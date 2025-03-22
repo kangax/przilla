@@ -1,4 +1,6 @@
 import "~/styles/globals.css";
+import "@radix-ui/themes/styles.css";
+import { Theme } from "@radix-ui/themes";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -16,8 +18,10 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en" className={`${GeistSans.variable}`}>
-      <body>
-        <TRPCReactProvider>{children}</TRPCReactProvider>
+      <body className="dark">
+        <Theme>
+          <TRPCReactProvider>{children}</TRPCReactProvider>
+        </Theme>
       </body>
     </html>
   );

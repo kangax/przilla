@@ -7,16 +7,16 @@ import { Wod, WodResult, getPerformanceLevel, getPerformanceLevelColor, getPerfo
 
 interface WodTableProps {
   wods: Wod[];
-  sortBy: "wodName" | "date";
+  sortBy: "wodName" | "date" | "level";
   sortDirection: "asc" | "desc";
-  handleSort: (column: "wodName" | "date") => void;
+  handleSort: (column: "wodName" | "date" | "level") => void;
 }
 
 // Helper function to safely handle potentially undefined values
 const safeString = (value: string | undefined): string => value || "";
 
 const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
-  const getSortIndicator = (columnName: "wodName" | "date") => {
+  const getSortIndicator = (columnName: "wodName" | "date" | "level") => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }
@@ -34,7 +34,9 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
             Date {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[15%]">Score</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]">Level</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
+            Level {getSortIndicator("level")}
+          </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[30%]">Notes</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>

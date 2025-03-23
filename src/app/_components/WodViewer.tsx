@@ -121,7 +121,7 @@ export const getPerformanceLevel = (wod: Wod, score?: string): string | null => 
   }
 };
 
-const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date", sortDirection: "asc" | "desc"): Wod[] => {
+const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level", sortDirection: "asc" | "desc"): Wod[] => {
   return [...wodsToSort].sort((a, b) => {
     const directionMultiplier = sortDirection === "asc" ? 1 : -1;
 
@@ -135,6 +135,20 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date", sortDirection: 
       const dateA = a.results[0]?.date ? new Date(a.results[0].date) : new Date('1970-01-01');
       const dateB = b.results[0]?.date ? new Date(b.results[0].date) : new Date('1970-01-01');
       return (dateA.getTime() - dateB.getTime()) * directionMultiplier;
+    } else if (sortBy === "level") {
+      // For level sorting, we need to get the performance level of the first result
+      const levelA = getPerformanceLevel(a, a.results[0]?.score);
+      const levelB = getPerformanceLevel(b, b.results[0]?.score);
+      
+      // Define the order of levels for sorting (elite is highest)
+      const levelOrder = ["elite", "advanced", "intermediate", "beginner", null];
+      
+      // Get the index of each level in the order array
+      const indexA = levelOrder.indexOf(levelA);
+      const indexB = levelOrder.indexOf(levelB);
+      
+      // Compare the indices (lower index = higher level)
+      return (indexA - indexB) * directionMultiplier;
     }
     return 0;
   });
@@ -142,14 +156,14 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date", sortDirection: 
 
 export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [view, setView] = useState<"table" | "timeline">("timeline");
-  const [sortBy, setSortBy] = useState<"wodName" | "date">("wodName");
+  const [sortBy, setSortBy] = useState<"wodName" | "date" | "level">("wodName");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
   const completedWods = wods.filter(wod => 
     wod.results[0]?.date && wod.results[0].date !== ""
   );
 
-  const handleSort = (column: "wodName" | "date") => {
+  const handleSort = (column: "wodName" | "date" | "level") => {
     if (column === sortBy) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {

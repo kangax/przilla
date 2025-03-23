@@ -8,15 +8,15 @@ import React from "react";
 
 interface WodTimelineProps {
   wods: Wod[];
-  sortBy: "wodName" | "date";
+  sortBy: "wodName" | "date" | "level";
   sortDirection: "asc" | "desc";
-  handleSort: (column: "wodName" | "date") => void;
+  handleSort: (column: "wodName" | "date" | "level") => void;
 }
 
 const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
   const safeString = (value: string | undefined | null): string => value ?? "";
   
-  const getSortIndicator = (columnName: "wodName" | "date") => {
+  const getSortIndicator = (columnName: "wodName" | "date" | "level") => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }

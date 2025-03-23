@@ -138,16 +138,6 @@
     "wodUrl": "https://wodwell.com/wod/cindy/",
     "wodName": "Cindy",
     "description": "AMRAP in 20 minutes\n5 Pull-Ups\n10 Push-Ups\n15 Air Squats",
-    "benchmarks": {
-      "type": "rounds",
-      "certainty": 0.9,
-      "levels": {
-        "elite": { "min": 20, "max": null },
-        "advanced": { "min": 15, "max": 20 },
-        "intermediate": { "min": 10, "max": 15 },
-        "beginner": { "min": 0, "max": 10 }
-      }
-    },
     "results": [
       {
         "date": "14 Feb'24",
@@ -174,16 +164,6 @@
     "wodUrl": "https://wodwell.com/wod/dt/",
     "wodName": "DT",
     "description": "5 Rounds\n12 Deadlifts (155/105 lb)\n9 Hang Power Cleans (155/105 lb)\n6 Push Jerks (155/105 lb)",
-    "benchmarks": {
-      "type": "time",
-      "certainty": 0.9,
-      "levels": {
-        "elite": { "min": 0, "max": 5 },
-        "advanced": { "min": 5, "max": 8 },
-        "intermediate": { "min": 8, "max": 12 },
-        "beginner": { "min": 12, "max": null }
-      }
-    },
     "results": [
       {
         "date": "24 Feb'24",
@@ -532,16 +512,6 @@
     "wodUrl": "https://wodwell.com/wod/diane/",
     "wodName": "Diane",
     "description": "21-15-9\nDeadlifts (225/155 lb)\nHandstand Push-Ups",
-    "benchmarks": {
-      "type": "time",
-      "certainty": 0.9,
-      "levels": {
-        "elite": { "min": 0, "max": 3 },
-        "advanced": { "min": 3, "max": 5 },
-        "intermediate": { "min": 5, "max": 8 },
-        "beginner": { "min": 8, "max": null }
-      }
-    },
     "results": [
       {
         "date": "20 Sep'24",
@@ -637,16 +607,6 @@
     "wodUrl": "https://wodwell.com/wod/fran/",
     "wodName": "Fran",
     "description": "21-15-9\nThrusters (95/65 lb)\nPull-Ups",
-    "benchmarks": {
-      "type": "time",
-      "certainty": 0.9,
-      "levels": {
-        "elite": { "min": 0, "max": 3 },
-        "advanced": { "min": 3, "max": 5 },
-        "intermediate": { "min": 5, "max": 7 },
-        "beginner": { "min": 7, "max": null }
-      }
-    },
     "results": [
       {
         "date": "26 Feb'25",
@@ -800,16 +760,6 @@
     "wodUrl": "https://wodwell.com/wod/helen/",
     "wodName": "Helen",
     "description": "3 Rounds\n400 meter Run\n21 Kettlebell Swings (1.5/1 pood)\n12 Pull-Ups",
-    "benchmarks": {
-      "type": "time",
-      "certainty": 0.9,
-      "levels": {
-        "elite": { "min": 0, "max": 8 },
-        "advanced": { "min": 8, "max": 10 },
-        "intermediate": { "min": 10, "max": 12 },
-        "beginner": { "min": 12, "max": null }
-      }
-    },
     "results": [
       {
         "date": "29 Nov'24",
@@ -835,16 +785,6 @@
     "wodUrl": "https://wodwell.com/wod/grace/",
     "wodName": "Grace",
     "description": "30 Clean-and-Jerks (135/95 lb)",
-    "benchmarks": {
-      "type": "time",
-      "certainty": 0.9,
-      "levels": {
-        "elite": { "min": 0, "max": 2 },
-        "advanced": { "min": 2, "max": 3 },
-        "intermediate": { "min": 3, "max": 5 },
-        "beginner": { "min": 5, "max": null }
-      }
-    },
     "results": [
       {
         "date": "5 Feb'24",

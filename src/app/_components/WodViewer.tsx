@@ -12,10 +12,111 @@ export type WodResult = {
   notes?: string;
 };
 
+export type BenchmarkLevel = {
+  min: number | null;
+  max: number | null;
+};
+
+export type Benchmarks = {
+  type: "time" | "rounds" | "reps";
+  certainty: number;
+  levels: {
+    elite: BenchmarkLevel;
+    advanced: BenchmarkLevel;
+    intermediate: BenchmarkLevel;
+    beginner: BenchmarkLevel;
+  };
+};
+
 export type Wod = {
   wodUrl: string;
   wodName: string;
+  description?: string;
+  benchmarks?: Benchmarks;
   results: WodResult[];
+};
+
+// Helper function to calculate performance level
+// Helper function to get the color for a performance level
+export const getPerformanceLevelColor = (level: string | null): string => {
+  switch (level) {
+    case "elite":
+      return "text-yellow-400"; // Gold
+    case "advanced":
+      return "text-blue-400"; // Blue
+    case "intermediate":
+      return "text-green-400"; // Green
+    case "beginner":
+      return "text-gray-400"; // Gray
+    default:
+      return "text-gray-500"; // Default
+  }
+};
+
+// Helper function to get the tooltip content for a performance level
+export const getPerformanceLevelTooltip = (wod: Wod, level: string | null): string => {
+  if (!wod.benchmarks || !level) return "No benchmark data available";
+  
+  const { levels, type } = wod.benchmarks;
+  const levelData = levels[level as keyof typeof levels];
+  
+  if (type === "time") {
+    const min = levelData.min !== null ? `${Math.floor(levelData.min)}:${(levelData.min % 1 * 60).toFixed(0).padStart(2, '0')}` : "0:00";
+    const max = levelData.max !== null ? `${Math.floor(levelData.max)}:${(levelData.max % 1 * 60).toFixed(0).padStart(2, '0')}` : "∞";
+    return `${level.charAt(0).toUpperCase() + level.slice(1)}: ${min} - ${max}`;
+  } else {
+    const min = levelData.min !== null ? levelData.min.toString() : "0";
+    const max = levelData.max !== null ? levelData.max.toString() : "∞";
+    return `${level.charAt(0).toUpperCase() + level.slice(1)}: ${min} - ${max} ${type}`;
+  }
+};
+
+export const getPerformanceLevel = (wod: Wod, score?: string): string | null => {
+  if (!wod.benchmarks || !score) return null;
+  
+  // Parse the score
+  let numericScore: number | null = null;
+  
+  if (wod.benchmarks.type === "time") {
+    // Parse time format (e.g., "5:57" to 5.95 minutes)
+    const timeParts = score.split(":");
+    if (timeParts.length === 2) {
+      const minutes = parseInt(timeParts[0], 10);
+      const seconds = parseInt(timeParts[1], 10);
+      numericScore = minutes + seconds / 60;
+    } else {
+      numericScore = parseFloat(score);
+    }
+  } else if (wod.benchmarks.type === "rounds" || wod.benchmarks.type === "reps") {
+    // Parse rounds+reps format (e.g., "20+5" to 20.5 rounds)
+    const roundsParts = score.split("+");
+    if (roundsParts.length === 2) {
+      const rounds = parseInt(roundsParts[0], 10);
+      const reps = parseInt(roundsParts[1], 10);
+      numericScore = rounds + reps / 100; // Using a fraction for reps
+    } else {
+      numericScore = parseFloat(score);
+    }
+  }
+  
+  if (numericScore === null) return null;
+  
+  // Determine the performance level based on the benchmarks
+  const { levels } = wod.benchmarks;
+  
+  if (wod.benchmarks.type === "time") {
+    // For time-based workouts, lower is better
+    if (levels.elite.max !== null && numericScore <= levels.elite.max) return "elite";
+    if (levels.advanced.max !== null && numericScore <= levels.advanced.max) return "advanced";
+    if (levels.intermediate.max !== null && numericScore <= levels.intermediate.max) return "intermediate";
+    return "beginner";
+  } else {
+    // For rounds/reps-based workouts, higher is better
+    if (levels.elite.min !== null && numericScore >= levels.elite.min) return "elite";
+    if (levels.advanced.min !== null && numericScore >= levels.advanced.min) return "advanced";
+    if (levels.intermediate.min !== null && numericScore >= levels.intermediate.min) return "intermediate";
+    return "beginner";
+  }
 };
 
 const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date", sortDirection: "asc" | "desc"): Wod[] => {
@@ -96,44 +197,62 @@ function WodTable({ wods, sortBy, sortDirection, handleSort }: {
     <Table.Root variant="surface" className="table-fixed w-full [&_tr]:hover:bg-[#ffffff08]">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell className="w-1/4" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-1/5" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-[12%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
             Date {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]">Score</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[45%]">Notes</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[12%]">Score</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[12%]">Level</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[40%]">Notes</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       
       <Table.Body>
         {wods.map((wod) => (
-          wod.results.map((result, resultIndex) => (
-            <Table.Row key={`${wod.wodName}-${resultIndex}`} className="transition-colors">
-              {resultIndex === 0 ? (
-                <Table.Cell className="font-medium">
-                  <Tooltip content={wod.wodName}>
-                    <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
-                      {wod.wodName}
-                      <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
-                    </Link>
-                  </Tooltip>
+          wod.results.map((result, resultIndex) => {
+            const performanceLevel = getPerformanceLevel(wod, result.score);
+            const levelColor = getPerformanceLevelColor(performanceLevel);
+            const levelTooltip = getPerformanceLevelTooltip(wod, performanceLevel);
+            
+            return (
+              <Table.Row key={`${wod.wodName}-${resultIndex}`} className="transition-colors">
+                {resultIndex === 0 ? (
+                  <Table.Cell className="font-medium">
+                    <Tooltip content={wod.wodName}>
+                      <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                        {wod.wodName}
+                        <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                      </Link>
+                    </Tooltip>
+                  </Table.Cell>
+                ) : (
+                  <Table.Cell></Table.Cell>
+                )}
+                <Table.Cell className="whitespace-nowrap">{safeString(result.date)}</Table.Cell>
+                <Table.Cell className="whitespace-nowrap font-mono">
+                  {safeString(result.score)}{result.rxStatus ? <span className="text-sm opacity-50"> {safeString(result.rxStatus)}</span> : null}
                 </Table.Cell>
-              ) : (
-                <Table.Cell></Table.Cell>
-              )}
-              <Table.Cell className="whitespace-nowrap">{safeString(result.date)}</Table.Cell>
-              <Table.Cell className="whitespace-nowrap font-mono">
-                {safeString(result.score)}{result.rxStatus ? <span className="text-sm opacity-50"> {safeString(result.rxStatus)}</span> : null}
-              </Table.Cell>
-              <Table.Cell className="max-w-[400px]">
-                <Text as="p" className="text-sm leading-relaxed text-gray-300">
-                  {safeString(result.notes)}
-                </Text>
-              </Table.Cell>
-            </Table.Row>
-          ))
+                <Table.Cell>
+                  {performanceLevel ? (
+                    <Tooltip content={levelTooltip}>
+                      <Text className={`font-medium ${levelColor} capitalize`}>
+                        {performanceLevel}
+                      </Text>
+                    </Tooltip>
+                  ) : (
+                    <Text className="text-gray-500 text-sm">-</Text>
+                  )}
+                </Table.Cell>
+                <Table.Cell className="max-w-[400px]">
+                  <Text as="p" className="text-sm leading-relaxed text-gray-300">
+                    {safeString(result.notes)}
+                  </Text>
+                </Table.Cell>
+              </Table.Row>
+            );
+          })
         ))}
       </Table.Body>
     </Table.Root>
@@ -200,6 +319,34 @@ function WodTimeline({ wods, sortBy, sortDirection, handleSort }: {
                       <Tooltip content={safeString(result?.date)}>
                         <Text className="cursor-help whitespace-nowrap">
                           <span className="font-mono">{safeString(result?.score)}</span>{result?.rxStatus ? <span className="text-sm opacity-80"> {safeString(result?.rxStatus)}</span> : null}
+                          
+                          {/* Add performance level indicator */}
+                          {wod.benchmarks && result.score && (
+                            <span className="ml-1">
+                              {(() => {
+                                const level = getPerformanceLevel(wod, result.score);
+                                if (!level) return null;
+                                
+                                const levelColors = {
+                                  elite: "text-yellow-400",
+                                  advanced: "text-blue-400",
+                                  intermediate: "text-green-400",
+                                  beginner: "text-gray-400"
+                                };
+                                
+                                const levelColor = levelColors[level as keyof typeof levelColors] || "text-gray-500";
+                                const levelTooltip = getPerformanceLevelTooltip(wod, level);
+                                
+                                return (
+                                  <Tooltip content={levelTooltip}>
+                                    <span className={`text-xs font-medium ${levelColor} ml-1`}>
+                                      ({level.charAt(0).toUpperCase()})
+                                    </span>
+                                  </Tooltip>
+                                );
+                              })()}
+                            </span>
+                          )}
                         </Text>
                       </Tooltip>
                       

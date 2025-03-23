@@ -196,6 +196,35 @@
     ]
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-21-3/",
+    "wodName": "Open 21.3",
+    "description": "For total time:\n15 front squats\n30 toes-to-bars\n15 thrusters\nThen, rest 1 minute before continuing with:\n15 front squats\n30 chest-to-bar pull-ups\n15 thrusters\nThen, rest 1 minute before continuing with:\n15 front squats\n30 bar muscle-ups\n15 thrusters",
+    "benchmarks": {
+      "type": "reps",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 200, "max": null },
+        "advanced": { "min": 150, "max": 200 },
+        "intermediate": { "min": 100, "max": 150 },
+        "beginner": { "min": 0, "max": 100 }
+      }
+    },
+    "results": [
+      {
+        "date": "26 Mar'21",
+        "score": "135",
+        "rxStatus": "Rx",
+        "notes": "DNF"
+      },
+      {
+        "date": "23 Mar'25",
+        "score": "155",
+        "rxStatus": "Rx",
+        "notes": "DId this back in 21 and got 135 reps, no muscle-ups. Retested 4 years later and am now at 155 reps — was able to complete 20 muscle-ups."
+      }
+    ]
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/jackie/",
     "wodName": "Jackie",
     "description": "1000 meter Row\n50 Thrusters (45/35 lb)\n30 Pull-Ups",

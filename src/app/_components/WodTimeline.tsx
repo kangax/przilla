@@ -78,8 +78,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                   ))}
                 </Flex>
               </Table.Cell>
-              <Table.Cell>
-                <pre className="max-w-[400px] text-sm font-small">{wod.description?.replace('\n', "\n")}</pre>
+              <Table.Cell className="min-w-[400px]">
+                <Text className="text-sm font-small whitespace-pre-line">{wod.description}</Text>
               </Table.Cell>
             </Table.Row>
           );

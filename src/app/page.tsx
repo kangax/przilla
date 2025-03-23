@@ -29,17 +29,19 @@ export default async function Home() {
     <HydrateClient>
       <Box className="min-h-screen bg-[#09090b]">
         {/* Fixed Top Bar */}
-        <Box className="fixed top-0 left-0 w-full bg-[#09090b] py-4 px-4 z-10 border-b border-gray-800">
-          <Flex >
-            <Heading size="5" align="center">
+        <Box className="fixed top-0 left-0 w-full bg-[#09090b] py-4 px-6 z-10 border-b border-gray-800 shadow-md">
+          <Container size="3">
+            <Flex align="center">
+              <Heading size="5" className="text-white">
                 PRzilla
-            </Heading>
-            {/* Statistics display */}
-            <Flex justify="center" gap="4" className="text-gray-400 text-sm ml-auto" align="center">
-              <Text>{wodsData.length} WODs</Text>
-              <Text>{wodsData.reduce((total, wod) => total + wod.results.length, 0)} Sessions</Text>
+              </Heading>
+              {/* Statistics display */}
+              <Flex justify="center" gap="4" className="text-gray-400 text-sm ml-auto" align="center">
+                <Text>{wodsData.length} WODs</Text>
+                <Text>{wodsData.reduce((total, wod) => total + wod.results.length, 0)} Sessions</Text>
+              </Flex>
             </Flex>
-          </Flex>
+          </Container>
         </Box>
         
         {/* Main Content with top margin to account for fixed header */}

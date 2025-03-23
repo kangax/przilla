@@ -78,7 +78,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                       {/* @ts-ignore - Ignore TypeScript errors for now */}
                       <Tooltip content={`${safeString(result.date)}${safeString(result.notes) ? ` - ${safeString(result.notes)}` : ''}`}>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className="font-mono">{safeString(result.score)}</span> <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>
+                          <span className="font-mono">{safeString(result.score)}</span> 
+                          <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>
                         </Text>
                       </Tooltip>
                       

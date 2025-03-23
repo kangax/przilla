@@ -41,13 +41,13 @@ export type Wod = {
 export const getPerformanceLevelColor = (level: string | null): string => {
   switch (level) {
     case "elite":
-      return "text-yellow-400"; // Gold
+      return "text-purple-400"; // Gold
     case "advanced":
-      return "text-blue-400"; // Blue
+      return "text-green-400"; // Blue
     case "intermediate":
-      return "text-green-400"; // Green
+      return "text-yellow-400"; // Green
     case "beginner":
-      return "text-gray-400"; // Gray
+      return "text-red-400"; // Gray
     default:
       return "text-gray-500"; // Default
   }
@@ -318,35 +318,9 @@ function WodTimeline({ wods, sortBy, sortDirection, handleSort }: {
                     <Flex key={index} align="center" className="mb-1">
                       <Tooltip content={safeString(result?.date)}>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className="font-mono">{safeString(result?.score)}</span>{result?.rxStatus ? <span className="text-sm opacity-80"> {safeString(result?.rxStatus)}</span> : null}
-                          
-                          {/* Add performance level indicator */}
-                          {wod.benchmarks && result.score && (
-                            <span className="ml-1">
-                              {(() => {
-                                const level = getPerformanceLevel(wod, result.score);
-                                if (!level) return null;
-                                
-                                const levelColors = {
-                                  elite: "text-yellow-400",
-                                  advanced: "text-blue-400",
-                                  intermediate: "text-green-400",
-                                  beginner: "text-gray-400"
-                                };
-                                
-                                const levelColor = levelColors[level as keyof typeof levelColors] || "text-gray-500";
-                                const levelTooltip = getPerformanceLevelTooltip(wod, level);
-                                
-                                return (
-                                  <Tooltip content={levelTooltip}>
-                                    <span className={`text-xs font-medium ${levelColor} ml-1`}>
-                                      ({level.charAt(0).toUpperCase()})
-                                    </span>
-                                  </Tooltip>
-                                );
-                              })()}
-                            </span>
-                          )}
+                          <span className={`font-mono ${getPerformanceLevelColor(getPerformanceLevel(wod, result.score))}`}>
+                            {safeString(result?.score)}
+                          </span>
                         </Text>
                       </Tooltip>
                       

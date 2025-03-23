@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Tooltip, Table, Text } from "@radix-ui/themes";
 
-import { Wod, WodResult } from "./WodViewer";
+import { Wod, WodResult, getPerformanceLevel, getPerformanceLevelColor, getPerformanceLevelTooltip } from "./WodViewer";
 
 interface WodTableProps {
   wods: Wod[];
@@ -34,7 +34,8 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
             Date {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[15%]">Score</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[45%]">Notes</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[15%]">Level</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[30%]">Notes</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 
@@ -57,6 +58,15 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
               <Table.Cell className="whitespace-nowrap">{safeString(result.date)}</Table.Cell>
               <Table.Cell className="whitespace-nowrap font-mono">
                 {safeString(result.score)} {result.rxStatus && <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>}
+              </Table.Cell>
+              <Table.Cell>
+                {result.score && wod.benchmarks && (
+                  <Tooltip content={getPerformanceLevelTooltip(wod, getPerformanceLevel(wod, result.score))}>
+                    <Text className={`font-medium ${getPerformanceLevelColor(getPerformanceLevel(wod, result.score))}`}>
+                      {getPerformanceLevel(wod, result.score)?.charAt(0).toUpperCase() + getPerformanceLevel(wod, result.score)?.slice(1) || "N/A"}
+                    </Text>
+                  </Tooltip>
+                )}
               </Table.Cell>
               <Table.Cell className="max-w-[300px] truncate">
                 <Tooltip content={safeString(result.notes)}>

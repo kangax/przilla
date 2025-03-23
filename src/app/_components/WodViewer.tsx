@@ -8,7 +8,7 @@ import { Box, Flex, Table, Text, Tabs, Tooltip } from "@radix-ui/themes";
 export type WodResult = {
   date?: string;
   score?: string;
-  rxStatus?: string;
+  rxStatus?: string | null;
   notes?: string;
 };
 
@@ -29,7 +29,7 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date", sortDirection: 
       if (nameA > nameB) return 1 * directionMultiplier;
       return 0;
     } else if (sortBy === "date") {
-      const dateA = a.results[0]?.date ? new Date(a.results[0].date) : new Date('1970-01-01'); // Default to oldest date if no date
+      const dateA = a.results[0]?.date ? new Date(a.results[0].date) : new Date('1970-01-01');
       const dateB = b.results[0]?.date ? new Date(b.results[0].date) : new Date('1970-01-01');
       return (dateA.getTime() - dateB.getTime()) * directionMultiplier;
     }
@@ -37,13 +37,11 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date", sortDirection: 
   });
 };
 
-// Client-side component for view toggling
 export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [view, setView] = useState<"table" | "timeline">("timeline");
   const [sortBy, setSortBy] = useState<"wodName" | "date">("wodName");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
 
-  // Filter out workouts with no results or empty dates
   const completedWods = wods.filter(wod => 
     wod.results[0]?.date && wod.results[0].date !== ""
   );
@@ -63,7 +61,7 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
     <Box>
       <Tabs.Root defaultValue={view}>
         <Tabs.List>
-        <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
+          <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
           <Tabs.Trigger value="table" onClick={() => setView("table")}>Table View</Tabs.Trigger>
         </Tabs.List>
         
@@ -79,15 +77,13 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
   );
 }
 
-// Table View Component
 function WodTable({ wods, sortBy, sortDirection, handleSort }: { 
   wods: Wod[];
   sortBy: "wodName" | "date";
   sortDirection: "asc" | "desc";
   handleSort: (column: "wodName" | "date") => void;
 }) {
-  // Helper function to safely handle potentially undefined values
-  const safeString = (value: string | undefined): string => value || "";
+  const safeString = (value: string | undefined | null): string => value ?? "";
   
   const getSortIndicator = (columnName: "wodName" | "date") => {
     if (sortBy === columnName) {
@@ -97,7 +93,7 @@ function WodTable({ wods, sortBy, sortDirection, handleSort }: {
   };
 
   return (
-    <Table.Root variant="surface" className="table-fixed w-full">
+    <Table.Root variant="surface" className="table-fixed w-full [&_tr]:hover:bg-[#ffffff08]">
       <Table.Header>
         <Table.Row>
           <Table.ColumnHeaderCell className="w-1/4" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
@@ -114,7 +110,7 @@ function WodTable({ wods, sortBy, sortDirection, handleSort }: {
       <Table.Body>
         {wods.map((wod) => (
           wod.results.map((result, resultIndex) => (
-            <Table.Row key={`${wod.wodName}-${resultIndex}`}>
+            <Table.Row key={`${wod.wodName}-${resultIndex}`} className="transition-colors">
               {resultIndex === 0 ? (
                 <Table.Cell className="font-medium">
                   <Tooltip content={wod.wodName}>
@@ -129,12 +125,12 @@ function WodTable({ wods, sortBy, sortDirection, handleSort }: {
               )}
               <Table.Cell className="whitespace-nowrap">{safeString(result.date)}</Table.Cell>
               <Table.Cell className="whitespace-nowrap font-mono">
-                {safeString(result.score)} {result.rxStatus && <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>}
+                {safeString(result.score)}{result.rxStatus ? <span className="text-sm opacity-50"> {safeString(result.rxStatus)}</span> : null}
               </Table.Cell>
-              <Table.Cell className="max-w-[300px] truncate">
-                <Tooltip content={safeString(result.notes)}>
-                  <span>{safeString(result.notes)}</span>
-                </Tooltip>
+              <Table.Cell className="max-w-[400px]">
+                <Text as="p" className="text-sm leading-relaxed text-gray-300">
+                  {safeString(result.notes)}
+                </Text>
               </Table.Cell>
             </Table.Row>
           ))
@@ -144,24 +140,14 @@ function WodTable({ wods, sortBy, sortDirection, handleSort }: {
   );
 }
 
-// Timeline View Component
 function WodTimeline({ wods, sortBy, sortDirection, handleSort }: { 
   wods: Wod[];
   sortBy: "wodName" | "date";
   sortDirection: "asc" | "desc";
   handleSort: (column: "wodName" | "date") => void;
 }) {
-  // Helper function to safely handle potentially undefined values
-  const safeString = (value: string | undefined): string => value || "";
+  const safeString = (value: string | undefined | null): string => value ?? "";
   
-  // Helper function to safely extract date part
-  const getDatePart = (date: string | undefined): string => {
-    if (!date) return "";
-    // @ts-ignore - Ignore TypeScript error for now
-    const parts = date.split(" ");
-    return parts.length > 1 ? parts[1] : date;
-  };
-
   const getSortIndicator = (columnName: "wodName" | "date") => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
@@ -178,44 +164,42 @@ function WodTimeline({ wods, sortBy, sortDirection, handleSort }: {
           <Table.ColumnHeaderCell className="w-1/4" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-3/4" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-1/2" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
             Progress Timeline {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-1/4">Description</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       
       <Table.Body>
-        {sortedWods.map((wod) => { // Use sortedWods here
-          // Only show workouts with at least one result
+        {sortedWods.map((wod) => {
           if (wod.results.length === 0 || !wod.results[0].date) return null;
           
-          // Sort results by date (oldest first for the timeline)
           const sortedResults = [...wod.results]
             .filter(r => r.date && r.score)
             .sort((a, b) => {
-              if (!a.date) return 1;
-              if (!b.date) return -1;
-              return new Date(a.date).getTime() - new Date(b.date).getTime();
+              const dateA = safeString(a.date);
+              const dateB = safeString(b.date);
+              if (!dateA) return 1;
+              if (!dateB) return -1;
+              return new Date(dateA).getTime() - new Date(dateB).getTime();
             });
           
           return (
             <Table.Row key={wod.wodName}>
               <Table.Cell className="font-medium">
-                <Tooltip content={wod.wodName}>
-                  <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
-                    {wod.wodName}
-                    <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
-                  </Link>
-                </Tooltip>
+                <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                  {wod.wodName}
+                  <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                </Link>
               </Table.Cell>
               <Table.Cell>
-                <Flex align="center" gap="2" className="flex-wrap">
+                <Flex align="center" className="flex-wrap min-w-[350px]">
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
-                      {/* @ts-ignore - Ignore TypeScript errors for now */}
-                      <Tooltip content={`${safeString(result.date)}${safeString(result.notes) ? ` - ${safeString(result.notes)}` : ''}`}>
+                      <Tooltip content={safeString(result?.date)}>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className="font-mono">{safeString(result.score)}</span> <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>
+                          <span className="font-mono">{safeString(result?.score)}</span>{result?.rxStatus ? <span className="text-sm opacity-80"> {safeString(result?.rxStatus)}</span> : null}
                         </Text>
                       </Tooltip>
                       
@@ -225,6 +209,9 @@ function WodTimeline({ wods, sortBy, sortDirection, handleSort }: {
                     </Flex>
                   ))}
                 </Flex>
+              </Table.Cell>
+              <Table.Cell>
+                <pre className="max-w-[400px] text-sm font-small">{wod.description?.replace('\n', "\n")}</pre>
               </Table.Cell>
             </Table.Row>
           );

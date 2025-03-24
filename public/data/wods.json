@@ -399,7 +399,53 @@
         "date": "4 Nov'23",
         "score": "50:42",
         "rxStatus": "Rx",
-        "notes": "No vest"
+        "notes": "Death by\n squat cleans.No vest—I’m not that insane.\nAfter 1st run: 16:10\nBefore 2nd run: 33:19"
+      }
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/holleyman/",
+    "wodName": "Holleyman",
+    "description": "30 Rounds for Time\n5 Wall Ball Shots (20/14 lb)\n3 Handstand Push-Ups\n1 Power Clean (225/155 lb)",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 0, "max": 20 },
+        "advanced": { "min": 20, "max": 25 },
+        "intermediate": { "min": 25, "max": 35 },
+        "beginner": { "min": 35, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "24 Aug'24",
+        "score": "25:32",
+        "rxStatus": "Scaled",
+        "notes": "155lb\nElse rx (strict hsp)\nGotta try 165/175 next time, although HSP were the limiting factor, could barely do 3 at the end"
+      }
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/marston/",
+    "wodName": "Marston",
+    "description": "AMRAP in 20 minutes\n1 Deadlift (405/285 lb)\n10 Toes-to-Bars\n15 Bar Facing Burpees",
+    "benchmarks": {
+      "type": "rounds",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 10, "max": null },
+        "advanced": { "min": 7, "max": 10 },
+        "intermediate": { "min": 5, "max": 7 },
+        "beginner": { "min": 0, "max": 5 }
+      }
+    },
+    "results": [
+      {
+        "date": "9 Aug'24",
+        "score": "7",
+        "rxStatus": "Scaled",
+        "notes": "315lb"
       }
     ]
   },

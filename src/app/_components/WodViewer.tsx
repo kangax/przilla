@@ -1,13 +1,12 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { Box, Tabs, Flex, Table, Text, Tooltip, Separator } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
-import { classifyWods } from "./WodClassifier";
 
 // Type definitions for our data
 export type WodResult = {
@@ -176,24 +175,19 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  // Classify wods with categories and tags
-  const classifiedWods = useMemo(() => classifyWods(wods), [wods]);
   
   // Filter wods by completion status
-  const completedWods = classifiedWods.filter(wod => 
+  const completedWods = wods.filter(wod =>
     wod.results[0]?.date && wod.results[0].date !== ""
   );
 
   // Filter wods by selected categories and tags
   const filteredWods = completedWods.filter(wod => {
-    // If no categories are selected, show all
-    const categoryMatch = selectedCategories.length === 0 || 
+    const categoryMatch = selectedCategories.length === 0 ||
       (wod.category && selectedCategories.includes(wod.category));
-    
-    // If no tags are selected, show all
-    const tagMatch = selectedTags.length === 0 || 
+    const tagMatch = selectedTags.length === 0 ||
       (wod.tags && wod.tags.some(tag => selectedTags.includes(tag)));
-    
+
     return categoryMatch && tagMatch;
   });
 

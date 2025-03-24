@@ -1,10 +1,13 @@
 "use client";
 
-import { useState } from "react";
-import { Box, Tabs, Flex, Table, Text, Tooltip } from "@radix-ui/themes";
+import { useState, useMemo } from "react";
+import { Box, Tabs, Flex, Table, Text, Tooltip, Separator } from "@radix-ui/themes";
+import * as Select from "@radix-ui/react-select";
+import { ChevronDown } from "lucide-react";
 import Link from "next/link";
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
+import { classifyWods } from "./WodClassifier";
 
 // Type definitions for our data
 export type WodResult = {
@@ -36,6 +39,9 @@ export type Wod = {
   description?: string;
   benchmarks?: Benchmarks;
   results: WodResult[];
+  // New fields for categorization
+  category?: 'Girl' | 'Hero' | 'Games' | 'Open' | 'Benchmark' | 'Custom';
+  tags?: Array<'Chipper' | 'Couplet' | 'Triplet' | 'EMOM' | 'AMRAP' | 'For Time' | 'Ladder' | 'Partner' | 'Team'>;
 };
 
 // Helper function to calculate performance level
@@ -159,14 +165,37 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "att
   });
 };
 
+// Categories and tags for filtering
+const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Custom'];
+const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder', 'Partner', 'Team'];
+
 export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [view, setView] = useState<"table" | "timeline">("timeline");
   const [sortBy, setSortBy] = useState<"wodName" | "date" | "level" | "attempts">("attempts");
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedTags, setSelectedTags] = useState<string[]>([]);
 
-  const completedWods = wods.filter(wod => 
+  // Classify wods with categories and tags
+  const classifiedWods = useMemo(() => classifyWods(wods), [wods]);
+  
+  // Filter wods by completion status
+  const completedWods = classifiedWods.filter(wod => 
     wod.results[0]?.date && wod.results[0].date !== ""
   );
+
+  // Filter wods by selected categories and tags
+  const filteredWods = completedWods.filter(wod => {
+    // If no categories are selected, show all
+    const categoryMatch = selectedCategories.length === 0 || 
+      (wod.category && selectedCategories.includes(wod.category));
+    
+    // If no tags are selected, show all
+    const tagMatch = selectedTags.length === 0 || 
+      (wod.tags && wod.tags.some(tag => selectedTags.includes(tag)));
+    
+    return categoryMatch && tagMatch;
+  });
 
   const handleSort = (column: "wodName" | "date" | "level" | "attempts") => {
     if (column === sortBy) {
@@ -178,24 +207,125 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
     }
   };
 
-  const sortedWods = sortWods(completedWods, sortBy, sortDirection);
+  // Toggle tag selection (multiple tags can be selected)
+  const toggleTag = (tag: string) => {
+    setSelectedTags(prev => 
+      prev.includes(tag) 
+        ? prev.filter(t => t !== tag) 
+        : [...prev, tag]
+    );
+  };
+
+  const sortedWods = sortWods(filteredWods, sortBy, sortDirection);
 
   return (
-    <Box>
-      <Tabs.Root defaultValue={view}>
-        <Tabs.List>
-          <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
-          <Tabs.Trigger value="table" onClick={() => setView("table")}>Table View</Tabs.Trigger>
-        </Tabs.List>
+    <Flex>
+      {/* Sidebar with filters */}
+      <Box className="w-1/4 pr-4 min-h-[500px]">
         
-        <Box className="mt-4">
-          {view === "table" ? (
-            <WodTable wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
-          ) : (
-            <WodTimeline wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
-          )}
+        {/* Categories Dropdown */}
+        <Box className="mb-6 mt-14">
+          <Select.Root 
+            value={selectedCategories.length > 0 ? selectedCategories[0] : "all"} 
+            onValueChange={(value) => {
+              if (value === "all") {
+                setSelectedCategories([]);
+              } else {
+                setSelectedCategories([value]);
+              }
+            }}
+          >
+            <Select.Trigger 
+              className="w-full flex items-center justify-between px-3 py-2 rounded-md border border-border bg-card text-card-foreground hover:bg-accent"
+            >
+              <Select.Value placeholder="Select category">
+                {selectedCategories.length > 0 
+                  ? selectedCategories[0] 
+                  : "All Categories"}
+              </Select.Value>
+              <Select.Icon>
+                <ChevronDown className="h-4 w-4 opacity-70" />
+              </Select.Icon>
+            </Select.Trigger>
+            <Select.Portal>
+              <Select.Content 
+                className="bg-popover border border-border rounded-md shadow-md z-50"
+                position="popper"
+              >
+                <Select.Viewport>
+                  <Select.Item 
+                    value="all" 
+                    className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none"
+                  >
+                    <Select.ItemText>All Categories</Select.ItemText>
+                  </Select.Item>
+                  {CATEGORIES.map(category => (
+                    <Select.Item 
+                      key={category}
+                      value={category} 
+                      className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none"
+                    >
+                      <Select.ItemText>{category}</Select.ItemText>
+                    </Select.Item>
+                  ))}
+                </Select.Viewport>
+              </Select.Content>
+            </Select.Portal>
+          </Select.Root>
         </Box>
-      </Tabs.Root>
-    </Box>
+        
+        {/* Tags section */}
+        <Box className="mb-6">
+          <Flex wrap="wrap" gap="2">
+            {TAGS.map(tag => (
+              <Box 
+                key={tag}
+                className={`px-3 py-1 rounded-full text-xs border cursor-pointer ${
+                  selectedTags.includes(tag) 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : 'bg-card text-card-foreground border-border hover:bg-accent'
+                }`}
+                onClick={() => toggleTag(tag)}
+              >
+                {tag}
+              </Box>
+            ))}
+          </Flex>
+        </Box>
+        
+        {/* Clear filters button */}
+        {(selectedCategories.length > 0 || selectedTags.length > 0) && (
+          <Box className="mt-4">
+            <button 
+              onClick={() => {
+                setSelectedCategories([]);
+                setSelectedTags([]);
+              }}
+              className="text-sm text-primary hover:underline"
+            >
+              Clear all filters
+            </button>
+          </Box>
+        )}
+      </Box>
+      
+      {/* Main content */}
+      <Box className="w-3/4 pl-4">
+        <Tabs.Root defaultValue={view}>
+          <Tabs.List>
+            <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
+            <Tabs.Trigger value="table" onClick={() => setView("table")}>Table View</Tabs.Trigger>
+          </Tabs.List>
+          
+          <Box className="mt-4">
+            {view === "table" ? (
+              <WodTable wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
+            ) : (
+              <WodTimeline wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
+            )}
+          </Box>
+        </Tabs.Root>
+      </Box>
+    </Flex>
   );
 }

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Flex, Table, Text, Tooltip } from "@radix-ui/themes";
+import { Flex, Table, Text, Tooltip, Badge } from "@radix-ui/themes";
 import { Wod } from "./WodViewer";
 import { getPerformanceLevelColor, getPerformanceLevel } from "./WodViewer";
 import React from "react";
@@ -27,13 +27,16 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
     <Table.Root variant="surface" className="table-fixed w-full">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell className="w-1/4" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-1/5" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-1/2" onClick={() => handleSort("attempts")} style={{ cursor: 'pointer' }}>
+          {/* <Table.ColumnHeaderCell className="w-1/5">
+            Category & Type
+          </Table.ColumnHeaderCell> */}
+          <Table.ColumnHeaderCell className="w-2/5" onClick={() => handleSort("attempts")} style={{ cursor: 'pointer' }}>
             Progress Timeline <span className="text-xs opacity-70">(attempts)</span> {getSortIndicator("attempts")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-1/4">Description</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-1/5">Description</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       
@@ -59,6 +62,22 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                   <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
                 </Link>
               </Table.Cell>
+              {/* <Table.Cell>
+                <Flex direction="column" gap="1">
+                  {wod.category && (
+                    <Badge color="indigo" variant="soft" radius="full" className="w-fit">
+                      {wod.category}
+                    </Badge>
+                  )}
+                  <Flex gap="1" wrap="wrap">
+                    {wod.tags?.map(tag => (
+                      <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
+                  </Flex>
+                </Flex>
+              </Table.Cell> */}
               <Table.Cell>
                 <Flex align="center" className="flex-wrap min-w-[350px]">
                   <Tooltip content={`${sortedResults.length} attempt${sortedResults.length !== 1 ? 's' : ''}`}>

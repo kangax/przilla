@@ -30,7 +30,7 @@ export default async function Home() {
       <Box className="min-h-screen bg-[#09090b]">
         {/* Fixed Top Bar */}
         <Box className="fixed top-0 left-0 w-full bg-[#09090b] py-4 px-6 z-10 border-b border-gray-800 shadow-md">
-          <Container size="3">
+          <Container size="4">
             <Flex align="center">
               <Heading size="5" className="text-white">
                 PRzilla
@@ -45,7 +45,7 @@ export default async function Home() {
         </Box>
         
         {/* Main Content with top margin to account for fixed header */}
-        <Container size="3" className="py-8 pt-16">
+        <Container size="4" className="py-8 pt-16">
           <Flex direction="column" gap="6">
             
             <WodViewer wods={wodsData} />

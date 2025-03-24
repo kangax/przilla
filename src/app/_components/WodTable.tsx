@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { Tooltip, Table, Text } from "@radix-ui/themes";
+import { Tooltip, Table, Text, Flex, Badge } from "@radix-ui/themes";
 
 import { Wod, WodResult, getPerformanceLevel, getPerformanceLevelColor, getPerformanceLevelTooltip } from "./WodViewer";
 
@@ -27,14 +27,17 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
     <Table.Root variant="surface" className="table-fixed w-full">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell className="w-[20%]" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-[15%]">
+            Category & Type
+          </Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[12%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
             Date {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]">Score</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-[12%]">Score</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[12%]" onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
             Level {getSortIndicator("level")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[25%]">Notes</Table.ColumnHeaderCell>
@@ -53,6 +56,27 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
                       <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
                     </Link>
                   </Tooltip>
+                </Table.Cell>
+              ) : (
+                <Table.Cell></Table.Cell>
+              )}
+              
+              {resultIndex === 0 ? (
+                <Table.Cell>
+                  <Flex direction="column" gap="1">
+                    {wod.category && (
+                      <Badge color="indigo" variant="soft" radius="full" className="w-fit">
+                        {wod.category}
+                      </Badge>
+                    )}
+                    <Flex gap="1" wrap="wrap">
+                      {wod.tags?.map(tag => (
+                        <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </Flex>
+                  </Flex>
                 </Table.Cell>
               ) : (
                 <Table.Cell></Table.Cell>

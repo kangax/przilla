@@ -7,16 +7,16 @@ import { Wod, WodResult, getPerformanceLevel, getPerformanceLevelColor, getPerfo
 
 interface WodTableProps {
   wods: Wod[];
-  sortBy: "wodName" | "date" | "level";
+  sortBy: "wodName" | "date" | "level" | "attempts";
   sortDirection: "asc" | "desc";
-  handleSort: (column: "wodName" | "date" | "level") => void;
+  handleSort: (column: "wodName" | "date" | "level" | "attempts") => void;
 }
 
 // Helper function to safely handle potentially undefined values
 const safeString = (value: string | undefined): string => value || "";
 
 const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
-  const getSortIndicator = (columnName: "wodName" | "date" | "level") => {
+  const getSortIndicator = (columnName: "wodName" | "date" | "level" | "attempts") => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }
@@ -27,7 +27,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
     <Table.Root variant="surface" className="table-fixed w-full">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell className="w-1/4" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="w-[20%]" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
@@ -37,7 +37,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
           <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
             Level {getSortIndicator("level")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[30%]">Notes</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="w-[25%]">Notes</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 

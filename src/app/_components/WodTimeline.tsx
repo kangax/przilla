@@ -8,15 +8,15 @@ import React from "react";
 
 interface WodTimelineProps {
   wods: Wod[];
-  sortBy: "wodName" | "date" | "level";
+  sortBy: "wodName" | "date" | "level" | "attempts";
   sortDirection: "asc" | "desc";
-  handleSort: (column: "wodName" | "date" | "level") => void;
+  handleSort: (column: "wodName" | "date" | "level" | "attempts") => void;
 }
 
 const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
   const safeString = (value: string | undefined | null): string => value ?? "";
   
-  const getSortIndicator = (columnName: "wodName" | "date" | "level") => {
+  const getSortIndicator = (columnName: "wodName" | "date" | "level" | "attempts") => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }
@@ -30,8 +30,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
           <Table.ColumnHeaderCell className="w-1/4" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-1/2" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
-            Progress Timeline {getSortIndicator("date")}
+          <Table.ColumnHeaderCell className="w-1/2" onClick={() => handleSort("attempts")} style={{ cursor: 'pointer' }}>
+            Progress Timeline <span className="text-xs opacity-70">(attempts)</span> {getSortIndicator("attempts")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-1/4">Description</Table.ColumnHeaderCell>
         </Table.Row>
@@ -61,6 +61,11 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
               </Table.Cell>
               <Table.Cell>
                 <Flex align="center" className="flex-wrap min-w-[350px]">
+                  <Tooltip content={`${sortedResults.length} attempt${sortedResults.length !== 1 ? 's' : ''}`}>
+                    <Text className="mr-2 text-xs bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
+                      {sortedResults.length}
+                    </Text>
+                  </Tooltip>
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
                       <Tooltip content={safeString(result?.date)}>

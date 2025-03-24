@@ -121,7 +121,7 @@ export const getPerformanceLevel = (wod: Wod, score?: string): string | null => 
   }
 };
 
-const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level", sortDirection: "asc" | "desc"): Wod[] => {
+const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "attempts", sortDirection: "asc" | "desc"): Wod[] => {
   return [...wodsToSort].sort((a, b) => {
     const directionMultiplier = sortDirection === "asc" ? 1 : -1;
 
@@ -135,6 +135,11 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level", sortD
       const dateA = a.results[0]?.date ? new Date(a.results[0].date) : new Date('1970-01-01');
       const dateB = b.results[0]?.date ? new Date(b.results[0].date) : new Date('1970-01-01');
       return (dateA.getTime() - dateB.getTime()) * directionMultiplier;
+    } else if (sortBy === "attempts") {
+      // Sort by the number of attempts (results array length)
+      const attemptsA = a.results.filter(r => r.date && r.score).length;
+      const attemptsB = b.results.filter(r => r.date && r.score).length;
+      return (attemptsA - attemptsB) * directionMultiplier;
     } else if (sortBy === "level") {
       // For level sorting, we need to get the performance level of the first result
       const levelA = getPerformanceLevel(a, a.results[0]?.score);
@@ -156,19 +161,20 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level", sortD
 
 export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [view, setView] = useState<"table" | "timeline">("timeline");
-  const [sortBy, setSortBy] = useState<"wodName" | "date" | "level">("wodName");
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("asc");
+  const [sortBy, setSortBy] = useState<"wodName" | "date" | "level" | "attempts">("attempts");
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
 
   const completedWods = wods.filter(wod => 
     wod.results[0]?.date && wod.results[0].date !== ""
   );
 
-  const handleSort = (column: "wodName" | "date" | "level") => {
+  const handleSort = (column: "wodName" | "date" | "level" | "attempts") => {
     if (column === sortBy) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortBy(column);
-      setSortDirection("asc");
+      // Default to descending order for attempts (most attempts first)
+      setSortDirection(column === "attempts" ? "desc" : "asc");
     }
   };
 

@@ -220,7 +220,7 @@
         "date": "23 Mar'25",
         "score": "155",
         "rxStatus": "Rx",
-        "notes": "DId this back in 21 and got 135 reps, no muscle-ups. Retested 4 years later and am now at 155 reps — was able to complete 20 muscle-ups."
+        "notes": "Did this back in 21 and got 135 reps, no muscle-ups. Retested 4 years later and am now at 155 reps — was able to complete 20 muscle-ups."
       }
     ]
   },
@@ -1526,6 +1526,29 @@
         "score": "57:40",
         "rxStatus": "Rx",
         "notes": ""
+      }
+    ]
+  },
+  {
+    "wodName": "Barbara Ann",
+    "wodUrl": "https://wodwell.com/wod/barbara-ann/",
+    "description": "5 Rounds for Time\n20 Handstand Push-Ups\n30 Deadlifts (135/95 lb)\n40 Sit-Ups\n50 Double-Unders",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 0, "max": 20 },
+        "advanced": { "min": 20, "max": 25 },
+        "intermediate": { "min": 25, "max": 35 },
+        "beginner": { "min": 35, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "-",
+        "score": "-",
+        "rxStatus": "",
+        "notes": "TBD"
       }
     ]
   }

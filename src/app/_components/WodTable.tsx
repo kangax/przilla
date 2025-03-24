@@ -31,7 +31,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[15%]">
-            Category & Type
+            Type
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="w-[12%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
             Date {getSortIndicator("date")}

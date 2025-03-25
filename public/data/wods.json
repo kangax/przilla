@@ -1007,8 +1007,8 @@
       {
         "date": "12 Jun'23",
         "score": "10:00",
-        "rxStatus": "Rx",
-        "notes": "Can definitely do better but I'm happy I can do muscle ups as part of a wod interspersed with other hard moves"
+        "rxStatus": "Scaled",
+        "notes": "BMU. Can definitely do better but I'm happy I can do bar muscle ups as part of a wod interspersed with other hard moves"
       }
     ],
     "category": "Girl",
@@ -2027,6 +2027,50 @@
     "category": "Benchmark",
     "tags": [
       "Tabata"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/eva/",
+    "wodName": "Eva",
+    "description": "5 Rounds for Time\n800 meter Run\n30 Kettlebell Swings (2/1.5 pood)\n30 Pull-Ups",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.8,
+      "levels": {
+        "elite": { "min": 0, "max": 35 },
+        "advanced": { "min": 35, "max": 45 },
+        "intermediate": { "min": 45, "max": 55 },
+        "beginner": { "min": 55, "max": null }
+      }
+    },
+    "results": [
+      
+    ],
+    "category": "Girl",
+    "tags": [
+      "For Time"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/candy/",
+    "wodName": "Candy",
+    "description": "5 Rounds for Time\n20 Pull-Ups\n40 Push-Ups\n60 Air Squats",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.8,
+      "levels": {
+        "elite": { "min": 0, "max": 16 },
+        "advanced": { "min": 16, "max": 21 },
+        "intermediate": { "min": 21, "max": 35 },
+        "beginner": { "min": 35, "max": null }
+      }
+    },
+    "results": [
+      
+    ],
+    "category": "Girl",
+    "tags": [
+      "For Time"
     ]
   }
 ] 

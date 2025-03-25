@@ -39,7 +39,7 @@ export type Wod = {
   benchmarks?: Benchmarks;
   results: WodResult[];
   // New fields for categorization
-  category?: 'Girl' | 'Hero' | 'Games' | 'Open' | 'Benchmark' | 'Custom';
+  category?: 'Girl' | 'Hero' | 'Games' | 'Open' | 'Benchmark' | 'Other';
   tags?: Array<'Chipper' | 'Couplet' | 'Triplet' | 'EMOM' | 'AMRAP' | 'For Time' | 'Ladder' | 'Partner' | 'Team'>;
 };
 
@@ -48,15 +48,15 @@ export type Wod = {
 export const getPerformanceLevelColor = (level: string | null): string => {
   switch (level) {
     case "elite":
-      return "text-purple-400"; // Gold
+      return "text-purple-400";
     case "advanced":
-      return "text-green-400"; // Blue
+      return "text-green-400";
     case "intermediate":
-      return "text-yellow-400"; // Green
+      return "text-yellow-400";
     case "beginner":
-      return "text-red-400"; // Gray
+      return "text-red-400";
     default:
-      return "text-gray-500"; // Default
+      return "text-gray-500";
   }
 };
 
@@ -165,7 +165,7 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "att
 };
 
 // Categories and tags for filtering
-const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Custom'];
+const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Other'];
 const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder', 'Partner', 'Team'];
 
 export default function WodViewer({ wods }: { wods: Wod[] }) {
@@ -218,7 +218,7 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
       <Box className="w-1/6 pr-4 min-h-[500px]">
         
         {/* Categories Dropdown */}
-        <Box className="mb-6 mt-14">
+        <Box className="mb-6 mt-4">
           <Select.Root 
             value={selectedCategories.length > 0 ? selectedCategories[0] : "all"} 
             onValueChange={(value) => {

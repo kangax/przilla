@@ -991,10 +991,10 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 0, "max": 8 },
-        "advanced": { "min": 8, "max": 11 },
-        "intermediate": { "min": 11, "max": 17 },
-        "beginner": { "min": 17, "max": null }
+        "elite": { "min": 0, "max": 300 },
+        "advanced": { "min": 300, "max": 480 },
+        "intermediate": { "min": 480, "max": 780 },
+        "beginner": { "min": 780, "max": null }
       }
     },
     "results": [
@@ -1917,10 +1917,10 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 100, "max": null },
-        "advanced": { "min": 60, "max": 100 },
-        "intermediate": { "min": 40, "max": 60 },
-        "beginner": { "min": 0, "max": 40 }
+        "elite": { "min": 55, "max": null },
+        "advanced": { "min": 40, "max": 55 },
+        "intermediate": { "min": 25, "max": 40 },
+        "beginner": { "min": 0, "max": 25 }
       }
     },
     "results": [
@@ -2059,12 +2059,12 @@
     "wodName": "Open 23.2A",
     "description": "AMRAP in 15 minutes:\n5 burpee pull-ups\n10 shuttle runs\n15 burpee pull-ups\nAdd 5 burpee pull-ups each round",
     "benchmarks": {
-      "type": "load",
+      "type": "reps",
       "levels": {
-        "elite": { "min": 200, "max": null },
-        "advanced": { "min": 150, "max": 200 },
-        "intermediate": { "min": 100, "max": 150 },
-        "beginner": { "min": 0, "max": 100 }
+        "elite": { "min": 180, "max": null },
+        "advanced": { "min": 150, "max": 180 },
+        "intermediate": { "min": 120, "max": 150 },
+        "beginner": { "min": 0, "max": 120 }
       }
     },
     "results": [
@@ -2086,10 +2086,10 @@
     "wodName": "Open 23.2B",
     "description": "Establish 1RM thruster",
     "benchmarks": {
-      "type": "reps",
+      "type": "load",
       "levels": {
-        "elite": { "min": 275, "max": null },
-        "advanced": { "min": 225, "max": 275 },
+        "elite": { "min": 265, "max": null },
+        "advanced": { "min": 225, "max": 265 },
         "intermediate": { "min": 185, "max": 225 },
         "beginner": { "min": 0, "max": 185 }
       }
@@ -2176,12 +2176,7 @@
       }
     },
     "results": [
-      {
-        "date": "20 Apr'24",
-        "score": "126",
-        "rxStatus": "Rx",
-        "notes": ""
-      }
+      
     ],
     "category": "Open",
     "tags": [
@@ -2223,10 +2218,10 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 0, "max": 1 },
-        "advanced": { "min": 1, "max": 1.3 },
-        "intermediate": { "min": 1.3, "max": 1.5 },
-        "beginner": { "min": 1.5, "max": null }
+        "elite": { "min": 0, "max": 85 },
+        "advanced": { "min": 85, "max": 95 },
+        "intermediate": { "min": 95, "max": 110 },
+        "beginner": { "min": 110, "max": null }
       }
     },
     "results": [

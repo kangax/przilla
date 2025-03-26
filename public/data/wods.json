@@ -561,7 +561,7 @@
       {
         "date": "3 Nov'23",
         "score": "18:33",
-        "rxStatus": "Rx",
+        "rxStatus": "Scaled",
         "notes": "Bar muscle ups"
       }
     ],
@@ -624,7 +624,7 @@
       {
         "date": "21 Oct'23",
         "score": "30:00",
-        "rxStatus": "Rx",
+        "rxStatus": "Scaled",
         "notes": "RX but didn't finish. Last squat cleans at 28:30, I think. Completely gassed out. Gonna try again in couple weeks, hoping for 30min or under."
       }
     ],
@@ -2373,6 +2373,102 @@
     "category": "Girl",
     "tags": [
       "For Load"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/lyla/",
+    "wodName": "Lyla",
+    "description": "10-9-8-7-6-5-4-3-2-1 reps of\nMuscle-Ups\nClean-and-Jerks (Bodyweight)",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": {
+          "min": 0,
+          "max": 14
+        },
+        "advanced": {
+          "min": 14,
+          "max": 20
+        },
+        "intermediate": {
+          "min": 20,
+          "max": 30
+        },
+        "beginner": {
+          "min": 30,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Girl",
+    "tags": [
+      "For Time",
+      "Ladder",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/lane-2/",
+    "wodName": "Lane",
+    "description": "5 Rounds for Max Reps\nHang Power Snatches (3/4 Bodyweight)\nHandstand Push-Ups\nRest as needed between rounds",
+    "benchmarks": {
+      "type": "reps",
+      "certainty": 0.7,
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 150,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 150
+        },
+        "beginner": {
+          "min": 0,
+          "max": 100
+        }
+      }
+    },
+    "results": [],
+    "category": "Girl",
+    "tags": [
+      "For Reps",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/quarterfinals-24-3/",
+    "wodName": "Quarterfinals 24.3",
+    "description": "For Time:\n3 Rounds of:\n10 Handstand Push-Ups\n20 Toes-to-Bars\n2 Rounds of:\n10 Strict Handstand Push-Ups\n5 Rope Climbs (15 ft)\n1 Round of:\n10 Chest-to-Wall Handstand Push-Ups\n20 Muscle-Ups\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 0, "max": 12 },
+        "advanced": { "min": 12, "max": 14 },
+        "intermediate": { "min": 14, "max": 17 },
+        "beginner": { "min": 17, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "20 Apr'24",
+        "score": "126",
+        "rxStatus": "Rx",
+        "notes": ""
+      }
+    ],
+    "category": "Quarterfinals",
+    "tags": [
+      "For Time",
+      "Chipper",
+      "Gymnastics"
     ]
   }
 ] 

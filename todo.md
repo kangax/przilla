@@ -2,3 +2,4 @@
 - Fix N/A in some levels
 - Deploy to prod (vercel?)
 - Toggle between Done/TODO workouts
+- Add support for Open-like ranking (score if timecap or time)

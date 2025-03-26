@@ -70,7 +70,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                     <Flex key={index} align="center" className="mb-1">
                       <Tooltip content={safeString(result?.date)}>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className={`font-mono ${getPerformanceLevelColor(getPerformanceLevel(wod, result.score))}`}>
+                          <span className={`font-mono ${getPerformanceLevelColor(getPerformanceLevel(wod, result.score), result.rxStatus)}`}>
                             {safeString(result?.score)}
                           </span> {result.rxStatus && <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>}
                         </Text>

@@ -45,7 +45,13 @@ export type Wod = {
 
 // Helper function to calculate performance level
 // Helper function to get the color for a performance level
-export const getPerformanceLevelColor = (level: string | null): string => {
+export const getPerformanceLevelColor = (level: string | null, rxStatus?: string | null): string => {
+  // Check if this is a scaled result (rxStatus exists and isn't "Rx")
+  if (rxStatus && rxStatus !== "Rx") {
+    return "text-gray-500";
+  }
+  
+  // Otherwise proceed with normal performance level coloring
   switch (level) {
     case "elite":
       return "text-purple-400";

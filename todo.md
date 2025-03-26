@@ -1,5 +1,5 @@
 - Remove certainty
-- Scaled should be grey
++ Scaled should be grey
 - Fix N/A in some levels
 - Deploy to prod (vercel?)
 - Toggle between Done/TODO workouts

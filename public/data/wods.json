@@ -2470,5 +2470,33 @@
       "Chipper",
       "Gymnastics"
     ]
+  },
+  {
+    "wodName": "Run 1 mile",
+    "wodUrl": "",
+    "description": "Run 1 mile",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.8,
+      "levels": {
+        "elite": { "min": 0, "max": 5 },
+        "advanced": { "min": 5, "max": 6 },
+        "intermediate": { "min": 6, "max": 7 },
+        "beginner": { "min": 7, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "13 Jun'23",
+        "score": "7:05",
+        "rxStatus": "",
+        "notes": "Around the block"
+      }
+    ],
+    "category": "Benchmark",
+    "tags": [
+      "For Time",
+      "Monostructural"
+    ]
   }
 ] 

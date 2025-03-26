@@ -238,9 +238,9 @@
     ]
   },
   {
-    "wodUrl": "https://wodwell.com/wod/open-21-3/",
+    "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
     "wodName": "Open 21.3",
-    "description": "For total time:\n15 front squats\n30 toes-to-bars\n15 thrusters\nThen, rest 1 minute before continuing with:\n15 front squats\n30 chest-to-bar pull-ups\n15 thrusters\nThen, rest 1 minute before continuing with:\n15 front squats\n30 bar muscle-ups\n15 thrusters",
+    "description": "For time:\n15 front squats\n30 toes-to-bars\n15 thrusters\nThen, rest 1 minute before continuing with:\n15 front squats\n30 chest-to-bar pull-ups\n15 thrusters\nThen, rest 1 minute before continuing with:\n15 front squats\n30 bar muscle-ups\n15 thrusters",
     "benchmarks": {
       "type": "reps",
       "certainty": 0.7,
@@ -2071,6 +2071,308 @@
     "category": "Girl",
     "tags": [
       "For Time"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
+    "wodName": "Open 21.4",
+    "description": "For time:\n15 dumbbell snatches (50/35 lb)\n15 burpee box jump-overs (24/20 in)\nThen, 3 rounds of:\n15 dumbbell snatches\n15 burpee box jump-overs\nThen, 15 dumbbell snatches\n15 burpee box jump-overs",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 0, "max": 8 },
+        "advanced": { "min": 8, "max": 10 },
+        "intermediate": { "min": 10, "max": 13 },
+        "beginner": { "min": 13, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "27 Mar'21",
+        "score": "165",
+        "rxStatus": "Rx",
+        "notes": ""
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-23-1/",
+    "wodName": "Open 23.1",
+    "description": "For time (14 min cap):\n60 calorie row\n50 toes-to-bars\n40 wall-ball shots (20/14 lb)\n30 cleans (145/95 lb)\n20 muscle-ups",
+    "benchmarks": {
+      "type": "reps",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 200, "max": null },
+        "advanced": { "min": 170, "max": 200 },
+        "intermediate": { "min": 140, "max": 170 },
+        "beginner": { "min": 0, "max": 140 }
+      }
+    },
+    "results": [
+      {
+        "date": "18 Feb'23",
+        "score": "178",
+        "rxStatus": "Rx",
+        "notes": "Got a bunch of no reps on t2b so now I know what to work on 🫠"
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Chipper"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-23-2/",
+    "wodName": "Open 23.2A",
+    "description": "AMRAP in 15 minutes:\n5 burpee pull-ups\n10 shuttle runs\n15 burpee pull-ups\nAdd 5 burpee pull-ups each round",
+    "benchmarks": {
+      "type": "load",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 200, "max": null },
+        "advanced": { "min": 150, "max": 200 },
+        "intermediate": { "min": 100, "max": 150 },
+        "beginner": { "min": 0, "max": 100 }
+      }
+    },
+    "results": [
+      {
+        "date": "25 Feb'23",
+        "score": "108",
+        "rxStatus": "Rx",
+        "notes": "Judged in the official affiliate, CrossFit 954 in Puerto Escondido, Mexico"
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Load",
+      "Monostructural"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-23-2/",
+    "wodName": "Open 23.2B",
+    "description": "Establish 1RM thruster",
+    "benchmarks": {
+      "type": "reps",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 275, "max": null },
+        "advanced": { "min": 225, "max": 275 },
+        "intermediate": { "min": 185, "max": 225 },
+        "beginner": { "min": 0, "max": 185 }
+      }
+    },
+    "results": [
+      {
+        "date": "25 Feb'23",
+        "score": "185",
+        "rxStatus": "Rx",
+        "notes": ""
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Reps",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-24-1/",
+    "wodName": "Open 24.1",
+    "description": "For Time:\n21 Dumbbell Snatches (arm 1) (50/35 lb)\n21 Lateral Burpees Over Dumbbell\n21 Dumbbell Snatches (arm 2) (50/35 lb)\n21 Lateral Burpees Over Dumbbell\n15 Dumbbell Snatches (arm 1) (50/35 lb)\n15 Lateral Burpees Over Dumbbell\n15 Dumbbell Snatches(arm 2) (50/35 lb)\n15 Lateral Burpees Over Dumbbell\n9 Dumbbell Snatches (arm 1) (50/35 lb)\n9 Lateral Burpees Over Dumbbell\n9 Dumbbell Snatches (arm 2) (50/35 lb)\n9 Lateral Burpees Over Dumbbell\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 0, "max": 8 },
+        "advanced": { "min": 8, "max": 10 },
+        "intermediate": { "min": 10, "max": 13 },
+        "beginner": { "min": 13, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "2 Mar'24",
+        "score": "12:13",
+        "rxStatus": "Rx",
+        "notes": "🤮 Absolutely atrocious performance, I guess to be expected since I highly dislike burpees. How do I get to sub 10?"
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Triplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-24-2/",
+    "wodName": "Open 24.2",
+    "description": "AMRAP in 20 minutes of:\n300 meter row\n10 deadlifts (185/125 lb)\n50 double-unders",
+    "benchmarks": {
+      "type": "reps",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 648, "max": null },
+        "advanced": { "min": 500, "max": 648 },
+        "intermediate": { "min": 350, "max": 500 },
+        "beginner": { "min": 0, "max": 350 }
+      }
+    },
+    "results": [
+      {
+        "date": "9 Mar'24",
+        "score": "648",
+        "rxStatus": "Rx",
+        "notes": "🤮"
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Reps",
+      "Triplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-24-3/",
+    "wodName": "Open 24.3",
+    "description": "5 rounds of:\n10 thrusters (95/65 lb)\n10 chest-to-bar pull-ups\n1 minute rest\n5 rounds of:\n7 thrusters (135/95 lb)\n7 bar muscle-ups\n15 min cap",
+    "benchmarks": {
+      "type": "reps",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 150, "max": null },
+        "advanced": { "min": 120, "max": 150 },
+        "intermediate": { "min": 90, "max": 120 },
+        "beginner": { "min": 0, "max": 90 }
+      }
+    },
+    "results": [
+      {
+        "date": "20 Apr'24",
+        "score": "126",
+        "rxStatus": "Rx",
+        "notes": ""
+      }
+    ],
+    "category": "Open",
+    "tags": [
+      "For Reps",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/toes-to-bar-lunge/",
+    "wodName": "Games: Toes-to-bar/Lunge",
+    "description": "30-20-10 Reps for Time\nToes-to-Bars\nKettlebell Lunges (2x32/24 kg, yards)",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 0, "max": 5 },
+        "advanced": { "min": 5, "max": 7 },
+        "intermediate": { "min": 7, "max": 9 },
+        "beginner": { "min": 9, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "28 Nov'23",
+        "score": "7:53",
+        "rxStatus": "Scaled",
+        "notes": "☠️ ☠️ ☠️ 24kg"
+      }
+    ],
+    "category": "Games",
+    "tags": [
+      "For Time",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "",
+    "wodName": "Row 500m",
+    "description": "Row 500 meters",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.8,
+      "levels": {
+        "elite": { "min": 0, "max": 1 },
+        "advanced": { "min": 1, "max": 1.3 },
+        "intermediate": { "min": 1.3, "max": 1.5 },
+        "beginner": { "min": 1.5, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "31 Aug'24",
+        "score": "1:33",
+        "rxStatus": "Rx",
+        "notes": "🤮"
+      }
+    ],
+    "category": "Benchmark",
+    "tags": [
+      "For Time",
+      "Monostructural"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/handstand-hold/",
+    "wodName": "Handstand Hold: Max Time",
+    "description": "Handstand hold for maximum time",
+    "benchmarks": {
+      "type": "time",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 60, "max": null },
+        "advanced": { "min": 30, "max": 60 },
+        "intermediate": { "min": 15, "max": 30 },
+        "beginner": { "min": 0, "max": 15 }
+      }
+    },
+    "results": [
+      {
+        "date": "14 Jul'23",
+        "score": "0:15",
+        "rxStatus": "Rx",
+        "notes": "Free-standing"
+      }
+    ],
+    "category": "Skill",
+    "tags": [
+      "For Time",
+      "Gymnastics"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/gwen/",
+    "wodName": "Gwen",
+    "description": "15-12-9\nClean-and-Jerks (unbroken)\nRest as needed between sets",
+    "benchmarks": {
+      "type": "load",
+      "certainty": 0.7,
+      "levels": {
+        "elite": { "min": 185, "max": null },
+        "advanced": { "min": 155, "max": 185 },
+        "intermediate": { "min": 95, "max": 155 },
+        "beginner": { "min": 0, "max": 95 }
+      }
+    },
+    "results": [
+      
+    ],
+    "category": "Girl",
+    "tags": [
+      "For Load"
     ]
   }
 ] 

@@ -1037,7 +1037,18 @@
         "beginner": { "min": 0, "max": 95 }
       }
     },
-    "results": [],
+    "results": [
+      {
+        "date": "27 Mar'25",
+        "rxStatus": "Rx",
+        "notes": "Very deceiving. Go lighter than you think, unless you're great at barbell cycling and/or high rep oly lifts.\n6min rest.",
+        "score_time_seconds": null,
+        "score_reps": null,
+        "score_load": 115,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
     "category": "Girl",
     "tags": [
       "For Load"

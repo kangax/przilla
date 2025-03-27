@@ -36,7 +36,10 @@ export const env = createEnv({
     AUTH_SECRET: process.env.AUTH_SECRET,
     AUTH_DISCORD_ID: process.env.AUTH_DISCORD_ID,
     AUTH_DISCORD_SECRET: process.env.AUTH_DISCORD_SECRET,
-    DATABASE_URL: process.env.DATABASE_URL,
+    // Provide dummy URL during build if skipping validation and URL is missing
+    DATABASE_URL: (!!process.env.SKIP_ENV_VALIDATION && !process.env.DATABASE_URL)
+      ? "http://localhost:8080" // Dummy URL for build only
+      : process.env.DATABASE_URL,
     NODE_ENV: process.env.NODE_ENV,
   },
   /**

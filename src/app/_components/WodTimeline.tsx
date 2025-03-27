@@ -73,8 +73,18 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                 <Flex align="center">
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
-                      {/* Update Tooltip content to include notes */}
-                      <Tooltip content={`${safeString(result?.date)}${result.notes ? `\nNotes: ${safeString(result.notes)}` : ''}`}>
+                      {/* Update Tooltip content using Fragment and <br /> to avoid p>div nesting */}
+                      <Tooltip content={
+                        <>
+                          <Text size="1" weight="bold">{safeString(result?.date)}</Text>
+                          {result.notes && (
+                            <>
+                              <br />
+                              <Text size="1" style={{ whiteSpace: 'pre-wrap', maxWidth: '300px' }}>{safeString(result.notes)}</Text>
+                            </>
+                          )}
+                        </>
+                      }>
                         <Text className="cursor-help whitespace-nowrap">
                           <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-gray-500" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                             {formatScore(result)}

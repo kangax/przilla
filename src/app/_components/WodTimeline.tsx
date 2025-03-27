@@ -66,11 +66,6 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
               </Table.Cell>
               <Table.Cell>
                 <Flex align="center" className="flex-wrap min-w-[300px]">
-                  <Tooltip content={`${sortedResults.length} attempt${sortedResults.length !== 1 ? 's' : ''}`}>
-                    <Text className="mr-2 text-xs bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
-                      {sortedResults.length}
-                    </Text>
-                  </Tooltip>
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
                       {/* Update Tooltip content to include notes */}
@@ -78,10 +73,19 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                         <Text className="cursor-help whitespace-nowrap">
                           <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-gray-500" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                             {formatScore(result)}
-                          </span> {result.rxStatus && <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>}
+                          </span> 
+                          {/* Use Badge for RxStatus */}
+                          {result.rxStatus && (
+                            <Badge 
+                              className="ml-1 rounded-full" 
+                              size="1" 
+                              color="gray"
+                            >
+                              {safeString(result.rxStatus)}
+                            </Badge>
+                          )}
                         </Text>
                       </Tooltip>
-                      
                       {index < sortedResults.length - 1 && (
                         <Text className="mx-2">→</Text>
                       )}

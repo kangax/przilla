@@ -268,10 +268,7 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
   const sortedWods = sortWods(filteredWods, sortBy, sortDirection);
 
   return (
-    <Flex>
-      {/* Main content */}
-      <Box className="pl-4">
-        <Tabs.Root defaultValue={view}>
+    <Tabs.Root defaultValue={view}>
           <Tabs.List>
             <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
             <Tabs.Trigger value="table" onClick={() => setView("table")}>Table View</Tabs.Trigger>
@@ -403,7 +400,5 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
             )}
           </Box>
         </Tabs.Root>
-      </Box>
-    </Flex>
   );
 }

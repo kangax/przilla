@@ -29,16 +29,16 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
   };
 
   return (
-    <Table.Root variant="surface" className="table-fixed w-full">
+    <Table.Root variant="surface" className="w-full">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell className="w-1/5" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-2/5" onClick={() => handleSort("attempts")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("attempts")} style={{ cursor: 'pointer' }}>
             Progress Timeline <span className="text-xs opacity-70">(attempts)</span> {getSortIndicator("attempts")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-1/5">Description</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell>Description</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       

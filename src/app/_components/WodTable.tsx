@@ -31,23 +31,23 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
   };
 
   return (
-    <Table.Root variant="surface" className="table-fixed w-full">
+    <Table.Root variant="surface" className="w-full">
       <Table.Header>
         <Table.Row>
-          <Table.ColumnHeaderCell className="w-[15%]" onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[15%]">
+          <Table.ColumnHeaderCell>
             Type
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[12%]" onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
             Date {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[12%]">Score</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[12%]" onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell>Score</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
             Level {getSortIndicator("level")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="w-[25%]">Notes</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell>Notes</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 

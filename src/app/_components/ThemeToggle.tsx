@@ -1,14 +1,15 @@
 "use client";
 
-import { useTheme } from "@radix-ui/themes";
+import { useTheme } from "next-themes"; // Changed import
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
 import { Switch } from "@radix-ui/themes";
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
-  const { appearance, setAppearance } = useTheme();
+  // Use the hook from next-themes
+  const { theme, setTheme, resolvedTheme } = useTheme(); 
   const [mounted, setMounted] = useState(false);
-  
+
   // Avoid hydration mismatch by only rendering after component is mounted
   useEffect(() => {
     setMounted(true);
@@ -16,7 +17,8 @@ export default function ThemeToggle() {
 
   if (!mounted) return null;
 
-  const isDarkMode = appearance === "dark";
+  // Use resolvedTheme to determine the current actual theme
+  const isDarkMode = resolvedTheme === "dark"; 
 
   return (
     <div className="flex items-center gap-2">
@@ -24,7 +26,8 @@ export default function ThemeToggle() {
       <Switch
         checked={isDarkMode}
         onCheckedChange={(checked) => {
-          setAppearance(checked ? "dark" : "light");
+          // Use setTheme from next-themes
+          setTheme(checked ? "dark" : "light"); 
         }}
         size="1"
         color="violet"

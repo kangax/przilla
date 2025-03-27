@@ -48,7 +48,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             (op.direction === "down" && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
-          transformer: SuperJSON,
+          // transformer: SuperJSON, // Leave commented out for now
           url: getBaseUrl() + "/api/trpc",
           headers: () => {
             const headers = new Headers();

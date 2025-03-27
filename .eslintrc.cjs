@@ -38,6 +38,9 @@ const config = {
         }
       }
     ],
+    // Disable rules requiring strictNullChecks or causing issues without it
+    "@typescript-eslint/prefer-nullish-coalescing": "off",
+    "@typescript-eslint/prefer-optional-chain": "off", 
     "drizzle/enforce-delete-with-where": [
       "error",
       {

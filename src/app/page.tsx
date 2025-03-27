@@ -1,11 +1,15 @@
+import fs from 'fs'; // Use import instead of require
+import path from 'path'; // Use import instead of require
 import Link from "next/link";
 import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes";
 import { auth } from "~/server/auth";
-import { api, HydrateClient } from "~/trpc/server";
+// Remove unused 'api' import
+import { HydrateClient } from "~/trpc/server"; 
 
 // Import the WodViewer component
 import WodViewer from "~/app/_components/WodViewer";
-import { Wod } from "~/app/_components/WodViewer";
+// Use type import
+import type { Wod } from "~/app/_components/WodViewer"; 
 
 // This is a server component
 export default async function Home() {
@@ -14,12 +18,10 @@ export default async function Home() {
   // Fetch wods data from public directory
   let wodsData: Wod[] = [];
   try {
-    // Use the Node.js fs module to read the file in the server component
-    const fs = require('fs');
-    const path = require('path');
     const filePath = path.join(process.cwd(), 'public', 'data', 'wods.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    wodsData = JSON.parse(fileContents);
+    // Add type assertion to satisfy ESLint rule
+    wodsData = JSON.parse(fileContents) as Wod[]; 
     console.log('Loaded WODs data:', wodsData.length);
   } catch (error) {
     console.error('Error loading WODs data:', error);

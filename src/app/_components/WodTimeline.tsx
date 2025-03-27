@@ -70,7 +70,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                <Flex align="center" className="flex-wrap min-w-[300px]">
+                <Flex align="center">
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
                       {/* Update Tooltip content to include notes */}

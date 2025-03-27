@@ -66,20 +66,16 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
                   </Tooltip>
                 </Table.Cell>
                 <Table.Cell>
-                  <Flex direction="column" gap="1">
-                    {wod.category && (
-                      <Badge color="indigo" variant="soft" radius="full" className="w-fit">
-                        {wod.category}
-                      </Badge>
-                    )}
-                    <Flex gap="1" wrap="wrap">
-                      {wod.tags?.map(tag => (
-                        <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </Flex>
-                  </Flex>
+                  {wod.category && (
+                    <Badge color="indigo" variant="soft" radius="full" className="w-fit">
+                      {wod.category}
+                    </Badge>
+                  )}
+                  {wod.tags?.map(tag => (
+                    <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
+                      {tag}
+                    </Badge>
+                  ))}
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap">-</Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-mono">Not attempted</Table.Cell>
@@ -107,19 +103,17 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
               
               {resultIndex === 0 ? (
                 <Table.Cell>
-                  <Flex direction="column" gap="1">
+                  <Flex gap="1">
                     {wod.category && (
                       <Badge color="indigo" variant="soft" radius="full" className="w-fit">
                         {wod.category}
                       </Badge>
                     )}
-                    <Flex gap="1" wrap="wrap">
-                      {wod.tags?.map(tag => (
-                        <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </Flex>
+                    {wod.tags?.map(tag => (
+                      <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
+                        {tag}
+                      </Badge>
+                    ))}
                   </Flex>
                 </Table.Cell>
               ) : (

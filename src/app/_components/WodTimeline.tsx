@@ -65,7 +65,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                 </Link>
               </Table.Cell>
               <Table.Cell>
-                <Flex align="center" className="flex-wrap min-w-[350px]">
+                <Flex align="center" className="flex-wrap min-w-[300px]">
                   <Tooltip content={`${sortedResults.length} attempt${sortedResults.length !== 1 ? 's' : ''}`}>
                     <Text className="mr-2 text-xs bg-gray-100 dark:bg-gray-800 px-2 py-0.5 rounded-full">
                       {sortedResults.length}

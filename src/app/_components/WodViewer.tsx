@@ -1,10 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Tabs, Flex, Table, Text, Tooltip, Separator } from "@radix-ui/themes";
+import { Box, Tabs, Flex, Badge } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
-import Link from "next/link";
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
 
@@ -270,137 +269,8 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
 
   return (
     <Flex>
-      {/* Sidebar with filters */}
-      <Box className="w-1/6 pr-4 min-h-[500px]">
-        
-        {/* Completion Status Toggle - only show in table view */}
-        {view === "table" && (
-          <Box className="mb-6 mt-4">
-            <Text className="text-sm font-medium mb-2">Show Workouts</Text>
-            <Flex gap="1">
-              <Box 
-                className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
-                  completionFilter === "all" 
-                    ? 'bg-primary text-primary-foreground border-primary' 
-                    : 'bg-card text-card-foreground border-border hover:bg-accent'
-                }`}
-                onClick={() => setCompletionFilter("all")}
-              >
-                All ({wods.length})
-              </Box>
-              <Box 
-                className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
-                  completionFilter === "done" 
-                    ? 'bg-primary text-primary-foreground border-primary' 
-                    : 'bg-card text-card-foreground border-border hover:bg-accent'
-                }`}
-                onClick={() => setCompletionFilter("done")}
-              >
-                Done ({doneWods.length})
-              </Box>
-              <Box 
-                className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
-                  completionFilter === "notDone" 
-                    ? 'bg-primary text-primary-foreground border-primary' 
-                    : 'bg-card text-card-foreground border-border hover:bg-accent'
-                }`}
-                onClick={() => setCompletionFilter("notDone")}
-              >
-                Not Done ({notDoneWods.length})
-              </Box>
-            </Flex>
-          </Box>
-        )}
-        
-        {/* Categories Dropdown */}
-        <Box className="mb-6 mt-4">
-          <Select.Root 
-            value={selectedCategories.length > 0 ? selectedCategories[0] : "all"} 
-            onValueChange={(value) => {
-              if (value === "all") {
-                setSelectedCategories([]);
-              } else {
-                setSelectedCategories([value]);
-              }
-            }}
-          >
-            <Select.Trigger 
-              className="w-full flex items-center justify-between px-3 py-2 rounded-md border border-border bg-card text-card-foreground hover:bg-accent text-sm"
-            >
-              <Select.Value placeholder="Select category" className="text-sm">
-                {selectedCategories.length > 0 
-                  ? selectedCategories[0] 
-                  : "All Categories"}
-              </Select.Value>
-              <Select.Icon>
-                <ChevronDown className="h-4 w-4 opacity-70" />
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content 
-                className="bg-popover border border-border rounded-md shadow-md z-50"
-                position="popper"
-              >
-                <Select.Viewport>
-                  <Select.Item 
-                    value="all" 
-                    className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
-                  >
-                    <Select.ItemText>All Categories</Select.ItemText>
-                  </Select.Item>
-                  {CATEGORIES.map(category => (
-                    <Select.Item 
-                      key={category}
-                      value={category} 
-                      className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
-                    >
-                      <Select.ItemText>{category}</Select.ItemText>
-                    </Select.Item>
-                  ))}
-                </Select.Viewport>
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
-        </Box>
-        
-        {/* Tags section */}
-        <Box className="mb-6">
-          <Flex wrap="wrap" gap="2">
-            {TAGS.map(tag => (
-              <Box 
-                key={tag}
-                className={`px-3 py-1 rounded-full text-xs border cursor-pointer ${
-                  selectedTags.includes(tag) 
-                    ? 'bg-primary text-primary-foreground border-primary' 
-                    : 'bg-card text-card-foreground border-border hover:bg-accent'
-                }`}
-                onClick={() => toggleTag(tag)}
-              >
-                {tag}
-              </Box>
-            ))}
-          </Flex>
-        </Box>
-        
-        {/* Clear filters button */}
-        {(selectedCategories.length > 0 || selectedTags.length > 0 || (view === "table" && completionFilter !== "all")) && (
-          <Box className="mt-4">
-            <button 
-              onClick={() => {
-                setSelectedCategories([]);
-                setSelectedTags([]);
-                setCompletionFilter("all");
-              }}
-              className="text-sm text-primary hover:underline"
-            >
-              Clear all filters
-            </button>
-          </Box>
-        )}
-      </Box>
-      
       {/* Main content */}
-      <Box className="w-3/4 pl-4">
+      <Box className="pl-4">
         <Tabs.Root defaultValue={view}>
           <Tabs.List>
             <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
@@ -408,6 +278,124 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
           </Tabs.List>
           
           <Box className="mt-4">
+            {/* Categories Filter */}
+            <Box className="mb-2 mt-4 rt-Flex items-center">
+              <Select.Root 
+                value={selectedCategories.length > 0 ? selectedCategories[0] : "all"} 
+                onValueChange={(value) => {
+                  if (value === "all") {
+                    setSelectedCategories([]);
+                  } else {
+                    setSelectedCategories([value]);
+                  }
+                }}
+              >
+                <Select.Trigger 
+                  className="min-w-[130px] flex items-center justify-between px-3 py-2 mr-2 rounded-md border border-border bg-card text-card-foreground hover:bg-accent text-sm"
+                >
+                  <Select.Value placeholder="Select category" className="text-sm">
+                    {selectedCategories.length > 0 
+                      ? selectedCategories[0] 
+                      : "All Categories"}
+                  </Select.Value>
+                  <Select.Icon>
+                    <ChevronDown className="h-4 w-4 opacity-70" />
+                  </Select.Icon>
+                </Select.Trigger>
+                <Select.Portal>
+                  <Select.Content 
+                    className="bg-popover border border-border rounded-md shadow-md z-50"
+                    position="popper"
+                  >
+                    <Select.Viewport>
+                      <Select.Item 
+                        value="all" 
+                        className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
+                      >
+                        <Select.ItemText>All Categories</Select.ItemText>
+                      </Select.Item>
+                      {CATEGORIES.map(category => (
+                        <Select.Item 
+                          key={category}
+                          value={category} 
+                          className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
+                        >
+                          <Select.ItemText>{category}</Select.ItemText>
+                        </Select.Item>
+                      ))}
+                    </Select.Viewport>
+                  </Select.Content>
+                </Select.Portal>
+              </Select.Root>
+              {/* Tags section */}
+              <Flex wrap="wrap" gap="2">
+                {TAGS.map(tag => (
+                  <Box 
+                    key={tag}
+                    className={`px-3 py-1 rounded-full text-xs border cursor-pointer ${
+                      selectedTags.includes(tag) 
+                        ? 'bg-primary text-primary-foreground border-primary' 
+                        : 'bg-card text-card-foreground border-border hover:bg-accent'
+                    }`}
+                    onClick={() => toggleTag(tag)}
+                  >
+                    {tag}
+                  </Box>
+                ))}
+              </Flex>
+              {/* Clear filters button */}
+              {(selectedCategories.length > 0 || selectedTags.length > 0 || (view === "table" && completionFilter !== "all")) && (
+                <button 
+                  onClick={() => {
+                    setSelectedCategories([]);
+                    setSelectedTags([]);
+                    setCompletionFilter("all");
+                  }}
+                  className="text-sm text-primary hover:underline ml-2"
+                >
+                  &times;
+                </button>
+                )}
+            </Box>
+
+            {/* Completion Status Toggle - only show in table view */}
+            {view === "table" && (
+              <Box className="mb-4 mt-2">
+                <Flex gap="1">
+                  <Box 
+                    className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
+                      completionFilter === "all" 
+                        ? 'bg-primary text-primary-foreground border-primary' 
+                        : 'bg-card text-card-foreground border-border hover:bg-accent'
+                    }`}
+                    onClick={() => setCompletionFilter("all")}
+                  >
+                    All ({wods.length})
+                  </Box>
+                  <Box 
+                    className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
+                      completionFilter === "done" 
+                        ? 'bg-primary text-primary-foreground border-primary' 
+                        : 'bg-card text-card-foreground border-border hover:bg-accent'
+                    }`}
+                    onClick={() => setCompletionFilter("done")}
+                  >
+                    Done ({doneWods.length})
+                  </Box>
+                  <Box 
+                    className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
+                      completionFilter === "notDone" 
+                        ? 'bg-primary text-primary-foreground border-primary' 
+                        : 'bg-card text-card-foreground border-border hover:bg-accent'
+                    }`}
+                    onClick={() => setCompletionFilter("notDone")}
+                  >
+                    Not Done ({notDoneWods.length})
+                  </Box>
+                </Flex>
+              </Box>
+            )}
+            
             {view === "table" ? (
               <WodTable wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
             ) : (

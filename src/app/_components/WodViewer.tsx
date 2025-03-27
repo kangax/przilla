@@ -214,15 +214,31 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [completionFilter, setCompletionFilter] = useState<"all" | "done" | "notDone">("all");
 
-  
-  // Filter wods by completion status
-  const completedWods = wods.filter(wod =>
-    wod.results[0]?.date && wod.results[0].date !== "" && wod.results[0] && hasScore(wod.results[0])
+  // Calculate counts for each filter option
+  const doneWods = wods.filter(wod => 
+    wod.results.length > 0 && wod.results[0]?.date && hasScore(wod.results[0])
   );
+  const notDoneWods = wods.filter(wod => 
+    wod.results.length === 0 || !wod.results[0]?.date || !hasScore(wod.results[0])
+  );
+  
+  // Filter wods by completion status - only apply in table view
+  let filteredByCompletionWods = wods;
+  if (view === "table") {
+    if (completionFilter === "done") {
+      filteredByCompletionWods = doneWods;
+    } else if (completionFilter === "notDone") {
+      filteredByCompletionWods = notDoneWods;
+    }
+  } else {
+    // In timeline view, only show completed workouts
+    filteredByCompletionWods = doneWods;
+  }
 
   // Filter wods by selected categories and tags
-  const filteredWods = completedWods.filter(wod => {
+  const filteredWods = filteredByCompletionWods.filter(wod => {
     const categoryMatch = selectedCategories.length === 0 ||
       (wod.category && selectedCategories.includes(wod.category));
     const tagMatch = selectedTags.length === 0 ||
@@ -256,6 +272,45 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
     <Flex>
       {/* Sidebar with filters */}
       <Box className="w-1/6 pr-4 min-h-[500px]">
+        
+        {/* Completion Status Toggle - only show in table view */}
+        {view === "table" && (
+          <Box className="mb-6 mt-4">
+            <Text className="text-sm font-medium mb-2">Show Workouts</Text>
+            <Flex gap="1">
+              <Box 
+                className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
+                  completionFilter === "all" 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : 'bg-card text-card-foreground border-border hover:bg-accent'
+                }`}
+                onClick={() => setCompletionFilter("all")}
+              >
+                All ({wods.length})
+              </Box>
+              <Box 
+                className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
+                  completionFilter === "done" 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : 'bg-card text-card-foreground border-border hover:bg-accent'
+                }`}
+                onClick={() => setCompletionFilter("done")}
+              >
+                Done ({doneWods.length})
+              </Box>
+              <Box 
+                className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
+                  completionFilter === "notDone" 
+                    ? 'bg-primary text-primary-foreground border-primary' 
+                    : 'bg-card text-card-foreground border-border hover:bg-accent'
+                }`}
+                onClick={() => setCompletionFilter("notDone")}
+              >
+                Not Done ({notDoneWods.length})
+              </Box>
+            </Flex>
+          </Box>
+        )}
         
         {/* Categories Dropdown */}
         <Box className="mb-6 mt-4">
@@ -328,12 +383,13 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
         </Box>
         
         {/* Clear filters button */}
-        {(selectedCategories.length > 0 || selectedTags.length > 0) && (
+        {(selectedCategories.length > 0 || selectedTags.length > 0 || (view === "table" && completionFilter !== "all")) && (
           <Box className="mt-4">
             <button 
               onClick={() => {
                 setSelectedCategories([]);
                 setSelectedTags([]);
+                setCompletionFilter("all");
               }}
               className="text-sm text-primary hover:underline"
             >

@@ -1,7 +1,9 @@
-- Remove certainty
++ Remove certainty
 + Scaled should be grey
-- Fix N/A in some levels
-- Deploy to prod (vercel?)
++ Fix N/A in some levels
++ Add support for Open-like ranking (score if timecap or time)
+
 - Toggle between Done/TODO workouts
-- Add support for Open-like ranking (score if timecap or time)
 - If there's wodurl add icon-link; remove links from wod name
+
+- Deploy to prod (vercel?)

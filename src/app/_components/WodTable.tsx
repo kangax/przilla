@@ -52,8 +52,45 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
       </Table.Header>
 
       <Table.Body>
-        {wods.map((wod) => (
-          wod.results.map((result, resultIndex) => (
+        {wods.map((wod) => {
+          // For workouts with no results, display a single row with just the workout info
+          if (wod.results.length === 0) {
+            return (
+              <Table.Row key={`${wod.wodName}-no-results`}>
+                <Table.Cell className="font-medium">
+                  <Tooltip content={wod.description}>
+                    <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                      {wod.wodName}
+                      <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                    </Link>
+                  </Tooltip>
+                </Table.Cell>
+                <Table.Cell>
+                  <Flex direction="column" gap="1">
+                    {wod.category && (
+                      <Badge color="indigo" variant="soft" radius="full" className="w-fit">
+                        {wod.category}
+                      </Badge>
+                    )}
+                    <Flex gap="1" wrap="wrap">
+                      {wod.tags?.map(tag => (
+                        <Badge key={tag} color="gray" variant="soft" radius="full" className="text-xs">
+                          {tag}
+                        </Badge>
+                      ))}
+                    </Flex>
+                  </Flex>
+                </Table.Cell>
+                <Table.Cell className="whitespace-nowrap">-</Table.Cell>
+                <Table.Cell className="whitespace-nowrap font-mono">Not attempted</Table.Cell>
+                <Table.Cell>-</Table.Cell>
+                <Table.Cell>-</Table.Cell>
+              </Table.Row>
+            );
+          }
+          
+          // For workouts with results, display a row for each result
+          return wod.results.map((result, resultIndex) => (
             <Table.Row key={`${wod.wodName}-${resultIndex}`}>
               {resultIndex === 0 ? (
                 <Table.Cell className="font-medium">
@@ -113,8 +150,8 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
                 </Tooltip>
               </Table.Cell>
             </Table.Row>
-          ))
-        ))}
+          ));
+        })}
       </Table.Body>
     </Table.Root>
   );

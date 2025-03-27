@@ -47,15 +47,8 @@ export type Wod = {
   tags?: Array<'Chipper' | 'Couplet' | 'Triplet' | 'EMOM' | 'AMRAP' | 'For Time' | 'Ladder' | 'Partner' | 'Team'>;
 };
 
-// Helper function to calculate performance level
 // Helper function to get the color for a performance level
-export const getPerformanceLevelColor = (level: string | null, rxStatus?: string | null): string => {
-  // Check if this is a scaled result (rxStatus exists and isn't "Rx")
-  if (rxStatus && rxStatus !== "Rx") {
-    return "text-gray-500";
-  }
-  
-  // Otherwise proceed with normal performance level coloring
+export const getPerformanceLevelColor = (level: string | null): string => {
   switch (level) {
     case "elite":
       return "text-purple-400";
@@ -101,9 +94,9 @@ export const formatScore = (result: WodResult): string => {
   if (result.score_time_seconds !== null) {
     return formatSecondsToMMSS(result.score_time_seconds);
   } else if (result.score_reps !== null) {
-    return `${result.score_reps}reps`;
+    return `${result.score_reps} reps`;
   } else if (result.score_load !== null) {
-    return `${result.score_load}lbs`;
+    return `${result.score_load} lbs`;
   } else if (result.score_rounds_completed !== null) {
     if (result.score_partial_reps !== null && result.score_partial_reps > 0) {
       return `${result.score_rounds_completed}+${result.score_partial_reps}`;

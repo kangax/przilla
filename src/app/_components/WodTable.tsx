@@ -93,12 +93,18 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
                 {formatScore(result)} {result.rxStatus && <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>}
               </Table.Cell>
               <Table.Cell>
-                {wod.benchmarks && (
-                  <Tooltip content={getPerformanceLevelTooltip(wod, getPerformanceLevel(wod, result))}>
-                    <Text className={`font-medium ${getPerformanceLevelColor(getPerformanceLevel(wod, result), result.rxStatus)}`}>
-                      {getPerformanceLevel(wod, result)?.charAt(0).toUpperCase() + getPerformanceLevel(wod, result)?.slice(1) || "N/A"}
-                    </Text>
-                  </Tooltip>
+                {result.rxStatus && result.rxStatus !== "Rx" ? (
+                  <Text className="font-medium text-gray-500">
+                    Scaled
+                  </Text>
+                ) : (
+                  wod.benchmarks && (
+                    <Tooltip content={getPerformanceLevelTooltip(wod, getPerformanceLevel(wod, result))}>
+                      <Text className={`font-medium ${getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
+                        {getPerformanceLevel(wod, result)?.charAt(0).toUpperCase() + getPerformanceLevel(wod, result)?.slice(1) || "N/A"}
+                      </Text>
+                    </Tooltip>
+                  )
                 )}
               </Table.Cell>
               <Table.Cell className="max-w-[300px] truncate">

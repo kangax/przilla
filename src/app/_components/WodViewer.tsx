@@ -178,18 +178,26 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "att
       const attemptsB = b.results.filter(r => r.date && hasScore(r)).length;
       return (attemptsA - attemptsB) * directionMultiplier;
     } else if (sortBy === "level") {
-      // For level sorting, we need to get the performance level of the first result
+      // Check if results are scaled first
+      const isScaledA = a.results[0]?.rxStatus && a.results[0].rxStatus !== "Rx";
+      const isScaledB = b.results[0]?.rxStatus && b.results[0].rxStatus !== "Rx";
+      
+      // If one is scaled and the other isn't, the scaled one comes first
+      if (isScaledA && !isScaledB) return -1 * directionMultiplier;
+      if (!isScaledA && isScaledB) return 1 * directionMultiplier;
+      
+      // If both are scaled or both are not scaled, sort by level
       const levelA = a.results[0] ? getPerformanceLevel(a, a.results[0]) : null;
       const levelB = b.results[0] ? getPerformanceLevel(b, b.results[0]) : null;
       
-      // Define the order of levels for sorting (elite is highest)
-      const levelOrder = ["elite", "advanced", "intermediate", "beginner", null];
+      // Define the order of levels for sorting (beginner is highest in the new order)
+      const levelOrder = ["beginner", "intermediate", "advanced", "elite", null];
       
       // Get the index of each level in the order array
       const indexA = levelOrder.indexOf(levelA);
       const indexB = levelOrder.indexOf(levelB);
       
-      // Compare the indices (lower index = higher level)
+      // Compare the indices (lower index = higher in the sort order)
       return (indexA - indexB) * directionMultiplier;
     }
     return 0;

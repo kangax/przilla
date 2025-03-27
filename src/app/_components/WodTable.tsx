@@ -12,18 +12,22 @@ import {
   formatScore
 } from "./WodViewer";
 
+// Define the type for sorting columns including the new one (copied from WodViewer)
+type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
+
 interface WodTableProps {
   wods: Wod[];
-  sortBy: "wodName" | "date" | "level" | "attempts";
+  sortBy: SortByType; // Use new type
   sortDirection: "asc" | "desc";
-  handleSort: (column: "wodName" | "date" | "level" | "attempts") => void;
+  handleSort: (column: SortByType) => void; // Use new type
 }
 
 // Helper function to safely handle potentially undefined values
 const safeString = (value: string | undefined): string => value || "";
 
 const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
-  const getSortIndicator = (columnName: "wodName" | "date" | "level" | "attempts") => {
+  // Update signature to use new type
+  const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }

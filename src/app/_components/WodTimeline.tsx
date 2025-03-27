@@ -11,17 +11,21 @@ import {
 } from "./WodViewer";
 import React from "react";
 
+// Define the type for sorting columns including the new one (copied from WodViewer)
+type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
+
 interface WodTimelineProps {
   wods: Wod[];
-  sortBy: "wodName" | "date" | "level" | "attempts";
+  sortBy: SortByType; // Use new type
   sortDirection: "asc" | "desc";
-  handleSort: (column: "wodName" | "date" | "level" | "attempts") => void;
+  handleSort: (column: SortByType) => void; // Use new type
 }
 
 const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
   const safeString = (value: string | undefined | null): string => value ?? "";
   
-  const getSortIndicator = (columnName: "wodName" | "date" | "level" | "attempts") => {
+  // Update signature to use new type
+  const getSortIndicator = (columnName: SortByType) => { 
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }
@@ -35,8 +39,9 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
           <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell onClick={() => handleSort("attempts")} style={{ cursor: 'pointer' }}>
-            Progress Timeline <span className="text-xs opacity-70">(attempts)</span> {getSortIndicator("attempts")}
+          {/* Update onClick handler and text for the sort column */}
+          <Table.ColumnHeaderCell onClick={() => handleSort("latestLevel")} style={{ cursor: 'pointer' }}>
+            Progress Timeline <span className="text-xs opacity-70">(latest level)</span> {getSortIndicator("latestLevel")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell>Description</Table.ColumnHeaderCell>
         </Table.Row>

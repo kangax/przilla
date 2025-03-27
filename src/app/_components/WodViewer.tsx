@@ -154,12 +154,13 @@ export const hasScore = (result: WodResult): boolean => {
   return result.score_time_seconds !== null || 
          result.score_reps !== null || 
          result.score_load !== null || 
-         result.score_rounds_completed !== null;
-};
-
-const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "attempts", sortDirection: "asc" | "desc"): Wod[] => {
-  return [...wodsToSort].sort((a, b) => {
-    const directionMultiplier = sortDirection === "asc" ? 1 : -1;
+          result.score_rounds_completed !== null;
+ };
+ 
+ // Update function signature to use SortByType
+ const sortWods = (wodsToSort: Wod[], sortBy: SortByType, sortDirection: "asc" | "desc"): Wod[] => {
+   return [...wodsToSort].sort((a, b) => {
+     const directionMultiplier = sortDirection === "asc" ? 1 : -1;
 
     if (sortBy === "wodName") {
       const nameA = a.wodName.toUpperCase();
@@ -175,33 +176,102 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "att
       // Sort by the number of attempts (results array length)
       const attemptsA = a.results.filter(r => r.date && hasScore(r)).length;
       const attemptsB = b.results.filter(r => r.date && hasScore(r)).length;
-      return (attemptsA - attemptsB) * directionMultiplier;
-    } else if (sortBy === "level") {
+          return (attemptsA - attemptsB) * directionMultiplier;
+    } else if (sortBy === "level" || sortBy === "latestLevel") { // Combine level and latestLevel logic slightly
+      // --- Logic to find the result to compare ---
+      let resultA = null;
+      let resultB = null;
+
+      if (sortBy === "level") {
+        // Original 'level' sort uses the first result
+        resultA = a.results[0] ?? null;
+        resultB = b.results[0] ?? null;
+      } else { // sortBy === "latestLevel"
+        // Find the latest valid result for 'a'
+        const latestValidResultA = [...a.results]
+          .filter(r => r.date && hasScore(r))
+          .sort((r1, r2) => new Date(r2.date!).getTime() - new Date(r1.date!).getTime())[0];
+        resultA = latestValidResultA ?? null;
+        
+        // Find the latest valid result for 'b'
+        const latestValidResultB = [...b.results]
+          .filter(r => r.date && hasScore(r))
+          .sort((r1, r2) => new Date(r2.date!).getTime() - new Date(r1.date!).getTime())[0];
+        resultB = latestValidResultB ?? null;
+      }
+      
+      // --- Comparison logic using resultA and resultB ---
+      
+      // Handle cases where one or both results are missing
+      if (!resultA && !resultB) return 0;
+      if (!resultA) return 1 * directionMultiplier; // Treat missing result as lowest level
+      if (!resultB) return -1 * directionMultiplier; // Treat missing result as lowest level
+
+      // --- Revised Comparison Logic ---
+      const isScaledA = resultA.rxStatus && resultA.rxStatus !== "Rx";
+      const isScaledB = resultB.rxStatus && resultB.rxStatus !== "Rx";
+      
+      const levelA = getPerformanceLevel(a, resultA);
+      const levelB = getPerformanceLevel(b, resultB);
+
+      // Assign numerical values for levels (higher is better)
+      const levelValues: { [key: string]: number } = { elite: 4, advanced: 3, intermediate: 2, beginner: 1 };
+      const levelValueA = levelA ? levelValues[levelA] ?? 0 : 0;
+      const levelValueB = levelB ? levelValues[levelB] ?? 0 : 0;
+
+      // Assign a base score for Rx vs Scaled (Rx is much higher)
+      const baseScoreA = isScaledA ? 0 : 10; 
+      const baseScoreB = isScaledB ? 0 : 10;
+
+      // Calculate final sort score
+      const finalScoreA = baseScoreA + levelValueA;
+      const finalScoreB = baseScoreB + levelValueB;
+
+      // Compare final scores
+      if (finalScoreA !== finalScoreB) {
+        return (finalScoreA - finalScoreB) * directionMultiplier;
+      }
+
+      // If scores are the same, maintain original order (or sort by date?)
+      return 0;
+
+      // --- Old Comparison Logic (kept for reference) ---
       // Check if results are scaled first
-      const isScaledA = a.results[0]?.rxStatus && a.results[0].rxStatus !== "Rx";
-      const isScaledB = b.results[0]?.rxStatus && b.results[0].rxStatus !== "Rx";
+      // const isScaledA = resultA.rxStatus && resultA.rxStatus !== "Rx";
+      // const isScaledB = resultB.rxStatus && resultB.rxStatus !== "Rx";
+      // If one is scaled and the other isn't, the non-scaled one ranks higher (adjust multiplier later)
+      // if (!isScaledA && isScaledB) return -1; // a (Rx) is better than b (Scaled)
+      // if (isScaledA && !isScaledB) return 1;  // b (Rx) is better than a (Scaled)
+      // If both are scaled or both are Rx, sort by performance level
+      // const levelA = getPerformanceLevel(a, resultA);
+      // const levelB = getPerformanceLevel(b, resultB);
+      // Define the order of levels for sorting (elite is best)
+      // Assign numerical values for comparison (higher is better)
+      // const levelValues: { [key: string]: number } = { elite: 4, advanced: 3, intermediate: 2, beginner: 1 };
+      // const valueA = levelA ? levelValues[levelA] ?? 0 : 0; // Assign 0 if level is null
+      // const valueB = levelB ? levelValues[levelB] ?? 0 : 0; // Assign 0 if level is null
+      // Compare the values and apply direction multiplier
+      // if (valueA !== valueB) {
+      //   return (valueA - valueB) * directionMultiplier;
+      // }
+      // If levels are the same, maintain original order (or sort by date as secondary?)
+      // return 0; 
       
-      // If one is scaled and the other isn't, the scaled one comes first
-      if (isScaledA && !isScaledB) return -1 * directionMultiplier;
-      if (!isScaledA && isScaledB) return 1 * directionMultiplier;
-      
-      // If both are scaled or both are not scaled, sort by level
-      const levelA = a.results[0] ? getPerformanceLevel(a, a.results[0]) : null;
-      const levelB = b.results[0] ? getPerformanceLevel(b, b.results[0]) : null;
-      
+      // --- Old level comparison logic (kept for reference) ---
       // Define the order of levels for sorting (beginner is highest in the new order)
-      const levelOrder = ["beginner", "intermediate", "advanced", "elite", null];
-      
+      // const levelOrder = ["beginner", "intermediate", "advanced", "elite", null];
       // Get the index of each level in the order array
-      const indexA = levelOrder.indexOf(levelA);
-      const indexB = levelOrder.indexOf(levelB);
-      
+      // const indexA = levelOrder.indexOf(levelA);
+      // const indexB = levelOrder.indexOf(levelB);
       // Compare the indices (lower index = higher in the sort order)
-      return (indexA - indexB) * directionMultiplier;
+      // return (indexA - indexB) * directionMultiplier;
     }
     return 0;
   });
 };
+
+// Define the type for sorting columns including the new one
+type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
 
 // Categories and tags for filtering
 const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Other'];
@@ -209,7 +279,8 @@ const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Lad
 
 export default function WodViewer({ wods }: { wods: Wod[] }) {
   const [view, setView] = useState<"table" | "timeline">("timeline");
-  const [sortBy, setSortBy] = useState<"wodName" | "date" | "level" | "attempts">("attempts");
+  // Update state type and initial value if desired (keeping 'attempts' for now, UI will trigger 'latestLevel')
+  const [sortBy, setSortBy] = useState<SortByType>("attempts"); 
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -246,13 +317,20 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
     return categoryMatch && tagMatch;
   });
 
-  const handleSort = (column: "wodName" | "date" | "level" | "attempts") => {
+  // Update handleSort to accept the new type
+  const handleSort = (column: SortByType) => {
     if (column === sortBy) {
       setSortDirection(sortDirection === "asc" ? "desc" : "asc");
     } else {
       setSortBy(column);
-      // Default to descending order for attempts (most attempts first)
-      setSortDirection(column === "attempts" ? "desc" : "asc");
+      // Default sort directions
+      if (column === "latestLevel") {
+        setSortDirection("desc"); // Higher level first
+      } else if (column === "attempts") {
+        setSortDirection("desc"); // Most attempts first
+      } else {
+        setSortDirection("asc"); // Default others to ascending
+      }
     }
   };
 

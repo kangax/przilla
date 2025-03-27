@@ -3,7 +3,12 @@
 import Link from "next/link";
 import { Flex, Table, Text, Tooltip, Badge } from "@radix-ui/themes";
 import { Wod } from "./WodViewer";
-import { getPerformanceLevelColor, getPerformanceLevel } from "./WodViewer";
+import { 
+  getPerformanceLevelColor, 
+  getPerformanceLevel, 
+  formatScore,
+  hasScore
+} from "./WodViewer";
 import React from "react";
 
 interface WodTimelineProps {
@@ -42,7 +47,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
           if (wod.results.length === 0 || !wod.results[0].date) return null;
           
           const sortedResults = [...wod.results]
-            .filter(r => r.date && r.score)
+            .filter(r => r.date && hasScore(r))
             .sort((a, b) => {
               const dateA = safeString(a.date);
               const dateB = safeString(b.date);
@@ -70,8 +75,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                     <Flex key={index} align="center" className="mb-1">
                       <Tooltip content={safeString(result?.date)}>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className={`font-mono ${getPerformanceLevelColor(getPerformanceLevel(wod, result.score), result.rxStatus)}`}>
-                            {safeString(result?.score)}
+                          <span className={`font-mono ${getPerformanceLevelColor(getPerformanceLevel(wod, result), result.rxStatus)}`}>
+                            {formatScore(result)}
                           </span> {result.rxStatus && <span className="text-sm opacity-80">{safeString(result.rxStatus)}</span>}
                         </Text>
                       </Tooltip>

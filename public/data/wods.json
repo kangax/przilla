@@ -2350,38 +2350,6 @@
     ]
   },
   {
-    "wodUrl": "https://wodwell.com/wod/omar/",
-    "wodName": "Omar",
-    "description": "For Time\n10 Thrusters (95/65 lb)\n15 Bar-Facing Burpees\n20 Thrusters (95/65 lb)\n25 Bar-Facing Burpees\n30 Thrusters (95/65 lb)\n35 Bar-Facing Burpees",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 600 },
-        "advanced": { "min": 600, "max": 840 },
-        "intermediate": { "min": 840, "max": 1080 },
-        "beginner": { "min": 1080, "max": null }
-      }
-    },
-    "results": [
-      {
-        "date": "20 Mar'23",
-        "rxStatus": "Rx",
-        "notes": "",
-        "score_time_seconds": 837,
-        "score_reps": null,
-        "score_load": null,
-        "score_rounds_completed": null,
-        "score_partial_reps": null
-      }
-    ],
-    "category": "Hero",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ]
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/peyton/",
     "wodName": "Peyton",
     "description": "AMRAP in 20 minutes:\n10 Chest-to-Bar Pull-Ups\n10 Dumbbell Thrusters (50/35 lb)\nEvery 2 minutes, starting at 0:00, complete:\n40 Double-Unders\nFrom 20:00, complete:\n2 mile Run",

@@ -11,9 +11,14 @@ import WodTimeline from "./WodTimeline";
 // Type definitions for our data
 export type WodResult = {
   date?: string;
-  score?: string;
   rxStatus?: string | null;
   notes?: string;
+  // New score fields replacing the old 'score' field
+  score_time_seconds: number | null;
+  score_reps: number | null;
+  score_load: number | null;
+  score_rounds_completed: number | null;
+  score_partial_reps: number | null;
 };
 
 export type BenchmarkLevel = {
@@ -22,8 +27,7 @@ export type BenchmarkLevel = {
 };
 
 export type Benchmarks = {
-  type: "time" | "rounds" | "reps";
-  certainty: number;
+  type: "time" | "rounds" | "reps" | "load";
   levels: {
     elite: BenchmarkLevel;
     advanced: BenchmarkLevel;
@@ -66,6 +70,13 @@ export const getPerformanceLevelColor = (level: string | null, rxStatus?: string
   }
 };
 
+// Helper function to format seconds to MM:SS
+export const formatSecondsToMMSS = (seconds: number): string => {
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = seconds % 60;
+  return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
+};
+
 // Helper function to get the tooltip content for a performance level
 export const getPerformanceLevelTooltip = (wod: Wod, level: string | null): string => {
   if (!wod.benchmarks || !level) return "No benchmark data available";
@@ -74,8 +85,9 @@ export const getPerformanceLevelTooltip = (wod: Wod, level: string | null): stri
   const levelData = levels[level as keyof typeof levels];
   
   if (type === "time") {
-    const min = levelData.min !== null ? `${Math.floor(levelData.min)}:${(levelData.min % 1 * 60).toFixed(0).padStart(2, '0')}` : "0:00";
-    const max = levelData.max !== null ? `${Math.floor(levelData.max)}:${(levelData.max % 1 * 60).toFixed(0).padStart(2, '0')}` : "∞";
+    // Format time in seconds to MM:SS
+    const min = levelData.min !== null ? formatSecondsToMMSS(levelData.min) : "0:00";
+    const max = levelData.max !== null ? formatSecondsToMMSS(levelData.max) : "∞";
     return `${level.charAt(0).toUpperCase() + level.slice(1)}: ${min} - ${max}`;
   } else {
     const min = levelData.min !== null ? levelData.min.toString() : "0";
@@ -84,34 +96,47 @@ export const getPerformanceLevelTooltip = (wod: Wod, level: string | null): stri
   }
 };
 
-export const getPerformanceLevel = (wod: Wod, score?: string): string | null => {
-  if (!wod.benchmarks || !score) return null;
-  
-  // Parse the score
-  let numericScore: number | null = null;
-  
-  if (wod.benchmarks.type === "time") {
-    // Parse time format (e.g., "5:57" to 5.95 minutes)
-    const timeParts = score.split(":");
-    if (timeParts.length === 2) {
-      const minutes = parseInt(timeParts[0], 10);
-      const seconds = parseInt(timeParts[1], 10);
-      numericScore = minutes + seconds / 60;
+// Helper function to format score based on the available score fields
+export const formatScore = (result: WodResult): string => {
+  if (result.score_time_seconds !== null) {
+    return formatSecondsToMMSS(result.score_time_seconds);
+  } else if (result.score_reps !== null) {
+    return `${result.score_reps}reps`;
+  } else if (result.score_load !== null) {
+    return `${result.score_load}lbs`;
+  } else if (result.score_rounds_completed !== null) {
+    if (result.score_partial_reps !== null && result.score_partial_reps > 0) {
+      return `${result.score_rounds_completed}+${result.score_partial_reps}`;
     } else {
-      numericScore = parseFloat(score);
-    }
-  } else if (wod.benchmarks.type === "rounds" || wod.benchmarks.type === "reps") {
-    // Parse rounds+reps format (e.g., "20+5" to 20.5 rounds)
-    const roundsParts = score.split("+");
-    if (roundsParts.length === 2) {
-      const rounds = parseInt(roundsParts[0], 10);
-      const reps = parseInt(roundsParts[1], 10);
-      numericScore = rounds + reps / 100; // Using a fraction for reps
-    } else {
-      numericScore = parseFloat(score);
+      return `${result.score_rounds_completed}`;
     }
   }
+  return "";
+};
+
+// Helper function to get numeric score for performance level calculation
+export const getNumericScore = (wod: Wod, result: WodResult): number | null => {
+  if (!wod.benchmarks) return null;
   
+  if (wod.benchmarks.type === "time" && result.score_time_seconds !== null) {
+    return result.score_time_seconds;
+  } else if (wod.benchmarks.type === "reps" && result.score_reps !== null) {
+    return result.score_reps;
+  } else if (wod.benchmarks.type === "load" && result.score_load !== null) {
+    return result.score_load;
+  } else if (wod.benchmarks.type === "rounds" && result.score_rounds_completed !== null) {
+    // Convert rounds+reps to a decimal number (e.g., 5+10 becomes 5.1)
+    const partialReps = result.score_partial_reps || 0;
+    return result.score_rounds_completed + (partialReps / 100);
+  }
+  
+  return null;
+};
+
+export const getPerformanceLevel = (wod: Wod, result: WodResult): string | null => {
+  if (!wod.benchmarks) return null;
+  
+  const numericScore = getNumericScore(wod, result);
   if (numericScore === null) return null;
   
   // Determine the performance level based on the benchmarks
@@ -124,12 +149,20 @@ export const getPerformanceLevel = (wod: Wod, score?: string): string | null => 
     if (levels.intermediate.max !== null && numericScore <= levels.intermediate.max) return "intermediate";
     return "beginner";
   } else {
-    // For rounds/reps-based workouts, higher is better
+    // For rounds/reps/load-based workouts, higher is better
     if (levels.elite.min !== null && numericScore >= levels.elite.min) return "elite";
     if (levels.advanced.min !== null && numericScore >= levels.advanced.min) return "advanced";
     if (levels.intermediate.min !== null && numericScore >= levels.intermediate.min) return "intermediate";
     return "beginner";
   }
+};
+
+// Helper function to check if a result has any score
+export const hasScore = (result: WodResult): boolean => {
+  return result.score_time_seconds !== null || 
+         result.score_reps !== null || 
+         result.score_load !== null || 
+         result.score_rounds_completed !== null;
 };
 
 const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "attempts", sortDirection: "asc" | "desc"): Wod[] => {
@@ -148,13 +181,13 @@ const sortWods = (wodsToSort: Wod[], sortBy: "wodName" | "date" | "level" | "att
       return (dateA.getTime() - dateB.getTime()) * directionMultiplier;
     } else if (sortBy === "attempts") {
       // Sort by the number of attempts (results array length)
-      const attemptsA = a.results.filter(r => r.date && r.score).length;
-      const attemptsB = b.results.filter(r => r.date && r.score).length;
+      const attemptsA = a.results.filter(r => r.date && hasScore(r)).length;
+      const attemptsB = b.results.filter(r => r.date && hasScore(r)).length;
       return (attemptsA - attemptsB) * directionMultiplier;
     } else if (sortBy === "level") {
       // For level sorting, we need to get the performance level of the first result
-      const levelA = getPerformanceLevel(a, a.results[0]?.score);
-      const levelB = getPerformanceLevel(b, b.results[0]?.score);
+      const levelA = a.results[0] ? getPerformanceLevel(a, a.results[0]) : null;
+      const levelB = b.results[0] ? getPerformanceLevel(b, b.results[0]) : null;
       
       // Define the order of levels for sorting (elite is highest)
       const levelOrder = ["elite", "advanced", "intermediate", "beginner", null];
@@ -184,7 +217,7 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
   
   // Filter wods by completion status
   const completedWods = wods.filter(wod =>
-    wod.results[0]?.date && wod.results[0].date !== ""
+    wod.results[0]?.date && wod.results[0].date !== "" && wod.results[0] && hasScore(wod.results[0])
   );
 
   // Filter wods by selected categories and tags

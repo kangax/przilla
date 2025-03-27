@@ -142,7 +142,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
                   )
                 )}
               </Table.Cell>
-              <Table.Cell className="max-w-[300px] truncate">
+              <Table.Cell className="max-w-[250px] truncate">
                 <Tooltip content={safeString(result.notes)}>
                   <span>{safeString(result.notes)}</span>
                 </Tooltip>

@@ -73,7 +73,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                   </Tooltip>
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
-                      <Tooltip content={safeString(result?.date)}>
+                      {/* Update Tooltip content to include notes */}
+                      <Tooltip content={`${safeString(result?.date)}${result.notes ? `\nNotes: ${safeString(result.notes)}` : ''}`}>
                         <Text className="cursor-help whitespace-nowrap">
                           <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-gray-500" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                             {formatScore(result)}

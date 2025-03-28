@@ -61,10 +61,14 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
               <Table.Row key={`${wod.wodName}-no-results`} className="border-t border-table-border hover:bg-table-rowAlt">
                 <Table.Cell className="font-medium">
                   <Tooltip content={wod.description}>
-                    <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
-                      {wod.wodName}
-                      <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
-                    </Link>
+                    {wod.wodUrl ? (
+                      <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                        {wod.wodName}
+                        <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                      </Link>
+                    ) : (
+                      <span className="whitespace-nowrap max-w-[200px] truncate">{wod.wodName}</span>
+                    )}
                   </Tooltip>
                 </Table.Cell>
                 <Table.Cell>
@@ -93,10 +97,14 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
               {resultIndex === 0 ? (
                 <Table.Cell className="font-medium">
                   <Tooltip content={wod.description}>
-                    <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
-                      {wod.wodName}
-                      <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
-                    </Link>
+                    {wod.wodUrl ? (
+                      <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                        {wod.wodName}
+                        <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                      </Link>
+                    ) : (
+                      <span className="whitespace-nowrap max-w-[200px] truncate">{wod.wodName}</span>
+                    )}
                   </Tooltip>
                 </Table.Cell>
               ) : (

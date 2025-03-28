@@ -61,10 +61,14 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
           return (
             <Table.Row key={wod.wodName} className="border-t border-table-border hover:bg-table-rowAlt">
               <Table.Cell className="font-medium">
-                <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
-                  {wod.wodName}
-                  <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
-                </Link>
+                {wod.wodUrl ? (
+                  <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                    {wod.wodName}
+                    <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                  </Link>
+                ) : (
+                  <span className="whitespace-nowrap max-w-[200px] truncate">{wod.wodName}</span>
+                )}
               </Table.Cell>
               <Table.Cell>
                 <Flex align="center">

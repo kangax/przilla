@@ -433,12 +433,12 @@ export default function WodViewer({ wods }: WodViewerProps) {
                   </SegmentedControl.Item>
                   <SegmentedControl.Item value="done">
                     <Tooltip content="Show Done Workouts">
-                      <span>✓</span>
+                      <span>Done ({doneWods.length})</span>
                     </Tooltip>
                   </SegmentedControl.Item>
                   <SegmentedControl.Item value="notDone">
                      <Tooltip content="Show Not Done Workouts">
-                       <span>✕</span>
+                       <span>Todo ({notDoneWods.length})</span>
                      </Tooltip>
                   </SegmentedControl.Item>
                 </SegmentedControl.Root>

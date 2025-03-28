@@ -7,4 +7,17 @@
 + If there's wodurl add icon-link; remove links from wod name
 
 - Add search box to filter wods?
-- Add difficulty to wods
+- Add difficulty level to wods
+
+### Stats
+- Short excerpt about your data (what to focus on, strength/weaknesses)
+- Use AI endpoint?
+
+### Import from wodwell / sugarwod
+- Write scripts for scraping
+- Bookmarklet so users can use?
+
+### Authentication
+
+### JSON -> database
+- store data in a database, per user (under auth)

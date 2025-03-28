@@ -45,7 +45,7 @@ export default async function Home() {
         </Box>
         
         {/* Main Content with top margin to account for fixed header */}
-        <Container size="4" className="py-8 pt-16">
+        <Container size="4" className="pb-8">
           <Flex direction="column" gap="6">
             
             <WodViewer wods={wodsData} /> 

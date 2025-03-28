@@ -60,7 +60,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
             return (
               <Table.Row key={`${wod.wodName}-no-results`} className="border-t border-table-border hover:bg-table-rowAlt">
                 <Table.Cell className="font-medium">
-                  <Tooltip content={wod.description}>
+                  <Tooltip content={<span style={{ whiteSpace: 'pre-wrap' }}>{wod.description}</span>}>
                     {wod.wodUrl ? (
                       <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
                         {wod.wodName}
@@ -96,7 +96,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
             <Table.Row key={`${wod.wodName}-${resultIndex}`} className="border-t border-table-border hover:bg-table-rowAlt">
               {resultIndex === 0 ? (
                 <Table.Cell className="font-medium">
-                  <Tooltip content={wod.description}>
+                  <Tooltip content={<span style={{ whiteSpace: 'pre-wrap' }}>{wod.description}</span>}>
                     {wod.wodUrl ? (
                       <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
                         {wod.wodName}

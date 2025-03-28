@@ -4,8 +4,9 @@ import Link from "next/link";
 import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes"; 
 import { auth } from "~/server/auth"; 
 
-// Import the WodViewer component
+// Import the WodViewer and ThemeToggle components
 import WodViewer from "~/app/_components/WodViewer";
+import ThemeToggle from "~/app/_components/ThemeToggle"; // Import ThemeToggle
 // Use type import
 import type { Wod } from "~/app/_components/WodViewer"; 
 
@@ -23,20 +24,28 @@ export default async function Home() {
   }
 
   return ( 
-      <Box className="min-h-screen bg-[#09090b]">
+      <Box className="min-h-screen bg-white dark:bg-[#09090b]"> 
         {/* Fixed Top Bar */}
-        <Box className="fixed top-0 left-0 w-full bg-[#09090b] py-4 px-6 z-10 border-b border-gray-800 shadow-md">
+        {/* Update header background and border for light/dark */}
+        <Box className="fixed top-0 left-0 w-full bg-white dark:bg-[#09090b] py-4 px-6 z-10 border-b border-gray-200 dark:border-gray-800 shadow-md relative"> 
           <Container size="4">
             <Flex align="center">
-              <Heading size="5" className="text-zinc-200"> 
+              {/* Update heading color for light/dark */}
+              <Heading size="5" className="text-gray-900 dark:text-zinc-200"> 
                 PRzilla
               </Heading>
-              <Flex justify="center" gap="4" className="text-gray-400 text-sm ml-auto" align="center">
+              {/* Update stats color for light/dark */}
+              <Flex justify="center" gap="4" className="text-gray-600 dark:text-gray-400 text-sm ml-auto" align="center"> 
                 <Text>{wodsData.length} WODs</Text>
                 <Text>{wodsData.reduce((total, wod) => total + (wod.results?.length ?? 0), 0)} Sessions</Text>
               </Flex>
+              {/* ThemeToggle is moved outside the Flex/Container below */}
             </Flex>
           </Container>
+          {/* Absolutely position ThemeToggle */}
+          <Box className="absolute top-4 right-6"> {/* Adjust top/right as needed */}
+             <ThemeToggle />
+          </Box>
         </Box>
         
         {/* Main Content with top margin to account for fixed header */}

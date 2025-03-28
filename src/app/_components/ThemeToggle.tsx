@@ -1,8 +1,9 @@
 "use client";
 
-import { useTheme } from "next-themes"; // Changed import
+import { useTheme } from "next-themes"; 
 import { MoonIcon, SunIcon } from "@radix-ui/react-icons";
-import { Switch } from "@radix-ui/themes";
+// Import IconButton and Tooltip
+import { IconButton, Tooltip } from "@radix-ui/themes"; 
 import { useEffect, useState } from "react";
 
 export default function ThemeToggle() {
@@ -18,23 +19,20 @@ export default function ThemeToggle() {
   if (!mounted) return null;
 
   // Use resolvedTheme to determine the current actual theme
-  const isDarkMode = resolvedTheme === "dark"; 
+  const isDarkMode = resolvedTheme === "dark";
 
+  // Render IconButton instead of Switch
   return (
-    <div className="flex items-center gap-2">
-      <SunIcon className={`h-4 w-4 ${isDarkMode ? 'opacity-50' : 'text-yellow-500'}`} />
-      <Switch
-        checked={isDarkMode}
-        onCheckedChange={(checked) => {
-          // Use setTheme from next-themes
-          setTheme(checked ? "dark" : "light"); 
-        }}
-        size="1"
-        color="violet"
-        highContrast
+    <Tooltip content={isDarkMode ? "Switch to Light Mode" : "Switch to Dark Mode"}>
+      <IconButton 
+        size="2" // Adjust size as needed
+        variant="ghost" // Use ghost variant for subtle look
+        color="gray" 
+        onClick={() => setTheme(isDarkMode ? "light" : "dark")}
         className="cursor-pointer"
-      />
-      <MoonIcon className={`h-4 w-4 ${isDarkMode ? 'text-blue-300' : 'opacity-50'}`} />
-    </div>
+      >
+        {isDarkMode ? <SunIcon width="16" height="16" /> : <MoonIcon width="16" height="16" />}
+      </IconButton>
+    </Tooltip>
   );
 }

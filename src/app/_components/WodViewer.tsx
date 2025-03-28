@@ -48,17 +48,19 @@ export type Wod = {
 
 // Helper function to get the color for a performance level
 export const getPerformanceLevelColor = (level: string | null): string => {
+  // Using darker shades for better contrast in light mode
   switch (level) {
     case "elite":
-      return "text-purple-400";
+      return "text-purple-600 dark:text-purple-400";
     case "advanced":
-      return "text-green-400";
+      return "text-green-600 dark:text-green-400";
     case "intermediate":
-      return "text-yellow-400";
+      return "text-yellow-600 dark:text-yellow-400"; // yellow-600 might still be tricky, consider dark:text-yellow-300?
     case "beginner":
-      return "text-red-400";
+      return "text-red-600 dark:text-red-400";
     default:
-      return "text-foreground/60";
+      // Use a slightly less faded color for default/scaled in light mode
+      return "text-foreground/70 dark:text-foreground/60"; 
   }
 };
 

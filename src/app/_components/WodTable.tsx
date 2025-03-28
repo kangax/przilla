@@ -135,7 +135,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
               </Table.Cell>
               <Table.Cell>
                 {result.rxStatus && result.rxStatus !== "Rx" ? (
-                  <Text className="font-medium text-foreground/60">
+                  <Text className={`font-medium ${getPerformanceLevelColor(null)}`}>
                     Scaled
                   </Text>
                 ) : (

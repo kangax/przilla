@@ -86,7 +86,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                         </>
                       }>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-foreground/60" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
+                          <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                             {formatScore(result)}
                           </span> 
                           {result.rxStatus && (

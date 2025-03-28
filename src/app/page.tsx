@@ -34,7 +34,8 @@ export default async function Home() {
         <Box className="fixed top-0 left-0 w-full bg-[#09090b] py-4 px-6 z-10 border-b border-gray-800 shadow-md">
           <Container size="4">
             <Flex align="center">
-              <Heading size="5" className="text-white">
+              {/* Change heading text color */}
+              <Heading size="5" className="text-zinc-200"> 
                 PRzilla
               </Heading>
               {/* Statistics display */}

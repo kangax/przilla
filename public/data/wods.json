@@ -2807,5 +2807,25 @@
     "tags": [
       "For Time"
     ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/g-i-jane/",
+    "wodName": "GI Jane",
+    "description": "100 Burpee Pull-ups For Time (6 inch target)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": 0, "max": 600 },
+        "advanced": { "min": 600, "max": 900 },
+        "intermediate": { "min": 900, "max": 1200 },
+        "beginner": { "min": 1200, "max": null }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": [
+      "For Time",
+      "Monostructural"
+    ]
   }
 ]

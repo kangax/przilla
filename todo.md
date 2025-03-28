@@ -4,6 +4,7 @@
 + Add support for Open-like ranking (score if timecap or time)
 + Toggle between Done/TODO workouts
 + Deploy to prod (vercel?)
++ If there's wodurl add icon-link; remove links from wod name
 
-- If there's wodurl add icon-link; remove links from wod name
-- Add search 
+- Add search box to filter wods?
+- Add difficulty to wods

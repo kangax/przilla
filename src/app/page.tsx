@@ -24,26 +24,22 @@ export default async function Home() {
   }
 
   return ( 
-      <Box className="min-h-screen bg-white dark:bg-[#09090b]"> 
+      <Box className="min-h-screen bg-background text-foreground"> 
         {/* Fixed Top Bar */}
-        {/* Update header background and border for light/dark */}
-        <Box className="fixed top-0 left-0 w-full bg-white dark:bg-[#09090b] py-4 px-6 z-10 border-b border-gray-200 dark:border-gray-800 shadow-md relative"> 
+        <Box className="fixed top-0 left-0 w-full bg-background py-4 px-6 z-10 border-b border-border shadow-md relative"> 
           <Container size="4">
             <Flex align="center">
-              {/* Update heading color for light/dark */}
-              <Heading size="5" className="text-gray-900 dark:text-zinc-200"> 
+              <Heading size="5" className="text-foreground"> 
                 PRzilla
               </Heading>
-              {/* Update stats color for light/dark */}
-              <Flex justify="center" gap="4" className="text-gray-600 dark:text-gray-400 text-sm ml-auto" align="center"> 
+              <Flex justify="center" gap="4" className="text-foreground/70 text-sm ml-auto" align="center"> 
                 <Text>{wodsData.length} WODs</Text>
                 <Text>{wodsData.reduce((total, wod) => total + (wod.results?.length ?? 0), 0)} Sessions</Text>
               </Flex>
-              {/* ThemeToggle is moved outside the Flex/Container below */}
             </Flex>
           </Container>
           {/* Absolutely position ThemeToggle */}
-          <Box className="absolute top-4 right-6"> {/* Adjust top/right as needed */}
+          <Box className="absolute top-4 right-6">
              <ThemeToggle />
           </Box>
         </Box>

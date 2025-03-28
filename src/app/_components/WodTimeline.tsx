@@ -31,20 +31,20 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
   };
 
   return (
-    <Table.Root variant="surface" className="w-full">
-      <Table.Header>
+    <Table.Root variant="surface" className="w-full bg-table-row border border-table-border rounded-md overflow-hidden">
+      <Table.Header className="bg-table-header">
         <Table.Row>
-          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }} className="text-foreground">
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell onClick={() => handleSort("latestLevel")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("latestLevel")} style={{ cursor: 'pointer' }} className="text-foreground">
             Progress Timeline <span className="text-xs opacity-70">(latest level)</span> {getSortIndicator("latestLevel")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Description</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="text-foreground">Description</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
       
-      <Table.Body>
+      <Table.Body className="bg-table-row">
         {wods.map((wod) => {
           if (wod.results.length === 0 || !wod.results[0].date) return null;
           
@@ -59,9 +59,9 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
             });
           
           return (
-            <Table.Row key={wod.wodName}>
+            <Table.Row key={wod.wodName} className="border-t border-table-border hover:bg-table-rowAlt">
               <Table.Cell className="font-medium">
-                <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
                   {wod.wodName}
                   <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
                 </Link>
@@ -82,7 +82,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                         </>
                       }>
                         <Text className="cursor-help whitespace-nowrap">
-                          <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-gray-500" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
+                          <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-foreground/60" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                             {formatScore(result)}
                           </span> 
                           {result.rxStatus && (

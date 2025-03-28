@@ -33,35 +33,35 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
   };
 
   return (
-    <Table.Root variant="surface" className="w-full">
-      <Table.Header>
+    <Table.Root variant="surface" className="w-full bg-table-row border border-table-border rounded-md overflow-hidden">
+      <Table.Header className="bg-table-header">
         <Table.Row>
-          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }} className="text-foreground">
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="text-foreground">
             Type
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell onClick={() => handleSort("date")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell onClick={() => handleSort("date")} style={{ cursor: 'pointer' }} className="text-foreground">
             Date {getSortIndicator("date")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Score</Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell onClick={() => handleSort("level")} style={{ cursor: 'pointer' }}>
+          <Table.ColumnHeaderCell className="text-foreground">Score</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell onClick={() => handleSort("level")} style={{ cursor: 'pointer' }} className="text-foreground">
             Level {getSortIndicator("level")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell>Notes</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="text-foreground">Notes</Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
 
-      <Table.Body>
+      <Table.Body className="bg-table-row">
         {wods.map((wod) => {
           // For workouts with no results, display a single row with just the workout info
           if (wod.results.length === 0) {
             return (
-              <Table.Row key={`${wod.wodName}-no-results`}>
+              <Table.Row key={`${wod.wodName}-no-results`} className="border-t border-table-border hover:bg-table-rowAlt">
                 <Table.Cell className="font-medium">
                   <Tooltip content={wod.description}>
-                    <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                    <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
                       {wod.wodName}
                       <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
                     </Link>
@@ -89,11 +89,11 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
           
           // For workouts with results, display a row for each result
           return wod.results.map((result, resultIndex) => (
-            <Table.Row key={`${wod.wodName}-${resultIndex}`}>
+            <Table.Row key={`${wod.wodName}-${resultIndex}`} className="border-t border-table-border hover:bg-table-rowAlt">
               {resultIndex === 0 ? (
                 <Table.Cell className="font-medium">
                   <Tooltip content={wod.description}>
-                    <Link href={wod.wodUrl} target="_blank" className="text-[#a855f7] hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                    <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
                       {wod.wodName}
                       <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
                     </Link>
@@ -127,7 +127,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
               </Table.Cell>
               <Table.Cell>
                 {result.rxStatus && result.rxStatus !== "Rx" ? (
-                  <Text className="font-medium text-gray-500">
+                  <Text className="font-medium text-foreground/60">
                     Scaled
                   </Text>
                 ) : (

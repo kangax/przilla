@@ -58,7 +58,7 @@ export const getPerformanceLevelColor = (level: string | null): string => {
     case "beginner":
       return "text-red-400";
     default:
-      return "text-gray-500";
+      return "text-foreground/60";
   }
 };
 

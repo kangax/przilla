@@ -35,6 +35,12 @@ export default {
           DEFAULT: "hsl(var(--popover))",
           foreground: "hsl(var(--popover-foreground))",
         },
+        table: {
+          header: "hsl(var(--table-header-bg))",
+          row: "hsl(var(--table-row-bg))",
+          rowAlt: "hsl(var(--table-row-alt-bg))",
+          border: "hsl(var(--table-border))",
+        },
       },
     },
   },

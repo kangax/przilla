@@ -24,7 +24,7 @@ export default function RootLayout({
       <body>
         <SessionProvider> 
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Theme>
+            <Theme accentColor="blue" grayColor="slate">
               <TRPCReactProvider>{children}</TRPCReactProvider>
             </Theme>
           </ThemeProvider>

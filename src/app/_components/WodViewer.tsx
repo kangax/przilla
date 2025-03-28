@@ -1,7 +1,8 @@
 "use client";
 
 import { useState } from "react";
-import { Box, Tabs, Flex, Badge } from "@radix-ui/themes";
+// Import SegmentedControl and Tooltip
+import { Box, Tabs, Flex, Badge, SegmentedControl, Tooltip } from "@radix-ui/themes"; 
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
@@ -353,8 +354,10 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
           </Tabs.List>
           
           <Box className="mt-4">
-            {/* Categories Filter */}
-            <Box className="mb-2 mt-4 rt-Flex items-center">
+            {/* Filter Bar */}
+            {/* Use Flex to align items, add justify='between' later if needed */}
+            <Flex className="mb-4 mt-4 items-center" gap="4"> 
+              {/* Category Select */}
               <Select.Root 
                 value={selectedCategories.length > 0 ? selectedCategories[0] : "all"} 
                 onValueChange={(value) => {
@@ -402,8 +405,8 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
                   </Select.Content>
                 </Select.Portal>
               </Select.Root>
-              {/* Tags section */}
-              <Flex wrap="wrap" gap="2">
+              {/* Tags section - wrap if needed */}
+              <Flex wrap="wrap" gap="2" className="flex-grow"> 
                 {TAGS.map(tag => (
                   <Box 
                     key={tag}
@@ -418,59 +421,39 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
                   </Box>
                 ))}
               </Flex>
-              {/* Clear filters button */}
-              {(selectedCategories.length > 0 || selectedTags.length > 0 || (view === "table" && completionFilter !== "all")) && (
-                <button 
-                  onClick={() => {
-                    setSelectedCategories([]);
-                    setSelectedTags([]);
-                    setCompletionFilter("all");
-                  }}
-                  className="text-sm text-primary hover:underline ml-2"
+              {/* New Segmented Control Filter - only show in table view */}
+              {view === "table" && (
+                <SegmentedControl.Root 
+                  size="1" 
+                  value={completionFilter} 
+                onValueChange={(value) => setCompletionFilter(value as "all" | "done" | "notDone")}
+                  className="ml-auto" // Push to the right
                 >
-                  &times;
-                </button>
-                )}
-            </Box>
+                  <SegmentedControl.Item value="all">
+                    <Tooltip content="Show All Workouts">
+                      {/* Wrap content in span for Tooltip trigger */}
+                      <span>All</span> 
+                    </Tooltip>
+                  </SegmentedControl.Item>
+                  <SegmentedControl.Item value="done">
+                    <Tooltip content="Show Done Workouts">
+                      <span>✓</span>
+                    </Tooltip>
+                  </SegmentedControl.Item>
+                  <SegmentedControl.Item value="notDone">
+                     <Tooltip content="Show Not Done Workouts">
+                       <span>✕</span>
+                     </Tooltip>
+                  </SegmentedControl.Item>
+                </SegmentedControl.Root>
+              )}
 
-            {/* Completion Status Toggle - only show in table view */}
-            {view === "table" && (
-              <Box className="mb-4 mt-2">
-                <Flex gap="1">
-                  <Box 
-                    className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
-                      completionFilter === "all" 
-                        ? 'bg-primary text-primary-foreground border-primary' 
-                        : 'bg-card text-card-foreground border-border hover:bg-accent'
-                    }`}
-                    onClick={() => setCompletionFilter("all")}
-                  >
-                    All ({wods.length})
-                  </Box>
-                  <Box 
-                    className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
-                      completionFilter === "done" 
-                        ? 'bg-primary text-primary-foreground border-primary' 
-                        : 'bg-card text-card-foreground border-border hover:bg-accent'
-                    }`}
-                    onClick={() => setCompletionFilter("done")}
-                  >
-                    Done ({doneWods.length})
-                  </Box>
-                  <Box 
-                    className={`px-3 py-1 rounded-md text-sm border cursor-pointer flex-1 text-center ${
-                      completionFilter === "notDone" 
-                        ? 'bg-primary text-primary-foreground border-primary' 
-                        : 'bg-card text-card-foreground border-border hover:bg-accent'
-                    }`}
-                    onClick={() => setCompletionFilter("notDone")}
-                  >
-                    Not Done ({notDoneWods.length})
-                  </Box>
-                </Flex>
-              </Box>
-            )}
+            </Flex> {/* End of Filter Bar Flex */}
+
+            {/* Remove old Completion Status Toggle */}
+            {/* {view === "table" && ( ... )} */}
             
+            {/* Render Table or Timeline */}
             {view === "table" ? (
               <WodTable wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
             ) : (

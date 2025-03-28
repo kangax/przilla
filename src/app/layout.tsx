@@ -5,6 +5,7 @@ import { ThemeProvider } from "next-themes";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
+import { SessionProvider } from "next-auth/react"; 
 
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -21,11 +22,13 @@ export default function RootLayout({
     // suppressHydrationWarning is recommended by next-themes when using class attribute
     <html lang="en" className={`${GeistSans.variable}`} suppressHydrationWarning>
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Theme>
-            <TRPCReactProvider>{children}</TRPCReactProvider>
-          </Theme>
-        </ThemeProvider>
+        <SessionProvider> 
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+            <Theme>
+              <TRPCReactProvider>{children}</TRPCReactProvider>
+            </Theme>
+          </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

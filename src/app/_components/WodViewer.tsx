@@ -1,10 +1,9 @@
 "use client";
 
-import { useState } from "react";
-// Import SegmentedControl and Tooltip
-import { Box, Tabs, Flex, Badge, SegmentedControl, Tooltip } from "@radix-ui/themes"; 
+import { useState } from "react"; 
+import { Box, Flex, Badge, SegmentedControl, Tooltip } from "@radix-ui/themes"; // Remove Tabs import
 import * as Select from "@radix-ui/react-select";
-import { ChevronDown } from "lucide-react";
+import { ChevronDown, TableIcon, List } from "lucide-react"; 
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
 
@@ -44,7 +43,7 @@ export type Wod = {
   results: WodResult[];
   // New fields for categorization
   category?: 'Girl' | 'Hero' | 'Games' | 'Open' | 'Benchmark' | 'Other';
-  tags?: Array<'Chipper' | 'Couplet' | 'Triplet' | 'EMOM' | 'AMRAP' | 'For Time' | 'Ladder' | 'Partner' | 'Team'>;
+  tags?: Array<'Chipper' | 'Couplet' | 'Triplet' | 'EMOM' | 'AMRAP' | 'For Time' | 'Ladder'>;
 };
 
 // Helper function to get the color for a performance level
@@ -276,11 +275,14 @@ type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
 
 // Categories and tags for filtering
 const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Other'];
-const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder', 'Partner', 'Team'];
+const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'];
 
-export default function WodViewer({ wods }: { wods: Wod[] }) {
-  const [view, setView] = useState<"table" | "timeline">("timeline");
-  // Update state type and initial value if desired (keeping 'attempts' for now, UI will trigger 'latestLevel')
+interface WodViewerProps {
+  wods: Wod[];
+}
+
+export default function WodViewer({ wods }: WodViewerProps) { 
+  const [view, setView] = useState<"table" | "timeline">("timeline"); 
   const [sortBy, setSortBy] = useState<SortByType>("attempts"); 
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
@@ -346,17 +348,10 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
 
   const sortedWods = sortWods(filteredWods, sortBy, sortDirection);
 
-  return (
-    <Tabs.Root defaultValue={view}>
-          <Tabs.List>
-            <Tabs.Trigger value="timeline" onClick={() => setView("timeline")}>Timeline View</Tabs.Trigger>
-            <Tabs.Trigger value="table" onClick={() => setView("table")}>Table View</Tabs.Trigger>
-          </Tabs.List>
-          
-          <Box className="mt-4">
+  return ( 
+          <Box>
             {/* Filter Bar */}
-            {/* Use Flex to align items, add justify='between' later if needed */}
-            <Flex className="mb-4 mt-4 items-center" gap="4"> 
+            <Flex className="mb-4 mt-4 items-center" gap="4">
               {/* Category Select */}
               <Select.Root 
                 value={selectedCategories.length > 0 ? selectedCategories[0] : "all"} 
@@ -406,7 +401,7 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
                 </Select.Portal>
               </Select.Root>
               {/* Tags section - wrap if needed */}
-              <Flex wrap="wrap" gap="2" className="flex-grow"> 
+              <Flex wrap="wrap" gap="1" className="flex-grow"> 
                 {TAGS.map(tag => (
                   <Box 
                     key={tag}
@@ -431,7 +426,6 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
                 >
                   <SegmentedControl.Item value="all">
                     <Tooltip content="Show All Workouts">
-                      {/* Wrap content in span for Tooltip trigger */}
                       <span>All</span> 
                     </Tooltip>
                   </SegmentedControl.Item>
@@ -448,18 +442,32 @@ export default function WodViewer({ wods }: { wods: Wod[] }) {
                 </SegmentedControl.Root>
               )}
 
-            </Flex> {/* End of Filter Bar Flex */}
+            <Flex justify="center">
+              <SegmentedControl.Root 
+                size="1" 
+                value={view} 
+                onValueChange={(value) => setView(value as "table" | "timeline")}
+              >
+                <SegmentedControl.Item value="timeline">
+                  <Tooltip content="Timeline View">
+                    <List size={16} />
+                  </Tooltip>
+                </SegmentedControl.Item>
+                <SegmentedControl.Item value="table">
+                  <Tooltip content="Table View">
+                    <TableIcon size={16} />
+                  </Tooltip>
+                </SegmentedControl.Item>
+              </SegmentedControl.Root>
+            </Flex>
 
-            {/* Remove old Completion Status Toggle */}
-            {/* {view === "table" && ( ... )} */}
+            </Flex> {/* End of Filter Bar Flex */}
             
-            {/* Render Table or Timeline */}
             {view === "table" ? (
               <WodTable wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
             ) : (
               <WodTimeline wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />
             )}
           </Box>
-        </Tabs.Root>
   );
 }

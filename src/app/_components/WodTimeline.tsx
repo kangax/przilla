@@ -11,7 +11,6 @@ import {
 } from "./WodViewer";
 import React from "react";
 
-// Define the type for sorting columns including the new one (copied from WodViewer)
 type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
 
 interface WodTimelineProps {
@@ -24,7 +23,6 @@ interface WodTimelineProps {
 const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
   const safeString = (value: string | undefined | null): string => value ?? "";
   
-  // Update signature to use new type
   const getSortIndicator = (columnName: SortByType) => { 
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
@@ -39,7 +37,6 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
           <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }}>
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          {/* Update onClick handler and text for the sort column */}
           <Table.ColumnHeaderCell onClick={() => handleSort("latestLevel")} style={{ cursor: 'pointer' }}>
             Progress Timeline <span className="text-xs opacity-70">(latest level)</span> {getSortIndicator("latestLevel")}
           </Table.ColumnHeaderCell>
@@ -73,7 +70,6 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                 <Flex align="center">
                   {sortedResults.map((result, index) => (
                     <Flex key={index} align="center" className="mb-1">
-                      {/* Update Tooltip content using Fragment and <br /> to avoid p>div nesting */}
                       <Tooltip content={
                         <>
                           <Text size="1" weight="bold">{safeString(result?.date)}</Text>
@@ -89,7 +85,6 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                           <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? "text-gray-500" : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                             {formatScore(result)}
                           </span> 
-                          {/* Use Badge for RxStatus */}
                           {result.rxStatus && (
                             <Badge 
                               className="ml-1 rounded-full" 

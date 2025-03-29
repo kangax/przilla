@@ -33,7 +33,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/30-muscle-ups/",
     "wodName": "30 Muscle Ups",
-    "description": "For Time: 30 Muscle-Ups",
+    "description": "For Time\n30 Muscle-Ups",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -96,7 +96,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/andi/",
     "wodName": "Andi",
-    "description": "For Time:\n100 Hang Power Snatches (75/55 lb)\n100 Push Presses (75/55 lb)\n100 Sumo Deadlift High-Pulls (75/55 lb)\n100 Front Squats (75/55 lb)",
+    "description": "For Time\n100 Hang Power Snatches (75/55 lb)\n100 Push Presses (75/55 lb)\n100 Sumo Deadlift High-Pulls (75/55 lb)\n100 Front Squats (75/55 lb)",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -127,7 +127,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/angie/",
     "wodName": "Angie",
-    "description": "For Time:\n100 Pull-Ups\n100 Push-Ups\n100 Sit-Ups\n100 Air Squats",
+    "description": "For Time\n100 Pull-Ups\n100 Push-Ups\n100 Sit-Ups\n100 Air Squats",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -320,7 +320,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/canine-rex/",
     "wodName": "Canine Rex",
-    "description": "For Time:\n7 rounds of:\n500 meter run\n14 Air Squats\n14 Lunges\n14 Sit-Ups\n14 Squat Jumps\nDirectly into:\n25 Burpees\n1 mile Run",
+    "description": "For Time\n7 rounds of:\n500 meter run\n14 Air Squats\n14 Lunges\n14 Sit-Ups\n14 Squat Jumps\nDirectly into:\n25 Burpees\n1 mile Run",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -945,7 +945,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/grace/",
     "wodName": "Grace",
-    "description": "For Time: 30 Clean-and-Jerks (135/95 lb)",
+    "description": "For Time\n30 Clean-and-Jerks (135/95 lb)",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -1241,7 +1241,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/isabel/",
     "wodName": "Isabel",
-    "description": "For Time: 30 Snatches (135/95 lb)",
+    "description": "For Time\n30 Snatches (135/95 lb)",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -2424,7 +2424,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/randy/",
     "wodName": "Randy",
-    "description": "For Time: 75 Power Snatches (75/55 lb)",
+    "description": "For Time\n75 Power Snatches (75/55 lb)",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -2609,7 +2609,7 @@
   {
     "wodUrl": "https://wodwell.com/wod/schmalls/",
     "wodName": "Schmalls",
-    "description": "For Time:\nRun 800 meters\nThen 2 rounds of:\n50 Burpees\n40 Pull-Ups\n30 Pistols (alternating legs)\n20 Kettlebell Swings (1.5/1 pood)\nThen, run 800 meters",
+    "description": "For Time\nRun 800 meters\nThen 2 rounds of:\n50 Burpees\n40 Pull-Ups\n30 Pistols (alternating legs)\n20 Kettlebell Swings (1.5/1 pood)\nThen, run 800 meters",
     "benchmarks": {
       "type": "time",
       "levels": {
@@ -2826,6 +2826,36 @@
     "tags": [
       "For Time",
       "Monostructural"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/luke/",
+    "wodName": "Luke",
+    "description": "For Time\n400 meter Run\n15 Clean-and-Jerks (155/105 lb)\n400 meter Run\n30 Toes-to-Bars\n400 meter Run\n45 Wall Ball Shots (20/14 lb)\n400 meter Run\n45 Kettlebell Swings (1.5/1 pood)\n400 meter Run\n30 Ring Dips\n400 meter Run\n15 Weighted Lunge Steps (155/105 lb)\n400 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": 0, "max": 1200 },
+        "advanced": { "min": 1200, "max": 1500 },
+        "intermediate": { "min": 1500, "max": 1800 },
+        "beginner": { "min": 1800, "max": null }
+      }
+    },
+    "results": [
+      {
+        "date": "29 Mar'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": 1890,
+        "score_reps": null,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Hero",
+    "tags": [
+      "For Time"
     ]
   }
 ]

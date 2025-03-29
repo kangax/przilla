@@ -14,8 +14,11 @@
 - Use AI endpoint?
 
 ### Import from wodwell / sugarwod
-- Write scripts for scraping
-- Bookmarklet so users can use?
+- wodwell
+    - write scripts for scraping
+    - bookmarklet so users can use?
+- sugarwod (allows export!)
+- write import functionality
 
 ### Authentication
 

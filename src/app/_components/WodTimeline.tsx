@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { Flex, Table, Text, Tooltip, Badge } from "@radix-ui/themes";
-import { Wod } from "./WodViewer";
+import type { Wod } from "./WodViewer"; 
 import { 
   getPerformanceLevelColor, 
   getPerformanceLevel, 

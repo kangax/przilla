@@ -3,9 +3,10 @@
 import Link from "next/link";
 import { Tooltip, Table, Text, Flex, Badge } from "@radix-ui/themes";
 
+import type { 
+  Wod 
+} from "./WodViewer";
 import { 
-  Wod, 
-  WodResult, 
   getPerformanceLevel, 
   getPerformanceLevelColor, 
   getPerformanceLevelTooltip,

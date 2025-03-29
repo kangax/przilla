@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react"; 
-import { Box, Flex, Badge, SegmentedControl, Tooltip } from "@radix-ui/themes"; // Remove Tabs import
+import { Box, Flex, SegmentedControl, Tooltip } from "@radix-ui/themes"; 
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown, TableIcon, List } from "lucide-react"; 
 import WodTable from "./WodTable";
@@ -181,8 +181,9 @@ export const hasScore = (result: WodResult): boolean => {
           return (attemptsA - attemptsB) * directionMultiplier;
     } else if (sortBy === "level" || sortBy === "latestLevel") { // Combine level and latestLevel logic slightly
       // --- Logic to find the result to compare ---
-      let resultA = null;
-      let resultB = null;
+      // Explicitly type resultA and resultB
+      let resultA: WodResult | null = null;
+      let resultB: WodResult | null = null;
 
       if (sortBy === "level") {
         // Original 'level' sort uses the first result
@@ -190,15 +191,17 @@ export const hasScore = (result: WodResult): boolean => {
         resultB = b.results[0] ?? null;
       } else { // sortBy === "latestLevel"
         // Find the latest valid result for 'a'
+        
         const latestValidResultA = [...a.results]
           .filter(r => r.date && hasScore(r))
-          .sort((r1, r2) => new Date(r2.date!).getTime() - new Date(r1.date!).getTime())[0];
+          .sort((r1, r2) => new Date(r2.date).getTime() - new Date(r1.date).getTime())[0]; 
         resultA = latestValidResultA ?? null;
         
         // Find the latest valid result for 'b'
+        
         const latestValidResultB = [...b.results]
           .filter(r => r.date && hasScore(r))
-          .sort((r1, r2) => new Date(r2.date!).getTime() - new Date(r1.date!).getTime())[0];
+          .sort((r1, r2) => new Date(r2.date).getTime() - new Date(r1.date).getTime())[0];
         resultB = latestValidResultB ?? null;
       }
       
@@ -210,14 +213,17 @@ export const hasScore = (result: WodResult): boolean => {
       if (!resultB) return -1 * directionMultiplier; // Treat missing result as lowest level
 
       // --- Revised Comparison Logic ---
-      const isScaledA = resultA.rxStatus && resultA.rxStatus !== "Rx";
-      const isScaledB = resultB.rxStatus && resultB.rxStatus !== "Rx";
+      // Add null checks before accessing rxStatus
+      const isScaledA = resultA && resultA.rxStatus && resultA.rxStatus !== "Rx";
+      const isScaledB = resultB && resultB.rxStatus && resultB.rxStatus !== "Rx";
       
-      const levelA = getPerformanceLevel(a, resultA);
-      const levelB = getPerformanceLevel(b, resultB);
+      // Add null checks before calling getPerformanceLevel
+      const levelA = resultA ? getPerformanceLevel(a, resultA) : null;
+      const levelB = resultB ? getPerformanceLevel(b, resultB) : null;
 
       // Assign numerical values for levels (higher is better)
-      const levelValues: { [key: string]: number } = { elite: 4, advanced: 3, intermediate: 2, beginner: 1 };
+      // Use Record type
+      const levelValues: Record<string, number> = { elite: 4, advanced: 3, intermediate: 2, beginner: 1 };
       const levelValueA = levelA ? levelValues[levelA] ?? 0 : 0;
       const levelValueB = levelB ? levelValues[levelB] ?? 0 : 0;
 

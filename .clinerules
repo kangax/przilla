@@ -1,0 +1,17 @@
+# Project Guidelines
+
+## General
+-  Do not leave comments of your changes (comments should only be used to explain why something is done, not what is done)
+-  Use meaningful commit messages after every task but ask user before commiting
+
+## Code Style & Patterns
+
+-   Prefer composition over inheritance
+-   Use repository pattern for data access
+-   Don't forget error handling
+
+## Testing Standards
+
+-   Unit tests required for business logic
+-   Integration tests for API endpoints
+-   E2E tests for critical user flows

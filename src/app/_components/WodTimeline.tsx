@@ -46,10 +46,9 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
       
       <Table.Body className="bg-table-row">
         {wods.map((wod) => {
-          if (wod.results.length === 0 || !wod.results[0].date) return null;
-          
+          // Calculate sorted valid results first
           const sortedResults = [...wod.results]
-            .filter(r => r.date && hasScore(r))
+            .filter(r => r.date && hasScore(r)) // Filter for valid results (date and score)
             .sort((a, b) => {
               const dateA = safeString(a.date);
               const dateB = safeString(b.date);
@@ -57,7 +56,10 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
               if (!dateB) return -1;
               return new Date(dateA).getTime() - new Date(dateB).getTime();
             });
-          
+
+          // If no valid results after filtering, don't render the row
+          if (sortedResults.length === 0) return null;
+
           return (
             <Table.Row key={wod.wodName} className="border-t border-table-border hover:bg-table-rowAlt">
               <Table.Cell className="font-medium">

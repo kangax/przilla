@@ -16,3 +16,6 @@ Object.defineProperty(window, 'matchMedia', {
     dispatchEvent: vi.fn(),
   })),
 });
+
+// Mock scrollIntoView for Radix UI components in JSDOM
+Element.prototype.scrollIntoView = vi.fn();

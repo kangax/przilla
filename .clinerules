@@ -5,6 +5,7 @@
     - e.g. "// Changed text-sm to text-xs" should never be added in TS/TSX files
 - Use meaningful commit messages after every task but ask user before commiting
 - Use `;` to string commands in terminal since `&&` have escaping issues
+- Do not create backup files since we use versioning system
 
 ## Code Style & Patterns
 

@@ -297,6 +297,15 @@ export default function WodViewer({ wods }: WodViewerProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [completionFilter, setCompletionFilter] = useState<"all" | "done" | "notDone">("all");
 
+  // Calculate counts for categories
+  const categoryCounts = wods.reduce((acc, wod) => {
+    if (wod.category) {
+      acc[wod.category] = (acc[wod.category] || 0) + 1;
+    }
+    return acc;
+  }, {} as Record<string, number>);
+  const totalWodCount = wods.length;
+
   // Calculate counts for each filter option
   const doneWods = wods.filter(wod => 
     wod.results.length > 0 && wod.results[0]?.date && hasScore(wod.results[0])
@@ -376,8 +385,8 @@ export default function WodViewer({ wods }: WodViewerProps) {
                 >
                   <Select.Value placeholder="Select category" className="text-sm">
                     {selectedCategories.length > 0 
-                      ? selectedCategories[0] 
-                      : "All Categories"}
+                      ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
+                      : `All Categories (${totalWodCount})`}
                   </Select.Value>
                   <Select.Icon>
                     <ChevronDown className="h-4 w-4 opacity-70" />
@@ -393,7 +402,7 @@ export default function WodViewer({ wods }: WodViewerProps) {
                         value="all" 
                         className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
                       >
-                        <Select.ItemText>All Categories</Select.ItemText>
+                        <Select.ItemText>All Categories ({totalWodCount})</Select.ItemText>
                       </Select.Item>
                       {CATEGORIES.map(category => (
                         <Select.Item 
@@ -401,7 +410,7 @@ export default function WodViewer({ wods }: WodViewerProps) {
                           value={category} 
                           className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
                         >
-                          <Select.ItemText>{category}</Select.ItemText>
+                          <Select.ItemText>{category} ({categoryCounts[category] || 0})</Select.ItemText>
                         </Select.Item>
                       ))}
                     </Select.Viewport>

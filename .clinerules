@@ -2,7 +2,9 @@
 
 ## General
 - Do not leave comments of your changes (comments should only be used to explain why something is done, not what is done)
+    - e.g. "// Changed text-sm to text-xs" should never be added in TS/TSX files
 - Use meaningful commit messages after every task but ask user before commiting
+- Use `;` to string commands in terminal since `&&` have escaping issues
 
 ## Code Style & Patterns
 
@@ -13,5 +15,6 @@
 ## Testing Standards
 
 - Unit tests required for business logic
+  - Using Vitest + React Testing Library
 - Integration tests for API endpoints
 - E2E tests for critical user flows

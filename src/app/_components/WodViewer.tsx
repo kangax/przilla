@@ -381,9 +381,9 @@ export default function WodViewer({ wods }: WodViewerProps) {
                 }}
               >
                 <Select.Trigger 
-                  className="min-w-[130px] flex items-center justify-between px-3 py-2 mr-2 rounded-md border border-border bg-card text-card-foreground hover:bg-accent text-sm"
+                  className="min-w-[130px] flex items-center justify-between px-3 py-2 mr-2 rounded-md border border-border bg-card text-card-foreground hover:bg-accent text-xs" 
                 >
-                  <Select.Value placeholder="Select category" className="text-sm">
+                  <Select.Value placeholder="Select category" className="text-xs"> 
                     {selectedCategories.length > 0 
                       ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
                       : `All Categories (${totalWodCount})`}
@@ -400,7 +400,7 @@ export default function WodViewer({ wods }: WodViewerProps) {
                     <Select.Viewport>
                       <Select.Item 
                         value="all" 
-                        className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
+                        className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-xs" 
                       >
                         <Select.ItemText>All Categories ({totalWodCount})</Select.ItemText>
                       </Select.Item>
@@ -408,7 +408,7 @@ export default function WodViewer({ wods }: WodViewerProps) {
                         <Select.Item 
                           key={category}
                           value={category} 
-                          className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-sm"
+                          className="px-3 py-2 cursor-pointer text-popover-foreground hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground outline-none text-xs" 
                         >
                           <Select.ItemText>{category} ({categoryCounts[category] || 0})</Select.ItemText>
                         </Select.Item>

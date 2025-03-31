@@ -389,7 +389,7 @@ export default function WodViewer({ wods }: WodViewerProps) {
                       : `All Categories (${totalWodCount})`}
                   </Select.Value>
                   <Select.Icon>
-                    <ChevronDown className="h-4 w-4 opacity-70" />
+                    <ChevronDown className="h-4 w-4 opacity-70 ml-2" />
                   </Select.Icon>
                 </Select.Trigger>
                 <Select.Portal>

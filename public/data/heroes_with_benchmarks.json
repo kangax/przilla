@@ -1068,7 +1068,7 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 1800, "max": 2400 }, // Includes rest
+        "elite": { "min": 1800, "max": 2400 },
         "advanced": { "min": 2400, "max": 3000 },
         "intermediate": { "min": 3000, "max": 3600 },
         "beginner": { "min": 3600, "max": null }
@@ -1174,9 +1174,9 @@
     "wodName": "Garbo",
     "description": "On a 21-minute clock:\n\n400 meter run\n\nThen, AMRAP in remaining time of:\n10 Hand-Release Push-Ups\n4 Strict Pull-Ups\n20 Kettlebell Swings (53/35 lb)\n4 Single-Arm Kettlebell Snatches (53/35 lb)\n10 Kettlebell Goblet Squats (53/35 lb)",
      "benchmarks": {
-      "type": "amrap", // Score is AMRAP reps after run
+      "type": "amrap",
       "levels": {
-        "elite": { "min": 6, "max": null }, // Rounds estimation
+        "elite": { "min": 6, "max": null },
         "advanced": { "min": 4, "max": 5 },
         "intermediate": { "min": 3, "max": 3 },
         "beginner": { "min": 2, "max": 2 }
@@ -1184,7 +1184,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP"], // Main scoring component is AMRAP
+    "tags": ["AMRAP"],
     "reasoning": "Workout includes a 400m run buy-in, followed by an AMRAP in the remaining time of a 21-minute clock. The AMRAP combines bodyweight movements (HR Push-Ups, Strict Pull-Ups) with various kettlebell exercises (Swings, Snatches, Goblet Squats at 53lb~24kg/35lb~16kg). Tests conditioning and kettlebell proficiency. Score is rounds + reps of the AMRAP."
   },
   {
@@ -1212,7 +1212,7 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 0, "max": 3600 }, // Very long WOD
+        "elite": { "min": 0, "max": 3600 },
         "advanced": { "min": 3600, "max": 4500 },
         "intermediate": { "min": 4500, "max": 5400 },
         "beginner": { "min": 5400, "max": null }
@@ -1220,7 +1220,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Structure is rounds, but each round is like a mini-chipper + run
+    "tags": ["For Time"],
     "reasoning": "An extremely high-volume workout testing endurance across multiple domains over 5 rounds. Each round includes KB swings (1.5 pood~24kg/1 pood~16kg), Push-Ups, Pull-Ups, high Box Jumps (30/24 in), followed by a full mile run. Requires exceptional stamina and mental fortitude. Total reps per round: 110 + 1 mile run. Total: 550 reps + 5 miles run."
   },
   {
@@ -1274,7 +1274,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Partner WOD
+    "tags": ["For Time"],
     "reasoning": "Challenging partner workout combining moderate-load deadlifts (135lb~61kg/95lb~43kg), high-skill rope climbs, demanding thrusters (135lb~61kg/95lb~43kg), heavy kettlebell swings (70lb~32kg/53lb~24kg), and a final weighted run (45lb~20kg/25lb~11kg plate). Tests teamwork, strength, skill, and endurance. Work distribution strategy is key."
   },
   {
@@ -1336,7 +1336,7 @@
     "wodName": "Hall",
     "description": "5 Rounds for Time\n3 Cleans (225/155 lb)\n200 meter Sprint\n20 Kettlebell Snatches (1.5/1 pood) (10 each arm)\n2 minutes Rest",
      "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 900, "max": 1200 },
         "advanced": { "min": 1200, "max": 1500 },
@@ -1346,7 +1346,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "Interval workout over 5 rounds. Each round features heavy Cleans (225lb~102kg/155lb~70kg), a sprint, and moderate KB Snatches (1.5 pood~24kg/1 pood~16kg), followed by significant rest. Tests power, speed, and ability to recover. Total reps: 15 Cleans, 100 KB Snatches + 1000m sprint. Total rest: 8 minutes."
   },
   {
@@ -1372,7 +1372,7 @@
     "wodName": "Hammer",
     "description": "5 Rounds For Time\n5 Power Cleans (135/95 lb)\n10 Front Squats (135/95 lb)\n5 Jerks (135/95 lb)\n20 Pull-Ups\n90 seconds Rest",
      "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 900, "max": 1200 },
         "advanced": { "min": 1200, "max": 1500 },
@@ -1382,7 +1382,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "Interval workout over 5 rounds. Each round includes moderate-load barbell cycling (Power Clean, Front Squat, Jerk at 135lb~61kg/95lb~43kg) and Pull-Ups, followed by mandatory rest. Tests strength endurance, power, and recovery. Total reps: 25 PC, 50 FS, 25 Jerks, 100 Pull-Ups. Total rest: 6 minutes."
   },
   {
@@ -1436,7 +1436,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Partner WOD
+    "tags": ["For Time"],
     "reasoning": "Partner workout over 2 rounds featuring high-skill Rope Climbs, demanding Buddy Carries, moderate-load Power Cleans and Front Squats (135lb~61kg/95lb~43kg), and Burpees. Tests teamwork, communication, strength, skill, and endurance. Work distribution and carry strategy are crucial."
   },
   {
@@ -1516,7 +1516,7 @@
     "wodName": "Hidalgo",
     "description": "For Time\n2 Mile Run\n2 Minutes Rest\n20 Squat Cleans (135/95 lb)\n20 Box Jumps (24/20 in)\n20 Overhead Walking Lunges (45/25 lb plate)\n20 Box Jumps (24/20 in)\n20 Squat Cleans (135/95 lb)\n2 minutes Rest\n2 mile Run\n\nWear a weight vest (20/14 lb)",
      "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 1800, "max": 2400 },
         "advanced": { "min": 2400, "max": 3000 },
@@ -1534,7 +1534,7 @@
     "wodName": "Holbrook",
     "description": "10 Rounds For Time\n5 Thrusters (115/85 lb)\n10 Pull-Ups\n100 meter Sprint\n1 minute Rest",
      "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 900, "max": 1200 },
         "advanced": { "min": 1200, "max": 1500 },
@@ -1544,7 +1544,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "High-intensity interval workout over 10 rounds. Each round features moderate Thrusters (115lb~52kg/85lb~38.5kg), Pull-Ups, and a short sprint, followed by mandatory rest. Tests power output, anaerobic capacity, and recovery. Total reps: 50 Thrusters, 100 Pull-Ups + 1000m sprint. Total rest: 9 minutes."
   },
   {
@@ -1580,7 +1580,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP"], // Partner WOD
+    "tags": ["AMRAP"],
     "reasoning": "Partner AMRAP over 23 minutes. Combines partner running with shared reps of high-volume Double-Unders, Burpees, and high-skill Rope Climbs. Tests teamwork, coordination, skill, and conditioning. Strategy for breaking up reps and transitions is crucial. Score is rounds + reps."
   },
   {
@@ -1688,7 +1688,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP"], // EMOM component modifies AMRAP flow
+    "tags": ["AMRAP"],
     "reasoning": "A 25-minute AMRAP with a mandatory Burpee penalty each minute. The main AMRAP combines moderate Deadlifts (185lb~84kg/135lb~61kg), KB Swings (53lb~24kg/35lb~16kg), heavy Hack Squats (185lb~84kg/155lb~70kg), and weighted Sit-Ups (45lb~20kg/25lb~11kg). Tests strength endurance and conditioning under constant interruption. Score is rounds + reps of the main AMRAP."
   },
   {
@@ -1724,7 +1724,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Couplet"], // Effectively couplet rounds with changing reps
+    "tags": ["For Time", "Couplet"],
     "reasoning": "Combines descending reps of Air Squats with ascending reps of high-skill Muscle-Ups. Tests lower body endurance and high-level gymnastics capacity under fatigue. Total reps: 250 Air Squats, 50 Muscle-Ups."
   },
   {
@@ -1850,7 +1850,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Couplet"], // Descending rounds of a couplet
+    "tags": ["For Time", "Couplet"],
     "reasoning": "A couplet performed in descending rounds (21-15-9 for OHS, 42-30-18 for Pull-Ups). Combines light Overhead Squats (95lb~43kg/65lb~29.5kg) requiring stability and mobility, with high-volume Pull-Ups testing grip and pulling endurance. Total reps: 45 OHS, 90 Pull-Ups."
   },
   {
@@ -1868,7 +1868,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Couplet"], // Each round has 2 major components (DB Snatches L/R combined, L-Pulls)
+    "tags": ["For Time", "Couplet"],
     "reasoning": "Gymnastics-heavy workout over 3 rounds. Combines unilateral Dumbbell Squat Snatches (40lb~18kg/25lb~11kg) requiring coordination and stability, with challenging L-Pull-Ups testing core and pulling strength. Total reps: 126 DB Snatches (63 each arm), 126 L-Pull-Ups."
   },
   {
@@ -1940,7 +1940,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP"], // Partner WOD
+    "tags": ["AMRAP"],
     "reasoning": "Partner AMRAP (26 min) combining heavy individual Deadlifts (315lb~143kg/205lb~93kg), synchronized Burpees, individual high-skill Bar Muscle-Ups, and a heavy partner barbell carry. Tests teamwork, strength, skill, and coordination. Score is rounds + reps."
   },
   {
@@ -1958,7 +1958,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Triplet"], // Main part is RFT triplet
+    "tags": ["For Time", "Triplet"],
     "reasoning": "Workout includes Medicine Ball Carry buy-in/cash-out (20lb~9kg/14lb~6kg) around 10 rounds of a triplet (HR Push-Ups, Squats, KB Swings 53lb~24kg/35lb~16kg), performed with a weight vest (20lb~9kg/14lb~6kg). Tests endurance under load and work capacity. Total triplet reps: 450."
   },
   {
@@ -1966,7 +1966,7 @@
     "wodName": "Kerrie",
     "description": "10 Rounds for Time\n100 meter Sprint\n5 Burpees\n20 Sit-Ups\n15 Push-Ups\n100 meter Sprint\n\nRest 2 minutes\n\nWear a Weight Vest (20/14 lb)",
      "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 2100, "max": 2700 },
         "advanced": { "min": 2700, "max": 3300 },
@@ -1976,7 +1976,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "High-intensity interval workout over 10 rounds performed with a weight vest (20lb~9kg/14lb~6kg). Each round includes sprints and bodyweight exercises (Burpees, Sit-Ups, Push-Ups), followed by mandatory rest. Tests anaerobic capacity, muscular endurance under load, and recovery. Total reps: 50 Burpees, 200 Sit-Ups, 150 Push-Ups + 2000m sprint. Total rest: 18 minutes."
   },
   {
@@ -2030,7 +2030,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP", "Triplet"], // Partner WOD
+    "tags": ["AMRAP", "Triplet"],
     "reasoning": "Partner AMRAP triplet (21 min) combining rowing, burpees over the rower, and moderate-heavy power cleans (155lb~70kg/105lb~47.5kg). Tests teamwork, cardiovascular capacity, and power endurance. Strategy for work/rest and transitions is key. Score is total rounds + reps."
   },
   {
@@ -2163,8 +2163,8 @@
     "wodUrl": "https://wodwell.com/wod/the-lyon/",
     "wodName": "The Lyon",
     "description": "5 Rounds for Time\n7 Squat Cleans (165/115 lb)\n7 Shoulder-to-Overheads (165/115 lb)\n7 Burpee Chest-to-Bar Pull-Ups\n\n2 minutes Rest between rounds",
-    "benchmarks": {
-      "type": "time", // Including rest
+     "benchmarks": {
+      "type": "time",
       "levels": {
         "elite": { "min": 900, "max": 1200 },
         "advanced": { "min": 1200, "max": 1500 },
@@ -2174,7 +2174,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "Interval workout over 5 rounds. Each round includes heavy Squat Cleans and Shoulder-to-Overheads (165lb~75kg/115lb~52kg) paired with complex Burpee C2B Pull-Ups, followed by mandatory rest. Tests strength, power, high-skill gymnastics, and recovery. Total reps: 35 SQ Cl, 35 S2OH, 35 Burpee C2B. Total rest: 8 minutes."
   },
   {
@@ -2282,7 +2282,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Chipper"], // Includes Buy-in, RFT core, Cash-out
+    "tags": ["For Time", "Chipper"],
     "reasoning": "Structured chipper with Row buy-in and Bike cash-out. The core 3 rounds combine heavy Deadlifts (315lb~143kg/275lb~125kg), long Plank Holds, Burpees, Jumping Jacks, and Push-Ups. Tests strength, core stability, conditioning, and endurance across multiple modalities."
   },
   {
@@ -2372,7 +2372,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Team WOD
+    "tags": ["For Time"],
     "reasoning": "Team chipper (3 partners) involving rowing, moderate DB Thrusters (50lb~23kg/35lb~16kg each), heavy KB Swings (70lb~32kg/53lb~24kg), high-rep Double-Unders, high-rep Burpees, more rowing, and heavy Deadlifts (225lb~102kg/155lb~70kg). Tests teamwork, communication, and broad fitness."
   },
   {
@@ -2642,7 +2642,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Structured buy-in, rounds, cash-out
+    "tags": ["For Time"],
     "reasoning": "Workout includes a buy-in of weighted Step-Ups (95lb~43kg/65lb~29.5kg), 3 rounds of a triplet (Power Cleans, Sit-Ups, Deadlifts at 95lb~43kg/65lb~29.5kg), and a rowing cash-out. Tests lower body endurance, light barbell cycling, core, and conditioning."
   },
   {
@@ -2668,7 +2668,7 @@
     "wodName": "ODA 7313",
     "description": "7 rounds for Time of:\n300 meter Jog\n10 Single-Arm Dumbbell Thrusters (Left) (30/20 lb)\n10 Single-Arm Dumbbell Thrusters (Right) (30/20 lb)\n7 Strict Pull-Ups\n3 minute Rest\n\nWear a Weight Vest (14/10 lb)",
     "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 2100, "max": 2700 },
         "advanced": { "min": 2700, "max": 3300 },
@@ -2678,7 +2678,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "Interval workout over 7 rounds performed with a weight vest (14lb~6kg/10lb~4.5kg). Each round includes jogging, light unilateral DB Thrusters (30lb~14kg/20lb~9kg), and Strict Pull-Ups, followed by significant mandatory rest. Tests conditioning, unilateral strength/stability, strict pulling, and recovery. Total rest: 18 minutes."
   },
   {
@@ -2722,12 +2722,12 @@
     "wodName": "Otis",
     "description": "AMRAP in 15 minutes\nBack Squat (1½ bodyweight)\nShoulder Press (¾ bodyweight)\nDeadlift (1½ bodyweight)\n\nStart with 1 rep each. Increase each by 1 rep per round.",
     "benchmarks": {
-      "type": "amrap", // Score is total reps
+      "type": "amrap",
       "levels": {
-        "elite": { "min": 60, "max": null }, // Approx 6 rounds completed (1+2+3+4+5+6 = 21 reps/lift = 63 total)
-        "advanced": { "min": 40, "max": 59 }, // Approx 5 rounds
-        "intermediate": { "min": 25, "max": 39 }, // Approx 4 rounds
-        "beginner": { "min": 10, "max": 24 }  // Approx 3 rounds
+        "elite": { "min": 60, "max": null },
+        "advanced": { "min": 40, "max": 59 },
+        "intermediate": { "min": 25, "max": 39 },
+        "beginner": { "min": 10, "max": 24 }
       }
     },
     "results": [],
@@ -2768,7 +2768,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Chipper"], // Structured as Rounds + Cashout
+    "tags": ["For Time", "Chipper"],
     "reasoning": "A long workout performed with a weight vest (20lb~9kg/14lb~6kg). Includes 4 rounds combining Double-Unders, moderate Clean-and-Jerks (155lb~70kg/115lb~52kg), Push-Ups, and a significant Assault Bike portion, followed by a 1-mile run cash-out. Tests endurance, skill, strength, and conditioning under load."
   },
   {
@@ -2776,7 +2776,7 @@
     "wodName": "PK",
     "description": "5 Rounds for Time\n10 Back Squats (225/155 lb)\n10 Deadlifts (275/185 lb)\n400 meter Sprint\n2 minutes Rest",
      "benchmarks": {
-      "type": "time", // Including rest
+      "type": "time",
       "levels": {
         "elite": { "min": 1200, "max": 1500 },
         "advanced": { "min": 1500, "max": 1800 },
@@ -2786,7 +2786,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
+    "tags": ["For Time"],
     "reasoning": "Interval workout over 5 rounds. Each round includes heavy Back Squats (225lb~102kg/155lb~70kg), heavy Deadlifts (275lb~125kg/185lb~84kg), and a 400m sprint, followed by mandatory rest. Tests strength endurance, speed, and recovery. Total reps: 50 Back Squats, 50 Deadlifts + 2000m sprint. Total rest: 8 minutes."
   },
   {
@@ -2830,9 +2830,9 @@
     "wodName": "Paz",
     "description": "Cash-In: 1,000 meter Run\n\nDirectly into AMRAP in 22 minutes of:\n23 Air Squats\n7 Burpees\n14 Push-Ups\n\nCash-Out: 1,000 meter Run",
      "benchmarks": {
-      "type": "amrap", // Score is AMRAP reps, but total time influenced by runs
+      "type": "amrap",
       "levels": {
-        "elite": { "min": 10, "max": null }, // Rounds estimation
+        "elite": { "min": 10, "max": null },
         "advanced": { "min": 8, "max": 9 },
         "intermediate": { "min": 6, "max": 7 },
         "beginner": { "min": 4, "max": 5 }
@@ -2840,7 +2840,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP"], // Main scoring component is AMRAP
+    "tags": ["AMRAP"],
     "reasoning": "Workout with run buy-in/cash-out surrounding a 22-minute AMRAP of basic bodyweight movements (Squats, Burpees, Push-Ups). Tests endurance and sustained work capacity on fundamental exercises. Score is rounds + reps of the AMRAP portion."
   },
   {
@@ -2912,7 +2912,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time", "Chipper"], // Descending rounds structure acts like a chipper
+    "tags": ["For Time", "Chipper"],
     "reasoning": "A descending chipper combining short runs with decreasing rounds of the classic 'Cindy' benchmark (Pull-Ups, Push-Ups, Air Squats). Tests endurance and the ability to maintain intensity on bodyweight movements as fatigue accumulates. Total Cindy reps: 75 Pull-Ups, 150 Push-Ups, 225 Squats + 1800m run."
   },
   {
@@ -3182,7 +3182,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Structured RFT with Buy-in/out
+    "tags": ["For Time"],
     "reasoning": "Workout with Push-Up buy-in/out. The main part includes 4 rounds combining running with sets of barbell lifts (Front Squat, Thruster, Push Press, Power Clean at 115lb~52kg/85lb~38.5kg) interspersed with Burpees. Tests conditioning and barbell cycling under fatigue."
   },
   {
@@ -3244,8 +3244,8 @@
     "wodName": "Scooter",
     "description": "With a Running Clock in 35 minutes\nFirst, AMRAP in 30 minutes (with a Partner)\n30 Double-Unders\n15 Pull-Ups\n15 Push-Ups\n100 meter Sprint\n\nPartners alternate rounds\n\nThen, 5 minutes to find a 1-rep-max Partner Deadlift",
      "benchmarks": {
-      "type": "amrap", // Plus max lift
-      "levels": { // AMRAP rounds estimate per team
+      "type": "amrap",
+      "levels": {
         "elite": { "min": 20, "max": null },
         "advanced": { "min": 16, "max": 19 },
         "intermediate": { "min": 12, "max": 15 },
@@ -3254,7 +3254,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["AMRAP"], // Partner WOD + Max Lift
+    "tags": ["AMRAP"],
     "reasoning": "Partner workout with two parts. First, a 30-minute AMRAP where partners alternate rounds of Double-Unders, Pull-Ups, Push-Ups, and a sprint. Second, a 5-minute window to find a 1RM partner deadlift. Tests teamwork, conditioning, basic gymnastics, and maximal strength. AMRAP Score is total team rounds + reps."
   },
   {
@@ -3416,7 +3416,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["For Time"], // Chipper-like structure
+    "tags": ["For Time"],
     "reasoning": "Bodyweight workout structured with multiple runs separating sets of Burpees and other basic movements (Squats, Push-Ups, Lunges). Burpees feature heavily throughout. Tests conditioning and muscular endurance. Total reps: 136 Burpees, 42 Squats, 56 Push-Ups, 52 Lunges + 3200m run."
   },
   {
@@ -3453,600 +3453,4 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "reasoning": "Combines moderate distance runs with weighted movements using a kettlebell (1.5 pood~24kg/1 pood~16kg) over 8 rounds: Weighted Pull-Ups, Walking Lunges, and Thrusters. Tests endurance, strength under load, and grip. Total reps per round: 33 + 600m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/swink/",
-    "wodName": "Swink",
-    "description": "For Time\n1 mile Run\n27 Bench Presses (70%)\n27 Handstand Push-Ups\n27 Dumbbell Thrusters (2 x 50/35 lb)\n27 Knees-to-Elbows\n27 Deadlift (155/105 lb)\n1 mile Run",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "Chipper workout bookended by 1-mile runs. Includes heavy percentage-based Bench Press, HSPU, moderate DB Thrusters (50lb~23kg/35lb~16kg each), KTE, and moderate Deadlifts (155lb~70kg/105lb~47.5kg). Tests endurance, strength across different patterns, and gymnastics skills. Total reps: 135 (27 each) + 2 miles run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/t/",
-    "wodName": "T",
-    "description": "5 Rounds for Time\n100-meter sprint\n10 Squat Clean Thrusters (115/75 lb)\n15 Kettlebell Swings (2/1.5 pood)\n100 meter Sprint\n2 minutes Rest",
-     "benchmarks": {
-      "type": "time", // Including rest
-      "levels": {
-        "elite": { "min": 900, "max": 1200 },
-        "advanced": { "min": 1200, "max": 1500 },
-        "intermediate": { "min": 1500, "max": 1800 },
-        "beginner": { "min": 1800, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
-    "reasoning": "High-intensity interval workout over 5 rounds. Each round includes sprints, moderate Squat Clean Thrusters (Clusters at 115lb~52kg/75lb~34kg), and heavy KB Swings (2 pood~32kg/1.5 pood~24kg), followed by mandatory rest. Tests anaerobic power, strength endurance, and recovery. Total reps: 50 Clusters, 75 KB Swings + 1000m sprint. Total rest: 8 minutes."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/t-u-p/",
-    "wodName": "T.U.P.",
-    "description": "15-12-9-6-3 Reps For Time\nPower Cleans (135/95 lb)\nPull-Ups\nFront Squats (135/95 lb)\nPull-Ups",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 720 },
-        "advanced": { "min": 720, "max": 960 },
-        "intermediate": { "min": 960, "max": 1200 },
-        "beginner": { "min": 1200, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Ladder"],
-    "reasoning": "Descending ladder workout (15-12-9-6-3) combining moderate barbell lifts (Power Cleans, Front Squats at 135lb~61kg/95lb~43kg) with Pull-Ups done twice per round. Tests strength endurance and pulling volume capacity. Total reps: 45 Power Cleans, 90 Pull-Ups, 45 Front Squats."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/taylor/",
-    "wodName": "Taylor",
-    "description": "4 Rounds for Time\n400 meter Run\n5 Burpee Muscle-Ups\n\nWear a weight vest (20/14 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 900 },
-        "advanced": { "min": 900, "max": 1200 },
-        "intermediate": { "min": 1200, "max": 1500 },
-        "beginner": { "min": 1500, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Couplet"],
-    "reasoning": "Couplet workout combining running with a highly complex gymnastics movement (Burpee Muscle-Up), further challenged by a weight vest (20lb~9kg/14lb~6kg). Tests cardiovascular endurance and high-level gymnastic skill under fatigue over 4 rounds. Efficiency in the Burpee Muscle-Up is crucial. Total reps: 20 Burpee Muscle-Ups + 1600m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/terry/",
-    "wodName": "Terry",
-    "description": "For Time\n1 mile Run\n100 Push-Ups\n100 meter Bear Crawl\n1 mile Run\n100 meter Bear Crawl\n100 Push-Ups\n1 mile Run",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "Endurance-focused chipper with significant running (3 miles total). Includes high-volume Push-Ups and challenging Bear Crawls. Tests running stamina, upper body muscular endurance, and core/shoulder stability during the crawls."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/tk/",
-    "wodName": "TK",
-    "description": "AMRAP in 20 minutes\n8 Strict Pull-Ups\n8 Box Jumps (36/30 in)\n12 Kettlebell Swings (2/1.5 pood)",
-    "benchmarks": {
-      "type": "amrap",
-      "levels": {
-        "elite": { "min": 10, "max": null },
-        "advanced": { "min": 8, "max": 9 },
-        "intermediate": { "min": 6, "max": 7 },
-        "beginner": { "min": 4, "max": 5 }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["AMRAP", "Triplet"],
-    "reasoning": "A 20-minute triplet AMRAP combining strict pulling strength (Strict Pull-Ups), explosive power (high Box Jumps 36/30 in), and heavy Kettlebell Swings (2 pood~32kg/1.5 pood~24kg). Tests strength, power, and conditioning. Score is rounds + reps."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/tommy-v/",
-    "wodName": "Tommy V",
-    "description": "For Time\n21 Thrusters (115/75 lb)\n12 Rope Climbs (15 ft)\n15 Thrusters (115/75 lb)\n9 Rope Climbs (15 ft)\n9 Thrusters (115/75 lb)\n6 Rope Climbs (15 ft)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 720 },
-        "advanced": { "min": 720, "max": 960 },
-        "intermediate": { "min": 960, "max": 1200 },
-        "beginner": { "min": 1200, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Ladder", "Couplet"],
-    "reasoning": "Descending ladder couplet (21-15-9 for Thrusters, 12-9-6 for Rope Climbs) combining moderate Thrusters (115lb~52kg/75lb~34kg) with high-skill Rope Climbs. Tests strength endurance, pulling strength/skill, and grip endurance under fatigue. Total reps: 45 Thrusters, 27 Rope Climbs."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/thomas-nye/",
-    "wodName": "Thomas Nye",
-    "description": "For Time\nBuy-In: 30 Kettlebell Swings (53/35 lb)\n\nDirectly into:\n20 Flights of Stairs with Weight Vest (20/14 lb)\n20 V-Ups\n20 Russian Twists\n20 Sit-Ups\n\nBuy-Out: 30 Kettlebell Swings (53/35 lb)",
-     "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 900 },
-        "advanced": { "min": 900, "max": 1200 },
-        "intermediate": { "min": 1200, "max": 1500 },
-        "beginner": { "min": 1500, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "reasoning": "Workout with KB Swing buy-in/out (53lb~24kg/35lb~16kg). The main part involves stair climbing with a weight vest (20lb~9kg/14lb~6kg) and a core complex (V-Ups, Russian Twists, Sit-Ups). Tests endurance under load, specifically on stairs, and core endurance. Reps for core complex likely per round if intended to be repeated, but description implies one set. Assuming one set."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/three-fathers/",
-    "wodName": "Three Fathers",
-    "description": "For Time\n1,000 meter Run\n100 Push-Ups\n200 Sit-Ups\n300 Air Squats\n1,000 meter Run",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1500 },
-        "advanced": { "min": 1500, "max": 1920 },
-        "intermediate": { "min": 1920, "max": 2400 },
-        "beginner": { "min": 2400, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "A bodyweight chipper bookended by runs. Includes high volumes of Push-Ups, Sit-Ups, and Air Squats. Similar structure to 'Angie' but with runs added. Tests basic muscular endurance and cardiovascular capacity. Total reps: 600 + 2000m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/timmins/",
-    "wodName": "Timmins",
-    "description": "For Time\nBuy-In: 1,026 meter Row\n\nThen, 3 Rounds of:\n84 Double-Unders\n14 Clean-and-Jerks (185/135 lb)\n10 Bar Muscle-Ups\n\nCash-Out: 1,295 meter Row",
-     "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"], // Structured RFT with Buy-in/out
-    "reasoning": "Workout with rowing buy-in/cash-out. The main part includes 3 rounds combining high-rep Double-Unders, heavy Clean-and-Jerks (185lb~84kg/135lb~61kg), and high-skill Bar Muscle-Ups. Tests endurance, skill, strength, and power. Total reps in main part: 252 DU, 42 C&J, 30 BMU."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/travis/",
-    "wodName": "Travis",
-    "description": "For Time\nBuy-In: 2,774 meter Run\n\nThen, 9 Rounds of:\n14 Dumbbell Devil Presses (2x50/35 lb)\n22 Dumbbell Front Squats (2x50/35 lb)\n\nBuy-Out: 90 Dumbbell Push Presses (2x50/35 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 2700 },
-        "advanced": { "min": 2700, "max": 3300 },
-        "intermediate": { "min": 3300, "max": 3900 },
-        "beginner": { "min": 3900, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"], // Structure includes buy-in, RFT core, cash-out
-    "reasoning": "A long workout with a significant run buy-in, 9 rounds of demanding dumbbell work (Devil Press and Front Squats at 50lb~23kg/35lb~16kg each hand), and a high-rep dumbbell push press cash-out. Tests endurance, full-body strength endurance with dumbbells, and mental toughness."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/tumilson/",
-    "wodName": "Tumilson",
-    "description": "8 Rounds For Time\n200 meter Run\n11 Dumbbell Burpee Deadlifts (2x60/40 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 900 },
-        "advanced": { "min": 900, "max": 1200 },
-        "intermediate": { "min": 1200, "max": 1500 },
-        "beginner": { "min": 1500, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Couplet"],
-    "reasoning": "Couplet workout over 8 rounds combining short runs with challenging Dumbbell Burpee Deadlifts using heavy dumbbells (60lb~27kg/40lb~18kg each hand). Tests conditioning and strength endurance in a complex movement pattern. Total reps: 88 DB Burpee Deadlifts + 1600m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/tyler/",
-    "wodName": "Tyler",
-    "description": "5 Rounds For Time\n7 Muscle-Ups\n21 Sumo-Deadlift High-Pulls (95/65 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 720 },
-        "advanced": { "min": 720, "max": 960 },
-        "intermediate": { "min": 960, "max": 1200 },
-        "beginner": { "min": 1200, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Couplet"],
-    "reasoning": "A couplet pairing high-skill Muscle-Ups with high-rep, light Sumo-Deadlift High-Pulls (95lb~43kg/65lb~29.5kg) over 5 rounds. Tests gymnastics proficiency and metabolic conditioning/posterior chain endurance. Total reps: 35 Muscle-Ups, 105 SDHP."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/the-don/",
-    "wodName": "The Don",
-    "description": "For Time\n66 Deadlifts (110/75 lb)\n66 Box Jumps (24/20 in)\n66 Kettlebell Swings (1.5/1 pood)\n66 Knees-to-Elbows\n66 Sit-Ups\n66 Pull-Ups\n66 Thrusters (55/35 lb)\n66 Wall Ball Shots (20/14 lb)\n66 Burpees\n66 Double-Unders",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "A long, high-volume chipper requiring completion of 66 reps of 10 different movements. Uses relatively light weights (DL 110lb~50kg/75lb~34kg, KB 1.5 pood~24kg/1 pood~16kg, Thruster 55lb~25kg/35lb~16kg, WB 20lb~9kg/14lb~6kg) but tests endurance across lifting, gymnastics, and skill. Total reps: 660."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/the-kabul-thirteen/",
-    "wodName": "The Kabul Thirteen",
-    "description": "For Time\n20 Deadlifts  (75/55 lb)\n23 Hang Power Cleans (75/55 lb) \n31 Front Squats (75/55 lb)\n23 Push Presses (75/55 lb)\n22 Box Jump Overs  (24/20 in)\n20 Butterfly Sit-Ups \n20 Reverse Step Lunges \n20 Pull-Ups \n23 Goblet Squats (53/35 lb)\n25 American Kettlebell Swings (53/35 lb)\n22 Power Snatches (75/55 lb)\n20 Overhead Squats (75/55 lb)\n22 Thrusters (75/55 lb)\n\nPerform 13 Burpees after each movement.",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 2400 },
-        "advanced": { "min": 2400, "max": 3000 },
-        "intermediate": { "min": 3000, "max": 3600 },
-        "beginner": { "min": 3600, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "A very long chipper with 13 different movements, including light barbell work (75lb~34kg/55lb~25kg), kettlebell work (53lb~24kg/35lb~16kg), box jump overs, and bodyweight/gymnastics. Critically, 13 Burpees must be performed after each of the 13 movements, making Burpees the main challenge (169 total). Tests endurance and mental fortitude."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/the-lyon/",
-    "wodName": "The Lyon",
-    "description": "5 Rounds for Time\n7 Squat Cleans (165/115 lb)\n7 Shoulder-to-Overheads (165/115 lb)\n7 Burpee Chest-to-Bar Pull-Ups\n\n2 minutes Rest between rounds",
-     "benchmarks": {
-      "type": "time", // Including rest
-      "levels": {
-        "elite": { "min": 900, "max": 1200 },
-        "advanced": { "min": 1200, "max": 1500 },
-        "intermediate": { "min": 1500, "max": 1800 },
-        "beginner": { "min": 1800, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"], // Interval style RFT
-    "reasoning": "Interval workout over 5 rounds. Each round includes heavy Squat Cleans and Shoulder-to-Overheads (165lb~75kg/115lb~52kg) paired with complex Burpee C2B Pull-Ups, followed by mandatory rest. Tests strength, power, high-skill gymnastics, and recovery. Total reps: 35 SQ Cl, 35 S2OH, 35 Burpee C2B. Total rest: 8 minutes."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/the-payne-train/",
-    "wodName": "The Payne Train",
-    "description": "For Time\n300 meter Run\n5 Rounds of Cindy*\n300 meter Run\n4 Rounds of Cindy*\n300 meter Run\n3 Rounds of Cindy*\n300 meter Run\n2 Rounds of Cindy*\n300 meter Run\n1 Round of Cindy*\n300 meter Run\n\n*1 Round of Cindy consists of 5 Pull-Ups, 10 Push-Ups, and 15 Air Squats.",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1500 },
-        "advanced": { "min": 1500, "max": 1920 },
-        "intermediate": { "min": 1920, "max": 2400 },
-        "beginner": { "min": 2400, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"], // Descending rounds structure acts like a chipper
-    "reasoning": "A descending chipper combining short runs with decreasing rounds of the classic 'Cindy' benchmark (Pull-Ups, Push-Ups, Air Squats). Tests endurance and the ability to maintain intensity on bodyweight movements as fatigue accumulates. Total Cindy reps: 75 Pull-Ups, 150 Push-Ups, 225 Squats + 1800m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/tpt9000/",
-    "wodName": "TPT9000",
-    "description": "For Time:\n\n100 meter Run\n\nThen, 9 rounds of:\n8 Burpees\n26 Kettlebell Swings (44/35 lb)\n21 Wall Ball Shots (20/14 lb, 10/9 ft)\n100 meter Run\n\nWear a Weight Vest (20/14 lb)",
-     "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 2100 },
-        "advanced": { "min": 2100, "max": 2700 },
-        "intermediate": { "min": 2700, "max": 3300 },
-        "beginner": { "min": 3300, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"], // Structured as RFT with buy-in
-    "reasoning": "Workout with a run buy-in, followed by 9 rounds of a triplet (Burpees, KB Swings 44lb~20kg/35lb~16kg, Wall Balls 20lb~9kg/14lb~6kg) plus a short run each round, all performed with a weight vest (20lb~9kg/14lb~6kg). Tests endurance under load and work capacity. Total reps per round: 55 + 100m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/vitalii-skakun/",
-    "wodName": "Vitalii Skakun",
-    "description": "For Total Reps\nFrom 0:00-8:19, complete Buy-In:\n96 Burpees\n\nAt 8:19, if the Burpees are not completed, perform a 120 meter Run before resuming the Burpees.\n\nRest until 14:00\n\nFrom 14:00-39:00, AMRAP of:\n24 Dumbbell Snatches (50/35 lb)\n2 Tire Flips\n22 Goblet Squats (50/35 lb)\n5 Burpee Pull-Ups\n\nCash-Out: 35 Single-Arm Devil Presses (50/35 lb)",
-    "benchmarks": {
-      "type": "reps", // Score is AMRAP reps, but workout is complex structure
-      "levels": { // Estimate based on AMRAP portion
-        "elite": { "min": 5, "max": null }, // Rounds estimate
-        "advanced": { "min": 4, "max": 4 },
-        "intermediate": { "min": 3, "max": 3 },
-        "beginner": { "min": 2, "max": 2 }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["AMRAP"], // Primary scoring mechanism after buy-in
-    "reasoning": "Complex structure: Burpee buy-in against clock, rest, then a 25-minute AMRAP (DB Snatches 50lb~23kg/35lb~16kg, Tire Flips, Goblet Squats, Burpee Pull-Ups), followed by Devil Press cash-out. Score typically reflects AMRAP reps. Tests endurance, strength, and varied skills."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/wade-2/",
-    "wodName": "Wade",
-    "description": "For Time\n1,200 meter Run\n\nThen, 4 rounds of:\n12 Strict Pull-Ups\n9 Strict Dips\n6 Strict Handstand Push-Ups\n\n1,200 meter Run\n\nWear a Weight Vest (20/14 lb)",
-     "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1500 },
-        "advanced": { "min": 1500, "max": 1920 },
-        "intermediate": { "min": 1920, "max": 2400 },
-        "beginner": { "min": 2400, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "reasoning": "Combines running with 4 rounds of a strict gymnastics triplet (Pull-Ups, Dips, HSPU), performed with a weight vest (20lb~9kg/14lb~6kg). Tests strict upper body strength endurance under load and cardiovascular fitness. Total reps: 48 Strict Pull-Ups, 36 Strict Dips, 24 Strict HSPU + 2400m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/war-frank/",
-    "wodName": "War Frank",
-    "description": "3 Rounds For Time\n25 Muscle-Ups\n100 Air Squats\n35 GHD Sit-Ups",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Triplet"],
-    "reasoning": "A very high-skill, high-volume triplet over 3 rounds. Combines a large number of Muscle-Ups with high-rep Air Squats and GHD Sit-Ups. Tests advanced gymnastics capacity, lower body endurance, and core stamina significantly. Total reps: 75 Muscle-Ups, 300 Squats, 105 GHD Sit-Ups."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/weaver/",
-    "wodName": "Weaver",
-    "description": "4 Round For Time\n10 L-Pull-Ups\n15 Push-Ups\n15 Chest-to-Bar Pull-Ups\n15 Push-Ups\n20 Pull-Ups\n15 Push-Ups",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1200 },
-        "advanced": { "min": 1200, "max": 1620 },
-        "intermediate": { "min": 1620, "max": 2100 },
-        "beginner": { "min": 2100, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "reasoning": "Focuses entirely on upper body gymnastics endurance over 4 rounds. Each round features variations of pulling (L-Pull-Ups, C2B Pull-Ups, regular Pull-Ups) interspersed with Push-Ups. Tests grip and pulling/pushing stamina. Total reps per round: 45 Pull-Up variations, 45 Push-Ups."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/wesley/",
-    "wodName": "Wesley",
-    "description": "On a 35-minute clock:\n\n800 meter Run\n\nThen, AMRAP of:\n8 Box Jumps\n6 Strict Pull-Ups\n21-yard Overhead Walking Lunge, with a 45-lb plate",
-     "benchmarks": {
-      "type": "amrap", // Score is AMRAP reps after run
-      "levels": {
-        "elite": { "min": 10, "max": null }, // Rounds estimation
-        "advanced": { "min": 8, "max": 9 },
-        "intermediate": { "min": 6, "max": 7 },
-        "beginner": { "min": 4, "max": 5 }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["AMRAP"], // Main scoring component is AMRAP
-    "reasoning": "Workout includes an 800m run buy-in, followed by an AMRAP within the remaining time of a 35-minute clock. The AMRAP combines Box Jumps, Strict Pull-Ups, and challenging Overhead Plate Lunges (45lb~20kg). Tests endurance, strict pulling strength, stability, and core control. Score is rounds + reps of the AMRAP."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/weston/",
-    "wodName": "Weston",
-    "description": "5 Rounds For Time\n1,000 meter Row\n200 meter Farmer Carry (2x45/35 lb)\n50 meter Waiter Walk, Right Arm (45/35 lb)\n50 meter Waiter Walk, Left Arm (45/35 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 2700 },
-        "advanced": { "min": 2700, "max": 3300 },
-        "intermediate": { "min": 3300, "max": 3900 },
-        "beginner": { "min": 3900, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "reasoning": "Endurance-focused workout over 5 rounds. Combines significant rowing with various loaded carries: Farmer Carry and unilateral Waiter Walks using 45lb~20kg/35lb~16kg dumbbells/kettlebells. Tests cardiovascular capacity, grip strength, and core/shoulder stability under load."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/white/",
-    "wodName": "White",
-    "description": "5 Rounds For Time\n3 Rope Climbs (15 ft)\n10 Toes-to-Bars\n21 Overhead Walking Lunges (45/35 lb plate)\n400 meter Run",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1500 },
-        "advanced": { "min": 1500, "max": 1920 },
-        "intermediate": { "min": 1920, "max": 2400 },
-        "beginner": { "min": 2400, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "reasoning": "Combines high-skill Rope Climbs, gymnastics core work (Toes-to-Bars), challenging Overhead Plate Lunges (45lb~20kg/35lb~16kg), and running over 5 rounds. Tests skill, core strength, stability, and endurance. Total reps per round: 34 + 400m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/whitten/",
-    "wodName": "Whitten",
-    "description": "5 Rounds For Time\n22 Kettlebell Swings (2/1.5 pood)\n22 Box Jumps (24/20 in)\n400 meter Run\n22 Burpees\n22 Wall Ball Shots (10/9 ft, 20/14 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1920 },
-        "advanced": { "min": 1920, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "reasoning": "A long, high-volume workout with 5 substantial rounds. Each round includes heavy KB swings (2 pood~32kg/1.5 pood~24kg), box jumps, running, burpees, and wall balls (20lb~9kg/14lb~6kg). Tests endurance, stamina, and mental fortitude. Total reps per round: 88 + 400m run. Total workout: 440 reps + 2000m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/will-lindsay/",
-    "wodName": "Will Lindsay",
-    "description": "10 Rounds for Time\n3 Devil Presses (2x55/35 lb)\n22 Alternating Dumbbell Lunges (2x55/35 lb)\n19 Air Squats\n\nWear a Weight Vest (20/14 lb)",
-     "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Triplet"],
-    "reasoning": "Triplet workout over 10 rounds performed with a weight vest (20lb~9kg/14lb~6kg). Combines complex Devil Presses, Lunges (both with 55lb~25kg/35lb~16kg DBs), and Air Squats. Tests full-body strength endurance, conditioning, and stamina under load. Total reps per round: 44."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/wilmot/",
-    "wodName": "Wilmot",
-    "description": "6 Rounds For Time\n50 Air Squats\n25 Ring Dips",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 900 },
-        "advanced": { "min": 900, "max": 1200 },
-        "intermediate": { "min": 1200, "max": 1500 },
-        "beginner": { "min": 1500, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Couplet"],
-    "reasoning": "A bodyweight couplet focused on high-volume squatting and gymnastics pushing over 6 rounds. Combines Air Squats with challenging Ring Dips. Tests lower body and upper body muscular endurance and stamina. Total reps: 300 Squats, 150 Ring Dips."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/wittman/",
-    "wodName": "Wittman",
-    "description": "7 Rounds For Time\n15 Kettlebell Swings (1.5/1 pood)\n15 Power Cleans (95/65 lb)\n15 Box Jumps (24/20 in)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 900 },
-        "advanced": { "min": 900, "max": 1200 },
-        "intermediate": { "min": 1200, "max": 1500 },
-        "beginner": { "min": 1500, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Triplet"],
-    "reasoning": "A triplet workout over 7 rounds, combining standard KB swings (1.5 pood~24kg/1 pood~16kg), light power cleans (95lb~43kg/65lb~29.5kg), and box jumps. Tests metabolic conditioning and consistent output across multiple movements. Total reps: 315 (105 each)."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/xingu-e-besada/",
-    "wodName": "Xingu E Besada",
-    "description": "For Time\n1,200 meter Run\n100 Push-Ups\n110 Reverse Lunges\n50 Pull-Ups\n110 Ait Squats\n101 Burpees\n1,200 meter Run",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "A bodyweight chipper bookended by runs. Includes high volumes of Push-Ups, Lunges, Pull-Ups, Squats, and Burpees. Tests endurance and basic muscular stamina across multiple fundamental movements. Total reps: 471 + 2400m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/yeti/",
-    "wodName": "Yeti",
-    "description": "For Time\n25 Pull-Ups\n10 Muscle-Ups\n1.5 mile Run\n10 Muscle-Ups\n25 Pull-Ups",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1200 },
-        "advanced": { "min": 1200, "max": 1500 },
-        "intermediate": { "min": 1500, "max": 1800 },
-        "beginner": { "min": 1800, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"],
-    "reasoning": "A gymnastics-focused chipper with a significant run in the middle. Combines Pull-Ups and high-skill Muscle-Ups. Tests pulling endurance, advanced gymnastics capacity, and running fitness. Total reps: 50 Pull-Ups, 20 Muscle-Ups + 1.5 mile Run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/zembiec/",
-    "wodName": "Zembiec",
-    "description": "5 Rounds for Time\n11 Back Squats (185/135 lb)\n7 Burpee Pull-Ups (Strict)\n400 meter Run",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1500 },
-        "advanced": { "min": 1500, "max": 1920 },
-        "intermediate": { "min": 1920, "max": 2400 },
-        "beginner": { "min": 2400, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Triplet"],
-    "reasoning": "Triplet workout over 5 rounds combining heavy Back Squats (185lb~84kg/135lb~61kg), challenging strict Burpee Pull-Ups, and running. Tests strength endurance, strict pulling/pushing combined with burpee, and conditioning. Total reps: 55 Back Squats, 35 Burpee Pull-Ups + 2000m run."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/zeus/",
-    "wodName": "Zeus",
-    "description": "3 Rounds For Time\n30 Wall Ball Shots (20/14 lb)\n30 Sumo Deadlift High-Pull (75/55 lb)\n30 Box Jump (20 in)\n30 Push Presses (75/55 lb)\n30 calorie Row\n30 Push-Ups\n10 Back Squats (Bodyweight)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": 0, "max": 1800 },
-        "advanced": { "min": 1800, "max": 2400 },
-        "intermediate": { "min": 2400, "max": 3000 },
-        "beginner": { "min": 3000, "max": null }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time", "Chipper"], // Rounds are long and chipper-like
-    "reasoning": "A long, high-volume workout testing multiple fitness domains across 3 substantial, chipper-style rounds. Includes light barbell work (SDHP 75lb~34kg/55lb~25kg, Push Press), Wall Balls (20lb~9kg/14lb~6kg), Box Jumps, Rowing, Push-Ups, and challenging Bodyweight Back Squats. Requires endurance and consistent pacing. Total reps per round: 190 + 30 cal row."
-  }
-]
+    "reasoning": "Combines moderate distance runs with weighted movements using a kettlebell (1.5 pood~

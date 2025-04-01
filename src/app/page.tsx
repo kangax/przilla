@@ -1,8 +1,8 @@
-import fs from 'fs'; 
-import path from 'path'; 
+import fs from 'fs';
+import path from 'path';
 import Link from "next/link";
-import { Box, Container, Flex, Heading, Text } from "@radix-ui/themes"; 
-import { auth } from "~/server/auth"; 
+import { Box, Container, Flex, Heading } from "@radix-ui/themes"; // Removed Text
+import { auth } from "~/server/auth";
 
 // Import the WodViewer and ThemeToggle components
 import WodViewer from "~/app/_components/WodViewer";

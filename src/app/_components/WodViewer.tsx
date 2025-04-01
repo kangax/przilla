@@ -177,11 +177,11 @@ export const hasScore = (result: WodResult): boolean => {
        // Find the earliest valid date for comparison (matching test description)
        const earliestDateA = [...a.results]
          .filter(r => r.date && hasScore(r)) // Ensure result has date and score
-         .map(r => new Date(r.date!).getTime())
+         .map(r => new Date(r.date).getTime())
          .sort((d1, d2) => d1 - d2)[0] ?? Infinity; // Use Infinity if no valid date (sorts last asc, first desc)
        const earliestDateB = [...b.results]
          .filter(r => r.date && hasScore(r)) // Ensure result has date and score
-         .map(r => new Date(r.date!).getTime())
+         .map(r => new Date(r.date).getTime())
          .sort((d1, d2) => d1 - d2)[0] ?? Infinity; // Use Infinity if no valid date
 
        // Handle Infinity cases correctly based on sort direction
@@ -220,10 +220,10 @@ export const hasScore = (result: WodResult): boolean => {
 
         if (sortBy === "level") {
           // 'level' uses the *first* result chronologically
-          return validResults.sort((r1, r2) => new Date(r1.date!).getTime() - new Date(r2.date!).getTime())[0];
+          return validResults.sort((r1, r2) => new Date(r1.date).getTime() - new Date(r2.date).getTime())[0];
         } else { // sortBy === "latestLevel"
           // 'latestLevel' uses the *last* result chronologically
-          return validResults.sort((r1, r2) => new Date(r2.date!).getTime() - new Date(r1.date!).getTime())[0];
+          return validResults.sort((r1, r2) => new Date(r2.date).getTime() - new Date(r1.date).getTime())[0];
         }
       };
 

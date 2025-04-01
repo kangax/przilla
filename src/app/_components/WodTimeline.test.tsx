@@ -13,12 +13,12 @@ vi.mock('next/link', () => ({
 }));
 
 // --- Mock Data ---
-const mockResultTime = (seconds: number | null, rx: boolean = true, date: string = '2024-01-15', notes: string = ''): WodResult => ({
+const mockResultTime = (seconds: number | null, rx = true, date = '2024-01-15', notes = ''): WodResult => ({
   score_time_seconds: seconds, score_reps: null, score_load: null, score_rounds_completed: null, score_partial_reps: null,
   rxStatus: rx ? 'Rx' : 'Scaled', date, notes,
 });
 
-const mockResultNoScore = (date: string = '2024-01-19'): WodResult => ({
+const mockResultNoScore = (date = '2024-01-19'): WodResult => ({
   score_time_seconds: null, score_reps: null, score_load: null, score_rounds_completed: null, score_partial_reps: null,
   rxStatus: null, date,
 });
@@ -126,17 +126,17 @@ describe('WodTimeline Component', () => {
      // Result 1: 2024-01-05, 290s, Rx (Advanced)
      const result1Score = within(resultsContainer).getByText('4:50');
      expect(result1Score).toHaveClass('text-green-600'); // Advanced color
-     expect(within(result1Score.parentElement!).getByText('Rx')).toBeInTheDocument();
+     expect(within(result1Score.parentElement).getByText('Rx')).toBeInTheDocument();
 
      // Result 2: 2024-03-10, 310s, Rx (Intermediate)
      const result2Score = within(resultsContainer).getByText('5:10');
      expect(result2Score).toHaveClass('text-yellow-600'); // Intermediate color
-     expect(within(result2Score.parentElement!).getByText('Rx')).toBeInTheDocument();
+     expect(within(result2Score.parentElement).getByText('Rx')).toBeInTheDocument();
 
      // Result 3: 2024-05-15, 250s, Scaled
      const result3Score = within(resultsContainer).getByText('4:10');
      expect(result3Score).toHaveClass('text-foreground/70'); // Scaled color (default)
-     expect(within(result3Score.parentElement!).getByText('Scaled')).toBeInTheDocument();
+     expect(within(result3Score.parentElement).getByText('Scaled')).toBeInTheDocument();
   });
 
   it('should render WOD description correctly (including newlines)', () => {

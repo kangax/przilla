@@ -16,12 +16,12 @@ vi.mock('next/link', () => ({
 
 // --- Mock Data ---
 // Re-use or adapt mocks from WodViewer.test.tsx if suitable
-const mockResultTime = (seconds: number | null, rx: boolean = true, date: string = '2024-01-15', notes: string = ''): WodResult => ({
+const mockResultTime = (seconds: number | null, rx = true, date = '2024-01-15', notes = ''): WodResult => ({
   score_time_seconds: seconds, score_reps: null, score_load: null, score_rounds_completed: null, score_partial_reps: null,
   rxStatus: rx ? 'Rx' : 'Scaled', date, notes,
 });
 
-const mockResultRounds = (rounds: number | null, partialReps: number | null = 0, rx: boolean = true, date: string = '2024-01-16', notes: string = ''): WodResult => ({
+const mockResultRounds = (rounds: number | null, partialReps: number | null = 0, rx = true, date = '2024-01-16', notes = ''): WodResult => ({
   score_time_seconds: null, score_reps: null, score_load: null, score_rounds_completed: rounds, score_partial_reps: partialReps,
   rxStatus: rx ? 'Rx' : 'Scaled', date, notes,
 });
@@ -128,10 +128,10 @@ describe('WodTable Component', () => {
     expect(within(row).getByText('Chipper')).toBeInTheDocument(); // Tag
     expect(within(row).getByText('2024-03-11')).toBeInTheDocument(); // Date
     const scoreCell = within(row).getByText(/12\+5/).closest('td');
-    expect(within(scoreCell!).getByText('Scaled')).toBeInTheDocument(); // Rx Status within Score cell
+    expect(within(scoreCell).getByText('Scaled')).toBeInTheDocument(); // Rx Status within Score cell
     const levelCell = within(row).getByText('Scaled', { selector: 'span.rt-Text' }).closest('td'); // Find Scaled text specifically in Level cell span
     expect(levelCell).toHaveClass('rt-TableCell'); // Ensure it's the level cell
-    expect(within(levelCell!).getByText('Scaled')).toHaveClass('text-foreground/70'); // Check class on the specific span
+    expect(within(levelCell).getByText('Scaled')).toHaveClass('text-foreground/70'); // Check class on the specific span
     expect(within(row).getByText('Used lighter weight')).toBeInTheDocument(); // Notes
   });
 

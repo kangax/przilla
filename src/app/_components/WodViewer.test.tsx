@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'; // Remove afterEach
-import { render, screen, fireEvent, within } from '../../test-utils';
+import { render, screen, fireEvent } from '../../test-utils'; // Removed 'within'
 import '@testing-library/jest-dom';
 import WodViewer, { // Import component itself
   getPerformanceLevelColor,
@@ -12,8 +12,12 @@ import WodViewer, { // Import component itself
   sortWods,
   type Wod,
   type WodResult,
-  type Benchmarks,
+  // Removed 'Benchmarks' type import
 } from './WodViewer';
+
+// Define types locally for mocks as they are not exported from component
+type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
+type SortDirection = "asc" | "desc";
 
 // --- Mocks and Test Data ---
 
@@ -83,7 +87,7 @@ const mockWodNoBenchmark: Wod = {
   results: [],
 };
 
-const mockResultTime = (seconds: number | null, rx: boolean = true): WodResult => ({
+const mockResultTime = (seconds: number | null, rx = true): WodResult => ({
   score_time_seconds: seconds,
   score_reps: null,
   score_load: null,
@@ -93,7 +97,7 @@ const mockResultTime = (seconds: number | null, rx: boolean = true): WodResult =
   date: '2024-01-15',
 });
 
-const mockResultRounds = (rounds: number | null, partialReps: number | null = 0, rx: boolean = true): WodResult => ({
+const mockResultRounds = (rounds: number | null, partialReps: number | null = 0, rx = true): WodResult => ({
   score_time_seconds: null,
   score_reps: null,
   score_load: null,
@@ -103,7 +107,7 @@ const mockResultRounds = (rounds: number | null, partialReps: number | null = 0,
   date: '2024-01-16',
 });
 
-const mockResultLoad = (load: number | null, rx: boolean = true): WodResult => ({
+const mockResultLoad = (load: number | null, rx = true): WodResult => ({
   score_time_seconds: null,
   score_reps: null,
   score_load: load,
@@ -113,7 +117,7 @@ const mockResultLoad = (load: number | null, rx: boolean = true): WodResult => (
   date: '2024-01-17',
 });
 
-const mockResultReps = (reps: number | null, rx: boolean = true): WodResult => ({
+const mockResultReps = (reps: number | null, rx = true): WodResult => ({
   score_time_seconds: null,
   score_reps: reps,
   score_load: null,
@@ -487,12 +491,13 @@ describe('WodViewer Helper Functions', () => {
 // Mock WodTable and WodTimeline to check props passed to them
 vi.mock('./WodTable', () => ({
   // Use default export syntax for mocked component
-  default: vi.fn(({ wods, sortBy, sortDirection, handleSort }) => (
+  // Add explicit types to parameters using locally defined types
+  default: vi.fn(({ wods, sortBy, sortDirection, handleSort }: { wods: Wod[], sortBy: SortByType, sortDirection: SortDirection, handleSort: (column: SortByType) => void }) => (
     <div data-testid="wod-table">
       {/* Render something identifiable */}
       <span>WodTable Mock</span>
       {/* Optionally render props for easier debugging in tests */}
-      <span data-testid="table-wod-count">{wods.length}</span>
+      <span data-testid="table-wod-count">{wods.length}</span> {/* Safe: wods is Wod[] */}
       <span data-testid="table-sort-by">{sortBy}</span>
       <span data-testid="table-sort-direction">{sortDirection}</span>
       {/* Mock button to trigger handleSort */}
@@ -502,10 +507,11 @@ vi.mock('./WodTable', () => ({
 }));
 
 vi.mock('./WodTimeline', () => ({
-  default: vi.fn(({ wods, sortBy, sortDirection, handleSort }) => (
+  // Add explicit types to parameters using locally defined types
+  default: vi.fn(({ wods, sortBy, sortDirection, handleSort }: { wods: Wod[], sortBy: SortByType, sortDirection: SortDirection, handleSort: (column: SortByType) => void }) => (
     <div data-testid="wod-timeline">
       <span>WodTimeline Mock</span>
-      <span data-testid="timeline-wod-count">{wods.length}</span>
+      <span data-testid="timeline-wod-count">{wods.length}</span> {/* Safe: wods is Wod[] */}
        <span data-testid="timeline-sort-by">{sortBy}</span>
       <span data-testid="timeline-sort-direction">{sortDirection}</span>
        {/* Mock button to trigger handleSort */}

@@ -57,8 +57,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
               return new Date(dateA).getTime() - new Date(dateB).getTime();
             });
 
-          // If no valid results after filtering, don't render the row
-          if (sortedResults.length === 0) return null;
+          // Determine if the WOD has been attempted (has valid results)
+          const isAttempted = sortedResults.length > 0;
 
           return (
             <Table.Row key={wod.wodName} className="border-t border-table-border hover:bg-table-rowAlt">
@@ -73,41 +73,45 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                 )}
               </Table.Cell>
               <Table.Cell>
-                <Flex align="center">
-                  {sortedResults.map((result, index) => (
-                    <Flex key={index} align="center" className="mb-1">
-                      <Tooltip content={
-                        <>
-                          <Text size="1" weight="bold">{safeString(result?.date)}</Text>
-                          {result.notes && (
-                            <>
-                              <br />
-                              <Text size="1" style={{ whiteSpace: 'pre-wrap', maxWidth: '300px' }}>{safeString(result.notes)}</Text>
-                            </>
-                          )}
-                        </>
-                      }>
-                        <Text className="cursor-help whitespace-nowrap">
-                          <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
-                            {formatScore(result)}
-                          </span> 
-                          {result.rxStatus && (
-                            <Badge 
-                              className="ml-1 rounded-full" 
-                              size="1" 
-                              color="gray"
-                            >
-                              {safeString(result.rxStatus)}
-                            </Badge>
-                          )}
-                        </Text>
-                      </Tooltip>
-                      {index < sortedResults.length - 1 && (
-                        <Text className="mx-2">→</Text>
-                      )}
-                    </Flex>
-                  ))}
-                </Flex>
+                {isAttempted ? (
+                  <Flex align="center">
+                    {sortedResults.map((result, index) => (
+                      <Flex key={index} align="center" className="mb-1">
+                        <Tooltip content={
+                          <>
+                            <Text size="1" weight="bold">{safeString(result?.date)}</Text>
+                            {result.notes && (
+                              <>
+                                <br />
+                                <Text size="1" style={{ whiteSpace: 'pre-wrap', maxWidth: '300px' }}>{safeString(result.notes)}</Text>
+                              </>
+                            )}
+                          </>
+                        }>
+                          <Text className="cursor-help whitespace-nowrap">
+                            <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
+                              {formatScore(result)}
+                            </span>
+                            {result.rxStatus && (
+                              <Badge
+                                className="ml-1 rounded-full"
+                                size="1"
+                                color="gray"
+                              >
+                                {safeString(result.rxStatus)}
+                              </Badge>
+                            )}
+                          </Text>
+                        </Tooltip>
+                        {index < sortedResults.length - 1 && (
+                          <Text className="mx-2">→</Text>
+                        )}
+                      </Flex>
+                    ))}
+                  </Flex>
+                ) : (
+                  <Text size="1" className="text-foreground/60 italic">Not Attempted</Text>
+                )}
               </Table.Cell>
               <Table.Cell className="min-w-[400px]">
                 <Text className="text-sm font-small whitespace-pre-line">{wod.description}</Text>

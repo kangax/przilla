@@ -302,18 +302,14 @@ export default function WodViewer({ wods }: WodViewerProps) {
   const notDoneWodsCount = totalWodCount - doneWodsCount;
 
 
-  // Filter wods by completion status - only apply in table view
+  // Filter wods by completion status - apply universally
   let filteredByCompletionWods = wods;
-  if (view === "table") {
-    if (completionFilter === "done") {
-      filteredByCompletionWods = wods.filter(wod => wod.results.some(r => r.date && hasScore(r)));
-    } else if (completionFilter === "notDone") {
-      filteredByCompletionWods = wods.filter(wod => !wod.results.some(r => r.date && hasScore(r)));
-    }
-  } else {
-    // In timeline view, only show completed workouts
+  if (completionFilter === "done") {
     filteredByCompletionWods = wods.filter(wod => wod.results.some(r => r.date && hasScore(r)));
+  } else if (completionFilter === "notDone") {
+    filteredByCompletionWods = wods.filter(wod => !wod.results.some(r => r.date && hasScore(r)));
   }
+  // No 'else' needed, 'all' shows everything by default
 
   // Filter wods by selected categories and tags
   const filteredWods = filteredByCompletionWods.filter(wod => {
@@ -424,11 +420,10 @@ export default function WodViewer({ wods }: WodViewerProps) {
                   </Box>
                 ))}
               </Flex>
-              {/* New Segmented Control Filter - only show in table view */}
-              {view === "table" && (
-                <SegmentedControl.Root
-                  size="1"
-                  value={completionFilter}
+              {/* New Segmented Control Filter - always show */}
+              <SegmentedControl.Root
+                size="1"
+                value={completionFilter}
                 onValueChange={(value) => setCompletionFilter(value as "all" | "done" | "notDone")}
                   className="ml-auto" // Push to the right
                 >
@@ -448,7 +443,7 @@ export default function WodViewer({ wods }: WodViewerProps) {
                      </Tooltip>
                   </SegmentedControl.Item>
                 </SegmentedControl.Root>
-              )}
+              {/* Removed the closing parenthesis for the conditional rendering */}
 
             <Flex justify="center">
               <SegmentedControl.Root

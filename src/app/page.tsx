@@ -32,10 +32,6 @@ export default async function Home() {
               <Heading size="5" className="text-foreground"> 
                 PRzilla
               </Heading>
-              <Flex justify="center" gap="4" className="text-foreground/70 text-sm ml-auto" align="center"> 
-                <Text>{wodsData.length} WODs</Text>
-                <Text>{wodsData.reduce((total, wod) => total + (wod.results?.length ?? 0), 0)} Sessions</Text>
-              </Flex>
             </Flex>
           </Container>
           {/* Absolutely position ThemeToggle */}

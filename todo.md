@@ -11,6 +11,7 @@
 
 ### Stats
 - Short excerpt about your data (what to focus on, strength/weaknesses)
+- Chart that shows where you lean more (Girl vs. Hero; Chipper vs. AMRAP)
 - Use AI endpoint?
 
 ### Import from wodwell / sugarwod
@@ -21,6 +22,15 @@
 - write import functionality
 
 ### Authentication
+- implement
 
 ### JSON -> database
 - store data in a database, per user (under auth)
+
+### Misc
++ favicon
++ przilla.app
+
+## Data
+- Add Open workouts
+- Add Games workouts

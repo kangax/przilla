@@ -141,7 +141,7 @@ const WodTable: React.FC<WodTableProps> = ({ wods, sortBy, sortDirection, handle
                   </Text>
                 ) : (
                   wod.benchmarks && (
-                    <Tooltip content={getPerformanceLevelTooltip(wod, getPerformanceLevel(wod, result))}>
+                    <Tooltip content={<span style={{ whiteSpace: 'pre-wrap' }}>{getPerformanceLevelTooltip(wod, getPerformanceLevel(wod, result))}</span>}>
                       <Text className={`font-medium ${getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
                         {getPerformanceLevel(wod, result)?.charAt(0).toUpperCase() + getPerformanceLevel(wod, result)?.slice(1) || "N/A"}
                       </Text>

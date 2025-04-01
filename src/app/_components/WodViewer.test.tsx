@@ -559,16 +559,18 @@ describe('WodViewer Component', () => {
     expect(screen.queryByTestId('wod-table')).not.toBeInTheDocument();
 
     // Timeline view should only show WODs with valid scores (A, B, C, F)
-    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('4');
+     // Timeline view with "All" filter should show all WODs initially
+     expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent(testWods.length.toString());
 
     // Check default sort state passed to timeline
     expect(screen.getByTestId('timeline-sort-by')).toHaveTextContent('attempts');
     expect(screen.getByTestId('timeline-sort-direction')).toHaveTextContent('desc');
 
-    // Completion filter should not be visible in timeline view
-    expect(screen.queryByRole('radio', { name: /All/i })).not.toBeInTheDocument(); // Use radio based on error
-    expect(screen.queryByRole('radio', { name: /Done/i })).not.toBeInTheDocument(); // Use radio based on error
-    expect(screen.queryByRole('radio', { name: /Todo/i })).not.toBeInTheDocument(); // Use radio based on error
+    // Completion filter should be visible and default to "All"
+    expect(screen.getByRole('radio', { name: /All \(\d+\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: /Done \(\d+\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: /Todo \(\d+\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: /All \(\d+\)/i, checked: true })).toBeInTheDocument();
   });
 
   it('should switch to table view and show all WODs by default', () => {
@@ -595,7 +597,7 @@ describe('WodViewer Component', () => {
     expect(screen.getByRole('radio', { name: /Done \(\d+\)/i })).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: /Todo \(\d+\)/i })).toBeInTheDocument();
     // Check which radio button is checked using aria-checked or data-state
-    expect(screen.getByRole('radio', { name: /All \(\d+\)/i, checked: true })).toBeInTheDocument();
+     expect(screen.getByRole('radio', { name: /All \(\d+\)/i, checked: true })).toBeInTheDocument();
   });
 
   it('should filter by category', async () => {
@@ -722,4 +724,26 @@ describe('WodViewer Component', () => {
      expect(screen.getByText('Chipper')).toBeInTheDocument(); // Example tag - Use getByText
      expect(screen.getByRole('radio', { name: /All \(\d+\)/i })).toBeInTheDocument(); // Completion filter - Use radio
    });
+
+   it('should filter by completion status in timeline view', () => {
+    render(<WodViewer wods={testWods} />);
+    // Timeline view is default
+    expect(screen.getByTestId('wod-timeline')).toBeInTheDocument();
+    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('6'); // All
+
+    // Click 'Done' filter (A, B, C, F)
+    const doneFilter = screen.getByRole('radio', { name: /Done \(\d+\)/i });
+    fireEvent.click(doneFilter);
+    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('4');
+
+    // Click 'Todo' filter (D, E)
+    const todoFilter = screen.getByRole('radio', { name: /Todo \(\d+\)/i });
+    fireEvent.click(todoFilter);
+    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('2');
+
+    // Click 'All' filter
+    const allFilter = screen.getByRole('radio', { name: /All \(\d+\)/i });
+    fireEvent.click(allFilter);
+    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('6');
+  });
 });

@@ -74,7 +74,7 @@ describe('WodTimeline Component', () => {
     render(<WodTimeline wods={[]} sortBy="wodName" sortDirection="asc" handleSort={handleSortMock} />);
     expect(screen.getByRole('columnheader', { name: /Workout/ })).toBeInTheDocument();
     expect(screen.getByRole('columnheader', { name: /Progress Timeline/ })).toBeInTheDocument();
-    expect(screen.getByRole('columnheader', { name: /Description/ })).toBeInTheDocument();
+     expect(screen.getByRole('columnheader', { name: /Description/ })).toBeInTheDocument();
   });
 
   it('should display sort indicators correctly', () => {
@@ -83,16 +83,25 @@ describe('WodTimeline Component', () => {
 
     rerender(<WodTimeline wods={[]} sortBy="latestLevel" sortDirection="desc" handleSort={handleSortMock} />);
     expect(screen.getByRole('columnheader', { name: /Workout/ })).toBeInTheDocument(); // No indicator
-    expect(screen.getByRole('columnheader', { name: /Progress Timeline.*▼/ })).toBeInTheDocument();
+     expect(screen.getByRole('columnheader', { name: /Progress Timeline.*▼/ })).toBeInTheDocument();
   });
 
-  it('should filter out WODs with no valid results', () => {
+  it('should render all passed WODs, including those without valid results', () => {
     render(<WodTimeline wods={testWods} sortBy="wodName" sortDirection="asc" handleSort={handleSortMock} />);
     expect(screen.getByRole('row', { name: /WOD Alpha/ })).toBeInTheDocument();
     expect(screen.getByRole('row', { name: /WOD Bravo/ })).toBeInTheDocument();
-    expect(screen.queryByRole('row', { name: /WOD Charlie/ })).not.toBeInTheDocument(); // Should be filtered out
+    expect(screen.getByRole('row', { name: /WOD Charlie/ })).toBeInTheDocument(); // Should now be rendered
     expect(screen.getByRole('row', { name: /WOD Delta/ })).toBeInTheDocument();
   });
+
+  it('should render "Not Attempted" for WODs with no valid results', () => {
+    render(<WodTimeline wods={[mockWod3_NoValidResults]} sortBy="wodName" sortDirection="asc" handleSort={handleSortMock} />);
+    const row = screen.getByRole('row', { name: /WOD Charlie/ });
+    const timelineCell = within(row).getAllByRole('cell')[1]; // Second cell is the timeline
+    expect(within(timelineCell).getByText('Not Attempted')).toBeInTheDocument();
+    expect(within(timelineCell).getByText('Not Attempted')).toHaveClass('italic'); // Check for styling
+  });
+
 
   it('should render results chronologically within a WOD row', () => {
     render(<WodTimeline wods={[mockWod1_MultiResultSorted]} sortBy="wodName" sortDirection="asc" handleSort={handleSortMock} />);

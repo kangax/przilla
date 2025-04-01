@@ -19,3 +19,4 @@
   - Using Vitest + React Testing Library
 - Integration tests for API endpoints
 - E2E tests for critical user flows
+- Always ensure tests exist for additions/changes

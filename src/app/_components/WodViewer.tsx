@@ -71,24 +71,38 @@ export const formatSecondsToMMSS = (seconds: number): string => {
   return `${minutes}:${remainingSeconds.toString().padStart(2, '0')}`;
 };
 
-// Helper function to get the tooltip content for a performance level
-export const getPerformanceLevelTooltip = (wod: Wod, level: string | null): string => {
-  if (!wod.benchmarks || !level) return "No benchmark data available";
+// Helper function to get the tooltip content showing all performance levels
+export const getPerformanceLevelTooltip = (wod: Wod, currentLevel: string | null): string => {
+  if (!wod.benchmarks) return "No benchmark data available";
 
   const { levels, type } = wod.benchmarks;
-  const levelData = levels[level as keyof typeof levels];
+  const levelOrder: Array<keyof typeof levels> = ['elite', 'advanced', 'intermediate', 'beginner'];
+  const tooltipLines: string[] = [];
 
-  if (type === "time") {
-    // Format time in seconds to MM:SS
-    const min = levelData.min !== null ? formatSecondsToMMSS(levelData.min) : "0:00";
-    const max = levelData.max !== null ? formatSecondsToMMSS(levelData.max) : "∞";
-    return `${level.charAt(0).toUpperCase() + level.slice(1)}: ${min} - ${max}`;
-  } else {
-    const min = levelData.min !== null ? levelData.min.toString() : "0";
-    const max = levelData.max !== null ? levelData.max.toString() : "∞";
-    return `${level.charAt(0).toUpperCase() + level.slice(1)}: ${min} - ${max} ${type}`;
-  }
+  levelOrder.forEach(levelName => {
+    const levelData = levels[levelName];
+    let formattedRange = "";
+
+    if (type === "time") {
+      // Lower is better for time
+      const min = levelData.min !== null ? formatSecondsToMMSS(levelData.min) : "0:00"; // Usually 0 for time min
+      const max = levelData.max !== null ? formatSecondsToMMSS(levelData.max) : "∞";
+      formattedRange = `${min} - ${max}`; // Show range like 0:00 - 2:00
+    } else {
+      // Higher is better for reps, load, rounds
+      const min = levelData.min !== null ? levelData.min.toString() : "0";
+      const max = levelData.max !== null ? levelData.max.toString() : "∞";
+      formattedRange = `${min} - ${max} ${type}`; // Show range like 25 - ∞ rounds
+    }
+    
+    // Capitalize level name
+    const capitalizedLevelName = levelName.charAt(0).toUpperCase() + levelName.slice(1);
+    tooltipLines.push(`${capitalizedLevelName}: ${formattedRange}`);
+  });
+
+  return tooltipLines.join("\n"); // Join with newline for multi-line tooltip
 };
+
 
 // Helper function to format score based on the available score fields
 export const formatScore = (result: WodResult): string => {

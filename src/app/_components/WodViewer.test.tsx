@@ -166,28 +166,67 @@ describe('WodViewer Helper Functions', () => {
   });
 
   describe('getPerformanceLevelTooltip', () => {
-    it('should return correct tooltip for time benchmarks', () => {
-      expect(getPerformanceLevelTooltip(mockWodTime, 'elite')).toBe('Elite: 0:00 - 2:00');
-      expect(getPerformanceLevelTooltip(mockWodTime, 'beginner')).toBe('Beginner: 0:00 - 8:00');
+    // Note: The 'currentLevel' parameter is no longer used to select the output, but we still pass it for function signature compatibility.
+    it('should return correct multi-line tooltip for time benchmarks', () => {
+      const expectedTooltip = [
+        "Elite: 0:00 - 2:00",
+        "Advanced: 0:00 - 3:00",
+        "Intermediate: 0:00 - 5:00",
+        "Beginner: 0:00 - 8:00"
+      ].join("\n");
+      expect(getPerformanceLevelTooltip(mockWodTime, 'elite')).toBe(expectedTooltip);
+      // The output should be the same regardless of the 'currentLevel' passed
+      expect(getPerformanceLevelTooltip(mockWodTime, 'beginner')).toBe(expectedTooltip);
     });
 
-    it('should return correct tooltip for rounds benchmarks', () => {
-      expect(getPerformanceLevelTooltip(mockWodRounds, 'elite')).toBe('Elite: 25 - ∞ rounds');
-      expect(getPerformanceLevelTooltip(mockWodRounds, 'beginner')).toBe('Beginner: 10 - ∞ rounds');
-    });
-     it('should return correct tooltip for load benchmarks', () => {
-      expect(getPerformanceLevelTooltip(mockWodLoad, 'elite')).toBe('Elite: 405 - ∞ load');
-      expect(getPerformanceLevelTooltip(mockWodLoad, 'beginner')).toBe('Beginner: 135 - ∞ load');
-    });
-     it('should return correct tooltip for reps benchmarks', () => {
-      expect(getPerformanceLevelTooltip(mockWodReps, 'elite')).toBe('Elite: 30 - ∞ reps');
-      expect(getPerformanceLevelTooltip(mockWodReps, 'beginner')).toBe('Beginner: 5 - ∞ reps');
+    it('should return correct multi-line tooltip for rounds benchmarks', () => {
+       const expectedTooltip = [
+        "Elite: 25 - ∞ rounds",
+        "Advanced: 20 - ∞ rounds",
+        "Intermediate: 15 - ∞ rounds",
+        "Beginner: 10 - ∞ rounds"
+      ].join("\n");
+      expect(getPerformanceLevelTooltip(mockWodRounds, 'elite')).toBe(expectedTooltip);
+      expect(getPerformanceLevelTooltip(mockWodRounds, 'beginner')).toBe(expectedTooltip);
     });
 
-    it('should return default message if no benchmarks or level', () => {
+     it('should return correct multi-line tooltip for load benchmarks', () => {
+       const expectedTooltip = [
+        "Elite: 405 - ∞ load",
+        "Advanced: 315 - ∞ load",
+        "Intermediate: 225 - ∞ load",
+        "Beginner: 135 - ∞ load"
+      ].join("\n");
+      expect(getPerformanceLevelTooltip(mockWodLoad, 'elite')).toBe(expectedTooltip);
+      expect(getPerformanceLevelTooltip(mockWodLoad, 'beginner')).toBe(expectedTooltip);
+    });
+
+     it('should return correct multi-line tooltip for reps benchmarks', () => {
+       const expectedTooltip = [
+        "Elite: 30 - ∞ reps",
+        "Advanced: 20 - ∞ reps",
+        "Intermediate: 10 - ∞ reps",
+        "Beginner: 5 - ∞ reps"
+      ].join("\n");
+      expect(getPerformanceLevelTooltip(mockWodReps, 'elite')).toBe(expectedTooltip);
+      expect(getPerformanceLevelTooltip(mockWodReps, 'beginner')).toBe(expectedTooltip);
+    });
+
+    it('should return default message if no benchmarks', () => {
+      // The function now ignores the 'currentLevel' if benchmarks are missing
       expect(getPerformanceLevelTooltip(mockWodNoBenchmark, 'elite')).toBe('No benchmark data available');
-      expect(getPerformanceLevelTooltip(mockWodTime, null)).toBe('No benchmark data available');
+      expect(getPerformanceLevelTooltip(mockWodNoBenchmark, null)).toBe('No benchmark data available');
     });
+     // Test case where benchmarks exist but currentLevel is null (should still show all levels)
+     it('should return all levels even if currentLevel is null', () => {
+       const expectedTooltip = [
+         "Elite: 0:00 - 2:00",
+         "Advanced: 0:00 - 3:00",
+         "Intermediate: 0:00 - 5:00",
+         "Beginner: 0:00 - 8:00"
+       ].join("\n");
+       expect(getPerformanceLevelTooltip(mockWodTime, null)).toBe(expectedTooltip);
+     });
   });
 
   describe('formatScore', () => {

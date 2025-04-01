@@ -557,60 +557,57 @@ describe('WodViewer Component', () => {
     vi.clearAllMocks();
   });
 
-  it('should render timeline view by default and show only done WODs', () => {
+  it('should render table view by default and show only done WODs', () => {
     render(<WodViewer wods={testWods} />);
+
+    // Check table is rendered by default
+    expect(screen.getByTestId('wod-table')).toBeInTheDocument();
+    expect(screen.queryByTestId('wod-timeline')).not.toBeInTheDocument();
+
+    // Table view with "Done" filter should show WODs A, B, C, F
+    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
+
+    // Check default sort state passed to table (date/desc)
+    expect(screen.getByTestId('table-sort-by')).toHaveTextContent('date');
+    expect(screen.getByTestId('table-sort-direction')).toHaveTextContent('desc');
+
+    // Completion filter should be visible and default to "Done"
+    expect(screen.getByRole('radio', { name: /All \(\d+\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: /Done \(\d+\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: /Todo \(\d+\)/i })).toBeInTheDocument();
+    expect(screen.getByRole('radio', { name: /Done \(\d+\)/i, checked: true })).toBeInTheDocument(); // Check Done is checked
+  });
+
+  it('should switch to timeline view and show only done WODs initially', () => {
+    render(<WodViewer wods={testWods} />);
+
+    // Find the view switcher and switch to timeline
+    const timelineViewButton = screen.getByRole('radio', { name: /Timeline View/i });
+    fireEvent.click(timelineViewButton);
 
     // Check timeline is rendered
     expect(screen.getByTestId('wod-timeline')).toBeInTheDocument();
     expect(screen.queryByTestId('wod-table')).not.toBeInTheDocument();
 
-    // Timeline view should only show WODs with valid scores (A, B, C, F)
-     // Timeline view with "All" filter should show all WODs initially
-     expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent(testWods.length.toString());
+    // Timeline view should still reflect the "Done" filter initially (A, B, C, F)
+    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('4');
 
-    // Check default sort state passed to timeline
-    expect(screen.getByTestId('timeline-sort-by')).toHaveTextContent('attempts');
+    // Check default sort state passed to timeline (date/desc)
+    expect(screen.getByTestId('timeline-sort-by')).toHaveTextContent('date');
     expect(screen.getByTestId('timeline-sort-direction')).toHaveTextContent('desc');
 
-    // Completion filter should be visible and default to "All"
+    // Completion filter should be visible and default to "Done"
     expect(screen.getByRole('radio', { name: /All \(\d+\)/i })).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: /Done \(\d+\)/i })).toBeInTheDocument();
     expect(screen.getByRole('radio', { name: /Todo \(\d+\)/i })).toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: /All \(\d+\)/i, checked: true })).toBeInTheDocument();
+    // Check that the "Done" filter is still checked after switching views
+     expect(screen.getByRole('radio', { name: /Done \(\d+\)/i, checked: true })).toBeInTheDocument();
   });
 
-  it('should switch to table view and show all WODs by default', () => {
+  it('should filter by category (starting from default "Done" filter)', async () => {
     render(<WodViewer wods={testWods} />);
-
-    // Find the view switcher - assuming Tooltip wraps the button/icon
-    const tableViewButton = screen.getByRole('radio', { name: /Table View/i });
-    fireEvent.click(tableViewButton);
-
-    // Check table is rendered
-    expect(screen.getByTestId('wod-table')).toBeInTheDocument();
-    expect(screen.queryByTestId('wod-timeline')).not.toBeInTheDocument();
-
-    // Table view with "All" filter should show all WODs initially
-    expect(screen.getByTestId('table-wod-count')).toHaveTextContent(testWods.length.toString());
-
-    // Check default sort state passed to table
-    expect(screen.getByTestId('table-sort-by')).toHaveTextContent('attempts');
-    expect(screen.getByTestId('table-sort-direction')).toHaveTextContent('desc');
-
-    // Completion filter should be visible and default to "All"
-    // Using radio role based on error output and matching text including count
-    expect(screen.getByRole('radio', { name: /All \(\d+\)/i })).toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: /Done \(\d+\)/i })).toBeInTheDocument();
-    expect(screen.getByRole('radio', { name: /Todo \(\d+\)/i })).toBeInTheDocument();
-    // Check which radio button is checked using aria-checked or data-state
-     expect(screen.getByRole('radio', { name: /All \(\d+\)/i, checked: true })).toBeInTheDocument();
-  });
-
-  it('should filter by category', async () => {
-    render(<WodViewer wods={testWods} />);
-     // Switch to table view to see all WODs initially
-    fireEvent.click(screen.getByRole('radio', { name: /Table View/i }));
-    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6'); // All WODs
+    // Table view is default, "Done" filter is default (A, B, C, F)
+    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
     // Find the category select trigger
     const categorySelect = screen.getByRole('combobox');
@@ -620,10 +617,10 @@ describe('WodViewer Component', () => {
     const benchmarkItem = await screen.findByText(/Benchmark \(\d+\)/i);
     fireEvent.click(benchmarkItem);
 
-    // Check that only Benchmark WODs are passed to the table (C, D, E)
+    // Check that only "Done" Benchmark WODs are passed to the table (C)
     // Need to wait for the state update and re-render
     await vi.waitFor(() => {
-        expect(screen.getByTestId('table-wod-count')).toHaveTextContent('3');
+        expect(screen.getByTestId('table-wod-count')).toHaveTextContent('1');
     });
 
 
@@ -635,21 +632,20 @@ describe('WodViewer Component', () => {
     fireEvent.click(allCategoriesItem);
 
     await vi.waitFor(() => {
-        expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6'); // Back to all
+        expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4'); // Back to all "Done" WODs
     });
   });
 
-  it('should filter by tags (multiple)', () => {
+  it('should filter by tags (multiple, starting from default "Done" filter)', () => {
     render(<WodViewer wods={testWods} />);
-    fireEvent.click(screen.getByRole('radio', { name: /Table View/i }));
-    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6');
+    // Table view, Done filter default (A, B, C, F)
+    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
-    // Click 'For Time' tag (A, F) - Use getByText based on error output
+    // Click 'For Time' tag (Done WODs: A, F)
     fireEvent.click(screen.getByText('For Time'));
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('2');
 
-    // Click 'AMRAP' tag (B) - Use getByText. Tags are OR filter.
-    // The logic is: (category match) AND (tag match)
+    // Click 'AMRAP' tag (Done WODs: B)
     // Tag match means: no tags selected OR wod.tags includes *any* selected tag
     // Let's re-evaluate the filtering logic based on the code:
     // categoryMatch = selectedCategories.length === 0 || (wod.category && selectedCategories.includes(wod.category));
@@ -657,30 +653,30 @@ describe('WodViewer Component', () => {
     // return categoryMatch && tagMatch;
     // So, clicking multiple tags acts as an OR filter within tags.
 
-    // Click 'AMRAP' tag (B) - now filters for 'For Time' OR 'AMRAP' (A, B, F) - Use getByText
+    // Click 'AMRAP' tag - now filters for ('For Time' OR 'AMRAP') among Done WODs (A, B, F)
     fireEvent.click(screen.getByText('AMRAP'));
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('3');
 
-    // Click 'For Time' again to deselect it - should show only 'AMRAP' (B) - Use getByText
+    // Click 'For Time' again to deselect it - should show only 'AMRAP' among Done WODs (B)
     fireEvent.click(screen.getByText('For Time'));
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('1');
 
-    // Click 'AMRAP' again to deselect - should show all again - Use getByText
+    // Click 'AMRAP' again to deselect - should show all Done WODs again
     fireEvent.click(screen.getByText('AMRAP'));
-    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6');
+    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
   });
 
-   it('should filter by completion status in table view', () => {
+   it('should filter by completion status in table view (default view)', () => {
     render(<WodViewer wods={testWods} />);
-    fireEvent.click(screen.getByRole('radio', { name: /Table View/i }));
-    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6'); // All
+    // Table view, Done filter default (A, B, C, F)
+    expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
-    // Click 'Done' filter (A, B, C, F) - Use radio role
+    // Click 'Done' filter again (should have no effect)
     const doneFilter = screen.getByRole('radio', { name: /Done \(\d+\)/i });
     fireEvent.click(doneFilter);
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
-    // Click 'Todo' filter (D, E) - Use radio role
+    // Click 'Todo' filter (D, E)
     const todoFilter = screen.getByRole('radio', { name: /Todo \(\d+\)/i });
     fireEvent.click(todoFilter);
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('2');
@@ -691,16 +687,16 @@ describe('WodViewer Component', () => {
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6');
   });
 
-  it('should handle sorting correctly', () => {
+  it('should handle sorting correctly (starting from default date/desc)', () => {
      render(<WodViewer wods={testWods} />);
-     fireEvent.click(screen.getByRole('radio', { name: /Table View/i }));
+     // Table view is default
 
-     // Initial sort check
-     expect(screen.getByTestId('table-sort-by')).toHaveTextContent('attempts');
+     // Initial sort check (date/desc)
+     expect(screen.getByTestId('table-sort-by')).toHaveTextContent('date');
      expect(screen.getByTestId('table-sort-direction')).toHaveTextContent('desc');
 
-     // Simulate sort trigger from mocked child component
-     const sortButton = screen.getByRole('button', { name: /Sort Table By Name/i });
+     // Simulate sort trigger from mocked child component (e.g., clicking name header)
+     const sortButton = screen.getByRole('button', { name: /Sort Table By Name/i }); // Mock button in WodTable mock
      fireEvent.click(sortButton);
 
      // Check sort state updated and passed down
@@ -713,31 +709,35 @@ describe('WodViewer Component', () => {
      expect(screen.getByTestId('table-sort-direction')).toHaveTextContent('desc');
    });
 
-   it('should render correctly with empty wods array', () => {
+   it('should render correctly with empty wods array (defaulting to table view)', () => {
      render(<WodViewer wods={[]} />);
 
-     // Should default to timeline view
+     // Should default to table view
+     expect(screen.getByTestId('wod-table')).toBeInTheDocument();
+     expect(screen.queryByTestId('wod-timeline')).not.toBeInTheDocument();
+     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('0');
+
+     // Switch to timeline view
+     fireEvent.click(screen.getByRole('radio', { name: /Timeline View/i }));
      expect(screen.getByTestId('wod-timeline')).toBeInTheDocument();
      expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('0');
 
-     // Switch to table view
-     fireEvent.click(screen.getByRole('radio', { name: /Table View/i }));
-     expect(screen.getByTestId('wod-table')).toBeInTheDocument();
-     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('0');
-
      // Filters should still be present
      expect(screen.getByRole('combobox')).toBeInTheDocument(); // Category select
-     expect(screen.getByText('Chipper')).toBeInTheDocument(); // Example tag - Use getByText
-     expect(screen.getByRole('radio', { name: /All \(\d+\)/i })).toBeInTheDocument(); // Completion filter - Use radio
+     expect(screen.getByText('Chipper')).toBeInTheDocument(); // Example tag
+     expect(screen.getByRole('radio', { name: /Done \(\d+\)/i, checked: true })).toBeInTheDocument(); // Default filter is Done
    });
 
-   it('should filter by completion status in timeline view', () => {
+   it('should filter by completion status in timeline view (after switching)', () => {
     render(<WodViewer wods={testWods} />);
-    // Timeline view is default
-    expect(screen.getByTestId('wod-timeline')).toBeInTheDocument();
-    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('6'); // All
+    // Switch to timeline view first
+    fireEvent.click(screen.getByRole('radio', { name: /Timeline View/i }));
 
-    // Click 'Done' filter (A, B, C, F)
+    // Timeline view starts with "Done" filter (A, B, C, F)
+    expect(screen.getByTestId('wod-timeline')).toBeInTheDocument();
+    expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('4');
+
+    // Click 'Done' filter again (no effect)
     const doneFilter = screen.getByRole('radio', { name: /Done \(\d+\)/i });
     fireEvent.click(doneFilter);
     expect(screen.getByTestId('timeline-wod-count')).toHaveTextContent('4');

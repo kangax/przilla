@@ -279,12 +279,12 @@ interface WodViewerProps {
 }
 
 export default function WodViewer({ wods }: WodViewerProps) {
-  const [view, setView] = useState<"table" | "timeline">("timeline");
-  const [sortBy, setSortBy] = useState<SortByType>("attempts");
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc");
+  const [view, setView] = useState<"table" | "timeline">("table"); // Default to table view
+  const [sortBy, setSortBy] = useState<SortByType>("date"); // Default sort by date
+  const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc"); // Default sort direction desc
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [completionFilter, setCompletionFilter] = useState<"all" | "done" | "notDone">("all");
+  const [completionFilter, setCompletionFilter] = useState<"all" | "done" | "notDone">("done"); // Default filter to done
 
   // Calculate counts for categories
   const categoryCounts = wods.reduce((acc, wod) => {

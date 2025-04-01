@@ -7695,6 +7695,65 @@
     ]
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-13-5/",
+    "wodName": "Open 13.5",
+    "description": "AMRAP For As Long As Possible\n15 Thrusters (100/65 lb)\n15 Chest-to-Bar Pull-Ups\n\nIf 90 reps (3 rounds) are completed in under 4 minutes, time extends to 8 minutes.\n\nIf 180 reps (6 rounds) are completed in under 8 minutes, time extends to 12 minutes. Etc.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 270, "max": null },
+        "advanced": { "min": 180, "max": 269 },
+        "intermediate": { "min": 90, "max": 179 },
+        "beginner": { "min": 0, "max": 89 }
+      }
+    },
+    "results": [{
+      "date": "3 Mar'21",
+      "rxStatus": "Scaled",
+      "notes": "Worst wod ever? Yup\n65# thrusters, jumping c2b",
+      "score_time_seconds": null,
+      "score_reps": null,
+      "score_load": null,
+      "score_rounds_completed": 1,
+      "score_partial_reps": 30
+    }],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-14-2/",
+    "wodName": "Open 14.2",
+    "description": "For As Long As Possible\nFrom 0:00-3:00, 2 rounds of:\n10 Overhead Squats (95/65 lb)\n10 Chest-to-Bar Pull-Ups\n\nFrom 3:00-6:00, 2 rounds of:\n12 Overhead Squats (95/65 lb)\n12 Chest-to-Bar Pull-Ups\n\nFrom 6:00-9:00, 2 rounds of:\n14 Overhead Squats (95/65 lb)\n14 Chest-to-Bar Pull-Ups\n\nFollow the pattern until you fail to complete both rounds.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 144, "max": null },
+        "advanced": { "min": 88, "max": 143 },
+        "intermediate": { "min": 40, "max": 87 },
+        "beginner": { "min": 0, "max": 39 }
+      }
+    },
+    "results": [{
+      "date": "24 Feb'21",
+      "rxStatus": "Rx",
+      "notes": "Strict C2B\n10x4 first round\n12,12,12,11 second\n14,14 third",
+      "score_time_seconds": null,
+      "score_reps": 115,
+      "score_load": null,
+      "score_rounds_completed": null,
+      "score_partial_reps": null
+    }],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Couplet",
+      "Ladder"
+    ]
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-14-4/",
     "wodName": "Open 14.4",
     "description": "AMRAP in 14 minutes\n60-calorie row\n50 toes-to-bars\n40 wall-ball shots, 20/14 lb\n30 cleans, 135/95 lb\n20 muscle-ups",
@@ -7735,6 +7794,66 @@
     "tags": [
       "AMRAP",
       "For Time"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-19-1/",
+    "wodName": "Open 19.1",
+    "description": "AMRAP in 15 minutes\n19 Wall Ball Shots (20/14 lb, 10/9 ft)\n19 calorie Row",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 340, "max": null },
+        "advanced": { "min": 280, "max": 339 },
+        "intermediate": { "min": 220, "max": 279 },
+        "beginner": { "min": 0, "max": 219 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-19-2/",
+    "wodName": "Open 19.2",
+    "description": "AMRAP in 20 minutes\nBeginning on an 8-minute clock, complete as many reps as possible of:\n25 Toes-to-Bars\n50 Double-Unders\n15 Squat Cleans (135/85 lb)\n25 Toes-to-Bars\n50 Double-Unders\n13 Squat cleans (185/115 lb)\n\nIf completed before 8 minutes, add 4 minutes to the clock and proceed to:\n25 Toes-to-Bars\n50 Double-Unders\n11 Squat Cleans (225/145 lb)\n\nIf completed before 12 minutes, add 4 minutes to the clock and proceed to:\n25 Toes-to-Bars\n50 Double-Unders\n9 Squat Cleans (275/175 lb)\n\nIf completed before 16 minutes, add 4 minutes to the clock and proceed to:\n25 Toes-to-Bars\n50 Double-Unders\n7 Squat Cleans (315/205 lb)\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 264, "max": null },
+        "advanced": { "min": 178, "max": 263 },
+        "intermediate": { "min": 90, "max": 177 },
+        "beginner": { "min": 0, "max": 89 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Triplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-19-3/",
+    "wodName": "Open 19.3",
+    "description": "For Time\n200 foot Dumbbell Overhead Lunges (50/35 lb)\n50 Dumbbell Box Step-Ups (24/20 in)\n50 Strict Handstand Push-Ups\n200 foot Handstand Walk\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 141, "max": null },
+        "advanced": { "min": 91, "max": 140 },
+        "intermediate": { "min": 41, "max": 90 },
+        "beginner": { "min": 0, "max": 40 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Chipper"
     ]
   },
   {
@@ -7781,6 +7900,107 @@
     ]
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-20-1/",
+    "wodName": "Open 20.1",
+    "description": "10 Rounds for Time\n8 Ground-to-Overheads (95/65 lb)\n10 Bar Facing Burpees\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": 0, "max": 480 },
+        "advanced": { "min": 480, "max": 600 },
+        "intermediate": { "min": 600, "max": 780 },
+        "beginner": { "min": 780, "max": 900 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-20-2/",
+    "wodName": "Open 20.2",
+    "description": "AMRAP in 20 minutes\n4 Dumbbell Thrusters (2x50/35 lb)\n6 Toes-to-Bar\n24 Double-Unders",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 850, "max": null },
+        "advanced": { "min": 680, "max": 849 },
+        "intermediate": { "min": 510, "max": 679 },
+        "beginner": { "min": 0, "max": 509 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Triplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-20-3/",
+    "wodName": "Open 20.3",
+    "description": "For Time\n21-15-9 Reps of:\nDeadlifts (225/155 lb)\nHandstand Push-Ups\n\nThen, 21-15-9 Reps of:\nDeadlifts (315/205 lb)\n50 foot Handstand Walk\n\nTime Cap: 9 minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 135, "max": null },
+        "advanced": { "min": 90, "max": 134 },
+        "intermediate": { "min": 45, "max": 89 },
+        "beginner": { "min": 0, "max": 44 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Chipper",
+      "Ladder"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-20-4/",
+    "wodName": "Open 20.4",
+    "description": "For Time\n30 Box Jumps (24/20 in)\n15 Clean-and-Jerks (95/65 lb)\n30 Box Jumps (24/20 in)\n15 Clean-and-Jerks (135/85 lb)\n30 Box Jumps (24/20 in)\n10 Clean-and-Jerks (185/115 lb)\n30 Single-Leg Squats\n10 Clean-and-Jerks (225/145 lb)\n30 Single-Leg Squats\n5 Clean-and-Jerks (275/175 lb)\n30 Single-Leg Squats\n5 Clean-and-Jerks (315/205 lb)\n\nTime cap: 20 minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 205, "max": null },
+        "advanced": { "min": 170, "max": 204 },
+        "intermediate": { "min": 130, "max": 169 },
+        "beginner": { "min": 0, "max": 129 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Chipper"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-20-5/",
+    "wodName": "Open 20.5",
+    "description": "For Time\n40 Ring Muscle-Ups\n80 calorie Row\n120 Wall Ball Shots (20/14 lb)\n\nPartition any way\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 200, "max": null },
+        "advanced": { "min": 160, "max": 199 },
+        "intermediate": { "min": 80, "max": 159 },
+        "beginner": { "min": 0, "max": 79 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Triplet"
+    ]
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-21-1/",
     "wodName": "Open 21.1",
     "description": "For Time (15 min cap)\n1 wall walk\n10 double-unders\n3 wall walks\n30 double-unders\n6 wall walks\n60 double-unders\n9 wall walks\n90 double-unders\n15 wall walks\n150 double-unders\n21 wall walks\n210 double-unders",
@@ -7822,6 +8042,36 @@
       "For Time",
       "Ladder",
       "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-21-2/",
+    "wodName": "Open 21.2",
+    "description": "For Time\n10 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs (24/20 in)\n20 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs (24/20 in)\n30 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs (24/20 in)\n40 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs (24/20 in)\n50 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs (24/20 in)\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": 0, "max": 600 },
+        "advanced": { "min": 600, "max": 780 },
+        "intermediate": { "min": 780, "max": 1020 },
+        "beginner": { "min": 1020, "max": 1200 }
+      }
+    },
+    "results": [{
+      "date": "5 Mar'21",
+      "rxStatus": "Rx",
+      "notes": "Finished only last 46 snatches at 20:00. Damn burpees is what killed me.",
+      "score_time_seconds": null,
+      "score_reps": 206,
+      "score_load": null,
+      "score_rounds_completed": null,
+      "score_partial_reps": null
+    }],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Couplet",
+      "Ladder"
     ]
   },
   {
@@ -7920,6 +8170,67 @@
     ]
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-22-1/",
+    "wodName": "Open 22.1",
+    "description": "AMRAP in 15 minutes\n3 Wall Walks\n12 Dumbbell Snatches (50/35 lb)\n15 Box Jump Overs",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 300, "max": null },
+        "advanced": { "min": 240, "max": 299 },
+        "intermediate": { "min": 180, "max": 239 },
+        "beginner": { "min": 0, "max": 179 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Triplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-22-2/",
+    "wodName": "Open 22.2",
+    "description": "For Time\n1-2-3-4-5-6-7-8-9-10-9-8-7-6-5-4-3-2-1 Reps of:\nDeadlifts (225/155 lb)\nBar-Facing Burpees\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": 0, "max": 300 },
+        "advanced": { "min": 300, "max": 420 },
+        "intermediate": { "min": 420, "max": 540 },
+        "beginner": { "min": 540, "max": 600 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Couplet",
+      "Ladder"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-22-3/",
+    "wodName": "Open 22.3",
+    "description": "For Time\n21 Pull-Ups\n42 Double-Unders\n21 Thrusters (95/65 lb)\n18 Chest-to-Bar Pull-Ups\n36 Double-Unders\n18 Thrusters (115/75 lb)\n15 Bar Muscle-Ups\n30 Double-Unders\n15 Thrusters (135/85 lb)\n\nTime Cap: 12 Minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 180, "max": null },
+        "advanced": { "min": 156, "max": 179 },
+        "intermediate": { "min": 84, "max": 155 },
+        "beginner": { "min": 0, "max": 83 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "For Time",
+      "Chipper"
+    ]
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-23-1/",
     "wodName": "Open 23.1",
     "description": "For time (14 min cap):\n60 calorie row\n50 toes-to-bars\n40 wall-ball shots (20/14 lb)\n30 cleans (145/95 lb)\n20 muscle-ups",
@@ -8003,6 +8314,26 @@
     "tags": [
       "AMRAP",
       "Couplet"
+    ]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-23-3/",
+    "wodName": "Open 23.3",
+    "description": "Starting with a 6-minute time cap, complete as many reps as possible of:\n\n5 Wall Walks\n50 Double-Unders\n15 Snatches (95/65 lb)\n5 Wall Walks\n50 Double-Unders\n12 Snatches (135/95 lb)\n\n*If completed before the 6-minute time cap, add 3 minutes to the time cap and complete:\n\n20 Strict Handstand Push-Ups\n50 Double-Unders\n9 Snatches (185/125 lb)\n\n*If completed before the 9-minute time cap, add 3 minutes to the time cap and complete:\n\n20 Strict Handstand Push-Ups\n50 Double-Unders\n6 Snatches (225/155 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 216, "max": null },
+        "advanced": { "min": 137, "max": 215 },
+        "intermediate": { "min": 70, "max": 136 },
+        "beginner": { "min": 0, "max": 69 }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": [
+      "AMRAP",
+      "Chipper"
     ]
   },
   {

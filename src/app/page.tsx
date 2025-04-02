@@ -7,110 +7,40 @@ import { auth } from "~/server/auth";
 // Import the WodViewer and ThemeToggle components
 import WodViewer from "~/app/_components/WodViewer";
 import ThemeToggle from "~/app/_components/ThemeToggle";
-// Use type import - Import WodResult as well
-// Also import Benchmarks type and helper functions needed for server-side processing
 import {
   type Wod,
-  type WodResult,
-  // Benchmarks type removed as it's not directly used here
-} from "~/app/_components/WodViewer";
+  // type WodResult, // Removed unused import
+  // type ChartDataPoint, // Removed unused import
+  // type FrequencyDataPoint, // Removed unused import
+  // type PerformanceDataPoint, // Removed unused import
+} from "~/types/wodTypes"; // Import shared types
+import {
+  DESIRED_TAG_ORDER,
+  ALLOWED_TAGS,
+  DESIRED_CATEGORY_ORDER,
+  PERFORMANCE_LEVEL_VALUES,
+} from "~/config/constants"; // Import shared constants
+import { hasScore, getPerformanceLevel, isWodDone } from "~/utils/wodUtils"; // Import shared utils
 
+// Local definitions REMOVED - Now imported from shared files
+/*
 // Define allowed tags and their desired display order
-const DESIRED_TAG_ORDER = [
-  "For Time",
-  "AMRAP",
-  "Couplet",
-  "Triplet",
-  "Chipper",
-  "Ladder",
-  "EMOM",
-];
-const ALLOWED_TAGS = DESIRED_TAG_ORDER; // Keep ALLOWED_TAGS consistent if needed elsewhere, or remove if only order matters
+const DESIRED_TAG_ORDER = [ ... ];
+const ALLOWED_TAGS = DESIRED_TAG_ORDER;
 
 // Define desired category order
-const DESIRED_CATEGORY_ORDER = [
-  "Girl",
-  "Benchmark",
-  "Hero",
-  "Skill",
-  "Open",
-  "Quarterfinals",
-  "Games",
-  "Other",
-];
+const DESIRED_CATEGORY_ORDER = [ ... ];
 
 // Define hasScore locally for server-side use
-const hasScore = (result: WodResult): boolean => {
-  return (
-    result.score_time_seconds !== null ||
-    result.score_reps !== null ||
-    result.score_load !== null ||
-    result.score_rounds_completed !== null
-  );
-};
+const hasScore = (result: WodResult): boolean => { ... };
 
 // Define getNumericScore and getPerformanceLevel locally for server-side use
-const getNumericScore = (wod: Wod, result: WodResult): number | null => {
-  if (!wod.benchmarks) return null;
-
-  if (wod.benchmarks.type === "time" && result.score_time_seconds !== null) {
-    return result.score_time_seconds;
-  } else if (wod.benchmarks.type === "reps" && result.score_reps !== null) {
-    return result.score_reps;
-  } else if (wod.benchmarks.type === "load" && result.score_load !== null) {
-    return result.score_load;
-  } else if (
-    wod.benchmarks.type === "rounds" &&
-    result.score_rounds_completed !== null
-  ) {
-    // Convert rounds+reps to a decimal number (e.g., 5+10 becomes 5.1)
-    const partialReps = result.score_partial_reps || 0;
-    return result.score_rounds_completed + partialReps / 100;
-  }
-
-  return null;
-};
-
-const getPerformanceLevel = (wod: Wod, result: WodResult): string | null => {
-  if (!wod.benchmarks) return null;
-
-  const numericScore = getNumericScore(wod, result);
-  if (numericScore === null) return null;
-
-  // Determine the performance level based on the benchmarks
-  const { levels } = wod.benchmarks;
-
-  if (wod.benchmarks.type === "time") {
-    // For time-based workouts, lower is better
-    if (levels.elite.max !== null && numericScore <= levels.elite.max)
-      return "elite";
-    if (levels.advanced.max !== null && numericScore <= levels.advanced.max)
-      return "advanced";
-    if (
-      levels.intermediate.max !== null &&
-      numericScore <= levels.intermediate.max
-    )
-      return "intermediate";
-    return "beginner";
-  } else {
-    // For rounds/reps/load-based workouts, higher is better
-    if (levels.elite.min !== null && numericScore >= levels.elite.min)
-      return "elite";
-    if (levels.advanced.min !== null && numericScore >= levels.advanced.min)
-      return "advanced";
-    if (
-      levels.intermediate.min !== null &&
-      numericScore >= levels.intermediate.min
-    )
-      return "intermediate";
-    return "beginner";
-  }
-};
+const getNumericScore = (wod: Wod, result: WodResult): number | null => { ... };
+const getPerformanceLevel = (wod: Wod, result: WodResult): string | null => { ... };
 
 // Helper function to check if a WOD is considered "done"
-const isWodDone = (wod: Wod): boolean => {
-  return wod.results.some((r) => r.date && hasScore(r));
-};
+const isWodDone = (wod: Wod): boolean => { ... };
+*/
 
 export default async function Home() {
   const session = await auth();
@@ -122,12 +52,7 @@ export default async function Home() {
     string,
     { count: number; totalLevelScore: number }
   > = {};
-  const levelValues: Record<string, number> = {
-    elite: 4,
-    advanced: 3,
-    intermediate: 2,
-    beginner: 1,
-  };
+  // const levelValues: Record<string, number> = { ... }; // REMOVED - Use imported PERFORMANCE_LEVEL_VALUES
 
   try {
     const filePath = path.join(process.cwd(), "public", "data", "wods.json");
@@ -171,7 +96,10 @@ export default async function Home() {
             monthlyData[monthKey].count++;
 
             const level = getPerformanceLevel(wod, result);
-            const levelScore = level ? (levelValues[level] ?? 0) : 0;
+            // Use imported PERFORMANCE_LEVEL_VALUES
+            const levelScore = level
+              ? (PERFORMANCE_LEVEL_VALUES[level] ?? 0)
+              : 0;
             monthlyData[monthKey].totalLevelScore += levelScore;
           } catch (e) {
             // Ignore results with invalid dates

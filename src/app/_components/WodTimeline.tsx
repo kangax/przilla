@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import { Flex, Table, Text, Tooltip, Badge } from "@radix-ui/themes";
-import type { Wod } from "./WodViewer";
+import type { Wod, SortByType } from "~/types/wodTypes"; // Import Wod and SortByType from shared types
 import {
   getPerformanceLevelColor,
   getPerformanceLevel,
   formatScore,
   hasScore,
-} from "./WodViewer";
+} from "~/utils/wodUtils"; // Import utils from shared utils file
 import React from "react";
 
-type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
+// type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel"; // Removed local definition
 
 interface WodTimelineProps {
   wods: Wod[];

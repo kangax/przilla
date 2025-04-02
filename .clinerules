@@ -7,6 +7,7 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 - Use `;` to string commands in terminal since `&&` have escaping issues
 - Do not create backup files since we use versioning system
 - Use meaningful commit messages at the end of every task (don't ask me if I'm ok with them since I can see them when approving command)
+- Read as many files as you need as long as they're not very large (do not ask me if you can read and which file)
 
 ## Code Style & Patterns
 

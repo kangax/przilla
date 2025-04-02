@@ -55,7 +55,7 @@ export default function WodDistributionChart({
 
   const chartData = view === "tags" ? tagData : categoryData;
   const chartTitle =
-    view === "tags" ? "Distribution by Tag" : "Distribution by Category";
+    view === "tags" ? "Wods done, by Tag" : "Wods done, by Category";
 
   // Find the maximum value for the radius axis domain
   const maxValue = Math.max(...chartData.map((item) => item.value), 0); // Ensure domain starts at 0

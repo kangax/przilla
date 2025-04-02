@@ -6,7 +6,8 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDown, TableIcon, List } from "lucide-react";
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
-import WodDistributionChart from "./WodDistributionChart"; // Import the new chart component
+import WodDistributionChart from "./WodDistributionChart";
+import WodTimelineChart from "./WodTimelineChart"; // Import the new timeline chart
 
 // Type definitions for our data
 export type WodResult = {
@@ -339,12 +340,24 @@ type ChartDataPoint = {
   value: number;
 };
 
+// Define the structure for timeline data points (as passed from page.tsx)
+type FrequencyDataPoint = {
+  month: string;
+  count: number;
+};
+type PerformanceDataPoint = {
+  month: string;
+  averageLevel: number;
+};
+
 interface WodViewerProps {
   wods: Wod[];
   tagChartData: ChartDataPoint[];
   categoryChartData: ChartDataPoint[];
+  frequencyData: FrequencyDataPoint[]; // Add frequency data prop
+  performanceData: PerformanceDataPoint[]; // Add performance data prop
   categoryOrder: string[];
-  tagOrder: string[]; // Add prop for desired tag order
+  tagOrder: string[];
 }
 
 // Remove the hardcoded TAGS constant
@@ -354,10 +367,11 @@ export default function WodViewer({
   wods,
   tagChartData,
   categoryChartData,
+  frequencyData, // Destructure new prop
+  performanceData, // Destructure new prop
   categoryOrder,
   tagOrder,
 }: WodViewerProps) {
-  // Destructure new props
   const [view, setView] = useState<"table" | "timeline">("table"); // Default to table view
   const [sortBy, setSortBy] = useState<SortByType>("date"); // Default sort by date
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc"); // Default sort direction desc
@@ -557,11 +571,22 @@ export default function WodViewer({
         </Flex>
       </Flex>{" "}
       {/* End of Filter Bar Flex */}
-      {/* Render the Distribution Chart */}
-      <WodDistributionChart
-        tagData={tagChartData}
-        categoryData={categoryChartData}
-      />
+      {/* Render Charts Side-by-Side */}
+      <Flex gap="4" direction={{ initial: "column", sm: "row" }}>
+        <Box className="flex-1">
+          <WodDistributionChart
+            tagData={tagChartData}
+            categoryData={categoryChartData}
+          />
+        </Box>
+        <Box className="flex-1">
+          <WodTimelineChart
+            frequencyData={frequencyData}
+            performanceData={performanceData}
+          />
+        </Box>
+      </Flex>
+      {/* Render Table or Timeline View */}
       {view === "table" ? (
         <WodTable
           wods={sortedWods}

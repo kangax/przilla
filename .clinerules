@@ -1,5 +1,7 @@
 # Project Guidelines
 
+IMPORTANT: Do not add comments of your changes in jsx/tsx
+
 ## General
 
 - Do not leave comments of your changes (comments should only be used to explain why something is done, not what is done)

@@ -8,7 +8,13 @@ import { auth } from "~/server/auth";
 import WodViewer from "~/app/_components/WodViewer";
 import ThemeToggle from "~/app/_components/ThemeToggle";
 // Use type import - Import WodResult as well
-import type { Wod, WodResult } from "~/app/_components/WodViewer";
+// Also import Benchmarks type and helper functions needed for server-side processing
+import {
+  type Wod,
+  type WodResult,
+  type Benchmarks,
+  getPerformanceLevel,
+} from "~/app/_components/WodViewer";
 
 // Define allowed tags and their desired display order
 const DESIRED_TAG_ORDER = [
@@ -34,7 +40,7 @@ const DESIRED_CATEGORY_ORDER = [
   "Other",
 ];
 
-// Helper function to check if a result has any score (copied from WodViewer)
+// Define hasScore locally for server-side use
 const hasScore = (result: WodResult): boolean => {
   return (
     result.score_time_seconds !== null ||
@@ -55,6 +61,16 @@ export default async function Home() {
   let wodsData: Wod[] = [];
   const tagCounts: Record<string, number> = {};
   const categoryCounts: Record<string, number> = {};
+  const monthlyData: Record<
+    string,
+    { count: number; totalLevelScore: number }
+  > = {};
+  const levelValues: Record<string, number> = {
+    elite: 4,
+    advanced: 3,
+    intermediate: 2,
+    beginner: 1,
+  };
 
   try {
     const filePath = path.join(process.cwd(), "public", "data", "wods.json");
@@ -81,10 +97,38 @@ export default async function Home() {
           });
         }
       }
+
+      // Process results for timeline chart
+      wod.results.forEach((result) => {
+        if (result.date && hasScore(result)) {
+          try {
+            const date = new Date(result.date);
+            const monthKey = `${date.getFullYear()}-${(date.getMonth() + 1)
+              .toString()
+              .padStart(2, "0")}`; // Format as YYYY-MM
+
+            if (!monthlyData[monthKey]) {
+              monthlyData[monthKey] = { count: 0, totalLevelScore: 0 };
+            }
+
+            monthlyData[monthKey].count++;
+
+            const level = getPerformanceLevel(wod, result);
+            const levelScore = level ? (levelValues[level] ?? 0) : 0;
+            monthlyData[monthKey].totalLevelScore += levelScore;
+          } catch (e) {
+            // Ignore results with invalid dates
+            console.warn(
+              `Skipping result due to invalid date format: ${result.date} for WOD ${wod.wodName}`,
+            );
+          }
+        }
+      });
     });
 
     console.log("Calculated Tag Counts (Done WODs):", tagCounts);
     console.log("Calculated Category Counts (Done WODs):", categoryCounts);
+    console.log("Calculated Monthly Data:", monthlyData);
   } catch (error) {
     console.error("Error loading or processing WODs data:", error);
   }
@@ -99,6 +143,21 @@ export default async function Home() {
   const categoryChartData = DESIRED_CATEGORY_ORDER.map((categoryName) => ({
     name: categoryName,
     value: categoryCounts[categoryName] || 0, // Use count if exists, otherwise 0
+  }));
+
+  // Prepare data for the timeline chart component
+  const sortedMonths = Object.keys(monthlyData).sort();
+  const frequencyData = sortedMonths.map((month) => ({
+    month,
+    count: monthlyData[month].count,
+  }));
+  const performanceData = sortedMonths.map((month) => ({
+    month,
+    // Calculate average, handle division by zero
+    averageLevel:
+      monthlyData[month].count > 0
+        ? monthlyData[month].totalLevelScore / monthlyData[month].count
+        : 0,
   }));
 
   return (
@@ -123,10 +182,12 @@ export default async function Home() {
         <Flex direction="column" gap="6">
           <WodViewer
             wods={wodsData} // Pass all WODs to viewer for filtering/display
-            tagChartData={tagChartData} // Pass calculated counts for DONE WODs
-            categoryChartData={categoryChartData} // Pass calculated counts for DONE WODs
-            categoryOrder={DESIRED_CATEGORY_ORDER} // Pass the desired category order
-            tagOrder={DESIRED_TAG_ORDER} // Pass the desired tag order
+            tagChartData={tagChartData}
+            categoryChartData={categoryChartData}
+            frequencyData={frequencyData} // Pass frequency data
+            performanceData={performanceData} // Pass performance data
+            categoryOrder={DESIRED_CATEGORY_ORDER}
+            tagOrder={DESIRED_TAG_ORDER}
           />
 
           {session?.user && (

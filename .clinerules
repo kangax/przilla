@@ -1,11 +1,13 @@
 # Project Guidelines
 
 ## General
+
 - Do not leave comments of your changes (comments should only be used to explain why something is done, not what is done)
-    - e.g. "// Changed text-sm to text-xs" should never be added in TS/TSX files
+  - e.g. "// Changed text-sm to text-xs" should never be added in TS/TSX files
 - Use meaningful commit messages after every task but ask user before commiting
 - Use `;` to string commands in terminal since `&&` have escaping issues
 - Do not create backup files since we use versioning system
+- Make sure linting passes after every code change
 
 ## Code Style & Patterns
 
@@ -27,4 +29,5 @@
 - Allowed tags for WODS are 'Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'
 
 ## UI
+
 - Our UI is minimal, so instead of "Show Cagegories" and "Show Tags" toggle/links we would say "Cagegories" | "Tags", etc.

@@ -75,10 +75,7 @@ export const formatSecondsToMMSS = (seconds: number): string => {
 };
 
 // Helper function to get the tooltip content showing all performance levels
-export const getPerformanceLevelTooltip = (
-  wod: Wod,
-  currentLevel: string | null,
-): string => {
+export const getPerformanceLevelTooltip = (wod: Wod): string => {
   if (!wod.benchmarks) return "No benchmark data available";
 
   const { levels, type } = wod.benchmarks;
@@ -336,8 +333,6 @@ export const sortWods = (
   });
 };
 
-// Categories and tags for filtering
-const CATEGORIES = ["Girl", "Hero", "Games", "Open", "Benchmark", "Other"];
 // Define the structure for chart data points
 type ChartDataPoint = {
   name: string;

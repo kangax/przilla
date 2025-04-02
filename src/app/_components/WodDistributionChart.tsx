@@ -10,8 +10,12 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
-  Legend, // Added Legend for clarity
+  type TooltipProps, // Import TooltipProps for typing
 } from "recharts";
+import {
+  type NameType,
+  type ValueType,
+} from "recharts/types/component/DefaultTooltipContent"; // Import specific types for payload
 
 // Define the structure for chart data points
 type ChartDataPoint = {
@@ -24,12 +28,18 @@ interface WodDistributionChartProps {
   categoryData: ChartDataPoint[];
 }
 
-// Custom Tooltip for better display
-const CustomTooltip = ({ active, payload, label }: any) => {
-  if (active && payload && payload.length) {
+// Custom Tooltip for better display with proper types
+const CustomTooltip = ({
+  active,
+  payload,
+  label,
+}: TooltipProps<ValueType, NameType>) => {
+  // Type guard for payload
+  if (active && payload && payload.length && payload[0]?.value !== undefined) {
     return (
       <Box className="rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
         <Text className="font-bold">{label}</Text>
+        {/* Access value safely */}
         <Text>: {payload[0].value} WODs</Text>
       </Box>
     );

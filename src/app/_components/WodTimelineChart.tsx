@@ -156,6 +156,19 @@ export default function WodTimelineChart({
   const [view, setView] = useState<"frequency" | "performance">("frequency");
   const ROLLING_WINDOW = 12; // Define window size (Updated to 12 months)
 
+  // Reverse mapping for Y-axis ticks in performance view
+  const levelTickNames: Record<number, string> = {
+    1: "Beginner",
+    2: "Intermediate",
+    3: "Advanced",
+    4: "Elite",
+  };
+
+  // Formatter function for Y-axis ticks
+  const yAxisTickFormatter = (tickValue: number): string => {
+    return levelTickNames[tickValue] ?? ""; // Return name or empty string
+  };
+
   // Memoize the calculation of rolling average
   const chartDataWithAverage = useMemo(() => {
     const baseData = view === "frequency" ? frequencyData : performanceData;
@@ -234,9 +247,12 @@ export default function WodTimelineChart({
               },
               dx: -10, // Adjust position if needed
             }}
-            // Conditionally apply domain only for performance view
+            // Conditionally apply domain and formatter only for performance view
             {...(yDomain && { domain: yDomain })}
             allowDecimals={view === "performance"} // Allow decimals for performance axis
+            tickFormatter={
+              view === "performance" ? yAxisTickFormatter : undefined
+            }
           />
           <Tooltip content={<CustomTimelineTooltip />} />
           <Line

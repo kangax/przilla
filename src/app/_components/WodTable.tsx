@@ -222,24 +222,24 @@ const WodTable: React.FC<WodTableProps> = ({
                 )}
               </Table.Cell>
               <Table.Cell>
-                {result.rxStatus && result.rxStatus !== "Rx" ? (
-                  <Text
-                    className={`font-medium ${getPerformanceLevelColor(null)}`}
+                {wod.benchmarks ? (
+                  <Tooltip
+                    content={
+                      <span style={{ whiteSpace: "pre-wrap" }}>
+                        {/* Corrected call: only pass wod */}
+                        {getPerformanceLevelTooltip(wod)}
+                      </span>
+                    }
                   >
-                    Scaled
-                  </Text>
-                ) : (
-                  wod.benchmarks && (
-                    <Tooltip
-                      content={
-                        <span style={{ whiteSpace: "pre-wrap" }}>
-                          {getPerformanceLevelTooltip(
-                            wod,
-                            getPerformanceLevel(wod, result),
-                          )}
-                        </span>
-                      }
-                    >
+                    {result.rxStatus && result.rxStatus !== "Rx" ? (
+                      // Display "Scaled" if not Rx
+                      <Text
+                        className={`font-medium ${getPerformanceLevelColor(null)}`}
+                      >
+                        Scaled
+                      </Text>
+                    ) : (
+                      // Display calculated level if Rx or status is null/undefined
                       <Text
                         className={`font-medium ${getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}
                       >
@@ -248,8 +248,11 @@ const WodTable: React.FC<WodTableProps> = ({
                           .toUpperCase() +
                           getPerformanceLevel(wod, result)?.slice(1) || "N/A"}
                       </Text>
-                    </Tooltip>
-                  )
+                    )}
+                  </Tooltip>
+                ) : (
+                  // Render placeholder if no benchmarks
+                  <Text>-</Text>
                 )}
               </Table.Cell>
               <Table.Cell className="max-w-[250px] truncate">

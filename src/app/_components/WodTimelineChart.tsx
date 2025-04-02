@@ -33,6 +33,18 @@ interface WodTimelineChartProps {
   performanceData: PerformanceDataPoint[];
 }
 
+// Helper function to get descriptive level from numerical average
+const getDescriptiveLevel = (level: number): string => {
+  if (level < 1.5) return "Beginner";
+  if (level < 2) return "Beginner-Intermediate";
+  if (level < 2.5) return "Intermediate";
+  if (level < 3) return "Intermediate-Advanced";
+  if (level < 3.5) return "Advanced";
+  if (level < 4) return "Advanced-Elite";
+  if (level === 4) return "Elite";
+  return "Unknown"; // Should not happen with domain [0, 4]
+};
+
 // Custom Tooltip for better display
 const CustomTimelineTooltip = ({
   active,
@@ -47,9 +59,11 @@ const CustomTimelineTooltip = ({
     let displayValue: string;
     if (name === "count") {
       displayValue = `${value} WODs`;
-    } else if (name === "averageLevel") {
-      // Format average level to 2 decimal places
-      displayValue = `Avg Level: ${Number(value).toFixed(2)}`;
+    } else if (name === "averageLevel" && typeof value === "number") {
+      // Format average level to 2 decimal places and get descriptive level
+      const numericLevel = Number(value).toFixed(2);
+      const descriptiveLevel = getDescriptiveLevel(value);
+      displayValue = `${descriptiveLevel} (${numericLevel})`;
     } else {
       displayValue = String(value);
     }

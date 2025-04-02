@@ -1,7 +1,7 @@
-import { describe, it, expect, vi, beforeEach } from 'vitest'; // Remove afterEach
-import { render, screen, fireEvent } from '../../test-utils'; // Removed 'within'
+import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { render, screen, fireEvent } from '../../test-utils';
 import '@testing-library/jest-dom';
-import WodViewer, { // Import component itself
+import WodViewer, {
   getPerformanceLevelColor,
   formatSecondsToMMSS,
   getPerformanceLevelTooltip,
@@ -12,7 +12,6 @@ import WodViewer, { // Import component itself
   sortWods,
   type Wod,
   type WodResult,
-  // Removed 'Benchmarks' type import
 } from './WodViewer';
 
 // Define types locally for mocks as they are not exported from component
@@ -140,6 +139,7 @@ const mockResultNoScore = (): WodResult => ({
 // --- Tests ---
 
 describe('WodViewer Helper Functions', () => {
+  // ... (helper function tests remain the same) ...
   describe('getPerformanceLevelColor', () => {
     it('should return correct color class for each level', () => {
       expect(getPerformanceLevelColor('elite')).toBe('text-purple-600 dark:text-purple-400');
@@ -561,8 +561,15 @@ vi.mock('./WodTimeline', () => ({
 
 // --- Component Tests ---
 describe('WodViewer Component', () => {
-  // Mock chart data
-  const mockChartDataProps = { tagChartData: [], categoryChartData: [] };
+  // Mock chart data and category/tag order
+  const mockCategoryOrder = ['Girl', 'Benchmark', 'Hero', 'Skill', 'Open', 'Quarterfinals', 'Games', 'Other'];
+  const mockTagOrder = ['For Time', 'AMRAP', 'Couplet', 'Triplet', 'Chipper', 'Ladder', 'EMOM'];
+  const mockChartDataProps = {
+    tagChartData: [],
+    categoryChartData: [],
+    categoryOrder: mockCategoryOrder,
+    tagOrder: mockTagOrder // Add tag order to props
+  };
 
   // Use the same mock data from helper tests where applicable
    const testWods: Wod[] = [
@@ -764,7 +771,8 @@ describe('WodViewer Component', () => {
 
      // Filters should still be present
      expect(screen.getByRole('combobox')).toBeInTheDocument(); // Category select
-     expect(screen.getByText('Chipper')).toBeInTheDocument(); // Example tag
+     // Check for a tag from the mockTagOrder
+     expect(screen.getByText('For Time')).toBeInTheDocument();
      expect(screen.getByRole('radio', { name: /Done \(\d+\)/i, checked: true })).toBeInTheDocument(); // Default filter is Done
    });
 

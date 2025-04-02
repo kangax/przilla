@@ -287,8 +287,6 @@ export const hasScore = (result: WodResult): boolean => {
 
 // Categories and tags for filtering
 const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Other'];
-const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'];
-
 // Define the structure for chart data points
 type ChartDataPoint = {
   name: string;
@@ -297,11 +295,17 @@ type ChartDataPoint = {
 
 interface WodViewerProps {
   wods: Wod[];
-  tagChartData: ChartDataPoint[];      // Add prop for tag counts
-  categoryChartData: ChartDataPoint[]; // Add prop for category counts
+  tagChartData: ChartDataPoint[];
+  categoryChartData: ChartDataPoint[];
+  categoryOrder: string[];
+  tagOrder: string[]; // Add prop for desired tag order
 }
 
-export default function WodViewer({ wods, tagChartData, categoryChartData }: WodViewerProps) { // Destructure new props
+// Remove the hardcoded TAGS constant
+// const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'];
+
+
+export default function WodViewer({ wods, tagChartData, categoryChartData, categoryOrder, tagOrder }: WodViewerProps) { // Destructure new props
   const [view, setView] = useState<"table" | "timeline">("table"); // Default to table view
   const [sortBy, setSortBy] = useState<SortByType>("date"); // Default sort by date
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc"); // Default sort direction desc
@@ -414,7 +418,8 @@ export default function WodViewer({ wods, tagChartData, categoryChartData }: Wod
                       >
                         <Select.ItemText>All Categories ({totalWodCount})</Select.ItemText>
                       </Select.Item>
-                      {CATEGORIES.map(category => (
+                      {/* Use categoryOrder prop for dropdown items */}
+                      {categoryOrder.map(category => (
                         <Select.Item
                           key={category}
                           value={category}
@@ -429,7 +434,8 @@ export default function WodViewer({ wods, tagChartData, categoryChartData }: Wod
               </Select.Root>
               {/* Tags section - wrap if needed */}
               <Flex wrap="wrap" gap="1" className="flex-grow">
-                {TAGS.map(tag => (
+                 {/* Use tagOrder prop for filter buttons */}
+                {tagOrder.map(tag => (
                   <Box
                     key={tag}
                     className={`px-3 py-1 rounded-full text-xs border cursor-pointer ${

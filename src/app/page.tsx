@@ -108,6 +108,8 @@ export default async function Home() {
               wods={wodsData} // Pass all WODs to viewer for filtering/display
               tagChartData={tagChartData} // Pass calculated counts for DONE WODs
               categoryChartData={categoryChartData} // Pass calculated counts for DONE WODs
+              categoryOrder={DESIRED_CATEGORY_ORDER} // Pass the desired category order
+              tagOrder={DESIRED_TAG_ORDER} // Pass the desired tag order
             />
 
             {session?.user && (

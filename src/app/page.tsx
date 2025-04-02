@@ -10,8 +10,12 @@ import ThemeToggle from "~/app/_components/ThemeToggle";
 // Use type import - Import WodResult as well
 import type { Wod, WodResult } from "~/app/_components/WodViewer";
 
-// Define allowed tags based on .clinerules
-const ALLOWED_TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'];
+// Define allowed tags and their desired display order
+const DESIRED_TAG_ORDER = ['For Time', 'AMRAP', 'Couplet', 'Triplet', 'Chipper', 'Ladder', 'EMOM'];
+const ALLOWED_TAGS = DESIRED_TAG_ORDER; // Keep ALLOWED_TAGS consistent if needed elsewhere, or remove if only order matters
+
+// Define desired category order
+const DESIRED_CATEGORY_ORDER = ['Girl', 'Benchmark', 'Hero', 'Skill', 'Open', 'Quarterfinals', 'Games', 'Other'];
 
 // Helper function to check if a result has any score (copied from WodViewer)
 const hasScore = (result: WodResult): boolean => {
@@ -67,8 +71,16 @@ export default async function Home() {
   }
 
   // Prepare data for the chart component (array format expected by recharts)
-  const tagChartData = Object.entries(tagCounts).map(([name, value]) => ({ name, value }));
-  const categoryChartData = Object.entries(categoryCounts).map(([name, value]) => ({ name, value }));
+  // Ensure tagChartData follows the DESIRED_TAG_ORDER
+  const tagChartData = DESIRED_TAG_ORDER.map(tagName => ({
+    name: tagName,
+    value: tagCounts[tagName] || 0 // Use count if exists, otherwise 0
+  }));
+  // Ensure categoryChartData follows the DESIRED_CATEGORY_ORDER
+  const categoryChartData = DESIRED_CATEGORY_ORDER.map(categoryName => ({
+    name: categoryName,
+    value: categoryCounts[categoryName] || 0 // Use count if exists, otherwise 0
+  }));
 
 
   return (

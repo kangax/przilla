@@ -961,13 +961,34 @@ describe("WodViewer Component", () => {
     // Check that the "Done" filter is still checked after switching views
     expect(
       screen.getByRole("radio", { name: /Done \(\d+\)/i, checked: true }),
+    ).toBeInTheDocument(); // Check Done is checked
+
+    // Check initial counts (All: 6, Done: 4, Todo: 2)
+    expect(
+      screen.getByRole("radio", { name: /All \(6\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(4\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(2\)/i }),
     ).toBeInTheDocument();
   });
 
-  it('should filter by category (starting from default "Done" filter)', async () => {
+  it('should filter by category and update counts (starting from default "Done" filter)', async () => {
     render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Table view is default, "Done" filter is default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
+    // Initial counts
+    expect(
+      screen.getByRole("radio", { name: /All \(6\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(4\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(2\)/i }),
+    ).toBeInTheDocument();
 
     // Find the category select trigger
     const categorySelect = screen.getByRole("combobox");
@@ -981,6 +1002,16 @@ describe("WodViewer Component", () => {
     // Need to wait for the state update and re-render
     await vi.waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("1");
+      // Check updated counts for Benchmark category (All: 3, Done: 1, Todo: 2)
+      expect(
+        screen.getByRole("radio", { name: /All \(3\)/i }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("radio", { name: /Done \(1\)/i }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("radio", { name: /Todo \(2\)/i }),
+      ).toBeInTheDocument();
     });
 
     // Select 'All Categories' again by clicking
@@ -994,17 +1025,47 @@ describe("WodViewer Component", () => {
 
     await vi.waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4"); // Back to all "Done" WODs
+      // Check counts reset to original (All: 6, Done: 4, Todo: 2)
+      expect(
+        screen.getByRole("radio", { name: /All \(6\)/i }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("radio", { name: /Done \(4\)/i }),
+      ).toBeInTheDocument();
+      expect(
+        screen.getByRole("radio", { name: /Todo \(2\)/i }),
+      ).toBeInTheDocument();
     });
   });
 
-  it('should filter by tags (multiple, starting from default "Done" filter)', () => {
+  it('should filter by tags and update counts (multiple, starting from default "Done" filter)', () => {
     render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
+    // Initial counts
+    expect(
+      screen.getByRole("radio", { name: /All \(6\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(4\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(2\)/i }),
+    ).toBeInTheDocument();
 
     // Click 'For Time' tag (Done WODs: A, F)
     fireEvent.click(screen.getByText("For Time"));
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("2");
+    // Check counts for 'For Time' tag (All: 2, Done: 2, Todo: 0)
+    expect(
+      screen.getByRole("radio", { name: /All \(2\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(2\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(0\)/i }),
+    ).toBeInTheDocument();
 
     // Click 'AMRAP' tag (Done WODs: B)
     // Tag match means: no tags selected OR wod.tags includes *any* selected tag
@@ -1017,17 +1078,47 @@ describe("WodViewer Component", () => {
     // Click 'AMRAP' tag - now filters for ('For Time' OR 'AMRAP') among Done WODs (A, B, F)
     fireEvent.click(screen.getByText("AMRAP"));
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("3");
+    // Check counts for 'For Time' OR 'AMRAP' tags (All: 3, Done: 3, Todo: 0)
+    expect(
+      screen.getByRole("radio", { name: /All \(3\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(3\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(0\)/i }),
+    ).toBeInTheDocument();
 
     // Click 'For Time' again to deselect it - should show only 'AMRAP' among Done WODs (B)
     fireEvent.click(screen.getByText("For Time"));
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("1");
+    // Check counts for 'AMRAP' tag (All: 1, Done: 1, Todo: 0)
+    expect(
+      screen.getByRole("radio", { name: /All \(1\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(1\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(0\)/i }),
+    ).toBeInTheDocument();
 
     // Click 'AMRAP' again to deselect - should show all Done WODs again
     fireEvent.click(screen.getByText("AMRAP"));
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
+    // Check counts reset to original (All: 6, Done: 4, Todo: 2)
+    expect(
+      screen.getByRole("radio", { name: /All \(6\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Done \(4\)/i }),
+    ).toBeInTheDocument();
+    expect(
+      screen.getByRole("radio", { name: /Todo \(2\)/i }),
+    ).toBeInTheDocument();
   });
 
-  it("should filter by completion status in table view (default view)", () => {
+  it("should filter by completion status and update counts in table view (default view)", () => {
     render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");

@@ -58,7 +58,7 @@ export default function WodViewer({
     "all" | "done" | "notDone"
   >("done"); // Default filter to done
 
-  // Calculate counts for categories
+  // Calculate counts for categories based on the original list for the dropdown
   const categoryCounts = wods.reduce(
     (acc, wod) => {
       if (wod.category) {
@@ -68,29 +68,11 @@ export default function WodViewer({
     },
     {} as Record<string, number>,
   );
-  const totalWodCount = wods.length;
+  const originalTotalWodCount = wods.length; // Keep original count for category dropdown
 
-  // Calculate counts for each filter option based on the *original* wods list
-  // Use imported hasScore utility
-  const doneWodsCount = wods.filter((wod) =>
-    wod.results.some((r) => r.date && hasScore(r)),
-  ).length;
-  const notDoneWodsCount = totalWodCount - doneWodsCount;
-
-  // Filter wods by completion status - apply universally
-  let filteredByCompletionWods = wods;
-  if (completionFilter === "done") {
-    filteredByCompletionWods = wods.filter((wod) =>
-      wod.results.some((r) => r.date && hasScore(r)),
-    );
-  } else if (completionFilter === "notDone") {
-    filteredByCompletionWods = wods.filter(
-      (wod) => !wod.results.some((r) => r.date && hasScore(r)),
-    );
-  }
-
-  // Filter wods by selected categories and tags
-  const filteredWods = filteredByCompletionWods.filter((wod) => {
+  // --- Filtering Logic ---
+  // 1. Filter by selected categories and tags first
+  const categoryTagFilteredWods = wods.filter((wod) => {
     const categoryMatch =
       selectedCategories.length === 0 ||
       (wod.category && selectedCategories.includes(wod.category));
@@ -100,6 +82,26 @@ export default function WodViewer({
 
     return categoryMatch && tagMatch;
   });
+
+  // 2. Calculate dynamic counts based on the category/tag filtered list
+  const dynamicTotalWodCount = categoryTagFilteredWods.length;
+  const dynamicDoneWodsCount = categoryTagFilteredWods.filter((wod) =>
+    wod.results.some((r) => r.date && hasScore(r)),
+  ).length;
+  const dynamicNotDoneWodsCount = dynamicTotalWodCount - dynamicDoneWodsCount;
+
+  // 3. Apply completion filter to the category/tag filtered list
+  let finalFilteredWods = categoryTagFilteredWods;
+  if (completionFilter === "done") {
+    finalFilteredWods = categoryTagFilteredWods.filter((wod) =>
+      wod.results.some((r) => r.date && hasScore(r)),
+    );
+  } else if (completionFilter === "notDone") {
+    finalFilteredWods = categoryTagFilteredWods.filter(
+      (wod) => !wod.results.some((r) => r.date && hasScore(r)),
+    );
+  }
+  // --- End Filtering Logic ---
 
   // Update handleSort to accept the new type
   const handleSort = (column: SortByType) => {
@@ -127,8 +129,8 @@ export default function WodViewer({
     );
   };
 
-  // Use imported sortWods utility
-  const sortedWods = sortWods(filteredWods, sortBy, sortDirection);
+  // Use imported sortWods utility on the final filtered list
+  const sortedWods = sortWods(finalFilteredWods, sortBy, sortDirection);
 
   return (
     <Box>
@@ -164,7 +166,8 @@ export default function WodViewer({
             <Select.Value placeholder="Select category" className="text-xs">
               {selectedCategories.length > 0
                 ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
-                : `All Categories (${totalWodCount})`}
+                : `All Categories (${originalTotalWodCount})`}{" "}
+              {/* Use original count here */}
             </Select.Value>
             <Select.Icon>
               <ChevronDown className="ml-2 h-4 w-4 opacity-70" />
@@ -181,7 +184,8 @@ export default function WodViewer({
                   className="cursor-pointer px-3 py-2 text-xs text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
                 >
                   <Select.ItemText>
-                    All Categories ({totalWodCount})
+                    All Categories ({originalTotalWodCount}){" "}
+                    {/* Use original count here */}
                   </Select.ItemText>
                 </Select.Item>
                 {/* Use categoryOrder prop for dropdown items */}
@@ -228,17 +232,20 @@ export default function WodViewer({
         >
           <SegmentedControl.Item value="all">
             <Tooltip content="Show All Workouts">
-              <span>All ({totalWodCount})</span>
+              {/* Use dynamic count */}
+              <span>All ({dynamicTotalWodCount})</span>
             </Tooltip>
           </SegmentedControl.Item>
           <SegmentedControl.Item value="done">
             <Tooltip content="Show Done Workouts">
-              <span>Done ({doneWodsCount})</span>
+              {/* Use dynamic count */}
+              <span>Done ({dynamicDoneWodsCount})</span>
             </Tooltip>
           </SegmentedControl.Item>
           <SegmentedControl.Item value="notDone">
             <Tooltip content="Show Not Done Workouts">
-              <span>Todo ({notDoneWodsCount})</span>
+              {/* Use dynamic count */}
+              <span>Todo ({dynamicNotDoneWodsCount})</span>
             </Tooltip>
           </SegmentedControl.Item>
         </SegmentedControl.Root>

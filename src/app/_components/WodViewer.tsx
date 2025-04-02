@@ -6,6 +6,7 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDown, TableIcon, List } from "lucide-react";
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
+import WodDistributionChart from './WodDistributionChart'; // Import the new chart component
 
 // Type definitions for our data
 export type WodResult = {
@@ -288,11 +289,19 @@ export const hasScore = (result: WodResult): boolean => {
 const CATEGORIES = ['Girl', 'Hero', 'Games', 'Open', 'Benchmark', 'Other'];
 const TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'];
 
+// Define the structure for chart data points
+type ChartDataPoint = {
+  name: string;
+  value: number;
+};
+
 interface WodViewerProps {
   wods: Wod[];
+  tagChartData: ChartDataPoint[];      // Add prop for tag counts
+  categoryChartData: ChartDataPoint[]; // Add prop for category counts
 }
 
-export default function WodViewer({ wods }: WodViewerProps) {
+export default function WodViewer({ wods, tagChartData, categoryChartData }: WodViewerProps) { // Destructure new props
   const [view, setView] = useState<"table" | "timeline">("table"); // Default to table view
   const [sortBy, setSortBy] = useState<SortByType>("date"); // Default sort by date
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">("desc"); // Default sort direction desc
@@ -479,6 +488,9 @@ export default function WodViewer({ wods }: WodViewerProps) {
             </Flex>
 
             </Flex> {/* End of Filter Bar Flex */}
+
+            {/* Render the Distribution Chart */}
+            <WodDistributionChart tagData={tagChartData} categoryData={categoryChartData} />
 
             {view === "table" ? (
               <WodTable wods={sortedWods} sortBy={sortBy} sortDirection={sortDirection} handleSort={handleSort} />

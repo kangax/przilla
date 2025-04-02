@@ -6,25 +6,57 @@ import { auth } from "~/server/auth";
 
 // Import the WodViewer and ThemeToggle components
 import WodViewer from "~/app/_components/WodViewer";
-import ThemeToggle from "~/app/_components/ThemeToggle"; // Import ThemeToggle
+import ThemeToggle from "~/app/_components/ThemeToggle";
 // Use type import
-import type { Wod } from "~/app/_components/WodViewer"; 
+import type { Wod } from "~/app/_components/WodViewer";
 
-export default async function Home() { 
-  const session = await auth(); 
+// Define allowed tags based on .clinerules
+const ALLOWED_TAGS = ['Chipper', 'Couplet', 'Triplet', 'EMOM', 'AMRAP', 'For Time', 'Ladder'];
+
+export default async function Home() {
+  const session = await auth();
 
   let wodsData: Wod[] = [];
+  const tagCounts: Record<string, number> = {};
+  const categoryCounts: Record<string, number> = {};
+
   try {
     const filePath = path.join(process.cwd(), 'public', 'data', 'wods.json');
     const fileContents = fs.readFileSync(filePath, 'utf8');
-    wodsData = JSON.parse(fileContents) as Wod[]; 
+    wodsData = JSON.parse(fileContents) as Wod[];
     console.log('Loaded WODs data:', wodsData.length);
+
+    // Calculate counts
+    wodsData.forEach(wod => {
+      // Count categories
+      if (wod.category) {
+        categoryCounts[wod.category] = (categoryCounts[wod.category] || 0) + 1;
+      }
+
+      // Count allowed tags
+      if (wod.tags) {
+        wod.tags.forEach(tag => {
+          if (ALLOWED_TAGS.includes(tag)) {
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
+          }
+        });
+      }
+    });
+
+    console.log('Calculated Tag Counts:', tagCounts);
+    console.log('Calculated Category Counts:', categoryCounts);
+
   } catch (error) {
-    console.error('Error loading WODs data:', error);
+    console.error('Error loading or processing WODs data:', error);
   }
 
-  return ( 
-      <Box className="min-h-screen bg-background text-foreground"> 
+  // Prepare data for the chart component (array format expected by recharts)
+  const tagChartData = Object.entries(tagCounts).map(([name, value]) => ({ name, value }));
+  const categoryChartData = Object.entries(categoryCounts).map(([name, value]) => ({ name, value }));
+
+
+  return (
+      <Box className="min-h-screen bg-background text-foreground">
         {/* Fixed Top Bar */}
         <Box className="fixed top-0 left-0 w-full bg-background py-4 px-6 z-10 border-b border-border shadow-md relative"> 
           <Container size="4">
@@ -43,11 +75,15 @@ export default async function Home() {
         {/* Main Content with top margin to account for fixed header */}
         <Container size="4" className="pb-8">
           <Flex direction="column" gap="6">
-            
-            <WodViewer wods={wodsData} /> 
-            
-            {session?.user && ( 
-                <Flex gap="4" mt="4" justify="center"> 
+
+            <WodViewer
+              wods={wodsData}
+              tagChartData={tagChartData}
+              categoryChartData={categoryChartData}
+            />
+
+            {session?.user && (
+                <Flex gap="4" mt="4" justify="center">
                   <Link
                     href={session ? "/api/auth/signout" : "/api/auth/signin"}
                     className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"

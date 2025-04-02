@@ -561,7 +561,8 @@ vi.mock('./WodTimeline', () => ({
 
 // --- Component Tests ---
 describe('WodViewer Component', () => {
-  // Remove fake timer setup/teardown
+  // Mock chart data
+  const mockChartDataProps = { tagChartData: [], categoryChartData: [] };
 
   // Use the same mock data from helper tests where applicable
    const testWods: Wod[] = [
@@ -597,7 +598,7 @@ describe('WodViewer Component', () => {
   });
 
   it('should render table view by default and show only done WODs', () => {
-    render(<WodViewer wods={testWods} />);
+    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
 
     // Check table is rendered by default
     expect(screen.getByTestId('wod-table')).toBeInTheDocument();
@@ -618,7 +619,7 @@ describe('WodViewer Component', () => {
   });
 
   it('should switch to timeline view and show only done WODs initially', () => {
-    render(<WodViewer wods={testWods} />);
+    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
 
     // Find the view switcher and switch to timeline
     const timelineViewButton = screen.getByRole('radio', { name: /Timeline View/i });
@@ -644,7 +645,7 @@ describe('WodViewer Component', () => {
   });
 
   it('should filter by category (starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWods} />);
+    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Table view is default, "Done" filter is default (A, B, C, F)
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
@@ -676,7 +677,7 @@ describe('WodViewer Component', () => {
   });
 
   it('should filter by tags (multiple, starting from default "Done" filter)', () => {
-    render(<WodViewer wods={testWods} />);
+    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
@@ -703,10 +704,10 @@ describe('WodViewer Component', () => {
     // Click 'AMRAP' again to deselect - should show all Done WODs again
     fireEvent.click(screen.getByText('AMRAP'));
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
-  });
+   });
 
    it('should filter by completion status in table view (default view)', () => {
-    render(<WodViewer wods={testWods} />);
+    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('4');
 
@@ -724,10 +725,10 @@ describe('WodViewer Component', () => {
     const allFilter = screen.getByRole('radio', { name: /All \(\d+\)/i });
     fireEvent.click(allFilter);
     expect(screen.getByTestId('table-wod-count')).toHaveTextContent('6');
-  });
+   });
 
-  it('should handle sorting correctly (starting from default date/desc)', () => {
-     render(<WodViewer wods={testWods} />);
+   it('should handle sorting correctly (starting from default date/desc)', () => {
+     render(<WodViewer wods={testWods} {...mockChartDataProps} />);
      // Table view is default
 
      // Initial sort check (date/desc)
@@ -749,7 +750,7 @@ describe('WodViewer Component', () => {
    });
 
    it('should render correctly with empty wods array (defaulting to table view)', () => {
-     render(<WodViewer wods={[]} />);
+     render(<WodViewer wods={[]} {...mockChartDataProps} />);
 
      // Should default to table view
      expect(screen.getByTestId('wod-table')).toBeInTheDocument();
@@ -768,7 +769,7 @@ describe('WodViewer Component', () => {
    });
 
    it('should filter by completion status in timeline view (after switching)', () => {
-    render(<WodViewer wods={testWods} />);
+    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
     // Switch to timeline view first
     fireEvent.click(screen.getByRole('radio', { name: /Timeline View/i }));
 

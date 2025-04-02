@@ -19,7 +19,7 @@
     - write scripts for scraping
     - bookmarklet so users can use?
 - sugarwod (allows export!)
-- write import functionality
+    - write import functionality
 
 ### Authentication
 - implement

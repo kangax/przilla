@@ -48,6 +48,7 @@ export default async function Home() {
         }
       }
 
+      // Process results for timeline chart
       wod.results.forEach((result) => {
         if (result.date && hasScore(result)) {
           try {
@@ -85,12 +86,10 @@ export default async function Home() {
     console.error("Error loading or processing WODs data:", error);
   }
 
-  // Ensure tagChartData follows the DESIRED_TAG_ORDER
   const tagChartData = DESIRED_TAG_ORDER.map((tagName) => ({
     name: tagName,
-    value: tagCounts[tagName] || 0, // Use count if exists, otherwise 0
+    value: tagCounts[tagName] || 0,
   }));
-  // Ensure categoryChartData follows the DESIRED_CATEGORY_ORDER
   const categoryChartData = DESIRED_CATEGORY_ORDER.map((categoryName) => ({
     name: categoryName,
     value: categoryCounts[categoryName] || 0,
@@ -103,7 +102,6 @@ export default async function Home() {
   }));
   const performanceData = sortedMonths.map((month) => ({
     month,
-    // Calculate average, handle division by zero
     averageLevel:
       monthlyData[month].count > 0
         ? monthlyData[month].totalLevelScore / monthlyData[month].count
@@ -128,11 +126,11 @@ export default async function Home() {
       <Container size="4" className="pb-8">
         <Flex direction="column" gap="6">
           <WodViewer
-            wods={wodsData} // Pass all WODs to viewer for filtering/display
+            wods={wodsData}
             tagChartData={tagChartData}
             categoryChartData={categoryChartData}
-            frequencyData={frequencyData} // Pass frequency data
-            performanceData={performanceData} // Pass performance data
+            frequencyData={frequencyData}
+            performanceData={performanceData}
             categoryOrder={DESIRED_CATEGORY_ORDER}
             tagOrder={DESIRED_TAG_ORDER}
           />

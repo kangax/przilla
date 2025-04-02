@@ -18,7 +18,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2022-10-27"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Partner WOD allows rest; movements are primarily bodyweight; long duration but manageable intensity per minute with a partner."
   },
   {
     "wodUrl": "https://wodwell.com/wod/1lt-s-chase-prasnicki/",
@@ -39,7 +41,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2022-07-13"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD; includes a 2-mile run, a demanding multi-movement Tabata circuit with minimal rest, and a long accumulated plank hold."
   },
   {
     "wodUrl": "https://wodwell.com/wod/30-muscle-ups/",
@@ -82,7 +86,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "High volume (30 reps) of a high-skill gymnastics movement (Muscle-Ups) performed for time."
   },
   {
     "wodUrl": "https://wodwell.com/wod/31-heroes/",
@@ -103,7 +109,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2015-07-28"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Partner Hero WOD, 31 min AMRAP. Combines heavy thrusters (155lb), rope climbs, high box jumps (30in), and weighted sandbag runs, requiring high work capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/abbate/",
@@ -146,7 +154,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD combining significant running (2.5 miles) with high-volume, heavy Clean-and-Jerks (42 reps @ 155lb), testing both endurance and strength under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/adam/",
@@ -178,7 +188,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 5 rounds combining higher-skill C2B pull-ups, heavy KB swings (70lb), and wall balls, testing gymnastics, strength endurance, and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/adambrown/",
@@ -209,7 +221,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 2 rounds featuring very heavy deadlifts (295lb), heavy bench press (195lb), and moderately heavy cleans (145lb), interspersed with high-volume box jumps and wall balls. Extremely demanding on strength and conditioning due to heavy loads and volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/adrian/",
@@ -240,7 +254,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds combining challenging gymnastics (Wall Climbs, T2B), high box jumps (30in), and an unusual coordination element (Forward Rolls), testing skill, endurance, and coordination over significant volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/alan-cameron/",
@@ -261,7 +277,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2018-01-07"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (21-15-9 Triplet). Combines moderately weighted OHS (~99lb), high-skill HSPU, and demanding GHD Sit-Ups, testing strength, skill, and core endurance at high intensity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/alexander/",
@@ -293,7 +311,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 5 rounds combining high-volume moderate-weight back squats (155 reps @ 135lb) with heavy power cleans (60 reps @ 185lb), creating a significant strength and endurance challenge."
   },
   {
     "wodUrl": "https://wodwell.com/wod/amanda/",
@@ -337,7 +357,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (9-7-5 Couplet). Combines high-skill gymnastics (Muscle-Ups) with heavy, technical Olympic lifts (Squat Snatches @ 135lb) in a sprint format, demanding high proficiency in both."
   },
   {
     "wodUrl": "https://wodwell.com/wod/amer/",
@@ -358,7 +380,9 @@
       "likes": 0,
       "comments": 9,
       "posted_date": "2017-03-07"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds combining potentially very heavy deadlifts (1.5x Bodyweight) with burpees and box jumps, testing strength and conditioning. Difficulty varies significantly with individual bodyweight."
   },
   {
     "wodUrl": "https://wodwell.com/wod/andi/",
@@ -401,7 +425,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Chipper). Very high volume (400 total reps) with light-moderate weight (75lb) across four barbell movements, primarily testing muscular endurance and mental toughness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/andy/",
@@ -433,7 +459,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Very high volume including a 1.5-mile run, moderate weight barbell movements (thrusters, deadlifts), and box jumps, all performed wearing a weight vest, making it extremely demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/angie/",
@@ -486,7 +514,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Chipper). High volume (400 reps) of basic bodyweight movements performed sequentially, testing muscular endurance and pacing."
   },
   {
     "wodUrl": "https://wodwell.com/wod/annie/",
@@ -530,7 +560,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Ladder Couplet). Tests double-under skill proficiency and core endurance in a fast-paced descending rep scheme (50-40-30-20-10)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ariel/",
@@ -551,7 +583,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2019-12-17"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Extremely high volume with complex cash-in/out structure involving skill (HSPU, Bar MU) and high reps (step-ups). Main body is 13 rounds (325 DU, 143 Pull-Ups, 247 Push-Ups). Exceptionally demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/arnie/",
@@ -582,7 +616,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. High volume of very demanding, heavy Turkish Get-Ups (42 reps @ 72lb) and heavy KB Swings (150 reps @ 72lb), plus single-arm OHS. Tests strength, stability, coordination, and endurance significantly."
   },
   {
     "wodUrl": "https://wodwell.com/wod/artie/",
@@ -613,7 +649,9 @@
     "category": "Hero",
     "tags": [
       "AMRAP"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (20 min AMRAP). Combines bodyweight movements (pull-ups, push-ups, squats) with moderate-weight thrusters (95lb) in a structure that creates significant metabolic demand and tests muscular endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bncp/",
@@ -645,7 +683,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (20 min AMRAP). Combines a long bike erg (~2km) with low reps of heavy front rack lunges and thrusters (135lb), creating a demanding cycle of cardio and heavy lifting."
   },
   {
     "wodUrl": "https://wodwell.com/wod/badger/",
@@ -677,7 +717,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds combining moderate-volume squat cleans (90 reps @ 95lb), high-volume pull-ups (90 reps), and significant running (2400m), testing conditioning and muscular/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/barbara/",
@@ -719,7 +761,9 @@
     "category": "Girl",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD. High volume bodyweight movements (140 reps/round, 700 total). Mandatory 3-min rest encourages high intensity per round, making it deceptively challenging."
   },
   {
     "wodName": "Barbara Ann",
@@ -761,7 +805,9 @@
     "category": "Benchmark",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark WOD. High volume over 5 rounds (100 HSPU, 150 DL @ 135lb, 200 Sit-ups, 250 DU). Combines gymnastics skill, moderate lifting, core, and cardio/skill, making it very demanding due to volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/barraza/",
@@ -793,7 +839,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). Combines running, heavy deadlifts (275lb), and complex Burpee Bar Muscle-Ups, demanding high levels of strength, skill, and conditioning over 18 minutes."
   },
   {
     "wodUrl": "https://wodwell.com/wod/batra/",
@@ -814,7 +862,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-11-02"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. High volume (5 rounds) combining DU skill, gymnastics (pull-ups, ring dips), and moderate KB work (snatches, step-up presses), testing skill and endurance across multiple domains. Includes buy-in/cash-out DUs."
   },
   {
     "wodUrl": "https://wodwell.com/wod/baz/",
@@ -835,7 +885,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2015-12-23"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (30 min AMRAP). Combines DU skill, heavy squat cleans (155lb), and push-ups. The heavy cleans over a long duration make this exceptionally demanding on strength endurance and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/beana/",
@@ -866,7 +918,9 @@
     "category": "Hero",
     "tags": [
       "AMRAP"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (42 min AMRAP). Very long duration combining significant cardio (Air Bike) with a descending ladder of bodyweight movements, primarily testing endurance and pacing."
   },
   {
     "wodName": "Bear Complex",
@@ -908,7 +962,9 @@
     "category": "Benchmark",
     "tags": [
       "For Load"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark (For Load). Tests strength and barbell cycling endurance through a complex sequence (Power Clean, Front Squat, Push Press, Back Squat, Push Press) performed for 7 unbroken reps, repeated over 5 rounds with increasing load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bell/",
@@ -940,7 +996,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds combining heavy deadlifts and front squats (185lb) with pull-ups in a sprint format, testing strength endurance and grip."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bert/",
@@ -972,7 +1030,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Extremely high volume bodyweight movements (100 burpees, 200 push-ups, 300 lunges, 200 squats) combined with 3 miles of running. Exceptionally demanding on endurance and mental toughness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/big-sexy/",
@@ -1003,7 +1063,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds combining multiple very heavy lifts (DL @ 315, Clean @ 225, Thruster @ 155) with high-skill gymnastics (C2B, Muscle-Ups) and burpees. Extremely demanding on strength, skill, and work capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/birchall/",
@@ -1034,7 +1096,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. High volume bodyweight back squats (100 reps) interrupted by 5 burpees every minute, testing strength endurance and conditioning under constant metabolic stress."
   },
   {
     "wodUrl": "https://wodwell.com/wod/blake/",
@@ -1065,7 +1129,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds combining challenging overhead stability/endurance (100ft OH plate lunges), box jumps, wall balls, and gymnastics skill (HSPU)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bowen/",
@@ -1107,7 +1173,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds combining significant running (2400m), heavy deadlifts (275lb), complex burpee pull-ups, and moderate KB snatches, testing conditioning, strength, and skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bradley/",
@@ -1138,7 +1206,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds of high-intensity intervals (sprints, pull-ups, burpees) with short rest, demanding repeated bursts of power and endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bradshaw/",
@@ -1169,7 +1239,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds combining gymnastics skill (HSPU, Pull-Ups), heavy deadlifts (225lb), and cardio/skill (DUs). High volume across multiple domains makes it demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/brehm/",
@@ -1190,7 +1262,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines high-skill gymnastics (10 Rope Climbs, 30 HSPU) with heavy back squats (20 reps @ 225lb) and rowing, testing skill, strength, and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/brenton/",
@@ -1221,7 +1295,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds combining unconventional movements (Bear Crawl, Broad Jumps) with burpees, all performed under load (weight vest), testing coordination, power, and endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/brian/",
@@ -1253,7 +1329,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). Combines high-skill gymnastics (15 total rope climbs) with heavy back squats (75 reps @ 185lb), demanding significant upper body pulling strength, grip endurance, and leg strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/brian-moore/",
@@ -1274,7 +1352,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2023-05-24"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Massive volume (25 rounds, 350 reps) of moderately heavy barbell cycling (HPC, FS, S2OH @ 135lb) followed by a long row cash-out (2015m). Exceptionally demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/brian-serdynski/",
@@ -1295,7 +1375,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2021-01-16"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Descending ladder of running and bodyweight exercises performed under load (weight vest), testing endurance and stamina."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bruck/",
@@ -1327,7 +1409,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 4 rounds combining running with high-volume, heavy back squats (96 reps @ 185lb) and moderately heavy jerks (96 reps @ 135lb). Very demanding on strength endurance and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bulger/",
@@ -1358,7 +1442,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds combining short runs, C2B pull-ups, moderate front squats (135lb), and HSPU. High volume across multiple domains (cardio, gymnastics, weightlifting) makes it demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bull/",
@@ -1389,7 +1475,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 2 rounds of very high volume: 200 DUs, 50 heavy OHS (135lb), 50 pull-ups, and a 1-mile run per round. Exceptionally demanding across skill, strength, gymnastics, and cardio."
   },
   {
     "wodUrl": "https://wodwell.com/wod/buriak/",
@@ -1420,7 +1508,9 @@
     "category": "Hero",
     "tags": [
       "AMRAP"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (20 min AMRAP). Combines heavy squat cleans (155lb), burpees over bar, pull-ups, and running. The heavy cleans repeated over a long duration make this very demanding on strength endurance and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/cpl-emmanuel-hernandez/",
@@ -1452,7 +1542,9 @@
     "tags": [
       "For Time",
       "Ladder"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Very high volume running (2.6 miles) combined with high-volume bodyweight movements (210 push-ups, 210 jumping squats) and significant plank holds (3.5 min total). Exceptionally demanding on endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/csm-adkins/",
@@ -1473,7 +1565,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2020-08-17"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Combines weighted runs (1 mile total @ 45lb) with descending reps of burpees, lunges, and KB swings. The weighted runs add significant challenge to the conditioning aspect."
   },
   {
     "wodUrl": "https://wodwell.com/wod/cajun/",
@@ -1504,7 +1598,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds combining running with moderate-volume, moderate-weight bench press (135lb), wall balls, shoulder-to-overhead (95lb), and GHD sit-ups. Tests multiple domains over significant duration."
   },
   {
     "wodUrl": "https://wodwell.com/wod/cameron/",
@@ -1536,7 +1632,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). High volume across 10 diverse movements, including multiple high-skill gymnastics elements (C2B, Triple-Unders, Ring Dips, KTE, Rope Climbs) and an unusual Wall Ball variation. Very demanding on skill and endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/candy/",
@@ -1567,7 +1665,9 @@
     "category": "Girl",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD. Very high volume bodyweight movements (600 total reps: 100 Pull-Ups, 200 Push-Ups, 300 Air Squats) over 5 rounds, testing muscular endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/canine-rex/",
@@ -1609,7 +1709,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Very high volume running (~3.2 miles) combined with high-volume bodyweight movements (392 reps + 25 burpees), primarily testing endurance and stamina."
   },
   {
     "wodUrl": "https://wodwell.com/wod/capoot/",
@@ -1641,7 +1743,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines very high volume push-ups (250 reps) with significant and increasing running distances (5600m total). Primarily tests muscular endurance (pushing) and cardiovascular endurance. The sheer volume makes it very challenging."
   },
   {
     "wodUrl": "https://wodwell.com/wod/capt-jennifer-casey/",
@@ -1662,7 +1766,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2020-05-29"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Heavy deadlift buy-in (50 reps @ 275lb) followed by 5 rounds of heavy DB push jerks (75lb) and rowing, finishing with a 2km run. Very demanding on strength and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/caroline/",
@@ -1695,7 +1801,9 @@
       "For Time",
       "Ladder",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder Triplet). Combines heavy deadlifts (225lb), box jumps, and rowing in a pyramid rep scheme (3-7-11-14-11-7-3), testing strength and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/carse/",
@@ -1727,7 +1835,9 @@
     "tags": [
       "For Time",
       "Ladder"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Descending Ladder). Combines moderate squat cleans, DUs, heavy deadlifts (185lb), and box jumps, with a 50m bear crawl starting each round. Very demanding due to movement variety, heavy DLs, and bear crawl fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/celiz/",
@@ -1759,7 +1869,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines significant running (2 miles) with high-volume bodyweight movements (push-ups, squats, sit-ups, box jumps), all performed under load (weight vest/ruck). The combination of volume, running, and added weight makes it very challenging."
   },
   {
     "wodUrl": "https://wodwell.com/wod/chelsea/",
@@ -1803,7 +1915,9 @@
       "EMOM",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (EMOM). Requires completing a round of Cindy (5 Pull-Ups, 10 Push-Ups, 15 Squats) every minute for 30 minutes. Tests consistency and muscular endurance at a demanding pace for a long duration."
   },
   {
     "wodUrl": "https://wodwell.com/wod/chief-daryl-rollins/",
@@ -1834,7 +1948,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 5 rounds combining moderate-weight medicine ball slams, weighted sit-ups, rowing, and sandbag bear crawls. Tests core strength and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/chief-jason-byrd/",
@@ -1855,7 +1971,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-08-27"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds combining stair climbs (with air pack), heavy sandbag squats, plank pulls, cleans, and glute bridges (100lb). Very demanding due to heavy, awkward object work and loaded stair climbs."
   },
   {
     "wodUrl": "https://wodwell.com/wod/chief-john-sing/",
@@ -1876,7 +1994,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2021-02-08"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (EMOM). 10 minutes total (2 rounds) of max reps across 5 stations (Renegade Rows, Push-Ups, Mountain Climbers, Squats, Curl-to-Press) with heavy dumbbells (50lb). Tests muscular endurance across various movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/chris-kyle/",
@@ -1907,7 +2027,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. High volume (480 reps total) over 3 rounds. Combines moderate KB swings, box jumps, light clusters, and challenging elevated push-ups, testing endurance across multiple movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/christine/",
@@ -1960,7 +2082,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet). 3 rounds combining rowing, potentially heavy bodyweight deadlifts, and box jumps, testing conditioning and strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/cindy/",
@@ -2004,7 +2128,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet AMRAP). Tests basic bodyweight muscular endurance (pull-ups, push-ups, squats) and pacing over 20 minutes."
   },
   {
     "wodUrl": "https://wodwell.com/wod/clovis/",
@@ -2036,7 +2162,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Extreme endurance challenge combining a very long run (10 miles) with high-volume complex burpee pull-ups (150 reps). Exceptionally demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/coe/",
@@ -2068,7 +2196,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). High volume (10 rounds) combining light-moderate thrusters (95lb) with challenging ring push-ups, testing muscular endurance and stability."
   },
   {
     "wodUrl": "https://wodwell.com/wod/coffey/",
@@ -2100,7 +2230,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines significant running (3200m) with high volume, moderate-weight squats and bench press (105 reps each @ 135lb), plus a muscle-up finisher. Tests strength endurance and conditioning over a long duration."
   },
   {
     "wodUrl": "https://wodwell.com/wod/coffland/",
@@ -2131,7 +2263,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Unique structure demanding extreme grip endurance (6 min cumulative hang). Significant penalty (800m run, 30 push-ups) for each drop leads to high volume and tests mental toughness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/collin/",
@@ -2162,7 +2296,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 6 rounds combining loaded carries (400m sandbag), moderate push presses (115lb), box jumps, and moderate SDHP (95lb). Tests conditioning and strength endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/cookie/",
@@ -2193,7 +2329,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds combining challenging push-up variation, weighted step-ups, complex burpee pull-ups, and rowing. High volume and varied movements test endurance and strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/crain/",
@@ -2224,7 +2362,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 2 rounds of a long chipper combining high reps (34) of multiple movements (push-ups, DL, box jumps, C&J, burpees, wall balls, pull-ups) interspersed with short sprints. Tests endurance across many domains."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dg/",
@@ -2256,7 +2396,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). Short duration (10 min) with light DBs (35lb) and T2B. Tests conditioning and basic gymnastics/DB proficiency at high intensity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/drk/",
@@ -2277,7 +2419,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2022-03-06"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds combining high-skill gymnastics (Bar MU, T2B), heavy KB swings (70lb), DUs, and heavy KB lunges (70lb). Very demanding across multiple high-skill/heavy domains."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dt/",
@@ -2340,7 +2484,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 5 rounds of heavy barbell cycling (DL, HPC, Jerk @ 155lb). Tests strength endurance, grip, and barbell proficiency under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dvb/",
@@ -2371,7 +2517,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Combines significant loaded running (2800m w/ 20lb ball), high-volume rope climbs (14 reps), and wall balls. Very demanding on conditioning and grip/pulling strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/da-bauer/",
@@ -2392,7 +2540,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2019-09-10"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 2 rounds combining high-rep burpees, moderate KB swings, significant rowing (200 cal total), and light thrusters. Tests conditioning and endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dae-han/",
@@ -2424,7 +2574,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). Combines challenging loaded runs (2400m total with 45lb barbell), high-skill rope climbs (9 total), and heavy thrusters (36 reps @ 135lb). Very demanding across multiple domains."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dale/",
@@ -2445,7 +2597,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2018-01-08"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). Combines running with high-skill rope climbs (20ft) over 20 minutes. Tests conditioning and upper body pulling strength/skill endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dale-jaynes/",
@@ -2466,7 +2620,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-12-20"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. Descending ladder (21-15-9) combining running, moderate KB swings, and wall balls. Tests conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dallas-5/",
@@ -2497,7 +2653,9 @@
     "category": "Hero",
     "tags": [
       "AMRAP"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Five separate 5-min AMRAPs with 1 min rest. Tests capacity across diverse domains: burpees, moderate DL/box jumps, TGU, light snatches/push-ups, and rowing. Demanding due to variety and sustained effort."
   },
   {
     "wodUrl": "https://wodwell.com/wod/daniel/",
@@ -2528,7 +2686,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines high-volume pull-ups (100 total), significant running (1600m), and moderate-volume light thrusters (42 reps @ 95lb). Tests conditioning and muscular endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/danny/",
@@ -2560,7 +2720,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 minutes of high-rep box jumps and pull-ups combined with moderate push presses (115lb), testing conditioning and muscular endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/c4-danny-dietz/",
@@ -2581,7 +2743,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2017-02-28"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Combines significant running (1 mile + 600m) with heavy power cleans (185lb) and front squats (185lb), plus high-volume push-ups and pull-ups. Very demanding due to heavy lifts, running, and bodyweight volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/davo/",
@@ -2602,7 +2766,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-02-13"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines significant running (2400m) with moderate volume of various moderate-weight barbell movements (~88lb) and gymnastics skills (pull-ups, ring dips, HSPU), testing endurance and well-roundedness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/deluzio/",
@@ -2633,7 +2799,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Combines heavy C&J (185lb), rowing, DUs, heavy Devil Presses (50lb), heavy DLs (225lb), and very heavy Sandbag Cleans (150lb). Tests strength, power, skill, and conditioning across multiple heavy/complex movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/del/",
@@ -2665,7 +2833,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). High volume combining loaded runs (1600m w/ 20lb ball), burpees, and multiple challenging gymnastics variations (weighted pull-ups, HSPU, C2B). Very demanding on conditioning and gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dempsey/",
@@ -2686,7 +2856,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2017-05-04"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 3 rounds of high-rep wall balls, med ball push-ups, and ball slams. Tests muscular endurance and conditioning with moderate weight implements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/desforges/",
@@ -2717,7 +2889,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds combining heavy deadlifts (225lb), pull-ups, moderate C&J (135lb), and KTE. High volume across heavy lifting and challenging gymnastics makes it very demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/detective-familia/",
@@ -2748,7 +2922,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Long row buy-in/cash-out (~140 cal total) sandwiching 12 rounds of moderate thrusters (115lb), burpees, and DUs. Tests conditioning and barbell cycling endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dia/",
@@ -2780,7 +2956,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). High volume burpees (118) combined with heavy squat clean thrusters (26 reps @ 135lb). Tests conditioning and strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/diane/",
@@ -2853,7 +3031,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Combines heavy deadlifts (225lb) with high-skill HSPU in a sprint format, testing strength, power, and gymnastics proficiency."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dobogai/",
@@ -2885,7 +3065,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). Combines high-volume, high-skill gymnastics (56 total Muscle-Ups) with heavy farmer carries (2x50lb), testing gymnastics endurance, grip strength, and core stability."
   },
   {
     "wodUrl": "https://wodwell.com/wod/donald-l-wheeler-jr-dj/",
@@ -2906,7 +3088,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2020-06-02"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. High volume bodyweight movements (13 rounds of squats, push-ups, crunches, dips) with a cumulative plank hold cash-out. Tests muscular endurance and core strength. Time cap (22 min) adds intensity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/donny/",
@@ -2939,7 +3123,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder Couplet). Combines heavy deadlifts (225lb) with burpees in a high-volume pyramid rep scheme (21-15-9-9-15-21), testing strength endurance and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dork/",
@@ -2992,7 +3178,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 6 rounds combining DUs, heavy KB swings (70lb), and burpees. Tests conditioning, skill, and endurance over significant volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dragon/",
@@ -3013,7 +3201,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Combines very long runs (10k total) with short windows to establish 4RM Deadlift and Push Jerk. Tests extreme endurance alongside maximal strength under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dunn/",
@@ -3034,7 +3224,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-08-24"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). Combines high-skill gymnastics (Muscle-Ups), short explosive sprints, and complex burpee box jump overs (20in), testing skill, power, and conditioning over 19 minutes."
   },
   {
     "wodUrl": "https://wodwell.com/wod/efren-medina/",
@@ -3055,7 +3247,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2022-11-26"
-    }
+    },
+    "difficulty": "Easy",
+    "difficulty_explanation": "Hero WOD consisting of low-skill, low-impact bodyweight movements (Jumping Jacks, Sumo Squats, Sit-Ups) over moderate volume (4 rounds)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/elizabeth/",
@@ -3108,7 +3302,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Combines heavy squat cleans (135lb) with challenging ring dips in a sprint format, testing strength, power, and gymnastics pushing endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ella-french/",
@@ -3129,7 +3325,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2021-08-23"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. Long plank hold buy-in/cash-out (~8 min total) sandwiching moderate volume KB swings, air squats, and high-rep burpees. Primarily tests core endurance and mental toughness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ellen/",
@@ -3182,7 +3380,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet). 3 rounds combining burpees with moderate-weight dumbbell snatches (50lb) and thrusters (50lb), testing conditioning and dumbbell proficiency in a sprint format."
   },
   {
     "wodUrl": "https://wodwell.com/wod/elmsy/",
@@ -7701,22 +7901,36 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 270, "max": null },
-        "advanced": { "min": 180, "max": 269 },
-        "intermediate": { "min": 90, "max": 179 },
-        "beginner": { "min": 0, "max": 89 }
+        "elite": {
+          "min": 270,
+          "max": null
+        },
+        "advanced": {
+          "min": 180,
+          "max": 269
+        },
+        "intermediate": {
+          "min": 90,
+          "max": 179
+        },
+        "beginner": {
+          "min": 0,
+          "max": 89
+        }
       }
     },
-    "results": [{
-      "date": "3 Mar'21",
-      "rxStatus": "Scaled",
-      "notes": "Worst wod ever? Yup\n65# thrusters, jumping c2b",
-      "score_time_seconds": null,
-      "score_reps": null,
-      "score_load": null,
-      "score_rounds_completed": 1,
-      "score_partial_reps": 30
-    }],
+    "results": [
+      {
+        "date": "3 Mar'21",
+        "rxStatus": "Scaled",
+        "notes": "Worst wod ever? Yup\n65# thrusters, jumping c2b",
+        "score_time_seconds": null,
+        "score_reps": null,
+        "score_load": null,
+        "score_rounds_completed": 1,
+        "score_partial_reps": 30
+      }
+    ],
     "category": "Open",
     "tags": [
       "AMRAP",
@@ -7730,22 +7944,36 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 144, "max": null },
-        "advanced": { "min": 88, "max": 143 },
-        "intermediate": { "min": 40, "max": 87 },
-        "beginner": { "min": 0, "max": 39 }
+        "elite": {
+          "min": 144,
+          "max": null
+        },
+        "advanced": {
+          "min": 88,
+          "max": 143
+        },
+        "intermediate": {
+          "min": 40,
+          "max": 87
+        },
+        "beginner": {
+          "min": 0,
+          "max": 39
+        }
       }
     },
-    "results": [{
-      "date": "24 Feb'21",
-      "rxStatus": "Rx",
-      "notes": "Strict C2B\n10x4 first round\n12,12,12,11 second\n14,14 third",
-      "score_time_seconds": null,
-      "score_reps": 115,
-      "score_load": null,
-      "score_rounds_completed": null,
-      "score_partial_reps": null
-    }],
+    "results": [
+      {
+        "date": "24 Feb'21",
+        "rxStatus": "Rx",
+        "notes": "Strict C2B\n10x4 first round\n12,12,12,11 second\n14,14 third",
+        "score_time_seconds": null,
+        "score_reps": 115,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
     "category": "Open",
     "tags": [
       "AMRAP",
@@ -7803,10 +8031,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 340, "max": null },
-        "advanced": { "min": 280, "max": 339 },
-        "intermediate": { "min": 220, "max": 279 },
-        "beginner": { "min": 0, "max": 219 }
+        "elite": {
+          "min": 340,
+          "max": null
+        },
+        "advanced": {
+          "min": 280,
+          "max": 339
+        },
+        "intermediate": {
+          "min": 220,
+          "max": 279
+        },
+        "beginner": {
+          "min": 0,
+          "max": 219
+        }
       }
     },
     "results": [],
@@ -7823,10 +8063,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 264, "max": null },
-        "advanced": { "min": 178, "max": 263 },
-        "intermediate": { "min": 90, "max": 177 },
-        "beginner": { "min": 0, "max": 89 }
+        "elite": {
+          "min": 264,
+          "max": null
+        },
+        "advanced": {
+          "min": 178,
+          "max": 263
+        },
+        "intermediate": {
+          "min": 90,
+          "max": 177
+        },
+        "beginner": {
+          "min": 0,
+          "max": 89
+        }
       }
     },
     "results": [],
@@ -7843,10 +8095,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 141, "max": null },
-        "advanced": { "min": 91, "max": 140 },
-        "intermediate": { "min": 41, "max": 90 },
-        "beginner": { "min": 0, "max": 40 }
+        "elite": {
+          "min": 141,
+          "max": null
+        },
+        "advanced": {
+          "min": 91,
+          "max": 140
+        },
+        "intermediate": {
+          "min": 41,
+          "max": 90
+        },
+        "beginner": {
+          "min": 0,
+          "max": 40
+        }
       }
     },
     "results": [],
@@ -7906,10 +8170,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 0, "max": 480 },
-        "advanced": { "min": 480, "max": 600 },
-        "intermediate": { "min": 600, "max": 780 },
-        "beginner": { "min": 780, "max": 900 }
+        "elite": {
+          "min": 0,
+          "max": 480
+        },
+        "advanced": {
+          "min": 480,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 600,
+          "max": 780
+        },
+        "beginner": {
+          "min": 780,
+          "max": 900
+        }
       }
     },
     "results": [],
@@ -7926,10 +8202,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 850, "max": null },
-        "advanced": { "min": 680, "max": 849 },
-        "intermediate": { "min": 510, "max": 679 },
-        "beginner": { "min": 0, "max": 509 }
+        "elite": {
+          "min": 850,
+          "max": null
+        },
+        "advanced": {
+          "min": 680,
+          "max": 849
+        },
+        "intermediate": {
+          "min": 510,
+          "max": 679
+        },
+        "beginner": {
+          "min": 0,
+          "max": 509
+        }
       }
     },
     "results": [],
@@ -7946,10 +8234,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 135, "max": null },
-        "advanced": { "min": 90, "max": 134 },
-        "intermediate": { "min": 45, "max": 89 },
-        "beginner": { "min": 0, "max": 44 }
+        "elite": {
+          "min": 135,
+          "max": null
+        },
+        "advanced": {
+          "min": 90,
+          "max": 134
+        },
+        "intermediate": {
+          "min": 45,
+          "max": 89
+        },
+        "beginner": {
+          "min": 0,
+          "max": 44
+        }
       }
     },
     "results": [],
@@ -7967,10 +8267,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 205, "max": null },
-        "advanced": { "min": 170, "max": 204 },
-        "intermediate": { "min": 130, "max": 169 },
-        "beginner": { "min": 0, "max": 129 }
+        "elite": {
+          "min": 205,
+          "max": null
+        },
+        "advanced": {
+          "min": 170,
+          "max": 204
+        },
+        "intermediate": {
+          "min": 130,
+          "max": 169
+        },
+        "beginner": {
+          "min": 0,
+          "max": 129
+        }
       }
     },
     "results": [],
@@ -7987,10 +8299,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 200, "max": null },
-        "advanced": { "min": 160, "max": 199 },
-        "intermediate": { "min": 80, "max": 159 },
-        "beginner": { "min": 0, "max": 79 }
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 199
+        },
+        "intermediate": {
+          "min": 80,
+          "max": 159
+        },
+        "beginner": {
+          "min": 0,
+          "max": 79
+        }
       }
     },
     "results": [],
@@ -8051,22 +8375,36 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 0, "max": 600 },
-        "advanced": { "min": 600, "max": 780 },
-        "intermediate": { "min": 780, "max": 1020 },
-        "beginner": { "min": 1020, "max": 1200 }
+        "elite": {
+          "min": 0,
+          "max": 600
+        },
+        "advanced": {
+          "min": 600,
+          "max": 780
+        },
+        "intermediate": {
+          "min": 780,
+          "max": 1020
+        },
+        "beginner": {
+          "min": 1020,
+          "max": 1200
+        }
       }
     },
-    "results": [{
-      "date": "5 Mar'21",
-      "rxStatus": "Rx",
-      "notes": "Finished only last 46 snatches at 20:00. Damn burpees is what killed me.",
-      "score_time_seconds": null,
-      "score_reps": 206,
-      "score_load": null,
-      "score_rounds_completed": null,
-      "score_partial_reps": null
-    }],
+    "results": [
+      {
+        "date": "5 Mar'21",
+        "rxStatus": "Rx",
+        "notes": "Finished only last 46 snatches at 20:00. Damn burpees is what killed me.",
+        "score_time_seconds": null,
+        "score_reps": 206,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
     "category": "Open",
     "tags": [
       "For Time",
@@ -8176,10 +8514,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 300, "max": null },
-        "advanced": { "min": 240, "max": 299 },
-        "intermediate": { "min": 180, "max": 239 },
-        "beginner": { "min": 0, "max": 179 }
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 299
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 239
+        },
+        "beginner": {
+          "min": 0,
+          "max": 179
+        }
       }
     },
     "results": [],
@@ -8196,10 +8546,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": 0, "max": 300 },
-        "advanced": { "min": 300, "max": 420 },
-        "intermediate": { "min": 420, "max": 540 },
-        "beginner": { "min": 540, "max": 600 }
+        "elite": {
+          "min": 0,
+          "max": 300
+        },
+        "advanced": {
+          "min": 300,
+          "max": 420
+        },
+        "intermediate": {
+          "min": 420,
+          "max": 540
+        },
+        "beginner": {
+          "min": 540,
+          "max": 600
+        }
       }
     },
     "results": [],
@@ -8217,10 +8579,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 180, "max": null },
-        "advanced": { "min": 156, "max": 179 },
-        "intermediate": { "min": 84, "max": 155 },
-        "beginner": { "min": 0, "max": 83 }
+        "elite": {
+          "min": 180,
+          "max": null
+        },
+        "advanced": {
+          "min": 156,
+          "max": 179
+        },
+        "intermediate": {
+          "min": 84,
+          "max": 155
+        },
+        "beginner": {
+          "min": 0,
+          "max": 83
+        }
       }
     },
     "results": [],
@@ -8323,10 +8697,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 216, "max": null },
-        "advanced": { "min": 137, "max": 215 },
-        "intermediate": { "min": 70, "max": 136 },
-        "beginner": { "min": 0, "max": 69 }
+        "elite": {
+          "min": 216,
+          "max": null
+        },
+        "advanced": {
+          "min": 137,
+          "max": 215
+        },
+        "intermediate": {
+          "min": 70,
+          "max": 136
+        },
+        "beginner": {
+          "min": 0,
+          "max": 69
+        }
       }
     },
     "results": [],

@@ -13,7 +13,6 @@ import {
   type Wod,
   type WodResult,
   type Benchmarks,
-  getPerformanceLevel,
 } from "~/app/_components/WodViewer";
 
 // Define allowed tags and their desired display order
@@ -48,6 +47,64 @@ const hasScore = (result: WodResult): boolean => {
     result.score_load !== null ||
     result.score_rounds_completed !== null
   );
+};
+
+// Define getNumericScore and getPerformanceLevel locally for server-side use
+const getNumericScore = (wod: Wod, result: WodResult): number | null => {
+  if (!wod.benchmarks) return null;
+
+  if (wod.benchmarks.type === "time" && result.score_time_seconds !== null) {
+    return result.score_time_seconds;
+  } else if (wod.benchmarks.type === "reps" && result.score_reps !== null) {
+    return result.score_reps;
+  } else if (wod.benchmarks.type === "load" && result.score_load !== null) {
+    return result.score_load;
+  } else if (
+    wod.benchmarks.type === "rounds" &&
+    result.score_rounds_completed !== null
+  ) {
+    // Convert rounds+reps to a decimal number (e.g., 5+10 becomes 5.1)
+    const partialReps = result.score_partial_reps || 0;
+    return result.score_rounds_completed + partialReps / 100;
+  }
+
+  return null;
+};
+
+const getPerformanceLevel = (wod: Wod, result: WodResult): string | null => {
+  if (!wod.benchmarks) return null;
+
+  const numericScore = getNumericScore(wod, result);
+  if (numericScore === null) return null;
+
+  // Determine the performance level based on the benchmarks
+  const { levels } = wod.benchmarks;
+
+  if (wod.benchmarks.type === "time") {
+    // For time-based workouts, lower is better
+    if (levels.elite.max !== null && numericScore <= levels.elite.max)
+      return "elite";
+    if (levels.advanced.max !== null && numericScore <= levels.advanced.max)
+      return "advanced";
+    if (
+      levels.intermediate.max !== null &&
+      numericScore <= levels.intermediate.max
+    )
+      return "intermediate";
+    return "beginner";
+  } else {
+    // For rounds/reps/load-based workouts, higher is better
+    if (levels.elite.min !== null && numericScore >= levels.elite.min)
+      return "elite";
+    if (levels.advanced.min !== null && numericScore >= levels.advanced.min)
+      return "advanced";
+    if (
+      levels.intermediate.min !== null &&
+      numericScore >= levels.intermediate.min
+    )
+      return "intermediate";
+    return "beginner";
+  }
 };
 
 // Helper function to check if a WOD is considered "done"

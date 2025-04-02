@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react"; // Import useMemo
 import { Box, Flex, SegmentedControl, Heading, Text } from "@radix-ui/themes";
 import {
   LineChart,
@@ -21,17 +21,57 @@ import {
 type FrequencyDataPoint = {
   month: string; // YYYY-MM format
   count: number;
+  rollingAverage?: number; // Add optional rolling average
 };
 
 type PerformanceDataPoint = {
   month: string; // YYYY-MM format
   averageLevel: number; // 0-4 scale
+  rollingAverage?: number; // Add optional rolling average
 };
+
+// Union type for data points
+type DataPoint = FrequencyDataPoint | PerformanceDataPoint;
 
 interface WodTimelineChartProps {
   frequencyData: FrequencyDataPoint[];
   performanceData: PerformanceDataPoint[];
 }
+
+// Helper function to calculate rolling average
+const calculateRollingAverage = (
+  data: DataPoint[],
+  dataKey: "count" | "averageLevel",
+  windowSize: number,
+): DataPoint[] => {
+  // Ensure data is sorted by month ascending for correct calculation
+  const sortedData = [...data].sort((a, b) => a.month.localeCompare(b.month));
+
+  return sortedData.map((point, index, arr) => {
+    // Calculate average based on available data up to the current point
+    const currentWindowSize = Math.min(index + 1, windowSize);
+    const windowSlice = arr.slice(index - currentWindowSize + 1, index + 1);
+
+    // Calculate the sum of the relevant data key in the window, ensuring values are numeric and accessed safely
+    const sum = windowSlice.reduce((acc, p) => {
+      let value: number | undefined;
+      // Type guard to safely access the correct property based on dataKey
+      if (dataKey === "count" && "count" in p) {
+        value = p.count;
+      } else if (dataKey === "averageLevel" && "averageLevel" in p) {
+        value = p.averageLevel;
+      }
+      // Add to accumulator only if value is a valid number
+      return acc + (typeof value === "number" ? value : 0);
+    }, 0);
+
+    // Calculate the average using the actual number of points in the slice
+    // Add check for windowSlice.length to prevent division by zero, though theoretically > 0
+    const average = windowSlice.length > 0 ? sum / windowSlice.length : 0;
+
+    return { ...point, rollingAverage: average };
+  });
+};
 
 // Helper function to get descriptive level from numerical average
 const getDescriptiveLevel = (level: number): string => {
@@ -51,35 +91,58 @@ const CustomTimelineTooltip = ({
   payload,
   label,
 }: TooltipProps<ValueType, NameType>) => {
-  if (active && payload && payload.length) {
-    // const data = payload[0].payload; // Removed: Fixes unsafe-assignment and unused-vars
-    const value = payload[0].value;
-    const name = payload[0].name; // 'count' or 'averageLevel'
+  // Check if the tooltip should be active and has valid data
+  if (active && payload && payload.length > 0 && payload[0].payload) {
+    const dataPoint = payload[0].payload as DataPoint; // Base data point for the month
+    const rollingAverage = dataPoint.rollingAverage; // Rolling average is stored here
 
-    let displayValue = "Invalid data"; // Default string value, type inferred
+    // Determine which line's data we are hovering over (actual or average)
+    // We only want to display the tooltip based on the primary data line hover
+    const primaryDataPayload = payload.find(
+      (p) => p.name === "count" || p.name === "averageLevel",
+    );
 
-    // Ensure value is primitive before using it
+    // If not hovering over the primary line, don't show tooltip
+    if (!primaryDataPayload) {
+      return null;
+    }
+
+    const value = primaryDataPayload.value; // Actual value for the month from the primary line
+    const name = primaryDataPayload.name; // 'count' or 'averageLevel'
+
+    let displayValue = "Invalid data";
+    let rollingAvgDisplay = "";
+
+    // Format the main value
     if (
       name === "count" &&
       (typeof value === "number" || typeof value === "string")
     ) {
       displayValue = `${value} WODs`;
+      if (typeof rollingAverage === "number") {
+        rollingAvgDisplay = ` (Avg: ${rollingAverage.toFixed(1)})`;
+      }
     } else if (name === "averageLevel" && typeof value === "number") {
-      // Format average level to 2 decimal places and get descriptive level
-      const numericLevel = value.toFixed(2); // Use value directly
+      const numericLevel = value.toFixed(2);
       const descriptiveLevel = getDescriptiveLevel(value);
       displayValue = `${descriptiveLevel} (${numericLevel})`;
+      if (typeof rollingAverage === "number") {
+        const avgNumericLevel = rollingAverage.toFixed(2);
+        const avgDescriptiveLevel = getDescriptiveLevel(rollingAverage);
+        rollingAvgDisplay = ` (Avg: ${avgDescriptiveLevel} (${avgNumericLevel}))`;
+      }
     } else if (typeof value === "string" || typeof value === "number") {
-      // Handle other potential primitive values safely
       displayValue = String(value);
+      // Optionally display rolling average for other types if needed
     }
-    // If value is an array or object, displayValue remains "Invalid data"
 
     return (
       <Box className="rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
-        {/* Ensure label is also treated as a string */}
         <Text className="font-bold">{String(label)}</Text> {/* Month */}
-        <Text>: {displayValue}</Text> {/* displayValue is guaranteed string */}
+        <Text>
+          : {displayValue}
+          {rollingAvgDisplay}
+        </Text>
       </Box>
     );
   }
@@ -91,8 +154,19 @@ export default function WodTimelineChart({
   performanceData,
 }: WodTimelineChartProps) {
   const [view, setView] = useState<"frequency" | "performance">("frequency");
+  const ROLLING_WINDOW = 12; // Define window size (Updated to 12 months)
 
-  const chartData = view === "frequency" ? frequencyData : performanceData;
+  // Memoize the calculation of rolling average
+  const chartDataWithAverage = useMemo(() => {
+    const baseData = view === "frequency" ? frequencyData : performanceData;
+    const key = view === "frequency" ? "count" : "averageLevel";
+    // Ensure baseData is not empty before calculating
+    if (!baseData || baseData.length === 0) {
+      return [];
+    }
+    return calculateRollingAverage(baseData, key, ROLLING_WINDOW);
+  }, [view, frequencyData, performanceData]);
+
   const dataKey = view === "frequency" ? "count" : "averageLevel";
   const chartTitle =
     view === "frequency"
@@ -102,8 +176,8 @@ export default function WodTimelineChart({
   // Only set Y-axis domain for performance view
   const yDomain = view === "performance" ? [0, 4] : undefined;
 
-  // Check if there's data to display
-  if (!chartData || chartData.length === 0) {
+  // Check if there's data to display (use the calculated data)
+  if (!chartDataWithAverage || chartDataWithAverage.length === 0) {
     return <Text>No timeline data available.</Text>;
   }
 
@@ -130,7 +204,7 @@ export default function WodTimelineChart({
       </Flex>
       <ResponsiveContainer width="100%" height={300}>
         <LineChart
-          data={chartData}
+          data={chartDataWithAverage} // Use data with calculated average
           margin={{
             top: 5,
             right: 20, // Add margin for labels
@@ -173,6 +247,18 @@ export default function WodTimelineChart({
             strokeWidth={2}
             dot={{ r: 3, fill: "var(--accent-9)" }}
             activeDot={{ r: 6, fill: "var(--accent-10)" }}
+          />
+          {/* Add the rolling average line */}
+          <Line
+            type="monotone"
+            dataKey="rollingAverage"
+            name="Rolling Avg" // Name for tooltip identification if needed
+            stroke="var(--orange-9)" // Different color for trend line
+            strokeWidth={2}
+            strokeDasharray="5 5" // Dashed line style
+            dot={false} // No dots for the trend line
+            activeDot={false} // No active dots for the trend line
+            connectNulls={true} // Connect points even if some averages were initially approximated
           />
         </LineChart>
       </ResponsiveContainer>

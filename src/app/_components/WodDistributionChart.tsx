@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from 'react';
-import { Box, Flex, SegmentedControl, Heading, Text } from '@radix-ui/themes';
+import { useState } from "react";
+import { Box, Flex, SegmentedControl, Heading, Text } from "@radix-ui/themes";
 import {
   Radar,
   RadarChart,
@@ -10,8 +10,8 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
   Tooltip,
-  Legend // Added Legend for clarity
-} from 'recharts';
+  Legend, // Added Legend for clarity
+} from "recharts";
 
 // Define the structure for chart data points
 type ChartDataPoint = {
@@ -28,7 +28,7 @@ interface WodDistributionChartProps {
 const CustomTooltip = ({ active, payload, label }: any) => {
   if (active && payload && payload.length) {
     return (
-      <Box className="p-2 bg-gray-700 dark:bg-gray-800 text-white dark:text-gray-200 rounded shadow-lg text-xs">
+      <Box className="rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
         <Text className="font-bold">{label}</Text>
         <Text>: {payload[0].value} WODs</Text>
       </Box>
@@ -37,15 +37,18 @@ const CustomTooltip = ({ active, payload, label }: any) => {
   return null;
 };
 
+export default function WodDistributionChart({
+  tagData,
+  categoryData,
+}: WodDistributionChartProps) {
+  const [view, setView] = useState<"tags" | "category">("tags"); // Default to tags view
 
-export default function WodDistributionChart({ tagData, categoryData }: WodDistributionChartProps) {
-  const [view, setView] = useState<'tags' | 'category'>('tags'); // Default to tags view
-
-  const chartData = view === 'tags' ? tagData : categoryData;
-  const chartTitle = view === 'tags' ? 'Distribution by Tag' : 'Distribution by Category';
+  const chartData = view === "tags" ? tagData : categoryData;
+  const chartTitle =
+    view === "tags" ? "Distribution by Tag" : "Distribution by Category";
 
   // Find the maximum value for the radius axis domain
-  const maxValue = Math.max(...chartData.map(item => item.value), 0); // Ensure domain starts at 0
+  const maxValue = Math.max(...chartData.map((item) => item.value), 0); // Ensure domain starts at 0
 
   // Check if there's data to display
   if (!chartData || chartData.length === 0) {
@@ -53,16 +56,20 @@ export default function WodDistributionChart({ tagData, categoryData }: WodDistr
   }
 
   return (
-    <Box className="my-6 p-4 border border-border rounded-lg bg-card shadow">
+    <Box className="my-6 rounded-lg border border-border bg-card p-4 shadow">
       <Flex justify="between" align="center" mb="4">
-        <Heading size="4" className="text-card-foreground">{chartTitle}</Heading>
+        <Heading size="4" className="text-card-foreground">
+          {chartTitle}
+        </Heading>
         <SegmentedControl.Root
           size="1"
           value={view}
-          onValueChange={(value) => setView(value as 'tags' | 'category')}
+          onValueChange={(value) => setView(value as "tags" | "category")}
         >
           <SegmentedControl.Item value="tags">Tags</SegmentedControl.Item>
-          <SegmentedControl.Item value="category">Category</SegmentedControl.Item>
+          <SegmentedControl.Item value="category">
+            Category
+          </SegmentedControl.Item>
         </SegmentedControl.Root>
       </Flex>
       <ResponsiveContainer width="100%" height={300}>
@@ -70,19 +77,19 @@ export default function WodDistributionChart({ tagData, categoryData }: WodDistr
           <PolarGrid stroke="var(--gray-a7)" /> {/* Use Radix color variable */}
           <PolarAngleAxis
             dataKey="name"
-            tick={{ fill: 'var(--gray-11)', fontSize: 12 }} // Use Radix color variable
+            tick={{ fill: "var(--gray-11)", fontSize: 12 }} // Use Radix color variable
           />
           {/* Adjust domain for radius axis based on max value */}
           <PolarRadiusAxis
-             angle={30}
-             domain={[0, Math.ceil(maxValue / 10) * 10]} // Round max value up to nearest 10 for cleaner axis
-             tick={{ fill: 'var(--gray-11)', fontSize: 10 }} // Use Radix color variable
-           />
+            angle={30}
+            domain={[0, Math.ceil(maxValue / 10) * 10]} // Round max value up to nearest 10 for cleaner axis
+            tick={{ fill: "var(--gray-11)", fontSize: 10 }} // Use Radix color variable
+          />
           <Radar
             name="WODs" // Name for the legend/tooltip
             dataKey="value"
             stroke="var(--accent-9)" // Use Radix color variable
-            fill="var(--accent-9)"   // Use Radix color variable
+            fill="var(--accent-9)" // Use Radix color variable
             fillOpacity={0.6}
           />
           <Tooltip content={<CustomTooltip />} />

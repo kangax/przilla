@@ -2,12 +2,12 @@
 
 import Link from "next/link";
 import { Flex, Table, Text, Tooltip, Badge } from "@radix-ui/themes";
-import type { Wod } from "./WodViewer"; 
-import { 
-  getPerformanceLevelColor, 
-  getPerformanceLevel, 
+import type { Wod } from "./WodViewer";
+import {
+  getPerformanceLevelColor,
+  getPerformanceLevel,
   formatScore,
-  hasScore
+  hasScore,
 } from "./WodViewer";
 import React from "react";
 
@@ -20,10 +20,15 @@ interface WodTimelineProps {
   handleSort: (column: SortByType) => void; // Use new type
 }
 
-const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, handleSort }) => {
+const WodTimeline: React.FC<WodTimelineProps> = ({
+  wods,
+  sortBy,
+  sortDirection,
+  handleSort,
+}) => {
   const safeString = (value: string | undefined | null): string => value ?? "";
-  
-  const getSortIndicator = (columnName: SortByType) => { 
+
+  const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
     }
@@ -31,24 +36,39 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
   };
 
   return (
-    <Table.Root variant="surface" className="w-full bg-table-row border border-table-border rounded-md overflow-hidden">
+    <Table.Root
+      variant="surface"
+      className="w-full overflow-hidden rounded-md border border-table-border bg-table-row"
+    >
       <Table.Header className="bg-table-header">
         <Table.Row>
-          <Table.ColumnHeaderCell onClick={() => handleSort("wodName")} style={{ cursor: 'pointer' }} className="text-foreground">
+          <Table.ColumnHeaderCell
+            onClick={() => handleSort("wodName")}
+            style={{ cursor: "pointer" }}
+            className="text-foreground"
+          >
             Workout {getSortIndicator("wodName")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell onClick={() => handleSort("latestLevel")} style={{ cursor: 'pointer' }} className="text-foreground">
-            Progress Timeline <span className="text-xs opacity-70">(latest level)</span> {getSortIndicator("latestLevel")}
+          <Table.ColumnHeaderCell
+            onClick={() => handleSort("latestLevel")}
+            style={{ cursor: "pointer" }}
+            className="text-foreground"
+          >
+            Progress Timeline{" "}
+            <span className="text-xs opacity-70">(latest level)</span>{" "}
+            {getSortIndicator("latestLevel")}
           </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="text-foreground">Description</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell className="text-foreground">
+            Description
+          </Table.ColumnHeaderCell>
         </Table.Row>
       </Table.Header>
-      
+
       <Table.Body className="bg-table-row">
         {wods.map((wod) => {
           // Calculate sorted valid results first
           const sortedResults = [...wod.results]
-            .filter(r => r.date && hasScore(r)) // Filter for valid results (date and score)
+            .filter((r) => r.date && hasScore(r)) // Filter for valid results (date and score)
             .sort((a, b) => {
               const dateA = safeString(a.date);
               const dateB = safeString(b.date);
@@ -61,15 +81,26 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
           const isAttempted = sortedResults.length > 0;
 
           return (
-            <Table.Row key={wod.wodName} className="border-t border-table-border hover:bg-table-rowAlt">
+            <Table.Row
+              key={wod.wodName}
+              className="border-t border-table-border hover:bg-table-rowAlt"
+            >
               <Table.Cell className="font-medium">
                 {wod.wodUrl ? (
-                  <Link href={wod.wodUrl} target="_blank" className="text-primary hover:underline flex items-center whitespace-nowrap max-w-[200px] truncate">
+                  <Link
+                    href={wod.wodUrl}
+                    target="_blank"
+                    className="flex max-w-[200px] items-center truncate whitespace-nowrap text-primary hover:underline"
+                  >
                     {wod.wodName}
-                    <span className="ml-1 text-xs opacity-70 flex-shrink-0">↗</span>
+                    <span className="ml-1 flex-shrink-0 text-xs opacity-70">
+                      ↗
+                    </span>
                   </Link>
                 ) : (
-                  <span className="whitespace-nowrap max-w-[200px] truncate">{wod.wodName}</span>
+                  <span className="max-w-[200px] truncate whitespace-nowrap">
+                    {wod.wodName}
+                  </span>
                 )}
               </Table.Cell>
               <Table.Cell>
@@ -77,19 +108,33 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                   <Flex align="center">
                     {sortedResults.map((result, index) => (
                       <Flex key={index} align="center" className="mb-1">
-                        <Tooltip content={
-                          <>
-                            <Text size="1" weight="bold">{safeString(result?.date)}</Text>
-                            {result.notes && (
-                              <>
-                                <br />
-                                <Text size="1" style={{ whiteSpace: 'pre-wrap', maxWidth: '300px' }}>{safeString(result.notes)}</Text>
-                              </>
-                            )}
-                          </>
-                        }>
+                        <Tooltip
+                          content={
+                            <>
+                              <Text size="1" weight="bold">
+                                {safeString(result?.date)}
+                              </Text>
+                              {result.notes && (
+                                <>
+                                  <br />
+                                  <Text
+                                    size="1"
+                                    style={{
+                                      whiteSpace: "pre-wrap",
+                                      maxWidth: "300px",
+                                    }}
+                                  >
+                                    {safeString(result.notes)}
+                                  </Text>
+                                </>
+                              )}
+                            </>
+                          }
+                        >
                           <Text className="cursor-help whitespace-nowrap">
-                            <span className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}>
+                            <span
+                              className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}
+                            >
                               {formatScore(result)}
                             </span>
                             {result.rxStatus && (
@@ -110,11 +155,15 @@ const WodTimeline: React.FC<WodTimelineProps> = ({ wods, sortBy, sortDirection, 
                     ))}
                   </Flex>
                 ) : (
-                  <Text size="1" className="text-foreground/60 italic">Not Attempted</Text>
+                  <Text size="1" className="italic text-foreground/60">
+                    Not Attempted
+                  </Text>
                 )}
               </Table.Cell>
               <Table.Cell className="min-w-[400px]">
-                <Text className="text-sm font-small whitespace-pre-line">{wod.description}</Text>
+                <Text className="font-small whitespace-pre-line text-sm">
+                  {wod.description}
+                </Text>
               </Table.Cell>
             </Table.Row>
           );

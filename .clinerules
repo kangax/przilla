@@ -4,13 +4,9 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 
 ## General
 
-- Do not leave comments of your changes (comments should only be used to explain why something is done, not what is done)
-  - e.g. "// Changed text-sm to text-xs" should never be added in TS/TSX files
-- Use meaningful commit messages after every task but ask user before commiting
 - Use `;` to string commands in terminal since `&&` have escaping issues
 - Do not create backup files since we use versioning system
-- Make sure `npm run lint` passes after every change
-- Make sure `npm run build` passes after every change
+- Use meaningful commit messages at the end of every task (don't ask me if I'm ok with them since I can see them when approving command)
 
 ## Code Style & Patterns
 

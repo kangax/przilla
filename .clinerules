@@ -9,7 +9,8 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 - Use meaningful commit messages after every task but ask user before commiting
 - Use `;` to string commands in terminal since `&&` have escaping issues
 - Do not create backup files since we use versioning system
-- Make sure linting passes after every code change
+- Make sure `npm run lint` passes after every change
+- Make sure `npm run build` passes after every change
 
 ## Code Style & Patterns
 

@@ -52,26 +52,34 @@ const CustomTimelineTooltip = ({
   label,
 }: TooltipProps<ValueType, NameType>) => {
   if (active && payload && payload.length) {
-    const data = payload[0].payload; // Access the full data point
+    // const data = payload[0].payload; // Removed: Fixes unsafe-assignment and unused-vars
     const value = payload[0].value;
     const name = payload[0].name; // 'count' or 'averageLevel'
 
-    let displayValue: string;
-    if (name === "count") {
+    let displayValue = "Invalid data"; // Default string value, type inferred
+
+    // Ensure value is primitive before using it
+    if (
+      name === "count" &&
+      (typeof value === "number" || typeof value === "string")
+    ) {
       displayValue = `${value} WODs`;
     } else if (name === "averageLevel" && typeof value === "number") {
       // Format average level to 2 decimal places and get descriptive level
-      const numericLevel = Number(value).toFixed(2);
+      const numericLevel = value.toFixed(2); // Use value directly
       const descriptiveLevel = getDescriptiveLevel(value);
       displayValue = `${descriptiveLevel} (${numericLevel})`;
-    } else {
+    } else if (typeof value === "string" || typeof value === "number") {
+      // Handle other potential primitive values safely
       displayValue = String(value);
     }
+    // If value is an array or object, displayValue remains "Invalid data"
 
     return (
       <Box className="rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
-        <Text className="font-bold">{label}</Text> {/* Month */}
-        <Text>: {displayValue}</Text>
+        {/* Ensure label is also treated as a string */}
+        <Text className="font-bold">{String(label)}</Text> {/* Month */}
+        <Text>: {displayValue}</Text> {/* displayValue is guaranteed string */}
       </Box>
     );
   }

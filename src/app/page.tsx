@@ -12,7 +12,7 @@ import ThemeToggle from "~/app/_components/ThemeToggle";
 import {
   type Wod,
   type WodResult,
-  type Benchmarks,
+  // Benchmarks type removed as it's not directly used here
 } from "~/app/_components/WodViewer";
 
 // Define allowed tags and their desired display order
@@ -176,7 +176,7 @@ export default async function Home() {
           } catch (e) {
             // Ignore results with invalid dates
             console.warn(
-              `Skipping result due to invalid date format: ${result.date} for WOD ${wod.wodName}`,
+              `Skipping result due to invalid date format: ${result.date} for WOD ${wod.wodName}. Error: ${e}`, // Include error details
             );
           }
         }

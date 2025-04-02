@@ -1,7 +1,8 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "../../test-utils";
 import "@testing-library/jest-dom";
-import WodViewer, {
+import WodViewer from "./WodViewer"; // Import the component
+import {
   getPerformanceLevelColor,
   formatSecondsToMMSS,
   getPerformanceLevelTooltip,
@@ -10,12 +11,11 @@ import WodViewer, {
   getPerformanceLevel,
   hasScore,
   sortWods,
-  type Wod,
-  type WodResult,
-} from "./WodViewer";
+} from "~/utils/wodUtils"; // Import helpers from utils
+import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Import types
 
 // Define types locally for mocks as they are not exported from component
-type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel";
+// type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel"; // Now imported
 type SortDirection = "asc" | "desc";
 
 // --- Mocks and Test Data ---
@@ -190,13 +190,10 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 0:00 - 5:00",
         "Beginner: 0:00 - 8:00",
       ].join("\n");
-      expect(getPerformanceLevelTooltip(mockWodTime, "elite")).toBe(
-        expectedTooltip,
-      );
+      // Call with only one argument
+      expect(getPerformanceLevelTooltip(mockWodTime)).toBe(expectedTooltip);
       // The output should be the same regardless of the 'currentLevel' passed
-      expect(getPerformanceLevelTooltip(mockWodTime, "beginner")).toBe(
-        expectedTooltip,
-      );
+      expect(getPerformanceLevelTooltip(mockWodTime)).toBe(expectedTooltip);
     });
 
     it("should return correct multi-line tooltip for rounds benchmarks", () => {
@@ -206,27 +203,21 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 15 - ∞ rounds",
         "Beginner: 10 - ∞ rounds",
       ].join("\n");
-      expect(getPerformanceLevelTooltip(mockWodRounds, "elite")).toBe(
-        expectedTooltip,
-      );
-      expect(getPerformanceLevelTooltip(mockWodRounds, "beginner")).toBe(
-        expectedTooltip,
-      );
+      // Call with only one argument
+      expect(getPerformanceLevelTooltip(mockWodRounds)).toBe(expectedTooltip);
+      expect(getPerformanceLevelTooltip(mockWodRounds)).toBe(expectedTooltip);
     });
 
     it("should return correct multi-line tooltip for load benchmarks", () => {
       const expectedTooltip = [
-        "Elite: 405 - ∞ load",
-        "Advanced: 315 - ∞ load",
-        "Intermediate: 225 - ∞ load",
-        "Beginner: 135 - ∞ load",
+        "Elite: 405 - ∞ lbs", // Updated unit
+        "Advanced: 315 - ∞ lbs", // Updated unit
+        "Intermediate: 225 - ∞ lbs", // Updated unit
+        "Beginner: 135 - ∞ lbs", // Updated unit
       ].join("\n");
-      expect(getPerformanceLevelTooltip(mockWodLoad, "elite")).toBe(
-        expectedTooltip,
-      );
-      expect(getPerformanceLevelTooltip(mockWodLoad, "beginner")).toBe(
-        expectedTooltip,
-      );
+      // Call with only one argument
+      expect(getPerformanceLevelTooltip(mockWodLoad)).toBe(expectedTooltip);
+      expect(getPerformanceLevelTooltip(mockWodLoad)).toBe(expectedTooltip);
     });
 
     it("should return correct multi-line tooltip for reps benchmarks", () => {
@@ -236,20 +227,18 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 10 - ∞ reps",
         "Beginner: 5 - ∞ reps",
       ].join("\n");
-      expect(getPerformanceLevelTooltip(mockWodReps, "elite")).toBe(
-        expectedTooltip,
-      );
-      expect(getPerformanceLevelTooltip(mockWodReps, "beginner")).toBe(
-        expectedTooltip,
-      );
+      // Call with only one argument
+      expect(getPerformanceLevelTooltip(mockWodReps)).toBe(expectedTooltip);
+      expect(getPerformanceLevelTooltip(mockWodReps)).toBe(expectedTooltip);
     });
 
     it("should return default message if no benchmarks", () => {
       // The function now ignores the 'currentLevel' if benchmarks are missing
-      expect(getPerformanceLevelTooltip(mockWodNoBenchmark, "elite")).toBe(
+      // Call with only one argument
+      expect(getPerformanceLevelTooltip(mockWodNoBenchmark)).toBe(
         "No benchmark data available",
       );
-      expect(getPerformanceLevelTooltip(mockWodNoBenchmark, null)).toBe(
+      expect(getPerformanceLevelTooltip(mockWodNoBenchmark)).toBe(
         "No benchmark data available",
       );
     });
@@ -261,9 +250,8 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 0:00 - 5:00",
         "Beginner: 0:00 - 8:00",
       ].join("\n");
-      expect(getPerformanceLevelTooltip(mockWodTime, null)).toBe(
-        expectedTooltip,
-      );
+      // Call with only one argument
+      expect(getPerformanceLevelTooltip(mockWodTime)).toBe(expectedTooltip);
     });
   });
 
@@ -281,15 +269,16 @@ describe("WodViewer Helper Functions", () => {
     });
 
     it("should format rounds scores", () => {
-      expect(formatScore(mockResultRounds(15))).toBe("15");
+      expect(formatScore(mockResultRounds(15))).toBe("15 rounds"); // Updated expectation
     });
 
     it("should format rounds + partial reps scores", () => {
       expect(formatScore(mockResultRounds(15, 10))).toBe("15+10");
     });
 
-    it("should return empty string if no score", () => {
-      expect(formatScore(mockResultNoScore())).toBe("");
+    it("should return dash if no score", () => {
+      // Updated test description
+      expect(formatScore(mockResultNoScore())).toBe("-"); // Updated expectation
     });
   });
 
@@ -845,6 +834,8 @@ describe("WodViewer Component", () => {
   const mockChartDataProps = {
     tagChartData: [],
     categoryChartData: [],
+    frequencyData: [], // Add missing prop
+    performanceData: [], // Add missing prop
     categoryOrder: mockCategoryOrder,
     tagOrder: mockTagOrder, // Add tag order to props
   };

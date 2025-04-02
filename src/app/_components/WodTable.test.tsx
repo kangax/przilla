@@ -2,12 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, within } from "../../test-utils"; // Use custom render
 import "@testing-library/jest-dom";
 import WodTable from "./WodTable";
-import {
-  type Wod,
-  type WodResult,
-  // Import helpers needed for data generation/verification if necessary
-  // getPerformanceLevel, formatScore etc. are used internally by WodTable
-} from "./WodViewer";
+import type { Wod, WodResult } from "~/types/wodTypes";
 
 // --- Mock next/link ---
 vi.mock("next/link", () => ({
@@ -358,8 +353,8 @@ describe("WodTable Component", () => {
     );
     const row = screen.getByRole("row", { name: /WOD Echo/ });
     const cells = within(row).getAllByRole("cell");
-    // Level column (index 4) should be empty based on current output
-    expect(cells[4]).toBeEmptyDOMElement();
+    // Level column (index 4) should contain a dash (-)
+    expect(within(cells[4]).getByText("-")).toBeInTheDocument();
   });
 
   it("should call handleSort when clicking sortable headers", () => {

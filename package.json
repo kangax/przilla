@@ -19,7 +19,8 @@
     "start": "next start",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "scrape-wods": "node scripts/scrape-wods.js"
+    "scrape-wods": "node scripts/scrape-wods.js",
+    "prepare": "husky"
   },
   "dependencies": {
     "@auth/drizzle-adapter": "^1.7.2",
@@ -67,7 +68,9 @@
     "eslint-config-next": "^15.0.1",
     "eslint-plugin-drizzle": "^0.2.3",
     "fs-extra": "^11.3.0",
+    "husky": "^9.1.7",
     "jsdom": "^26.0.0",
+    "lint-staged": "^15.5.0",
     "postcss": "^8.4.39",
     "prettier": "^3.3.2",
     "prettier-plugin-tailwindcss": "^0.6.5",
@@ -79,6 +82,9 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.38.1"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "packageManager": "npm@11.2.0"
 }

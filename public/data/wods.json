@@ -9,9 +9,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "EMOM"
-    ],
+    "tags": ["EMOM"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 329,
@@ -32,9 +30,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 109,
@@ -83,10 +79,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Hard",
     "difficulty_explanation": "High volume (30 reps) of a high-skill gymnastics movement (Muscle-Ups) performed for time."
   },
@@ -100,9 +93,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 219,
@@ -151,10 +142,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD combining significant running (2.5 miles) with high-volume, heavy Clean-and-Jerks (42 reps @ 155lb), testing both endurance and strength under fatigue."
   },
@@ -185,10 +173,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 5 rounds combining higher-skill C2B pull-ups, heavy KB swings (70lb), and wall balls, testing gymnastics, strength endurance, and conditioning."
   },
@@ -219,9 +204,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 2 rounds featuring very heavy deadlifts (295lb), heavy bench press (195lb), and moderately heavy cleans (145lb), interspersed with high-volume box jumps and wall balls. Extremely demanding on strength and conditioning due to heavy loads and volume."
   },
@@ -252,9 +235,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 7 rounds combining challenging gymnastics (Wall Climbs, T2B), high box jumps (30in), and an unusual coordination element (Forward Rolls), testing skill, endurance, and coordination over significant volume."
   },
@@ -268,9 +249,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 24,
@@ -308,10 +287,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Couplet). 5 rounds combining high-volume moderate-weight back squats (155 reps @ 135lb) with heavy power cleans (60 reps @ 185lb), creating a significant strength and endurance challenge."
   },
@@ -353,11 +329,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (9-7-5 Couplet). Combines high-skill gymnastics (Muscle-Ups) with heavy, technical Olympic lifts (Squat Snatches @ 135lb) in a sprint format, demanding high proficiency in both."
   },
@@ -371,9 +343,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -422,10 +392,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Chipper). Very high volume (400 total reps) with light-moderate weight (75lb) across four barbell movements, primarily testing muscular endurance and mental toughness."
   },
@@ -456,10 +423,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Very high volume including a 1.5-mile run, moderate weight barbell movements (thrusters, deadlifts), and box jumps, all performed wearing a weight vest, making it extremely demanding."
   },
@@ -511,10 +475,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Chipper). High volume (400 reps) of basic bodyweight movements performed sequentially, testing muscular endurance and pacing."
   },
@@ -556,11 +517,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Ladder Couplet). Tests double-under skill proficiency and core endurance in a fast-paced descending rep scheme (50-40-30-20-10)."
   },
@@ -574,9 +531,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 19,
@@ -614,9 +569,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. High volume of very demanding, heavy Turkish Get-Ups (42 reps @ 72lb) and heavy KB Swings (150 reps @ 72lb), plus single-arm OHS. Tests strength, stability, coordination, and endurance significantly."
   },
@@ -647,9 +600,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (20 min AMRAP). Combines bodyweight movements (pull-ups, push-ups, squats) with moderate-weight thrusters (95lb) in a structure that creates significant metabolic demand and tests muscular endurance."
   },
@@ -680,10 +631,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (20 min AMRAP). Combines a long bike erg (~2km) with low reps of heavy front rack lunges and thrusters (135lb), creating a demanding cycle of cardio and heavy lifting."
   },
@@ -714,10 +662,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 3 rounds combining moderate-volume squat cleans (90 reps @ 95lb), high-volume pull-ups (90 reps), and significant running (2400m), testing conditioning and muscular/gymnastics endurance."
   },
@@ -759,9 +704,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD. High volume bodyweight movements (140 reps/round, 700 total). Mandatory 3-min rest encourages high intensity per round, making it deceptively challenging."
   },
@@ -803,9 +746,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark WOD. High volume over 5 rounds (100 HSPU, 150 DL @ 135lb, 200 Sit-ups, 250 DU). Combines gymnastics skill, moderate lifting, core, and cardio/skill, making it very demanding due to volume."
   },
@@ -836,10 +777,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Triplet AMRAP). Combines running, heavy deadlifts (275lb), and complex Burpee Bar Muscle-Ups, demanding high levels of strength, skill, and conditioning over 18 minutes."
   },
@@ -853,9 +791,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 21,
@@ -876,9 +812,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 24,
@@ -916,9 +850,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (42 min AMRAP). Very long duration combining significant cardio (Air Bike) with a descending ladder of bodyweight movements, primarily testing endurance and pacing."
   },
@@ -960,9 +892,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Load"
-    ],
+    "tags": ["For Load"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark (For Load). Tests strength and barbell cycling endurance through a complex sequence (Power Clean, Front Squat, Push Press, Back Squat, Push Press) performed for 7 unbroken reps, repeated over 5 rounds with increasing load."
   },
@@ -993,10 +923,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 3 rounds combining heavy deadlifts and front squats (185lb) with pull-ups in a sprint format, testing strength endurance and grip."
   },
@@ -1027,10 +954,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Extremely high volume bodyweight movements (100 burpees, 200 push-ups, 300 lunges, 200 squats) combined with 3 miles of running. Exceptionally demanding on endurance and mental toughness."
   },
@@ -1061,9 +985,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 5 rounds combining multiple very heavy lifts (DL @ 315, Clean @ 225, Thruster @ 155) with high-skill gymnastics (C2B, Muscle-Ups) and burpees. Extremely demanding on strength, skill, and work capacity."
   },
@@ -1094,9 +1016,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. High volume bodyweight back squats (100 reps) interrupted by 5 burpees every minute, testing strength endurance and conditioning under constant metabolic stress."
   },
@@ -1127,9 +1047,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 4 rounds combining challenging overhead stability/endurance (100ft OH plate lunges), box jumps, wall balls, and gymnastics skill (HSPU)."
   },
@@ -1171,9 +1089,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 3 rounds combining significant running (2400m), heavy deadlifts (275lb), complex burpee pull-ups, and moderate KB snatches, testing conditioning, strength, and skill."
   },
@@ -1204,9 +1120,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 10 rounds of high-intensity intervals (sprints, pull-ups, burpees) with short rest, demanding repeated bursts of power and endurance."
   },
@@ -1237,9 +1151,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 10 rounds combining gymnastics skill (HSPU, Pull-Ups), heavy deadlifts (225lb), and cardio/skill (DUs). High volume across multiple domains makes it demanding."
   },
@@ -1253,9 +1165,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 19,
@@ -1293,9 +1203,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 5 rounds combining unconventional movements (Bear Crawl, Broad Jumps) with burpees, all performed under load (weight vest), testing coordination, power, and endurance."
   },
@@ -1326,10 +1234,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Couplet). Combines high-skill gymnastics (15 total rope climbs) with heavy back squats (75 reps @ 185lb), demanding significant upper body pulling strength, grip endurance, and leg strength/endurance."
   },
@@ -1343,9 +1248,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 26,
@@ -1366,9 +1269,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 21,
@@ -1406,10 +1307,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 4 rounds combining running with high-volume, heavy back squats (96 reps @ 185lb) and moderately heavy jerks (96 reps @ 135lb). Very demanding on strength endurance and conditioning."
   },
@@ -1440,9 +1338,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 10 rounds combining short runs, C2B pull-ups, moderate front squats (135lb), and HSPU. High volume across multiple domains (cardio, gymnastics, weightlifting) makes it demanding."
   },
@@ -1473,9 +1369,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 2 rounds of very high volume: 200 DUs, 50 heavy OHS (135lb), 50 pull-ups, and a 1-mile run per round. Exceptionally demanding across skill, strength, gymnastics, and cardio."
   },
@@ -1506,9 +1400,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (20 min AMRAP). Combines heavy squat cleans (155lb), burpees over bar, pull-ups, and running. The heavy cleans repeated over a long duration make this very demanding on strength endurance and conditioning."
   },
@@ -1539,10 +1431,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Ladder"
-    ],
+    "tags": ["For Time", "Ladder"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Very high volume running (2.6 miles) combined with high-volume bodyweight movements (210 push-ups, 210 jumping squats) and significant plank holds (3.5 min total). Exceptionally demanding on endurance."
   },
@@ -1556,9 +1445,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 15,
@@ -1596,9 +1483,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 4 rounds combining running with moderate-volume, moderate-weight bench press (135lb), wall balls, shoulder-to-overhead (95lb), and GHD sit-ups. Tests multiple domains over significant duration."
   },
@@ -1629,10 +1514,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). High volume across 10 diverse movements including multiple high-skill gymnastics elements (C2B, Triple-Unders, Ring Dips, KTE, Rope Climbs) and an unusual Wall Ball variation. Very demanding on skill and endurance."
   },
@@ -1663,9 +1545,7 @@
     },
     "results": [],
     "category": "Girl",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD. Very high volume bodyweight movements (600 total reps: 100 Pull-Ups, 200 Push-Ups, 300 Air Squats) over 5 rounds, testing muscular endurance."
   },
@@ -1707,9 +1587,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. Very high volume running (~3.2 miles) combined with high-volume bodyweight movements (392 reps + 25 burpees), primarily testing endurance and stamina."
   },
@@ -1740,10 +1618,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Combines very high volume push-ups (250 reps) with significant and increasing running distances (5600m total). Primarily tests muscular endurance (pushing) and cardiovascular endurance. The sheer volume makes it very challenging."
   },
@@ -1757,9 +1632,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 21,
@@ -1797,11 +1670,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Ladder", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Ladder Triplet). Combines heavy deadlifts (225lb), box jumps, and rowing in a pyramid rep scheme (3-7-11-14-11-7-3), testing strength and conditioning."
   },
@@ -1832,10 +1701,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Ladder"
-    ],
+    "tags": ["For Time", "Ladder"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Descending Ladder). Combines moderate squat cleans, DUs, heavy deadlifts (185lb), and box jumps, with a 50m bear crawl starting each round. Very demanding due to movement variety, heavy DLs, and bear crawl fatigue."
   },
@@ -1866,10 +1732,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Combines significant running (2 miles) with high-volume bodyweight movements (push-ups, squats, sit-ups, box jumps), all performed under load (weight vest/ruck). The combination of volume, running, and added weight makes it very challenging."
   },
@@ -1911,11 +1774,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "EMOM",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["EMOM", "For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (EMOM). Requires completing a round of Cindy (5 Pull-Ups, 10 Push-Ups, 15 Squats) every minute for 30 minutes. Tests consistency and muscular endurance at a demanding pace for a long duration."
   },
@@ -1946,9 +1805,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "difficulty_explanation": "Hero WOD. 5 rounds combining moderate-weight medicine ball slams, weighted sit-ups, rowing, and sandbag bear crawls. Tests core strength and conditioning."
   },
@@ -1962,9 +1819,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 28,
@@ -1985,9 +1840,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "EMOM"
-    ],
+    "tags": ["EMOM"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 25,
@@ -2025,9 +1878,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. High volume (480 reps total) over 3 rounds. Combines moderate KB swings, box jumps, light clusters, and challenging elevated push-ups, testing endurance across multiple movements."
   },
@@ -2079,10 +1930,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Triplet). 3 rounds combining rowing, potentially heavy bodyweight deadlifts, and box jumps, testing conditioning and strength endurance."
   },
@@ -2124,11 +1972,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Triplet AMRAP). Tests basic bodyweight muscular endurance (pull-ups, push-ups, squats) and pacing over 20 minutes."
   },
@@ -2159,10 +2003,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Extreme endurance challenge combining a very long run (10 miles) with high-volume complex burpee pull-ups (150 reps). Exceptionally demanding."
   },
@@ -2193,10 +2034,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Couplet). High volume (10 rounds) combining light-moderate thrusters (95lb) with challenging ring push-ups, testing muscular endurance and stability."
   },
@@ -2227,10 +2065,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Combines significant running (3200m) with high volume, moderate-weight squats and bench press (105 reps each @ 135lb), plus a muscle-up finisher. Tests strength endurance and conditioning over a long duration."
   },
@@ -2261,9 +2096,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Unique structure demanding extreme grip endurance (6 min cumulative hang). Significant penalty (800m run, 30 push-ups) for each drop leads to high volume and tests mental toughness."
   },
@@ -2294,9 +2127,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 6 rounds combining loaded carries (400m sandbag), moderate push presses (115lb), box jumps, and moderate SDHP (95lb). Tests conditioning and strength endurance under load."
   },
@@ -2327,9 +2158,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 4 rounds combining challenging push-up variation, weighted step-ups, complex burpee pull-ups, and rowing. High volume and varied movements test endurance and strength."
   },
@@ -2360,9 +2189,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 2 rounds of a long chipper combining high reps (34) of multiple movements (push-ups, DL, box jumps, C&J, burpees, wall balls, pull-ups) interspersed with short sprints. Tests endurance across many domains."
   },
@@ -2393,10 +2220,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Hero WOD (Triplet AMRAP). Short duration (10 min) with light DBs (35lb) and T2B. Tests conditioning and basic gymnastics/DB proficiency at high intensity."
   },
@@ -2410,9 +2234,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 12,
@@ -2481,10 +2303,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 5 rounds of heavy barbell cycling (DL, HPC, Jerk @ 155lb). Tests strength endurance, grip, and barbell proficiency under fatigue."
   },
@@ -2515,9 +2334,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Combines significant loaded running (2800m w/ 20lb ball), high-volume rope climbs (14 reps), and wall balls. Very demanding on conditioning and grip/pulling strength."
   },
@@ -2531,9 +2348,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 19,
@@ -2571,10 +2386,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Triplet). Combines challenging loaded runs (2400m total with 45lb barbell), high-skill rope climbs (9 total), and heavy thrusters (36 reps @ 135lb). Very demanding across multiple domains."
   },
@@ -2588,9 +2400,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 25,
@@ -2611,9 +2421,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 20,
@@ -2651,9 +2459,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. Five separate 5-min AMRAPs with 1 min rest. Tests capacity across diverse domains: burpees, moderate DL/box jumps, TGU, light snatches/push-ups, and rowing. Demanding due to variety and sustained effort."
   },
@@ -2684,9 +2490,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Combines high-volume pull-ups (100 total), significant running (1600m), and moderate-volume light thrusters (42 reps @ 95lb). Tests conditioning and muscular endurance."
   },
@@ -2717,10 +2521,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 minutes of high-rep box jumps and pull-ups combined with moderate push presses (115lb), testing conditioning and muscular endurance."
   },
@@ -2734,9 +2535,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 29,
@@ -2757,9 +2556,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 15,
@@ -2797,9 +2594,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Combines heavy C&J (185lb), rowing, DUs, heavy Devil Presses (50lb), heavy DLs (225lb), and very heavy Sandbag Cleans (150lb). Tests strength, power, skill, and conditioning across multiple heavy/complex movements."
   },
@@ -2830,10 +2625,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). High volume combining loaded runs (1600m w/ 20lb ball), burpees, and multiple challenging gymnastics variations (weighted pull-ups, HSPU, C2B). Very demanding on conditioning and gymnastics endurance."
   },
@@ -2847,9 +2639,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 30,
@@ -2887,9 +2677,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 5 rounds combining heavy deadlifts (225lb), pull-ups, moderate C&J (135lb), and KTE. High volume across heavy lifting and challenging gymnastics makes it very demanding."
   },
@@ -2920,9 +2708,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. Long row buy-in/cash-out (~140 cal total) sandwiching 12 rounds of moderate thrusters (115lb), burpees, and DUs. Tests conditioning and barbell cycling endurance."
   },
@@ -2953,10 +2739,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Couplet). High volume burpees (118) combined with heavy squat clean thrusters (26 reps @ 135lb). Tests conditioning and strength endurance."
   },
@@ -3028,10 +2811,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Combines heavy deadlifts (225lb) with high-skill HSPU in a sprint format, testing strength, power, and gymnastics proficiency."
   },
@@ -3062,10 +2842,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Couplet). Combines high-volume, high-skill gymnastics (56 total Muscle-Ups) with heavy farmer carries (2x50lb), testing gymnastics endurance, grip strength, and core stability."
   },
@@ -3079,9 +2856,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 18,
@@ -3119,11 +2894,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Ladder Couplet). Combines heavy deadlifts (225lb) with burpees in a high-volume pyramid rep scheme (21-15-9-9-15-21), testing strength endurance and conditioning."
   },
@@ -3175,10 +2946,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 6 rounds combining DUs, heavy KB swings (70lb), and burpees. Tests conditioning, skill, and endurance over significant volume."
   },
@@ -3192,9 +2960,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 20,
@@ -3215,9 +2981,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 15,
@@ -3238,9 +3002,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 15,
@@ -3299,10 +3061,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Combines heavy squat cleans (135lb) with challenging ring dips in a sprint format, testing strength, power, and gymnastics pushing endurance."
   },
@@ -3316,9 +3075,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 27,
@@ -3377,10 +3134,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Triplet). 3 rounds combining burpees with moderate-weight dumbbell snatches (50lb) and thrusters (50lb), testing conditioning and dumbbell proficiency in a sprint format."
   },
@@ -3394,9 +3148,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 36,
@@ -3417,9 +3169,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 7,
@@ -3440,9 +3190,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 129,
@@ -3463,9 +3211,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 43,
@@ -3486,9 +3232,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 63,
@@ -3526,9 +3270,7 @@
     },
     "results": [],
     "category": "Girl",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Girl WOD. 5 rounds combining significant running (4000m total), high-volume heavy KB swings (150 reps @ 70lb), and high-volume pull-ups (150 reps). Extreme endurance challenge."
   },
@@ -3542,9 +3284,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 17,
@@ -3565,9 +3305,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 32,
@@ -3588,9 +3326,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 17,
@@ -3611,9 +3347,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 54,
@@ -3634,9 +3368,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 27,
@@ -3685,10 +3417,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "AMRAP"
-    ],
+    "tags": ["For Time", "AMRAP"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark. 3 rounds of 1-min max rep stations (Wall Balls, SDHP, Box Jumps, Push Press, Row) with 1 min rest. Classic test of work capacity across multiple movements."
   },
@@ -3730,10 +3459,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark (Chipper). 50 reps each of 10 varied movements (box jumps, jumping pull-ups, KB swings, lunges, KTE, push press, back extensions, wall balls, burpees, DUs). Tests endurance and well-roundedness across high volume."
   },
@@ -3747,9 +3473,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 87,
@@ -3770,9 +3494,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 26,
@@ -3793,9 +3515,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 28,
@@ -3874,10 +3594,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Classic benchmark combining light thrusters (95lb) and pull-ups in a sprint format. Tests intensity and efficiency."
   },
@@ -3891,9 +3608,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 20,
@@ -3931,10 +3646,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark. 100 Burpee Pull-ups for time. Tests endurance, stamina, and mental toughness with a single, demanding movement."
   },
@@ -3948,9 +3660,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 86,
@@ -3999,10 +3709,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Loaded runs (1.5 miles total w/ 20lb ball) sandwiching descending reps of burpee pull-ups. Very demanding endurance/stamina."
   },
@@ -4044,10 +3751,7 @@
       }
     ],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Games WOD (Couplet 30-20-10). Combines high-volume T2B with very heavy KB lunges (2x70lb), demanding extreme core/grip endurance and strength."
   },
@@ -4061,9 +3765,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 212,
@@ -4084,9 +3786,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 36,
@@ -4107,9 +3807,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 27,
@@ -4130,9 +3828,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 113,
@@ -4181,11 +3877,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark. 6 rounds, 1-min stations (Row, Burpees, DUs) w/ rest. Tests consistent output across varied modalities."
   },
@@ -4199,9 +3891,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 37,
@@ -4222,9 +3912,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 130,
@@ -4245,9 +3933,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 514,
@@ -4316,10 +4002,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD. 30 C&J (135lb) for time. Tests power/efficiency in a sprint."
   },
@@ -4333,9 +4016,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 55,
@@ -4384,10 +4065,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: moderate C&J (135lb), burpees over bar. Tests barbell cycling/conditioning in a sprint."
   },
@@ -4401,9 +4079,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 147,
@@ -4424,9 +4100,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 86,
@@ -4475,9 +4149,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Load"
-    ],
+    "tags": ["For Load"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (For Load). 15-12-9 unbroken C&J. Tests maximal strength/endurance for barbell cycling complex."
   },
@@ -4491,9 +4163,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 54,
@@ -4514,9 +4184,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 34,
@@ -4537,9 +4205,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 200,
@@ -4560,9 +4226,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 41,
@@ -4611,9 +4275,7 @@
       }
     ],
     "category": "Skill",
-    "tags": [
-      "Max Effort"
-    ],
+    "tags": ["Max Effort"],
     "difficulty": "Easy",
     "difficulty_explanation": "Skill. Tests static handstand hold capacity."
   },
@@ -4627,9 +4289,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 102,
@@ -4650,9 +4310,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 28,
@@ -4673,9 +4331,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 10,
@@ -4696,9 +4352,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 54,
@@ -4719,9 +4373,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 4,
@@ -4790,10 +4442,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Triplet). 3 rounds: run, moderate KB swings (53lb), pull-ups. Classic conditioning test."
   },
@@ -4807,9 +4456,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 93,
@@ -4858,10 +4505,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Long runs (4 miles total), moderate squat cleans (135lb), box jumps, weighted lunges, w/ rest periods. Extreme endurance focus."
   },
@@ -4875,9 +4519,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 102,
@@ -4898,9 +4540,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 50,
@@ -4949,10 +4589,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 30 rounds: wall balls, HSPU, heavy power clean (225lb). Extreme volume, demanding strength/skill/endurance."
   },
@@ -4966,9 +4603,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 7,
@@ -4989,9 +4624,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 11,
@@ -5012,9 +4645,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 24,
@@ -5035,9 +4666,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 31,
@@ -5058,9 +4687,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 629,
@@ -5081,9 +4708,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 19,
@@ -5104,9 +4729,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 31,
@@ -5165,10 +4788,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: heavy snatches (135lb), burpees over bar. Tests power/conditioning sprint."
   },
@@ -5210,10 +4830,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD. 30 snatches (135lb) for time. Tests power/efficiency/strength in a sprint."
   },
@@ -5227,9 +4844,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 70,
@@ -5250,9 +4865,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 22,
@@ -5301,10 +4914,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet 21-15-9). High volume gymnastics pushing (HSPU, Ring Dips, Push-Ups). Tests pushing endurance/skill."
   },
@@ -5318,9 +4928,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 340,
@@ -5341,9 +4949,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 22,
@@ -5402,10 +5008,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Triplet). Row, light thrusters (45lb), pull-ups. Classic conditioning test."
   },
@@ -5419,9 +5022,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 145,
@@ -5442,9 +5043,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 11,
@@ -5465,9 +5064,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 21,
@@ -5488,9 +5085,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 110,
@@ -5511,9 +5106,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 151,
@@ -5534,9 +5127,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 53,
@@ -5557,9 +5148,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 194,
@@ -5580,9 +5169,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 124,
@@ -5603,9 +5190,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 401,
@@ -5626,9 +5211,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 50,
@@ -5649,9 +5232,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 18,
@@ -5672,9 +5253,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -5695,9 +5274,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 224,
@@ -5718,9 +5295,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 205,
@@ -5741,9 +5316,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 40,
@@ -5764,9 +5337,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 186,
@@ -5787,9 +5358,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 103,
@@ -5810,9 +5379,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 29,
@@ -5861,10 +5428,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD. 150 Wall Balls for time. Tests muscular endurance/conditioning sprint."
   },
@@ -5906,10 +5470,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (Triplet). 5 rounds: run, high-vol box jumps, high-vol wall balls. Tests high-volume conditioning/endurance."
   },
@@ -5923,9 +5484,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 18,
@@ -5946,9 +5505,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -5969,9 +5526,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 87,
@@ -5992,9 +5547,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 33,
@@ -6015,9 +5568,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -6038,9 +5589,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 9,
@@ -6061,9 +5610,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 12,
@@ -6084,9 +5631,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 190,
@@ -6107,9 +5652,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 47,
@@ -6158,10 +5701,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Easy",
     "difficulty_explanation": "Benchmark (Couplet). 3 rounds: moderate thrusters (95lb), burpees. Short conditioning test."
   },
@@ -6192,9 +5732,7 @@
     },
     "results": [],
     "category": "Girl",
-    "tags": [
-      "Couplet"
-    ],
+    "tags": ["Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (Max Reps). 5 rounds: max reps hang power snatch (3/4 BW), max reps HSPU. Tests strength/power/gymnastics capacity."
   },
@@ -6208,9 +5746,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 43,
@@ -6231,9 +5767,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 312,
@@ -6254,9 +5788,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 17,
@@ -6277,9 +5809,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 17,
@@ -6300,9 +5830,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 37,
@@ -6323,9 +5851,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 68,
@@ -6374,11 +5900,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Ladder", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Girl WOD (Ladder 10->1). Heavy DL (1.5x BW), heavy Bench (BW), moderate Clean (0.75x BW). Classic strength endurance test."
   },
@@ -6392,9 +5914,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 25,
@@ -6415,9 +5935,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 1722,
@@ -6438,9 +5956,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 33,
@@ -6461,9 +5977,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 17,
@@ -6484,9 +5998,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 24,
@@ -6535,9 +6047,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Multiple runs interspersed with moderate C&J (155lb), T2B, wall balls, KB swings, ring dips, heavy weighted lunges (155lb). Very demanding volume/variety/strength/skill."
   },
@@ -6579,10 +6089,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Multiple runs interspersed with heavy DL (275lb), heavy KB swings (70lb), moderate OHS (115lb), burpees, C2B, box jumps, moderate DB squat cleans (45lb). Extremely demanding volume/strength/variety."
   },
@@ -6596,9 +6103,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 26,
@@ -6636,11 +6141,7 @@
     },
     "results": [],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Girl WOD (Ladder 10->1). Muscle-ups, bodyweight C&J. Extremely demanding skill/strength combination."
   },
@@ -6682,10 +6183,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (Max Reps). 5 rounds: max reps bodyweight bench press, max reps pull-ups. Tests pushing/pulling strength endurance."
   },
@@ -6699,9 +6197,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 91,
@@ -6722,9 +6218,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 44,
@@ -6745,9 +6239,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 33,
@@ -6768,9 +6260,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 256,
@@ -6791,9 +6281,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 1105,
@@ -6814,9 +6302,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 23,
@@ -6837,9 +6323,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 127,
@@ -6860,9 +6344,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 13,
@@ -6883,9 +6365,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 50,
@@ -6934,11 +6414,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 mins: very heavy DL (405lb), T2B, bar facing burpees. Extremely demanding strength/conditioning."
   },
@@ -6980,11 +6456,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Girl WOD (Triplet AMRAP). 20 mins: HSPU, pistols, pull-ups. Tests high-skill gymnastics endurance."
   },
@@ -6998,9 +6470,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 47,
@@ -7021,9 +6491,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 32,
@@ -7044,9 +6512,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 29,
@@ -7067,9 +6533,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 162,
@@ -7090,9 +6554,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 17,
@@ -7113,9 +6575,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 104,
@@ -7164,9 +6624,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 13 rounds: strict pull-ups, box step-ups, burpees, all w/ vest. Extreme volume/endurance under load."
   },
@@ -7180,9 +6638,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 278,
@@ -7203,9 +6659,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 20,
@@ -7254,11 +6708,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet AMRAP). 30 mins: heavy DL (275lb), push-ups, box jumps. Tests long-duration strength/endurance."
   },
@@ -7272,9 +6722,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 20,
@@ -7295,9 +6743,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 22,
@@ -7318,9 +6764,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 154,
@@ -7341,9 +6785,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 13,
@@ -7392,9 +6834,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 4 rounds: moderate KB GTOH/FS/Push-ups (53lb), optional KB run. Tests strength/endurance with KB complex."
   },
@@ -7408,9 +6848,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 87,
@@ -7431,9 +6869,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 30,
@@ -7454,9 +6890,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 29,
@@ -7477,9 +6911,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 456,
@@ -7500,9 +6932,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 10,
@@ -7523,9 +6953,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 66,
@@ -7594,10 +7022,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Chipper). Run buy-in/out, high-vol pull-ups, push-ups, squats. Classic endurance test (Very Hard w/ vest)."
   },
@@ -7639,10 +7064,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Couplet). 5 rounds: run, moderate OHS (95lb). Tests conditioning/overhead stability."
   },
@@ -7684,10 +7106,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark (Triplet). 3 rounds: squats, muscle-ups, moderate hang power cleans (135lb). Tests skill/power/conditioning."
   },
@@ -7729,11 +7148,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 mins: muscle-ups, HSPU, heavy KB swings (70lb). Tests high-skill gymnastics/power endurance."
   },
@@ -7747,9 +7162,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 83,
@@ -7770,9 +7183,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 43,
@@ -7793,9 +7204,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 80,
@@ -7816,9 +7225,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 37,
@@ -7867,11 +7274,7 @@
       }
     ],
     "category": "Girl",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (AMRAP). 20 mins: run, max pull-ups. Tests pulling endurance/conditioning."
   },
@@ -7885,9 +7288,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 34,
@@ -7908,9 +7309,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 46,
@@ -7931,9 +7330,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 31,
@@ -7954,9 +7351,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 75,
@@ -7977,9 +7372,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 54,
@@ -8000,9 +7393,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 7,
@@ -8023,9 +7414,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 6,
@@ -8046,9 +7435,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -8069,9 +7456,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 15,
@@ -8120,11 +7505,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Hero WOD (Ladder). Ascending reps: light thrusters (95lb), bar facing burpees. Tests conditioning/endurance sprint."
   },
@@ -8176,11 +7557,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["AMRAP", "For Time", "Monostructural"],
     "difficulty": "Easy",
     "difficulty_explanation": "Open WOD (AMRAP). 7 mins of burpees. Simple, short bodyweight endurance test."
   },
@@ -8222,11 +7599,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Open WOD (Triplet AMRAP). 10 mins: moderate S2OH (115lb), moderate DL (115lb), box jumps. Tests moderate barbell cycling/conditioning."
   },
@@ -8268,10 +7641,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Couplet"
-    ],
+    "tags": ["AMRAP", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds: moderate thrusters (100lb), C2B. Tests high-intensity threshold/gymnastics endurance."
   },
@@ -8313,11 +7683,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Couplet",
-      "Ladder"
-    ],
+    "tags": ["AMRAP", "Couplet", "Ladder"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/reps: moderate OHS (95lb), C2B. Tests threshold/gymnastics endurance."
   },
@@ -8359,12 +7725,28 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "For Time"
-    ],
+    "tags": ["AMRAP", "For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (AMRAP Chipper). 14 mins: row, T2B, wall balls, moderate cleans (135lb), muscle-ups. Tests well-roundedness/skill/conditioning."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-14-5/",
+    "wodName": "Open 14.5",
+    "description": "21-18-15-12-9-6-3 Reps, For Time\nThrusters (95/65 lb)\nBar Facing Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 720 },
+        "intermediate": { "min": 721, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Advanced",
+    "difficulty_explanation": "A classic CrossFit 'gas tank' test. High-volume descending ladder of light thrusters and burpees demands relentless pacing, cardiovascular endurance, and mental toughness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-1/",
@@ -8393,10 +7775,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Couplet"
-    ],
+    "tags": ["AMRAP", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Open WOD (Couplet AMRAP). 15 mins: wall balls, row. Simple conditioning test."
   },
@@ -8427,10 +7806,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight: T2B, DUs, heavy squat cleans (up to 315lb). Extremely demanding strength/skill/conditioning threshold test."
   },
@@ -8461,10 +7837,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (Chipper). DB OH lunges, DB box step-ups, strict HSPU, handstand walk. Very demanding gymnastics skill/strength/endurance."
   },
@@ -8506,10 +7879,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (2 Parts). Part 1 (3 rounds): light snatches (95lb), burpees. Part 2 (3 rounds): bar MU, burpees. Tests light lifting/conditioning then gymnastics/conditioning."
   },
@@ -8540,10 +7910,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Open WOD (Couplet). 10 rounds: light GTOH (95lb), bar facing burpees. Tests conditioning/pacing."
   },
@@ -8574,10 +7941,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: moderate DB thrusters (50lb), T2B, DUs. Tests long-duration conditioning/skill."
   },
@@ -8608,11 +7972,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Chipper",
-      "Ladder"
-    ],
+    "tags": ["For Time", "Chipper", "Ladder"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (Chipper Ladder). 21-15-9 DL (225lb)/HSPU, then 21-15-9 DL (315lb)/HSW. Extremely demanding strength/skill combination."
   },
@@ -8643,10 +8003,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (Chipper). Ascending weight/skill: box jumps, C&J (up to 315lb), pistols. Extremely demanding strength/skill progression."
   },
@@ -8677,10 +8034,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (Triplet). For time (partitioned): ring MU, row, wall balls. High volume skill/conditioning test."
   },
@@ -8722,11 +8076,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Ladder). Ascending reps: wall walks, DUs. Tests gymnastics endurance/skill."
   },
@@ -8768,11 +8118,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Couplet",
-      "Ladder"
-    ],
+    "tags": ["For Time", "Couplet", "Ladder"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Ladder Couplet). Ascending DB snatches (50lb), constant burpee box jump overs. Tests high-volume conditioning/unilateral strength."
   },
@@ -8824,10 +8170,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (Chipper). 3 sections w/ rest: FS/T2B, FS/C2B, FS/Bar MU (all moderate weight). Very demanding gymnastics progression/endurance."
   },
@@ -8869,9 +8212,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Load"
-    ],
+    "tags": ["For Load"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (For Load). Establish 1RM complex (DL+Clean+Hang Clean+Jerk) after 21.3. Tests maximal strength under fatigue."
   },
@@ -8902,10 +8243,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Triplet AMRAP). 15 mins: wall walks, moderate DB snatches (50lb), box jump overs. Tests gymnastics/DB cycling/conditioning."
   },
@@ -8936,11 +8274,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Couplet",
-      "Ladder"
-    ],
+    "tags": ["For Time", "Couplet", "Ladder"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Ladder Couplet). 10 min cap: Ascending/descending DL (225lb), bar facing burpees. Tests strength endurance/conditioning sprint."
   },
@@ -8971,10 +8305,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (Chipper). Pull-ups/DUs/Thrusters (95lb), then C2B/DUs/Thrusters (115lb), then Bar MU/DUs/Thrusters (135lb). Demanding gymnastics/weight progression."
   },
@@ -9016,10 +8347,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Chipper). 14 min cap: row, T2B, wall balls, moderate cleans (145lb), muscle-ups. Tests well-roundedness/skill/conditioning."
   },
@@ -9061,10 +8389,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Couplet"
-    ],
+    "tags": ["AMRAP", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Open WOD (AMRAP). 15 mins: ascending burpee pull-ups, ascending shuttle runs. Tests increasing volume bodyweight/conditioning."
   },
@@ -9095,10 +8420,7 @@
     },
     "results": [],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Chipper"
-    ],
+    "tags": ["AMRAP", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
   },
@@ -9140,10 +8462,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Load",
-      "Weightlifting"
-    ],
+    "tags": ["For Load", "Weightlifting"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (For Load). Establish 1RM thruster after 23.2A. Tests maximal strength under fatigue."
   },
@@ -9185,10 +8504,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Triplet). Descending reps: DB snatches (alternating arms, 50lb), lateral burpees over DB. Tests unilateral strength/conditioning sprint."
   },
@@ -9230,10 +8546,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "AMRAP",
-      "Triplet"
-    ],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: row, moderate DL (185lb), DUs. Tests long-duration conditioning/strength endurance."
   },
@@ -9275,10 +8588,7 @@
       }
     ],
     "category": "Open",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets."
   },
@@ -9292,9 +8602,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 49,
@@ -9315,9 +8623,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 18,
@@ -9338,9 +8644,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 11,
@@ -9361,9 +8665,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 72,
@@ -9384,9 +8686,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 51,
@@ -9407,9 +8707,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 39,
@@ -9430,9 +8728,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 54,
@@ -9453,9 +8749,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 17,
@@ -9504,11 +8798,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "AMRAP",
-      "EMOM",
-      "For Time"
-    ],
+    "tags": ["AMRAP", "EMOM", "For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (AMRAP w/ Run). 20 min AMRAP: C2B, moderate DB thrusters (50lb), w/ DU interrupt every 2 mins, + 2-mile run cash-out. Complex structure testing skill/conditioning/endurance."
   },
@@ -9522,9 +8812,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 39,
@@ -9545,9 +8833,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 27,
@@ -9568,9 +8854,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 172,
@@ -9591,9 +8875,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 52,
@@ -9642,10 +8924,7 @@
       }
     ],
     "category": "Quarterfinals",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Quarterfinals WOD (Chipper). Rounds of HSPU/T2B, then Strict HSPU/Rope Climbs, then Chest-to-Wall HSPU/Muscle-Ups. Extreme gymnastics skill/volume progression."
   },
@@ -9659,9 +8938,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 71,
@@ -9682,9 +8959,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 73,
@@ -9705,9 +8980,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 77,
@@ -9728,9 +9001,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 53,
@@ -9779,10 +9050,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Medium",
     "difficulty_explanation": "Hero WOD. 75 power snatches (75lb) for time. Tests light barbell cycling efficiency/endurance sprint."
   },
@@ -9796,9 +9064,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 130,
@@ -9819,9 +9085,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -9842,9 +9106,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 16,
@@ -9893,9 +9155,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. 7 rounds: run, lunges, pull-ups, burpees. Tests high-volume bodyweight endurance/conditioning. (Note: This is the version without a vest)."
   },
@@ -9909,9 +9169,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 220,
@@ -9932,9 +9190,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 28,
@@ -9955,9 +9211,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 39,
@@ -10006,10 +9260,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Couplet). 3 miles run total, 150 burpees, optional vest. Extreme endurance test."
   },
@@ -10023,9 +9274,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 23,
@@ -10046,9 +9295,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 14,
@@ -10069,9 +9316,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 56,
@@ -10092,9 +9337,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 60,
@@ -10115,9 +9358,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 52,
@@ -10138,9 +9379,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 23,
@@ -10189,10 +9428,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Easy",
     "difficulty_explanation": "Benchmark. Short sprint test of rowing power/efficiency."
   },
@@ -10206,9 +9442,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 103,
@@ -10267,10 +9501,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "For Time",
-      "Monostructural"
-    ],
+    "tags": ["For Time", "Monostructural"],
     "difficulty": "Easy",
     "difficulty_explanation": "Benchmark. Standard endurance test."
   },
@@ -10284,9 +9515,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 29,
@@ -10307,9 +9536,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 14,
@@ -10358,10 +9585,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Couplet). 5 rounds: muscle-ups, burpees. Tests high-skill gymnastics/conditioning endurance."
   },
@@ -10375,9 +9599,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 40,
@@ -10398,9 +9620,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 28,
@@ -10421,9 +9641,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 72,
@@ -10444,9 +9662,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 42,
@@ -10467,9 +9683,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 22,
@@ -10518,9 +9732,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD. Run buy-in/out, 2 rounds: high-vol burpees, pull-ups, pistols, heavy KB swings (70lb). Tests high-volume endurance/skill/power."
   },
@@ -10534,9 +9746,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 42,
@@ -10557,9 +9767,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 58,
@@ -10580,9 +9788,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 19,
@@ -10603,9 +9809,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 55,
@@ -10626,9 +9830,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 32,
@@ -10649,9 +9851,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 37,
@@ -10672,9 +9872,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 58,
@@ -10695,9 +9893,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 61,
@@ -10718,9 +9914,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 65,
@@ -10741,9 +9935,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 9,
@@ -10764,9 +9956,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 103,
@@ -10835,11 +10025,7 @@
       }
     ],
     "category": "Other",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Ladder", "Couplet"],
     "difficulty": "Hard",
     "difficulty_explanation": "Benchmark (Ladder). Ascending shuttle runs, ascending muscle-ups. Tests increasing skill/conditioning demand."
   },
@@ -10853,9 +10039,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 36,
@@ -10876,9 +10060,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 24,
@@ -10899,9 +10081,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 140,
@@ -10922,9 +10102,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 18,
@@ -10945,9 +10123,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 22,
@@ -10968,9 +10144,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 31,
@@ -10991,9 +10165,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 38,
@@ -11014,9 +10186,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 34,
@@ -11037,9 +10207,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 14,
@@ -11060,9 +10228,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 10,
@@ -11083,9 +10249,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 60,
@@ -11106,9 +10270,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 112,
@@ -11129,9 +10291,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 59,
@@ -11152,9 +10312,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 73,
@@ -11203,9 +10361,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "Tabata"
-    ],
+    "tags": ["Tabata"],
     "difficulty": "Medium",
     "difficulty_explanation": "Benchmark (Tabata). Pull-ups, Push-ups, Sit-ups, Squats. Tests max reps in Tabata intervals across basic bodyweight movements."
   },
@@ -11247,9 +10403,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": [
-      "Tabata"
-    ],
+    "tags": ["Tabata"],
     "difficulty": "Medium",
     "difficulty_explanation": "Benchmark (Tabata). Row, Squat, Pull-up, Push-up, Sit-up. Score is lowest reps per exercise. Tests consistent output across varied movements in Tabata intervals."
   },
@@ -11263,9 +10417,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 595,
@@ -11286,9 +10438,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 51,
@@ -11309,9 +10459,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 257,
@@ -11332,9 +10480,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 25,
@@ -11355,9 +10501,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 94,
@@ -11378,9 +10522,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 49,
@@ -11401,9 +10543,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 593,
@@ -11452,9 +10592,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 7 rounds of 7 reps: HSPU, heavy thrusters (135lb), KTE, heavy DL (245lb), burpees, heavy KB swings (70lb), pull-ups. Extremely demanding strength/skill/volume across 7 movements."
   },
@@ -11468,9 +10606,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 11,
@@ -11491,9 +10627,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 28,
@@ -11514,9 +10648,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 40,
@@ -11537,9 +10669,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 14,
@@ -11560,9 +10690,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 8,
@@ -11583,9 +10711,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 20,
@@ -11606,9 +10732,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 139,
@@ -11629,9 +10753,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 35,
@@ -11652,9 +10774,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 23,
@@ -11675,9 +10795,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 90,
@@ -11698,9 +10816,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 45,
@@ -11721,9 +10837,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 31,
@@ -11744,9 +10858,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 65,
@@ -11767,9 +10879,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 34,
@@ -11790,9 +10900,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 32,
@@ -11813,9 +10921,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 73,
@@ -11836,9 +10942,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 76,
@@ -11859,9 +10963,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 27,
@@ -11882,9 +10984,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 34,
@@ -11905,9 +11005,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 98,
@@ -11928,9 +11026,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 12,
@@ -11951,9 +11047,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 108,
@@ -12002,9 +11096,7 @@
       }
     ],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. 5 rounds of high volume across 5 movements including heavy KB swings (70lb). Extreme endurance/conditioning test."
   },
@@ -12018,9 +11110,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 265,
@@ -12041,9 +11131,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 23,
@@ -12064,9 +11152,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 39,
@@ -12087,9 +11173,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 309,
@@ -12110,9 +11194,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 23,
@@ -12133,9 +11215,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 23,
@@ -12156,9 +11236,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 4,
@@ -12179,9 +11257,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 226,
@@ -12202,9 +11278,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 39,
@@ -12225,9 +11299,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "_source_data": {
       "type": "CrossFit Hero WOD",
       "popularity": 414,
@@ -12248,9 +11320,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "AMRAP"
-    ],
+    "tags": ["AMRAP"],
     "_source_data": {
       "type": "Hero WOD",
       "popularity": 28,

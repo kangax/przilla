@@ -7562,6 +7562,37 @@
     "difficulty_explanation": "Open WOD (AMRAP). 7 mins of burpees. Simple, short bodyweight endurance test."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-13-1/",
+    "wodName": "Open 13.1",
+    "description": "AMRAP in 17 minutes\n40 Burpees\n30 Snatches (75/45 lb)\n30 Burpees\n30 Snatches (135/75 lb)\n20 Burpees\n30 Snatches (165/100 lb)\n10 Burpees\nMax Snatches (210/120 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 191,
+          "max": null
+        },
+        "advanced": {
+          "min": 161,
+          "max": 190
+        },
+        "intermediate": {
+          "min": 101,
+          "max": 160
+        },
+        "beginner": {
+          "min": 40,
+          "max": 100
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A long 17-minute AMRAP combining high-volume burpees with increasingly heavy snatches. Tests endurance, pacing, and strength under fatigue, culminating in a very heavy final barbell."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-13-2/",
     "wodName": "Open 13.2",
     "description": "AMRAP in 10 minutes\n5 Shoulder-to-Overheads (115/75 lb)\n10 Deadlifts (115/75 lb)\n15 Box Jumps (24/20 in)",
@@ -7602,6 +7633,68 @@
     "tags": ["AMRAP", "For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Open WOD (Triplet AMRAP). 10 mins: moderate S2OH (115lb), moderate DL (115lb), box jumps. Tests moderate barbell cycling/conditioning."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-13-3/",
+    "wodName": "Open 13.3",
+    "description": "AMRAP in 12 minutes\n150 Wall Balls (20/14 lb)\n90 Double-Unders\n30 Muscle-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 270,
+          "max": null
+        },
+        "advanced": {
+          "min": 255,
+          "max": 269
+        },
+        "intermediate": {
+          "min": 241,
+          "max": 254
+        },
+        "beginner": {
+          "min": 0,
+          "max": 240
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Triplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A demanding 12-minute triplet featuring high-volume wall balls, double-unders, and a significant set of muscle-ups, a high-skill gymnastics movement that serves as a major bottleneck."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-13-4/",
+    "wodName": "Open 13.4",
+    "description": "AMRAP in 7 minutes\n3 Clean-and-Jerks (135/95 lb)\n3 Toes-to-Bars\n6 Clean-and-Jerks (135/95 lb)\n6 Toes-to-Bars\n9 Clean-and-Jerks (135/95 lb)\n9 Toes-to-Bars\n12 Clean-and-Jerks (135/95 lb)\n12 Toes-to-Bars\nIf athlete completes the round of 12 go on to 15.  Complete 15 go on the 18 etc.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 90,
+          "max": null
+        },
+        "advanced": {
+          "min": 60,
+          "max": 89
+        },
+        "intermediate": {
+          "min": 36,
+          "max": 59
+        },
+        "beginner": {
+          "min": 18,
+          "max": 35
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Ladder"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A fast, intense 7-minute AMRAP featuring an ascending ladder of moderate-weight clean-and-jerks and toes-to-bars. Tests barbell cycling, grip endurance, and core strength under high fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-13-5/",

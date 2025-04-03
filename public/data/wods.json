@@ -5622,6 +5622,37 @@
     "difficulty_explanation": "Hero WOD. 7 rounds: run, pull-ups, dips, crunches, burpees. High volume bodyweight/cardio test."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/king-kong/",
+    "wodName": "King Kong",
+    "description": "3 Rounds For Time\n1 Deadlift (455/320 lb)\n2 Muscle-Ups\n3 Squat Cleans (250/175 lb)\n4 Handstand Push Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A classic test of elite strength and gymnastics. Combines extremely heavy deadlifts and squat cleans with muscle-ups and handstand push-ups."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/klepto/",
     "wodName": "Klepto",
     "description": "4 Rounds For Time\n27 Box Jumps (24/20 in)\n20 Burpees\n11 Squat Cleans (145/100 lb)",
@@ -8226,94 +8257,332 @@
     "difficulty_explanation": "A classic CrossFit 'gas tank' test. High-volume descending ladder of light thrusters and burpees demands relentless pacing, cardiovascular endurance, and mental toughness."
   },
   {
-    "wodUrl": "https://wodwell.com/wod/open-25-1/",
-    "wodName": "Open 25.1",
-    "description": "AMRAP 15 minutes:\n3 Lateral Burpees Over the Dumbbell* (50/35 lb)\n3 Dumbbell Hang Clean-to-Overheads* (50/35 lb)\n30 ft Walking Lunge (2x15 feet)\n*After completing each round add 3 reps to the Burpees and Hang Clean-to-Overheads.",
+    "wodUrl": "https://wodwell.com/wod/open-15-1/",
+    "wodName": "Open 15.1",
+    "description": "AMRAP in 9 minutes\n15 Toes-to-Bars\n10 Deadlifts (115/75 lb)\n5 Snatches (115/75 lb)",
     "benchmarks": {
       "type": "reps",
       "levels": {
         "elite": {
-          "min": 216,
+          "min": 240,
           "max": null
         },
         "advanced": {
-          "min": 168,
-          "max": 215
+          "min": 180,
+          "max": 239
         },
         "intermediate": {
-          "min": 126,
-          "max": 167
+          "min": 120,
+          "max": 179
         },
         "beginner": {
-          "min": 36,
-          "max": 125
+          "min": 30,
+          "max": 119
         }
       }
     },
-    "results": [
-      {
-        "date": "28 Feb'25",
-        "rxStatus": "Rx",
-        "notes": "",
-        "score_time_seconds": null,
-        "score_reps": 172,
-        "score_load": null,
-        "score_rounds_completed": null,
-        "score_partial_reps": null
-      }
-    ],
+    "results": [],
     "category": "Open",
-    "tags": ["AMRAP", "Ladder"],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 15-minute AMRAP with increasing reps of burpees and dumbbell C2OH, interspersed with lunges. Tests endurance and pacing."
+    "difficulty_explanation": "A 9-minute triplet combining toes-to-bars, moderate deadlifts, and moderate snatches. Tests grip endurance and barbell cycling efficiency."
   },
   {
-    "wodUrl": "https://wodwell.com/wod/open-25-2/",
-    "wodName": "Open 25.2",
-    "description": "For Time\n21 Pull-Ups\n42 Double-Unders\n21 Thrusters (95/65 lb)\n18 Chest-to-Bar Pull-Ups\n36 Double-Unders\n18 Thrusters (115/75 lb)\n15 Bar Muscle-Ups\n30 Double-Unders\n15 Thrusters (135/85 lb)\nTime Cap: 12 Minutes",
+    "wodUrl": "https://wodwell.com/wod/open-15-1/",
+    "wodName": "Open 15.1A",
+    "description": "Immediately following 15.1, from 9:00-15:00 (6 minutes):\n1-Rep-Max Clean-and-Jerk",
+    "benchmarks": {
+      "type": "load",
+      "levels": {
+        "elite": {
+          "min": 315,
+          "max": null
+        },
+        "advanced": {
+          "min": 255,
+          "max": 314
+        },
+        "intermediate": {
+          "min": 185,
+          "max": 254
+        },
+        "beginner": {
+          "min": 95,
+          "max": 184
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 6-minute window to establish a 1-rep max clean-and-jerk immediately after a 9-minute AMRAP. Tests maximal strength under fatigue."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-15-2/",
+    "wodName": "Open 15.2",
+    "description": "For As Long As Possible\nFrom 0:00-3:00 2 rounds of:\n10 Overhead Squats (95/65 lb)\n10 Chest-to-Bar Pull-Ups\nFrom 3:00-6:00 2 rounds of:\n12 Overhead Squats (95/65 lb)\n12 Chest-to-Bar Pull-Ups\nFrom 6:00-9:00 2 rounds of:\n14 Overhead Squats (95/65 lb)\n14 Chest-to-Bar Pull-Ups\nFollow the pattern until you fail to complete both rounds.",
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 216, "max": 216 },
-        "advanced": { "min": 187, "max": 215 },
-        "intermediate": { "min": 157, "max": 186 },
-        "beginner": { "min": 84, "max": 156 }
+        "elite": {
+          "min": 140,
+          "max": null
+        },
+        "advanced": {
+          "min": 88,
+          "max": 139
+        },
+        "intermediate": {
+          "min": 40,
+          "max": 87
+        },
+        "beginner": {
+          "min": 1,
+          "max": 39
+        }
       }
     },
-    "results": [
-      {
-        "date": "8 Mar'25",
-        "rxStatus": "Rx",
-        "notes": "",
-        "score_time_seconds": null,
-        "score_reps": 205,
-        "score_load": null,
-        "score_rounds_completed": null,
-        "score_partial_reps": null
-      }
-    ],
+    "results": [],
     "category": "Open",
-    "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "A challenging triplet combining ascending gymnastics skills (Pull-up, C2B, BMU) with double-unders and increasing thruster weight. Tests skill, strength, and conditioning."
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "An ascending couplet AMRAP with 3-minute time gates. Tests overhead squat proficiency and chest-to-bar pull-up capacity under increasing volume and time pressure."
   },
   {
-    "wodUrl": "https://wodwell.com/wod/open-25-3/",
-    "wodName": "Open 25.3",
-    "description": "For Time:\n5 Wall Walks\n50 calorie Row\n5 Wall Walks\n25 Deadlifts (225/155 lb)\n5 Wall Walks\n25 Cleans (135/85 lb)\n5 Wall Walks\n25 Snatches (95/65 lb)\n5 Wall Walks\n50 calorie Row\nTime cap: 20 minutes",
+    "wodUrl": "https://wodwell.com/wod/open-15-3/",
+    "wodName": "Open 15.3",
+    "description": "AMRAP in 14 minutes\n7 Muscle-Ups\n50 Wall Ball Shots (20/14 lb)\n100 Double-Unders",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 471,
+          "max": null
+        },
+        "advanced": {
+          "min": 314,
+          "max": 470
+        },
+        "intermediate": {
+          "min": 157,
+          "max": 313
+        },
+        "beginner": {
+          "min": 1,
+          "max": 156
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Triplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A 14-minute triplet featuring muscle-ups, high-volume wall balls, and double-unders. Tests high-skill gymnastics, endurance, and coordination."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-15-4/",
+    "wodName": "Open 15.4",
+    "description": "AMRAP in 8 minutes\n3 Handstand Push-Ups\n3 Cleans (185/125 lb)\n6 Handstand Push-Ups\n3 Cleans (185/125 lb)\n9 Handstand Push-Ups\n3 Cleans (185/125 lb)\n12 Handstand Push-Ups\n6 Cleans (185/125 lb)\n15 Handstand Push-Ups\n6 Cleans (185/125 lb)\n18 Handstand Push-Ups\n6 Cleans (185/125 lb)\n21 Handstand Push-Ups\n9 Cleans (185/125 lb)\nEtc. following same pattern until time is up",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 117,
+          "max": null
+        },
+        "advanced": {
+          "min": 78,
+          "max": 116
+        },
+        "intermediate": {
+          "min": 39,
+          "max": 77
+        },
+        "beginner": {
+          "min": 1,
+          "max": 38
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Ladder"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "An 8-minute AMRAP coupling increasing handstand push-ups with heavy cleans. Tests high-skill gymnastics capacity and strength under fatigue."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-15-5/",
+    "wodName": "Open 15.5",
+    "description": "27-21-15-9 Reps for Time\nRow (calories)\nThrusters (95/65 lb)",
     "benchmarks": {
       "type": "time",
       "levels": {
         "elite": {
           "min": null,
-          "max": 900
+          "max": 360
         },
         "advanced": {
-          "min": 901,
-          "max": 1080
+          "min": 361,
+          "max": 480
         },
         "intermediate": {
-          "min": 1081,
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A classic descending rep scheme couplet of rowing and thrusters. A brutal test of cardiovascular capacity and pacing."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-16-1/",
+    "wodName": "Open 16.1",
+    "description": "AMRAP in 20 minutes\n25 foot Overhead Walking Lunges (95/65 lb)\n8 Bar Facing Burpees\n25 foot Overhead Walking Lunges (95/65 lb)\n8 Chest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 448,
+          "max": null
+        },
+        "advanced": {
+          "min": 336,
+          "max": 447
+        },
+        "intermediate": {
+          "min": 224,
+          "max": 335
+        },
+        "beginner": {
+          "min": 1,
+          "max": 223
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A 20-minute AMRAP combining overhead lunges, burpees, and chest-to-bar pull-ups. Tests endurance, stability, and gymnastics capacity over a long duration."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-16-2/",
+    "wodName": "Open 16.2",
+    "description": "AMRAP in 20 minutes\nContinue until 4 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n15 Squat Cleans (135/85 lb)\nIf completed before 4 minutes continue until 8 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n13 Squat Cleans (185/115 lb)\nIf completed before 8 minutes continue until 12 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n11 Squat Cleans (225/145 lb)\nIf completed before 12 minutes continue until 16 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n9 Squat Cleans (275/175 lb)\nIf completed before 16 minutes continue until 20 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n7 Squat Cleans (315/205 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 351,
+          "max": 430
+        },
+        "advanced": {
+          "min": 251,
+          "max": 350
+        },
+        "intermediate": {
+          "min": 151,
+          "max": 250
+        },
+        "beginner": {
+          "min": 50,
+          "max": 150
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Combines gymnastics (Toes-to-Bars), cardio/skill (Double-Unders), and progressively heavy weightlifting (Squat Cleans) under increasing time pressure. Requires high capacity in all three modalities, especially significant strength for later rounds with very heavy weights. (Identical to 19.2)"
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-16-3/",
+    "wodName": "Open 16.3",
+    "description": "AMRAP in 7 minutes\n10 Power Snatches (75/55 lb)\n3 Bar Muscle-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 104,
+          "max": null
+        },
+        "advanced": {
+          "min": 65,
+          "max": 103
+        },
+        "intermediate": {
+          "min": 26,
+          "max": 64
+        },
+        "beginner": {
+          "min": 1,
+          "max": 25
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A short 7-minute sprint coupling light power snatches with bar muscle-ups. Tests efficiency and high-skill gymnastics capacity under intensity."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-16-4/",
+    "wodName": "Open 16.4",
+    "description": "AMRAP in 13 minutes\n55 Deadlifts (225/155 lb)\n55 Wall Ball Shots (20/14 lb)\n55 calorie Row\n55 Handstand Push-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 220,
+          "max": null
+        },
+        "advanced": {
+          "min": 165,
+          "max": 219
+        },
+        "intermediate": {
+          "min": 110,
+          "max": 164
+        },
+        "beginner": {
+          "min": 1,
+          "max": 109
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A demanding 13-minute chipper-style AMRAP with large sets of heavy deadlifts, wall balls, rowing, and handstand push-ups. Tests strength endurance, work capacity, and gymnastics skill."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-16-5/",
+    "wodName": "Open 16.5",
+    "description": "21-18-15-12-9-6-3 Reps For Time\nThrusters (95/65 lb)\nBar Facing Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 720
+        },
+        "intermediate": {
+          "min": 721,
           "max": 1200
         },
         "beginner": {
@@ -8322,22 +8591,166 @@
         }
       }
     },
-    "results": [
-      {
-        "date": "14 Mar'25",
-        "rxStatus": "Rx",
-        "notes": "",
-        "score_time_seconds": 1179,
-        "score_reps": null,
-        "score_load": null,
-        "score_rounds_completed": null,
-        "score_partial_reps": null
-      }
-    ],
+    "results": [],
     "category": "Open",
-    "tags": ["For Time", "Chipper"],
+    "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A chipper-style workout featuring wall walks, rowing, and a barbell complex (DL, Clean, Snatch). Tests endurance, strength, and gymnastics stamina."
+    "difficulty_explanation": "A classic descending rep scheme couplet of thrusters and burpees. A brutal test of cardiovascular capacity and pacing. (Identical to 14.5)"
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-17-1/",
+    "wodName": "Open 17.1",
+    "description": "For Time\n10 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n20 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n30 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n40 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n50 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 660
+        },
+        "advanced": {
+          "min": 661,
+          "max": 840
+        },
+        "intermediate": {
+          "min": 841,
+          "max": 1080
+        },
+        "beginner": {
+          "min": 1081,
+          "max": 1200
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A long chipper-style workout with ascending dumbbell snatches and constant burpee box jump overs. Tests endurance and pacing under fatigue."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-17-2/",
+    "wodName": "Open 17.2",
+    "description": "AMRAP in 12 minutes\n2 Rounds of:\n50 ft Dumbbell Walking Lunges (50/35 lb)\n16 Toe-to-Bars\n8 Dumbbell Power Cleans (50/35 lb)\nThen 2 Rounds of:\n50 ft Dumbbell Walking Lunges (50/35 lb)\n16 Bar Muscle-Ups\n8 Dumbbell Power Cleans (50/35 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 184,
+          "max": null
+        },
+        "advanced": {
+          "min": 137,
+          "max": 183
+        },
+        "intermediate": {
+          "min": 92,
+          "max": 136
+        },
+        "beginner": {
+          "min": 1,
+          "max": 91
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A 12-minute AMRAP featuring dumbbell movements and gymnastics, gated by bar muscle-ups. Tests endurance, strength, and high-skill gymnastics."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-17-3/",
+    "wodName": "Open 17.3",
+    "description": "For Reps\nPrior to 8 minutes 3 rounds of:\n6 Chest-to-Bar Pull-Ups\n6 Squat Snatches (95/65 lb)\nThen 3 rounds of:\n7 Chest-to-Bar Pull-Ups\n5 Squat Snatches (135/95 lb)\n* Prior to 12 minutes 3 rounds of:\n8 Chest-to-Bar Pull-Ups\n4 Squat Snatches (185/135 lb)\n* Prior to 16 minutes 3 rounds of:\n9 Chest-to-Bar Pull-Ups\n3 Squat Snatches (225/155 lb)\n* Prior to 20 minutes 3 rounds of:\n10 Chest-to-Bar Pull-Ups\n2 Squat Snatches (245/175 lb)\n* Prior to 24 minutes 3 rounds of:\n11 Chest-to-Bar Pull-Ups\n1 Squat Snatch (265/185 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 130,
+          "max": null
+        },
+        "advanced": {
+          "min": 100,
+          "max": 129
+        },
+        "intermediate": {
+          "min": 67,
+          "max": 99
+        },
+        "beginner": {
+          "min": 36,
+          "max": 66
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "An ascending ladder workout with time gates, combining chest-to-bar pull-ups with increasingly heavy squat snatches. Tests gymnastics endurance and heavy weightlifting capacity."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-17-4/",
+    "wodName": "Open 17.4",
+    "description": "AMRAP in 13 minutes\n55 Deadlifts (225/155 lb)\n55 Wall Ball Shots (20/14 lb 10/9 ft)\n55 calorie Row\n55 Handstand Push-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 220,
+          "max": null
+        },
+        "advanced": {
+          "min": 165,
+          "max": 219
+        },
+        "intermediate": {
+          "min": 110,
+          "max": 164
+        },
+        "beginner": {
+          "min": 1,
+          "max": 109
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A demanding 13-minute chipper-style AMRAP with large sets of heavy deadlifts, wall balls, rowing, and handstand push-ups. Tests strength endurance, work capacity, and gymnastics skill. (Identical to 16.4)"
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-17-5/",
+    "wodName": "Open 17.5",
+    "description": "10 Rounds for Time\n9 Thrusters (95/65 lb)\n35 Double-Unders\nTime Cap: 40 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 660
+        },
+        "intermediate": {
+          "min": 661,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A high-volume couplet of thrusters and double-unders for 10 rounds. Tests cardiovascular endurance, pacing, and skill proficiency under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-18-1/",
@@ -8524,502 +8937,6 @@
     "tags": ["AMRAP", "Ladder"],
     "difficulty": "Hard",
     "difficulty_explanation": "An intense 7-minute sprint with an ascending ladder of moderate thrusters and chest-to-bar pull-ups. Tests grip endurance and metabolic capacity under high intensity. (Repeat of 11.6/12.5)"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-17-1/",
-    "wodName": "Open 17.1",
-    "description": "For Time\n10 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n20 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n30 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n40 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\n50 Dumbbell Snatches (50/35 lb)\n15 Burpee Box Jump Overs\nTime Cap: 20 minutes",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 660
-        },
-        "advanced": {
-          "min": 661,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 1080
-        },
-        "beginner": {
-          "min": 1081,
-          "max": 1200
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A long chipper-style workout with ascending dumbbell snatches and constant burpee box jump overs. Tests endurance and pacing under fatigue."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-17-2/",
-    "wodName": "Open 17.2",
-    "description": "AMRAP in 12 minutes\n2 Rounds of:\n50 ft Dumbbell Walking Lunges (50/35 lb)\n16 Toe-to-Bars\n8 Dumbbell Power Cleans (50/35 lb)\nThen 2 Rounds of:\n50 ft Dumbbell Walking Lunges (50/35 lb)\n16 Bar Muscle-Ups\n8 Dumbbell Power Cleans (50/35 lb)",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 184,
-          "max": null
-        },
-        "advanced": {
-          "min": 137,
-          "max": 183
-        },
-        "intermediate": {
-          "min": 92,
-          "max": 136
-        },
-        "beginner": {
-          "min": 1,
-          "max": 91
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "A 12-minute AMRAP featuring dumbbell movements and gymnastics, gated by bar muscle-ups. Tests endurance, strength, and high-skill gymnastics."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-17-3/",
-    "wodName": "Open 17.3",
-    "description": "For Reps\nPrior to 8 minutes 3 rounds of:\n6 Chest-to-Bar Pull-Ups\n6 Squat Snatches (95/65 lb)\nThen 3 rounds of:\n7 Chest-to-Bar Pull-Ups\n5 Squat Snatches (135/95 lb)\n* Prior to 12 minutes 3 rounds of:\n8 Chest-to-Bar Pull-Ups\n4 Squat Snatches (185/135 lb)\n* Prior to 16 minutes 3 rounds of:\n9 Chest-to-Bar Pull-Ups\n3 Squat Snatches (225/155 lb)\n* Prior to 20 minutes 3 rounds of:\n10 Chest-to-Bar Pull-Ups\n2 Squat Snatches (245/175 lb)\n* Prior to 24 minutes 3 rounds of:\n11 Chest-to-Bar Pull-Ups\n1 Squat Snatch (265/185 lb)",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 130,
-          "max": null
-        },
-        "advanced": {
-          "min": 100,
-          "max": 129
-        },
-        "intermediate": {
-          "min": 67,
-          "max": 99
-        },
-        "beginner": {
-          "min": 36,
-          "max": 66
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "An ascending ladder workout with time gates, combining chest-to-bar pull-ups with increasingly heavy squat snatches. Tests gymnastics endurance and heavy weightlifting capacity."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-17-4/",
-    "wodName": "Open 17.4",
-    "description": "AMRAP in 13 minutes\n55 Deadlifts (225/155 lb)\n55 Wall Ball Shots (20/14 lb 10/9 ft)\n55 calorie Row\n55 Handstand Push-Ups",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 220,
-          "max": null
-        },
-        "advanced": {
-          "min": 165,
-          "max": 219
-        },
-        "intermediate": {
-          "min": 110,
-          "max": 164
-        },
-        "beginner": {
-          "min": 1,
-          "max": 109
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP", "Chipper"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "A demanding 13-minute chipper-style AMRAP with large sets of heavy deadlifts, wall balls, rowing, and handstand push-ups. Tests strength endurance, work capacity, and gymnastics skill. (Identical to 16.4)"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-17-5/",
-    "wodName": "Open 17.5",
-    "description": "10 Rounds for Time\n9 Thrusters (95/65 lb)\n35 Double-Unders\nTime Cap: 40 minutes",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 480
-        },
-        "advanced": {
-          "min": 481,
-          "max": 660
-        },
-        "intermediate": {
-          "min": 661,
-          "max": 900
-        },
-        "beginner": {
-          "min": 901,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A high-volume couplet of thrusters and double-unders for 10 rounds. Tests cardiovascular endurance, pacing, and skill proficiency under fatigue."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-16-1/",
-    "wodName": "Open 16.1",
-    "description": "AMRAP in 20 minutes\n25 foot Overhead Walking Lunges (95/65 lb)\n8 Bar Facing Burpees\n25 foot Overhead Walking Lunges (95/65 lb)\n8 Chest-to-Bar Pull-Ups",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 448,
-          "max": null
-        },
-        "advanced": {
-          "min": 336,
-          "max": 447
-        },
-        "intermediate": {
-          "min": 224,
-          "max": 335
-        },
-        "beginner": {
-          "min": 1,
-          "max": 223
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP"],
-    "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP combining overhead lunges, burpees, and chest-to-bar pull-ups. Tests endurance, stability, and gymnastics capacity over a long duration."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-16-2/",
-    "wodName": "Open 16.2",
-    "description": "AMRAP in 20 minutes\nContinue until 4 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n15 Squat Cleans (135/85 lb)\nIf completed before 4 minutes continue until 8 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n13 Squat Cleans (185/115 lb)\nIf completed before 8 minutes continue until 12 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n11 Squat Cleans (225/145 lb)\nIf completed before 12 minutes continue until 16 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n9 Squat Cleans (275/175 lb)\nIf completed before 16 minutes continue until 20 minutes:\n25 Toes-to-Bars\n50 Double-Unders\n7 Squat Cleans (315/205 lb)",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 351,
-          "max": 430
-        },
-        "advanced": {
-          "min": 251,
-          "max": 350
-        },
-        "intermediate": {
-          "min": 151,
-          "max": 250
-        },
-        "beginner": {
-          "min": 50,
-          "max": 150
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Combines gymnastics (Toes-to-Bars), cardio/skill (Double-Unders), and progressively heavy weightlifting (Squat Cleans) under increasing time pressure. Requires high capacity in all three modalities, especially significant strength for later rounds with very heavy weights. (Identical to 19.2)"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-16-3/",
-    "wodName": "Open 16.3",
-    "description": "AMRAP in 7 minutes\n10 Power Snatches (75/55 lb)\n3 Bar Muscle-Ups",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 104,
-          "max": null
-        },
-        "advanced": {
-          "min": 65,
-          "max": 103
-        },
-        "intermediate": {
-          "min": 26,
-          "max": 64
-        },
-        "beginner": {
-          "min": 1,
-          "max": 25
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A short 7-minute sprint coupling light power snatches with bar muscle-ups. Tests efficiency and high-skill gymnastics capacity under intensity."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-16-4/",
-    "wodName": "Open 16.4",
-    "description": "AMRAP in 13 minutes\n55 Deadlifts (225/155 lb)\n55 Wall Ball Shots (20/14 lb)\n55 calorie Row\n55 Handstand Push-Ups",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 220,
-          "max": null
-        },
-        "advanced": {
-          "min": 165,
-          "max": 219
-        },
-        "intermediate": {
-          "min": 110,
-          "max": 164
-        },
-        "beginner": {
-          "min": 1,
-          "max": 109
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP", "Chipper"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "A demanding 13-minute chipper-style AMRAP with large sets of heavy deadlifts, wall balls, rowing, and handstand push-ups. Tests strength endurance, work capacity, and gymnastics skill."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-16-5/",
-    "wodName": "Open 16.5",
-    "description": "21-18-15-12-9-6-3 Reps For Time\nThrusters (95/65 lb)\nBar Facing Burpees",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 480
-        },
-        "advanced": {
-          "min": 481,
-          "max": 720
-        },
-        "intermediate": {
-          "min": 721,
-          "max": 1200
-        },
-        "beginner": {
-          "min": 1201,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A classic descending rep scheme couplet of thrusters and burpees. A brutal test of cardiovascular capacity and pacing. (Identical to 14.5)"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-15-1/",
-    "wodName": "Open 15.1",
-    "description": "AMRAP in 9 minutes\n15 Toes-to-Bars\n10 Deadlifts (115/75 lb)\n5 Snatches (115/75 lb)",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 240,
-          "max": null
-        },
-        "advanced": {
-          "min": 180,
-          "max": 239
-        },
-        "intermediate": {
-          "min": 120,
-          "max": 179
-        },
-        "beginner": {
-          "min": 30,
-          "max": 119
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP", "Triplet"],
-    "difficulty": "Medium",
-    "difficulty_explanation": "A 9-minute triplet combining toes-to-bars, moderate deadlifts, and moderate snatches. Tests grip endurance and barbell cycling efficiency."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-15-1/",
-    "wodName": "Open 15.1A",
-    "description": "Immediately following 15.1, from 9:00-15:00 (6 minutes):\n1-Rep-Max Clean-and-Jerk",
-    "benchmarks": {
-      "type": "load",
-      "levels": {
-        "elite": {
-          "min": 315,
-          "max": null
-        },
-        "advanced": {
-          "min": 255,
-          "max": 314
-        },
-        "intermediate": {
-          "min": 185,
-          "max": 254
-        },
-        "beginner": {
-          "min": 95,
-          "max": 184
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A 6-minute window to establish a 1-rep max clean-and-jerk immediately after a 9-minute AMRAP. Tests maximal strength under fatigue."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-15-2/",
-    "wodName": "Open 15.2",
-    "description": "For As Long As Possible\nFrom 0:00-3:00 2 rounds of:\n10 Overhead Squats (95/65 lb)\n10 Chest-to-Bar Pull-Ups\nFrom 3:00-6:00 2 rounds of:\n12 Overhead Squats (95/65 lb)\n12 Chest-to-Bar Pull-Ups\nFrom 6:00-9:00 2 rounds of:\n14 Overhead Squats (95/65 lb)\n14 Chest-to-Bar Pull-Ups\nFollow the pattern until you fail to complete both rounds.",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 140,
-          "max": null
-        },
-        "advanced": {
-          "min": 88,
-          "max": 139
-        },
-        "intermediate": {
-          "min": 40,
-          "max": 87
-        },
-        "beginner": {
-          "min": 1,
-          "max": 39
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "An ascending couplet AMRAP with 3-minute time gates. Tests overhead squat proficiency and chest-to-bar pull-up capacity under increasing volume and time pressure."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-15-3/",
-    "wodName": "Open 15.3",
-    "description": "AMRAP in 14 minutes\n7 Muscle-Ups\n50 Wall Ball Shots (20/14 lb)\n100 Double-Unders",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 471,
-          "max": null
-        },
-        "advanced": {
-          "min": 314,
-          "max": 470
-        },
-        "intermediate": {
-          "min": 157,
-          "max": 313
-        },
-        "beginner": {
-          "min": 1,
-          "max": 156
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP", "Triplet"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "A 14-minute triplet featuring muscle-ups, high-volume wall balls, and double-unders. Tests high-skill gymnastics, endurance, and coordination."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-15-4/",
-    "wodName": "Open 15.4",
-    "description": "AMRAP in 8 minutes\n3 Handstand Push-Ups\n3 Cleans (185/125 lb)\n6 Handstand Push-Ups\n3 Cleans (185/125 lb)\n9 Handstand Push-Ups\n3 Cleans (185/125 lb)\n12 Handstand Push-Ups\n6 Cleans (185/125 lb)\n15 Handstand Push-Ups\n6 Cleans (185/125 lb)\n18 Handstand Push-Ups\n6 Cleans (185/125 lb)\n21 Handstand Push-Ups\n9 Cleans (185/125 lb)\nEtc. following same pattern until time is up",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 117,
-          "max": null
-        },
-        "advanced": {
-          "min": 78,
-          "max": 116
-        },
-        "intermediate": {
-          "min": 39,
-          "max": 77
-        },
-        "beginner": {
-          "min": 1,
-          "max": 38
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP", "Ladder"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "An 8-minute AMRAP coupling increasing handstand push-ups with heavy cleans. Tests high-skill gymnastics capacity and strength under fatigue."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/open-15-5/",
-    "wodName": "Open 15.5",
-    "description": "27-21-15-9 Reps for Time\nRow (calories)\nThrusters (95/65 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 360
-        },
-        "advanced": {
-          "min": 361,
-          "max": 480
-        },
-        "intermediate": {
-          "min": 481,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A classic descending rep scheme couplet of rowing and thrusters. A brutal test of cardiovascular capacity and pacing."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-1/",
@@ -9667,37 +9584,6 @@
     "difficulty_explanation": "Open WOD (AMRAP). 15 mins: ascending burpee pull-ups, ascending shuttle runs. Tests increasing volume bodyweight/conditioning."
   },
   {
-    "wodUrl": "https://wodwell.com/wod/open-23-3/",
-    "wodName": "Open 23.3",
-    "description": "Starting with a 6-minute time cap, complete as many reps as possible of:\n\n5 Wall Walks\n50 Double-Unders\n15 Snatches (95/65 lb)\n5 Wall Walks\n50 Double-Unders\n12 Snatches (135/95 lb)\n\n*If completed before the 6-minute time cap, add 3 minutes to the time cap and complete:\n\n20 Strict Handstand Push-Ups\n50 Double-Unders\n9 Snatches (185/125 lb)\n\n*If completed before the 9-minute time cap, add 3 minutes to the time cap and complete:\n\n20 Strict Handstand Push-Ups\n50 Double-Unders\n6 Snatches (225/155 lb)",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 216,
-          "max": null
-        },
-        "advanced": {
-          "min": 137,
-          "max": 215
-        },
-        "intermediate": {
-          "min": 70,
-          "max": 136
-        },
-        "beginner": {
-          "min": 0,
-          "max": 69
-        }
-      }
-    },
-    "results": [],
-    "category": "Open",
-    "tags": ["AMRAP", "Chipper"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/open-23-2/",
     "wodName": "Open 23.2B",
     "description": "Establish 1RM thruster",
@@ -9738,6 +9624,37 @@
     "tags": ["For Load", "Weightlifting"],
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (For Load). Establish 1RM thruster after 23.2A. Tests maximal strength under fatigue."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-23-3/",
+    "wodName": "Open 23.3",
+    "description": "Starting with a 6-minute time cap, complete as many reps as possible of:\n\n5 Wall Walks\n50 Double-Unders\n15 Snatches (95/65 lb)\n5 Wall Walks\n50 Double-Unders\n12 Snatches (135/95 lb)\n\n*If completed before the 6-minute time cap, add 3 minutes to the time cap and complete:\n\n20 Strict Handstand Push-Ups\n50 Double-Unders\n9 Snatches (185/125 lb)\n\n*If completed before the 9-minute time cap, add 3 minutes to the time cap and complete:\n\n20 Strict Handstand Push-Ups\n50 Double-Unders\n6 Snatches (225/155 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 216,
+          "max": null
+        },
+        "advanced": {
+          "min": 137,
+          "max": 215
+        },
+        "intermediate": {
+          "min": 70,
+          "max": 136
+        },
+        "beginner": {
+          "min": 0,
+          "max": 69
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-1/",
@@ -9864,6 +9781,132 @@
     "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-25-1/",
+    "wodName": "Open 25.1",
+    "description": "AMRAP 15 minutes:\n3 Lateral Burpees Over the Dumbbell* (50/35 lb)\n3 Dumbbell Hang Clean-to-Overheads* (50/35 lb)\n30 ft Walking Lunge (2x15 feet)\n*After completing each round add 3 reps to the Burpees and Hang Clean-to-Overheads.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 216,
+          "max": null
+        },
+        "advanced": {
+          "min": 168,
+          "max": 215
+        },
+        "intermediate": {
+          "min": 126,
+          "max": 167
+        },
+        "beginner": {
+          "min": 36,
+          "max": 125
+        }
+      }
+    },
+    "results": [
+      {
+        "date": "28 Feb'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": null,
+        "score_reps": 172,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Open",
+    "tags": ["AMRAP", "Ladder"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A 15-minute AMRAP with increasing reps of burpees and dumbbell C2OH, interspersed with lunges. Tests endurance and pacing."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-25-2/",
+    "wodName": "Open 25.2",
+    "description": "For Time\n21 Pull-Ups\n42 Double-Unders\n21 Thrusters (95/65 lb)\n18 Chest-to-Bar Pull-Ups\n36 Double-Unders\n18 Thrusters (115/75 lb)\n15 Bar Muscle-Ups\n30 Double-Unders\n15 Thrusters (135/85 lb)\nTime Cap: 12 Minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 216,
+          "max": 216
+        },
+        "advanced": {
+          "min": 187,
+          "max": 215
+        },
+        "intermediate": {
+          "min": 157,
+          "max": 186
+        },
+        "beginner": {
+          "min": 84,
+          "max": 156
+        }
+      }
+    },
+    "results": [
+      {
+        "date": "8 Mar'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": null,
+        "score_reps": 205,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A challenging triplet combining ascending gymnastics skills (Pull-up, C2B, BMU) with double-unders and increasing thruster weight. Tests skill, strength, and conditioning."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-25-3/",
+    "wodName": "Open 25.3",
+    "description": "For Time:\n5 Wall Walks\n50 calorie Row\n5 Wall Walks\n25 Deadlifts (225/155 lb)\n5 Wall Walks\n25 Cleans (135/85 lb)\n5 Wall Walks\n25 Snatches (95/65 lb)\n5 Wall Walks\n50 calorie Row\nTime cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1080
+        },
+        "intermediate": {
+          "min": 1081,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [
+      {
+        "date": "14 Mar'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": 1179,
+        "score_reps": null,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Open",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A chipper-style workout featuring wall walks, rowing, and a barbell complex (DL, Clean, Snatch). Tests endurance, strength, and gymnastics stamina."
   },
   {
     "wodUrl": "https://wodwell.com/wod/otis/",

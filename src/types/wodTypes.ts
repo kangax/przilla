@@ -55,6 +55,8 @@ export type Wod = {
   results: WodResult[];
   category?: WodCategory;
   tags?: WodTag[];
+  difficulty?: string; // Added difficulty
+  difficulty_explanation?: string; // Added explanation for tooltip
 };
 
 // Type for chart data points (used in WodViewer and passed from page.tsx)

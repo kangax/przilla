@@ -57,6 +57,8 @@ const mockWod1_NoResults: Wod = {
   category: "Benchmark",
   tags: ["AMRAP"],
   results: [],
+  difficulty: "Medium",
+  difficulty_explanation: "Standard benchmark AMRAP.",
 };
 
 const mockWod2_OneResultRx: Wod = {
@@ -75,6 +77,8 @@ const mockWod2_OneResultRx: Wod = {
     },
   },
   results: [mockResultTime(290, true, "2024-03-10", "Felt good")], // Advanced
+  difficulty: "Hard",
+  difficulty_explanation: "Classic Girl WOD, tough time cap.",
 };
 
 const mockWod3_OneResultScaled: Wod = {
@@ -95,6 +99,8 @@ const mockWod3_OneResultScaled: Wod = {
   results: [
     mockResultRounds(12, 5, false, "2024-03-11", "Used lighter weight"),
   ], // Scaled (Intermediate level if Rx)
+  difficulty: "Very Hard",
+  difficulty_explanation: "Hero WOD, high volume chipper.",
 };
 
 const mockWod4_MultiResult: Wod = {
@@ -116,6 +122,8 @@ const mockWod4_MultiResult: Wod = {
     mockResultTime(580, true, "2024-03-12", "First attempt"), // Intermediate
     mockResultTime(550, true, "2023-11-20", "PR!"), // Intermediate
   ],
+  difficulty: "Hard",
+  difficulty_explanation: "Open WOD, tests multiple modalities.",
 };
 
 const mockWod5_NoBenchmark: Wod = {
@@ -123,6 +131,7 @@ const mockWod5_NoBenchmark: Wod = {
   wodName: "WOD Echo",
   description: "Desc Echo",
   results: [mockResultRounds(10, 0, true, "2024-01-05")],
+  // No difficulty specified for this one to test placeholder
 };
 
 const testWods: Wod[] = [
@@ -163,6 +172,10 @@ describe("WodTable Component", () => {
     ).toBeInTheDocument();
     expect(
       screen.getByRole("columnheader", { name: /Level/ }),
+    ).toBeInTheDocument();
+    // Added Difficulty Header Check
+    expect(
+      screen.getByRole("columnheader", { name: /Difficulty/ }),
     ).toBeInTheDocument();
     expect(
       screen.getByRole("columnheader", { name: /Notes/ }),
@@ -223,7 +236,9 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("WOD Alpha")).toBeInTheDocument();
     expect(within(row).getByText("Benchmark")).toBeInTheDocument(); // Category Badge
     expect(within(row).getByText("AMRAP")).toBeInTheDocument(); // Tag Badge
-    expect(within(row).getAllByText("-")).toHaveLength(3); // Use getAllByText for multiple placeholders
+    expect(within(row).getByText("Medium")).toBeInTheDocument(); // Difficulty
+    expect(within(row).getByText("Medium")).toHaveClass("text-yellow-500"); // Difficulty Color
+    expect(within(row).getAllByText("-")).toHaveLength(3); // Date, Level, Notes placeholders
     expect(within(row).getByText("Not attempted")).toBeInTheDocument(); // Score placeholder
   });
 
@@ -245,7 +260,9 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("Rx")).toBeInTheDocument(); // Rx Status
     expect(within(row).getByText("Advanced")).toBeInTheDocument(); // Level
     // Check color class (might be brittle, depends on exact class names)
-    expect(within(row).getByText("Advanced")).toHaveClass("text-green-600");
+    expect(within(row).getByText("Advanced")).toHaveClass("text-green-600"); // Level Color
+    expect(within(row).getByText("Hard")).toBeInTheDocument(); // Difficulty
+    expect(within(row).getByText("Hard")).toHaveClass("text-orange-500"); // Difficulty Color
     expect(within(row).getByText("Felt good")).toBeInTheDocument(); // Notes (truncated potentially)
   });
 
@@ -272,6 +289,8 @@ describe("WodTable Component", () => {
     expect(within(levelCell).getByText("Scaled")).toHaveClass(
       "text-foreground/70",
     ); // Check class on the specific span
+    expect(within(row).getByText("Very Hard")).toBeInTheDocument(); // Difficulty
+    expect(within(row).getByText("Very Hard")).toHaveClass("text-red-500"); // Difficulty Color
     expect(within(row).getByText("Used lighter weight")).toBeInTheDocument(); // Notes
   });
 
@@ -296,6 +315,8 @@ describe("WodTable Component", () => {
     expect(within(row1).getByText("2024-03-12")).toBeInTheDocument();
     expect(within(row1).getByText(/9:40/)).toBeInTheDocument(); // Score (580s)
     expect(within(row1).getByText("Intermediate")).toBeInTheDocument(); // Level
+    expect(within(row1).getByText("Hard")).toBeInTheDocument(); // Difficulty (only on first row)
+    expect(within(row1).getByText("Hard")).toHaveClass("text-orange-500"); // Difficulty Color
     expect(within(row1).getByText("First attempt")).toBeInTheDocument(); // Notes
 
     // Second result row (older date: 2023-11-20)
@@ -310,6 +331,7 @@ describe("WodTable Component", () => {
     expect(within(row2).getByText("2023-11-20")).toBeInTheDocument();
     expect(within(row2).getByText(/9:10/)).toBeInTheDocument(); // Score (550s)
     expect(within(row2).getByText("Intermediate")).toBeInTheDocument(); // Level
+    expect(within(row2).queryByText("Hard")).not.toBeInTheDocument(); // Difficulty NOT repeated
     expect(within(row2).getByText("PR!")).toBeInTheDocument(); // Notes
   });
 
@@ -355,6 +377,8 @@ describe("WodTable Component", () => {
     const cells = within(row).getAllByRole("cell");
     // Level column (index 4) should contain a dash (-)
     expect(within(cells[4]).getByText("-")).toBeInTheDocument();
+    // Difficulty column (index 5) should contain a dash (-) as no difficulty was provided
+    expect(within(cells[5]).getByText("-")).toBeInTheDocument();
   });
 
   it("should call handleSort when clicking sortable headers", () => {
@@ -379,7 +403,8 @@ describe("WodTable Component", () => {
     // Non-sortable headers should not trigger handleSort
     fireEvent.click(screen.getByRole("columnheader", { name: /Type/ }));
     fireEvent.click(screen.getByRole("columnheader", { name: /Score/ }));
-    fireEvent.click(screen.getByRole("columnheader", { name: /Notes/ }));
+    fireEvent.click(screen.getByRole("columnheader", { name: /Difficulty/ })); // Not sortable
+    fireEvent.click(screen.getByRole("columnheader", { name: /Notes/ })); // Not sortable
     expect(handleSortMock).toHaveBeenCalledTimes(3); // Only the 3 sortable ones
   });
 });

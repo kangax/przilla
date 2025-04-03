@@ -35,6 +35,24 @@ const WodTable: React.FC<WodTableProps> = ({
     return "";
   };
 
+  // Helper function to get color based on difficulty
+  const getDifficultyColor = (difficulty: string | undefined): string => {
+    switch (difficulty?.toLowerCase()) {
+      case "very easy":
+        return "text-blue-500";
+      case "easy":
+        return "text-green-500";
+      case "medium":
+        return "text-yellow-500";
+      case "hard":
+        return "text-orange-500";
+      case "very hard":
+        return "text-red-500";
+      default:
+        return "text-foreground"; // Default color
+    }
+  };
+
   return (
     <Table.Root
       variant="surface"
@@ -68,6 +86,10 @@ const WodTable: React.FC<WodTableProps> = ({
             className="text-foreground"
           >
             Level {getSortIndicator("level")}
+          </Table.ColumnHeaderCell>
+          {/* Added Difficulty Header */}
+          <Table.ColumnHeaderCell className="text-foreground">
+            Difficulty
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="text-foreground">
             Notes
@@ -135,9 +157,29 @@ const WodTable: React.FC<WodTableProps> = ({
                 </Table.Cell>
                 <Table.Cell className="whitespace-nowrap">-</Table.Cell>
                 <Table.Cell className="whitespace-nowrap font-mono">
-                  Not attempted
+                  -
                 </Table.Cell>
                 <Table.Cell>-</Table.Cell>
+                {/* Added Difficulty Cell for no-results row */}
+                <Table.Cell>
+                  {wod.difficulty ? (
+                    <Tooltip
+                      content={
+                        <span style={{ whiteSpace: "pre-wrap" }}>
+                          {safeString(wod.difficulty_explanation)}
+                        </span>
+                      }
+                    >
+                      <Text
+                        className={`font-medium ${getDifficultyColor(wod.difficulty)}`}
+                      >
+                        {wod.difficulty}
+                      </Text>
+                    </Tooltip>
+                  ) : (
+                    <Text>-</Text> // Placeholder if no difficulty
+                  )}
+                </Table.Cell>
                 <Table.Cell>-</Table.Cell>
               </Table.Row>
             );
@@ -254,6 +296,30 @@ const WodTable: React.FC<WodTableProps> = ({
                   <Text>-</Text>
                 )}
               </Table.Cell>
+              {/* Added Difficulty Cell */}
+              {resultIndex === 0 ? ( // Only show difficulty on the first row for a WOD
+                <Table.Cell>
+                  {wod.difficulty ? (
+                    <Tooltip
+                      content={
+                        <span style={{ whiteSpace: "pre-wrap" }}>
+                          {safeString(wod.difficulty_explanation)}
+                        </span>
+                      }
+                    >
+                      <Text
+                        className={`font-medium ${getDifficultyColor(wod.difficulty)}`}
+                      >
+                        {wod.difficulty}
+                      </Text>
+                    </Tooltip>
+                  ) : (
+                    <Text>-</Text> // Placeholder if no difficulty
+                  )}
+                </Table.Cell>
+              ) : (
+                <Table.Cell></Table.Cell> // Empty cell for subsequent results of the same WOD
+              )}
               <Table.Cell className="max-w-[250px] truncate">
                 <Tooltip content={safeString(result.notes)}>
                   <span>{safeString(result.notes)}</span>

@@ -156,7 +156,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
                   </Flex>
                 ) : (
                   <Text size="1" className="italic text-foreground/60">
-                    Not Attempted
+                    n/a
                   </Text>
                 )}
               </Table.Cell>

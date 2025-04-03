@@ -48,6 +48,7 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
     "level",
     "attempts",
     "latestLevel",
+    "difficulty", // Added difficulty
   ];
   return validSortKeys.includes(sortBy as SortByType);
 };
@@ -64,6 +65,7 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   level: "desc",
   attempts: "desc",
   latestLevel: "desc",
+  difficulty: "asc", // Added difficulty, default asc (Easy -> Hard)
 };
 // --- End URL State Management ---
 

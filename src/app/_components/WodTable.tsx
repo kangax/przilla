@@ -85,9 +85,13 @@ const WodTable: React.FC<WodTableProps> = ({
           >
             Level {getSortIndicator("level")}
           </Table.ColumnHeaderCell>
-          {/* Added Difficulty Header */}
-          <Table.ColumnHeaderCell className="whitespace-nowrap text-foreground">
-            Difficulty
+          {/* Added Difficulty Header - Made clickable */}
+          <Table.ColumnHeaderCell
+            onClick={() => handleSort("difficulty")}
+            style={{ cursor: "pointer" }}
+            className="whitespace-nowrap text-foreground"
+          >
+            Difficulty {getSortIndicator("difficulty")}
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="text-foreground">
             Notes

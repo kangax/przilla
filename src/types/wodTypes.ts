@@ -81,4 +81,5 @@ export type SortByType =
   | "date"
   | "level"
   | "attempts"
-  | "latestLevel";
+  | "latestLevel"
+  | "difficulty";

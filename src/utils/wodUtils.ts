@@ -272,6 +272,26 @@ export const sortWods = (
         return nameCompare * directionMultiplier;
       }
       return 0;
+    } else if (sortBy === "difficulty") {
+      // Define a mapping for difficulty levels to numeric values
+      const difficultyValues: Record<string, number> = {
+        easy: 1,
+        medium: 2,
+        hard: 3,
+        "very hard": 4,
+      };
+
+      // Get the numeric value for each WOD's difficulty, defaulting to 0 if undefined/null or not in map
+      const difficultyA =
+        difficultyValues[a.difficulty?.toLowerCase() ?? ""] ?? 0;
+      const difficultyB =
+        difficultyValues[b.difficulty?.toLowerCase() ?? ""] ?? 0;
+
+      if (difficultyA !== difficultyB) {
+        return (difficultyA - difficultyB) * directionMultiplier;
+      }
+      // Secondary sort by name if difficulties are the same
+      return a.wodName.localeCompare(b.wodName) * directionMultiplier;
     }
     return 0;
   });

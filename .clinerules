@@ -8,6 +8,7 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 - Do not create backup files since we use versioning system
 - Use meaningful commit messages at the end of every task (don't ask me if I'm ok with them since I can see them when approving command)
 - Read as many files as you need as long as they're not very large (do not ask me if you can read and which file)
+- Never read large json files directly; always use `jq` so as not to load them in memory
 
 ## Code Style & Patterns
 
@@ -31,3 +32,4 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 ## UI
 
 - Our UI is minimal, so instead of "Show Cagegories" and "Show Tags" toggle/links we would say "Cagegories" | "Tags", etc.
+- Both dark and light mode should work

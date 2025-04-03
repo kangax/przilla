@@ -8272,24 +8272,12 @@
     "wodName": "Open 25.2",
     "description": "For Time\n21 Pull-Ups\n42 Double-Unders\n21 Thrusters (95/65 lb)\n18 Chest-to-Bar Pull-Ups\n36 Double-Unders\n18 Thrusters (115/75 lb)\n15 Bar Muscle-Ups\n30 Double-Unders\n15 Thrusters (135/85 lb)\nTime Cap: 12 Minutes",
     "benchmarks": {
-      "type": "time",
+      "type": "reps",
       "levels": {
-        "elite": {
-          "min": null,
-          "max": 480
-        },
-        "advanced": {
-          "min": 481,
-          "max": 600
-        },
-        "intermediate": {
-          "min": 601,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": null
-        }
+        "elite": { "min": 216, "max": 216 },
+        "advanced": { "min": 187, "max": 215 },
+        "intermediate": { "min": 157, "max": 186 },
+        "beginner": { "min": 84, "max": 156 }
       }
     },
     "results": [

@@ -7688,6 +7688,37 @@
     "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/reps: moderate OHS (95lb), C2B. Tests threshold/gymnastics endurance."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-14-3/",
+    "wodName": "Open 14.3",
+    "description": "AMRAP in 8 minutes\n10 Deadlifts (135/95 lb)\n15 Box Jumps (24/20 in)\n15 Deadlifts (185/135 lb)\n15 Box Jumps (24/20 in)\n20 Deadlifts (225/155 lb)\n15 Box Jumps (24/20 in)\n25 Deadlifts (275/185 lb)\n15 Box Jumps (24/20 in)\n30 Deadlifts (315/205 lb)\n15 Box Jumps (24/20 in)\n35 Deadlifts (365/225 lb)\n15 Box Jumps (24/20 in)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 131,
+          "max": null
+        },
+        "advanced": {
+          "min": 91,
+          "max": 130
+        },
+        "intermediate": {
+          "min": 56,
+          "max": 90
+        },
+        "beginner": {
+          "min": 25,
+          "max": 55
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "An 8-minute sprint featuring a challenging ascending deadlift ladder paired with constant box jumps. Tests strength endurance and power under significant fatigue as weights increase rapidly."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-14-4/",
     "wodName": "Open 14.4",
     "description": "AMRAP in 14 minutes\n60-calorie row\n50 toes-to-bars\n40 wall-ball shots, 20/14 lb\n30 cleans, 135/95 lb\n20 muscle-ups",
@@ -7736,16 +7767,28 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 480 },
-        "advanced": { "min": 481, "max": 720 },
-        "intermediate": { "min": 721, "max": 1200 },
-        "beginner": { "min": 1201, "max": null }
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 720
+        },
+        "intermediate": {
+          "min": 721,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
       }
     },
     "results": [],
     "category": "Open",
     "tags": ["For Time"],
-    "difficulty": "Advanced",
+    "difficulty": "Hard",
     "difficulty_explanation": "A classic CrossFit 'gas tank' test. High-volume descending ladder of light thrusters and burpees demands relentless pacing, cardiovascular endurance, and mental toughness."
   },
   {

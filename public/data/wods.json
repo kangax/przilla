@@ -3403,7 +3403,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2018-01-24"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds of push-ups, KB swings, and box jumps sandwiched between weighted runs (20lb vest). Tests endurance and stamina under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/emanuele-reali/",
@@ -3424,7 +3426,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2022-01-24"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (30 min AMRAP). Combines heavy deadlifts (70% 1RM), box jumps, and burpees. Demanding due to heavy lifting over a long duration."
   },
   {
     "wodUrl": "https://wodwell.com/wod/emily/",
@@ -3445,7 +3449,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2017-09-12"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds of DUs, pull-ups, squats, and sprints with 2 min rest. High volume and intensity intervals test conditioning and recovery."
   },
   {
     "wodUrl": "https://wodwell.com/wod/enis/",
@@ -3466,7 +3472,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2022-03-12"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (31 min AMRAP). Burpee buy-in, then AMRAP of heavy Bear Complexes (135lb), bike cals, and pull-ups, interrupted by DUs every 7 mins. Extremely demanding due to complexity, heavy weight, and varied structure."
   },
   {
     "wodUrl": "https://wodwell.com/wod/erin/",
@@ -3487,7 +3495,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Couplet). 5 rounds combining moderate DB split cleans (40lb) and pull-ups. Tests muscular endurance and grip."
   },
   {
     "wodUrl": "https://wodwell.com/wod/eva/",
@@ -3518,7 +3528,9 @@
     "category": "Girl",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Girl WOD. 5 rounds combining significant running (4000m total), high-volume heavy KB swings (150 reps @ 70lb), and high-volume pull-ups (150 reps). Extreme endurance challenge."
   },
   {
     "wodUrl": "https://wodwell.com/wod/evans/",
@@ -3539,7 +3551,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-03-14"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). High volume push-ups, heavy KB swings (70lb), T2B, and accumulated rope climbs (100ft). Tests endurance across multiple domains, especially grip and pulling."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ff-alex-graham/",
@@ -3560,7 +3574,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2020-09-18"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Total Reps). 3 rounds of 1-min stations: complex DB movement, band rows, KB high-pulls, med ball push-ups, sandbag drag bear crawl. Tests work capacity across varied movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/faas-fit/",
@@ -3581,7 +3597,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2018-02-20"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Partner Triplet). 3 rounds combining heavy deadlifts (315lb), pull-ups, and moderate KB snatches. Partner format helps, but DL weight is significant."
   },
   {
     "wodUrl": "https://wodwell.com/wod/falkel/",
@@ -3602,7 +3620,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 25 minutes combining HSPU, high box jumps (30in), and rope climbs. Tests gymnastics skill and endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/feeks/",
@@ -3623,7 +3643,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-12-02"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder). Ascending reps of heavy DB clusters (65lb) paired with shuttle sprints. Tests power endurance and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/fight-gone-bad/",
@@ -3666,7 +3688,9 @@
     "tags": [
       "For Time",
       "AMRAP"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark. 3 rounds of 1-min max rep stations (Wall Balls, SDHP, Box Jumps, Push Press, Row) with 1 min rest. Classic test of work capacity across multiple movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/filthy-50/",
@@ -3709,7 +3733,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark (Chipper). 50 reps each of 10 varied movements (box jumps, jumping pull-ups, KB swings, lunges, KTE, push press, back extensions, wall balls, burpees, DUs). Tests endurance and well-roundedness across high volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/foo/",
@@ -3730,7 +3756,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2015-03-03"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). Bench press buy-in (170lb), then 20 min AMRAP of C2B, DUs, heavy squat clean thrusters (170lb), and sit-ups. Very demanding due to heavy weights and skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/forrest/",
@@ -3751,7 +3779,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds combining high-skill L-Pull-Ups, T2B, burpees, and running. Extremely high gymnastics volume makes it very demanding."
   },
   {
     "wodUrl": "https://wodwell.com/wod/fournier/",
@@ -3772,7 +3802,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-08-31"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Combines moderate S2OH, heavy sled pulls, burpees, and moderate SDHP. Tests strength, power, and conditioning with odd objects."
   },
   {
     "wodUrl": "https://wodwell.com/wod/fran/",
@@ -3845,7 +3877,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Classic benchmark combining light thrusters (95lb) and pull-ups in a sprint format. Tests intensity and efficiency."
   },
   {
     "wodUrl": "https://wodwell.com/wod/french/",
@@ -3866,7 +3900,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2021-09-15"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Combines significant running (2 miles) with heavy deadlifts (185lb) and a max burpee effort. Tests endurance and strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/g-i-jane/",
@@ -3898,7 +3934,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark. 100 Burpee Pull-ups for time. Tests endurance, stamina, and mental toughness with a single, demanding movement."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gale-force/",
@@ -3919,7 +3957,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2024-05-27"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 30 minutes combining weighted step-ups (50lb backpack), burpees over backpack, and air squats. Tests endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gallant/",
@@ -3962,7 +4002,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: high-vol squats, very high-skill ring HSPU, L-Pull-Ups. Extreme gymnastics demand."
   },
   {
     "wodUrl": "https://wodwell.com/wod/toes-to-bar-lunge/",
@@ -4005,7 +4047,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 8 rounds: heavy front squats (185lb), high-vol ring push-ups. Tests strength/pushing endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/garbo-2/",
@@ -4026,7 +4070,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2024-03-27"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: heavy KB swings (70lb), push-ups, pull-ups, high box jumps (30in), 1-mile run per round. Extreme volume/intensity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/garrett/",
@@ -4047,7 +4093,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark. 6 rounds, 1-min stations (Row, Burpees, DUs) w/ rest. Tests consistent output across varied modalities."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gator/",
@@ -4068,7 +4116,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: run, burpee pull-ups, box jumps, lunges, all w/ vest. Tests endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gaza/",
@@ -4089,7 +4139,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2015-03-16"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Heavy C&J (135lb), 2 miles run, 10 rope climbs, 100 burpees. Very demanding across multiple domains/high volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ghost/",
@@ -4133,7 +4185,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Partner). Heavy DL buy-in (135lb), 7 rounds (rope climbs, heavy thrusters 135lb, heavy KB swings 70lb), loaded run cash-out. Very demanding weight/skill/volume even for partners."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ghost-31/",
@@ -4154,7 +4208,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2022-04-06"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD. 30 C&J (135lb) for time. Tests power/efficiency in a sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/glen/",
@@ -4175,7 +4231,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: tire flips, multiple farmer carries, push-ups, squats, sledge hits. Tests strength/conditioning with odd objects."
   },
   {
     "wodUrl": "https://wodwell.com/wod/goose/",
@@ -4196,7 +4254,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2024-05-27"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: moderate C&J (135lb), burpees over bar. Tests barbell cycling/conditioning in a sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/grace/",
@@ -4259,7 +4319,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Easy",
+    "difficulty_explanation": "Hero WOD. Running only (forward and backward). Tests cardio."
   },
   {
     "wodUrl": "https://wodwell.com/wod/granite-mile/",
@@ -4280,7 +4342,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2020-04-20"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 miles total weighted run (50lb), high-vol push-ups/sit-ups. Tests endurance under significant load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/grettel/",
@@ -4323,7 +4387,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (For Load). 15-12-9 unbroken C&J. Tests maximal strength/endurance for barbell cycling complex."
   },
   {
     "wodUrl": "https://wodwell.com/wod/griff/",
@@ -4344,7 +4410,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: heavy cleans (225lb), sprint, heavy KB snatches (70lb), w/ rest. Tests power/strength/conditioning intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gunny/",
@@ -4365,7 +4433,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2018-07-02"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: row, push-ups, run, pull-ups. High volume bodyweight/cardio test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gwen/",
@@ -4407,7 +4477,9 @@
     "category": "Girl",
     "tags": [
       "For Load"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: moderate barbell complex (PC, FS, Jerk @ 135lb), pull-ups, w/ rest. Tests strength endurance/conditioning intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hall/",
@@ -4428,7 +4500,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2015-06-07"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Very high volume running, box step-overs, push-ups, burpees, pull-ups, burpee box jumps, ring MU, all w/ vest. Exceptionally demanding endurance/volume/skill under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hamilton/",
@@ -4449,7 +4523,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Easy",
+    "difficulty_explanation": "Skill. Tests static hold capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hammer/",
@@ -4470,7 +4546,9 @@
       "likes": 0,
       "comments": 15,
       "posted_date": "2014-12-08"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: heavy KB swings (70lb), burpees, GHD sit-ups. Extremely high volume triplet testing endurance/core."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hammy-2/",
@@ -4491,7 +4569,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2024-03-27"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 23 mins: C2B, heavy power cleans (135lb), squats, weighted plate run. Tests strength/skill/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/handstand-hold/",
@@ -4533,7 +4613,9 @@
     "category": "Skill",
     "tags": [
       "Max Effort"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Partner). 2 rounds: rope climbs, long buddy carries, heavy power cleans (135lb), heavy front squats (135lb), burpees. Very demanding partner workout."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hansen/",
@@ -4554,7 +4636,9 @@
       "likes": 0,
       "comments": 19,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 25 mins: high-vol DUs, push-ups, heavy power cleans (185lb). Tests skill/endurance/strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/harper/",
@@ -4575,7 +4659,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2015-12-29"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Loaded runs (2 miles total w/ 20lb ball), 2 rounds of moderate FS/BS (95lb) and pull-ups. Tests endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/harvell/",
@@ -4596,7 +4682,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2018-06-16"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet). 3 rounds: run, moderate KB swings (53lb), pull-ups. Classic conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/havana/",
@@ -4617,7 +4705,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2018-02-19"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds: run, heavy DB squat cleans (50lb), burpees. Tests conditioning/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/heath/",
@@ -4638,7 +4728,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-11-01"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Long runs (4 miles total), moderate squat cleans (135lb), box jumps, weighted lunges, w/ rest periods. Extreme endurance focus."
   },
   {
     "wodUrl": "https://wodwell.com/wod/helen/",
@@ -4701,7 +4793,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). High-cal row buy-in/out, thrusters (light), pull-ups, wall balls, all w/ vest. Very demanding volume/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/helton/",
@@ -4722,7 +4816,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds: moderate thrusters (115lb), pull-ups, sprint, w/ rest. Tests power/endurance intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hidalgo/",
@@ -4765,7 +4861,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 30 rounds: wall balls, HSPU, heavy power clean (225lb). Extreme volume, demanding strength/skill/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hildy/",
@@ -4786,7 +4884,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2016-05-30"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Partner AMRAP). 23 mins: partner run, DUs, burpees, rope climbs. Tests partner coordination/conditioning/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/holbrook/",
@@ -4807,7 +4907,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). 2km run, heavy wall balls (30lb), muscle-ups, heavy power cleans (185lb), 2km run. Very demanding skill/strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/holleyman/",
@@ -4850,7 +4952,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 45 mins: run, high-vol squats, muscle-ups. Tests long-duration endurance/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/holloway/",
@@ -4871,7 +4975,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2017-11-06"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Partner). 9 rounds: bar MU, heavy C&J (155lb), buddy carry. Very demanding skill/strength/partner work."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hollywood/",
@@ -4892,7 +4998,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2016-11-27"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 6 rounds: squats, heavy power cleans (135lb), strict pull-ups, run. Tests strength/conditioning/gymnastics."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hortman/",
@@ -4913,7 +5021,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Bike buy-in/out, 2 rounds: moderate hang cleans, complex man makers, high-vol pull-ups/burpees. Extreme volume/complexity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/horton/",
@@ -4934,7 +5044,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2015-10-10"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). Bike buy-in, then 30m AMRAP: T2B, burpees, wall balls. Tests long-duration conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hotshots-19/",
@@ -4955,7 +5067,9 @@
       "likes": 0,
       "comments": 29,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: heavy snatches (135lb), burpees over bar. Tests power/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hotsinpiller/",
@@ -4976,7 +5090,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2023-02-20"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD. 30 snatches (135lb) for time. Tests power/efficiency/strength in a sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/indy-08/",
@@ -4997,7 +5113,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2022-05-03"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Ladder). Descending/ascending reps: heavy squat cleans (185lb), parallette HSPU. Extreme gymnastics/strength demand."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ingrid/",
@@ -5050,7 +5168,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 28 mins: moderate OHS (115lb), legless rope climbs, moderate bench press (115lb). Tests skill/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/isabel/",
@@ -5093,7 +5213,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet 21-15-9). High volume gymnastics pushing (HSPU, Ring Dips, Push-Ups). Tests pushing endurance/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/j-j/",
@@ -5114,7 +5236,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 mins: moderate push press (115lb), heavy KB swings (70lb), box jumps. Tests power endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jbo/",
@@ -5135,7 +5259,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2015-06-29"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. Run buy-in, then 4 rounds: burpees, jumping lunges, push-ups, jumping squats. Tests bodyweight endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jt/",
@@ -5178,7 +5304,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet). Row, light thrusters (45lb), pull-ups. Classic conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jack/",
@@ -5199,7 +5327,9 @@
       "likes": 0,
       "comments": 41,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Runs sandwiching heavy KB swings (70lb), strict pull-ups, heavy dual KB C&J (2x70lb). Very demanding strength/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jack-stanley/",
@@ -5220,7 +5350,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2020-06-23"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 25 mins: heavy DL (185lb), KB swings, heavy hack squats (185lb), weighted sit-ups, w/ burpee every minute. Demanding strength/conditioning with constant interruption."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jackie/",
@@ -5273,7 +5405,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 100 Muscle-Ups for time. Extreme gymnastics skill/endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jag-28/",
@@ -5294,7 +5428,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: run, high-vol pull-ups (40), high-vol push-ups (70). Tests high-volume bodyweight endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jaime-l-campbell/",
@@ -5315,7 +5451,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2017-01-16"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Descending squats / ascending muscle-ups. Extreme gymnastics volume (50 MUs total)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/james-prosser/",
@@ -5336,7 +5474,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2016-12-28"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: squats, T2B, burpees, all w/ vest. Tests conditioning/endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jared/",
@@ -5357,7 +5497,9 @@
       "likes": 0,
       "comments": 13,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 26 mins: pull-ups, heavy KB swings (70lb), box jumps. Tests long-duration endurance/power."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jason/",
@@ -5378,7 +5520,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: light OHS/BS (45lb bar), run. Tests light barbell cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jay/",
@@ -5399,7 +5543,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2016-12-28"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Run-Row-Run (1 mile, 2k, 1 mile). Pure endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jennifer/",
@@ -5420,7 +5566,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2015-10-01"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 30 mins: heavy DL (264lb), pull-ups, push-ups. Tests long-duration strength/bodyweight endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jenny/",
@@ -5441,7 +5589,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-12-10"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: very heavy DL (245lb), muscle-ups, heavy squat cleans (155lb). Extremely demanding strength/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jerry/",
@@ -5462,7 +5612,9 @@
       "likes": 0,
       "comments": 31,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (3 Parts). Multiple rounds across 3 sections involving various moderate barbell movements, running, ball slams, box jumps. Extreme volume/variety."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jimmy/",
@@ -5483,7 +5635,9 @@
       "likes": 0,
       "comments": 17,
       "posted_date": "2017-03-21"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Descending/Ascending Ladder). GHD sit-ups, heavy squat cleans (155lb). Tests core/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/johnson/",
@@ -5504,7 +5658,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Ladder). Moderate OHS (95lb), pull-ups. Tests moderate lifting/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jonno/",
@@ -5525,7 +5681,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2017-03-21"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: high-vol moderate DB snatches (40lb), high-skill L-Pull-Ups. Tests unilateral strength/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jorge/",
@@ -5546,7 +5704,9 @@
       "likes": 0,
       "comments": 11,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Run buy-in/out (2 miles total), 3 rounds: burpees, heavy power cleans (155lb), heavy front squats (155lb), all w/ vest. Very demanding strength/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/josh/",
@@ -5567,7 +5727,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Ladder 30-20-10). Bodyweight back squats, bodyweight bench press, strict pull-ups. Very demanding strength/gymnastics volume."
   },
   {
     "wodUrl": "https://wodwell.com/wod/joshie/",
@@ -5588,7 +5750,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 8 rounds: DL, sit-ups, push-ups, pull-ups, KB swings, DB step-ups, burpees, DB push press, + 2200m row cash-out. Extreme volume/variety."
   },
   {
     "wodUrl": "https://wodwell.com/wod/josie/",
@@ -5609,7 +5773,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2018-06-16"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD. 150 Wall Balls for time. Tests muscular endurance/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/justin/",
@@ -5630,7 +5796,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2015-10-01"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (Triplet). 5 rounds: run, high-vol box jumps, high-vol wall balls. Tests high-volume conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kabul/",
@@ -5651,7 +5819,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2021-09-11"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: DUs, moderate DL (135lb), moderate HPC (135lb), moderate FS (135lb). Tests barbell cycling/skill endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/karen/",
@@ -5694,7 +5864,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 5 rounds: bike, ball slams, lunges, skull crushers, spiderman push-ups, plank taps, row. Tests varied movement endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kelly/",
@@ -5737,7 +5909,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds: sprint, burpees, sit-ups, push-ups, sprint, w/ rest, all w/ vest. Tests interval endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/zink/",
@@ -5758,7 +5932,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2017-03-28"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Partner AMRAP). 26 mins: heavy DL (315lb), sync burpees, bar MU, partner BB carry (315lb). Very demanding strength/skill/partner work."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kenneth-stavinoha/",
@@ -5779,7 +5955,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2020-09-30"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: heavy DL (185lb), hanging hip touches, long running farmer carry (800m w/ 15lb DBs). Tests strength/core/grip endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kerrie/",
@@ -5800,7 +5978,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-12-09"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Med ball carry buy-in/out, 10 rounds: push-ups, squats, KB swings, all w/ vest. Tests endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kev/",
@@ -5821,7 +6001,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2017-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: run, pull-ups, dips, crunches, burpees. High volume bodyweight/cardio test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kevin/",
@@ -5842,7 +6024,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2015-05-31"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 4 rounds: box jumps, burpees, moderate squat cleans (145lb). Tests power endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kevin-conner/",
@@ -5863,7 +6047,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2021-10-25"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 7 rounds: heavy back squats (185lb), moderate jerks (135lb). Tests strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/killer-elite/",
@@ -5884,7 +6070,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2021-10-18"
-    }
+    },
+    "difficulty": "Easy",
+    "difficulty_explanation": "Benchmark (Couplet). 3 rounds: moderate thrusters (95lb), burpees. Short conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/klepto/",
@@ -5905,7 +6093,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (Max Reps). 5 rounds: max reps hang power snatch (3/4 BW), max reps HSPU. Tests strength/power/gymnastics capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kutschbach/",
@@ -5926,7 +6116,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2015-09-20"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder). Descending/Ascending: moderate FS (115lb), bar facing burpees, loaded sandbag carry. Tests conditioning/strength under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/l1-benchmark/",
@@ -5969,7 +6161,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Partner AMRAP). 21 mins: row, burpees over rower, moderate power cleans (155lb). Tests partner conditioning/power."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lane-2/",
@@ -6000,7 +6194,9 @@
     "category": "Girl",
     "tags": [
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: parallette HSPU, toes-to-rings, med ball cleans. Tests high-skill gymnastics/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/larry/",
@@ -6021,7 +6217,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2020-11-10"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: run, heavy DL (345lb), heavy squat cleans (185lb), heavy push jerks (185lb), muscle-ups, rope climb. Extremely demanding strength/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/laura/",
@@ -6042,7 +6240,9 @@
       "likes": 0,
       "comments": 11,
       "posted_date": "2021-02-12"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Squat buy-in, 4 rounds: run, Navy SEAL push-ups, sit-ups, strict pull-ups, burpee buy-out. Tests bodyweight endurance/stamina."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ledesma/",
@@ -6063,7 +6263,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Loaded runs (1600m w/ 45lb plate), high-vol T2B (100), moderate FS (155lb), rope climbs (10). Very demanding conditioning/gymnastics/strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lee/",
@@ -6084,7 +6286,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Girl WOD (Ladder 10->1). Heavy DL (1.5x BW), heavy Bench (BW), moderate Clean (0.75x BW). Classic strength endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lem/",
@@ -6105,7 +6309,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2020-05-20"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: run, box jumps, pull-ups, HSPU. Tests conditioning/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/liam/",
@@ -6126,7 +6332,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2017-03-21"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 6 rounds: high-vol squats, push-ups, lunges, run. Tests high-volume bodyweight endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/linda/",
@@ -6170,7 +6378,9 @@
       "For Time",
       "Ladder",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 3 rounds: run, KB swings, push-ups, skull crushers. Tests moderate endurance/strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lindskog/",
@@ -6191,7 +6401,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2017-07-23"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: row, heavy DB OHP (50lb), heavy sandbag lunges (100lb), box step-ups. Tests strength/conditioning with heavy/awkward objects."
   },
   {
     "wodUrl": "https://wodwell.com/wod/loredo/",
@@ -6212,7 +6424,9 @@
       "likes": 0,
       "comments": 151,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: run, muscle-ups, high-vol squats, all w/ vest. Very demanding skill/endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lt-bill-diblasio/",
@@ -6233,7 +6447,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2020-08-09"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Multiple runs interspersed with moderate C&J (155lb), T2B, wall balls, KB swings, ring dips, heavy weighted lunges (155lb). Very demanding volume/variety/strength/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lt-brian-sullivan/",
@@ -6254,7 +6470,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2020-08-11"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Multiple runs interspersed with heavy DL (275lb), heavy KB swings (70lb), moderate OHS (115lb), burpees, C2B, box jumps, moderate DB squat cleans (45lb). Extremely demanding volume/strength/variety."
   },
   {
     "wodUrl": "https://wodwell.com/wod/luce/",
@@ -6275,7 +6493,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Runs sandwiching pull-ups, KB swings, high-vol T2B, high-vol sit-ups, push-ups, heavy DL (225lb). Tests endurance/gymnastics/strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/luke/",
@@ -6317,7 +6537,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Girl WOD (Ladder 10->1). Muscle-ups, bodyweight C&J. Extremely demanding skill/strength combination."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lumberjack-20/",
@@ -6360,7 +6582,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (Max Reps). 5 rounds: max reps bodyweight bench press, max reps pull-ups. Tests pushing/pulling strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lund/",
@@ -6381,7 +6605,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2017-10-08"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 8 rounds: hand release push-ups, lunges, sit-ups. Tests bodyweight muscular endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lyla/",
@@ -6414,7 +6640,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 2 rounds: squats, pull-ups, burpees, cumulative plank, push-ups. Tests bodyweight endurance/core."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lynne/",
@@ -6457,7 +6685,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: run, KTE, moderate KB swings, moderate SDHP. Tests conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ma3-oscar-temores/",
@@ -6478,7 +6708,9 @@
       "likes": 0,
       "comments": 28,
       "posted_date": "2019-12-23"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Run buy-in/out, high-vol pull-ups, farmer carry, dips, push-ups, KTE, sit-ups. Very high volume bodyweight/gymnastics/carry endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mac/",
@@ -6499,7 +6731,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2020-07-19"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: run, high-vol moderate back squats (29 reps @ 135lb). Extremely demanding leg endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/magpie/",
@@ -6520,7 +6754,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2016-12-28"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Max Reps). 5 rounds, 10-min intervals: max rope climbs, max squats, max push-ups, 400m run, all w/ vest. Extreme endurance/skill test under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/maltz/",
@@ -6541,7 +6777,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2019-02-01"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Row buy-in, 3 rounds: heavy DL (315lb), plank, burpees, jumping jacks, push-ups, bike cash-out. Demanding strength/endurance/variety."
   },
   {
     "wodUrl": "https://wodwell.com/wod/manion/",
@@ -6562,7 +6800,9 @@
       "likes": 0,
       "comments": 52,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Multiple runs, descending/ascending heavy DL/HPC (155lb), 10 rounds moderate thrusters/DUs. Extreme volume/complexity/strength/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/manuel/",
@@ -6583,7 +6823,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2016-12-18"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds: pull-ups, HSPU, moderate thrusters (135lb). Tests gymnastics/pushing endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/marc-alan-lee/",
@@ -6604,7 +6846,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2021-09-14"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 mins: very heavy DL (405lb), T2B, bar facing burpees. Extremely demanding strength/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/marc-castellano/",
@@ -6625,7 +6869,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2019-09-18"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Girl WOD (Triplet AMRAP). 20 mins: HSPU, pistols, pull-ups. Tests high-skill gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/marco/",
@@ -6646,7 +6892,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2015-07-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 2 rounds: wall ball goblet squats, burpees over WB, wall balls, WB bear crawl. Tests conditioning with moderate weight."
   },
   {
     "wodUrl": "https://wodwell.com/wod/marston/",
@@ -6690,7 +6938,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: heavy DL (275lb), heavy HPC (185lb), moderate PP (135lb), run. Very demanding strength endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mary/",
@@ -6734,7 +6984,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: burpees, C2B, wall balls, push-ups, run. Tests high-volume conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/matt/",
@@ -6755,7 +7007,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2024-03-23"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 33 mins: very heavy clusters (205lb), bar facing burpees, bike cals. Extremely demanding strength/power/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/matt-16/",
@@ -6776,7 +7030,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2015-11-22"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Couplet 21-15-9). Moderate snatches (~94lb), push-ups. Tests moderate lifting/pushing endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/matt-b/",
@@ -6797,7 +7053,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2016-03-15"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: run, high-vol push-ups, sit-ups, squats. Tests high-volume bodyweight endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/matt-would-go/",
@@ -6818,7 +7076,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2020-08-27"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 13 rounds: strict pull-ups, box step-ups, burpees, all w/ vest. Extreme volume/endurance under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/matthew/",
@@ -6839,7 +7099,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-01-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Team of 3). Row, heavy DB thrusters (50lb), heavy KB swings (70lb), DUs, burpees, row, heavy DL (225lb). Extreme volume/variety/strength even for team."
   },
   {
     "wodUrl": "https://wodwell.com/wod/maupin/",
@@ -6860,7 +7122,9 @@
       "likes": 0,
       "comments": 31,
       "posted_date": "2016-04-12"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: muscle-ups, burpee pull-ups, pull-ups, run, all w/ vest. Extreme gymnastics volume/skill under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/maxton/",
@@ -6902,7 +7166,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). 30 mins: heavy DL (275lb), push-ups, box jumps. Tests long-duration strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mccartney/",
@@ -6923,7 +7189,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2024-03-27"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: moderate thrusters (50% BW), box jumps, hand release push-ups. Tests moderate endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mccluskey/",
@@ -6944,7 +7212,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). High volume, high-skill ring work: MUs, lowers, ring HSPU, ring rows, ring push-ups. Extreme gymnastics strength/skill demand."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mcghee/",
@@ -6988,7 +7258,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds: run, back extensions, sit-ups. Tests core/posterior chain endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mcclaren/",
@@ -7009,7 +7281,9 @@
       "likes": 0,
       "comments": 15,
       "posted_date": "2017-09-17"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds: muscle-ups, moderate thrusters (~88lb), GHD sit-ups. Tests skill/core/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/meadows/",
@@ -7030,7 +7304,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: moderate KB GTOH/FS/Push-ups (53lb), optional KB run. Tests strength/endurance with KB complex."
   },
   {
     "wodUrl": "https://wodwell.com/wod/michael/",
@@ -7051,7 +7327,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: high-vol weighted step-ups, moderate cleans (135lb), moderate snatches (135lb). Very demanding volume/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/millar/",
@@ -7072,7 +7350,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-03-07"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: moderate DB hang split snatches (40lb), rope climbs. Tests unilateral strength/skill/grip endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mogadishu-mile/",
@@ -7114,7 +7394,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: rope climb, run, max HSPU. Tests skill/endurance intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/monti/",
@@ -7135,7 +7417,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2016-07-20"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder 50->10). Wall balls, box jumps, heavy KB swings (70lb). Tests high-volume endurance/power."
   },
   {
     "wodUrl": "https://wodwell.com/wod/moon/",
@@ -7156,7 +7440,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: moderate DL/Clean/S2OH (155lb), high-vol single-unders. Tests barbell cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/moore/",
@@ -7177,7 +7463,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: run, GHD sit-ups, heavy DL (250lb). Tests endurance/core/strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/morrison/",
@@ -7198,7 +7486,9 @@
       "likes": 0,
       "comments": 34,
       "posted_date": "2014-12-08"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Run buy-in/out, high-vol pull-ups, push-ups, squats. Classic endurance test (Very Hard w/ vest)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mote/",
@@ -7219,7 +7509,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2020-09-15"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet). 5 rounds: run, moderate OHS (95lb). Tests conditioning/overhead stability."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mr-joshua/",
@@ -7240,7 +7532,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark (Triplet). 3 rounds: squats, muscle-ups, moderate hang power cleans (135lb). Tests skill/power/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/murph-6/",
@@ -7303,7 +7597,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). 20 mins: muscle-ups, HSPU, heavy KB swings (70lb). Tests high-skill gymnastics/power endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nancy/",
@@ -7346,7 +7642,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 7 rounds: high-vol bodyweight back squats, 1000m row. Extreme endurance/strength endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nasty-girls/",
@@ -7389,7 +7687,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20:22 AMRAP: burpees, squats, plank, lunges. Tests bodyweight endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nate/",
@@ -7433,7 +7733,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 12 rounds: moderate DB hang squat cleans (45lb), DB HSPU. Tests DB proficiency/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ned/",
@@ -7454,7 +7756,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2014-10-30"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds: farmer carry, weighted pull-ups (35lb), moderate DB power snatches (55lb). Very demanding grip/pulling/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/never-forget-31-01-2022/",
@@ -7475,7 +7779,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2022-02-08"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (AMRAP). 20 mins: run, max pull-ups. Tests pulling endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nick/",
@@ -7496,7 +7802,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: moderate squat clean/push press/back squat (~88lb), run. Tests barbell cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nickman/",
@@ -7517,7 +7825,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2016-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Chipper). Weighted step-ups, 3 rounds (moderate PC/sit-ups/DL @ 95lb), row cash-out. Tests moderate strength/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nicole/",
@@ -7561,7 +7871,9 @@
       "AMRAP",
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 3 sections (8/10/12 mins): 1-mile run + max reps heavy DL (315lb) / heavy PC (225lb) / moderate OHS (135lb). Extreme endurance/strength test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nookie/",
@@ -7582,7 +7894,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2017-03-21"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). HSPU, heavy DL (250lb), high box jumps, pull-ups, wall balls, DUs, weighted run. Extremely demanding volume/variety/skill/strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/northrup-2/",
@@ -7603,7 +7917,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2024-05-27"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 7 rounds: jog, light DB thrusters (30lb), strict pull-ups, w/ rest, all w/ light vest. Tests light endurance/skill intervals under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nukes/",
@@ -7624,7 +7940,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2015-10-01"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: DUs, moderate C&J (155lb), push-ups, long bike, + 1-mile run cash-out, all w/ vest. Very demanding volume/conditioning/strength under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nutts/",
@@ -7645,7 +7963,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2014-12-08"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 6 rounds: run, warrior sit-ups, light thrusters (95lb), jumping lunges. Tests conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/oda-7313/",
@@ -7666,7 +7986,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2024-05-27"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: DB complex (DL, HPC, FS, PP @ 50lb), DUs, run. Tests moderate DB cycling/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/oberheim-703/",
@@ -7687,7 +8009,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2021-05-27"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 22 mins: run, heavy DL (185lb), pull-ups, burpees, KB swings, lunges. Tests endurance/strength across varied movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/officer-darian-jarrot/",
@@ -7708,7 +8032,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2022-01-20"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Ladder). Ascending reps: light thrusters (95lb), bar facing burpees. Tests conditioning/endurance sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/officer-jason-knox/",
@@ -7729,7 +8055,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2020-05-22"
-    }
+    },
+    "difficulty": "Easy",
+    "difficulty_explanation": "Open WOD (AMRAP). 7 mins: burpees. Simple, short bodyweight test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ollis/",
@@ -7750,7 +8078,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2022-08-30"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 10 mins: moderate S2OH (115lb), moderate DL (115lb), box jumps. Tests moderate barbell cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/omar/",
@@ -7794,7 +8124,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds: moderate thrusters (100lb), C2B. Tests high-intensity threshold/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-12-1/",
@@ -7848,7 +8180,9 @@
       "AMRAP",
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/reps: moderate OHS (95lb), C2B. Tests threshold/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-13-2/",
@@ -7892,7 +8226,9 @@
       "AMRAP",
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (AMRAP Chipper). 14 mins: row, T2B, wall balls, moderate cleans (135lb), muscle-ups. Tests well-roundedness/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-13-5/",
@@ -7935,7 +8271,9 @@
     "tags": [
       "AMRAP",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Couplet AMRAP). 15 mins: wall balls, row. Simple conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-14-2/",
@@ -7979,7 +8317,9 @@
       "AMRAP",
       "Couplet",
       "Ladder"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight: T2B, DUs, heavy squat cleans (up to 315lb). Extremely demanding strength/skill/conditioning threshold test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-14-4/",
@@ -8022,7 +8362,9 @@
     "tags": [
       "AMRAP",
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). DB OH lunges, DB box step-ups, strict HSPU, handstand walk. Very demanding gymnastics skill/strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-1/",
@@ -8054,7 +8396,9 @@
     "tags": [
       "AMRAP",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (2 Parts). Part 1 (3 rounds): light snatches (95lb), burpees. Part 2 (3 rounds): bar MU, burpees. Tests light lifting/conditioning then gymnastics/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-2/",
@@ -8086,7 +8430,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Couplet). 10 rounds: light GTOH (95lb), bar facing burpees. Tests conditioning/pacing."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-3/",
@@ -8118,7 +8464,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: moderate DB thrusters (50lb), T2B, DUs. Tests long-duration conditioning/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-4/",
@@ -8161,7 +8509,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper Ladder). 21-15-9 DL (225lb)/HSPU, then 21-15-9 DL (315lb)/HSW. Extremely demanding strength/skill combination."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-1/",
@@ -8193,7 +8543,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). Ascending weight/skill: box jumps, C&J (up to 315lb), pistols. Extremely demanding strength/skill progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-2/",
@@ -8225,7 +8577,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Triplet). For time (partitioned): ring MU, row, wall balls. High volume skill/conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-3/",
@@ -8258,7 +8612,9 @@
       "For Time",
       "Chipper",
       "Ladder"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Ladder). Ascending reps: wall walks, DUs. Tests gymnastics endurance/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-4/",
@@ -8290,7 +8646,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Ladder Couplet). Ascending DB snatches (50lb), constant burpee box jump overs. Tests high-volume conditioning/unilateral strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-5/",
@@ -8322,7 +8680,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). 3 sections w/ rest: FS/T2B, FS/C2B, FS/Bar MU (all moderate weight). Very demanding gymnastics progression/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-1/",
@@ -8366,7 +8726,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (For Load). Establish 1RM complex (DL+Clean+Hang Clean+Jerk) after 21.3. Tests maximal strength under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-2/",
@@ -8410,7 +8772,9 @@
       "For Time",
       "Couplet",
       "Ladder"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 15 mins: wall walks, moderate DB snatches (50lb), box jump overs. Tests gymnastics/DB cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
@@ -8463,7 +8827,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Ladder Couplet). 10 min cap: Ascending/descending DL (225lb), bar facing burpees. Tests strength endurance/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
@@ -8505,7 +8871,9 @@
     "category": "Open",
     "tags": [
       "For Load"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). Pull-ups/DUs/Thrusters (95lb), then C2B/DUs/Thrusters (115lb), then Bar MU/DUs/Thrusters (135lb). Demanding gymnastics/weight progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-1/",
@@ -8537,7 +8905,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Chipper). 14 min cap: row, T2B, wall balls, moderate cleans (145lb), muscle-ups. Similar to 14.4, tests well-roundedness/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-2/",
@@ -8570,7 +8940,9 @@
       "For Time",
       "Couplet",
       "Ladder"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (AMRAP). 15 mins: ascending burpee pull-ups, ascending shuttle runs. Tests increasing volume bodyweight/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-3/",
@@ -8602,7 +8974,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (For Load). Establish 1RM thruster after 23.2A. Tests maximal strength under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-1/",
@@ -8645,7 +9019,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-2/",
@@ -8688,7 +9064,9 @@
     "tags": [
       "AMRAP",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Triplet). Descending reps: DB snatches (alternating arms, 50lb), lateral burpees over DB. Tests unilateral strength/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-3/",
@@ -8720,7 +9098,9 @@
     "tags": [
       "AMRAP",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: row, moderate DL (185lb), DUs. Tests long-duration conditioning/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-2/",
@@ -8763,7 +9143,9 @@
     "tags": [
       "For Load",
       "Weightlifting"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-1/",
@@ -8806,7 +9188,9 @@
     "tags": [
       "For Time",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 15 mins, ascending reps: heavy BS (1.5x BW), moderate SP (0.75x BW), heavy DL (1.5x BW). Tests strength endurance with heavy loads."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-2/",
@@ -8849,7 +9233,9 @@
     "tags": [
       "AMRAP",
       "Triplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 100 Squat Clean Thrusters (~88lb) for time. Tests high-volume barbell cycling endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-3/",
@@ -8892,7 +9278,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: deficit HSPU (6in), 1km run. Extreme endurance/gymnastics pushing demand."
   },
   {
     "wodUrl": "https://wodwell.com/wod/otis/",
@@ -8913,7 +9301,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2018-04-23"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: heavy BS (225lb), heavy DL (275lb), sprint, w/ rest. Tests maximal strength/power intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/oz/",
@@ -8934,7 +9324,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2017-11-02"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 6 rounds: pull-ups, moderate front-rack lunges (75lb), push-ups, all w/ vest. Very demanding endurance/strength under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ozzy/",
@@ -8955,7 +9347,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-11-06"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Runs interspersed with moderate DL (155lb), strict pull-ups, moderate C&J (155lb). Tests strength/gymnastics/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/pk/",
@@ -8976,7 +9370,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2015-07-03"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). Run buy-in/out, 22 min AMRAP: squats, burpees, push-ups. Tests long-duration bodyweight endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/pat/",
@@ -8997,7 +9393,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2017-05-29"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Ring dips, heavy PC (165lb), DUs, heavy BS (165lb), DUs, heavy S2OH (165lb), DUs. Tests strength/skill across multiple heavy lifts."
   },
   {
     "wodUrl": "https://wodwell.com/wod/patton/",
@@ -9018,7 +9416,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2015-01-26"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP w/ Run). 20 min AMRAP: C2B, moderate DB thrusters (50lb), w/ DU interrupt every 2 mins, + 2-mile run cash-out. Complex structure testing skill/conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/paz/",
@@ -9039,7 +9439,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2020-04-25"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: moderate FS (165lb), pull-ups, heavy DL (225lb), T2B, moderate push jerks (165lb), hand release push-ups. Tests strength/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/pearl-harbor-12-7-41/",
@@ -9060,7 +9462,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2017-03-21"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Partner). Row/Bike buy-in, Devil Presses, heavy Bear Complexes (95lb), sync burpees. Demanding partner work/strength/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/peyton/",
@@ -9104,7 +9508,9 @@
       "AMRAP",
       "EMOM",
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: moderate thrusters (75lb), strict ring dips, push-ups, strict HSPU, bear crawl. Tests high-volume strict gymnastics pushing endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/pheezy/",
@@ -9125,7 +9531,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Runs interspersed with burpee bar MU, heavy snatches (155lb), C&J, heavy thrusters (155lb). Extremely demanding skill/strength/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/philip-m-wigal/",
@@ -9146,7 +9554,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2022-04-13"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Quarterfinals WOD (Chipper). Rounds of HSPU/T2B, then Strict HSPU/Rope Climbs, then Chest-to-Wall HSPU/Muscle-Ups. Extreme gymnastics skill/volume progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/pike/",
@@ -9167,7 +9577,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2015-09-01"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: run, rope climbs, high-vol push-ups. Tests high-volume endurance/pulling strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/pikey/",
@@ -9188,7 +9600,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2024-05-27"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 2 rounds: box jumps, moderate push press (~88lb), ball slams, shuttle runs. Tests moderate conditioning/power."
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-24-3/",
@@ -9231,7 +9645,9 @@
     "tags": [
       "For Time",
       "Chipper"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Triplet AMRAP). 12 mins: box jumps, light thrusters (95lb), bar facing burpees. Short, intense conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rj/",
@@ -9252,7 +9668,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: heavy DL (250lb), burpees, rope climbs, run. Demanding strength/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rachel/",
@@ -9273,7 +9691,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2024-03-23"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 75 power snatches (75lb) for time. Tests light barbell cycling efficiency/endurance sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rahoi/",
@@ -9294,7 +9714,9 @@
       "likes": 0,
       "comments": 22,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: heavy DL (225lb), burpee pull-ups, heavy KB swings (70lb), run. Tests strength/conditioning endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ralph/",
@@ -9315,7 +9737,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Long row buy-in/out, sandwiching burpees, DB snatches, pull-ups, push presses, heavy DL (220lb), lunges, push-ups, squats. Extreme volume/variety."
   },
   {
     "wodUrl": "https://wodwell.com/wod/randy/",
@@ -9358,7 +9782,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 10:17 AMRAP: moderate thrusters (95lb), burpees, KB swings, row. Tests conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rankel/",
@@ -9379,7 +9805,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: run, lunges, pull-ups, burpees. Tests high-volume bodyweight endurance/conditioning. (Note: This is the version without a vest)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ratana/",
@@ -9400,7 +9828,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2020-10-01"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Same as above but w/ vest (20/14lb). Extreme endurance challenge under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/red-horse/",
@@ -9421,7 +9851,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2019-03-02"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Squat snatch buy-in (155lb), 10 rounds (pull-ups, sprint), squat clean cash-out (155lb). Tests strength/power/conditioning intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rene/",
@@ -9463,7 +9895,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: pull-ups, light DB DL (75lb), moderate push press (135lb). Tests moderate strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rene/",
@@ -9484,7 +9918,9 @@
       "likes": 0,
       "comments": 15,
       "posted_date": "2015-08-17"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 3 miles run total, 150 burpees, optional vest. Extreme endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rich/",
@@ -9505,7 +9941,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2017-07-04"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 25 mins: freestanding HSPU, L-sit rope climb. Extremely high skill gymnastics endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ricky/",
@@ -9526,7 +9964,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 3 rounds: burpees, jump squats, V-ups, mountain climbers, calf raises, ball slams, jumping jacks, plank. Tests varied bodyweight endurance/core."
   },
   {
     "wodUrl": "https://wodwell.com/wod/riley/",
@@ -9569,7 +10009,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Heavy C&J (185lb), heavy KB swings (70lb), moderate thrusters, C2B, burpees over bar, wall balls, row. Demanding chipper with heavy weights/high skills."
   },
   {
     "wodUrl": "https://wodwell.com/wod/robbie/",
@@ -9590,7 +10032,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2015-01-26"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (AMRAP). 30 mins: swim, push-ups, squats. Tests swimming endurance/basic bodyweight endurance. Difficulty depends heavily on swimming proficiency."
   },
   {
     "wodUrl": "https://wodwell.com/wod/robert-bush/",
@@ -9611,7 +10055,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-08-13"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: runs interspersed with moderate thrusters/push press/bench press (135lb). Tests barbell endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/roberts-ridge/",
@@ -9632,7 +10078,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2019-01-08"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). Row buy-in, then 28 min AMRAP: light thrusters, burpee box jump overs, pull-ups, light hang cleans. Tests long-duration conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rocket/",
@@ -9653,7 +10101,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-10-27"
-    }
+    },
+    "difficulty": "Easy",
+    "difficulty_explanation": "Benchmark. Short sprint test of rowing power/efficiency."
   },
   {
     "wodUrl": "https://wodwell.com/wod/roney/",
@@ -9674,7 +10124,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 5 rounds: heavy DL (225lb), box jumps, pull-ups. Tests strength/power endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rosenbloom/",
@@ -9695,7 +10147,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2021-07-10"
-    }
+    },
+    "difficulty": "Easy",
+    "difficulty_explanation": "Benchmark. Standard endurance test."
   },
   {
     "wodUrl": "",
@@ -9738,7 +10192,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 24 mins: bar over burpees, heavy DL (1.5x BW), pull-ups. Tests strength/conditioning endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/roy/",
@@ -9759,7 +10215,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: sandbag walk/sprint, bear crawl, complex KB movement (swing, clean, squat, push press), all w/ vest. Tests strength/conditioning with odd objects/load."
   },
   {
     "wodName": "Run 1 mile",
@@ -9802,7 +10260,9 @@
     "tags": [
       "For Time",
       "Monostructural"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 5 rounds: muscle-ups, burpees. Tests high-skill gymnastics/conditioning endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/runyan/",
@@ -9823,7 +10283,9 @@
       "likes": 0,
       "comments": 6,
       "posted_date": "2017-07-26"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Push-up buy-in/out, 4 rounds: run, moderate barbell complex (FS, Thrusters, PP, PC @ 115lb) interspersed with burpees. Tests barbell cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/russ/",
@@ -9844,7 +10306,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2018-07-07"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds: ruck squats/twists/push-ups/high pulls (45lb), plus 1-mile ruck sandbag run (100lb). Tests strength/endurance under heavy/awkward load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ryan/",
@@ -9887,7 +10351,9 @@
     "tags": [
       "For Time",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Multiple runs interspersed with high-volume burpees, squats, push-ups, lunges. Tests high-volume bodyweight endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/sc-4/",
@@ -9908,7 +10374,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2020-08-04"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds: moderate DB hang squat cleans, pull-ups, moderate power cleans (135lb), HSPU. Very high volume across multiple domains."
   },
   {
     "wodUrl": "https://wodwell.com/wod/sfc-will-lindsay/",
@@ -9929,7 +10397,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-09-08"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Max Reps). 3 rounds, 1-min stations: moderate squat cleans (155lb), shuttle sprints, heavy DL (245lb), burpees, moderate jerks (155lb), w/ rest. Tests power output across varied movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/spc-justin-hebert/",
@@ -9950,7 +10420,9 @@
       "likes": 0,
       "comments": 18,
       "posted_date": "2022-10-22"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. Run buy-in/out, 2 rounds: high-vol burpees, pull-ups, pistols, heavy KB swings (70lb). Tests high-volume endurance/skill/power."
   },
   {
     "wodUrl": "https://wodwell.com/wod/santiago/",
@@ -9971,7 +10443,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Partner AMRAP + Load). 30 min AMRAP: DUs, pull-ups, push-ups, sprint (alt rounds), then 5 min 1RM partner DL. Tests partner conditioning/max strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/santora/",
@@ -9992,7 +10466,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 2 rounds: run, KB swings, goblet squats, weighted plate lunges. Tests moderate conditioning/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/schmalls/",
@@ -10034,7 +10510,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds: heavy farmer carry (70lb), strict chin-ups, burpees, heavy DL (265lb). Tests strength/grip/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/scooter/",
@@ -10055,7 +10533,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2015-10-28"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 11 mins: heavy DL (315lb), wall balls, bar over burpees. Short, intense test of strength/power/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/scott-neumann/",
@@ -10076,7 +10556,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2020-12-13"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Couplet). 10 rounds: C2B, light front squats (75lb). Tests gymnastics pulling/light barbell endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/scottie/",
@@ -10097,7 +10579,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2016-04-15"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Run buy-in, 8 rounds (pull-ups, push-ups, burpees), heavy sandbag carry, long farmer carry. Extreme endurance/volume/carry test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/scotty/",
@@ -10118,7 +10602,9 @@
       "likes": 0,
       "comments": 9,
       "posted_date": "2017-06-18"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. High-vol strict pull-ups, high-vol hand release push-ups, 5k run, all w/ vest. Extreme endurance/strength under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/sean/",
@@ -10139,7 +10625,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD (Couplet). 7 rounds: bodyweight DL, sprint. Tests strength/power intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/servais/",
@@ -10160,7 +10648,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2015-06-09"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5-mile run with high-vol squats/push-ups every 5 mins. Extreme endurance test with bodyweight interruptions."
   },
   {
     "wodUrl": "https://wodwell.com/wod/severin/",
@@ -10181,7 +10671,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 2-mile run, burpees, high-vol box step-ups, all w/ heavy vest (50lb). Tests endurance under significant load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/sham/",
@@ -10202,7 +10694,9 @@
       "likes": 0,
       "comments": 11,
       "posted_date": "2014-11-06"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 9 rounds: heavy squat cleans (185lb), very high burpee box jumps (36in). Demanding strength/power/plyometrics."
   },
   {
     "wodUrl": "https://wodwell.com/wod/shawn/",
@@ -10223,7 +10717,9 @@
       "likes": 0,
       "comments": 28,
       "posted_date": "2015-02-12"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark (Ladder). Ascending shuttle runs, ascending muscle-ups. Tests increasing skill/conditioning demand."
   },
   {
     "wodUrl": "https://wodwell.com/wod/shawn-t-odare/",
@@ -10244,7 +10740,9 @@
       "likes": 0,
       "comments": 7,
       "posted_date": "2020-07-10"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: rope climb, burpees, run, all w/ vest. Tests skill/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ship/",
@@ -10265,7 +10763,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. 6 rounds: run, sit-ups, mountain climbers, push-ups, pike push-ups, jumping lunges, squats, burpees. Tests varied bodyweight endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/shuttle-up/",
@@ -10329,7 +10829,9 @@
       "For Time",
       "Ladder",
       "Couplet"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 3 rounds: row, high-vol burpees, high-vol box jumps, run. Extreme volume/endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/sisson/",
@@ -10350,7 +10852,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2016-02-09"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). 3 rounds: muscle-ups, moderate squat cleans (~132lb), GHD sit-ups. Tests skill/strength/core endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/sloan/",
@@ -10371,7 +10875,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2023-02-02"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Couplet). 6km run, high-vol burpee pull-ups, all w/ vest. Extreme endurance/stamina under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/small/",
@@ -10392,7 +10898,9 @@
       "likes": 0,
       "comments": 16,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Triplet). High-vol heavy thrusters (135lb), high-vol C2B, 6-mile run. Extreme volume/strength/skill/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/smudge/",
@@ -10413,7 +10921,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2017-03-14"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder 30->5). GHD sit-ups, back extensions, KTE, light RDLs (95lb). High volume core/posterior chain endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/smykowski/",
@@ -10434,7 +10944,9 @@
       "likes": 0,
       "comments": 5,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 8 rounds: run, heavy weighted pull-ups (70lb), heavy lunges (70lb), heavy thrusters (70lb). Extremely demanding strength/endurance across multiple domains with heavy KB."
   },
   {
     "wodUrl": "https://wodwell.com/wod/spehar/",
@@ -10455,7 +10967,9 @@
       "likes": 0,
       "comments": 4,
       "posted_date": "2014-12-17"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (3 Parts). AMRAPs (BS/OHS/DUs), max snatches, cumulative heavy sandbag bear hug w/ push-up/T2B penalty. Complex, demanding strength/skill/endurance/odd object test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/stephen/",
@@ -10476,7 +10990,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Runs sandwiching moderate bench press (70% BW), HSPU, moderate DB thrusters (50lb), KTE, moderate DL (155lb). Tests strength/skill/endurance across varied movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/strange/",
@@ -10497,7 +11013,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: sprint, heavy squat clean thrusters (115lb), heavy KB swings (70lb), sprint, w/ rest. Tests power/strength intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/styles/",
@@ -10518,7 +11036,9 @@
       "likes": 0,
       "comments": 0,
       "posted_date": "2020-07-19"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Ladder 15->3). Moderate power cleans (135lb), pull-ups, moderate front squats (135lb), pull-ups. Tests barbell cycling/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/swink/",
@@ -10539,7 +11059,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2018-10-02"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Benchmark (Tabata). Pull-ups, Push-ups, Sit-ups, Squats. Tests max reps in Tabata intervals across basic bodyweight movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/t/",
@@ -10560,7 +11082,9 @@
       "likes": 0,
       "comments": 2,
       "posted_date": "2018-02-03"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Benchmark (Tabata). Row, Squat, Pull-up, Push-up, Sit-up. Score is lowest reps per exercise. Tests consistent output across varied movements in Tabata intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/t-u-p/",
@@ -10581,7 +11105,9 @@
       "likes": 0,
       "comments": 9,
       "posted_date": "2015-12-14"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: run, burpee muscle-ups, all w/ vest. Demanding skill/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/tk/",
@@ -10602,7 +11128,9 @@
       "likes": 0,
       "comments": 9,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). 3 miles run total, high-vol push-ups, bear crawls. Extreme endurance/pushing stamina test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/tpt9000/",
@@ -10623,7 +11151,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2024-03-27"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). 66 reps each of 10 varied movements (DL, Box Jumps, KB Swings, KTE, Sit-Ups, Pull-Ups, Thrusters, Wall Balls, Burpees, DUs). Extreme volume/variety endurance test."
   },
   {
     "wodName": "Tabata Something Else",
@@ -10665,7 +11195,9 @@
     "category": "Benchmark",
     "tags": [
       "Tabata"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Team of 3). C&J, BB Carry, C&J, Sled Pull, C&J, Sled Push, all with average team bodyweight. Extremely demanding strength/teamwork with heavy/awkward loads."
   },
   {
     "wodName": "Tabata This!",
@@ -10707,7 +11239,9 @@
     "category": "Benchmark",
     "tags": [
       "Tabata"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). 13 varied movements with reps matching dates/ages, plus 13 burpees after each movement (169 total burpees). Extreme volume/complexity/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/taylor/",
@@ -10728,7 +11262,9 @@
       "likes": 0,
       "comments": 3,
       "posted_date": "2015-09-01"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 5 rounds: heavy squat cleans (165lb), heavy S2OH (165lb), burpee C2B, w/ rest. Demanding strength/skill intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/terry/",
@@ -10749,7 +11285,9 @@
       "likes": 0,
       "comments": 10,
       "posted_date": "2016-02-28"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Runs interspersed with descending rounds of Cindy (5-4-3-2-1 rounds). Extreme volume bodyweight/conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-don/",
@@ -10770,7 +11308,9 @@
       "likes": 0,
       "comments": 12,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 7 rounds of 7 reps: HSPU, heavy thrusters (135lb), KTE, heavy DL (245lb), burpees, heavy KB swings (70lb), pull-ups. Extremely demanding strength/skill/volume across 7 movements."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-juicy/",
@@ -10791,7 +11331,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2019-05-02"
-    }
+    },
+    "difficulty": "Medium",
+    "difficulty_explanation": "Hero WOD. KB swing buy-in/out, 20 flights stairs w/ vest, V-ups, Russian twists, sit-ups. Tests core/conditioning under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-kabul-thirteen-2/",
@@ -10812,7 +11354,9 @@
       "likes": 0,
       "comments": 30,
       "posted_date": "2021-09-19"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. 10 rounds: seated rope climb, high-vol light back squats (95lb), very heavy BB farmer carry (2x135lb). Demanding skill/strength endurance/grip."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-lyon/",
@@ -10833,7 +11377,9 @@
       "likes": 0,
       "comments": 8,
       "posted_date": "2017-12-26"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (Chipper). Run buy-in/out, high-vol push-ups, sit-ups, squats. High volume bodyweight endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-payne-train/",
@@ -10854,7 +11400,9 @@
       "likes": 0,
       "comments": 33,
       "posted_date": "2021-05-10"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP after Run). 1.5 mile run, then AMRAP: C2B, heavy hang squat cleans (155lb), heavy push presses (155lb). Tests endurance then strength/skill endurance."
   },
   {
     "wodName": "The Seven",
@@ -10896,7 +11444,9 @@
     "category": "Hero",
     "tags": [
       "For Time"
-    ]
+    ],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Row buy-in/out, 3 rounds: DUs, heavy C&J (185lb), bar MU. Demanding skill/strength/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/thomas-nye/",
@@ -10917,7 +11467,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2020-09-22"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 25 mins: muscle-ups, heavy thrusters (155lb), T2B. Demanding long-duration skill/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/thompson/",
@@ -10938,7 +11490,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2014-09-05"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD (Ladder). Descending reps: moderate thrusters (115lb), rope climbs. High volume skill/strength endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/three-fathers/",
@@ -10959,7 +11513,9 @@
       "likes": 0,
       "comments": 11,
       "posted_date": "2019-12-15"
-    }
+    },
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Hero WOD. Run buy-in, 9 rounds: heavy DB devil presses (50lb), heavy DB front squats (50lb), heavy DB push press cash-out. Extremely demanding DB strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/tiff/",
@@ -10980,7 +11536,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2016-12-28"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD. 4 rounds: swim, moderate DB squat cleans (40lb). Tests swimming endurance/moderate strength. Difficulty depends heavily on swimming proficiency."
   },
   {
     "wodUrl": "https://wodwell.com/wod/timmins/",
@@ -11001,7 +11559,9 @@
       "likes": 0,
       "comments": 1,
       "posted_date": "2021-11-11"
-    }
+    },
+    "difficulty": "Hard",
+    "difficulty_explanation": "Hero WOD (AMRAP). 8 rounds: run, moderate DB burpee deadlifts (60lb). Tests conditioning/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/tom/",

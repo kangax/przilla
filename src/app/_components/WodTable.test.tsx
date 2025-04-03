@@ -238,8 +238,8 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("AMRAP")).toBeInTheDocument(); // Tag Badge
     expect(within(row).getByText("Medium")).toBeInTheDocument(); // Difficulty
     expect(within(row).getByText("Medium")).toHaveClass("text-yellow-500"); // Difficulty Color
-    expect(within(row).getAllByText("-")).toHaveLength(3); // Date, Level, Notes placeholders
-    expect(within(row).getByText("Not attempted")).toBeInTheDocument(); // Score placeholder
+    // Check for 4 dashes: Date, Score, Level, Notes
+    expect(within(row).getAllByText("-")).toHaveLength(4);
   });
 
   it("should render WOD with one Rx result correctly", () => {
@@ -400,11 +400,15 @@ describe("WodTable Component", () => {
     fireEvent.click(screen.getByRole("columnheader", { name: /Level/ }));
     expect(handleSortMock).toHaveBeenCalledWith("level");
 
+    // Click the new sortable header
+    fireEvent.click(screen.getByRole("columnheader", { name: /Difficulty/ }));
+    expect(handleSortMock).toHaveBeenCalledWith("difficulty");
+
     // Non-sortable headers should not trigger handleSort
     fireEvent.click(screen.getByRole("columnheader", { name: /Type/ }));
     fireEvent.click(screen.getByRole("columnheader", { name: /Score/ }));
-    fireEvent.click(screen.getByRole("columnheader", { name: /Difficulty/ })); // Not sortable
-    fireEvent.click(screen.getByRole("columnheader", { name: /Notes/ })); // Not sortable
-    expect(handleSortMock).toHaveBeenCalledTimes(3); // Only the 3 sortable ones
+    // Difficulty is now sortable, removed from non-sortable checks
+    fireEvent.click(screen.getByRole("columnheader", { name: /Notes/ }));
+    expect(handleSortMock).toHaveBeenCalledTimes(4); // Now 4 sortable headers
   });
 });

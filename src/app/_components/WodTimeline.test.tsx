@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, within } from "../../test-utils"; // Use custom render
 import "@testing-library/jest-dom";
 import WodTimeline from "./WodTimeline";
-import { type Wod, type WodResult } from "./WodViewer"; // Import types
+import { type Wod, type WodResult } from "~/types/wodTypes"; // Corrected import path
 
 // --- Mock next/link ---
 vi.mock("next/link", () => ({
@@ -185,10 +185,8 @@ describe("WodTimeline Component", () => {
     );
     const row = screen.getByRole("row", { name: /WOD Charlie/ });
     const timelineCell = within(row).getAllByRole("cell")[1]; // Second cell is the timeline
-    expect(within(timelineCell).getByText("Not Attempted")).toBeInTheDocument();
-    expect(within(timelineCell).getByText("Not Attempted")).toHaveClass(
-      "italic",
-    ); // Check for styling
+    expect(within(timelineCell).getByText("n/a")).toBeInTheDocument(); // Updated expectation
+    expect(within(timelineCell).getByText("n/a")).toHaveClass("italic"); // Check for styling on 'n/a'
   });
 
   it("should render results chronologically within a WOD row", () => {

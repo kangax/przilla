@@ -38,8 +38,6 @@ const WodTable: React.FC<WodTableProps> = ({
   // Helper function to get color based on difficulty
   const getDifficultyColor = (difficulty: string | undefined): string => {
     switch (difficulty?.toLowerCase()) {
-      case "very easy":
-        return "text-blue-500";
       case "easy":
         return "text-green-500";
       case "medium":
@@ -88,7 +86,7 @@ const WodTable: React.FC<WodTableProps> = ({
             Level {getSortIndicator("level")}
           </Table.ColumnHeaderCell>
           {/* Added Difficulty Header */}
-          <Table.ColumnHeaderCell className="text-foreground">
+          <Table.ColumnHeaderCell className="whitespace-nowrap text-foreground">
             Difficulty
           </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="text-foreground">
@@ -161,7 +159,7 @@ const WodTable: React.FC<WodTableProps> = ({
                 </Table.Cell>
                 <Table.Cell>-</Table.Cell>
                 {/* Added Difficulty Cell for no-results row */}
-                <Table.Cell>
+                <Table.Cell className="whitespace-nowrap">
                   {wod.difficulty ? (
                     <Tooltip
                       content={
@@ -298,7 +296,7 @@ const WodTable: React.FC<WodTableProps> = ({
               </Table.Cell>
               {/* Added Difficulty Cell */}
               {resultIndex === 0 ? ( // Only show difficulty on the first row for a WOD
-                <Table.Cell>
+                <Table.Cell className="whitespace-nowrap">
                   {wod.difficulty ? (
                     <Tooltip
                       content={

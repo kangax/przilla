@@ -8226,6 +8226,132 @@
     "difficulty_explanation": "A classic CrossFit 'gas tank' test. High-volume descending ladder of light thrusters and burpees demands relentless pacing, cardiovascular endurance, and mental toughness."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-25-1/",
+    "wodName": "Open 25.1",
+    "description": "AMRAP 15 minutes:\n3 Lateral Burpees Over the Dumbbell* (50/35 lb)\n3 Dumbbell Hang Clean-to-Overheads* (50/35 lb)\n30 ft Walking Lunge (2x15 feet)\n*After completing each round add 3 reps to the Burpees and Hang Clean-to-Overheads.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 216,
+          "max": null
+        },
+        "advanced": {
+          "min": 168,
+          "max": 215
+        },
+        "intermediate": {
+          "min": 126,
+          "max": 167
+        },
+        "beginner": {
+          "min": 36,
+          "max": 125
+        }
+      }
+    },
+    "results": [
+      {
+        "date": "28 Feb'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": null,
+        "score_reps": 172,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Open",
+    "tags": ["AMRAP", "Ladder"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A 15-minute AMRAP with increasing reps of burpees and dumbbell C2OH, interspersed with lunges. Tests endurance and pacing."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-25-2/",
+    "wodName": "Open 25.2",
+    "description": "For Time\n21 Pull-Ups\n42 Double-Unders\n21 Thrusters (95/65 lb)\n18 Chest-to-Bar Pull-Ups\n36 Double-Unders\n18 Thrusters (115/75 lb)\n15 Bar Muscle-Ups\n30 Double-Unders\n15 Thrusters (135/85 lb)\nTime Cap: 12 Minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [
+      {
+        "date": "8 Mar'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": null,
+        "score_reps": 205,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Open",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A challenging triplet combining ascending gymnastics skills (Pull-up, C2B, BMU) with double-unders and increasing thruster weight. Tests skill, strength, and conditioning."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/open-25-3/",
+    "wodName": "Open 25.3",
+    "description": "For Time:\n5 Wall Walks\n50 calorie Row\n5 Wall Walks\n25 Deadlifts (225/155 lb)\n5 Wall Walks\n25 Cleans (135/85 lb)\n5 Wall Walks\n25 Snatches (95/65 lb)\n5 Wall Walks\n50 calorie Row\nTime cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1080
+        },
+        "intermediate": {
+          "min": 1081,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [
+      {
+        "date": "14 Mar'25",
+        "rxStatus": "Rx",
+        "notes": "",
+        "score_time_seconds": 1179,
+        "score_reps": null,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
+    "category": "Open",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A chipper-style workout featuring wall walks, rowing, and a barbell complex (DL, Clean, Snatch). Tests endurance, strength, and gymnastics stamina."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-18-1/",
     "wodName": "Open 18.1",
     "description": "AMRAP in 20 minutes\n8 Toes-to-Bars\n10 Dumbbell Hang Clean-and-Jerks (50/35 lb)\n14/12 calorie Row",

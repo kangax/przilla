@@ -4186,8 +4186,8 @@
       "For Time",
       "Triplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD (Partner). Heavy DL buy-in (135lb), 7 rounds (rope climbs, heavy thrusters 135lb, heavy KB swings 70lb), loaded run cash-out. Very demanding weight/skill/volume even for partners."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark. 6 rounds, 1-min stations (Row, Burpees, DUs) w/ rest. Tests consistent output across varied modalities."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ghost-31/",
@@ -6162,8 +6162,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (Partner AMRAP). 21 mins: row, burpees over rower, moderate power cleans (155lb). Tests partner conditioning/power."
+    "difficulty": "Easy",
+    "difficulty_explanation": "Benchmark (Couplet). 3 rounds: moderate thrusters (95lb), burpees. Short conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lane-2/",
@@ -7688,8 +7688,8 @@
       "For Time",
       "Triplet"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Hero WOD (AMRAP). 20:22 AMRAP: burpees, squats, plank, lunges. Tests bodyweight endurance."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Benchmark (Triplet). 3 rounds: squats, muscle-ups, moderate hang power cleans (135lb). Tests skill/power/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nate/",
@@ -10193,8 +10193,8 @@
       "For Time",
       "Monostructural"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (AMRAP). 24 mins: bar over burpees, heavy DL (1.5x BW), pull-ups. Tests strength/conditioning endurance."
+    "difficulty": "Easy",
+    "difficulty_explanation": "Benchmark. Short sprint test of rowing power/efficiency."
   },
   {
     "wodUrl": "https://wodwell.com/wod/roy/",
@@ -10261,8 +10261,8 @@
       "For Time",
       "Monostructural"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (Couplet). 5 rounds: muscle-ups, burpees. Tests high-skill gymnastics/conditioning endurance."
+    "difficulty": "Easy",
+    "difficulty_explanation": "Benchmark. Standard endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/runyan/",
@@ -11196,8 +11196,8 @@
     "tags": [
       "Tabata"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD (Team of 3). C&J, BB Carry, C&J, Sled Pull, C&J, Sled Push, all with average team bodyweight. Extremely demanding strength/teamwork with heavy/awkward loads."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Benchmark (Tabata). Pull-ups, Push-ups, Sit-ups, Squats. Tests max reps in Tabata intervals across basic bodyweight movements."
   },
   {
     "wodName": "Tabata This!",
@@ -11240,8 +11240,8 @@
     "tags": [
       "Tabata"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD (Chipper). 13 varied movements with reps matching dates/ages, plus 13 burpees after each movement (169 total burpees). Extreme volume/complexity/endurance."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Benchmark (Tabata). Row, Squat, Pull-up, Push-up, Sit-up. Score is lowest reps per exercise. Tests consistent output across varied movements in Tabata intervals."
   },
   {
     "wodUrl": "https://wodwell.com/wod/taylor/",

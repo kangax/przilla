@@ -7646,6 +7646,37 @@
     "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds: moderate thrusters (100lb), C2B. Tests high-intensity threshold/gymnastics endurance."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/open-14-1/",
+    "wodName": "Open 14.1",
+    "description": "AMRAP in 10 minutes\n30 Double-Unders\n15 Power Snatches (75/55 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 450,
+          "max": null
+        },
+        "advanced": {
+          "min": 315,
+          "max": 449
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 314
+        },
+        "beginner": {
+          "min": 45,
+          "max": 179
+        }
+      }
+    },
+    "results": [],
+    "category": "Open",
+    "tags": ["AMRAP"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A fast-paced 10-minute couplet testing efficiency in double-unders and light power snatches. Requires good cardiovascular endurance and consistent cycling speed."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/open-14-2/",
     "wodName": "Open 14.2",
     "description": "For As Long As Possible\nFrom 0:00-3:00, 2 rounds of:\n10 Overhead Squats (95/65 lb)\n10 Chest-to-Bar Pull-Ups\n\nFrom 3:00-6:00, 2 rounds of:\n12 Overhead Squats (95/65 lb)\n12 Chest-to-Bar Pull-Ups\n\nFrom 6:00-9:00, 2 rounds of:\n14 Overhead Squats (95/65 lb)\n14 Chest-to-Bar Pull-Ups\n\nFollow the pattern until you fail to complete both rounds.",

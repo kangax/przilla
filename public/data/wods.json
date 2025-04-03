@@ -4320,8 +4320,8 @@
       "For Time",
       "Monostructural"
     ],
-    "difficulty": "Easy",
-    "difficulty_explanation": "Hero WOD. Running only (forward and backward). Tests cardio."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD. 30 C&J (135lb) for time. Tests power/efficiency in a sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/granite-mile/",
@@ -4388,8 +4388,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Girl WOD (For Load). 15-12-9 unbroken C&J. Tests maximal strength/endurance for barbell cycling complex."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: moderate C&J (135lb), burpees over bar. Tests barbell cycling/conditioning in a sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/griff/",
@@ -4479,7 +4479,7 @@
       "For Load"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD. 5 rounds: moderate barbell complex (PC, FS, Jerk @ 135lb), pull-ups, w/ rest. Tests strength endurance/conditioning intervals."
+    "difficulty_explanation": "Girl WOD (For Load). 15-12-9 unbroken C&J. Tests maximal strength/endurance for barbell cycling complex."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hall/",
@@ -4794,8 +4794,8 @@
       "For Time",
       "Triplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD (Chipper). High-cal row buy-in/out, thrusters (light), pull-ups, wall balls, all w/ vest. Very demanding volume/conditioning under load."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet). 3 rounds: run, moderate KB swings (53lb), pull-ups. Classic conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/helton/",
@@ -5169,8 +5169,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (AMRAP). 28 mins: moderate OHS (115lb), legless rope climbs, moderate bench press (115lb). Tests skill/strength endurance."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: heavy snatches (135lb), burpees over bar. Tests power/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/isabel/",
@@ -5215,7 +5215,7 @@
       "Monostructural"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (Triplet 21-15-9). High volume gymnastics pushing (HSPU, Ring Dips, Push-Ups). Tests pushing endurance/skill."
+    "difficulty_explanation": "Girl WOD. 30 snatches (135lb) for time. Tests power/efficiency/strength in a sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/j-j/",
@@ -5406,8 +5406,8 @@
       "For Time",
       "Triplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD. 100 Muscle-Ups for time. Extreme gymnastics skill/endurance test."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Triplet). Row, light thrusters (45lb), pull-ups. Classic conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jag-28/",
@@ -5866,7 +5866,7 @@
       "Monostructural"
     ],
     "difficulty": "Medium",
-    "difficulty_explanation": "Hero WOD. 5 rounds: bike, ball slams, lunges, skull crushers, spiderman push-ups, plank taps, row. Tests varied movement endurance."
+    "difficulty_explanation": "Girl WOD. 150 Wall Balls for time. Tests muscular endurance/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/kelly/",
@@ -5911,7 +5911,7 @@
       "Triplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD. 10 rounds: sprint, burpees, sit-ups, push-ups, sprint, w/ rest, all w/ vest. Tests interval endurance under load."
+    "difficulty_explanation": "Girl WOD (Triplet). 5 rounds: run, high-vol box jumps, high-vol wall balls. Tests high-volume conditioning/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/zink/",
@@ -6196,7 +6196,7 @@
       "Couplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: parallette HSPU, toes-to-rings, med ball cleans. Tests high-skill gymnastics/conditioning."
+    "difficulty_explanation": "Girl WOD (Max Reps). 5 rounds: max reps hang power snatch (3/4 BW), max reps HSPU. Tests strength/power/gymnastics capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/larry/",
@@ -6379,8 +6379,8 @@
       "Ladder",
       "Triplet"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Hero WOD. 3 rounds: run, KB swings, push-ups, skull crushers. Tests moderate endurance/strength."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Girl WOD (Ladder 10->1). Heavy DL (1.5x BW), heavy Bench (BW), moderate Clean (0.75x BW). Classic strength endurance test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lindskog/",
@@ -6641,8 +6641,8 @@
       "Ladder",
       "Couplet"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Hero WOD. 2 rounds: squats, pull-ups, burpees, cumulative plank, push-ups. Tests bodyweight endurance/core."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Girl WOD (Ladder 10->1). Muscle-ups, bodyweight C&J. Extremely demanding skill/strength combination."
   },
   {
     "wodUrl": "https://wodwell.com/wod/lynne/",
@@ -6687,7 +6687,7 @@
       "Couplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD. 3 rounds: run, KTE, moderate KB swings, moderate SDHP. Tests conditioning/endurance."
+    "difficulty_explanation": "Girl WOD (Max Reps). 5 rounds: max reps bodyweight bench press, max reps pull-ups. Tests pushing/pulling strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ma3-oscar-temores/",
@@ -6986,7 +6986,7 @@
       "Triplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD. 5 rounds: burpees, C2B, wall balls, push-ups, run. Tests high-volume conditioning/endurance."
+    "difficulty_explanation": "Girl WOD (Triplet AMRAP). 20 mins: HSPU, pistols, pull-ups. Tests high-skill gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/matt/",
@@ -7643,8 +7643,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD (Couplet). 7 rounds: high-vol bodyweight back squats, 1000m row. Extreme endurance/strength endurance test."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (Couplet). 5 rounds: run, moderate OHS (95lb). Tests conditioning/overhead stability."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nasty-girls/",
@@ -7872,8 +7872,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD (AMRAP). 3 sections (8/10/12 mins): 1-mile run + max reps heavy DL (315lb) / heavy PC (225lb) / moderate OHS (135lb). Extreme endurance/strength test."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Girl WOD (AMRAP). 20 mins: run, max pull-ups. Tests pulling endurance/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/nookie/",
@@ -8227,8 +8227,8 @@
       "For Time",
       "Triplet"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (AMRAP Chipper). 14 mins: row, T2B, wall balls, moderate cleans (135lb), muscle-ups. Tests well-roundedness/skill/conditioning."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 10 mins: moderate S2OH (115lb), moderate DL (115lb), box jumps. Tests moderate barbell cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-13-5/",
@@ -8272,8 +8272,8 @@
       "AMRAP",
       "Couplet"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Open WOD (Couplet AMRAP). 15 mins: wall balls, row. Simple conditioning test."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds: moderate thrusters (100lb), C2B. Tests high-intensity threshold/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-14-2/",
@@ -8318,8 +8318,8 @@
       "Couplet",
       "Ladder"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight: T2B, DUs, heavy squat cleans (up to 315lb). Extremely demanding strength/skill/conditioning threshold test."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/reps: moderate OHS (95lb), C2B. Tests threshold/gymnastics endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-14-4/",
@@ -8363,8 +8363,8 @@
       "AMRAP",
       "For Time"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (Chipper). DB OH lunges, DB box step-ups, strict HSPU, handstand walk. Very demanding gymnastics skill/strength/endurance."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (AMRAP Chipper). 14 mins: row, T2B, wall balls, moderate cleans (135lb), muscle-ups. Tests well-roundedness/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-1/",
@@ -8397,8 +8397,8 @@
       "AMRAP",
       "Couplet"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (2 Parts). Part 1 (3 rounds): light snatches (95lb), burpees. Part 2 (3 rounds): bar MU, burpees. Tests light lifting/conditioning then gymnastics/conditioning."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Couplet AMRAP). 15 mins: wall balls, row. Simple conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-2/",
@@ -8431,8 +8431,8 @@
       "AMRAP",
       "Triplet"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Open WOD (Couplet). 10 rounds: light GTOH (95lb), bar facing burpees. Tests conditioning/pacing."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight: T2B, DUs, heavy squat cleans (up to 315lb). Extremely demanding strength/skill/conditioning threshold test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-3/",
@@ -8465,8 +8465,8 @@
       "For Time",
       "Chipper"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: moderate DB thrusters (50lb), T2B, DUs. Tests long-duration conditioning/skill."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). DB OH lunges, DB box step-ups, strict HSPU, handstand walk. Very demanding gymnastics skill/strength/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-4/",
@@ -8510,8 +8510,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (Chipper Ladder). 21-15-9 DL (225lb)/HSPU, then 21-15-9 DL (315lb)/HSW. Extremely demanding strength/skill combination."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (2 Parts). Part 1 (3 rounds): light snatches (95lb), burpees. Part 2 (3 rounds): bar MU, burpees. Tests light lifting/conditioning then gymnastics/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-1/",
@@ -8544,8 +8544,8 @@
       "For Time",
       "Couplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (Chipper). Ascending weight/skill: box jumps, C&J (up to 315lb), pistols. Extremely demanding strength/skill progression."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Couplet). 10 rounds: light GTOH (95lb), bar facing burpees. Tests conditioning/pacing."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-2/",
@@ -8578,8 +8578,8 @@
       "AMRAP",
       "Triplet"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (Triplet). For time (partitioned): ring MU, row, wall balls. High volume skill/conditioning test."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: moderate DB thrusters (50lb), T2B, DUs. Tests long-duration conditioning/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-3/",
@@ -8613,8 +8613,8 @@
       "Chipper",
       "Ladder"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Ladder). Ascending reps: wall walks, DUs. Tests gymnastics endurance/skill."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper Ladder). 21-15-9 DL (225lb)/HSPU, then 21-15-9 DL (315lb)/HSW. Extremely demanding strength/skill combination."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-4/",
@@ -8647,8 +8647,8 @@
       "For Time",
       "Chipper"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Ladder Couplet). Ascending DB snatches (50lb), constant burpee box jump overs. Tests high-volume conditioning/unilateral strength."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). Ascending weight/skill: box jumps, C&J (up to 315lb), pistols. Extremely demanding strength/skill progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-5/",
@@ -8682,7 +8682,7 @@
       "Triplet"
     ],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (Chipper). 3 sections w/ rest: FS/T2B, FS/C2B, FS/Bar MU (all moderate weight). Very demanding gymnastics progression/endurance."
+    "difficulty_explanation": "Open WOD (Triplet). For time (partitioned): ring MU, row, wall balls. High volume skill/conditioning test."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-1/",
@@ -8728,7 +8728,7 @@
       "Couplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (For Load). Establish 1RM complex (DL+Clean+Hang Clean+Jerk) after 21.3. Tests maximal strength under fatigue."
+    "difficulty_explanation": "Open WOD (Ladder). Ascending reps: wall walks, DUs. Tests gymnastics endurance/skill."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-2/",
@@ -8774,7 +8774,7 @@
       "Ladder"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Triplet AMRAP). 15 mins: wall walks, moderate DB snatches (50lb), box jump overs. Tests gymnastics/DB cycling/conditioning."
+    "difficulty_explanation": "Open WOD (Ladder Couplet). Ascending DB snatches (50lb), constant burpee box jump overs. Tests high-volume conditioning/unilateral strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
@@ -8828,8 +8828,8 @@
       "For Time",
       "Chipper"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Ladder Couplet). 10 min cap: Ascending/descending DL (225lb), bar facing burpees. Tests strength endurance/conditioning sprint."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). 3 sections w/ rest: FS/T2B, FS/C2B, FS/Bar MU (all moderate weight). Very demanding gymnastics progression/endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
@@ -8872,8 +8872,8 @@
     "tags": [
       "For Load"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (Chipper). Pull-ups/DUs/Thrusters (95lb), then C2B/DUs/Thrusters (115lb), then Bar MU/DUs/Thrusters (135lb). Demanding gymnastics/weight progression."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (For Load). Establish 1RM complex (DL+Clean+Hang Clean+Jerk) after 21.3. Tests maximal strength under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-1/",
@@ -8907,7 +8907,7 @@
       "Triplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Chipper). 14 min cap: row, T2B, wall balls, moderate cleans (145lb), muscle-ups. Similar to 14.4, tests well-roundedness/skill/conditioning."
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 15 mins: wall walks, moderate DB snatches (50lb), box jump overs. Tests gymnastics/DB cycling/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-2/",
@@ -8941,8 +8941,8 @@
       "Couplet",
       "Ladder"
     ],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Open WOD (AMRAP). 15 mins: ascending burpee pull-ups, ascending shuttle runs. Tests increasing volume bodyweight/conditioning."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Ladder Couplet). 10 min cap: Ascending/descending DL (225lb), bar facing burpees. Tests strength endurance/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-3/",
@@ -8975,8 +8975,8 @@
       "For Time",
       "Chipper"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (For Load). Establish 1RM thruster after 23.2A. Tests maximal strength under fatigue."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (Chipper). Pull-ups/DUs/Thrusters (95lb), then C2B/DUs/Thrusters (115lb), then Bar MU/DUs/Thrusters (135lb). Demanding gymnastics/weight progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-1/",
@@ -9020,8 +9020,8 @@
       "For Time",
       "Chipper"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (Chipper). 14 min cap: row, T2B, wall balls, moderate cleans (145lb), muscle-ups. Tests well-roundedness/skill/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-2/",
@@ -9065,8 +9065,8 @@
       "AMRAP",
       "Couplet"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Triplet). Descending reps: DB snatches (alternating arms, 50lb), lateral burpees over DB. Tests unilateral strength/conditioning sprint."
+    "difficulty": "Medium",
+    "difficulty_explanation": "Open WOD (AMRAP). 15 mins: ascending burpee pull-ups, ascending shuttle runs. Tests increasing volume bodyweight/conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-3/",
@@ -9099,8 +9099,8 @@
       "AMRAP",
       "Chipper"
     ],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: row, moderate DL (185lb), DUs. Tests long-duration conditioning/strength endurance."
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-2/",
@@ -9144,8 +9144,8 @@
       "For Load",
       "Weightlifting"
     ],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets."
+    "difficulty": "Hard",
+    "difficulty_explanation": "Open WOD (For Load). Establish 1RM thruster after 23.2A. Tests maximal strength under fatigue."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-1/",
@@ -9190,7 +9190,7 @@
       "Triplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD (AMRAP). 15 mins, ascending reps: heavy BS (1.5x BW), moderate SP (0.75x BW), heavy DL (1.5x BW). Tests strength endurance with heavy loads."
+    "difficulty_explanation": "Open WOD (Triplet). Descending reps: DB snatches (alternating arms, 50lb), lateral burpees over DB. Tests unilateral strength/conditioning sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-2/",
@@ -9235,7 +9235,7 @@
       "Triplet"
     ],
     "difficulty": "Hard",
-    "difficulty_explanation": "Hero WOD. 100 Squat Clean Thrusters (~88lb) for time. Tests high-volume barbell cycling endurance."
+    "difficulty_explanation": "Open WOD (Triplet AMRAP). 20 mins: row, moderate DL (185lb), DUs. Tests long-duration conditioning/strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-3/",
@@ -9280,7 +9280,7 @@
       "Couplet"
     ],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Hero WOD. 7 rounds: deficit HSPU (6in), 1km run. Extreme endurance/gymnastics pushing demand."
+    "difficulty_explanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets."
   },
   {
     "wodUrl": "https://wodwell.com/wod/otis/",

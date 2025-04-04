@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react"; // Import useMemo
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, SegmentedControl, Tooltip } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -16,7 +16,7 @@ import {
   type PerformanceDataPoint,
   type SortByType,
 } from "~/types/wodTypes";
-import { hasScore, sortWods } from "~/utils/wodUtils";
+import { hasScore, sortWods, isWodDone } from "~/utils/wodUtils"; // Import isWodDone
 
 // --- URL State Management ---
 const DEFAULT_COMPLETION_FILTER = "done";
@@ -219,34 +219,57 @@ export default function WodViewer({
   );
   const originalTotalWodCount = wods.length;
 
-  // --- Filtering Logic ---
-  const categoryTagFilteredWods = wods.filter((wod) => {
-    const categoryMatch =
-      selectedCategories.length === 0 ||
-      (wod.category && selectedCategories.includes(wod.category));
-    const tagMatch =
-      selectedTags.length === 0 ||
-      (wod.tags && wod.tags.some((tag) => selectedTags.includes(tag)));
-    return categoryMatch && tagMatch;
-  });
+  // --- Memoized Filtering and Sorting Logic ---
 
-  const dynamicTotalWodCount = categoryTagFilteredWods.length;
-  const dynamicDoneWodsCount = categoryTagFilteredWods.filter((wod) =>
-    wod.results.some((r) => r.date && hasScore(r)),
-  ).length;
-  const dynamicNotDoneWodsCount = dynamicTotalWodCount - dynamicDoneWodsCount;
+  // 1. Memoize category/tag filtering
+  const categoryTagFilteredWods = useMemo(() => {
+    // console.log("Memo: Recalculating category/tag filter"); // For debugging
+    return wods.filter((wod) => {
+      const categoryMatch =
+        selectedCategories.length === 0 ||
+        (wod.category && selectedCategories.includes(wod.category));
+      const tagMatch =
+        selectedTags.length === 0 ||
+        (wod.tags && wod.tags.some((tag) => selectedTags.includes(tag)));
+      return categoryMatch && tagMatch;
+    });
+  }, [wods, selectedCategories, selectedTags]);
 
-  let finalFilteredWods = categoryTagFilteredWods;
-  if (completionFilter === "done") {
-    finalFilteredWods = categoryTagFilteredWods.filter((wod) =>
-      wod.results.some((r) => r.date && hasScore(r)),
-    );
-  } else if (completionFilter === "notDone") {
-    finalFilteredWods = categoryTagFilteredWods.filter(
-      (wod) => !wod.results.some((r) => r.date && hasScore(r)),
-    );
-  }
-  // --- End Filtering Logic ---
+  // 2. Memoize counts (depends on categoryTagFilteredWods)
+  const {
+    dynamicTotalWodCount,
+    dynamicDoneWodsCount,
+    dynamicNotDoneWodsCount,
+  } = useMemo(() => {
+    // console.log("Memo: Recalculating counts"); // For debugging
+    const total = categoryTagFilteredWods.length;
+    const done = categoryTagFilteredWods.filter(isWodDone).length; // Use isWodDone utility
+    const notDone = total - done;
+    return {
+      dynamicTotalWodCount: total,
+      dynamicDoneWodsCount: done,
+      dynamicNotDoneWodsCount: notDone,
+    };
+  }, [categoryTagFilteredWods]);
+
+  // 3. Memoize completion filtering (depends on categoryTagFilteredWods and completionFilter)
+  const finalFilteredWods = useMemo(() => {
+    // console.log("Memo: Recalculating completion filter"); // For debugging
+    if (completionFilter === "done") {
+      return categoryTagFilteredWods.filter(isWodDone); // Use isWodDone utility
+    } else if (completionFilter === "notDone") {
+      return categoryTagFilteredWods.filter((wod) => !isWodDone(wod)); // Use isWodDone utility
+    }
+    return categoryTagFilteredWods; // 'all' case
+  }, [categoryTagFilteredWods, completionFilter]);
+
+  // 4. Memoize sorting (depends on finalFilteredWods, sortBy, sortDirection)
+  const sortedWods = useMemo(() => {
+    // console.log("Memo: Recalculating sort"); // For debugging
+    return sortWods(finalFilteredWods, sortBy, sortDirection);
+  }, [finalFilteredWods, sortBy, sortDirection]);
+
+  // --- End Memoized Filtering and Sorting Logic ---
 
   // --- Event Handlers ---
   const handleSort = (column: SortByType) => {
@@ -265,8 +288,7 @@ export default function WodViewer({
   };
   // --- End Event Handlers ---
 
-  // Use imported sortWods utility on the final filtered list
-  const sortedWods = sortWods(finalFilteredWods, sortBy, sortDirection);
+  // sortedWods is now calculated using useMemo above
 
   return (
     <Box>

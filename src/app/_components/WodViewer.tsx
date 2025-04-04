@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useMemo } from "react"; // Import useMemo
+import { useState, useEffect, useMemo, useCallback } from "react"; // Import useCallback
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, SegmentedControl, Tooltip } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -272,20 +272,30 @@ export default function WodViewer({
   // --- End Memoized Filtering and Sorting Logic ---
 
   // --- Event Handlers ---
-  const handleSort = (column: SortByType) => {
-    if (column === sortBy) {
-      setSortDirection(sortDirection === "asc" ? "desc" : "asc");
-    } else {
-      setSortBy(column);
-      setSortDirection(DEFAULT_SORT_DIRECTIONS[column]);
-    }
-  };
+  // Memoize handleSort to stabilize its reference
+  const handleSort = useCallback(
+    (column: SortByType) => {
+      if (column === sortBy) {
+        // Toggle direction if same column
+        setSortDirection((currentDirection) =>
+          currentDirection === "asc" ? "desc" : "asc",
+        );
+      } else {
+        // Set new column and default direction
+        setSortBy(column);
+        setSortDirection(DEFAULT_SORT_DIRECTIONS[column]);
+      }
+    },
+    [sortBy], // Dependency: Recreate only if sortBy changes
+  );
 
-  const toggleTag = (tag: string) => {
+  // Memoize toggleTag to stabilize its reference
+  const toggleTag = useCallback((tag: string) => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     );
-  };
+  }, []); // No dependencies needed as it uses the setter function form
+
   // --- End Event Handlers ---
 
   // sortedWods is now calculated using useMemo above

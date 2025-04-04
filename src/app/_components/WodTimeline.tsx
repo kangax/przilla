@@ -17,17 +17,127 @@ interface WodTimelineProps {
   wods: Wod[];
   sortBy: SortByType; // Use new type
   sortDirection: "asc" | "desc";
-  handleSort: (column: SortByType) => void; // Use new type
+  handleSort: (column: SortByType) => void;
 }
 
+// --- Memoized Row Component ---
+interface WodTimelineRowProps {
+  wod: Wod;
+}
+
+const WodTimelineRow: React.FC<WodTimelineRowProps> = React.memo(({ wod }) => {
+  // console.log(`Rendering WodTimelineRow for: ${wod.wodName}`); // For debugging memoization
+  const safeString = (value: string | undefined | null): string => value ?? "";
+
+  // Calculate sorted valid results first
+  const sortedResults = [...wod.results]
+    .filter((r) => r.date && hasScore(r)) // Filter for valid results (date and score)
+    .sort((a, b) => {
+      const dateA = safeString(a.date);
+      const dateB = safeString(b.date);
+      if (!dateA) return 1;
+      if (!dateB) return -1;
+      return new Date(dateA).getTime() - new Date(dateB).getTime();
+    });
+
+  // Determine if the WOD has been attempted (has valid results)
+  const isAttempted = sortedResults.length > 0;
+
+  return (
+    <Table.Row
+      key={wod.wodName} // Key moved here
+      className="border-t border-table-border hover:bg-table-rowAlt"
+    >
+      <Table.Cell className="font-medium">
+        {wod.wodUrl ? (
+          <Link
+            href={wod.wodUrl}
+            target="_blank"
+            className="flex max-w-[200px] items-center truncate whitespace-nowrap text-primary hover:underline"
+          >
+            {wod.wodName}
+            <span className="ml-1 flex-shrink-0 text-xs opacity-70">↗</span>
+          </Link>
+        ) : (
+          <span className="max-w-[200px] truncate whitespace-nowrap">
+            {wod.wodName}
+          </span>
+        )}
+      </Table.Cell>
+      <Table.Cell>
+        {isAttempted ? (
+          <Flex align="center">
+            {sortedResults.map((result, index) => (
+              <Flex key={index} align="center" className="mb-1">
+                <Tooltip
+                  content={
+                    <>
+                      <Text size="1" weight="bold">
+                        {safeString(result?.date)}
+                      </Text>
+                      {result.notes && (
+                        <>
+                          <br />
+                          <Text
+                            size="1"
+                            style={{
+                              whiteSpace: "pre-wrap",
+                              maxWidth: "300px",
+                            }}
+                          >
+                            {safeString(result.notes)}
+                          </Text>
+                        </>
+                      )}
+                    </>
+                  }
+                >
+                  <Text className="cursor-help whitespace-nowrap">
+                    <span
+                      className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}
+                    >
+                      {formatScore(result)}
+                    </span>
+                    {result.rxStatus && (
+                      <Badge
+                        className="ml-1 rounded-full"
+                        size="1"
+                        color="gray"
+                      >
+                        {safeString(result.rxStatus)}
+                      </Badge>
+                    )}
+                  </Text>
+                </Tooltip>
+                {index < sortedResults.length - 1 && (
+                  <Text className="mx-2">→</Text>
+                )}
+              </Flex>
+            ))}
+          </Flex>
+        ) : (
+          <Text size="1" className="italic text-foreground/60">
+            n/a
+          </Text>
+        )}
+      </Table.Cell>
+      <Table.Cell className="min-w-[400px]">
+        <Text className="font-small whitespace-pre-line text-sm">
+          {wod.description}
+        </Text>
+      </Table.Cell>
+    </Table.Row>
+  );
+});
+WodTimelineRow.displayName = "WodTimelineRow"; // Add display name
+
+// --- Main Timeline Component ---
 const WodTimeline: React.FC<WodTimelineProps> = ({
   wods,
   sortBy,
   sortDirection,
   handleSort,
 }) => {
-  const safeString = (value: string | undefined | null): string => value ?? "";
-
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? "▲" : "▼";
@@ -65,109 +175,10 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
       </Table.Header>
 
       <Table.Body className="bg-table-row">
-        {wods.map((wod) => {
-          // Calculate sorted valid results first
-          const sortedResults = [...wod.results]
-            .filter((r) => r.date && hasScore(r)) // Filter for valid results (date and score)
-            .sort((a, b) => {
-              const dateA = safeString(a.date);
-              const dateB = safeString(b.date);
-              if (!dateA) return 1;
-              if (!dateB) return -1;
-              return new Date(dateA).getTime() - new Date(dateB).getTime();
-            });
-
-          // Determine if the WOD has been attempted (has valid results)
-          const isAttempted = sortedResults.length > 0;
-
-          return (
-            <Table.Row
-              key={wod.wodName}
-              className="border-t border-table-border hover:bg-table-rowAlt"
-            >
-              <Table.Cell className="font-medium">
-                {wod.wodUrl ? (
-                  <Link
-                    href={wod.wodUrl}
-                    target="_blank"
-                    className="flex max-w-[200px] items-center truncate whitespace-nowrap text-primary hover:underline"
-                  >
-                    {wod.wodName}
-                    <span className="ml-1 flex-shrink-0 text-xs opacity-70">
-                      ↗
-                    </span>
-                  </Link>
-                ) : (
-                  <span className="max-w-[200px] truncate whitespace-nowrap">
-                    {wod.wodName}
-                  </span>
-                )}
-              </Table.Cell>
-              <Table.Cell>
-                {isAttempted ? (
-                  <Flex align="center">
-                    {sortedResults.map((result, index) => (
-                      <Flex key={index} align="center" className="mb-1">
-                        <Tooltip
-                          content={
-                            <>
-                              <Text size="1" weight="bold">
-                                {safeString(result?.date)}
-                              </Text>
-                              {result.notes && (
-                                <>
-                                  <br />
-                                  <Text
-                                    size="1"
-                                    style={{
-                                      whiteSpace: "pre-wrap",
-                                      maxWidth: "300px",
-                                    }}
-                                  >
-                                    {safeString(result.notes)}
-                                  </Text>
-                                </>
-                              )}
-                            </>
-                          }
-                        >
-                          <Text className="cursor-help whitespace-nowrap">
-                            <span
-                              className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}
-                            >
-                              {formatScore(result)}
-                            </span>
-                            {result.rxStatus && (
-                              <Badge
-                                className="ml-1 rounded-full"
-                                size="1"
-                                color="gray"
-                              >
-                                {safeString(result.rxStatus)}
-                              </Badge>
-                            )}
-                          </Text>
-                        </Tooltip>
-                        {index < sortedResults.length - 1 && (
-                          <Text className="mx-2">→</Text>
-                        )}
-                      </Flex>
-                    ))}
-                  </Flex>
-                ) : (
-                  <Text size="1" className="italic text-foreground/60">
-                    n/a
-                  </Text>
-                )}
-              </Table.Cell>
-              <Table.Cell className="min-w-[400px]">
-                <Text className="font-small whitespace-pre-line text-sm">
-                  {wod.description}
-                </Text>
-              </Table.Cell>
-            </Table.Row>
-          );
-        })}
+        {/* Map over wods and render the memoized WodTimelineRow */}
+        {wods.map((wod) => (
+          <WodTimelineRow key={wod.wodName} wod={wod} /> // Use wodName as key
+        ))}
       </Table.Body>
     </Table.Root>
   );

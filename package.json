@@ -84,7 +84,7 @@
     "initVersion": "7.38.1"
   },
   "lint-staged": {
-    "*.{js,jsx,ts,tsx}": "eslint --fix"
+    "src/**/*.{js,jsx,ts,tsx}": "eslint --fix"
   },
   "packageManager": "npm@11.2.0"
 }

@@ -153,7 +153,7 @@ export default function WodTimelineChart({
   frequencyData,
   performanceData,
 }: WodTimelineChartProps) {
-  const [view, setView] = useState<"frequency" | "performance">("frequency");
+  const [view, setView] = useState<"frequency" | "performance">("performance"); // Default to performance
   const ROLLING_WINDOW = 12; // Define window size (Updated to 12 months)
 
   // Reverse mapping for Y-axis ticks in performance view

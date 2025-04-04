@@ -550,6 +550,7 @@ describe("WodViewer Helper Functions", () => {
         results: [mockResultTime(110, true)], // Elite
         category: "Girl",
         tags: ["For Time", "Couplet"],
+        count_likes: 100, // Added likes
       },
       {
         // Wod B - Cindy, fewer rounds, newer date, 2 attempts, intermediate
@@ -561,6 +562,7 @@ describe("WodViewer Helper Functions", () => {
         ],
         category: "Girl",
         tags: ["AMRAP"],
+        count_likes: 50, // Added likes
       },
       {
         // Wod C - Deadlift, lower weight, middle date, 1 attempt, beginner (scaled)
@@ -569,6 +571,7 @@ describe("WodViewer Helper Functions", () => {
         results: [mockResultLoad(200, false)], // Beginner (Scaled)
         category: "Benchmark",
         tags: ["Ladder"],
+        count_likes: 75, // Added likes
       },
       {
         // Wod D - Fran, slower time, latest date, 1 attempt, advanced
@@ -577,6 +580,7 @@ describe("WodViewer Helper Functions", () => {
         results: [{ ...mockResultTime(150, true), date: "2024-03-01" }], // Advanced
         category: "Girl",
         tags: ["For Time", "Couplet"],
+        count_likes: 100, // Same as A
       },
       {
         // Wod E - Cindy, more rounds, earliest date, 1 attempt, elite (scaled)
@@ -585,6 +589,7 @@ describe("WodViewer Helper Functions", () => {
         results: [{ ...mockResultRounds(26, 0, false), date: "2023-05-15" }], // Elite (Scaled)
         category: "Girl",
         tags: ["AMRAP"],
+        count_likes: 25, // Added likes
       },
       {
         // Wod F - No results
@@ -592,6 +597,7 @@ describe("WodViewer Helper Functions", () => {
         wodName: "Pull-ups",
         results: [],
         category: "Benchmark",
+        count_likes: 10, // Added likes
       },
       {
         // Wod G - Result with no score
@@ -599,6 +605,7 @@ describe("WodViewer Helper Functions", () => {
         wodName: "Push-ups",
         results: [mockResultNoScore()],
         category: "Benchmark",
+        // No count_likes, should default to 0
       },
       {
         // Wod H - Cindy, latest result is better
@@ -610,6 +617,7 @@ describe("WodViewer Helper Functions", () => {
         ],
         category: "Girl",
         tags: ["AMRAP"],
+        count_likes: 50, // Same as B
       },
     ];
 
@@ -792,6 +800,38 @@ describe("WodViewer Helper Functions", () => {
         "Pull-ups",
       ]);
     });
+
+    it("should sort by count_likes ascending", () => {
+      const sorted = sortWods(wodsToSort, "count_likes", "asc");
+      // Likes: G(0), F(10), E(25), B(50), H(50), C(75), A(100), D(100)
+      // Secondary sort name asc: G, F, E, B, H, C, A, D
+      expect(sorted.map((w) => w.wodName)).toEqual([
+        "Push-ups", // 0
+        "Pull-ups", // 10
+        "Cindy", // 25
+        "Cindy", // 50 (B)
+        "Cindy", // 50 (H)
+        "Deadlift", // 75
+        "Fran", // 100 (A)
+        "Fran", // 100 (D)
+      ]);
+    });
+
+    it("should sort by count_likes descending", () => {
+      const sorted = sortWods(wodsToSort, "count_likes", "desc");
+      // Likes: A(100), D(100), C(75), B(50), H(50), E(25), F(10), G(0)
+      // Secondary sort name desc: D, A, C, H, B, E, F, G
+      expect(sorted.map((w) => w.wodName)).toEqual([
+        "Fran", // 100 (D)
+        "Fran", // 100 (A)
+        "Deadlift", // 75
+        "Cindy", // 50 (H)
+        "Cindy", // 50 (B)
+        "Cindy", // 25
+        "Pull-ups", // 10
+        "Push-ups", // 0
+      ]);
+    });
   });
 });
 
@@ -939,6 +979,12 @@ describe("WodViewer Component", () => {
     },
   ];
 
+  // Add likes to the testWods used in component tests
+  const testWodsWithLikes = testWods.map((wod, index) => ({
+    ...wod,
+    count_likes: [100, 50, 75, 10, 0, 500][index], // Assign some likes
+  }));
+
   beforeEach(() => {
     // Reset mocks and search params before each test
     vi.clearAllMocks();
@@ -951,7 +997,7 @@ describe("WodViewer Component", () => {
 
   it("should render table view by default and show only done WODs (no URL params)", () => {
     // No specific params set for this test
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check table is rendered by default
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
@@ -982,7 +1028,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should switch to timeline view and show only done WODs initially", () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Find the view switcher and switch to timeline
     const timelineViewButton = screen.getByRole("radio", {
@@ -1031,7 +1077,7 @@ describe("WodViewer Component", () => {
   });
 
   it('should filter by category, update counts, and update URL (starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
     // Table view is default, "Done" filter is default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
     // Initial counts
@@ -1103,7 +1149,7 @@ describe("WodViewer Component", () => {
   });
 
   it('should filter by tags, update counts, and update URL (multiple, starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
     // Initial counts
@@ -1212,7 +1258,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should filter by completion status, update counts, and update URL", async () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
 
@@ -1269,7 +1315,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should handle sorting correctly and update URL", async () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
     // Table view is default
 
     // Initial sort check (date/desc) - Default, so no URL params expected initially
@@ -1341,7 +1387,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should filter by completion status in timeline view and update URL (after switching)", async () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
     // Switch to timeline view first
     fireEvent.click(screen.getByRole("radio", { name: /Timeline View/i }));
 
@@ -1402,7 +1448,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with category from URL", () => {
     mockSearchParams = new URLSearchParams("?category=Benchmark");
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check category select reflects the URL param
     expect(screen.getByRole("combobox")).toHaveTextContent(
@@ -1424,7 +1470,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with tags from URL", () => {
     mockSearchParams = new URLSearchParams("?tags=AMRAP%2CLadder"); // Cindy (B), Deadlift (C) are Done
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check tags are selected visually (assuming class indicates selection)
     expect(screen.getByText("AMRAP")).toHaveClass(
@@ -1454,7 +1500,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with completion status from URL", () => {
     mockSearchParams = new URLSearchParams("?completion=all"); // view/sort default
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check completion filter is set to 'All'
     expect(
@@ -1474,7 +1520,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with view=timeline from URL", () => {
     mockSearchParams = new URLSearchParams("?view=timeline");
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check timeline view is active
     expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
@@ -1493,7 +1539,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with sortBy and sortDir from URL", () => {
     mockSearchParams = new URLSearchParams("?sortBy=wodName&sortDir=asc");
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check sort state is applied (table view is default)
     expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
@@ -1504,11 +1550,28 @@ describe("WodViewer Component", () => {
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4"); // Default "Done" filter
   });
 
+  it("should initialize with sortBy=count_likes from URL", () => {
+    mockSearchParams = new URLSearchParams("?sortBy=count_likes"); // Default direction is desc
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+
+    // Check sort state is applied (table view is default)
+    expect(screen.getByTestId("table-sort-by")).toHaveTextContent(
+      "count_likes",
+    );
+    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
+      "desc",
+    ); // Default desc for count_likes
+
+    // Check default view/filters
+    expect(screen.getByTestId("wod-table")).toBeInTheDocument();
+    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4"); // Default "Done" filter
+  });
+
   it("should initialize with multiple parameters from URL including view/sort", () => {
     mockSearchParams = new URLSearchParams(
       "?category=Girl&tags=AMRAP&completion=all&view=timeline&sortBy=latestLevel&sortDir=asc",
     );
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check category
     expect(screen.getByRole("combobox")).toHaveTextContent(/Girl \(\d+\)/i);
@@ -1539,7 +1602,7 @@ describe("WodViewer Component", () => {
     mockSearchParams = new URLSearchParams(
       "?category=InvalidCat&tags=InvalidTag,AMRAP&completion=invalidStatus&view=invalidView&sortBy=invalidSort&sortDir=invalidDir",
     );
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check category defaults to 'All Categories'
     expect(screen.getByRole("combobox")).toHaveTextContent(/All Categories/i);
@@ -1575,7 +1638,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should update URL correctly when changing view", async () => {
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
     // Initial state: table view, no params in URL yet
     mockRouterReplace.mockClear(); // Clear after initial render
 
@@ -1609,7 +1672,7 @@ describe("WodViewer Component", () => {
   it("should update URL correctly when changing filters and view/sort are non-default", async () => {
     // Start with non-default view and sort
     mockSearchParams = new URLSearchParams("?view=timeline&sortBy=wodName"); // sortDir=asc is default for wodName
-    render(<WodViewer wods={testWods} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
 
     // Check initial state
     await waitFor(() => {

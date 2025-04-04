@@ -292,6 +292,16 @@ export const sortWods = (
       }
       // Secondary sort by name if difficulties are the same
       return a.wodName.localeCompare(b.wodName) * directionMultiplier;
+    } else if (sortBy === "count_likes") {
+      // Treat null/undefined likes as 0 for comparison
+      const likesA = a.count_likes ?? 0;
+      const likesB = b.count_likes ?? 0;
+
+      if (likesA !== likesB) {
+        return (likesA - likesB) * directionMultiplier;
+      }
+      // Secondary sort by name if likes are the same
+      return a.wodName.localeCompare(b.wodName) * directionMultiplier;
     }
     return 0;
   });

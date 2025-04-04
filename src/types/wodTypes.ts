@@ -57,6 +57,7 @@ export type Wod = {
   tags?: WodTag[];
   difficulty?: string; // Added difficulty
   difficulty_explanation?: string; // Added explanation for tooltip
+  count_likes?: number; // Added likes count
 };
 
 // Type for chart data points (used in WodViewer and passed from page.tsx)
@@ -82,4 +83,5 @@ export type SortByType =
   | "level"
   | "attempts"
   | "latestLevel"
-  | "difficulty";
+  | "difficulty"
+  | "count_likes";

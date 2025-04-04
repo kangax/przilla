@@ -93,6 +93,14 @@ const WodTable: React.FC<WodTableProps> = ({
           >
             Difficulty {getSortIndicator("difficulty")}
           </Table.ColumnHeaderCell>
+          {/* Added Likes Header */}
+          <Table.ColumnHeaderCell
+            onClick={() => handleSort("count_likes")}
+            style={{ cursor: "pointer" }}
+            className="whitespace-nowrap text-foreground" // Added whitespace-nowrap
+          >
+            Likes {getSortIndicator("count_likes")}
+          </Table.ColumnHeaderCell>
           <Table.ColumnHeaderCell className="text-foreground">
             Notes
           </Table.ColumnHeaderCell>
@@ -181,6 +189,10 @@ const WodTable: React.FC<WodTableProps> = ({
                   ) : (
                     <Text>-</Text> // Placeholder if no difficulty
                   )}
+                </Table.Cell>
+                {/* Added Likes Cell for no-results row */}
+                <Table.Cell className="whitespace-nowrap">
+                  {wod.count_likes ?? "-"}
                 </Table.Cell>
                 <Table.Cell>-</Table.Cell>
               </Table.Row>
@@ -321,6 +333,14 @@ const WodTable: React.FC<WodTableProps> = ({
                 </Table.Cell>
               ) : (
                 <Table.Cell></Table.Cell> // Empty cell for subsequent results of the same WOD
+              )}
+              {/* Added Likes Cell */}
+              {resultIndex === 0 ? ( // Only show likes on the first row for a WOD
+                <Table.Cell className="whitespace-nowrap">
+                  {wod.count_likes ?? "-"}
+                </Table.Cell>
+              ) : (
+                <Table.Cell></Table.Cell> // Empty cell for subsequent results
               )}
               <Table.Cell className="max-w-[250px] truncate">
                 <Tooltip content={safeString(result.notes)}>

@@ -49,6 +49,7 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
     "attempts",
     "latestLevel",
     "difficulty", // Added difficulty
+    "count_likes", // Added likes
   ];
   return validSortKeys.includes(sortBy as SortByType);
 };
@@ -66,6 +67,7 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   attempts: "desc",
   latestLevel: "desc",
   difficulty: "asc", // Added difficulty, default asc (Easy -> Hard)
+  count_likes: "desc", // Added likes, default desc (Most likes first)
 };
 // --- End URL State Management ---
 

@@ -59,6 +59,7 @@ const mockWod1_NoResults: Wod = {
   results: [],
   difficulty: "Medium",
   difficulty_explanation: "Standard benchmark AMRAP.",
+  count_likes: 15, // Added likes
 };
 
 const mockWod2_OneResultRx: Wod = {
@@ -79,6 +80,7 @@ const mockWod2_OneResultRx: Wod = {
   results: [mockResultTime(290, true, "2024-03-10", "Felt good")], // Advanced
   difficulty: "Hard",
   difficulty_explanation: "Classic Girl WOD, tough time cap.",
+  count_likes: 123, // Added likes
 };
 
 const mockWod3_OneResultScaled: Wod = {
@@ -101,6 +103,7 @@ const mockWod3_OneResultScaled: Wod = {
   ], // Scaled (Intermediate level if Rx)
   difficulty: "Very Hard",
   difficulty_explanation: "Hero WOD, high volume chipper.",
+  count_likes: 50, // Added likes
 };
 
 const mockWod4_MultiResult: Wod = {
@@ -124,6 +127,7 @@ const mockWod4_MultiResult: Wod = {
   ],
   difficulty: "Hard",
   difficulty_explanation: "Open WOD, tests multiple modalities.",
+  count_likes: 200, // Added likes
 };
 
 const mockWod5_NoBenchmark: Wod = {
@@ -131,7 +135,7 @@ const mockWod5_NoBenchmark: Wod = {
   wodName: "WOD Echo",
   description: "Desc Echo",
   results: [mockResultRounds(10, 0, true, "2024-01-05")],
-  // No difficulty specified for this one to test placeholder
+  // No difficulty or likes specified for this one to test placeholder
 };
 
 const testWods: Wod[] = [
@@ -177,6 +181,10 @@ describe("WodTable Component", () => {
     expect(
       screen.getByRole("columnheader", { name: /Difficulty/ }),
     ).toBeInTheDocument();
+    // Added Likes Header Check
+    expect(
+      screen.getByRole("columnheader", { name: /Likes/ }),
+    ).toBeInTheDocument();
     expect(
       screen.getByRole("columnheader", { name: /Notes/ }),
     ).toBeInTheDocument();
@@ -221,6 +229,18 @@ describe("WodTable Component", () => {
     expect(
       screen.getByRole("columnheader", { name: /Date ▲/ }),
     ).toBeInTheDocument();
+
+    rerender(
+      <WodTable
+        wods={[]}
+        sortBy="count_likes"
+        sortDirection="desc"
+        handleSort={handleSortMock}
+      />,
+    );
+    expect(
+      screen.getByRole("columnheader", { name: /Likes ▼/ }),
+    ).toBeInTheDocument();
   });
 
   it('should render a "Not attempted" row for WODs with no results', () => {
@@ -238,8 +258,9 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("AMRAP")).toBeInTheDocument(); // Tag Badge
     expect(within(row).getByText("Medium")).toBeInTheDocument(); // Difficulty
     expect(within(row).getByText("Medium")).toHaveClass("text-yellow-500"); // Difficulty Color
-    // Check for 4 dashes: Date, Score, Level, Notes
-    expect(within(row).getAllByText("-")).toHaveLength(4);
+    expect(within(row).getByText("15")).toBeInTheDocument(); // Likes
+    // Check for 3 dashes: Date, Score, Level, Notes (Likes has value)
+    expect(within(row).getAllByText("-")).toHaveLength(3);
   });
 
   it("should render WOD with one Rx result correctly", () => {
@@ -263,6 +284,7 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("Advanced")).toHaveClass("text-green-600"); // Level Color
     expect(within(row).getByText("Hard")).toBeInTheDocument(); // Difficulty
     expect(within(row).getByText("Hard")).toHaveClass("text-orange-500"); // Difficulty Color
+    expect(within(row).getByText("123")).toBeInTheDocument(); // Likes
     expect(within(row).getByText("Felt good")).toBeInTheDocument(); // Notes (truncated potentially)
   });
 
@@ -291,6 +313,7 @@ describe("WodTable Component", () => {
     ); // Check class on the specific span
     expect(within(row).getByText("Very Hard")).toBeInTheDocument(); // Difficulty
     expect(within(row).getByText("Very Hard")).toHaveClass("text-red-500"); // Difficulty Color
+    expect(within(row).getByText("50")).toBeInTheDocument(); // Likes
     expect(within(row).getByText("Used lighter weight")).toBeInTheDocument(); // Notes
   });
 
@@ -317,6 +340,7 @@ describe("WodTable Component", () => {
     expect(within(row1).getByText("Intermediate")).toBeInTheDocument(); // Level
     expect(within(row1).getByText("Hard")).toBeInTheDocument(); // Difficulty (only on first row)
     expect(within(row1).getByText("Hard")).toHaveClass("text-orange-500"); // Difficulty Color
+    expect(within(row1).getByText("200")).toBeInTheDocument(); // Likes (only on first row)
     expect(within(row1).getByText("First attempt")).toBeInTheDocument(); // Notes
 
     // Second result row (older date: 2023-11-20)
@@ -332,6 +356,7 @@ describe("WodTable Component", () => {
     expect(within(row2).getByText(/9:10/)).toBeInTheDocument(); // Score (550s)
     expect(within(row2).getByText("Intermediate")).toBeInTheDocument(); // Level
     expect(within(row2).queryByText("Hard")).not.toBeInTheDocument(); // Difficulty NOT repeated
+    expect(within(row2).queryByText("200")).not.toBeInTheDocument(); // Likes NOT repeated
     expect(within(row2).getByText("PR!")).toBeInTheDocument(); // Notes
   });
 
@@ -379,6 +404,8 @@ describe("WodTable Component", () => {
     expect(within(cells[4]).getByText("-")).toBeInTheDocument();
     // Difficulty column (index 5) should contain a dash (-) as no difficulty was provided
     expect(within(cells[5]).getByText("-")).toBeInTheDocument();
+    // Likes column (index 6) should contain a dash (-) as no likes were provided
+    expect(within(cells[6]).getByText("-")).toBeInTheDocument();
   });
 
   it("should call handleSort when clicking sortable headers", () => {
@@ -404,11 +431,14 @@ describe("WodTable Component", () => {
     fireEvent.click(screen.getByRole("columnheader", { name: /Difficulty/ }));
     expect(handleSortMock).toHaveBeenCalledWith("difficulty");
 
+    // Click the new Likes header
+    fireEvent.click(screen.getByRole("columnheader", { name: /Likes/ }));
+    expect(handleSortMock).toHaveBeenCalledWith("count_likes");
+
     // Non-sortable headers should not trigger handleSort
     fireEvent.click(screen.getByRole("columnheader", { name: /Type/ }));
     fireEvent.click(screen.getByRole("columnheader", { name: /Score/ }));
-    // Difficulty is now sortable, removed from non-sortable checks
     fireEvent.click(screen.getByRole("columnheader", { name: /Notes/ }));
-    expect(handleSortMock).toHaveBeenCalledTimes(4); // Now 4 sortable headers
+    expect(handleSortMock).toHaveBeenCalledTimes(5); // Now 5 sortable headers
   });
 });

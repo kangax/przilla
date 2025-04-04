@@ -1021,6 +1021,37 @@
     "difficulty_explanation": "Hero WOD. High volume bodyweight back squats (100 reps) interrupted by 5 burpees every minute, testing strength endurance and conditioning under constant metabolic stress."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/blackjack/",
+    "wodName": "Blackjack",
+    "description": "For Time\n20 Push-Ups 1 Sit-Up\n19 Push-Ups 2 Sit-Ups\n18 Push-Ups 3 Sit-Ups\n...continue this pattern until...\n2 Push-Ups 19 Sit-Ups\n1 Push-Up 20 Sit-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A high-volume bodyweight couplet with a descending/ascending rep scheme for push-ups and sit-ups. Tests muscular endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/blake/",
     "wodName": "Blake",
     "description": "4 Rounds For Time\n100 ft Overhead Walking Lunges (45/35 lb plate)\n30 Box Jumps (24/20 in)\n20 Wall Balls Shots (20/14 lb, 10/9 ft)\n10 Handstand Push-Ups",
@@ -2816,6 +2847,37 @@
     "difficulty_explanation": "Girl WOD (Couplet 21-15-9). Combines heavy deadlifts (225lb) with high-skill HSPU in a sprint format, testing strength, power, and gymnastics proficiency."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/dirty-30/",
+    "wodName": "Dirty Thirty",
+    "description": "For Time\n30 Box Jumps (24/20 in)\n30 Jumping Pull-Ups\n30 Kettlebell Swings (35/26 lb)\n30 Lunges\n30 Knees-to-Elbows\n30 Push Presses (45/35 lb)\n30 Back Extensions\n30 Wall Ball Shots (20/14 lb)\n30 Burpees\n30 Double-Unders\nTime Cap: 30 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": 1800
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A 10-movement chipper with 30 reps each. Tests broad fitness across various light-weight and bodyweight movements."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/dobogai/",
     "wodName": "Dobogai",
     "description": "7 Rounds For Time\n8 Muscle-Ups\n22 Yard Farmer Carry (50/40 lb dumbells)",
@@ -3359,6 +3421,37 @@
     "difficulty_explanation": "Hero WOD (AMRAP). 25 minutes combining HSPU, high box jumps (30in), and rope climbs. Tests gymnastics skill and endurance."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/fat-amy/",
+    "wodName": "Fat Amy",
+    "description": "For Time\n50 Air Squats\n10 Burpees\n40 Sit-Ups\n10 Burpees\n30 Lunges (alternating legs)\n10 Burpees\n20 Kettlebell Swings (1.5/1 pood)\n10 Burpees\n10 meter Bear Crawl\n10 Burpees\n20 Kettlebell Swings (1.5/1 pood)\n10 Burpees\n30 Lunges (alternating legs)\n10 Burpees\n40 Sit-Ups\n10 Burpees\n50 Air Squats",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A symmetrical chipper featuring bodyweight movements, kettlebell swings, and burpees. Tests endurance and work capacity."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/feeks/",
     "wodName": "Feeks",
     "description": "2-4-6-8-10-12-14-16 Reps For Time\n100 meter Shuttle Sprint\nDumbbell Clusters (2x65/45 lb)",
@@ -3423,7 +3516,7 @@
   },
   {
     "wodUrl": "https://wodwell.com/wod/filthy-50/",
-    "wodName": "Filthy 50",
+    "wodName": "Filthy Fifty",
     "description": "For Time (50 Reps of each):\nBox Jumps (24/20 in)\nJumping Pull-Ups\nKettlebell Swings (1/.75 pood)\nWalking Lunges\nKnees-to-Elbows\nPush Press (45/35 lb)\nBack Extensions\nWall Ball Shots (20/14 lb)\nBurpees\nDouble-Unders",
     "benchmarks": {
       "type": "time",
@@ -4718,6 +4811,37 @@
     },
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Bike buy-in/out, 2 rounds: moderate hang cleans, complex man makers, high-vol pull-ups/burpees. Extreme volume/complexity."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/incredible-hulk/",
+    "wodName": "Incredible Hulk",
+    "description": "AMRAP in 20 minutes\n5 Deadlifts (115/75 lb)\n5 Hang Power Cleans (115/75 lb)\n5 Front Squats (115/75 lb)\n5 Push Press (115/75 lb)\n5 Back Squat (115/75 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 175,
+          "max": 249
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 174
+        },
+        "beginner": {
+          "min": 25,
+          "max": 99
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A 20-minute AMRAP of a 5-movement barbell complex. Tests barbell cycling endurance and stamina with moderate weight."
   },
   {
     "wodUrl": "https://wodwell.com/wod/indy-08/",
@@ -11827,6 +11951,37 @@
     },
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). 13 varied movements with reps matching dates/ages, plus 13 burpees after each movement (169 total burpees). Extreme volume/complexity/endurance."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/longest-mile/",
+    "wodName": "The Longest Mile",
+    "description": "4 Rounds for Time\n10 Burpees\n100 meter Run\n10 Air Squats\n100 meter Run\n10 Push-Ups\n100 meter Run\n10 Sit-Ups\n100 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 780
+        },
+        "intermediate": {
+          "min": 781,
+          "max": 960
+        },
+        "beginner": {
+          "min": 961,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Four rounds combining short runs with basic bodyweight movements. Tests cardiovascular endurance and pacing."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-lyon/",

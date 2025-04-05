@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useState, useLayoutEffect } from "react"; // Added useState, useLayoutEffect
+import React, { useRef, useMemo } from "react"; // Removed useState, useLayoutEffect
 import Link from "next/link";
 import { Tooltip, Text, Flex, Badge } from "@radix-ui/themes";
 import {
@@ -8,7 +8,7 @@ import {
   getCoreRowModel,
   createColumnHelper,
   flexRender,
-  ColumnDef,
+  type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { Wod, WodResult, SortByType } from "~/types/wodTypes";
@@ -71,7 +71,8 @@ const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
-): ColumnDef<FlatWodRow, any>[] => {
+): ColumnDef<FlatWodRow, unknown>[] => {
+  // Changed any to unknown
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? " ▲" : " ▼";
@@ -163,88 +164,7 @@ const createColumns = (
       },
       size: 150, // Set size for tags column
     }),
-    columnHelper.accessor((row) => row.result?.date, {
-      id: "date",
-      header: () => (
-        <span onClick={() => handleSort("date")} className="cursor-pointer">
-          Date{getSortIndicator("date")}
-        </span>
-      ),
-      cell: (info) => {
-        const dateValue = safeString(info.getValue());
-        return (
-          <span className="whitespace-nowrap">{dateValue || "-"}</span> // Render dash if date is empty
-        );
-      },
-      size: 100,
-    }),
-    columnHelper.accessor((row) => row.result, {
-      id: "score",
-      header: "Score",
-      cell: (info) => {
-        const result = info.getValue();
-        if (!result)
-          return <span className="whitespace-nowrap font-mono">-</span>;
-        return (
-          <span className="whitespace-nowrap font-mono">
-            {formatScore(result)}{" "}
-            {result.rxStatus && (
-              <span className="text-sm opacity-80">
-                {safeString(result.rxStatus)}
-              </span>
-            )}
-          </span>
-        );
-      },
-      size: 120,
-    }),
-    columnHelper.accessor(
-      (row) => ({ result: row.result, benchmarks: row.benchmarks }),
-      {
-        id: "level",
-        header: () => (
-          <span onClick={() => handleSort("level")} className="cursor-pointer">
-            Level{getSortIndicator("level")}
-          </span>
-        ),
-        cell: (info) => {
-          const { result, benchmarks } = info.getValue();
-          if (!result || !benchmarks) return <Text>-</Text>;
-
-          const level = getPerformanceLevel(
-            { benchmarks } as Wod, // Cast needed for util function
-            result,
-          );
-          const levelText =
-            level?.charAt(0).toUpperCase() + level?.slice(1) || "N/A";
-
-          return (
-            <Tooltip
-              content={
-                <span style={{ whiteSpace: "pre-wrap" }}>
-                  {getPerformanceLevelTooltip({ benchmarks } as Wod)}
-                </span>
-              }
-            >
-              {result.rxStatus && result.rxStatus !== "Rx" ? (
-                <Text
-                  className={`font-medium ${getPerformanceLevelColor(null)}`}
-                >
-                  Scaled
-                </Text>
-              ) : (
-                <Text
-                  className={`font-medium ${getPerformanceLevelColor(level)}`}
-                >
-                  {levelText}
-                </Text>
-              )}
-            </Tooltip>
-          );
-        },
-        size: 100,
-      },
-    ),
+    // --- Moved Level column after Score ---
     columnHelper.accessor("difficulty", {
       header: () => (
         <span
@@ -296,6 +216,97 @@ const createColumns = (
       },
       size: 80,
     }),
+    // --- Date Column (Moved) ---
+    columnHelper.accessor((row) => row.result?.date, {
+      id: "date",
+      header: () => (
+        <span onClick={() => handleSort("date")} className="cursor-pointer">
+          Date{getSortIndicator("date")}
+        </span>
+      ),
+      cell: (info) => {
+        const dateValue = safeString(info.getValue());
+        return (
+          <span className="whitespace-nowrap">{dateValue || "-"}</span> // Render dash if date is empty
+        );
+      },
+      size: 100,
+    }),
+    // --- Score Column (Moved) ---
+    columnHelper.accessor((row) => row.result, {
+      id: "score",
+      header: "Score",
+      cell: (info) => {
+        const result = info.getValue(); // Type assertion
+        if (!result)
+          return <span className="whitespace-nowrap font-mono">-</span>;
+        return (
+          <span className="whitespace-nowrap font-mono">
+            {formatScore(result)}{" "}
+            {result.rxStatus && (
+              <span className="text-sm opacity-80">
+                {safeString(result.rxStatus)}
+              </span>
+            )}
+          </span>
+        );
+      },
+      size: 120,
+    }),
+    // --- Level Column (Moved) ---
+    columnHelper.accessor(
+      (row) => ({ result: row.result, benchmarks: row.benchmarks }),
+      {
+        id: "level",
+        header: () => (
+          <span onClick={() => handleSort("level")} className="cursor-pointer">
+            Level{getSortIndicator("level")}
+          </span>
+        ),
+        cell: (info) => {
+          // Type assertion for the destructured value
+          const value = info.getValue() as {
+            result?: WodResult;
+            benchmarks?: Wod["benchmarks"];
+          };
+          const { result, benchmarks } = value;
+          if (!result || !benchmarks) return <Text>-</Text>;
+
+          const level = getPerformanceLevel(
+            { benchmarks } as Wod, // Cast needed for util function
+            result,
+          );
+          const levelText =
+            level?.charAt(0).toUpperCase() + level?.slice(1) || "N/A";
+
+          return (
+            <Tooltip
+              content={
+                <span style={{ whiteSpace: "pre-wrap" }}>
+                  {getPerformanceLevelTooltip({ benchmarks } as Wod)}
+                </span>
+              }
+            >
+              {result.rxStatus && result.rxStatus !== "Rx" ? (
+                <Text
+                  className={`font-medium ${getPerformanceLevelColor(null)}`}
+                >
+                  Scaled
+                </Text>
+              ) : (
+                <Text
+                  className={`font-medium ${getPerformanceLevelColor(level)}`}
+                >
+                  {levelText}
+                </Text>
+              )}
+            </Tooltip>
+          );
+        },
+        size: 100,
+      },
+    ),
+    // --- Notes Column ---
     columnHelper.accessor((row) => row.result?.notes, {
       id: "notes",
       header: "Notes",
@@ -323,14 +334,7 @@ const WodTable: React.FC<WodTableProps> = ({
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null); // Ref for header
-  const [headerHeight, setHeaderHeight] = useState(0); // State for header height
-
-  // Measure header height after layout
-  useLayoutEffect(() => {
-    if (headerRef.current) {
-      setHeaderHeight(headerRef.current.offsetHeight);
-    }
-  }, []); // Run once after initial layout
+  // Removed unused headerHeight state and useLayoutEffect
 
   // Flatten the data for virtualization
   const flatData = useMemo(() => {

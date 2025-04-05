@@ -1,9 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, within } from "../../test-utils"; // Use custom render
 import "@testing-library/jest-dom";
-import { useVirtualizer } from "@tanstack/react-virtual"; // Import useVirtualizer
+// Removed unused useVirtualizer import
 import WodTable from "./WodTable";
-import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Import SortByType
+import type { Wod, WodResult } from "~/types/wodTypes"; // Removed unused SortByType
 
 // --- Mock next/link ---
 vi.mock("next/link", () => ({
@@ -21,31 +21,35 @@ vi.mock("@tanstack/react-virtual", async () => {
   const actual = await vi.importActual("@tanstack/react-virtual");
   return {
     ...actual,
-    useVirtualizer: vi.fn((options) => {
-      // Simple mock: return all items and a fixed total size
-      const virtualItems = Array.from(
-        { length: options.count },
-        (_, index) => ({
-          index,
-          start: index * options.estimateSize(),
-          size: options.estimateSize(),
-          key: index, // Ensure key is present
-          measureElement: vi.fn(), // Mock measureElement if needed
-          end: (index + 1) * options.estimateSize(), // Mock end if needed
-          lane: 0, // Mock lane if needed
-        }),
-      );
-      return {
-        getVirtualItems: () => virtualItems,
-        getTotalSize: () => options.count * options.estimateSize(),
-        // Mock other properties/methods if needed by the component
-        scrollOffset: 0,
-        scrollToOffset: vi.fn(),
-        scrollToIndex: vi.fn(),
-        measure: vi.fn(),
-        virtualItems, // Also return the items directly if accessed
-      };
-    }),
+    // Add type safety to the mock
+    useVirtualizer: vi.fn(
+      (options: { count: number; estimateSize: () => number }) => {
+        // Simple mock: return all items and a fixed total size
+        const estimateSizeValue = options.estimateSize(); // Call once
+        const virtualItems = Array.from(
+          { length: options.count },
+          (_, index) => ({
+            index,
+            start: index * estimateSizeValue,
+            size: estimateSizeValue,
+            key: index, // Ensure key is present
+            measureElement: vi.fn(), // Mock measureElement if needed
+            end: (index + 1) * estimateSizeValue, // Mock end if needed
+            lane: 0, // Mock lane if needed
+          }),
+        );
+        return {
+          getVirtualItems: () => virtualItems,
+          getTotalSize: () => options.count * estimateSizeValue,
+          // Mock other properties/methods if needed by the component
+          scrollOffset: 0,
+          scrollToOffset: vi.fn(),
+          scrollToIndex: vi.fn(),
+          measure: vi.fn(),
+          virtualItems, // Also return the items directly if accessed
+        };
+      },
+    ),
   };
 });
 
@@ -310,12 +314,14 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("Medium")).toBeInTheDocument(); // Difficulty
     expect(within(row).getByText("Medium")).toHaveClass("text-yellow-500"); // Difficulty Color
     expect(within(row).getByText("15")).toBeInTheDocument(); // Likes
-    // Check for dashes in specific cells (Date, Score, Level, Notes) - Indices shifted
-    const cells = within(row).getAllByRole("cell") as HTMLElement[]; // Assert type
-    expect(within(cells[3]).getByText("-")).toBeInTheDocument(); // Date (index +1)
-    expect(within(cells[4]).getByText("-")).toBeInTheDocument(); // Score (index +1)
-    expect(within(cells[5]).getByText("-")).toBeInTheDocument(); // Level (index +1)
-    expect(within(cells[8]).getByText("-")).toBeInTheDocument(); // Notes (index +1)
+    // Check for dashes in specific cells (Difficulty, Likes, Date, Score, Level, Notes) - Indices updated again
+    const cells = within(row).getAllByRole("cell"); // Assert type
+    // Difficulty is rendered: expect(within(cells[3]).getByText("-")).toBeInTheDocument(); // Difficulty (index 3)
+    // Likes is rendered: expect(within(cells[4]).getByText("-")).toBeInTheDocument(); // Likes (index 4)
+    expect(within(cells[5]).getByText("-")).toBeInTheDocument(); // Date (index 5)
+    expect(within(cells[6]).getByText("-")).toBeInTheDocument(); // Score (index 6)
+    expect(within(cells[7]).getByText("-")).toBeInTheDocument(); // Level (index 7)
+    expect(within(cells[8]).getByText("-")).toBeInTheDocument(); // Notes (index 8)
   });
 
   it("should render WOD with one Rx result correctly", () => {
@@ -365,9 +371,9 @@ describe("WodTable Component", () => {
       within(scoreCell as HTMLElement).getByText("Scaled"),
     ).toBeInTheDocument(); // Rx Status within Score cell
 
-    // Find the Level cell more robustly - Index shifted
-    const cells = within(row).getAllByRole("cell") as HTMLElement[]; // Assert type
-    const levelCell = cells[5]; // Assuming Level is the 6th column (index 5)
+    // Find the Level cell more robustly - Index updated again
+    const cells = within(row).getAllByRole("cell"); // Assert type
+    const levelCell = cells[7]; // Level is now the 8th column (index 7)
     expect(within(levelCell).getByText("Scaled")).toBeInTheDocument();
     expect(within(levelCell).getByText("Scaled")).toHaveClass(
       "text-foreground/70", // Adjust if needed
@@ -407,19 +413,19 @@ describe("WodTable Component", () => {
 
     // Find the second result row (older date: 2023-11-20) by its unique date/score
     const row2 = findRenderedRowByContent("2023-11-20");
-    // Check that name/category/tags/difficulty/likes are NOT rendered (cells should be empty based on cell logic) - Indices shifted
-    const cells2 = within(row2).getAllByRole("cell") as HTMLElement[]; // Assert type
+    // Check that name/category/tags/difficulty/likes are NOT rendered (cells should be empty based on cell logic) - Indices updated again
+    const cells2 = within(row2).getAllByRole("cell"); // Assert type
     expect(cells2[0].textContent).toBe(""); // WodName cell empty
     expect(cells2[1].textContent).toBe(""); // Category cell empty
     expect(cells2[2].textContent).toBe(""); // Tags cell empty
-    expect(cells2[6].textContent).toBe(""); // Difficulty cell empty (index +1)
-    expect(cells2[7].textContent).toBe(""); // Likes cell empty (index +1)
+    expect(cells2[3].textContent).toBe(""); // Difficulty cell empty (new index 3)
+    expect(cells2[4].textContent).toBe(""); // Likes cell empty (new index 4)
 
     // Check the unique data for the second row:
-    expect(within(row2).getByText("2023-11-20")).toBeInTheDocument();
-    expect(within(row2).getByText(/9:10/)).toBeInTheDocument(); // Score (550s)
-    expect(within(row2).getByText("Intermediate")).toBeInTheDocument(); // Level
-    expect(within(row2).getByText("PR!")).toBeInTheDocument(); // Notes
+    expect(within(row2).getByText("2023-11-20")).toBeInTheDocument(); // Date (now index 5)
+    expect(within(row2).getByText(/9:10/)).toBeInTheDocument(); // Score (now index 6)
+    expect(within(row2).getByText("Intermediate")).toBeInTheDocument(); // Level (now index 7)
+    expect(within(row2).getByText("PR!")).toBeInTheDocument(); // Notes (now index 8)
   });
 
   it("should render external link icon when wodUrl is present", () => {
@@ -436,7 +442,7 @@ describe("WodTable Component", () => {
     // Assert link type for within
     const link = within(row).getByRole("link", {
       name: /WOD Bravo/,
-    }) as HTMLLinkElement;
+    });
     expect(within(link).getByText("↗")).toBeInTheDocument();
   });
 
@@ -450,7 +456,7 @@ describe("WodTable Component", () => {
       />,
     );
     const row = findRenderedRowByContent("WOD Charlie");
-    const nameElement = within(row).getByText("WOD Charlie") as HTMLElement; // Assert type
+    const nameElement = within(row).getByText("WOD Charlie"); // Assert type
     // Ensure it's not a link and doesn't contain the icon
     expect(nameElement.closest("a")).toBeNull(); // Check it's not inside an anchor
     expect(within(nameElement).queryByText("↗")).not.toBeInTheDocument();
@@ -466,12 +472,12 @@ describe("WodTable Component", () => {
       />,
     );
     const row = findRenderedRowByContent("WOD Echo");
-    const cells = within(row).getAllByRole("cell") as HTMLElement[]; // Assert type
-    // Level column (index 5) should contain a dash (-) - Index shifted
-    expect(within(cells[5]).getByText("-")).toBeInTheDocument();
-    // Difficulty column (index 6) should contain a dash (-) - Index shifted
-    expect(within(cells[6]).getByText("-")).toBeInTheDocument();
-    // Likes column (index 7) should contain a dash (-) - Index shifted
+    const cells = within(row).getAllByRole("cell"); // Assert type
+    // Difficulty column (index 3) should contain a dash (-) - Index updated again
+    expect(within(cells[3]).getByText("-")).toBeInTheDocument();
+    // Likes column (index 4) should contain a dash (-) - Index updated again
+    expect(within(cells[4]).getByText("-")).toBeInTheDocument();
+    // Level column (index 7) should contain a dash (-) - Index updated again
     expect(within(cells[7]).getByText("-")).toBeInTheDocument();
   });
 

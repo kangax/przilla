@@ -11,10 +11,10 @@ export default function PageNavigation() {
   const isWorkoutsActive = !isChartsActive;
 
   const linkBaseClasses =
-    "flex items-center gap-1.5 px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out";
+    "flex items-center gap-1.5 px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out rounded-md";
   const inactiveClasses =
-    "text-muted-foreground hover:text-foreground border-b-2 border-transparent";
-  const activeClasses = "text-primary border-b-2 border-primary";
+    "text-muted-foreground hover:text-foreground hover:bg-muted/50";
+  const activeClasses = "text-accent-foreground bg-accent";
 
   return (
     <Flex gap="4">

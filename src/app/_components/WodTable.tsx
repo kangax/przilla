@@ -163,7 +163,8 @@ const createColumns = (
           </Flex>
         );
       },
-      size: 200, // Set size for tags column
+      // tags column
+      size: 200,
     }),
     // --- Moved Level column after Score ---
     columnHelper.accessor("difficulty", {
@@ -215,7 +216,7 @@ const createColumns = (
           <span className="whitespace-nowrap">{row.count_likes ?? "-"} </span>
         );
       },
-      size: 60,
+      size: 70,
     }),
     // --- Date Column (Moved) ---
     columnHelper.accessor((row) => row.result?.date, {

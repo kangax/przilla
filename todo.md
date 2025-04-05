@@ -23,10 +23,10 @@
 
 ### Authentication
 
-- Implement it
+- [Switch to betterAuth](https://www.better-auth.com/)
 
 ### JSON -> database
 
-- Store data in a database, per user (under auth)
+- Store data in a database, per user
 
 ### Misc

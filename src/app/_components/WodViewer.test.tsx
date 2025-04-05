@@ -920,13 +920,9 @@ describe("WodViewer Component", () => {
     "Ladder",
     "EMOM",
   ];
-  const mockChartDataProps = {
-    tagChartData: [],
-    categoryChartData: [],
-    frequencyData: [], // Add missing prop
-    performanceData: [], // Add missing prop
+  const mockViewerProps = {
     categoryOrder: mockCategoryOrder,
-    tagOrder: mockTagOrder, // Add tag order to props
+    tagOrder: mockTagOrder,
   };
 
   // Use the same mock data from helper tests where applicable
@@ -997,7 +993,7 @@ describe("WodViewer Component", () => {
 
   it("should render table view by default and show only done WODs (no URL params)", () => {
     // No specific params set for this test
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check table is rendered by default
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
@@ -1028,7 +1024,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should switch to timeline view and show only done WODs initially", () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Find the view switcher and switch to timeline
     const timelineViewButton = screen.getByRole("radio", {
@@ -1077,7 +1073,7 @@ describe("WodViewer Component", () => {
   });
 
   it('should filter by category, update counts, and update URL (starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
     // Table view is default, "Done" filter is default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
     // Initial counts
@@ -1149,7 +1145,7 @@ describe("WodViewer Component", () => {
   });
 
   it('should filter by tags, update counts, and update URL (multiple, starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
     // Initial counts
@@ -1258,7 +1254,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should filter by completion status, update counts, and update URL", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
     // Table view, Done filter default (A, B, C, F)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
 
@@ -1315,7 +1311,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should handle sorting correctly and update URL", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
     // Table view is default
 
     // Initial sort check (date/desc) - Default, so no URL params expected initially
@@ -1365,7 +1361,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should render correctly with empty wods array (defaulting to table view)", () => {
-    render(<WodViewer wods={[]} {...mockChartDataProps} />);
+    render(<WodViewer wods={[]} {...mockViewerProps} />); // Use updated props
 
     // Should default to table view
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
@@ -1387,7 +1383,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should filter by completion status in timeline view and update URL (after switching)", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
     // Switch to timeline view first
     fireEvent.click(screen.getByRole("radio", { name: /Timeline View/i }));
 
@@ -1448,7 +1444,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with category from URL", () => {
     mockSearchParams = new URLSearchParams("?category=Benchmark");
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check category select reflects the URL param
     expect(screen.getByRole("combobox")).toHaveTextContent(
@@ -1470,7 +1466,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with tags from URL", () => {
     mockSearchParams = new URLSearchParams("?tags=AMRAP%2CLadder"); // Cindy (B), Deadlift (C) are Done
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check tags are selected visually (assuming class indicates selection)
     expect(screen.getByText("AMRAP")).toHaveClass(
@@ -1500,7 +1496,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with completion status from URL", () => {
     mockSearchParams = new URLSearchParams("?completion=all"); // view/sort default
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check completion filter is set to 'All'
     expect(
@@ -1520,7 +1516,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with view=timeline from URL", () => {
     mockSearchParams = new URLSearchParams("?view=timeline");
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check timeline view is active
     expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
@@ -1539,7 +1535,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with sortBy and sortDir from URL", () => {
     mockSearchParams = new URLSearchParams("?sortBy=wodName&sortDir=asc");
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check sort state is applied (table view is default)
     expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
@@ -1552,7 +1548,7 @@ describe("WodViewer Component", () => {
 
   it("should initialize with sortBy=count_likes from URL", () => {
     mockSearchParams = new URLSearchParams("?sortBy=count_likes"); // Default direction is desc
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check sort state is applied (table view is default)
     expect(screen.getByTestId("table-sort-by")).toHaveTextContent(
@@ -1571,7 +1567,7 @@ describe("WodViewer Component", () => {
     mockSearchParams = new URLSearchParams(
       "?category=Girl&tags=AMRAP&completion=all&view=timeline&sortBy=latestLevel&sortDir=asc",
     );
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check category
     expect(screen.getByRole("combobox")).toHaveTextContent(/Girl \(\d+\)/i);
@@ -1602,7 +1598,7 @@ describe("WodViewer Component", () => {
     mockSearchParams = new URLSearchParams(
       "?category=InvalidCat&tags=InvalidTag,AMRAP&completion=invalidStatus&view=invalidView&sortBy=invalidSort&sortDir=invalidDir",
     );
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check category defaults to 'All Categories'
     expect(screen.getByRole("combobox")).toHaveTextContent(/All Categories/i);
@@ -1638,7 +1634,7 @@ describe("WodViewer Component", () => {
   });
 
   it("should update URL correctly when changing view", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
     // Initial state: table view, no params in URL yet
     mockRouterReplace.mockClear(); // Clear after initial render
 
@@ -1672,7 +1668,7 @@ describe("WodViewer Component", () => {
   it("should update URL correctly when changing filters and view/sort are non-default", async () => {
     // Start with non-default view and sort
     mockSearchParams = new URLSearchParams("?view=timeline&sortBy=wodName"); // sortDir=asc is default for wodName
-    render(<WodViewer wods={testWodsWithLikes} {...mockChartDataProps} />);
+    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
 
     // Check initial state
     await waitFor(() => {

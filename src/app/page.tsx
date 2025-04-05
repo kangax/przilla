@@ -6,6 +6,7 @@ import { auth } from "~/server/auth";
 
 import WodViewer from "~/app/_components/WodViewer";
 import ThemeToggle from "~/app/_components/ThemeToggle";
+import Header from "~/app/_components/Header";
 import { type Wod } from "~/types/wodTypes";
 import {
   DESIRED_TAG_ORDER,
@@ -13,128 +14,32 @@ import {
   DESIRED_CATEGORY_ORDER,
   PERFORMANCE_LEVEL_VALUES,
 } from "~/config/constants";
-import { hasScore, getPerformanceLevel, isWodDone } from "~/utils/wodUtils";
+import { isWodDone } from "~/utils/wodUtils";
 
 export default async function Home() {
   const session = await auth();
 
   let wodsData: Wod[] = [];
-  const tagCounts: Record<string, number> = {};
-  const categoryCounts: Record<string, number> = {};
-  const monthlyData: Record<
-    string,
-    { count: number; totalLevelScore: number }
-  > = {};
 
   try {
     const filePath = path.join(process.cwd(), "public", "data", "wods.json");
     const fileContents = fs.readFileSync(filePath, "utf8");
     wodsData = JSON.parse(fileContents) as Wod[];
     console.log("Loaded WODs data:", wodsData.length);
-
-    wodsData.forEach((wod) => {
-      if (isWodDone(wod)) {
-        if (wod.category) {
-          categoryCounts[wod.category] =
-            (categoryCounts[wod.category] || 0) + 1;
-        }
-
-        if (wod.tags) {
-          wod.tags.forEach((tag) => {
-            if (ALLOWED_TAGS.includes(tag)) {
-              tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-            }
-          });
-        }
-      }
-
-      // Process results for timeline chart
-      wod.results.forEach((result) => {
-        if (result.date && hasScore(result)) {
-          try {
-            const date = new Date(result.date);
-            const monthKey = `${date.getFullYear()}-${(date.getMonth() + 1)
-              .toString()
-              .padStart(2, "0")}`;
-
-            if (!monthlyData[monthKey]) {
-              monthlyData[monthKey] = { count: 0, totalLevelScore: 0 };
-            }
-
-            monthlyData[monthKey].count++;
-
-            const level = getPerformanceLevel(wod, result);
-            // Use imported PERFORMANCE_LEVEL_VALUES
-            const levelScore = level
-              ? (PERFORMANCE_LEVEL_VALUES[level] ?? 0)
-              : 0;
-            monthlyData[monthKey].totalLevelScore += levelScore;
-          } catch (e) {
-            // Ignore results with invalid dates
-            console.warn(
-              `Skipping result due to invalid date format: ${result.date} for WOD ${wod.wodName}. Error: ${e}`, // Include error details
-            );
-          }
-        }
-      });
-    });
-
-    console.log("Calculated Tag Counts (Done WODs):", tagCounts);
-    console.log("Calculated Category Counts (Done WODs):", categoryCounts);
-    console.log("Calculated Monthly Data:", monthlyData);
   } catch (error) {
     console.error("Error loading or processing WODs data:", error);
   }
 
-  const tagChartData = DESIRED_TAG_ORDER.map((tagName) => ({
-    name: tagName,
-    value: tagCounts[tagName] || 0,
-  }));
-  const categoryChartData = DESIRED_CATEGORY_ORDER.map((categoryName) => ({
-    name: categoryName,
-    value: categoryCounts[categoryName] || 0,
-  }));
-
-  const sortedMonths = Object.keys(monthlyData).sort();
-  const frequencyData = sortedMonths.map((month) => ({
-    month,
-    count: monthlyData[month].count,
-  }));
-  const performanceData = sortedMonths.map((month) => ({
-    month,
-    averageLevel:
-      monthlyData[month].count > 0
-        ? monthlyData[month].totalLevelScore / monthlyData[month].count
-        : 0,
-  }));
-
   return (
     <Box className="min-h-screen bg-background text-foreground">
-      <Box className="fixed relative left-0 top-0 z-10 w-full border-b border-border bg-background px-6 py-4 shadow-md">
-        <Container size="4">
-          <Flex align="center">
-            <Heading size="5" className="text-foreground">
-              PRzilla
-            </Heading>
-          </Flex>
-        </Container>
-        <Box className="absolute right-6 top-4">
-          <ThemeToggle />
-        </Box>
-      </Box>
-
-      <Container size="4" className="pb-8">
+      <Header />
+      <Container size="4" className="pb-8 pt-6">
         <Flex direction="column" gap="6">
           <WodViewer
             wods={wodsData}
-            tagChartData={tagChartData}
-            categoryChartData={categoryChartData}
-            frequencyData={frequencyData}
-            performanceData={performanceData}
             categoryOrder={DESIRED_CATEGORY_ORDER}
             tagOrder={DESIRED_TAG_ORDER}
           />
-
           {session?.user && (
             <Flex gap="4" mt="4" justify="center">
               <Link

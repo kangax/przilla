@@ -9,14 +9,8 @@ import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
 import WodDistributionChart from "./WodDistributionChart";
 import WodTimelineChart from "./WodTimelineChart";
-import {
-  type Wod,
-  type ChartDataPoint,
-  type FrequencyDataPoint,
-  type PerformanceDataPoint,
-  type SortByType,
-} from "~/types/wodTypes";
-import { hasScore, sortWods, isWodDone } from "~/utils/wodUtils"; // Import isWodDone
+import { type Wod, type SortByType } from "~/types/wodTypes";
+import { hasScore, sortWods, isWodDone } from "~/utils/wodUtils";
 
 // --- URL State Management ---
 const DEFAULT_COMPLETION_FILTER = "done";
@@ -73,20 +67,12 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 
 interface WodViewerProps {
   wods: Wod[];
-  tagChartData: ChartDataPoint[];
-  categoryChartData: ChartDataPoint[];
-  frequencyData: FrequencyDataPoint[];
-  performanceData: PerformanceDataPoint[];
   categoryOrder: string[];
   tagOrder: string[];
 }
 
 export default function WodViewer({
   wods,
-  tagChartData,
-  categoryChartData,
-  frequencyData,
-  performanceData,
   categoryOrder,
   tagOrder,
 }: WodViewerProps) {
@@ -221,9 +207,7 @@ export default function WodViewer({
 
   // --- Memoized Filtering and Sorting Logic ---
 
-  // 1. Memoize category/tag filtering
   const categoryTagFilteredWods = useMemo(() => {
-    // console.log("Memo: Recalculating category/tag filter"); // For debugging
     return wods.filter((wod) => {
       const categoryMatch =
         selectedCategories.length === 0 ||
@@ -235,15 +219,13 @@ export default function WodViewer({
     });
   }, [wods, selectedCategories, selectedTags]);
 
-  // 2. Memoize counts (depends on categoryTagFilteredWods)
   const {
     dynamicTotalWodCount,
     dynamicDoneWodsCount,
     dynamicNotDoneWodsCount,
   } = useMemo(() => {
-    // console.log("Memo: Recalculating counts"); // For debugging
     const total = categoryTagFilteredWods.length;
-    const done = categoryTagFilteredWods.filter(isWodDone).length; // Use isWodDone utility
+    const done = categoryTagFilteredWods.filter(isWodDone).length;
     const notDone = total - done;
     return {
       dynamicTotalWodCount: total,
@@ -252,27 +234,22 @@ export default function WodViewer({
     };
   }, [categoryTagFilteredWods]);
 
-  // 3. Memoize completion filtering (depends on categoryTagFilteredWods and completionFilter)
   const finalFilteredWods = useMemo(() => {
-    // console.log("Memo: Recalculating completion filter"); // For debugging
     if (completionFilter === "done") {
-      return categoryTagFilteredWods.filter(isWodDone); // Use isWodDone utility
+      return categoryTagFilteredWods.filter(isWodDone);
     } else if (completionFilter === "notDone") {
-      return categoryTagFilteredWods.filter((wod) => !isWodDone(wod)); // Use isWodDone utility
+      return categoryTagFilteredWods.filter((wod) => !isWodDone(wod));
     }
-    return categoryTagFilteredWods; // 'all' case
+    return categoryTagFilteredWods;
   }, [categoryTagFilteredWods, completionFilter]);
 
-  // 4. Memoize sorting (depends on finalFilteredWods, sortBy, sortDirection)
   const sortedWods = useMemo(() => {
-    // console.log("Memo: Recalculating sort"); // For debugging
     return sortWods(finalFilteredWods, sortBy, sortDirection);
   }, [finalFilteredWods, sortBy, sortDirection]);
 
   // --- End Memoized Filtering and Sorting Logic ---
 
   // --- Event Handlers ---
-  // Memoize handleSort to stabilize its reference
   const handleSort = useCallback(
     (column: SortByType) => {
       if (column === sortBy) {
@@ -286,19 +263,16 @@ export default function WodViewer({
         setSortDirection(DEFAULT_SORT_DIRECTIONS[column]);
       }
     },
-    [sortBy], // Dependency: Recreate only if sortBy changes
+    [sortBy],
   );
 
-  // Memoize toggleTag to stabilize its reference
   const toggleTag = useCallback((tag: string) => {
     setSelectedTags((prev) =>
       prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
     );
-  }, []); // No dependencies needed as it uses the setter function form
+  }, []);
 
   // --- End Event Handlers ---
-
-  // sortedWods is now calculated using useMemo above
 
   return (
     <Box>
@@ -431,22 +405,6 @@ export default function WodViewer({
           handleSort={handleSort}
         />
       )}
-
-      {/* Render Charts Side-by-Side */}
-      <Flex gap="4" direction={{ initial: "column", sm: "row" }} mt="6">
-        <Box className="flex-1">
-          <WodDistributionChart
-            tagData={tagChartData}
-            categoryData={categoryChartData}
-          />
-        </Box>
-        <Box className="flex-1">
-          <WodTimelineChart
-            frequencyData={frequencyData}
-            performanceData={performanceData}
-          />
-        </Box>
-      </Flex>
     </Box>
   );
 }

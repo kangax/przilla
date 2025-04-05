@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import { Flex } from "@radix-ui/themes";
 import { BarChart3, ListChecks } from "lucide-react";
 
-export default function ViewSwitcherTabs() {
+export default function PageNavigation() {
   const pathname = usePathname();
   const isChartsActive = pathname === "/charts";
   const isWorkoutsActive = !isChartsActive;

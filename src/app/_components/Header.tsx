@@ -1,6 +1,6 @@
 import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import ThemeToggle from "~/app/_components/ThemeToggle";
-import ViewSwitcherTabs from "~/app/_components/ViewSwitcherTabs";
+import PageNavigation from "~/app/_components/PageNavigation";
 
 export default function Header() {
   return (
@@ -13,7 +13,7 @@ export default function Header() {
           <ThemeToggle />
         </Flex>
         <Box className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-          <ViewSwitcherTabs />
+          <PageNavigation />
         </Box>
       </Container>
     </Box>

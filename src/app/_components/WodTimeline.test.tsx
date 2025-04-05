@@ -1,8 +1,9 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent, within } from "../../test-utils"; // Use custom render
 import "@testing-library/jest-dom";
+import { TableVirtuoso } from "react-virtuoso"; // Import for mocking
 import WodTimeline from "./WodTimeline";
-import { type Wod, type WodResult } from "~/types/wodTypes"; // Corrected import path
+import { type Wod, type WodResult, type SortByType } from "~/types/wodTypes"; // Added SortByType
 
 // --- Mock next/link ---
 vi.mock("next/link", () => ({
@@ -14,6 +15,38 @@ vi.mock("next/link", () => ({
     href: string;
   }) => <a href={href}>{children}</a>,
 }));
+
+// --- Mock react-virtuoso ---
+// Mock TableVirtuoso to render all items for testing, bypassing virtualization
+vi.mock("react-virtuoso", async (importOriginal) => {
+  const original = await importOriginal<typeof import("react-virtuoso")>();
+  return {
+    ...original,
+    TableVirtuoso: vi.fn(
+      ({ data, itemContent, fixedHeaderContent, components }) => {
+        const {
+          Table = "table",
+          TableHead = "thead",
+          TableBody = "tbody",
+          TableRow = "tr",
+        } = components ?? {};
+        return (
+          <Table>
+            <TableHead>
+              <TableRow>{fixedHeaderContent()}</TableRow>
+            </TableHead>
+            <TableBody>
+              {data.map((item: any, index: number) =>
+                // Render the itemContent which should return the cells wrapped in a TableRow
+                itemContent(index, item),
+              )}
+            </TableBody>
+          </Table>
+        );
+      },
+    ),
+  };
+});
 
 // --- Mock Data ---
 const mockResultTime = (
@@ -106,6 +139,8 @@ describe("WodTimeline Component", () => {
 
   beforeEach(() => {
     handleSortMock = vi.fn();
+    // Clear mocks before each test if TableVirtuoso mock needs reset
+    vi.clearAllMocks();
   });
 
   it("should render table headers correctly", () => {
@@ -166,12 +201,11 @@ describe("WodTimeline Component", () => {
         handleSort={handleSortMock}
       />,
     );
-    expect(screen.getByRole("row", { name: /WOD Alpha/ })).toBeInTheDocument();
-    expect(screen.getByRole("row", { name: /WOD Bravo/ })).toBeInTheDocument();
-    expect(
-      screen.getByRole("row", { name: /WOD Charlie/ }),
-    ).toBeInTheDocument(); // Should now be rendered
-    expect(screen.getByRole("row", { name: /WOD Delta/ })).toBeInTheDocument();
+    // Find by unique text within each expected row
+    expect(screen.getByText("WOD Alpha")).toBeInTheDocument();
+    expect(screen.getByText("WOD Bravo")).toBeInTheDocument();
+    expect(screen.getByText("WOD Charlie")).toBeInTheDocument();
+    expect(screen.getByText("WOD Delta")).toBeInTheDocument();
   });
 
   it('should render "Not Attempted" for WODs with no valid results', () => {
@@ -183,10 +217,11 @@ describe("WodTimeline Component", () => {
         handleSort={handleSortMock}
       />,
     );
-    const row = screen.getByRole("row", { name: /WOD Charlie/ });
-    const timelineCell = within(row).getAllByRole("cell")[1]; // Second cell is the timeline
-    expect(within(timelineCell).getByText("n/a")).toBeInTheDocument(); // Updated expectation
-    expect(within(timelineCell).getByText("n/a")).toHaveClass("italic"); // Check for styling on 'n/a'
+    const charlieRow = screen.getByText("WOD Charlie").closest("tr");
+    expect(charlieRow).toBeInTheDocument();
+    const timelineCell = within(charlieRow!).getAllByRole("cell")[1]; // Second cell is the timeline
+    expect(within(timelineCell).getByText("n/a")).toBeInTheDocument();
+    expect(within(timelineCell).getByText("n/a")).toHaveClass("italic");
   });
 
   it("should render results chronologically within a WOD row", () => {
@@ -198,8 +233,9 @@ describe("WodTimeline Component", () => {
         handleSort={handleSortMock}
       />,
     );
-    const row = screen.getByRole("row", { name: /WOD Alpha/ });
-    const resultsContainer = within(row).getAllByRole("cell")[1]; // Second cell contains the timeline Flex
+    const alphaRow = screen.getByText("WOD Alpha").closest("tr");
+    expect(alphaRow).toBeInTheDocument();
+    const resultsContainer = within(alphaRow!).getAllByRole("cell")[1]; // Second cell contains the timeline Flex
     const resultsText =
       within(resultsContainer).getAllByText(/^[0-9]+:[0-9]{2}/); // Match MM:SS format
 
@@ -221,8 +257,9 @@ describe("WodTimeline Component", () => {
         handleSort={handleSortMock}
       />,
     );
-    const row = screen.getByRole("row", { name: /WOD Alpha/ });
-    const resultsContainer = within(row).getAllByRole("cell")[1];
+    const alphaRow = screen.getByText("WOD Alpha").closest("tr");
+    expect(alphaRow).toBeInTheDocument();
+    const resultsContainer = within(alphaRow!).getAllByRole("cell")[1];
 
     // Result 1: 2024-01-05, 290s, Rx (Advanced)
     const result1Score = within(resultsContainer).getByText("4:50");
@@ -255,8 +292,9 @@ describe("WodTimeline Component", () => {
         handleSort={handleSortMock}
       />,
     );
-    const row = screen.getByRole("row", { name: /WOD Alpha/ });
-    const descriptionCell = within(row).getAllByRole("cell")[2];
+    const alphaRow = screen.getByText("WOD Alpha").closest("tr");
+    expect(alphaRow).toBeInTheDocument();
+    const descriptionCell = within(alphaRow!).getAllByRole("cell")[2];
     // Check for text content, whitespace might be tricky
     expect(descriptionCell).toHaveTextContent("Desc Alpha");
     expect(descriptionCell).toHaveTextContent("Line 2");
@@ -303,8 +341,9 @@ describe("WodTimeline Component", () => {
         handleSort={handleSortMock}
       />,
     );
-    const row = screen.getByRole("row", { name: /WOD Alpha/ });
-    const resultsContainer = within(row).getAllByRole("cell")[1];
+    const alphaRow = screen.getByText("WOD Alpha").closest("tr");
+    expect(alphaRow).toBeInTheDocument();
+    const resultsContainer = within(alphaRow!).getAllByRole("cell")[1];
     const resultElements =
       within(resultsContainer).getAllByText(/^[0-9]+:[0-9]{2}/); // Find scores again
 

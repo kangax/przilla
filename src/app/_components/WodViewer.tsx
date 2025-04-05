@@ -433,14 +433,14 @@ export default function WodViewer({
       {/* Render Table or Timeline View */}
       {view === "table" ? (
         <WodTable
-          wods={sortedWods as Wod[]} // Explicit cast
+          wods={sortedWods}
           sortBy={sortBy}
           sortDirection={sortDirection}
           handleSort={handleSort}
         />
       ) : (
         <WodTimeline
-          wods={sortedWods as Wod[]} // Explicit cast
+          wods={sortedWods}
           sortBy={sortBy}
           sortDirection={sortDirection}
           handleSort={handleSort}

@@ -17,7 +17,6 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 - Use repository pattern for data access
 - Don't forget error handling
 - Check if data/logic already exists in an app and don't repeat yourself
-- Use "@ts-expect-error" instead of "@ts-ignore"
 
 ## Testing Standards
 

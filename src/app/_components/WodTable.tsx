@@ -132,7 +132,7 @@ const createColumns = (
           </Badge>
         );
       },
-      size: 120, // Adjusted size
+      size: 110, // Adjusted size
     }),
     // New column for Tags
     columnHelper.accessor("tags", {
@@ -162,7 +162,7 @@ const createColumns = (
           </Flex>
         );
       },
-      size: 150, // Set size for tags column
+      size: 200, // Set size for tags column
     }),
     // --- Moved Level column after Score ---
     columnHelper.accessor("difficulty", {
@@ -195,7 +195,7 @@ const createColumns = (
           </Tooltip>
         );
       },
-      size: 100,
+      size: 90,
     }),
     columnHelper.accessor("count_likes", {
       header: () => (
@@ -214,7 +214,7 @@ const createColumns = (
           <span className="whitespace-nowrap">{row.count_likes ?? "-"} </span>
         );
       },
-      size: 80,
+      size: 60,
     }),
     // --- Date Column (Moved) ---
     columnHelper.accessor((row) => row.result?.date, {
@@ -230,7 +230,7 @@ const createColumns = (
           <span className="whitespace-nowrap">{dateValue || "-"}</span> // Render dash if date is empty
         );
       },
-      size: 100,
+      size: 90,
     }),
     // --- Score Column (Moved) ---
     columnHelper.accessor((row) => row.result, {
@@ -251,7 +251,7 @@ const createColumns = (
           </span>
         );
       },
-      size: 120,
+      size: 150,
     }),
     // --- Level Column (Moved) ---
     columnHelper.accessor(
@@ -303,7 +303,7 @@ const createColumns = (
             </Tooltip>
           );
         },
-        size: 100,
+        size: 110,
       },
     ),
     // --- Notes Column ---

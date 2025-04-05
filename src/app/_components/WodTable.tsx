@@ -1,17 +1,25 @@
 "use client";
 
-import React from "react"; // Import React
+import React, { useRef, useMemo, useState, useLayoutEffect } from "react"; // Added useState, useLayoutEffect
 import Link from "next/link";
-import { Tooltip, Table, Text, Flex, Badge } from "@radix-ui/themes";
-import type { Wod, SortByType } from "~/types/wodTypes"; // Import Wod and SortByType from shared types
+import { Tooltip, Text, Flex, Badge } from "@radix-ui/themes";
+import {
+  useReactTable,
+  getCoreRowModel,
+  createColumnHelper,
+  flexRender,
+  ColumnDef,
+} from "@tanstack/react-table";
+import { useVirtualizer } from "@tanstack/react-virtual";
+import type { Wod, WodResult, SortByType } from "~/types/wodTypes";
 import {
   getPerformanceLevel,
   getPerformanceLevelColor,
   getPerformanceLevelTooltip,
   formatScore,
-} from "~/utils/wodUtils"; // Import utils from shared utils file
+} from "~/utils/wodUtils";
 
-// type SortByType = "wodName" | "date" | "level" | "attempts" | "latestLevel"; // Removed local definition
+// --- Interfaces & Types ---
 
 interface WodTableProps {
   wods: Wod[];
@@ -20,10 +28,26 @@ interface WodTableProps {
   handleSort: (column: SortByType) => void;
 }
 
-// Helper function to safely handle potentially undefined values
+// Represents a single row in the flattened data structure
+interface FlatWodRow {
+  wodName: string;
+  wodUrl?: string;
+  description?: string;
+  category?: string;
+  tags?: string[];
+  difficulty?: string;
+  difficulty_explanation?: string;
+  count_likes?: number;
+  benchmarks?: Wod["benchmarks"]; // Keep benchmarks for level calculation
+  resultIndex: number; // Index of the result within the original Wod.results array
+  result?: WodResult; // The specific result for this row (optional if no results)
+  isFirstResult: boolean; // Flag if this is the first result row for a WOD
+}
+
+// --- Helper Functions ---
+
 const safeString = (value: string | undefined): string => value || "";
 
-// Helper function to get color based on difficulty (moved outside WodTable for use in WodRowSet)
 const getDifficultyColor = (difficulty: string | undefined): string => {
   switch (difficulty?.toLowerCase()) {
     case "easy":
@@ -35,322 +59,422 @@ const getDifficultyColor = (difficulty: string | undefined): string => {
     case "very hard":
       return "text-red-500";
     default:
-      return "text-foreground"; // Default color
+      return "text-foreground";
   }
 };
 
-// --- Memoized Row Component ---
-interface WodRowSetProps {
-  wod: Wod;
-}
+// --- Column Definitions ---
 
-const WodRowSet: React.FC<WodRowSetProps> = React.memo(({ wod }) => {
-  // console.log(`Rendering WodRowSet for: ${wod.wodName}`); // For debugging memoization
+const columnHelper = createColumnHelper<FlatWodRow>();
 
-  // For workouts with no results, display a single row
-  if (wod.results.length === 0) {
-    return (
-      <Table.Row
-        key={`${wod.wodName}-no-results`} // Key moved here
-        className="border-t border-table-border hover:bg-table-rowAlt"
-      >
-        <Table.Cell className="font-medium">
+const createColumns = (
+  handleSort: (column: SortByType) => void,
+  sortBy: SortByType,
+  sortDirection: "asc" | "desc",
+): ColumnDef<FlatWodRow, any>[] => {
+  const getSortIndicator = (columnName: SortByType) => {
+    if (sortBy === columnName) {
+      return sortDirection === "asc" ? " ▲" : " ▼";
+    }
+    return "";
+  };
+
+  return [
+    columnHelper.accessor("wodName", {
+      header: () => (
+        <span onClick={() => handleSort("wodName")} className="cursor-pointer">
+          Workout{getSortIndicator("wodName")}
+        </span>
+      ),
+      cell: (info) => {
+        const row = info.row.original;
+        // Only render WOD name/link on the first row for that WOD
+        if (!row.isFirstResult) return null;
+        return (
           <Tooltip
             content={
-              <span style={{ whiteSpace: "pre-wrap" }}>{wod.description}</span>
+              <span style={{ whiteSpace: "pre-wrap" }}>
+                {safeString(row.description)}
+              </span>
             }
           >
-            {wod.wodUrl ? (
+            {row.wodUrl ? (
               <Link
-                href={wod.wodUrl}
+                href={row.wodUrl}
                 target="_blank"
-                className="flex max-w-[200px] items-center truncate whitespace-nowrap text-primary hover:underline"
+                className="flex max-w-[200px] items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
               >
-                {wod.wodName}
+                {row.wodName}
                 <span className="ml-1 flex-shrink-0 text-xs opacity-70">
                   ↗
                 </span>
               </Link>
             ) : (
-              <span className="max-w-[200px] truncate whitespace-nowrap">
-                {wod.wodName}
+              <span className="max-w-[200px] truncate whitespace-nowrap font-medium">
+                {row.wodName}
               </span>
             )}
           </Tooltip>
-        </Table.Cell>
-        <Table.Cell>
-          {wod.category && (
-            <Badge
-              color="indigo"
-              variant="soft"
-              radius="full"
-              className="w-fit"
-            >
-              {wod.category}
-            </Badge>
-          )}
-          {wod.tags?.map((tag) => (
-            <Badge
-              key={tag}
-              color="gray"
-              variant="soft"
-              radius="full"
-              className="text-xs"
-            >
-              {tag}
-            </Badge>
-          ))}
-        </Table.Cell>
-        <Table.Cell className="whitespace-nowrap">-</Table.Cell>
-        <Table.Cell className="whitespace-nowrap font-mono">-</Table.Cell>
-        <Table.Cell>-</Table.Cell>
-        <Table.Cell className="whitespace-nowrap">
-          {wod.difficulty ? (
-            <Tooltip
-              content={
-                <span style={{ whiteSpace: "pre-wrap" }}>
-                  {safeString(wod.difficulty_explanation)}
-                </span>
-              }
-            >
-              <Text
-                className={`font-medium ${getDifficultyColor(wod.difficulty)}`}
-              >
-                {wod.difficulty}
-              </Text>
-            </Tooltip>
-          ) : (
-            <Text>-</Text>
-          )}
-        </Table.Cell>
-        <Table.Cell className="whitespace-nowrap">
-          {wod.count_likes ?? "-"}
-        </Table.Cell>
-        <Table.Cell>-</Table.Cell>
-      </Table.Row>
-    );
-  }
-
-  // For workouts with results, display a row for each result
-  return wod.results.map((result, resultIndex) => (
-    <Table.Row
-      key={`${wod.wodName}-${resultIndex}`} // Key moved here
-      className="border-t border-table-border hover:bg-table-rowAlt"
-    >
-      {resultIndex === 0 ? (
-        <Table.Cell className="font-medium">
-          <Tooltip
-            content={
-              <span style={{ whiteSpace: "pre-wrap" }}>{wod.description}</span>
-            }
+        );
+      },
+      size: 220, // Estimate size
+    }),
+    columnHelper.accessor("category", {
+      header: "Category", // Changed header
+      cell: (info) => {
+        const row = info.row.original;
+        // Only render category on the first row for that WOD
+        if (!row.isFirstResult || !row.category) return null;
+        return (
+          <Badge color="indigo" variant="soft" radius="full" className="w-fit">
+            {row.category}
+          </Badge>
+        );
+      },
+      size: 120, // Adjusted size
+    }),
+    // New column for Tags
+    columnHelper.accessor("tags", {
+      header: "Tags",
+      cell: (info) => {
+        const row = info.row.original;
+        // Only render tags on the first row for that WOD
+        if (!row.isFirstResult || !row.tags || row.tags.length === 0)
+          return null;
+        return (
+          <Flex
+            gap="1"
+            className="flex-nowrap overflow-hidden" // Ensure single line
+            title={row.tags.join(", ")} // Tooltip for overflow
           >
-            {wod.wodUrl ? (
-              <Link
-                href={wod.wodUrl}
-                target="_blank"
-                className="flex max-w-[200px] items-center truncate whitespace-nowrap text-primary hover:underline"
-              >
-                {wod.wodName}
-                <span className="ml-1 flex-shrink-0 text-xs opacity-70">
-                  ↗
-                </span>
-              </Link>
-            ) : (
-              <span className="max-w-[200px] truncate whitespace-nowrap">
-                {wod.wodName}
-              </span>
-            )}
-          </Tooltip>
-        </Table.Cell>
-      ) : (
-        <Table.Cell></Table.Cell>
-      )}
-
-      {resultIndex === 0 ? (
-        <Table.Cell>
-          <Flex gap="1">
-            {wod.category && (
-              <Badge
-                color="indigo"
-                variant="soft"
-                radius="full"
-                className="w-fit"
-              >
-                {wod.category}
-              </Badge>
-            )}
-            {wod.tags?.map((tag) => (
+            {row.tags.map((tag) => (
               <Badge
                 key={tag}
                 color="gray"
                 variant="soft"
                 radius="full"
-                className="text-xs"
+                className="flex-shrink-0 text-xs" // Prevent shrinking
               >
                 {tag}
               </Badge>
             ))}
           </Flex>
-        </Table.Cell>
-      ) : (
-        <Table.Cell></Table.Cell>
-      )}
-      <Table.Cell className="whitespace-nowrap">
-        {safeString(result.date)}
-      </Table.Cell>
-      <Table.Cell className="whitespace-nowrap font-mono">
-        {formatScore(result)}{" "}
-        {result.rxStatus && (
-          <span className="text-sm opacity-80">
-            {safeString(result.rxStatus)}
-          </span>
-        )}
-      </Table.Cell>
-      <Table.Cell>
-        {wod.benchmarks ? (
-          <Tooltip
-            content={
-              <span style={{ whiteSpace: "pre-wrap" }}>
-                {getPerformanceLevelTooltip(wod)}
+        );
+      },
+      size: 150, // Set size for tags column
+    }),
+    columnHelper.accessor((row) => row.result?.date, {
+      id: "date",
+      header: () => (
+        <span onClick={() => handleSort("date")} className="cursor-pointer">
+          Date{getSortIndicator("date")}
+        </span>
+      ),
+      cell: (info) => {
+        const dateValue = safeString(info.getValue());
+        return (
+          <span className="whitespace-nowrap">{dateValue || "-"}</span> // Render dash if date is empty
+        );
+      },
+      size: 100,
+    }),
+    columnHelper.accessor((row) => row.result, {
+      id: "score",
+      header: "Score",
+      cell: (info) => {
+        const result = info.getValue();
+        if (!result)
+          return <span className="whitespace-nowrap font-mono">-</span>;
+        return (
+          <span className="whitespace-nowrap font-mono">
+            {formatScore(result)}{" "}
+            {result.rxStatus && (
+              <span className="text-sm opacity-80">
+                {safeString(result.rxStatus)}
               </span>
-            }
-          >
-            {result.rxStatus && result.rxStatus !== "Rx" ? (
-              <Text className={`font-medium ${getPerformanceLevelColor(null)}`}>
-                Scaled
-              </Text>
-            ) : (
-              <Text
-                className={`font-medium ${getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}
-              >
-                {getPerformanceLevel(wod, result)?.charAt(0).toUpperCase() +
-                  getPerformanceLevel(wod, result)?.slice(1) || "N/A"}
-              </Text>
             )}
-          </Tooltip>
-        ) : (
-          <Text>-</Text>
-        )}
-      </Table.Cell>
-      {resultIndex === 0 ? (
-        <Table.Cell className="whitespace-nowrap">
-          {wod.difficulty ? (
+          </span>
+        );
+      },
+      size: 120,
+    }),
+    columnHelper.accessor(
+      (row) => ({ result: row.result, benchmarks: row.benchmarks }),
+      {
+        id: "level",
+        header: () => (
+          <span onClick={() => handleSort("level")} className="cursor-pointer">
+            Level{getSortIndicator("level")}
+          </span>
+        ),
+        cell: (info) => {
+          const { result, benchmarks } = info.getValue();
+          if (!result || !benchmarks) return <Text>-</Text>;
+
+          const level = getPerformanceLevel(
+            { benchmarks } as Wod, // Cast needed for util function
+            result,
+          );
+          const levelText =
+            level?.charAt(0).toUpperCase() + level?.slice(1) || "N/A";
+
+          return (
             <Tooltip
               content={
                 <span style={{ whiteSpace: "pre-wrap" }}>
-                  {safeString(wod.difficulty_explanation)}
+                  {getPerformanceLevelTooltip({ benchmarks } as Wod)}
                 </span>
               }
             >
-              <Text
-                className={`font-medium ${getDifficultyColor(wod.difficulty)}`}
-              >
-                {wod.difficulty}
-              </Text>
+              {result.rxStatus && result.rxStatus !== "Rx" ? (
+                <Text
+                  className={`font-medium ${getPerformanceLevelColor(null)}`}
+                >
+                  Scaled
+                </Text>
+              ) : (
+                <Text
+                  className={`font-medium ${getPerformanceLevelColor(level)}`}
+                >
+                  {levelText}
+                </Text>
+              )}
             </Tooltip>
-          ) : (
-            <Text>-</Text>
-          )}
-        </Table.Cell>
-      ) : (
-        <Table.Cell></Table.Cell>
-      )}
-      {resultIndex === 0 ? (
-        <Table.Cell className="whitespace-nowrap">
-          {wod.count_likes ?? "-"}
-        </Table.Cell>
-      ) : (
-        <Table.Cell></Table.Cell>
-      )}
-      <Table.Cell className="max-w-[250px] truncate">
-        <Tooltip content={safeString(result.notes)}>
-          <span>{safeString(result.notes)}</span>
-        </Tooltip>
-      </Table.Cell>
-    </Table.Row>
-  ));
-});
-WodRowSet.displayName = "WodRowSet"; // Add display name for better debugging
+          );
+        },
+        size: 100,
+      },
+    ),
+    columnHelper.accessor("difficulty", {
+      header: () => (
+        <span
+          onClick={() => handleSort("difficulty")}
+          className="cursor-pointer whitespace-nowrap"
+        >
+          Difficulty{getSortIndicator("difficulty")}
+        </span>
+      ),
+      cell: (info) => {
+        const row = info.row.original;
+        // Only render difficulty on the first row for that WOD
+        if (!row.isFirstResult) return null;
+        if (!row.difficulty) return <Text>-</Text>;
+        return (
+          <Tooltip
+            content={
+              <span style={{ whiteSpace: "pre-wrap" }}>
+                {safeString(row.difficulty_explanation)}
+              </span>
+            }
+          >
+            <Text
+              className={`whitespace-nowrap font-medium ${getDifficultyColor(row.difficulty)}`}
+            >
+              {row.difficulty}
+            </Text>
+          </Tooltip>
+        );
+      },
+      size: 100,
+    }),
+    columnHelper.accessor("count_likes", {
+      header: () => (
+        <span
+          onClick={() => handleSort("count_likes")}
+          className="cursor-pointer whitespace-nowrap"
+        >
+          Likes{getSortIndicator("count_likes")}
+        </span>
+      ),
+      cell: (info) => {
+        const row = info.row.original;
+        // Only render likes on the first row for that WOD
+        if (!row.isFirstResult) return null;
+        return (
+          <span className="whitespace-nowrap">{row.count_likes ?? "-"} </span>
+        );
+      },
+      size: 80,
+    }),
+    columnHelper.accessor((row) => row.result?.notes, {
+      id: "notes",
+      header: "Notes",
+      cell: (info) => {
+        const notes = safeString(info.getValue());
+        if (!notes) return <span>-</span>;
+        return (
+          <Tooltip content={notes}>
+            <span className="block max-w-[250px] truncate">{notes}</span>
+          </Tooltip>
+        );
+      },
+      size: 250,
+    }),
+  ];
+};
 
 // --- Main Table Component ---
+
 const WodTable: React.FC<WodTableProps> = ({
   wods,
   sortBy,
   sortDirection,
   handleSort,
 }) => {
-  const getSortIndicator = (columnName: SortByType) => {
-    if (sortBy === columnName) {
-      return sortDirection === "asc" ? "▲" : "▼";
-    }
-    return "";
-  };
+  const parentRef = useRef<HTMLDivElement>(null);
+  const headerRef = useRef<HTMLDivElement>(null); // Ref for header
+  const [headerHeight, setHeaderHeight] = useState(0); // State for header height
 
-  // getDifficultyColor moved outside
+  // Measure header height after layout
+  useLayoutEffect(() => {
+    if (headerRef.current) {
+      setHeaderHeight(headerRef.current.offsetHeight);
+    }
+  }, []); // Run once after initial layout
+
+  // Flatten the data for virtualization
+  const flatData = useMemo(() => {
+    const rows: FlatWodRow[] = [];
+    wods.forEach((wod) => {
+      if (wod.results.length === 0) {
+        rows.push({
+          wodName: wod.wodName,
+          wodUrl: wod.wodUrl,
+          description: wod.description,
+          category: wod.category,
+          tags: wod.tags,
+          difficulty: wod.difficulty,
+          difficulty_explanation: wod.difficulty_explanation,
+          count_likes: wod.count_likes,
+          benchmarks: wod.benchmarks,
+          resultIndex: 0,
+          result: undefined,
+          isFirstResult: true,
+        });
+      } else {
+        wod.results.forEach((result, index) => {
+          rows.push({
+            wodName: wod.wodName,
+            wodUrl: wod.wodUrl,
+            description: wod.description,
+            category: wod.category,
+            tags: wod.tags,
+            difficulty: wod.difficulty,
+            difficulty_explanation: wod.difficulty_explanation,
+            count_likes: wod.count_likes,
+            benchmarks: wod.benchmarks,
+            resultIndex: index,
+            result: result,
+            isFirstResult: index === 0,
+          });
+        });
+      }
+    });
+    return rows;
+  }, [wods]);
+
+  const columns = useMemo(
+    () => createColumns(handleSort, sortBy, sortDirection),
+    [handleSort, sortBy, sortDirection],
+  );
+
+  const table = useReactTable({
+    data: flatData,
+    columns,
+    getCoreRowModel: getCoreRowModel(),
+    manualSorting: true, // We handle sorting externally
+  });
+
+  const { rows } = table.getRowModel();
+
+  const rowVirtualizer = useVirtualizer({
+    count: rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 49, // Estimate row height in px (adjust as needed)
+    overscan: 5, // Render a few extra rows above/below viewport
+  });
+
+  const virtualRows = rowVirtualizer.getVirtualItems();
+  const totalSize = rowVirtualizer.getTotalSize();
+
+  const headerGroups = table.getHeaderGroups();
 
   return (
-    <Table.Root
-      variant="surface"
-      className="w-full overflow-hidden rounded-md border border-table-border bg-table-row"
+    <div
+      ref={parentRef}
+      className="h-[600px] w-full overflow-auto rounded-md border border-table-border" // Container with fixed height and scroll
     >
-      <Table.Header className="bg-table-header">
-        <Table.Row>
-          <Table.ColumnHeaderCell
-            onClick={() => handleSort("wodName")}
-            style={{ cursor: "pointer" }}
-            className="text-foreground"
-          >
-            Workout {getSortIndicator("wodName")}
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="text-foreground">
-            Type
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell
-            onClick={() => handleSort("date")}
-            style={{ cursor: "pointer" }}
-            className="text-foreground"
-          >
-            Date {getSortIndicator("date")}
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="text-foreground">
-            Score
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell
-            onClick={() => handleSort("level")}
-            style={{ cursor: "pointer" }}
-            className="text-foreground"
-          >
-            Level {getSortIndicator("level")}
-          </Table.ColumnHeaderCell>
-          {/* Added Difficulty Header - Made clickable */}
-          <Table.ColumnHeaderCell
-            onClick={() => handleSort("difficulty")}
-            style={{ cursor: "pointer" }}
-            className="whitespace-nowrap text-foreground"
-          >
-            Difficulty {getSortIndicator("difficulty")}
-          </Table.ColumnHeaderCell>
-          {/* Added Likes Header */}
-          <Table.ColumnHeaderCell
-            onClick={() => handleSort("count_likes")}
-            style={{ cursor: "pointer" }}
-            className="whitespace-nowrap text-foreground" // Added whitespace-nowrap
-          >
-            Likes {getSortIndicator("count_likes")}
-          </Table.ColumnHeaderCell>
-          <Table.ColumnHeaderCell className="text-foreground">
-            Notes
-          </Table.ColumnHeaderCell>
-        </Table.Row>
-      </Table.Header>
+      <div
+        style={{
+          height: `${totalSize}px`,
+          width: "100%",
+          position: "relative",
+        }}
+      >
+        {/* Sticky Header */}
+        {/* Ensure header stays sticky, remove incorrect absolute positioning */}
+        <div
+          ref={headerRef} // Attach ref here
+          className="sticky top-0 z-10 bg-table-header"
+          style={{ width: table.getTotalSize() }} // Rely on sticky class for positioning
+        >
+          {headerGroups.map((headerGroup) => (
+            <div key={headerGroup.id} className="flex" role="row">
+              {headerGroup.headers.map((header) => (
+                <div
+                  key={header.id}
+                  className="flex-shrink-0 flex-grow-0 border-b border-r border-table-border px-3 py-2 text-sm font-medium text-foreground last:border-r-0"
+                  style={{ width: `${header.getSize()}px` }}
+                  role="columnheader"
+                  aria-sort={
+                    header.column.id === sortBy
+                      ? sortDirection === "asc"
+                        ? "ascending"
+                        : "descending"
+                      : undefined
+                  }
+                >
+                  {header.isPlaceholder
+                    ? null
+                    : flexRender(
+                        header.column.columnDef.header,
+                        header.getContext(),
+                      )}
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
 
-      <Table.Body className="bg-table-row">
-        {/* Map over wods and render the memoized WodRowSet */}
-        {wods.map((wod) => (
-          <WodRowSet key={wod.wodName} wod={wod} /> // Use wodName as key (assuming unique for this list)
-        ))}
-      </Table.Body>
-    </Table.Root>
+        {/* Virtualized Rows - These are positioned absolutely relative to the padded container */}
+        {virtualRows.map((virtualRow) => {
+          const row = rows[virtualRow.index];
+          return (
+            <div
+              key={row.id}
+              className="absolute left-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
+              style={{
+                height: `${virtualRow.size}px`,
+                transform: `translateY(${virtualRow.start}px)`, // Positions row within the padded container
+                width: table.getTotalSize(),
+              }}
+              role="row"
+            >
+              {row.getVisibleCells().map((cell) => (
+                <div
+                  key={cell.id}
+                  className="flex flex-shrink-0 flex-grow-0 items-center border-r border-table-border px-3 py-2 text-sm last:border-r-0"
+                  style={{ width: `${cell.column.getSize()}px` }}
+                  role="cell"
+                >
+                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                </div>
+              ))}
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 

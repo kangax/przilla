@@ -14,10 +14,10 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDown, TableIcon, List } from "lucide-react";
 import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
-import WodDistributionChart from "./WodDistributionChart";
-import WodTimelineChart from "./WodTimelineChart";
+// Removed unused WodDistributionChart
+// Removed unused WodTimelineChart
 import { type Wod, type SortByType } from "~/types/wodTypes";
-import { hasScore, sortWods, isWodDone } from "~/utils/wodUtils";
+import { sortWods, isWodDone } from "~/utils/wodUtils"; // Removed unused hasScore
 
 // --- URL State Management ---
 const DEFAULT_COMPLETION_FILTER = "done";
@@ -442,6 +442,7 @@ export default function WodViewer({
       ) : (
         <WodTimeline
           wods={sortedWods}
+          tableHeight={tableHeight} // Pass height prop
           sortBy={sortBy}
           sortDirection={sortDirection}
           handleSort={handleSort}

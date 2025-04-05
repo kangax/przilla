@@ -1,6 +1,13 @@
 "use client";
 
-import { useState, useEffect, useMemo, useCallback } from "react"; // Import useCallback
+import {
+  useState,
+  useEffect,
+  useLayoutEffect, // Import useLayoutEffect
+  useRef, // Import useRef
+  useMemo,
+  useCallback,
+} from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, SegmentedControl, Tooltip } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -79,6 +86,8 @@ export default function WodViewer({
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
+  const filterBarRef = useRef<HTMLDivElement>(null); // Ref for filter bar
+  const [tableHeight, setTableHeight] = useState<number>(600); // Default height
 
   // --- Initialize State from URL or Defaults ---
   // Note: These functions run on every render, but useState only uses them for the *initial* value.
@@ -137,6 +146,39 @@ export default function WodViewer({
     getInitialSortDirection(sortBy),
   );
   // --- End Initialize State ---
+
+  // --- Calculate Table Height ---
+  useLayoutEffect(() => {
+    const calculateHeight = () => {
+      if (filterBarRef.current) {
+        const filterBarHeight = filterBarRef.current.offsetHeight;
+        // Estimates based on inspection/common values
+        const HEADER_HEIGHT_ESTIMATE = 64;
+        const PAGE_CONTAINER_PADDING_TOP = 24; // pt-6 in page.tsx
+        const PAGE_CONTAINER_PADDING_BOTTOM = 32; // pb-8 in page.tsx
+        const FILTER_BAR_MARGIN_TOP = 16; // mt-4 on filter bar
+        const FILTER_BAR_MARGIN_BOTTOM = 16; // mb-4 on filter bar
+        // Sum of fixed offsets above and below the filter bar + table area
+        const TOTAL_VERTICAL_OFFSET =
+          HEADER_HEIGHT_ESTIMATE +
+          PAGE_CONTAINER_PADDING_TOP +
+          FILTER_BAR_MARGIN_TOP +
+          filterBarHeight + // Include measured filter bar height
+          FILTER_BAR_MARGIN_BOTTOM +
+          PAGE_CONTAINER_PADDING_BOTTOM;
+
+        const availableHeight = window.innerHeight - TOTAL_VERTICAL_OFFSET;
+        // Set a minimum height, e.g., 300px
+        setTableHeight(Math.max(300, availableHeight));
+      }
+    };
+
+    calculateHeight(); // Initial calculation
+    window.addEventListener("resize", calculateHeight); // Recalculate on resize
+
+    // Cleanup listener on component unmount
+    return () => window.removeEventListener("resize", calculateHeight);
+  }, []); // Empty dependency array ensures this runs once on mount and cleans up on unmount
 
   // --- Sync State TO URL ---
   // Update URL when internal state changes
@@ -276,8 +318,8 @@ export default function WodViewer({
 
   return (
     <Box>
-      {/* Filter Bar */}
-      <Flex className="mb-4 mt-4 items-center" gap="4">
+      {/* Filter Bar - Add ref */}
+      <Flex ref={filterBarRef} className="mb-4 mt-4 items-center" gap="4">
         {/* Category Select */}
         <Select.Root
           value={selectedCategories.length > 0 ? selectedCategories[0] : "all"}
@@ -369,7 +411,6 @@ export default function WodViewer({
             </Tooltip>
           </SegmentedControl.Item>
         </SegmentedControl.Root>
-
         <Flex justify="center">
           <SegmentedControl.Root
             size="1"
@@ -389,10 +430,11 @@ export default function WodViewer({
           </SegmentedControl.Root>
         </Flex>
       </Flex>
-      {/* Render Table or Timeline View */}
+      {/* Render Table or Timeline View - Pass calculated height */}
       {view === "table" ? (
         <WodTable
           wods={sortedWods}
+          tableHeight={tableHeight} // Pass height prop
           sortBy={sortBy}
           sortDirection={sortDirection}
           handleSort={handleSort}

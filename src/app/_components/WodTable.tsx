@@ -23,6 +23,7 @@ import {
 
 interface WodTableProps {
   wods: Wod[];
+  tableHeight: number; // Add prop for dynamic height
   sortBy: SortByType;
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
@@ -328,6 +329,7 @@ const createColumns = (
 
 const WodTable: React.FC<WodTableProps> = ({
   wods,
+  tableHeight, // Destructure the new prop
   sortBy,
   sortDirection,
   handleSort,
@@ -406,7 +408,8 @@ const WodTable: React.FC<WodTableProps> = ({
   return (
     <div
       ref={parentRef}
-      className="h-[600px] w-full overflow-auto rounded-md border border-table-border" // Container with fixed height and scroll
+      className="w-full overflow-auto rounded-md border border-table-border" // Removed h-[600px]
+      style={{ height: `${tableHeight}px` }} // Apply dynamic height
     >
       <div
         style={{

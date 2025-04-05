@@ -408,8 +408,8 @@ const WodTable: React.FC<WodTableProps> = ({
   return (
     <div
       ref={parentRef}
-      className="w-full overflow-auto rounded-md border border-table-border" // Removed h-[600px]
-      style={{ height: `${tableHeight}px` }} // Apply dynamic height
+      className="w-full overflow-auto rounded-md border border-table-border"
+      style={{ height: `${tableHeight}px` }}
     >
       <div
         style={{

@@ -203,8 +203,10 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 49, // Estimate row height (adjust as needed)
+    estimateSize: () => 70, // Estimate: Adjust based on typical content + padding
     overscan: 5,
+    // Add measureElement for dynamic height - remove userAgent check
+    measureElement: (element) => element.getBoundingClientRect().height,
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
@@ -220,7 +222,7 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
       <div
         style={{
           height: `${totalSize}px`,
-          width: table.getTotalSize(), // Use table total size for inner div width
+          width: "100%",
           position: "relative",
         }}
       >
@@ -263,9 +265,11 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
           return (
             <div
               key={row.id}
+              ref={rowVirtualizer.measureElement} // Add ref for measurement
+              data-index={virtualRow.index} // Required by measureElement
               className="absolute left-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
               style={{
-                height: `${virtualRow.size}px`,
+                // Height is now dynamic based on content, remove fixed height style
                 transform: `translateY(${virtualRow.start}px)`,
                 width: "100%", // Row width should match container
               }}

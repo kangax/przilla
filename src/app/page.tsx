@@ -40,16 +40,6 @@ export default async function Home() {
             categoryOrder={DESIRED_CATEGORY_ORDER}
             tagOrder={DESIRED_TAG_ORDER}
           />
-          {session?.user && (
-            <Flex gap="4" mt="4" justify="center">
-              <Link
-                href={session ? "/api/auth/signout" : "/api/auth/signin"}
-                className="rounded-full bg-white/10 px-10 py-3 font-semibold no-underline transition hover:bg-white/20"
-              >
-                {session ? "Sign out" : "Sign in"}
-              </Link>
-            </Flex>
-          )}
         </Flex>
       </Container>
     </Box>

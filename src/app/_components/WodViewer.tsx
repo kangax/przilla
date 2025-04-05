@@ -302,21 +302,6 @@ export default function WodViewer({
 
   return (
     <Box>
-      {/* Render Charts Side-by-Side */}
-      <Flex gap="4" direction={{ initial: "column", sm: "row" }}>
-        <Box className="flex-1">
-          <WodDistributionChart
-            tagData={tagChartData}
-            categoryData={categoryChartData}
-          />
-        </Box>
-        <Box className="flex-1">
-          <WodTimelineChart
-            frequencyData={frequencyData}
-            performanceData={performanceData}
-          />
-        </Box>
-      </Flex>
       {/* Filter Bar */}
       <Flex className="mb-4 mt-4 items-center" gap="4">
         {/* Category Select */}
@@ -446,6 +431,22 @@ export default function WodViewer({
           handleSort={handleSort}
         />
       )}
+
+      {/* Render Charts Side-by-Side */}
+      <Flex gap="4" direction={{ initial: "column", sm: "row" }} mt="6">
+        <Box className="flex-1">
+          <WodDistributionChart
+            tagData={tagChartData}
+            categoryData={categoryChartData}
+          />
+        </Box>
+        <Box className="flex-1">
+          <WodTimelineChart
+            frequencyData={frequencyData}
+            performanceData={performanceData}
+          />
+        </Box>
+      </Flex>
     </Box>
   );
 }

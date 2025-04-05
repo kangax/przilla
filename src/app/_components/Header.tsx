@@ -1,6 +1,7 @@
 import { Box, Container, Flex, Heading } from "@radix-ui/themes";
 import ThemeToggle from "~/app/_components/ThemeToggle";
 import PageNavigation from "~/app/_components/PageNavigation";
+import AuthControls from "~/app/_components/AuthControls"; // Import the new component
 
 export default function Header() {
   return (
@@ -10,7 +11,10 @@ export default function Header() {
           <Heading size="5" className="text-foreground">
             PRzilla
           </Heading>
-          <ThemeToggle />
+          <Flex gap="4" align="center">
+            <ThemeToggle />
+            <AuthControls />
+          </Flex>
         </Flex>
         <Box className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
           <PageNavigation />

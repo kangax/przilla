@@ -212,37 +212,6 @@
     "count_likes": 18
   },
   {
-    "wodUrl": "https://wodwell.com/wod/30-muscle-ups/",
-    "wodName": "30 Muscle-Ups",
-    "description": "For Time\n30 Muscle-Ups",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 180
-        },
-        "advanced": {
-          "min": 181,
-          "max": 360
-        },
-        "intermediate": {
-          "min": 361,
-          "max": 600
-        },
-        "beginner": {
-          "min": 601,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Benchmark",
-    "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "A test of maximum efficiency and capacity for performing 30 muscle-ups (typically ring) for time."
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/31-heroes/",
     "wodName": "31 Heroes",
     "description": "AMRAP (with a Partner) in 31 minutes\nPartner A performs AMRAP of:\n8 Thrusters (155/105 lb)\n6 Rope Climbs (15 ft)\n11 Box Jumps (30/24 in)\n\nWhile Partner B performs:\n400 meter Sandbag Run (45/25 lb)\n\nPartners switch after each Run.",
@@ -681,6 +650,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Chipper). High volume (400 reps) of basic bodyweight movements performed sequentially, testing muscular endurance and pacing.",
     "count_likes": 1216
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/angry-jackie/",
+    "wodName": "Angry Jackie",
+    "description": "For Time\n2000 meter Row\n50 Thrusters (95/65 lb)\n30 Bar Muscle-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 720
+        },
+        "advanced": {
+          "min": 721,
+          "max": 960
+        },
+        "intermediate": {
+          "min": 961,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A triplet combining a long row, moderate thrusters, and high-skill bar muscle-ups. Tests rowing endurance, strength endurance, and gymnastics capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/angus/",
@@ -1185,6 +1185,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "A 20-minute AMRAP combining barbell movements, push-ups, and Assault Bike calories.",
     "count_likes": 89
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/assault-flatline/",
+    "wodName": "Assault Flatline",
+    "description": "For Time\n60 calorie Standing Assault Air Bike (remove seat)\n50 Squat Cleans (135/95 lb)\n40 GHD Sit-Ups\n30 Handstand Push-Ups\n20 Chest-to-Bar Pull-Ups\n10 Bar Over Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A challenging chipper starting with standing bike calories, followed by cleans, GHDs, HSPU, C2B, and burpees."
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-flex/",
@@ -5578,6 +5609,37 @@
     "count_likes": 2326
   },
   {
+    "wodUrl": "https://wodwell.com/wod/dt-deja-vu/",
+    "wodName": "DT Deja Vu",
+    "description": "For Time\n5 Rounds of:\n12 Dumbbell Deadlifts (2x50/35 lb)\n9 Dumbbell Hang Power Cleans (2x50/35 lb)\n6 Dumbbell Shoulder-to-Overheads (2x50/35 lb)\n\nRest 1 minute\n\n5 Rounds of:\n6 Dumbbell Shoulder-to-Overheads (2x50/35 lb)\n9 Dumbbell Hang Power Cleans (2x50/35 lb)\n12 Dumbbell Deadlifts (2x50/35 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1140
+        },
+        "intermediate": {
+          "min": 1141,
+          "max": 1380
+        },
+        "beginner": {
+          "min": 1381,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Two blocks of 5 rounds of Dumbbell 'DT', performed forward and then in reverse, separated by rest. Tests dumbbell cycling and endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/dumb-and-dumber/",
     "wodName": "Dumb and Dumber",
     "description": "30 Rounds for Time\n1 Squat Clean (95/65 lb)\n1 Hang Squat Clean (95/65 lb)\n1 Thruster (95/65 lb)",
@@ -9966,6 +10028,37 @@
     "count_likes": 19
   },
   {
+    "wodUrl": "https://wodwell.com/wod/light-linda/",
+    "wodName": "Light Linda",
+    "description": "For Time\n24-21-18-15-12-9-6-3 reps of:\nDeadlifts (Bodyweight)\nBench Presses (3/4 Bodyweight)\nSquat Cleans (1/2 Bodyweight)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1500
+        },
+        "advanced": {
+          "min": 1501,
+          "max": 2100
+        },
+        "intermediate": {
+          "min": 2101,
+          "max": 2700
+        },
+        "beginner": {
+          "min": 2701,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A descending rep chipper similar to 'Linda' but scaled to bodyweight percentages for DL, BP, and Cleans. Tests strength endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/linchpin-test-3/",
     "wodName": "Linchpin Test 3",
     "description": "3 Rounds for Time\n21 Wall Ball Shots (20/14 lb)\n14 Handstand Push-Ups\n7 Deadlifts (315/205 lb)",
@@ -11466,6 +11559,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (AMRAP). 20 mins: moderate DL/Clean/S2OH (155lb), high-vol single-unders. Tests barbell cycling/conditioning.",
     "count_likes": 39
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/movember-cowboys/",
+    "wodName": "Movember Cowboys",
+    "description": "3 Rounds for Time\n10 Handstand Push-Ups\n20 Hang Squat Cleans (115/80 lb)\n3 Rope Climbs",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 840
+        },
+        "intermediate": {
+          "min": 841,
+          "max": 1080
+        },
+        "beginner": {
+          "min": 1081,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Three rounds combining HSPU, moderate hang squat cleans, and rope climbs. Tests gymnastics skill and strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/mr-joshua/",
@@ -14810,6 +14934,99 @@
     "difficulty_explanation": "A multi-part workout including 3 rounds of Helen, an ascending chipper, and a final 10-min AMRAP of KB snatches. Tests endurance across multiple structures."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/painstorm-ii/",
+    "wodName": "Painstorm II",
+    "description": "For Time\n5 Rounds of:\n10 Cleans (60/40 kg)\n15 Push-Ups\n\nDirectly into:\n400 meter Run\n20 Barbell A Complexes (95/65 lb)*\n30 Pull-Ups\n400 meter Run\n30 Box Jumps (24/20 in)\n30 Thrusters (45/35 lb)\n400 meter Run\n20 Barbell B Complexes (45/35 lb)**\n30 Ball Slams (20/14 lb)\n400 meter Run\n30 Kettlebell Swings (50/30 lb)\n50 Push-Ups\n\n*Barbell A Complex consists of: 1 Hang Squat Clean 1 Right Leg Front Rack Lunge 1 Left Leg Front Rack Lunge and 1 Split Jerk\n**Barbell B Complex consists of: 1 Hang Snatch 1 Right Leg Overhead Lunge 1 Left Leg Overhead Lunge",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2100
+        },
+        "advanced": {
+          "min": 2101,
+          "max": 2700
+        },
+        "intermediate": {
+          "min": 2701,
+          "max": 3300
+        },
+        "beginner": {
+          "min": 3301,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A long, complex chipper starting with 5 rounds of Cleans/Push-ups, followed by a large chipper section with runs, barbell complexes, and various other movements."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-iii/",
+    "wodName": "Painstorm III",
+    "description": "For Time\n76 Sit-Up+Clean-and-Jerk Complexes\n76 Wall Ball Shots\n76 Box Jumps\n76 Pull-Ups\n76 Kettlebell Swings\n76 Burpees\n76 Kness-to-Elbows\n76 Push-Ups\n76 Air Squats\n76 Turkish Get-Up+Right Leg Lunge+Left Leg Lunge Complexes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 3600
+        },
+        "advanced": {
+          "min": 3601,
+          "max": 4800
+        },
+        "intermediate": {
+          "min": 4801,
+          "max": 6000
+        },
+        "beginner": {
+          "min": 6001,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "An extremely high-volume chipper requiring 76 reps each of 10 different movements, including complex ones. Tests endurance and mental fortitude over a very long duration."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-vi/",
+    "wodName": "Painstorm VI",
+    "description": "For Time\n3 Rounds of:\n400 meter Run\n15 Deadlifts (Bodyweight)\n15 Pull-Ups\n\nThen 3 Rounds of:\n400 meter Run\n21 Kettlebell Swings (50/30 lb)\n12 Handstand Push-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1500
+        },
+        "advanced": {
+          "min": 1501,
+          "max": 1920
+        },
+        "intermediate": {
+          "min": 1921,
+          "max": 2340
+        },
+        "beginner": {
+          "min": 2341,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Two distinct 3-round triplets performed back-to-back, combining running with strength and gymnastics elements."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/painstorm-vii/",
     "wodName": "Painstorm VII",
     "description": "For Time\n50-40-30-20-10 Air Squats\n45-35-25-15-5 Push-Ups\n\n400 meter Run\n\n40-32-24-16-8 Left-Arm Dumbbell Snatches (50/35 lb)\n36-28-20-12-4 Right-Arm Dumbbell Snatches (50/35 lb)\n\n400 meter Run\n\n30-24-18-12-6 Box Jumps (24/20 in)\n27-21-15-9-3 Pull-Ups\n\n400 meter Run\n\n20-16-12-8-4 Dumbbell Burpee Hang Squat Clean Thrusters (50/35 lb)\n18-14-10-6-2 Ring Dips\n\n400 meter Run\n\n10-8-6-4-2 Handstand Push-Ups\n9-7-5-3-1 Pistols (L+R=1)\n\n400 meter Run",
@@ -14903,6 +15120,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "A high-volume chipper using only an empty barbell for various movements, interspersed with runs. Tests endurance and technique.",
     "count_likes": 244
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xiv/",
+    "wodName": "Painstorm XIV",
+    "description": "For Time\n800 meter Run\n50 Box Jumps (24/20 in)\n400 meter Run\n25 Push Presses (95/65 lb)\n200 meter Run\n12 Handstand Push-Ups\n400 meter Run\n25 Pull-Ups\n800 meter Run\n50 Beck's Burpees*\n400 meter Run\n25 Kettlebell Swings (24/16 kg)\n200 meter Run\n12 Thrusters (95/65 lb)\n400 meter Run\n25 Power Cleans (95/65 lb)\n800 meter Run\n50 Power Snatches (95/65 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3000
+        },
+        "intermediate": {
+          "min": 3001,
+          "max": 3600
+        },
+        "beginner": {
+          "min": 3601,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A very long chipper involving multiple runs of varying distances interspersed with numerous movements like box jumps, HSPU, pull-ups, burpees, KB swings, and barbell lifts."
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xix/",
@@ -15125,6 +15373,37 @@
     "count_likes": 600
   },
   {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xxii/",
+    "wodName": "Painstorm XXII",
+    "description": "For Time\nBuy-In:\nMax Hang Hold\n1 minute Rest\nMax Bottom Squat Hold\n\nDirectly into:\n200 meter Sprint / 20 Double-Unders\n20 Medicine Ball Clean Thrusters / 40 Wall Ball Shots (20/14 lb)\n20 Clapping Push-Ups / 40 Burpees\n\n400 meter Run / 40 Double-Unders\n10 Brand X Bear Complexes (95/65 lb)* / 10 Hom-Strametz Complexes (75/55 lb)**\n5 Muscle-Ups / 25 Pull-Ups + 50 Dips\n\n600 meter Run / 60 Double-Unders\n30 Knees-to-Elbows / 75 Sit-Ups\n15 Clapping Pull-Ups / 40 Kipping Pull-Ups\n\n400 meter Run / 40 Double-Unders\n15 L-Sit Pull-Ups / 25 Kipping Pull-Ups + 25 L-Leg Raises\n20 Windshield Wipers / 50 Hanging Knee Raises\n\n200 meter Row / 20 Double-Unders\n30 Snatch Grip Deadlifts / 45 Standard Deadlifts (185/125 lb)\n50 meter Catterpillar Walk / 100 meter Bear Walk\n\nRest 5 minutes\n\nCash-Out:\nMax Hang Hold\n1 minute Rest\nMax Bottom Squat Hold\n\n*1 Brand X Bear Complex consists of : 1 Clean 1 Thruster 1 Left Lunge 1 Right Lunge 1 Back Squat 1 Thruster\n**1 Hom-Strametz Complex consists of: 1 Power Snatch 1 Snatch Balance 1 Left Lunge 1 Right Lunge 1 Overhead Squat 1 Thruster",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2700
+        },
+        "advanced": {
+          "min": 2701,
+          "max": 3600
+        },
+        "intermediate": {
+          "min": 3601,
+          "max": 4500
+        },
+        "beginner": {
+          "min": 4501,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A highly complex chipper with static hold buy-in/cash-out, multiple sections with scaling options, runs/DUs, barbell complexes, and gymnastics. Tests a vast range of skills and endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxiii/",
     "wodName": "Painstorm XXIII",
     "description": "21-15-9 Reps for Time\nThrusters (95/65 lb)\nCleans (135/95 lb)\nDeadlifts (225/155 lb)\nPull-Ups\nKettlebell Swings (24/16 kg)\nRing Dips\nHandstand Push-Ups\n400 meter Run (after each round)",
@@ -15280,6 +15559,68 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Eight separate Tabata intervals covering various barbell, gymnastics, kettlebell, and cardio movements. Tests broad fitness in short bursts. Score is total reps.",
     "count_likes": 87
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xxviii/",
+    "wodName": "Painstorm XXVIII",
+    "description": "For Time\n800 meter Run\n50 Box Jumps (20 in)\n10 Pull-Ups\n40 Overhead Squats (95/65 lb)\n10 Pull-Ups\n30 Thrusters (95/65 lb)\n10 Pull-Ups\n20 Handstand Push-Ups\n10 Pull-Ups\n10 Muscle-Ups\n10 Pull-Ups\n400 meter Run\n10 Pull-Ups\n10 Muscle-Ups\n10 Pull-Ups\n20 Handstand Push-Ups\n10 Pull-Ups\n30 Thrusters (95/65 lb)\n10 Pull-Ups\n40 Overhead Squats (95/65 lb)\n10 Pull-Ups\n50 Box Jumps (20 in)\n800 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2100
+        },
+        "advanced": {
+          "min": 2101,
+          "max": 2700
+        },
+        "intermediate": {
+          "min": 2701,
+          "max": 3300
+        },
+        "beginner": {
+          "min": 3301,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A long, symmetrical chipper with runs sandwiching numerous movements interspersed with sets of 10 pull-ups. Tests endurance and broad fitness."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xxx/",
+    "wodName": "Painstorm XXX",
+    "description": "AMRAP in 40 minutes\n50 meter Bear Crawl\n7 Bear Complexes (95/65 lb)\n\n1 Bear Complex consists of: 1 Power Clean 1 Front Squat 1 Push Press 1 Back Squat and 1 Push Press",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 10,
+          "max": null
+        },
+        "advanced": {
+          "min": 7,
+          "max": 9
+        },
+        "intermediate": {
+          "min": 4,
+          "max": 6
+        },
+        "beginner": {
+          "min": 1,
+          "max": 3
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A long 40-minute AMRAP combining bear crawls with multiple Bear Complexes per round. Tests strength endurance and stamina."
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxvi/",
@@ -15709,6 +16050,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "A 20-minute AMRAP triplet combining chest-to-bar pull-ups, wall balls, and kettlebell swings.",
     "count_likes": 81
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/probatio/",
+    "wodName": "Probatio",
+    "description": "For Max Reps in 30 minutes\n0:00-5:00\nMax Burpee Box Jump-Overs (24/20 in)\n\nRest 5 minutes\n\n10:00-14:00\nMax 10 meter Shuttle Runs\n\nRest 4 minutes\n\n18:00-22:00\nMax Power Cleans (155/105 lb)\n\nRest 3 minutes\n\n25:00-27:00\nMax Wall Ball Shots (20/14 lb)\n\nRest 2 minutes\n\n29:00-30:00\nMax Unbroken Pull-Ups (single attempt)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 249
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 199
+        },
+        "beginner": {
+          "min": 1,
+          "max": 149
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 30-minute test with multiple work/rest intervals focusing on max reps/distance for different movements. Tests capacity across varied domains."
   },
   {
     "wodUrl": "https://wodwell.com/wod/progressive-dt/",
@@ -16521,10 +16893,9 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["For Time"],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining handstand push-ups and running. Tests gymnastics strength and cardiovascular endurance.",
-    "count_likes": 96
+    "difficulty_explanation": "Five rounds combining handstand push-ups and 400m runs. Tests gymnastics capacity and running endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rosenbloom/",
@@ -17813,6 +18184,37 @@
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "Three rounds combining light ground-to-overheads with shuttle sprints. Tests speed and power endurance."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/start-today/",
+    "wodName": "Start Today",
+    "description": "2 Rounds for Time\n25 Toes-to-Bars\n50 calorie Row\n75 Kettlebell Swings (16/12 kg)\n100 Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1500
+        },
+        "intermediate": {
+          "min": 1501,
+          "max": 1800
+        },
+        "beginner": {
+          "min": 1801,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Two rounds of a high-volume chipper including TTB, rowing, light KB swings, and burpees. Tests endurance and mental toughness."
   },
   {
     "wodUrl": "https://wodwell.com/wod/stephen/",
@@ -19621,6 +20023,37 @@
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD. Runs sandwiching 4 rounds of strict gymnastics (pull-ups, dips, HSPU), all performed with a weight vest. Extremely demanding strict strength/endurance under load.",
     "count_likes": 63
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/walk-it-out/",
+    "wodName": "Walk It Out",
+    "description": "For Time\n25-20-15 Deadlifts (155/105 lb)\n50-40-30 Walking Lunges\n50 meter Double Kettlebell Farmer's Carry (2x70/53 lb)*\n\nRest 1 minute\n\n15-10-5 Deadlifts (225/155 lb)\n30-20-10 Walking Lunges\n50 meter Double Kettlebell Farmer's Carry (2x70/53 lb)*\n\n*Complete the Farmer's Carry after each full set.",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Two blocks of descending rep couplets (DL/Lunge) with heavy farmer's carries, separated by rest. Tests strength endurance and grip."
   },
   {
     "wodUrl": "https://wodwell.com/wod/walsh/",

@@ -3,6 +3,7 @@
 import React, { useRef, useMemo } from "react"; // Removed useState, useLayoutEffect
 import Link from "next/link";
 import { Tooltip, Text, Flex, Badge } from "@radix-ui/themes";
+import { Info } from "lucide-react"; // Added Info icon
 import {
   useReactTable,
   getCoreRowModel,
@@ -235,26 +236,53 @@ const createColumns = (
       size: 90,
     }),
     // --- Score Column (Moved) ---
-    columnHelper.accessor((row) => row.result, {
-      id: "score",
-      header: "Score",
-      cell: (info) => {
-        const result = info.getValue(); // Type assertion
-        if (!result)
-          return <span className="whitespace-nowrap font-mono">-</span>;
-        return (
-          <span className="whitespace-nowrap font-mono">
-            {formatScore(result)}{" "}
-            {result.rxStatus && (
-              <span className="text-sm opacity-80">
-                {safeString(result.rxStatus)}
-              </span>
-            )}
-          </span>
-        );
+    // Accessor now includes benchmarks for the tooltip
+    columnHelper.accessor(
+      (row) => ({ result: row.result, benchmarks: row.benchmarks }),
+      {
+        id: "score",
+        header: "Score",
+        cell: (info) => {
+          // Destructure result and benchmarks
+          const value = info.getValue() as {
+            result?: WodResult;
+            benchmarks?: Wod["benchmarks"];
+          };
+          const { result, benchmarks } = value;
+
+          // If no result, show Info icon with benchmark tooltip
+          if (!result) {
+            // Ensure benchmarks exist before showing tooltip
+            if (!benchmarks)
+              return <span className="whitespace-nowrap font-mono">-</span>;
+            return (
+              <Tooltip
+                content={
+                  <span style={{ whiteSpace: "pre-wrap" }}>
+                    {getPerformanceLevelTooltip({ benchmarks } as Wod)}
+                  </span>
+                }
+              >
+                <Info size={14} className="text-muted-foreground" />
+              </Tooltip>
+            );
+          }
+
+          // Original score display logic
+          return (
+            <span className="whitespace-nowrap font-mono">
+              {formatScore(result)}{" "}
+              {result.rxStatus && (
+                <span className="text-sm opacity-80">
+                  {safeString(result.rxStatus)}
+                </span>
+              )}
+            </span>
+          );
+        },
+        size: 150,
       },
-      size: 150,
-    }),
+    ),
     // --- Level Column (Moved) ---
     columnHelper.accessor(
       (row) => ({ result: row.result, benchmarks: row.benchmarks }),

@@ -62,6 +62,37 @@
     "difficulty_explanation": "Ten rounds combining bike calories, light squat snatches, push-ups, and Russian twists. Tests consistency and work capacity across varied movements."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/140224/",
+    "wodName": "10k Row",
+    "description": "For Time\n10000 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2160
+        },
+        "advanced": {
+          "min": 2161,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 2700
+        },
+        "beginner": {
+          "min": 2701,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A standard benchmark test of 10,000 meter rowing endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/18-0/",
     "wodName": "18.0",
     "description": "21-15-9 Reps for Time of:\nDumbbell Snatches (50/35 lb)\nOver-Dumbbell Burpees",
@@ -92,6 +123,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "A fast couplet of dumbbell snatches and burpees over the dumbbell. Tests speed and work capacity.",
     "count_likes": 444
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/170516/",
+    "wodName": "1k Row",
+    "description": "For Time\n1000 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 210
+        },
+        "intermediate": {
+          "min": 211,
+          "max": 240
+        },
+        "beginner": {
+          "min": 241,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A standard benchmark test of 1000 meter rowing speed."
   },
   {
     "wodUrl": "https://wodwell.com/wod/1lt-derek-hines/",
@@ -136,6 +198,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD; includes a 2-mile run, a demanding multi-movement Tabata circuit with minimal rest, and a long accumulated plank hold.",
     "count_likes": 7
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/080721/",
+    "wodName": "2k Row",
+    "description": "For Time\n2000 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 400
+        },
+        "advanced": {
+          "min": 401,
+          "max": 440
+        },
+        "intermediate": {
+          "min": 441,
+          "max": 480
+        },
+        "beginner": {
+          "min": 481,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A standard benchmark test of 2000 meter rowing speed."
   },
   {
     "wodUrl": "https://wodwell.com/wod/30-caliber/",
@@ -232,6 +325,37 @@
     "difficulty": "Very Hard",
     "difficulty_explanation": "Partner Hero WOD, 31 min AMRAP. Combines heavy thrusters (155lb), rope climbs, high box jumps (30in), and weighted sandbag runs, requiring high work capacity.",
     "count_likes": 111
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/5k-run/",
+    "wodName": "5k Run",
+    "description": "For Time: \n5k Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1500
+        },
+        "intermediate": {
+          "min": 1501,
+          "max": 1800
+        },
+        "beginner": {
+          "min": 1801,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A standard benchmark test of 5 kilometer running endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/6-pack/",
@@ -849,6 +973,37 @@
     "tags": ["For Time"],
     "difficulty": "Hard",
     "difficulty_explanation": "Complete 75 HSPU for time, with a burpee penalty for every break. Tests HSPU capacity and strategy."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/ant-man/",
+    "wodName": "Ant Man",
+    "description": "For Time\n3 Rounds of:\n15 Toes-to-Bars\n15 Wall Ball Shots (30/20 lb)\n15 Devil Presses (2x50/35 lb)\n\nRest 1 minute\n\nThen complete:\n2000/1600 meter Row\n\nRest 1 minute\n\nFinally complete:\n45 Toes-to-Bars\n45 Wall Ball Shots (30/20 lb)\n45 Devil Presses (2x50/35 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1500
+        },
+        "advanced": {
+          "min": 1501,
+          "max": 1920
+        },
+        "intermediate": {
+          "min": 1921,
+          "max": 2340
+        },
+        "beginner": {
+          "min": 2341,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A three-part workout with rest, involving rounds of TTB/WB/Devil Press, a long row, and then a large final set of TTB/WB/Devil Press."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ariel/",
@@ -5236,6 +5391,37 @@
     "count_likes": 869
   },
   {
+    "wodUrl": "https://wodwell.com/wod/dizzy-diane/",
+    "wodName": "Dizzy Diane",
+    "description": "15-12-9 Reps for Time\nDeadlifts (155/105 lb)\n21 foot Handstand Walk\nHandstand Push-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A triplet combining deadlifts, handstand walks, and HSPU with an unusual rep scheme (15-12-9)."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/dobogai/",
     "wodName": "Dobogai",
     "description": "7 Rounds For Time\n8 Muscle-Ups\n22 Yard Farmer Carry (50/40 lb dumbells)",
@@ -5531,6 +5717,37 @@
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "A quick sprint couplet combining Assault Bike and Rower calories in the 21-15-9 format. Tests cardiovascular power."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/double-rep-light-dt/",
+    "wodName": "Double-Rep Light DT",
+    "description": "5 Rounds for Time\n24 Deadlifts (95/65 lb)\n18 Hang Power Cleans (95/65 lb)\n12 Push Jerks (95/65 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 780
+        },
+        "intermediate": {
+          "min": 781,
+          "max": 960
+        },
+        "beginner": {
+          "min": 961,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Five rounds of the 'DT' complex but with double the reps and lighter weight. Tests barbell cycling endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/dragon/",
@@ -6418,6 +6635,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Ladder). Ascending reps of heavy DB clusters (65lb) paired with shuttle sprints. Tests power endurance and conditioning.",
     "count_likes": 66
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/feeling-chipper/",
+    "wodName": "Feeling Chipper",
+    "description": "For Time\n20 Weighted Lunges (185/125 lb)\n20 Muscle-Ups\n200 foot Handstand Walk\n20 Hang Power Cleans (185/125 lb)\n20 Box Jumps (36/30 in)\n20 Deficit Handstand Push-Ups (6/4 in)\n20 Front Squats (185/125 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1620
+        },
+        "intermediate": {
+          "min": 1621,
+          "max": 2100
+        },
+        "beginner": {
+          "min": 2101,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A chipper workout with 20 reps each of heavy lunges, MU, HSW, heavy HPC, high box jumps, deficit HSPU, and heavy front squats. Tests high skill and strength."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ff-alex-graham/",
@@ -7496,6 +7744,37 @@
     "count_likes": 1019
   },
   {
+    "wodUrl": "https://wodwell.com/wod/graciebel/",
+    "wodName": "Graciebel",
+    "description": "For Time\n15 Clean-and-Jerks (155/105 lb)\n15 Snatches (155/105 lb)\n10 Clean-and-Jerks (155/105 lb)\n10 Snatches (155/105 lb)\n5 Clean-and-Jerks (155/105 lb)\n5 Snatches (155/105 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 780
+        },
+        "beginner": {
+          "min": 781,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Combines 'Grace' and 'Isabel' with descending reps (15-10-5) using a heavy weight (155/105 lb). Tests heavy Olympic lifting capacity."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/granite-mile/",
     "wodName": "Granite Mile",
     "description": "4 Rounds for Time\n10 Tire Flips\n100 meter Farmer's Carry (2x25 lb)\n10 Push-Ups\n100 meter Farmer's Carry (2x25 lb)\n10 Air Squats\n100 meter Farmer's Carry (2x25 lb)\n20 Sledge Tire Hits\n100 meter Farmer's Carry (2x25 lb)",
@@ -7581,6 +7860,37 @@
     "difficulty": "Easy",
     "difficulty_explanation": "Hero WOD. Running only (forward and backward). Tests cardio.",
     "count_likes": 114
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/grog-bowl/",
+    "wodName": "Grog Bowl",
+    "description": "For Time\nBuy-In: 1200 meter Row\n\nThen wear a Weight Vest (20/14 lb) and complete:\n400 meter Single Plate-Pinch Carry (45/25 lb) \n20 Air Squat (every rest)\n\nThen remove the Weight Vest and complete 10-9-8-7-6-5-4-3-2-1 reps of:\nSingle Kettlebell Deadlifts (70/53 lb)\n50 meter Farmer's Carry (70/53 lb)\nLateral Box Step-Ups (24/20 in each side)\n\nThen wear a Weight Vest (20/14 lb) and complete:\n400 meter Single Plate-Pinch Carry (45/25 lb) \n20 Air Squat (every rest)\n\nCash-Out (no Weight Vest): 1200 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2700
+        },
+        "advanced": {
+          "min": 2701,
+          "max": 3600
+        },
+        "intermediate": {
+          "min": 3601,
+          "max": 4500
+        },
+        "beginner": {
+          "min": 4501,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A long, complex workout involving rowing buy-in/out, weighted carries with penalties, and a descending rep chipper with KB deadlifts, farmer's carries, and step-ups."
   },
   {
     "wodUrl": "https://wodwell.com/wod/gunny/",
@@ -7680,6 +7990,37 @@
     "count_likes": 163
   },
   {
+    "wodUrl": "https://wodwell.com/wod/gymnasty-annie/",
+    "wodName": "Gymnasty Annie",
+    "description": "For Time\n50 Double-Unders\n50 Sit-Ups\n5 Presses to Handstand\n\n40 Double-Unders\n40 Sit-Ups\n4 Presses to Handstand\n\n30 Double-Unders\n30 Sit-Ups\n3 Presses to Handstand\n\n20 Double-Unders\n20 Sit-Ups\n2 Presses to Handstand\n\n10 Double-Unders\n10 Sit-Ups\n1 Press to Handstand",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 660
+        },
+        "intermediate": {
+          "min": 661,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A variation of 'Annie' adding the high-skill 'Press to Handstand' in descending reps alongside double-unders and sit-ups."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/half-chelsea/",
     "wodName": "Half Chelsea",
     "description": "EMOM for 15 minutes\n10 Pull-Ups\n15 Push-Ups\n20 Air Squats\n\nIf you fall behind the clock keep going for 15 minutes and see how many rounds you can complete.",
@@ -7709,6 +8050,37 @@
     "tags": ["EMOM"],
     "difficulty": "Medium",
     "difficulty_explanation": "Perform a round of 10 Pull-ups, 15 Push-ups, 20 Squats every minute for 15 minutes. Tests consistency and bodyweight endurance."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/130724/",
+    "wodName": "Half Marathon Row",
+    "description": "For Time:\n21097 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 4800
+        },
+        "advanced": {
+          "min": 4801,
+          "max": 5400
+        },
+        "intermediate": {
+          "min": 5401,
+          "max": 6000
+        },
+        "beginner": {
+          "min": 6001,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A standard benchmark test of rowing endurance over the half marathon distance (21,097 meters)."
   },
   {
     "wodUrl": "https://wodwell.com/wod/hall/",
@@ -8552,6 +8924,37 @@
     "count_likes": 86
   },
   {
+    "wodUrl": "https://wodwell.com/wod/icarus/",
+    "wodName": "Icarus",
+    "description": "For Time\n100 Double-Unders\n30 Toes-to-Bars\n100 Double-Unders\n40 Pull-Ups\n100 Double-Unders\n50 Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 780
+        },
+        "intermediate": {
+          "min": 781,
+          "max": 960
+        },
+        "beginner": {
+          "min": 961,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A chipper workout combining high-rep double-unders with TTB, pull-ups, and burpees."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/ides-of-march/",
     "wodName": "Ides of March",
     "description": "EMOM for 23 minutes\nPart A: 10 Bench Presses (185/95 lb)\nPart B: 10 Front Squats (185/95 lb)\nPart C: 10 Pull-Ups\nPart D: 10 calorie Assault Air Bike\nRest 1 minute after finishing each part.",
@@ -8750,6 +9153,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Couplet). 10 rounds: heavy snatches (135lb), burpees over bar. Tests power/conditioning sprint.",
     "count_likes": 157
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/inman-mile/",
+    "wodName": "Inman Mile",
+    "description": "For Time\n1 mile Weighted Walk (150% bodyweight)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1800
+        },
+        "intermediate": {
+          "min": 1801,
+          "max": 2400
+        },
+        "beginner": {
+          "min": 2401,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A test of strength and endurance involving walking 1 mile carrying 150% of bodyweight."
   },
   {
     "wodUrl": "https://wodwell.com/wod/invisible-fran/",
@@ -18651,6 +19085,37 @@
     "count_likes": 22
   },
   {
+    "wodUrl": "https://wodwell.com/wod/split-chipper/",
+    "wodName": "Split Chipper",
+    "description": "For Time\n21 Weighted Pistols (65/45 lb dumbbell)\n15 Clean-and-Jerks (185/135 lb)\n9 Muscle-Ups\n\n15 minutes Rest\n\nThen For Time:\n21 Parallette Handstand Push-Ups\n15 Snatches (165/115 lb)\n9 Muscle-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Two separate 'For Time' chippers involving high skill and heavy weights, separated by a long rest. Tests capacity across two distinct efforts."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/sqt/",
     "wodName": "SQT",
     "description": "3 Rounds for Time\n10 Ground-to-Overheads (95/65 lb)\n200 yard Shuttle Sprint (50 yards there and back twice)",
@@ -19257,6 +19722,37 @@
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). 3 miles run total, high-vol push-ups, bear crawls. Extreme endurance/pushing stamina test.",
     "count_likes": 162
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/test-3/",
+    "wodName": "Test 3",
+    "description": "For Reps in 8 minutes\nTabata Air Squats\n\nRest 10 seconds then:\nMax Muscle Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 30,
+          "max": null
+        },
+        "advanced": {
+          "min": 20,
+          "max": 29
+        },
+        "intermediate": {
+          "min": 10,
+          "max": 19
+        },
+        "beginner": {
+          "min": 1,
+          "max": 9
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["Tabata", "AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Perform Tabata air squats (score lowest round), then immediately perform max muscle-ups. Tests squat endurance and max gymnastics capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/thanksgiving-throwdown/",
@@ -19913,28 +20409,27 @@
       "levels": {
         "elite": {
           "min": null,
-          "max": 420
+          "max": 480
         },
         "advanced": {
-          "min": 421,
-          "max": 600
+          "min": 481,
+          "max": 660
         },
         "intermediate": {
-          "min": 601,
-          "max": 780
+          "min": 661,
+          "max": 840
         },
         "beginner": {
-          "min": 781,
+          "min": 841,
           "max": null
         }
       }
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["For Time"],
+    "tags": ["For Time", "Couplet", "Ladder"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A symmetrical ascending and descending ladder of deadlifts and box jumps. Tests power endurance and pacing.",
-    "count_likes": 345
+    "difficulty_explanation": "A pyramid rep scheme couplet combining moderate deadlifts with box jumps."
   },
   {
     "wodName": "The Seven",
@@ -20097,6 +20592,68 @@
     "tags": ["AMRAP"],
     "difficulty": "Hard",
     "difficulty_explanation": "A twist on 'Diane' focusing on max reps within decreasing time intervals for deadlifts and HSPU. Tests power endurance."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/time-priority-linda/",
+    "wodName": "Time Priority Linda",
+    "description": "AMRAP in 25 minutes\n5 Deadlifts (315/225 lb)\n5 Bench Presses (205/135 lb)\n5 Hang Squat Cleans (155/105 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 10,
+          "max": null
+        },
+        "advanced": {
+          "min": 7,
+          "max": 9
+        },
+        "intermediate": {
+          "min": 4,
+          "max": 6
+        },
+        "beginner": {
+          "min": 1,
+          "max": 3
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A 25-minute AMRAP performing rounds of 5 reps each of heavy deadlifts, bench presses, and hang squat cleans. Tests strength endurance."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/time-priority-fran/",
+    "wodName": "Time-Priority Fran",
+    "description": "For Total Reps\n60 second Thrusters (95/65 lb)\n60 second Pull-Ups\n45 second Thrusters (95/65 lb)\n45 second Pull-Ups\n30 second Thrusters (95/65 lb)\n30 second Pull-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 100,
+          "max": null
+        },
+        "advanced": {
+          "min": 75,
+          "max": 99
+        },
+        "intermediate": {
+          "min": 50,
+          "max": 74
+        },
+        "beginner": {
+          "min": 1,
+          "max": 49
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A twist on 'Fran' focusing on max reps within decreasing time intervals for thrusters and pull-ups. Tests power endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/timmins/",

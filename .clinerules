@@ -10,6 +10,7 @@ IMPORTANT: Do not add comments of your changes in jsx/tsx
 - Read as many files as you need as long as they're not very large (do not ask me if you can read and which file)
 - Never read large json files directly; always use `jq` so as not to load them in memory
 - Try to avoid making lots of small requests to the server; attempt to reasonably batch them
+- Do not EVER guess info about WODs, always ask for real data if unsure
 
 ## Code Style & Patterns
 

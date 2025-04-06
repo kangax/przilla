@@ -28,7 +28,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A grueling 400m front rack lunge with push press penalties every 10 lunges. Tests leg endurance, core stability, and mental toughness."
+    "difficulty_explanation": "A grueling 400m front rack lunge with push press penalties every 10 lunges. Tests leg endurance, core stability, and mental toughness.",
+    "count_likes": 22
   },
   {
     "wodUrl": "https://wodwell.com/wod/10x10/",
@@ -59,7 +60,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Ten rounds combining bike calories, light squat snatches, push-ups, and Russian twists. Tests consistency and work capacity across varied movements."
+    "difficulty_explanation": "Ten rounds combining bike calories, light squat snatches, push-ups, and Russian twists. Tests consistency and work capacity across varied movements.",
+    "count_likes": 49
   },
   {
     "wodUrl": "https://wodwell.com/wod/140224/",
@@ -90,7 +92,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A standard benchmark test of 10,000 meter rowing endurance."
+    "difficulty_explanation": "A standard benchmark test of 10,000 meter rowing endurance.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/10k-run/",
@@ -121,7 +124,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A standard benchmark test of 10 kilometer running endurance."
+    "difficulty_explanation": "A standard benchmark test of 10 kilometer running endurance.",
+    "count_likes": 0
   },
   {
     "wodUrl": "https://wodwell.com/wod/18-0/",
@@ -184,7 +188,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Easy",
-    "difficulty_explanation": "A standard benchmark test of 1000 meter rowing speed."
+    "difficulty_explanation": "A standard benchmark test of 1000 meter rowing speed.",
+    "count_likes": 5
   },
   {
     "wodUrl": "https://wodwell.com/wod/1lt-derek-hines/",
@@ -259,7 +264,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A standard benchmark test of 2000 meter rowing speed."
+    "difficulty_explanation": "A standard benchmark test of 2000 meter rowing speed.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/30-caliber/",
@@ -290,7 +296,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A long chipper workout with 30 reps across 10 different movements plus bike buy-in/cash-out. Uses mostly lighter weights or scaled movements, testing broad work capacity and pacing."
+    "difficulty_explanation": "A long chipper workout with 30 reps across 10 different movements plus bike buy-in/cash-out. Uses mostly lighter weights or scaled movements, testing broad work capacity and pacing.",
+    "count_likes": 60
   },
   {
     "wodUrl": "https://wodwell.com/wod/30-muscle-ups/",
@@ -386,7 +393,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A standard benchmark test of 5000 meter rowing endurance."
+    "difficulty_explanation": "A standard benchmark test of 5000 meter rowing endurance.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/5k-run/",
@@ -417,7 +425,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A standard benchmark test of 5 kilometer running endurance."
+    "difficulty_explanation": "A standard benchmark test of 5 kilometer running endurance.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/6-pack/",
@@ -523,7 +532,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 22-minute AMRAP chipper with ascending reps across power cleans, TTB, bike, wall balls, and double-unders. Tests endurance and capacity across multiple movements."
+    "difficulty_explanation": "A 22-minute AMRAP chipper with ascending reps across power cleans, TTB, bike, wall balls, and double-unders. Tests endurance and capacity across multiple movements.",
+    "count_likes": 10
   },
   {
     "wodUrl": "https://wodwell.com/wod/adam/",
@@ -897,7 +907,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A triplet combining a long row, moderate thrusters, and high-skill bar muscle-ups. Tests rowing endurance, strength endurance, and gymnastics capacity."
+    "difficulty_explanation": "A triplet combining a long row, moderate thrusters, and high-skill bar muscle-ups. Tests rowing endurance, strength endurance, and gymnastics capacity.",
+    "count_likes": 12
   },
   {
     "wodUrl": "https://wodwell.com/wod/angus/",
@@ -928,7 +939,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds combining heavy thrusters, pull-ups, and burpees. Tests strength endurance and work capacity."
+    "difficulty_explanation": "Three rounds combining heavy thrusters, pull-ups, and burpees. Tests strength endurance and work capacity.",
+    "count_likes": 68
   },
   {
     "wodUrl": "https://wodwell.com/wod/annie/",
@@ -1034,7 +1046,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Complete 75 HSPU for time, with a burpee penalty for every break. Tests HSPU capacity and strategy."
+    "difficulty_explanation": "Complete 75 HSPU for time, with a burpee penalty for every break. Tests HSPU capacity and strategy.",
+    "count_likes": 20
   },
   {
     "wodUrl": "https://wodwell.com/wod/ant-man/",
@@ -1065,7 +1078,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A three-part workout with rest, involving rounds of TTB/WB/Devil Press, a long row, and then a large final set of TTB/WB/Devil Press."
+    "difficulty_explanation": "A three-part workout with rest, involving rounds of TTB/WB/Devil Press, a long row, and then a large final set of TTB/WB/Devil Press.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/ariel/",
@@ -1182,7 +1196,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds combining various heavy barbell pressing/pulling movements with Assault Bike calories. Tests strength endurance and power."
+    "difficulty_explanation": "Five rounds combining various heavy barbell pressing/pulling movements with Assault Bike calories. Tests strength endurance and power.",
+    "count_likes": 43
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-5050/",
@@ -1213,7 +1228,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds combining high-rep back squats with high-calorie standing Assault Bike efforts. Tests leg endurance and cardiovascular capacity."
+    "difficulty_explanation": "Three rounds combining high-rep back squats with high-calorie standing Assault Bike efforts. Tests leg endurance and cardiovascular capacity.",
+    "count_likes": 65
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-baseline/",
@@ -1276,7 +1292,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 24-minute AMRAP combining moderate-heavy barbell work, box jumps, and bike calories. Tests strength endurance and pacing."
+    "difficulty_explanation": "A 24-minute AMRAP combining moderate-heavy barbell work, box jumps, and bike calories. Tests strength endurance and pacing.",
+    "count_likes": 25
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-breakdown/",
@@ -1307,7 +1324,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 21-minute AMRAP combining moderate-heavy barbell work, bodyweight exercises, and Assault Bike calories."
+    "difficulty_explanation": "A 21-minute AMRAP combining moderate-heavy barbell work, bodyweight exercises, and Assault Bike calories.",
+    "count_likes": 34
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-bulldozer/",
@@ -1338,7 +1356,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP combining bike calories, wall balls, SDLHP, and push-ups. Tests work capacity and endurance."
+    "difficulty_explanation": "A 20-minute AMRAP combining bike calories, wall balls, SDLHP, and push-ups. Tests work capacity and endurance.",
+    "count_likes": 27
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-burnout/",
@@ -1369,7 +1388,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Ten rounds involving heavy kettlebell movements, burpee box jumps, and Assault Bike calories. Tests endurance and strength with challenging implements."
+    "difficulty_explanation": "Ten rounds involving heavy kettlebell movements, burpee box jumps, and Assault Bike calories. Tests endurance and strength with challenging implements.",
+    "count_likes": 53
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-downhill/",
@@ -1400,7 +1420,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long 30-minute AMRAP featuring bike calories, plate GTOH, KTE, moderate bench press, and pull-ups. Tests sustained work capacity."
+    "difficulty_explanation": "A long 30-minute AMRAP featuring bike calories, plate GTOH, KTE, moderate bench press, and pull-ups. Tests sustained work capacity.",
+    "count_likes": 29
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-finisher/",
@@ -1463,7 +1484,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A challenging chipper starting with standing bike calories, followed by cleans, GHDs, HSPU, C2B, and burpees."
+    "difficulty_explanation": "A challenging chipper starting with standing bike calories, followed by cleans, GHDs, HSPU, C2B, and burpees.",
+    "count_likes": 17
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-flex/",
@@ -1494,7 +1516,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds combining heavy barbell movements (SDLHP, Curls, Ground Press) with bike calories and sit-ups. Tests strength endurance."
+    "difficulty_explanation": "Five rounds combining heavy barbell movements (SDLHP, Curls, Ground Press) with bike calories and sit-ups. Tests strength endurance.",
+    "count_likes": 25
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-gladiator/",
@@ -1525,7 +1548,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds of a descending rep chipper featuring bike calories, lunges, box jumps, push-ups, and progressively heavier barbell movements (SDLHP, FS, Snatch)."
+    "difficulty_explanation": "Three rounds of a descending rep chipper featuring bike calories, lunges, box jumps, push-ups, and progressively heavier barbell movements (SDLHP, FS, Snatch).",
+    "count_likes": 37
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-insanity/",
@@ -1588,7 +1612,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long 30-minute AMRAP combining moderate-heavy barbell lifts (FS, BP), pull-ups, GHD extensions, and bike calories. Tests strength endurance and sustained effort."
+    "difficulty_explanation": "A long 30-minute AMRAP combining moderate-heavy barbell lifts (FS, BP), pull-ups, GHD extensions, and bike calories. Tests strength endurance and sustained effort.",
+    "count_likes": 30
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-lift-pyramid/",
@@ -1651,7 +1676,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP combining various medicine ball movements with pull-ups and Assault Bike calories. Tests conditioning and core strength."
+    "difficulty_explanation": "A 20-minute AMRAP combining various medicine ball movements with pull-ups and Assault Bike calories. Tests conditioning and core strength.",
+    "count_likes": 39
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-man-eater/",
@@ -1714,7 +1740,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining Man Makers, pull-ups, bike calories, lunges, and sit-ups."
+    "difficulty_explanation": "Five rounds combining Man Makers, pull-ups, bike calories, lunges, and sit-ups.",
+    "count_likes": 67
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-odyssey/",
@@ -1745,7 +1772,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Four rounds combining plate GTOH, TTB, high box jumps, and bike calories. Tests conditioning and gymnastics."
+    "difficulty_explanation": "Four rounds combining plate GTOH, TTB, high box jumps, and bike calories. Tests conditioning and gymnastics.",
+    "count_likes": 29
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-on-linda/",
@@ -1776,7 +1804,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A descending rep chipper combining Assault Bike calories with bodyweight-scaled deadlifts, bench presses, and power cleans. Tests strength across multiple lifts and endurance."
+    "difficulty_explanation": "A descending rep chipper combining Assault Bike calories with bodyweight-scaled deadlifts, bench presses, and power cleans. Tests strength across multiple lifts and endurance.",
+    "count_likes": 47
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-overhead-complex/",
@@ -1807,7 +1836,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP combining light overhead barbell work, burpees, and bike calories. Tests shoulder stability and conditioning."
+    "difficulty_explanation": "A 20-minute AMRAP combining light overhead barbell work, burpees, and bike calories. Tests shoulder stability and conditioning.",
+    "count_likes": 35
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-pyramid/",
@@ -1838,7 +1868,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper", "Ladder"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A pyramid rep scheme chipper involving clean-and-jerks, burpees, KTE, and bike calories. Tests endurance and pacing across multiple domains."
+    "difficulty_explanation": "A pyramid rep scheme chipper involving clean-and-jerks, burpees, KTE, and bike calories. Tests endurance and pacing across multiple domains.",
+    "count_likes": 48
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-quest/",
@@ -1869,7 +1900,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds of a chipper-style round including HSPU, box jumps, SDLHP, bike, sit-ups, and single-unders. Tests broad fitness."
+    "difficulty_explanation": "Five rounds of a chipper-style round including HSPU, box jumps, SDLHP, bike, sit-ups, and single-unders. Tests broad fitness.",
+    "count_likes": 30
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-rapid-fire/",
@@ -1900,7 +1932,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining various dumbbell movements with Assault Bike calories. Tests strength, stability, and conditioning."
+    "difficulty_explanation": "Five rounds combining various dumbbell movements with Assault Bike calories. Tests strength, stability, and conditioning.",
+    "count_likes": 65
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-reduction/",
@@ -1963,7 +1996,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 21-minute AMRAP combining HSPU, heavy dumbbell movements (rows, snatches, lunges), TTB, and bike calories."
+    "difficulty_explanation": "A 21-minute AMRAP combining HSPU, heavy dumbbell movements (rows, snatches, lunges), TTB, and bike calories.",
+    "count_likes": 23
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-road-block/",
@@ -1994,7 +2028,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 21-minute AMRAP combining moderate-heavy thrusters with bodyweight movements and Assault Bike calories. Tests sustained work capacity."
+    "difficulty_explanation": "A 21-minute AMRAP combining moderate-heavy thrusters with bodyweight movements and Assault Bike calories. Tests sustained work capacity.",
+    "count_likes": 47
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-uptempo/",
@@ -2025,7 +2060,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining SDLHP, high-calorie bike efforts, sit-ups, and single-unders. Tests cardiovascular endurance and work capacity."
+    "difficulty_explanation": "Five rounds combining SDLHP, high-calorie bike efforts, sit-ups, and single-unders. Tests cardiovascular endurance and work capacity.",
+    "count_likes": 44
   },
   {
     "wodUrl": "https://wodwell.com/wod/assault-con/",
@@ -2056,7 +2092,8 @@
     "category": "Benchmark",
     "tags": ["EMOM"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 40-minute EMOM where a block of rowing, running, biking, and bodyweight movements must be completed within each 10-minute window for 4 rounds. Tests endurance and pacing under constraints."
+    "difficulty_explanation": "A 40-minute EMOM where a block of rowing, running, biking, and bodyweight movements must be completed within each 10-minute window for 4 rounds. Tests endurance and pacing under constraints.",
+    "count_likes": 62
   },
   {
     "wodUrl": "https://wodwell.com/wod/baby-got-back-squat/",
@@ -2087,7 +2124,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long 30-minute AMRAP combining HSPU, box jumps, heavy back squats, sit-ups, and Assault Bike calories. Tests sustained work capacity across multiple domains."
+    "difficulty_explanation": "A long 30-minute AMRAP combining HSPU, box jumps, heavy back squats, sit-ups, and Assault Bike calories. Tests sustained work capacity across multiple domains.",
+    "count_likes": 58
   },
   {
     "wodUrl": "https://wodwell.com/wod/bad-karma/",
@@ -2214,7 +2252,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A descending rep scheme workout focused on heavy overhead pressing variations. Tests shoulder strength and endurance."
+    "difficulty_explanation": "A descending rep scheme workout focused on heavy overhead pressing variations. Tests shoulder strength and endurance.",
+    "count_likes": 74
   },
   {
     "wodUrl": "https://wodwell.com/wod/barbara/",
@@ -2331,7 +2370,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP combining various barbell movements with push-ups and Assault Bike calories."
+    "difficulty_explanation": "A 20-minute AMRAP combining various barbell movements with push-ups and Assault Bike calories.",
+    "count_likes": 68
   },
   {
     "wodUrl": "https://wodwell.com/wod/barraza/",
@@ -2448,7 +2488,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 24-minute AMRAP with 24 reps each of bike calories, thrusters, burpees, and KTE. Tests endurance and pacing."
+    "difficulty_explanation": "A 24-minute AMRAP with 24 reps each of bike calories, thrusters, burpees, and KTE. Tests endurance and pacing.",
+    "count_likes": 30
   },
   {
     "wodUrl": "https://wodwell.com/wod/baz/",
@@ -2608,7 +2649,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long 25-minute AMRAP featuring Bear Complexes, burpees, TTB, push-ups, and bike calories. Tests strength endurance and work capacity."
+    "difficulty_explanation": "A long 25-minute AMRAP featuring Bear Complexes, burpees, TTB, push-ups, and bike calories. Tests strength endurance and work capacity.",
+    "count_likes": 35
   },
   {
     "wodUrl": "https://wodwell.com/wod/beast-mode-24/",
@@ -2703,7 +2745,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long chipper involving rowing, running, and high-volume gymnastics (dips, pull-ups) and ball slams. Tests endurance and stamina."
+    "difficulty_explanation": "A long chipper involving rowing, running, and high-volume gymnastics (dips, pull-ups) and ball slams. Tests endurance and stamina.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/bert/",
@@ -2798,7 +2841,8 @@
     "category": "Benchmark",
     "tags": ["Tabata"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Four Tabata intervals rotating through wall balls, TTB, rowing, and heavy power cleans. Tests capacity across varied movements under high intensity."
+    "difficulty_explanation": "Four Tabata intervals rotating through wall balls, TTB, rowing, and heavy power cleans. Tests capacity across varied movements under high intensity.",
+    "count_likes": 48
   },
   {
     "wodUrl": "https://wodwell.com/wod/big-sexy/",
@@ -2861,7 +2905,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A quick couplet combining bike calories with challenging ring push-ups. Tests cardiovascular output and pushing strength/stability."
+    "difficulty_explanation": "A quick couplet combining bike calories with challenging ring push-ups. Tests cardiovascular output and pushing strength/stability.",
+    "count_likes": 8
   },
   {
     "wodUrl": "https://wodwell.com/wod/birchall/",
@@ -3191,7 +3236,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds involving six different movements including barbell work, high-skill gymnastics, and weighted back extensions. Tests broad fitness."
+    "difficulty_explanation": "Three rounds involving six different movements including barbell work, high-skill gymnastics, and weighted back extensions. Tests broad fitness.",
+    "count_likes": 29
   },
   {
     "wodUrl": "https://wodwell.com/wod/brehm/",
@@ -3352,7 +3398,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "An ultra-endurance chipper involving high-volume bodyweight movements (some weighted), biking, running, and double-unders. Tests stamina and mental fortitude over a long duration."
+    "difficulty_explanation": "An ultra-endurance chipper involving high-volume bodyweight movements (some weighted), biking, running, and double-unders. Tests stamina and mental fortitude over a long duration.",
+    "count_likes": 57
   },
   {
     "wodUrl": "https://wodwell.com/wod/broomstick-mile/",
@@ -3447,7 +3494,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper", "Ladder"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A symmetrical ladder chipper with bodyweight-scaled barbell movements and ring dips, split by a run. Tests strength endurance, gymnastics, and pacing."
+    "difficulty_explanation": "A symmetrical ladder chipper with bodyweight-scaled barbell movements and ring dips, split by a run. Tests strength endurance, gymnastics, and pacing.",
+    "count_likes": 53
   },
   {
     "wodUrl": "https://wodwell.com/wod/bsu/",
@@ -3478,7 +3526,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Three rounds combining heavy thrusters, high-volume muscle-ups, and heavy power snatches. A significant test of strength, skill, and capacity."
+    "difficulty_explanation": "Three rounds combining heavy thrusters, high-volume muscle-ups, and heavy power snatches. A significant test of strength, skill, and capacity.",
+    "count_likes": 23
   },
   {
     "wodUrl": "https://wodwell.com/wod/bulger/",
@@ -3637,7 +3686,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A high-volume chipper requiring 100 reps/calories across 8 different movements. Tests endurance and mental fortitude."
+    "difficulty_explanation": "A high-volume chipper requiring 100 reps/calories across 8 different movements. Tests endurance and mental fortitude.",
+    "count_likes": 39
   },
   {
     "wodUrl": "https://wodwell.com/wod/cajun/",
@@ -4492,7 +4542,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A 'Fran' variation with descending reps but incorporating a challenging pull-up complex (BMU, C2B, Pull-up) in each round."
+    "difficulty_explanation": "A 'Fran' variation with descending reps but incorporating a challenging pull-up complex (BMU, C2B, Pull-up) in each round.",
+    "count_likes": 24
   },
   {
     "wodUrl": "https://wodwell.com/wod/cookie/",
@@ -4619,7 +4670,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A descending rep chipper with heavy barbell lifts (DL, PC, BP), pull-ups, and bike calories. Tests strength across multiple lifts and endurance."
+    "difficulty_explanation": "A descending rep chipper with heavy barbell lifts (DL, PC, BP), pull-ups, and bike calories. Tests strength across multiple lifts and endurance.",
+    "count_likes": 52
   },
   {
     "wodUrl": "https://wodwell.com/wod/crossfit-total/",
@@ -4834,7 +4886,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Four rounds combining high-rep overhead squats with 400m runs. Tests shoulder stability, leg endurance, and running capacity."
+    "difficulty_explanation": "Four rounds combining high-rep overhead squats with 400m runs. Tests shoulder stability, leg endurance, and running capacity.",
+    "count_likes": 45
   },
   {
     "wodUrl": "https://wodwell.com/wod/danger-zone/",
@@ -4865,7 +4918,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 20-minute AMRAP combining Assault Bike calories, heavy front squats, and complex dumbbell Man Makers. Tests strength endurance, conditioning, and pacing."
+    "difficulty_explanation": "A 20-minute AMRAP combining Assault Bike calories, heavy front squats, and complex dumbbell Man Makers. Tests strength endurance, conditioning, and pacing.",
+    "count_likes": 62
   },
   {
     "wodUrl": "https://wodwell.com/wod/daniel/",
@@ -4982,7 +5036,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds combining light snatches, pull-ups, and light thrusters. Tests work capacity and endurance across multiple movements."
+    "difficulty_explanation": "Five rounds combining light snatches, pull-ups, and light thrusters. Tests work capacity and endurance across multiple movements.",
+    "count_likes": 42
   },
   {
     "wodUrl": "https://wodwell.com/wod/davo/",
@@ -5035,7 +5090,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP triplet combining Assault Bike calories, thrusters, and high box jumps."
+    "difficulty_explanation": "A 20-minute AMRAP triplet combining Assault Bike calories, thrusters, and high box jumps.",
+    "count_likes": 70
   },
   {
     "wodUrl": "https://wodwell.com/wod/death-by-assault/",
@@ -5481,7 +5537,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A triplet combining deadlifts, handstand walks, and HSPU with an unusual rep scheme (15-12-9)."
+    "difficulty_explanation": "A triplet combining deadlifts, handstand walks, and HSPU with an unusual rep scheme (15-12-9).",
+    "count_likes": 5
   },
   {
     "wodUrl": "https://wodwell.com/wod/dobogai/",
@@ -5544,7 +5601,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three separate 4-minute AMRAPs with rest, featuring rowing, power cleans (descending weight), and burpee box jump-overs. Tests power output and recovery."
+    "difficulty_explanation": "Three separate 4-minute AMRAPs with rest, featuring rowing, power cleans (descending weight), and burpee box jump-overs. Tests power output and recovery.",
+    "count_likes": 40
   },
   {
     "wodUrl": "https://wodwell.com/wod/dock-ock/",
@@ -5575,7 +5633,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Five 2-minute intervals with 2 min rest. Each interval: 20 TTB then max C&J with increasing weight. Tests gymnastics and heavy lifting under fatigue."
+    "difficulty_explanation": "Five 2-minute intervals with 2 min rest. Each interval: 20 TTB then max C&J with increasing weight. Tests gymnastics and heavy lifting under fatigue.",
+    "count_likes": 1
   },
   {
     "wodUrl": "https://wodwell.com/wod/donald-l-wheeler-jr-dj/",
@@ -5809,7 +5868,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A quick sprint couplet combining Assault Bike and Rower calories in the 21-15-9 format. Tests cardiovascular power."
+    "difficulty_explanation": "A quick sprint couplet combining Assault Bike and Rower calories in the 21-15-9 format. Tests cardiovascular power.",
+    "count_likes": 143
   },
   {
     "wodUrl": "https://wodwell.com/wod/double-rep-light-dt/",
@@ -5840,7 +5900,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds of the 'DT' complex but with double the reps and lighter weight. Tests barbell cycling endurance."
+    "difficulty_explanation": "Five rounds of the 'DT' complex but with double the reps and lighter weight. Tests barbell cycling endurance.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/dragon/",
@@ -5893,7 +5954,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A symmetrical chipper workout with heavy barbell movements and gymnastics against a tight time cap."
+    "difficulty_explanation": "A symmetrical chipper workout with heavy barbell movements and gymnastics against a tight time cap.",
+    "count_likes": 75
   },
   {
     "wodUrl": "https://wodwell.com/wod/drk/",
@@ -5946,7 +6008,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A variation of 'Angie' replacing runs with swims and using strict pull-ups. Tests swimming endurance and high-volume bodyweight movements."
+    "difficulty_explanation": "A variation of 'Angie' replacing runs with swims and using strict pull-ups. Tests swimming endurance and high-volume bodyweight movements.",
+    "count_likes": 2
   },
   {
     "wodUrl": "https://wodwell.com/wod/dt/",
@@ -6040,7 +6103,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Two blocks of 5 rounds of Dumbbell 'DT', performed forward and then in reverse, separated by rest. Tests dumbbell cycling and endurance."
+    "difficulty_explanation": "Two blocks of 5 rounds of Dumbbell 'DT', performed forward and then in reverse, separated by rest. Tests dumbbell cycling and endurance.",
+    "count_likes": 12
   },
   {
     "wodUrl": "https://wodwell.com/wod/dueling-elizabeth/",
@@ -6071,7 +6135,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A challenging couplet combining heavy cleans with muscle-ups in the classic 21-15-9 format."
+    "difficulty_explanation": "A challenging couplet combining heavy cleans with muscle-ups in the classic 21-15-9 format.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/dumb-and-dumber/",
@@ -6102,7 +6167,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Thirty rounds of a light barbell complex (squat clean, hang squat clean, thruster). Tests technique consistency and work capacity over high volume."
+    "difficulty_explanation": "Thirty rounds of a light barbell complex (squat clean, hang squat clean, thruster). Tests technique consistency and work capacity over high volume.",
+    "count_likes": 47
   },
   {
     "wodUrl": "https://wodwell.com/wod/dumbbell-demons/",
@@ -6165,7 +6231,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds featuring complex Man Makers, toes-to-bars, dumbbell lunges, and Assault Bike calories. Tests strength, skill, and conditioning."
+    "difficulty_explanation": "Five rounds featuring complex Man Makers, toes-to-bars, dumbbell lunges, and Assault Bike calories. Tests strength, skill, and conditioning.",
+    "count_likes": 58
   },
   {
     "wodUrl": "https://wodwell.com/wod/dunn/",
@@ -6628,7 +6695,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "An extended version of 'Elizabeth' with more reps (21 down to 3) of power cleans and ring dips."
+    "difficulty_explanation": "An extended version of 'Elizabeth' with more reps (21 down to 3) of power cleans and ring dips.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/faas-fit/",
@@ -6735,7 +6803,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Combines heavy sets of squats, deadlifts, and presses with demanding prowler sprints. Tests raw strength and power endurance."
+    "difficulty_explanation": "Combines heavy sets of squats, deadlifts, and presses with demanding prowler sprints. Tests raw strength and power endurance.",
+    "count_likes": 41
   },
   {
     "wodUrl": "https://wodwell.com/wod/fatal-40/",
@@ -6820,7 +6889,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A chipper workout with 20 reps each of heavy lunges, MU, HSW, heavy HPC, high box jumps, deficit HSPU, and heavy front squats. Tests high skill and strength."
+    "difficulty_explanation": "A chipper workout with 20 reps each of heavy lunges, MU, HSW, heavy HPC, high box jumps, deficit HSPU, and heavy front squats. Tests high skill and strength.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/ff-alex-graham/",
@@ -6959,7 +7029,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Easy",
-    "difficulty_explanation": "A push-up endurance test following the cues of the song 'Flower' by Moby. Score is max successful reps (down/up cycles)."
+    "difficulty_explanation": "A push-up endurance test following the cues of the song 'Flower' by Moby. Score is max successful reps (down/up cycles).",
+    "count_likes": 64
   },
   {
     "wodUrl": "https://wodwell.com/wod/foo/",
@@ -7012,7 +7083,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three consecutive 4-minute intervals focusing on max reps/calories for C&J, Rowing, and Burpees. Tests power output across different modalities."
+    "difficulty_explanation": "Three consecutive 4-minute intervals focusing on max reps/calories for C&J, Rowing, and Burpees. Tests power output across different modalities.",
+    "count_likes": 25
   },
   {
     "wodUrl": "https://wodwell.com/wod/forrest/",
@@ -7192,7 +7264,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 21-15-9 workout adding Assault Bike calories, push-ups, and sit-ups to the classic Fran structure. Increases the endurance demand significantly."
+    "difficulty_explanation": "A 21-15-9 workout adding Assault Bike calories, push-ups, and sit-ups to the classic Fran structure. Increases the endurance demand significantly.",
+    "count_likes": 55
   },
   {
     "wodUrl": "https://wodwell.com/wod/franzilla/",
@@ -7223,7 +7296,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper", "Ladder"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A challenging variation of 'Fran' with ascending thruster weight and increasing pull-up difficulty (Pull-up, C2B, BMU)."
+    "difficulty_explanation": "A challenging variation of 'Fran' with ascending thruster weight and increasing pull-up difficulty (Pull-up, C2B, BMU).",
+    "count_likes": 37
   },
   {
     "wodUrl": "https://wodwell.com/wod/freak/",
@@ -7286,7 +7360,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Four 3-minute AMRAP intervals with rest. Each interval involves OHS (increasing weight) and burpees, followed by max calorie row. Score is total calories."
+    "difficulty_explanation": "Four 3-minute AMRAP intervals with rest. Each interval involves OHS (increasing weight) and burpees, followed by max calorie row. Score is total calories.",
+    "count_likes": 37
   },
   {
     "wodUrl": "https://wodwell.com/wod/freestyle-diane/",
@@ -7317,7 +7392,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Complete 45 reps each of deadlifts and HSPU, partitioning as needed. Tests strategy and endurance compared to standard Diane."
+    "difficulty_explanation": "Complete 45 reps each of deadlifts and HSPU, partitioning as needed. Tests strategy and endurance compared to standard Diane.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/freestyle-fran/",
@@ -7348,7 +7424,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Complete 45 reps each of thrusters and pull-ups, partitioning as needed. Tests strategy and endurance compared to the standard 21-15-9 Fran."
+    "difficulty_explanation": "Complete 45 reps each of thrusters and pull-ups, partitioning as needed. Tests strategy and endurance compared to the standard 21-15-9 Fran.",
+    "count_likes": 37
   },
   {
     "wodUrl": "https://wodwell.com/wod/frelen/",
@@ -7433,7 +7510,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A challenging chipper combining elements of Fran, Elizabeth, and Diane with decreasing reps but increasing weight/skill. Tests broad fitness."
+    "difficulty_explanation": "A challenging chipper combining elements of Fran, Elizabeth, and Diane with decreasing reps but increasing weight/skill. Tests broad fitness.",
+    "count_likes": 53
   },
   {
     "wodUrl": "https://wodwell.com/wod/furious-five/",
@@ -7464,7 +7542,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds combining heavy barbell work, burpee variations, and high-calorie bike sprints. Tests strength, power, and anaerobic capacity."
+    "difficulty_explanation": "Five rounds combining heavy barbell work, burpee variations, and high-calorie bike sprints. Tests strength, power, and anaerobic capacity.",
+    "count_likes": 54
   },
   {
     "wodUrl": "https://wodwell.com/wod/g-i-gran/",
@@ -7495,7 +7574,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A couplet combining moderate-heavy clean-and-jerks with demanding burpee pull-ups in the classic 21-15-9 format."
+    "difficulty_explanation": "A couplet combining moderate-heavy clean-and-jerks with demanding burpee pull-ups in the classic 21-15-9 format.",
+    "count_likes": 43
   },
   {
     "wodUrl": "https://wodwell.com/wod/g-i-jane/",
@@ -7958,7 +8038,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Combines 'Grace' and 'Isabel' with descending reps (15-10-5) using a heavy weight (155/105 lb). Tests heavy Olympic lifting capacity."
+    "difficulty_explanation": "Combines 'Grace' and 'Isabel' with descending reps (15-10-5) using a heavy weight (155/105 lb). Tests heavy Olympic lifting capacity.",
+    "count_likes": 5
   },
   {
     "wodUrl": "https://wodwell.com/wod/granite-mile/",
@@ -8076,7 +8157,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long, complex workout involving rowing buy-in/out, weighted carries with penalties, and a descending rep chipper with KB deadlifts, farmer's carries, and step-ups."
+    "difficulty_explanation": "A long, complex workout involving rowing buy-in/out, weighted carries with penalties, and a descending rep chipper with KB deadlifts, farmer's carries, and step-ups.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/gunny/",
@@ -8204,7 +8286,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A variation of 'Annie' adding the high-skill 'Press to Handstand' in descending reps alongside double-unders and sit-ups."
+    "difficulty_explanation": "A variation of 'Annie' adding the high-skill 'Press to Handstand' in descending reps alongside double-unders and sit-ups.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/half-chelsea/",
@@ -8235,7 +8318,8 @@
     "category": "Benchmark",
     "tags": ["EMOM"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Perform a round of 10 Pull-ups, 15 Push-ups, 20 Squats every minute for 15 minutes. Tests consistency and bodyweight endurance."
+    "difficulty_explanation": "Perform a round of 10 Pull-ups, 15 Push-ups, 20 Squats every minute for 15 minutes. Tests consistency and bodyweight endurance.",
+    "count_likes": 18
   },
   {
     "wodUrl": "https://wodwell.com/wod/130724/",
@@ -8266,7 +8350,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A standard benchmark test of rowing endurance over the half marathon distance (21,097 meters)."
+    "difficulty_explanation": "A standard benchmark test of rowing endurance over the half marathon distance (21,097 meters).",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/hall/",
@@ -8602,7 +8687,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds combining rowing, heavy deadlifts, and challenging ring dips. Tests endurance, strength, and gymnastics."
+    "difficulty_explanation": "Three rounds combining rowing, heavy deadlifts, and challenging ring dips. Tests endurance, strength, and gymnastics.",
+    "count_likes": 57
   },
   {
     "wodUrl": "https://wodwell.com/wod/heavy-fran/",
@@ -8665,7 +8751,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A variation of 'Helen' using heavier kettlebells and chest-to-bar pull-ups. Tests endurance with increased strength demands."
+    "difficulty_explanation": "A variation of 'Helen' using heavier kettlebells and chest-to-bar pull-ups. Tests endurance with increased strength demands.",
+    "count_likes": 0
   },
   {
     "wodUrl": "https://wodwell.com/wod/helen/",
@@ -8824,7 +8911,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long Assault Bike effort interrupted by high-rep bodyweight sets every 2 minutes. Tests cardiovascular endurance and muscular stamina."
+    "difficulty_explanation": "A long Assault Bike effort interrupted by high-rep bodyweight sets every 2 minutes. Tests cardiovascular endurance and muscular stamina.",
+    "count_likes": 72
   },
   {
     "wodUrl": "https://wodwell.com/wod/hildy/",
@@ -8986,7 +9074,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three rounds of 1-minute max effort intervals across five movements, separated by rest. Tests work capacity across varied domains. Score is total reps."
+    "difficulty_explanation": "Three rounds of 1-minute max effort intervals across five movements, separated by rest. Tests work capacity across varied domains. Score is total reps.",
+    "count_likes": 71
   },
   {
     "wodUrl": "https://wodwell.com/wod/hope-for-kenya/",
@@ -9049,7 +9138,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three rounds of 1-minute max effort intervals across five movements (shuttle, snatch, bike, step-up, burpee), separated by rest. Score is total reps."
+    "difficulty_explanation": "Three rounds of 1-minute max effort intervals across five movements (shuttle, snatch, bike, step-up, burpee), separated by rest. Score is total reps.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/hortman/",
@@ -9200,7 +9290,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A chipper workout combining high-rep double-unders with TTB, pull-ups, and burpees."
+    "difficulty_explanation": "A chipper workout combining high-rep double-unders with TTB, pull-ups, and burpees.",
+    "count_likes": 5
   },
   {
     "wodUrl": "https://wodwell.com/wod/ides-of-march/",
@@ -9231,7 +9322,8 @@
     "category": "Benchmark",
     "tags": ["EMOM"],
     "difficulty": "Hard",
-    "difficulty_explanation": "An EMOM structure rotating through heavy bench press, heavy front squats, pull-ups, and bike calories, with built-in rest. Tests strength and capacity across varied domains."
+    "difficulty_explanation": "An EMOM structure rotating through heavy bench press, heavy front squats, pull-ups, and bike calories, with built-in rest. Tests strength and capacity across varied domains.",
+    "count_likes": 66
   },
   {
     "wodUrl": "https://wodwell.com/wod/ignite/",
@@ -9262,7 +9354,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Complete a 21-15-9 triplet (Thrusters, Burpees, Sit-ups) for time, then use remaining time in 18 min window to find a max clean complex."
+    "difficulty_explanation": "Complete a 21-15-9 triplet (Thrusters, Burpees, Sit-ups) for time, then use remaining time in 18 min window to find a max clean complex.",
+    "count_likes": 7
   },
   {
     "wodUrl": "https://wodwell.com/wod/ignite-21/",
@@ -9293,7 +9386,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A chipper workout with burpee buy-in and row cash-out, featuring DUs, sit-ups, wall balls, lunges, and power cleans."
+    "difficulty_explanation": "A chipper workout with burpee buy-in and row cash-out, featuring DUs, sit-ups, wall balls, lunges, and power cleans.",
+    "count_likes": 7
   },
   {
     "wodUrl": "https://wodwell.com/wod/incredible-hulk/",
@@ -9431,7 +9525,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A test of strength and endurance involving walking 1 mile carrying 150% of bodyweight."
+    "difficulty_explanation": "A test of strength and endurance involving walking 1 mile carrying 150% of bodyweight.",
+    "count_likes": 5
   },
   {
     "wodUrl": "https://wodwell.com/wod/invisible-fran/",
@@ -9462,7 +9557,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Easy",
-    "difficulty_explanation": "A bodyweight-only version of 'Fran' using air squats and push-ups. Tests basic bodyweight movement speed."
+    "difficulty_explanation": "A bodyweight-only version of 'Fran' using air squats and push-ups. Tests basic bodyweight movement speed.",
+    "count_likes": 31
   },
   {
     "wodUrl": "https://wodwell.com/wod/isabel/",
@@ -9687,7 +9783,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 21-minute AMRAP triplet combining bike calories, Bear Complexes, and C2B pull-ups, all in sets of 7."
+    "difficulty_explanation": "A 21-minute AMRAP triplet combining bike calories, Bear Complexes, and C2B pull-ups, all in sets of 7.",
+    "count_likes": 21
   },
   {
     "wodUrl": "https://wodwell.com/wod/jag-28/",
@@ -9960,7 +10057,8 @@
     "category": "Benchmark",
     "tags": ["EMOM"],
     "difficulty": "Hard",
-    "difficulty_explanation": "An EMOM focused on squat snatch technique and strength, with increasing weight leading to a max attempt in the final minutes."
+    "difficulty_explanation": "An EMOM focused on squat snatch technique and strength, with increasing weight leading to a max attempt in the final minutes.",
+    "count_likes": 1
   },
   {
     "wodUrl": "https://wodwell.com/wod/johnson/",
@@ -10642,7 +10740,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining C2B pull-ups, light power snatches, bike calories, sit-ups, and single-unders. Tests work capacity across varied movements."
+    "difficulty_explanation": "Five rounds combining C2B pull-ups, light power snatches, bike calories, sit-ups, and single-unders. Tests work capacity across varied movements.",
+    "count_likes": 24
   },
   {
     "wodUrl": "https://wodwell.com/wod/klepto/",
@@ -10924,7 +11023,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A descending rep chipper similar to 'Linda' but scaled to bodyweight percentages for DL, BP, and Cleans. Tests strength endurance."
+    "difficulty_explanation": "A descending rep chipper similar to 'Linda' but scaled to bodyweight percentages for DL, BP, and Cleans. Tests strength endurance.",
+    "count_likes": 17
   },
   {
     "wodUrl": "https://wodwell.com/wod/linchpin-test-3/",
@@ -10955,7 +11055,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds combining wall balls, handstand push-ups, and heavy deadlifts. Tests strength and gymnastics capacity under fatigue."
+    "difficulty_explanation": "Three rounds combining wall balls, handstand push-ups, and heavy deadlifts. Tests strength and gymnastics capacity under fatigue.",
+    "count_likes": 54
   },
   {
     "wodUrl": "https://wodwell.com/wod/linda/",
@@ -11398,7 +11499,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long workout with bike buy-in/out, sandwiching 4 rounds of Bear Complexes, pull-ups, push-ups, and running. Tests endurance and strength endurance."
+    "difficulty_explanation": "A long workout with bike buy-in/out, sandwiching 4 rounds of Bear Complexes, pull-ups, push-ups, and running. Tests endurance and strength endurance.",
+    "count_likes": 23
   },
   {
     "wodUrl": "https://wodwell.com/wod/maggie/",
@@ -11426,10 +11528,11 @@
       }
     },
     "results": [],
-    "category": "Benchmark",
+    "category": "Girl",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Five rounds of high-volume, high-skill gymnastics movements (HSPU, Pull-ups, Pistols). Tests advanced gymnastics capacity and endurance."
+    "difficulty_explanation": "Five rounds of high-volume, high-skill gymnastics movements (HSPU, Pull-ups, Pistols). Tests advanced gymnastics capacity and endurance.",
+    "count_likes": 76
   },
   {
     "wodUrl": "https://wodwell.com/wod/magpie/",
@@ -11732,7 +11835,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Ladder"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "An extremely demanding 20-minute AMRAP with escalating rounds of high-skill gymnastics (HSPU, Pistols, Pull-Ups). Tests advanced gymnastics capacity and endurance under fatigue."
+    "difficulty_explanation": "An extremely demanding 20-minute AMRAP with escalating rounds of high-skill gymnastics (HSPU, Pistols, Pull-Ups). Tests advanced gymnastics capacity and endurance under fatigue.",
+    "count_likes": 61
   },
   {
     "wodUrl": "https://wodwell.com/wod/mashed-potatoes/",
@@ -11763,7 +11867,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds combining moderate barbell lifts, TTB, and double-unders with a significant burpee penalty for misses."
+    "difficulty_explanation": "Three rounds combining moderate barbell lifts, TTB, and double-unders with a significant burpee penalty for misses.",
+    "count_likes": 2
   },
   {
     "wodUrl": "https://wodwell.com/wod/matt/",
@@ -12272,7 +12377,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A shorter version of 'Murph', involving running and five rounds of 'Cindy' (Pull-ups, Push-ups, Squats). Tests basic bodyweight endurance."
+    "difficulty_explanation": "A shorter version of 'Murph', involving running and five rounds of 'Cindy' (Pull-ups, Push-ups, Squats). Tests basic bodyweight endurance.",
+    "count_likes": 52
   },
   {
     "wodUrl": "https://wodwell.com/wod/modified-cindy/",
@@ -12488,7 +12594,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds combining HSPU, moderate hang squat cleans, and rope climbs. Tests gymnastics skill and strength endurance."
+    "difficulty_explanation": "Three rounds combining HSPU, moderate hang squat cleans, and rope climbs. Tests gymnastics skill and strength endurance.",
+    "count_likes": 13
   },
   {
     "wodUrl": "https://wodwell.com/wod/mr-joshua/",
@@ -12690,7 +12797,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Three rounds combining high-volume pistols, muscle-ups, and heavy hang power cleans. A significant test of skill, strength, and capacity."
+    "difficulty_explanation": "Three rounds combining high-volume pistols, muscle-ups, and heavy hang power cleans. A significant test of skill, strength, and capacity.",
+    "count_likes": 35
   },
   {
     "wodUrl": "https://wodwell.com/wod/nate/",
@@ -13189,7 +13297,8 @@
     "category": "Benchmark",
     "tags": [],
     "difficulty": "Hard",
-    "difficulty_explanation": "A standard test of maximal strength in the two Olympic lifts: the Snatch and the Clean-and-Jerk. Score is the sum of the best successful lift for each."
+    "difficulty_explanation": "A standard test of maximal strength in the two Olympic lifts: the Snatch and the Clean-and-Jerk. Score is the sum of the best successful lift for each.",
+    "count_likes": 0
   },
   {
     "wodUrl": "https://wodwell.com/wod/omar/",
@@ -15786,7 +15895,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A pure endurance test combining rowing, running, and biking for time."
+    "difficulty_explanation": "A pure endurance test combining rowing, running, and biking for time.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/oz/",
@@ -15861,7 +15971,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining Assault Bike calories with various bodyweight, dumbbell, and kettlebell movements."
+    "difficulty_explanation": "Five rounds combining Assault Bike calories with various bodyweight, dumbbell, and kettlebell movements.",
+    "count_likes": 77
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-i/",
@@ -15892,7 +16003,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper", "AMRAP"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A multi-part workout including 3 rounds of Helen, an ascending chipper, and a final 10-min AMRAP of KB snatches. Tests endurance across multiple structures."
+    "difficulty_explanation": "A multi-part workout including 3 rounds of Helen, an ascending chipper, and a final 10-min AMRAP of KB snatches. Tests endurance across multiple structures.",
+    "count_likes": 40
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-ii/",
@@ -15923,7 +16035,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long, complex chipper starting with 5 rounds of Cleans/Push-ups, followed by a large chipper section with runs, barbell complexes, and various other movements."
+    "difficulty_explanation": "A long, complex chipper starting with 5 rounds of Cleans/Push-ups, followed by a large chipper section with runs, barbell complexes, and various other movements.",
+    "count_likes": 14
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-iii/",
@@ -15954,7 +16067,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "An extremely high-volume chipper requiring 76 reps each of 10 different movements, including complex ones. Tests endurance and mental fortitude over a very long duration."
+    "difficulty_explanation": "An extremely high-volume chipper requiring 76 reps each of 10 different movements, including complex ones. Tests endurance and mental fortitude over a very long duration.",
+    "count_likes": 12
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-ix/",
@@ -15985,7 +16099,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long chipper with ascending reps across many movements, sandwiched between runs. Uses light weights but high volume. Tests endurance and broad fitness."
+    "difficulty_explanation": "A long chipper with ascending reps across many movements, sandwiched between runs. Uses light weights but high volume. Tests endurance and broad fitness.",
+    "count_likes": 8
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-v/",
@@ -16016,7 +16131,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Complete a chipper (Complex, Pull-ups, Push-ups, Run) while performing a dumbbell hold penalty every 45 seconds. Tests strength endurance and grip."
+    "difficulty_explanation": "Complete a chipper (Complex, Pull-ups, Push-ups, Run) while performing a dumbbell hold penalty every 45 seconds. Tests strength endurance and grip.",
+    "count_likes": 7
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-vi/",
@@ -16047,7 +16163,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Two distinct 3-round triplets performed back-to-back, combining running with strength and gymnastics elements."
+    "difficulty_explanation": "Two distinct 3-round triplets performed back-to-back, combining running with strength and gymnastics elements.",
+    "count_likes": 15
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-vii/",
@@ -16078,7 +16195,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "An extremely long and complex chipper involving multiple descending rep couplets separated by runs. Tests endurance across a vast range of movements and time domains."
+    "difficulty_explanation": "An extremely long and complex chipper involving multiple descending rep couplets separated by runs. Tests endurance across a vast range of movements and time domains.",
+    "count_likes": 25
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-viii/",
@@ -16109,7 +16227,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Complex structure with MU buy-in, 5 rounds of a challenging circuit including complexes and burpee pull-ups, and HSPU cash-out."
+    "difficulty_explanation": "Complex structure with MU buy-in, 5 rounds of a challenging circuit including complexes and burpee pull-ups, and HSPU cash-out.",
+    "count_likes": 2
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xi/",
@@ -16204,7 +16323,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Two distinct 3-round triplets performed back-to-back, both featuring grueling 200m 'Beck's Burpees' combined with strength and gymnastics."
+    "difficulty_explanation": "Two distinct 3-round triplets performed back-to-back, both featuring grueling 200m 'Beck's Burpees' combined with strength and gymnastics.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xiv/",
@@ -16235,7 +16355,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A very long chipper involving multiple runs of varying distances interspersed with numerous movements like box jumps, HSPU, pull-ups, burpees, KB swings, and barbell lifts."
+    "difficulty_explanation": "A very long chipper involving multiple runs of varying distances interspersed with numerous movements like box jumps, HSPU, pull-ups, burpees, KB swings, and barbell lifts.",
+    "count_likes": 13
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xix/",
@@ -16298,7 +16419,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Five rounds, each requiring accumulating 1000 lbs GTOH followed by a row, with mandatory rest between rounds. Tests strength, power, and rowing capacity."
+    "difficulty_explanation": "Five rounds, each requiring accumulating 1000 lbs GTOH followed by a row, with mandatory rest between rounds. Tests strength, power, and rowing capacity.",
+    "count_likes": 9
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xli/",
@@ -16329,7 +16451,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Ladder"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Twenty rounds combining running, pull-ups, push-ups, and thrusters, with the thruster weight increasing every 5 rounds. Tests endurance and strength endurance."
+    "difficulty_explanation": "Twenty rounds combining running, pull-ups, push-ups, and thrusters, with the thruster weight increasing every 5 rounds. Tests endurance and strength endurance.",
+    "count_likes": 26
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xlii/",
@@ -16360,7 +16483,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Starts with a heavy weighted run buy-in, followed by a 20-minute AMRAP of a bodyweight-scaled barbell complex and running. Tests strength endurance and running under load."
+    "difficulty_explanation": "Starts with a heavy weighted run buy-in, followed by a 20-minute AMRAP of a bodyweight-scaled barbell complex and running. Tests strength endurance and running under load.",
+    "count_likes": 35
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xv/",
@@ -16423,7 +16547,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Five rounds of a massive chipper involving high-skill gymnastics (MU, RC, HSPU), high volume bodyweight movements, and double-unders. Extreme test of endurance."
+    "difficulty_explanation": "Five rounds of a massive chipper involving high-skill gymnastics (MU, RC, HSPU), high volume bodyweight movements, and double-unders. Extreme test of endurance.",
+    "count_likes": 7
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xviii/",
@@ -16454,7 +16579,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "An extremely long chipper involving a huge variety of kettlebell movements and carries, finishing with a max plank hold. Tests kettlebell proficiency and endurance."
+    "difficulty_explanation": "An extremely long chipper involving a huge variety of kettlebell movements and carries, finishing with a max plank hold. Tests kettlebell proficiency and endurance.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xx/",
@@ -16485,7 +16611,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long 47-minute workout consisting of two rounds of 20 different 1-minute stations separated by rest. Tests work capacity across a huge variety of movements."
+    "difficulty_explanation": "A long 47-minute workout consisting of two rounds of 20 different 1-minute stations separated by rest. Tests work capacity across a huge variety of movements.",
+    "count_likes": 25
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxi/",
@@ -16548,7 +16675,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A highly complex chipper with static hold buy-in/cash-out, multiple sections with scaling options, runs/DUs, barbell complexes, and gymnastics. Tests a vast range of skills and endurance."
+    "difficulty_explanation": "A highly complex chipper with static hold buy-in/cash-out, multiple sections with scaling options, runs/DUs, barbell complexes, and gymnastics. Tests a vast range of skills and endurance.",
+    "count_likes": 12
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxiii/",
@@ -16579,7 +16707,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A massive 21-15-9 chipper involving 7 different movements per round plus a 400m run after each. Tests broad fitness and endurance."
+    "difficulty_explanation": "A massive 21-15-9 chipper involving 7 different movements per round plus a 400m run after each. Tests broad fitness and endurance.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxiv/",
@@ -16642,7 +16771,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A high-volume descending rep chipper involving bodyweight deadlifts, push-ups, and moderate dumbbell cleans. Tests endurance and mental fortitude."
+    "difficulty_explanation": "A high-volume descending rep chipper involving bodyweight deadlifts, push-ups, and moderate dumbbell cleans. Tests endurance and mental fortitude.",
+    "count_likes": 49
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxv/",
@@ -16673,7 +16803,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Complete 500 thrusters with an empty barbell for time. A brutal test of muscular endurance and mental fortitude."
+    "difficulty_explanation": "Complete 500 thrusters with an empty barbell for time. A brutal test of muscular endurance and mental fortitude.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxvi/",
@@ -16736,7 +16867,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Accumulate 10,000 lbs in ground-to-overhead lifts (strategy required), followed by an 800m barbell carry. Tests strength endurance and strategy."
+    "difficulty_explanation": "Accumulate 10,000 lbs in ground-to-overhead lifts (strategy required), followed by an 800m barbell carry. Tests strength endurance and strategy.",
+    "count_likes": 0
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxviii/",
@@ -16767,7 +16899,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long, symmetrical chipper with runs sandwiching numerous movements interspersed with sets of 10 pull-ups. Tests endurance and broad fitness."
+    "difficulty_explanation": "A long, symmetrical chipper with runs sandwiching numerous movements interspersed with sets of 10 pull-ups. Tests endurance and broad fitness.",
+    "count_likes": 16
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxx/",
@@ -16798,7 +16931,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A long 40-minute AMRAP combining bear crawls with multiple Bear Complexes per round. Tests strength endurance and stamina."
+    "difficulty_explanation": "A long 40-minute AMRAP combining bear crawls with multiple Bear Complexes per round. Tests strength endurance and stamina.",
+    "count_likes": 14
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxiii/",
@@ -16829,7 +16963,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds of two 5-minute work intervals (Run+Max GTOH / Run+Max MU) separated by rest. Tests capacity for lifting and gymnastics after running."
+    "difficulty_explanation": "Three rounds of two 5-minute work intervals (Run+Max GTOH / Run+Max MU) separated by rest. Tests capacity for lifting and gymnastics after running.",
+    "count_likes": 1
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxix/",
@@ -16860,7 +16995,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Starts with heavy back squats, then a run, followed by 10 rounds of pull-ups, DB cleans, lunges, and an 800m run *each round*. Extremely high volume running."
+    "difficulty_explanation": "Starts with heavy back squats, then a run, followed by 10 rounds of pull-ups, DB cleans, lunges, and an 800m run *each round*. Extremely high volume running.",
+    "count_likes": 10
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxv/",
@@ -16891,7 +17027,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Complex structure: Max thrusters determines reps for MU buy-in/cash-out. Main score is rounds of Row/Run in 30 min AMRAP. Tests strength, skill, and endurance."
+    "difficulty_explanation": "Complex structure: Max thrusters determines reps for MU buy-in/cash-out. Main score is rounds of Row/Run in 30 min AMRAP. Tests strength, skill, and endurance.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxvi/",
@@ -16922,7 +17059,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A descending rep chipper involving very heavy deadlifts, bodyweight push presses, and heavy weighted pull-ups. Tests raw strength and strength endurance."
+    "difficulty_explanation": "A descending rep chipper involving very heavy deadlifts, bodyweight push presses, and heavy weighted pull-ups. Tests raw strength and strength endurance.",
+    "count_likes": 21
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxvii/",
@@ -16953,7 +17091,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A chipper combining descending distance rows with descending sets of a long, light barbell complex. Tests endurance and barbell cycling."
+    "difficulty_explanation": "A chipper combining descending distance rows with descending sets of a long, light barbell complex. Tests endurance and barbell cycling.",
+    "count_likes": 43
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxviii/",
@@ -16984,7 +17123,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Three rounds of 1-minute max rep stations (barbell lifts + row), followed by a 5-minute AMRAP of muscle-ups. Tests capacity across lifts and gymnastics."
+    "difficulty_explanation": "Three rounds of 1-minute max rep stations (barbell lifts + row), followed by a 5-minute AMRAP of muscle-ups. Tests capacity across lifts and gymnastics.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/panic-breathing/",
@@ -17222,7 +17362,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A descending rep chipper where the athlete chooses one movement from three categories (pull, press, hinge). Difficulty varies greatly based on selections."
+    "difficulty_explanation": "A descending rep chipper where the athlete chooses one movement from three categories (pull, press, hinge). Difficulty varies greatly based on selections.",
+    "count_likes": 54
   },
   {
     "wodUrl": "https://wodwell.com/wod/pike/",
@@ -17319,7 +17460,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 20-minute AMRAP sandwiched between heavy farmer's carries, featuring Bear Complexes, burpees, and biking. Tests strength, conditioning, and grip."
+    "difficulty_explanation": "A 20-minute AMRAP sandwiched between heavy farmer's carries, featuring Bear Complexes, burpees, and biking. Tests strength, conditioning, and grip.",
+    "count_likes": 48
   },
   {
     "wodUrl": "https://wodwell.com/wod/popeye/",
@@ -17382,7 +17524,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A descending rep couplet combining heavy power snatches with bar muscle-ups. Tests power, strength, and high-skill gymnastics."
+    "difficulty_explanation": "A descending rep couplet combining heavy power snatches with bar muscle-ups. Tests power, strength, and high-skill gymnastics.",
+    "count_likes": 12
   },
   {
     "wodUrl": "https://wodwell.com/wod/probatio/",
@@ -17413,7 +17556,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 30-minute test with multiple work/rest intervals focusing on max reps/distance for different movements. Tests capacity across varied domains."
+    "difficulty_explanation": "A 30-minute test with multiple work/rest intervals focusing on max reps/distance for different movements. Tests capacity across varied domains.",
+    "count_likes": 17
   },
   {
     "wodUrl": "https://wodwell.com/wod/progressive-dt/",
@@ -17444,7 +17588,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Ladder"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Five rounds of the 'DT' complex (DL, HPC, PJ) with progressively increasing weight each round. Tests strength endurance and barbell cycling under heavy load."
+    "difficulty_explanation": "Five rounds of the 'DT' complex (DL, HPC, PJ) with progressively increasing weight each round. Tests strength endurance and barbell cycling under heavy load.",
+    "count_likes": 28
   },
   {
     "wodUrl": "https://wodwell.com/wod/pukie-brewster/",
@@ -17507,7 +17652,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 24-minute AMRAP chipper with ascending reps across muscle-ups, KB movements, box jumps, bike, push-ups, and sit-ups."
+    "difficulty_explanation": "A 24-minute AMRAP chipper with ascending reps across muscle-ups, KB movements, box jumps, bike, push-ups, and sit-ups.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/push-pull-2/",
@@ -17570,7 +17716,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity."
+    "difficulty_explanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity.",
+    "count_likes": 51
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-24-3/",
@@ -17851,7 +17998,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three descending rep couplets of front squats and bike calories, separated by mandatory rest. Tests power output and recovery."
+    "difficulty_explanation": "Three descending rep couplets of front squats and bike calories, separated by mandatory rest. Tests power output and recovery.",
+    "count_likes": 0
   },
   {
     "wodUrl": "https://wodwell.com/wod/regionals-16-2/",
@@ -17882,7 +18030,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Ten rounds combining high-skill strict gymnastics (MU, HSPU) with heavy kettlebell snatches against a time cap. A significant test of strict strength and skill."
+    "difficulty_explanation": "Ten rounds combining high-skill strict gymnastics (MU, HSPU) with heavy kettlebell snatches against a time cap. A significant test of strict strength and skill.",
+    "count_likes": 11
   },
   {
     "wodUrl": "https://wodwell.com/wod/regionals-rehab/",
@@ -17913,7 +18062,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Four rounds combining high-calorie Assault Bike efforts with light dumbbell thrusters, lunges, and sit-ups. Primarily tests cardiovascular endurance."
+    "difficulty_explanation": "Four rounds combining high-calorie Assault Bike efforts with light dumbbell thrusters, lunges, and sit-ups. Primarily tests cardiovascular endurance.",
+    "count_likes": 61
   },
   {
     "wodUrl": "https://wodwell.com/wod/rene/",
@@ -18096,7 +18246,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A quick couplet of 3 rounds combining Assault Bike calories and light overhead lunges. Tests conditioning and shoulder stability."
+    "difficulty_explanation": "A quick couplet of 3 rounds combining Assault Bike calories and light overhead lunges. Tests conditioning and shoulder stability.",
+    "count_likes": 29
   },
   {
     "wodUrl": "https://wodwell.com/wod/rj/",
@@ -18149,7 +18300,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A variation of 'Diane' replacing handstand push-ups with handstand walks (distance typically matches reps). Tests deadlift strength and advanced gymnastics skill."
+    "difficulty_explanation": "A variation of 'Diane' replacing handstand push-ups with handstand walks (distance typically matches reps). Tests deadlift strength and advanced gymnastics skill.",
+    "count_likes": 37
   },
   {
     "wodUrl": "https://wodwell.com/wod/robbie/",
@@ -18290,7 +18442,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Five rounds combining handstand push-ups and 400m runs. Tests gymnastics capacity and running endurance."
+    "difficulty_explanation": "Five rounds combining handstand push-ups and 400m runs. Tests gymnastics capacity and running endurance.",
+    "count_likes": 96
   },
   {
     "wodUrl": "https://wodwell.com/wod/rosenbloom/",
@@ -18418,7 +18571,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A test of maximum rowing distance covered in 20 minutes."
+    "difficulty_explanation": "A test of maximum rowing distance covered in 20 minutes.",
+    "count_likes": 1
   },
   {
     "wodUrl": "https://wodwell.com/wod/roy/",
@@ -18675,7 +18829,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 23-minute AMRAP combining shuttle runs, burpees, and moderate-heavy power cleans."
+    "difficulty_explanation": "A 23-minute AMRAP combining shuttle runs, burpees, and moderate-heavy power cleans.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/sage-20/",
@@ -18706,7 +18861,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 20-minute AMRAP triplet combining heavy thrusters, pull-ups, and burpees. Tests strength endurance and work capacity."
+    "difficulty_explanation": "A 20-minute AMRAP triplet combining heavy thrusters, pull-ups, and burpees. Tests strength endurance and work capacity.",
+    "count_likes": 78
   },
   {
     "wodUrl": "https://wodwell.com/wod/sam-2/",
@@ -18737,7 +18893,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A challenging chipper with high-skill gymnastics, burpee pull-ups, wall balls, and heavy clean-and-jerks against a tight time cap."
+    "difficulty_explanation": "A challenging chipper with high-skill gymnastics, burpee pull-ups, wall balls, and heavy clean-and-jerks against a tight time cap.",
+    "count_likes": 0
   },
   {
     "wodUrl": "https://wodwell.com/wod/san-fran-crippler/",
@@ -18844,7 +19001,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three rounds of 1-minute max effort intervals across five movements, separated by rest. Similar to 'Hope'. Score is total reps."
+    "difficulty_explanation": "Three rounds of 1-minute max effort intervals across five movements, separated by rest. Similar to 'Hope'. Score is total reps.",
+    "count_likes": 69
   },
   {
     "wodUrl": "https://wodwell.com/wod/sc-4/",
@@ -18897,7 +19055,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Four rounds combining running, muscle-ups, and double-unders. Tests gymnastics skill, coordination, and cardiovascular endurance."
+    "difficulty_explanation": "Four rounds combining running, muscle-ups, and double-unders. Tests gymnastics skill, coordination, and cardiovascular endurance.",
+    "count_likes": 43
   },
   {
     "wodUrl": "https://wodwell.com/wod/schmalls/",
@@ -19081,7 +19240,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 10-minute test of maximum kettlebell snatches with a moderate weight. Tests technique, grip endurance, and cardiovascular capacity."
+    "difficulty_explanation": "A 10-minute test of maximum kettlebell snatches with a moderate weight. Tests technique, grip endurance, and cardiovascular capacity.",
+    "count_likes": 53
   },
   {
     "wodUrl": "https://wodwell.com/wod/servais/",
@@ -19471,7 +19631,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds combining light squat snatches, overhead squats, and running. Tests snatch technique, shoulder stability, and running endurance."
+    "difficulty_explanation": "Five rounds combining light squat snatches, overhead squats, and running. Tests snatch technique, shoulder stability, and running endurance.",
+    "count_likes": 53
   },
   {
     "wodUrl": "https://wodwell.com/wod/sneak-attack/",
@@ -19556,7 +19717,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Ladder"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A long, symmetrical ladder workout involving only strict, high-skill gymnastics movements. Tests strength endurance and gymnastics capacity."
+    "difficulty_explanation": "A long, symmetrical ladder workout involving only strict, high-skill gymnastics movements. Tests strength endurance and gymnastics capacity.",
+    "count_likes": 45
   },
   {
     "wodUrl": "https://wodwell.com/wod/speed-round/",
@@ -19587,7 +19749,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Triplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A fast-paced 9-minute AMRAP combining a barbell complex (clean, squat, jerk) with Assault Bike calories. Tests power output and transition speed."
+    "difficulty_explanation": "A fast-paced 9-minute AMRAP combining a barbell complex (clean, squat, jerk) with Assault Bike calories. Tests power output and transition speed.",
+    "count_likes": 56
   },
   {
     "wodUrl": "https://wodwell.com/wod/spehar/",
@@ -19640,7 +19803,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Two separate 'For Time' chippers involving high skill and heavy weights, separated by a long rest. Tests capacity across two distinct efforts."
+    "difficulty_explanation": "Two separate 'For Time' chippers involving high skill and heavy weights, separated by a long rest. Tests capacity across two distinct efforts.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/sqt/",
@@ -19671,7 +19835,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three rounds combining light ground-to-overheads with shuttle sprints. Tests speed and power endurance."
+    "difficulty_explanation": "Three rounds combining light ground-to-overheads with shuttle sprints. Tests speed and power endurance.",
+    "count_likes": 23
   },
   {
     "wodUrl": "https://wodwell.com/wod/start-today/",
@@ -19702,7 +19867,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Two rounds of a high-volume chipper including TTB, rowing, light KB swings, and burpees. Tests endurance and mental toughness."
+    "difficulty_explanation": "Two rounds of a high-volume chipper including TTB, rowing, light KB swings, and burpees. Tests endurance and mental toughness.",
+    "count_likes": 17
   },
   {
     "wodUrl": "https://wodwell.com/wod/stephen/",
@@ -19755,7 +19921,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Triplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 10-minute AMRAP triplet combining moderate power cleans, lateral burpees, and wall balls."
+    "difficulty_explanation": "A 10-minute AMRAP triplet combining moderate power cleans, lateral burpees, and wall balls.",
+    "count_likes": 2
   },
   {
     "wodUrl": "https://wodwell.com/wod/steve-mercado/",
@@ -19786,7 +19953,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A chipper workout with 40 reps each of pull-ups, snatches, KTE, cleans, and HSPU. Tests work capacity across multiple domains."
+    "difficulty_explanation": "A chipper workout with 40 reps each of pull-ups, snatches, KTE, cleans, and HSPU. Tests work capacity across multiple domains.",
+    "count_likes": 12
   },
   {
     "wodUrl": "https://wodwell.com/wod/steve-skipton-sr/",
@@ -19871,7 +20039,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds performing a complex with a heavy strongman bag (Deadlift, Hang Power Clean, Shoulder-to-Overhead). Tests odd object strength."
+    "difficulty_explanation": "Five rounds performing a complex with a heavy strongman bag (Deadlift, Hang Power Clean, Shoulder-to-Overhead). Tests odd object strength.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/strung-backwards-upside-fran/",
@@ -20054,7 +20223,8 @@
     "category": "Benchmark",
     "tags": ["Tabata"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five Tabata intervals rotating through Wall Balls, SDLHP, Box Jumps, Push Press, and Row. Score is total reps/calories."
+    "difficulty_explanation": "Five Tabata intervals rotating through Wall Balls, SDLHP, Box Jumps, Push Press, and Row. Score is total reps/calories.",
+    "count_likes": 63
   },
   {
     "wodName": "Tabata Something Else",
@@ -20203,7 +20373,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 12-minute AMRAP starting with a large row buy-in, followed by rounds of heavy deadlifts, double-unders, and wall balls."
+    "difficulty_explanation": "A 12-minute AMRAP starting with a large row buy-in, followed by rounds of heavy deadlifts, double-unders, and wall balls.",
+    "count_likes": 22
   },
   {
     "wodUrl": "https://wodwell.com/wod/task-tabata/",
@@ -20234,7 +20405,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Tabata"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Accumulate 300 total reps across four bodyweight movements using the Tabata protocol (20 sec work / 10 sec rest). Tests work capacity and consistency."
+    "difficulty_explanation": "Accumulate 300 total reps across four bodyweight movements using the Tabata protocol (20 sec work / 10 sec rest). Tests work capacity and consistency.",
+    "count_likes": 52
   },
   {
     "wodUrl": "https://wodwell.com/wod/taylor/",
@@ -20341,7 +20513,8 @@
     "category": "Benchmark",
     "tags": ["Tabata", "AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Perform Tabata air squats (score lowest round), then immediately perform max muscle-ups. Tests squat endurance and max gymnastics capacity."
+    "difficulty_explanation": "Perform Tabata air squats (score lowest round), then immediately perform max muscle-ups. Tests squat endurance and max gymnastics capacity.",
+    "count_likes": 6
   },
   {
     "wodUrl": "https://wodwell.com/wod/thanksgiving-throwdown/",
@@ -20372,7 +20545,8 @@
     "category": "Benchmark",
     "tags": ["EMOM"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A 30-minute EMOM rotating through 5 stations (FS, PP, MU, Sled Push, Bike) for 5 rounds total. Tests strength, skill, and capacity under time pressure."
+    "difficulty_explanation": "A 30-minute EMOM rotating through 5 stations (FS, PP, MU, Sled Push, Bike) for 5 rounds total. Tests strength, skill, and capacity under time pressure.",
+    "count_likes": 23
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-300/",
@@ -20531,7 +20705,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A descending rep scheme of overhead squats interspersed with rowing intervals."
+    "difficulty_explanation": "A descending rep scheme of overhead squats interspersed with rowing intervals.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-big-push/",
@@ -20594,7 +20769,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Seven rounds of a snatch complex involving power snatch, snatch balance, and OHS with light weight. Tests technique and consistency."
+    "difficulty_explanation": "Seven rounds of a snatch complex involving power snatch, snatch balance, and OHS with light weight. Tests technique and consistency.",
+    "count_likes": 2
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-burner/",
@@ -20625,7 +20801,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A 25-minute AMRAP featuring C2B pull-ups, moderate C&J, heavy bench press, and bike calories. Tests strength and conditioning."
+    "difficulty_explanation": "A 25-minute AMRAP featuring C2B pull-ups, moderate C&J, heavy bench press, and bike calories. Tests strength and conditioning.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-chief-is-dead/",
@@ -20688,7 +20865,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A couplet combining heavy back squats with a 1-mile run. Tests strength endurance and running capacity."
+    "difficulty_explanation": "A couplet combining heavy back squats with a 1-mile run. Tests strength endurance and running capacity.",
+    "count_likes": 72
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-deep-end/",
@@ -20719,7 +20897,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three rounds combining running with bodyweight squat cleans, burpees, and deadlifts. Tests strength endurance and conditioning."
+    "difficulty_explanation": "Three rounds combining running with bodyweight squat cleans, burpees, and deadlifts. Tests strength endurance and conditioning.",
+    "count_likes": 45
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-don/",
@@ -20772,7 +20951,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A descending rep couplet of overhead squats and pull-ups. Tests shoulder stability, leg endurance, and pulling capacity."
+    "difficulty_explanation": "A descending rep couplet of overhead squats and pull-ups. Tests shoulder stability, leg endurance, and pulling capacity.",
+    "count_likes": 29
   },
   {
     "wodUrl": "https://wodwell.com/wod/ghost/",
@@ -20867,7 +21047,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Complete 3 rounds of a circuit, then max calories on the Assault Bike in the remaining time of a 12-minute AMRAP."
+    "difficulty_explanation": "Complete 3 rounds of a circuit, then max calories on the Assault Bike in the remaining time of a 12-minute AMRAP.",
+    "count_likes": 23
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-inferno/",
@@ -20898,7 +21079,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A chipper combining descending double-unders with constant air squats and ascending weight deadlifts."
+    "difficulty_explanation": "A chipper combining descending double-unders with constant air squats and ascending weight deadlifts.",
+    "count_likes": 11
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-juicy/",
@@ -20973,7 +21155,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Medium",
-    "difficulty_explanation": "Three rounds combining high-calorie Assault Bike efforts with high-rep wall balls. Tests cardiovascular and muscular endurance."
+    "difficulty_explanation": "Three rounds combining high-calorie Assault Bike efforts with high-rep wall balls. Tests cardiovascular and muscular endurance.",
+    "count_likes": 66
   },
   {
     "wodUrl": "https://wodwell.com/wod/longest-mile/",
@@ -21080,7 +21263,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet", "Ladder"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A pyramid rep scheme couplet combining moderate deadlifts with box jumps."
+    "difficulty_explanation": "A pyramid rep scheme couplet combining moderate deadlifts with box jumps.",
+    "count_likes": 345
   },
   {
     "wodName": "The Seven",
@@ -21220,7 +21404,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Five rounds combining moderate thrusters with 400m runs. Tests strength endurance and running capacity."
+    "difficulty_explanation": "Five rounds combining moderate thrusters with 400m runs. Tests strength endurance and running capacity.",
+    "count_likes": 3
   },
   {
     "wodUrl": "https://wodwell.com/wod/tiff/",
@@ -21273,7 +21458,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A twist on 'Diane' focusing on max reps within decreasing time intervals for deadlifts and HSPU. Tests power endurance."
+    "difficulty_explanation": "A twist on 'Diane' focusing on max reps within decreasing time intervals for deadlifts and HSPU. Tests power endurance.",
+    "count_likes": 45
   },
   {
     "wodUrl": "https://wodwell.com/wod/time-priority-linda/",
@@ -21304,7 +21490,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A 25-minute AMRAP performing rounds of 5 reps each of heavy deadlifts, bench presses, and hang squat cleans. Tests strength endurance."
+    "difficulty_explanation": "A 25-minute AMRAP performing rounds of 5 reps each of heavy deadlifts, bench presses, and hang squat cleans. Tests strength endurance.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/time-priority-fran/",
@@ -21335,7 +21522,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A twist on 'Fran' focusing on max reps within decreasing time intervals for thrusters and pull-ups. Tests power endurance."
+    "difficulty_explanation": "A twist on 'Fran' focusing on max reps within decreasing time intervals for thrusters and pull-ups. Tests power endurance.",
+    "count_likes": 4
   },
   {
     "wodUrl": "https://wodwell.com/wod/timmins/",
@@ -21454,7 +21642,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "Ski Erg buy-in/cash-out sandwiching 3 rounds of ring muscle-ups and heavy alternating dumbbell snatches."
+    "difficulty_explanation": "Ski Erg buy-in/cash-out sandwiching 3 rounds of ring muscle-ups and heavy alternating dumbbell snatches.",
+    "count_likes": 2
   },
   {
     "wodUrl": "https://wodwell.com/wod/top-gun/",
@@ -21593,7 +21782,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Combines a 2k row with an immediate 'Death by Thrusters'. Tests rowing endurance followed by power endurance. Score is typically total time or reps on thrusters."
+    "difficulty_explanation": "Combines a 2k row with an immediate 'Death by Thrusters'. Tests rowing endurance followed by power endurance. Score is typically total time or reps on thrusters.",
+    "count_likes": 76
   },
   {
     "wodUrl": "https://wodwell.com/wod/tully/",
@@ -21668,7 +21858,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Two distinct couplets performed for two rounds each. Tests rowing, gymnastics (HSPU, L-Pull-ups), and moderate thrusters."
+    "difficulty_explanation": "Two distinct couplets performed for two rounds each. Tests rowing, gymnastics (HSPU, L-Pull-ups), and moderate thrusters.",
+    "count_likes": 36
   },
   {
     "wodUrl": "https://wodwell.com/wod/two-minute-defense/",
@@ -21699,7 +21890,8 @@
     "category": "Benchmark",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Two blocks of 5 rounds, each round containing a barbell complex and a sprint, separated by rest. Tests power, speed, and recovery."
+    "difficulty_explanation": "Two blocks of 5 rounds, each round containing a barbell complex and a sprint, separated by rest. Tests power, speed, and recovery.",
+    "count_likes": 37
   },
   {
     "wodUrl": "https://wodwell.com/wod/tyler/",
@@ -21752,7 +21944,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Couplet"],
     "difficulty": "Very Hard",
-    "difficulty_explanation": "A couplet combining heavy thrusters with bar muscle-ups in the classic 21-15-9 format. Tests strength and high-skill gymnastics."
+    "difficulty_explanation": "A couplet combining heavy thrusters with bar muscle-ups in the classic 21-15-9 format. Tests strength and high-skill gymnastics.",
+    "count_likes": 19
   },
   {
     "wodUrl": "https://wodwell.com/wod/upside-angie/",
@@ -21881,7 +22074,8 @@
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Two blocks of descending rep couplets (DL/Lunge) with heavy farmer's carries, separated by rest. Tests strength endurance and grip."
+    "difficulty_explanation": "Two blocks of descending rep couplets (DL/Lunge) with heavy farmer's carries, separated by rest. Tests strength endurance and grip.",
+    "count_likes": 15
   },
   {
     "wodUrl": "https://wodwell.com/wod/walsh/",
@@ -22197,7 +22391,8 @@
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
-    "difficulty_explanation": "A 20-minute AMRAP featuring heavy barbell movements (thrusters, curls, lunges) and bike calories. Tests strength endurance."
+    "difficulty_explanation": "A 20-minute AMRAP featuring heavy barbell movements (thrusters, curls, lunges) and bike calories. Tests strength endurance.",
+    "count_likes": 42
   },
   {
     "wodUrl": "https://wodwell.com/wod/wittman/",

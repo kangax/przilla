@@ -3,8 +3,8 @@
 import {
   useState,
   useEffect,
-  useLayoutEffect, // Import useLayoutEffect
-  useRef, // Import useRef
+  useLayoutEffect,
+  useRef,
   useMemo,
   useCallback,
 } from "react";
@@ -145,6 +145,7 @@ export default function WodViewer({
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">(() =>
     getInitialSortDirection(sortBy),
   );
+  const [searchTerm, setSearchTerm] = useState<string>(""); // Add search term state
   // --- End Initialize State ---
 
   // --- Calculate Table Height ---
@@ -205,6 +206,10 @@ export default function WodViewer({
     if (sortDirection !== defaultSortDir) {
       urlParams.sortDir = sortDirection;
     }
+    // Add search term to URL params if not empty
+    if (searchTerm) {
+      urlParams.search = searchTerm;
+    }
 
     // Sort keys alphabetically and build the search string
     const sortedKeys = Object.keys(urlParams).sort();
@@ -229,9 +234,10 @@ export default function WodViewer({
     view,
     sortBy,
     sortDirection,
+    searchTerm, // Add searchTerm dependency
     pathname,
     router,
-    searchParams, // Include searchParams to compare against current URL state
+    searchParams,
   ]);
   // --- End Sync State TO URL ---
 
@@ -249,8 +255,32 @@ export default function WodViewer({
 
   // --- Memoized Filtering and Sorting Logic ---
 
-  const categoryTagFilteredWods = useMemo(() => {
+  // 1. Filter by search term first
+  const searchedWods = useMemo(() => {
+    if (!searchTerm) {
+      return wods; // No search term, return all
+    }
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
     return wods.filter((wod) => {
+      const nameMatch = wod.wodName
+        ?.toLowerCase()
+        .includes(lowerCaseSearchTerm);
+      const descMatch = wod.description
+        ?.toLowerCase()
+        .includes(lowerCaseSearchTerm);
+      const categoryMatch = wod.category
+        ?.toLowerCase()
+        .includes(lowerCaseSearchTerm);
+      const tagsMatch =
+        wod.tags &&
+        wod.tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchTerm));
+      return nameMatch || descMatch || categoryMatch || tagsMatch;
+    });
+  }, [wods, searchTerm]);
+
+  // 2. Filter by category and tags (using the result of search filter)
+  const categoryTagFilteredWods = useMemo(() => {
+    return searchedWods.filter((wod) => {
       const categoryMatch =
         selectedCategories.length === 0 ||
         (wod.category && selectedCategories.includes(wod.category));
@@ -259,7 +289,7 @@ export default function WodViewer({
         (wod.tags && wod.tags.some((tag) => selectedTags.includes(tag)));
       return categoryMatch && tagMatch;
     });
-  }, [wods, selectedCategories, selectedTags]);
+  }, [searchedWods, selectedCategories, selectedTags]);
 
   const {
     dynamicTotalWodCount,
@@ -319,7 +349,17 @@ export default function WodViewer({
   return (
     <Box>
       {/* Filter Bar - Add ref */}
-      <Flex ref={filterBarRef} className="mb-4 mt-4 items-center" gap="4">
+      <Flex ref={filterBarRef} className="mb-4 mt-4 items-center" gap="2">
+        {" "}
+        {/* Reduced gap */}
+        {/* NEW: Search Input */}
+        <input
+          type="text"
+          placeholder="Search..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="placeholder:text-muted-foreground w-48 rounded border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50" // Adjusted width and styling
+        />
         {/* Category Select */}
         <Select.Root
           value={selectedCategories.length > 0 ? selectedCategories[0] : "all"}

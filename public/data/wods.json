@@ -1,5 +1,36 @@
 [
   {
+    "wodUrl": "https://wodwell.com/wod/1-4-mile-for-humanity/",
+    "wodName": "1/4 Mile for Humanity",
+    "description": "For Time\n400 meter Front Rack Lunges (45/35 lb)\n\n*Every 10 lunges perform:\n5 Push Presses (45/35 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A grueling 400m front rack lunge with push press penalties every 10 lunges. Tests leg endurance, core stability, and mental toughness."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/10x10/",
     "wodName": "10×10",
     "description": "10 Rounds for Time\n10 calorie Assault Air Bike\n10 Squat Snatches (95/65 lb)\n10 Push-Ups\n10 Russian Twists (25/15 lb)",
@@ -179,6 +210,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "High volume (30 reps) of a high-skill gymnastics movement (Muscle-Ups) performed for time.",
     "count_likes": 18
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/30-muscle-ups/",
+    "wodName": "30 Muscle-Ups",
+    "description": "For Time\n30 Muscle-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 360
+        },
+        "intermediate": {
+          "min": 361,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A test of maximum efficiency and capacity for performing 30 muscle-ups (typically ring) for time."
   },
   {
     "wodUrl": "https://wodwell.com/wod/31-heroes/",
@@ -725,6 +787,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "A 21-15-9 workout involving six different movements. Tests broad conditioning and transitions.",
     "count_likes": 123
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/another-dimension/",
+    "wodName": "Another Dimension",
+    "description": "For Time\n75 Handstand Push-Ups\n\nEvery time you break perform:\n5 Burpees to Target",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Complete 75 HSPU for time, with a burpee penalty for every break. Tests HSPU capacity and strategy."
   },
   {
     "wodUrl": "https://wodwell.com/wod/ariel/",
@@ -1563,6 +1656,37 @@
     "count_likes": 255
   },
   {
+    "wodUrl": "https://wodwell.com/wod/assault-renegade/",
+    "wodName": "Assault Renegade",
+    "description": "AMRAP in 21 minutes\n3 Handstand Push-Ups\n6 Renegade Rows (75/50 lb)\n9 Single Arm Dumbbell Snatches (75/50 lb)\n12 Dumbbell Lunges (75/50 lb)\n15 Toes-to-Bars\n18 calorie Assault Air Bike",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 189,
+          "max": null
+        },
+        "advanced": {
+          "min": 126,
+          "max": 188
+        },
+        "intermediate": {
+          "min": 63,
+          "max": 125
+        },
+        "beginner": {
+          "min": 1,
+          "max": 62
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 21-minute AMRAP combining HSPU, heavy dumbbell movements (rows, snatches, lunges), TTB, and bike calories."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/assault-road-block/",
     "wodName": "Assault Road Block",
     "description": "AMRAP in 21 minutes\n3 Thrusters (135/95 lb)\n6 Bar Over Burpees\n9 Pull-Ups\n12 Hand Release Push-Ups\n15 calorie Assault Air Bike",
@@ -2270,6 +2394,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Triplet). 3 rounds combining heavy deadlifts and front squats (185lb) with pull-ups in a sprint format, testing strength endurance and grip.",
     "count_likes": 191
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/beowulf/",
+    "wodName": "Beowulf",
+    "description": "For Time\n1000 meter Row\n800 meter Run\n50 Ring Dips\n100 Pull-Ups\n150 Jumping Ball Slams\n800 meter Run\n1000 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A long chipper involving rowing, running, and high-volume gymnastics (dips, pull-ups) and ball slams. Tests endurance and stamina."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bert/",
@@ -2983,6 +3138,37 @@
     "tags": ["For Time", "Chipper", "Ladder"],
     "difficulty": "Very Hard",
     "difficulty_explanation": "A symmetrical ladder chipper with bodyweight-scaled barbell movements and ring dips, split by a run. Tests strength endurance, gymnastics, and pacing."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/bsu/",
+    "wodName": "BSU",
+    "description": "3 Rounds for Time\n7 Thrusters (165/110 lb)\n15 Muscle-Ups\n10 Power Snatches (165/110 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 720
+        },
+        "advanced": {
+          "min": 721,
+          "max": 960
+        },
+        "intermediate": {
+          "min": 961,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Three rounds combining heavy thrusters, high-volume muscle-ups, and heavy power snatches. A significant test of strength, skill, and capacity."
   },
   {
     "wodUrl": "https://wodwell.com/wod/bulger/",
@@ -7339,6 +7525,37 @@
     "count_likes": 163
   },
   {
+    "wodUrl": "https://wodwell.com/wod/half-chelsea/",
+    "wodName": "Half Chelsea",
+    "description": "EMOM for 15 minutes\n10 Pull-Ups\n15 Push-Ups\n20 Air Squats\n\nIf you fall behind the clock keep going for 15 minutes and see how many rounds you can complete.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 225,
+          "max": 225
+        },
+        "advanced": {
+          "min": 180,
+          "max": 224
+        },
+        "intermediate": {
+          "min": 135,
+          "max": 179
+        },
+        "beginner": {
+          "min": 1,
+          "max": 134
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["EMOM"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Perform a round of 10 Pull-ups, 15 Push-ups, 20 Squats every minute for 15 minutes. Tests consistency and bodyweight endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/hall/",
     "wodName": "Hall",
     "description": "5 Rounds for Time\n3 Cleans (225/155 lb)\n200 meter Sprint\n20 Kettlebell Snatches (1.5/1 pood) (10 each arm)\n2 minutes Rest",
@@ -8541,6 +8758,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "Girl WOD (Triplet). Row, light thrusters (45lb), pull-ups. Classic conditioning test.",
     "count_likes": 696
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/jackpot-777/",
+    "wodName": "Jackpot 777",
+    "description": "AMRAP in 21 minutes\n7 calorie Assault Air Bike\n7 Bear Complexes (135/75 lb)\n7 Chest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 245,
+          "max": null
+        },
+        "advanced": {
+          "min": 196,
+          "max": 244
+        },
+        "intermediate": {
+          "min": 147,
+          "max": 195
+        },
+        "beginner": {
+          "min": 1,
+          "max": 146
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP", "Triplet"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 21-minute AMRAP triplet combining bike calories, Bear Complexes, and C2B pull-ups, all in sets of 7."
   },
   {
     "wodUrl": "https://wodwell.com/wod/jag-28/",
@@ -10159,6 +10407,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "Hero WOD. 2 rounds: squats, pull-ups, burpees, cumulative plank, push-ups. Tests bodyweight endurance/core.",
     "count_likes": 62
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/mad-miles/",
+    "wodName": "Mad Miles",
+    "description": "4 Rounds for Time\nBuy-In:\n1 mile Assault Air Bike\n\nThen 4 Rounds of:\n5 Bear Complexes (135/95 lb)\n10 Pull-Ups\n10 Push-Ups\n400 meter Run\n\nBuy-Out:\n1 mile Assault Air Bike",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3000
+        },
+        "intermediate": {
+          "min": 3001,
+          "max": 3600
+        },
+        "beginner": {
+          "min": 3601,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A long workout with bike buy-in/out, sandwiching 4 rounds of Bear Complexes, pull-ups, push-ups, and running. Tests endurance and strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/maggie/",
@@ -14752,6 +15031,37 @@
     "count_likes": 469
   },
   {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xviii/",
+    "wodName": "Painstorm XVIII",
+    "description": "For Time\n10 Alternating Turkish Get-Ups (16/12 kg)\n50 Kettlebell Sumo Deadlift High-Pulls (16/12 kg)\n50 Kettlebell Cleans (16/12 kg 25 each hand)\n50 Kettlebell Jerks (16/12 kg 25 each hand)\n\n100 meter Kettlebell Waiter Walk (16/12 kg)\n\n50 Kettlebell Figure 8 through Legs (16/12 kg)\n50 American Kettlebell Swings (16/12 kg)\n50 Kettlebell Deadlifts (16/12 kg)\n\n100 meter Kettlebell Broad Jumps (16/12 kg)\n\n50 Kettlebell Sit-Ups (16/12 kg)\n50 Left-Hand American Kettlebell Swings (16/12 kg)\n50 Kettlebell Goblet Squats (16/12 kg)\n\n100 meter Kettlebell Lunges (16/12 kg)\n\n50 Kettlebell Bent Over Rows (16/12 kg 25 each side)\n50 Right-Hand American Kettlebell Swings (16/12 kg)\n50 Kettlebell Snatches (16/12 kg)\n\nMax Kettlebell Plank until Failure (16/12 kg)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3300
+        },
+        "intermediate": {
+          "min": 3301,
+          "max": 4200
+        },
+        "beginner": {
+          "min": 4201,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "An extremely long chipper involving a huge variety of kettlebell movements and carries, finishing with a max plank hold. Tests kettlebell proficiency and endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/painstorm-xx/",
     "wodName": "Painstorm XX",
     "description": "AMRAP in 47 minutes\n\n1 minute Handstand Push-Ups\n1 minute Muscle-Ups\n1 minute Air Squats\n1 minute Sit-Ups\n1 minute Pull-Ups\n\n1 minute Rest\n\n1 minute Kettlebell Swings (16/12 kg)\n1 minute Left-Arm Kettlebell Snatches (16/12 kg)\n1 minute Kettlebell Walking Lunges (16/12 kg)\n1 minute Right-Arm Kettlebell Snatches (16/12 kg)\n1 minute Kettlebell Goblet Squats (16/12 kg)\n\n1 minute Rest\n\n1 minute Push Presses (40/30 kg)\n1 minute Sumo Deadlift High-Pulls (40/30 kg)\n1 minute Split Jerks (40/30 kg)\n1 minute Power Cleans (40/30 kg)\n1 minute Thrusters (40/30 kg)\n\n1 minute Rest\n\n1 minute Burpees\n1 minute 10 meter Sprints\n1 minute Pull-Ups\n1 minute Shoulder Presses (40/30 kg)\n1 minute Calorie Row\n\n1 minute Rest\n\nRepeat the above for a total of 2 Rounds in 47 minutes",
@@ -14813,6 +15123,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "A long, grueling chipper involving many dumbbell movements interspersed with high-volume burpees.",
     "count_likes": 600
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xxiii/",
+    "wodName": "Painstorm XXIII",
+    "description": "21-15-9 Reps for Time\nThrusters (95/65 lb)\nCleans (135/95 lb)\nDeadlifts (225/155 lb)\nPull-Ups\nKettlebell Swings (24/16 kg)\nRing Dips\nHandstand Push-Ups\n400 meter Run (after each round)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1500
+        },
+        "advanced": {
+          "min": 1501,
+          "max": 2100
+        },
+        "intermediate": {
+          "min": 2101,
+          "max": 2700
+        },
+        "beginner": {
+          "min": 2701,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A massive 21-15-9 chipper involving 7 different movements per round plus a 400m run after each. Tests broad fitness and endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxiv/",
@@ -14878,6 +15219,37 @@
     "difficulty_explanation": "A high-volume descending rep chipper involving bodyweight deadlifts, push-ups, and moderate dumbbell cleans. Tests endurance and mental fortitude."
   },
   {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xxv/",
+    "wodName": "Painstorm XXV",
+    "description": "For Time\n500 Thrusters (45/35 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1500
+        },
+        "advanced": {
+          "min": 1501,
+          "max": 2100
+        },
+        "intermediate": {
+          "min": 2101,
+          "max": 2700
+        },
+        "beginner": {
+          "min": 2701,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Complete 500 thrusters with an empty barbell for time. A brutal test of muscular endurance and mental fortitude."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxvi/",
     "wodName": "Painstorm XXVI",
     "description": "Eight Tabatas in 39 minutes\nTabata Thrusters (95/65 lb)\n1 minute Rest\nTabata Pull-Ups\n1 minute Rest\nTabata Cleans (135/95 lb)\n1 minute Rest\nTabata Ring Dips\n1 minute Rest\nTabata Deadlifts (200/150 lb)\n1 minute Rest\nTabata Handstand Push-Ups\n1 minute Rest\nTabata Kettlebell Swings (1.5/1 pood)\n1 minute Rest\nTabata Row",
@@ -14908,6 +15280,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Eight separate Tabata intervals covering various barbell, gymnastics, kettlebell, and cardio movements. Tests broad fitness in short bursts. Score is total reps.",
     "count_likes": 87
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/painstorm-xxxvi/",
+    "wodName": "Painstorm XXXVI",
+    "description": "For Time\n10-9-8-7-6-5-4-3-2-1 reps of:\nDeadlifts (2 x Bodyweight)\nPush Presses (Bodyweight)\nWeighted Pull-Ups (50% Bodyweight)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1800
+        },
+        "intermediate": {
+          "min": 1801,
+          "max": 2400
+        },
+        "beginner": {
+          "min": 2401,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A descending rep chipper involving very heavy deadlifts, bodyweight push presses, and heavy weighted pull-ups. Tests raw strength and strength endurance."
   },
   {
     "wodUrl": "https://wodwell.com/wod/painstorm-xxxvii/",
@@ -15369,6 +15772,37 @@
     "difficulty": "Medium",
     "difficulty_explanation": "A test of endurance and mental fortitude completing 150 burpees for time.",
     "count_likes": 198
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/pull-press-pedal-squat/",
+    "wodName": "Pull-Press-Pedal-Squat",
+    "description": "AMRAP in 24 minutes\n3 Muscle-Ups\n6 Kettlebell Thrusters (53/35 lb)\n9 Box Jumps (24/20 in)\n12 Sumo Deadlift High-Pulls (53/35 lb)\n15 calorie Assault Air Bike\n18 Push-Ups\n21 AbMat Sit-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 252,
+          "max": null
+        },
+        "advanced": {
+          "min": 168,
+          "max": 251
+        },
+        "intermediate": {
+          "min": 84,
+          "max": 167
+        },
+        "beginner": {
+          "min": 1,
+          "max": 83
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 24-minute AMRAP chipper with ascending reps across muscle-ups, KB movements, box jumps, bike, push-ups, and sit-ups."
   },
   {
     "wodUrl": "https://wodwell.com/wod/push-pull-2/",
@@ -17350,6 +17784,37 @@
     "count_likes": 22
   },
   {
+    "wodUrl": "https://wodwell.com/wod/sqt/",
+    "wodName": "SQT",
+    "description": "3 Rounds for Time\n10 Ground-to-Overheads (95/65 lb)\n200 yard Shuttle Sprint (50 yards there and back twice)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 420
+        },
+        "intermediate": {
+          "min": 421,
+          "max": 540
+        },
+        "beginner": {
+          "min": 541,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Three rounds combining light ground-to-overheads with shuttle sprints. Tests speed and power endurance."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/stephen/",
     "wodName": "Stephen",
     "description": "For Time\n30-25-20-15-10-5 Reps of:\nGHD Sit-Ups\nBack Extensions\nKnees-to-Elbows\nRomanian Deadlifts (95/65 lb)",
@@ -17727,6 +18192,37 @@
     "count_likes": 301
   },
   {
+    "wodUrl": "https://wodwell.com/wod/tall-dan/",
+    "wodName": "Tall Dan",
+    "description": "AMRAP in 12 minutes\nBuy-In:\n80 calorie Row\n\nThen AMRAP in remaining time:\n6 Deadlifts (315/255 lb)\n29 Double-Unders\n18 Wall Ball Shots (20/14 lb)",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 106,
+          "max": null
+        },
+        "advanced": {
+          "min": 53,
+          "max": 105
+        },
+        "intermediate": {
+          "min": 20,
+          "max": 52
+        },
+        "beginner": {
+          "min": 1,
+          "max": 19
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 12-minute AMRAP starting with a large row buy-in, followed by rounds of heavy deadlifts, double-unders, and wall balls."
+  },
+  {
     "wodUrl": "https://wodwell.com/wod/task-tabata/",
     "wodName": "Task Tabata",
     "description": "For Time\n300 reps following the pattern:\n20 second Pull-Ups\n10 second Rest\n20 second Push-Ups\n10 second Rest\n20 second Sit-Ups\n10 second Rest\n20 second Air Squats\n10 second Rest\n\nAfter the round of Air Squats begin again with the Pull-Ups. Keep a running total of reps and continue working until 300 reps are completed.",
@@ -17832,6 +18328,37 @@
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (Chipper). 3 miles run total, high-vol push-ups, bear crawls. Extreme endurance/pushing stamina test.",
     "count_likes": 162
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/thanksgiving-throwdown/",
+    "wodName": "Thanksgiving Throwdown",
+    "description": "EMOM for 30 minutes\nComplete 5 Rounds of Each Movement:\n5 Front Squats (75% BW)\nRest in 1 minute.\n5 Push Presses (75% BW)\nRest in 1 minute.\n5 Muscle-Ups\nRest in 1 minute.\n30 meter Sled Push (200% BW)\nRest in 1 minute.\n10 calorie Assault Air Bike",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 25,
+          "max": 25
+        },
+        "advanced": {
+          "min": 20,
+          "max": 24
+        },
+        "intermediate": {
+          "min": 15,
+          "max": 19
+        },
+        "beginner": {
+          "min": 1,
+          "max": 14
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["EMOM"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A 30-minute EMOM rotating through 5 stations (FS, PP, MU, Sled Push, Bike) for 5 rounds total. Tests strength, skill, and capacity under time pressure."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-300/",
@@ -17992,6 +18519,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "A descending ladder triplet combining Assault Bike calories, thrusters, and burpees. Tests cardiovascular capacity and pacing.",
     "count_likes": 123
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/the-burner/",
+    "wodName": "The Burner",
+    "description": "AMRAP in 25 minutes\n5 Chest-to-Bar Pull-Ups\n10 Clean and Split Jerks (135/95 lb)\n15 Bench Presses (2015/135 b)\n20 calorie Assault Air Bike",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 249
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 199
+        },
+        "beginner": {
+          "min": 1,
+          "max": 149
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 25-minute AMRAP featuring C2B pull-ups, moderate C&J, heavy bench press, and bike calories. Tests strength and conditioning."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-chief-is-dead/",
@@ -18203,6 +18761,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Eight rounds of eight different movements, combining bodyweight, gymnastics, barbell, and cardio. Tests broad fitness and endurance.",
     "count_likes": 404
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/the-hunt/",
+    "wodName": "The Hunt",
+    "description": "AMRAP in 12 minutes\n3 Rounds of:\n10 Toes-to-Bars\n15 Sumo Deadlift High-Pulls (95/65 lb)\n15 Push Presses (95/65 lb)\n10 Bar-Over Burpees\n\nThen in remaining time:\nMax Calorie Assault Air Bike",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 60,
+          "max": null
+        },
+        "advanced": {
+          "min": 45,
+          "max": 59
+        },
+        "intermediate": {
+          "min": 30,
+          "max": 44
+        },
+        "beginner": {
+          "min": 1,
+          "max": 29
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["AMRAP"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "Complete 3 rounds of a circuit, then max calories on the Assault Bike in the remaining time of a 12-minute AMRAP."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-juicy/",
@@ -18903,6 +19492,37 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Couplet). 5 rounds: muscle-ups, moderate SDHP (95lb). Tests high-skill gymnastics/endurance.",
     "count_likes": 24
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/ultimate-warrior/",
+    "wodName": "Ultimate Warrior",
+    "description": "21-15-9 Reps for Time\nThrusters (135/95 lb)\nBar Muscle-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 780
+        },
+        "beginner": {
+          "min": 781,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A couplet combining heavy thrusters with bar muscle-ups in the classic 21-15-9 format. Tests strength and high-skill gymnastics."
   },
   {
     "wodUrl": "https://wodwell.com/wod/upside-angie/",

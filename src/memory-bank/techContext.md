@@ -57,7 +57,7 @@
   - E2E tests for critical user flows.
   - Ensure tests exist for additions/changes.
 
-## Example of a workout from wodwell_workouts.json
+## Example of a wod/workout from wodwell_workouts.json
 
 ```
 {
@@ -109,5 +109,42 @@
         "title": ""
       }
     }
+  },
+```
+
+### Example of a wod/workout in wods.json:
+
+```
+{
+    "wodUrl": "https://wodwell.com/wod/pyramid-double-helen/",
+    "wodName": "Pyramid Double Helen",
+    "description": "For Time\n1200 meter Run\n63 Kettlebell Swings (1.5/1 pood)\n36 Pull-Ups\n800 meters Run\n42 Kettlebell Swings (1.5/1 pood)\n24 Pull-Ups\n400 meters Run\n21 Kettlebell Swings (1.5/1 pood)\n12 Pull-Ups\n\nTime Cap: 22 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 960
+        },
+        "advanced": {
+          "min": 961,
+          "max": 1140
+        },
+        "intermediate": {
+          "min": 1141,
+          "max": 1320
+        },
+        "beginner": {
+          "min": 1321,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity.",
+    "count_likes": 51
   },
 ```

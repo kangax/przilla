@@ -20173,30 +20173,13 @@
     "description": "For Time\n3 Rounds of:\n10 Strict Handstand Push-Ups\n10 Dumbbell Hang Power Cleans (2x50/35 lb)\n50 Double-Unders\n\nRest 1 minute\n\nThen, 3 Rounds of:\n10 Kipping Handstand Push-Ups\n10 Dumbbell Shoulder-to-Overheads  (2x50/35 lb)\n50 Double-Unders\n\nTime Cap: 10 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 360,
-          "max": 480
-        },
-        "advanced": {
-          "min": 481,
-          "max": 540
-        },
-        "intermediate": {
-          "min": 541,
-          "max": 600
-        },
-        "beginner": {
-          "min": 0,
-          "max": 600
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Strict HSPU, heavy dumbbells, and double-unders in a fast-paced 10-minute cap",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "8"
   },
   {
@@ -20205,30 +20188,13 @@
     "description": "For Time\n60 GHD Sit-Ups\n6 Rope Climbs (15 ft)\n60 Alternating Pistols\n\n50 GHD Sit-Ups\n5 Rope Climbs (15 ft)\n50 Alternating Pistols\n\n40 GHD Sit-Ups\n4 Rope Climbs (15 ft)\n40 Alternating Pistols\n\n30 GHD Sit-Ups\n3 Rope Climbs (15 ft)\n30 Alternating Pistols\n\nTime Cap: 20 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 900,
-          "max": 1020
-        },
-        "advanced": {
-          "min": 1021,
-          "max": 1140
-        },
-        "intermediate": {
-          "min": 1141,
-          "max": 1200
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1200
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "High volume GHDs, rope climbs, and pistols in descending chipper",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "6"
   },
   {
@@ -20237,30 +20203,13 @@
     "description": "For Time\n120 Wall Ball Shots (20/14 lb, 10/9 ft)\n120 calorie Row\n\nTime Cap: 15 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 720,
-          "max": 840
-        },
-        "advanced": {
-          "min": 841,
-          "max": 960
-        },
-        "intermediate": {
-          "min": 961,
-          "max": 1080
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1080
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Heavy deadlifts with high-skill gymnastics",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "14"
   },
   {
@@ -20269,34 +20218,13 @@
     "description": "For Load\n4 rep max Front Squats\n\nTime Cap: 20 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 90,
-          "max": 100,
-          "unit": "% of Rx"
-        },
-        "advanced": {
-          "min": 80,
-          "max": 90,
-          "unit": "% of Rx"
-        },
-        "intermediate": {
-          "min": 70,
-          "max": 80,
-          "unit": "% of Rx"
-        },
-        "beginner": {
-          "min": 0,
-          "max": 70,
-          "unit": "% of Rx"
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Pure strength test - 4RM front squat",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "1"
   },
   {
@@ -20305,30 +20233,13 @@
     "description": "9-6-3 Reps for Time\nSnatches (185/135 lb)\nBurpee Box Jump Overs (30 in)\n\nTime Cap: 7 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 240,
-          "max": 300
-        },
-        "advanced": {
-          "min": 301,
-          "max": 360
-        },
-        "intermediate": {
-          "min": 361,
-          "max": 420
-        },
-        "beginner": {
-          "min": 0,
-          "max": 420
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Sprint format with heavy snatches",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "10"
   },
   {
@@ -20337,30 +20248,13 @@
     "description": "For Time\n50 Dumbbell Walking Lunges (2x50/35 lb)\n30 Handstand Push-Ups\n40 Front Rack Walking Lunges (2x50/35 lb)\n20 Deficit Handstand Push-Ups (3.5/2 in)\n30 Overhead Walking Lunges (2x50/35 lb)\n10 Strict Handstand Push-Ups\n\nTime Cap: 15 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 600,
-          "max": 720
-        },
-        "advanced": {
-          "min": 721,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 900
-        },
-        "beginner": {
-          "min": 0,
-          "max": 900
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Heavy dumbbell lunges with progressive HSPU variations",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "6"
   },
   {
@@ -20369,30 +20263,13 @@
     "description": "3 Rounds for Time\n30 Alternating Pistols\n30 GHD Sit-Ups\n10 Muscle-Ups\n\nTime Cap: 15 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 600,
-          "max": 720
-        },
-        "advanced": {
-          "min": 721,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 900
-        },
-        "beginner": {
-          "min": 0,
-          "max": 900
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "High skill movements with GHD sit-ups",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "3"
   },
   {
@@ -20401,30 +20278,13 @@
     "description": "For Time\n8 Wall Ball Shots (20/14 lb)\n4 Shuttle Runs\n1 Rope Climb\n16 Wall Ball Shots (20/14 lb)\n8 Shuttle Runs\n2 Rope Climbs\n24 Wall Ball Shots (20/14 lb)\n12 Shuttle Runs\n3 Rope Climbs\n32 Wall Ball Shots (20/14 lb)\n16 Shuttle Runs\n4 Rope Climbs\n24 Wall Ball Shots (20/14 lb)\n12 Shuttle Runs\n3 Rope Climbs\n16 Wall Ball Shots (20/14 lb)\n8 Shuttle Runs\n2 Rope Climbs\n8 Wall Ball Shots (20/14 lb)\n4 Shuttle Runs\n1 Rope Climb\n\nTime Cap: 25 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 1080,
-          "max": 1200
-        },
-        "advanced": {
-          "min": 1201,
-          "max": 1320
-        },
-        "intermediate": {
-          "min": 1321,
-          "max": 1500
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1500
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Pyramid format with extreme endurance test",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "6"
   },
   {
@@ -20433,30 +20293,13 @@
     "description": "For Time\n30 calorie Row\n20 Burpee Box Jump Overs (24/20 in)\n10 Snatches (185/135 lb)\n\nTime Cap: 7 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 240,
-          "max": 300
-        },
-        "advanced": {
-          "min": 301,
-          "max": 360
-        },
-        "intermediate": {
-          "min": 361,
-          "max": 420
-        },
-        "beginner": {
-          "min": 0,
-          "max": 420
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Sprint format with heavy snatches",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "2"
   },
   {
@@ -20465,30 +20308,13 @@
     "description": "For Time\n9 Front Squats (225/155 lb)\n9x25 foot Handstand Walk\n15 Front Squats (185/125 lb)\n15 Muscle-Ups\n21 Front Squats (135/95 lb)\n21 Chest-to-Wall Handstand Push-Ups\n\nTime Cap: 15 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 600,
-          "max": 720
-        },
-        "advanced": {
-          "min": 721,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 900
-        },
-        "beginner": {
-          "min": 0,
-          "max": 900
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Progressive loading front squats with gymnastics",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "0"
   },
   {
@@ -20497,30 +20323,13 @@
     "description": "For Time\n9 Front Squats (225/155 lb)\n9x25 foot Handstand Walk\n15 Front Squats (185/125 lb)\n15 Muscle-Ups\n21 Front Squats (135/95 lb)\n21 Chest-to-Wall Handstand Push-Ups\n\nTime Cap: 15 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 600,
-          "max": 720
-        },
-        "advanced": {
-          "min": 721,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 900
-        },
-        "beginner": {
-          "min": 0,
-          "max": 900
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Progressive loading front squats with gymnastics",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "0"
   },
   {
@@ -20529,30 +20338,13 @@
     "description": "AMRAP in 12 minutes\n8 Single-Arm Dumbbell Snatches (70/50 lb)\n8 Single-Arm Overhead Walking Lunges (70/50 lb)\n8 Single-Arm Dumbbell Snatches (70/50 lb)\n8 Single-Arm Overhead Walking Lunges (70/50 lb)\n40 Crossovers",
     "benchmarks": {
       "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 5,
-          "max": null
-        },
-        "advanced": {
-          "min": 4,
-          "max": 5
-        },
-        "intermediate": {
-          "min": 3,
-          "max": 4
-        },
-        "beginner": {
-          "min": 2,
-          "max": 3
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["AMRAP"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Unilateral loading with heavy dumbbells",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "0"
   },
   {
@@ -20561,30 +20353,13 @@
     "description": "AMRAP in 12 minutes\n8 Single-Arm Dumbbell Snatches (70/50 lb)\n8 Single-Arm Overhead Walking Lunges (70/50 lb)\n8 Single-Arm Dumbbell Snatches (70/50 lb)\n8 Single-Arm Overhead Walking Lunges (70/50 lb)\n40 Crossovers",
     "benchmarks": {
       "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 5,
-          "max": null
-        },
-        "advanced": {
-          "min": 4,
-          "max": 5
-        },
-        "intermediate": {
-          "min": 3,
-          "max": 4
-        },
-        "beginner": {
-          "min": 2,
-          "max": 3
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["AMRAP"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Unilateral loading with heavy dumbbells",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "5"
   },
   {
@@ -20593,30 +20368,13 @@
     "description": "5 Rounds for Time\n5 Burpee Box Jump Overs (30/24 in)\n1 Clean-and-Jerk (275/185 lb)\n\nTime Cap: 10 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 360,
-          "max": 480
-        },
-        "advanced": {
-          "min": 481,
-          "max": 600
-        },
-        "intermediate": {
-          "min": 601,
-          "max": 720
-        },
-        "beginner": {
-          "min": 0,
-          "max": 720
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Extremely Hard",
-    "difficulty_explanation": "Very heavy clean & jerks with high box jumps",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "1"
   },
   {
@@ -20625,30 +20383,13 @@
     "description": "AMRAP in 20 minutes\n1,000 meter Row\n50 GHD Sit-Ups\n500 meter Row\n25 V-Ups",
     "benchmarks": {
       "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 3,
-          "max": null
-        },
-        "advanced": {
-          "min": 2,
-          "max": 3
-        },
-        "intermediate": {
-          "min": 1,
-          "max": 2
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["AMRAP"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Long endurance test with rowing and core work",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "1"
   },
   {
@@ -20657,30 +20398,13 @@
     "description": "AMRAP in 20 minutes\n1,000 meter Row\n50 GHD Sit-Ups\n500 meter Row\n25 V-Ups",
     "benchmarks": {
       "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 3,
-          "max": null
-        },
-        "advanced": {
-          "min": 2,
-          "max": 3
-        },
-        "intermediate": {
-          "min": 1,
-          "max": 2
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["AMRAP"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Long endurance test with rowing and core work",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "1"
   },
   {
@@ -20689,30 +20413,13 @@
     "description": "For Time\n21 Deadlifts (225/155 lb)\n21 Chest-to-Bar Pull-Ups\n15 Deadlifts (275/185 lb)\n15 Bar Muscle-Ups\n9 Deadlifts (315/205 lb)\n\nTime Cap: 15 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 600,
-          "max": 720
-        },
-        "advanced": {
-          "min": 721,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 900
-        },
-        "beginner": {
-          "min": 0,
-          "max": 900
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Heavy deadlifts with high-skill gymnastics",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "4"
   },
   {
@@ -20721,30 +20428,13 @@
     "description": "4 Rounds for Max Reps of:\n1 minute of Snatches (135/85 lb)\n1 minute of Rowing (calories)\n1 minute of Dumbbell Box Step-Ups (2 x 50/35 lb, 20/20 in)\n1 minute of Rest",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 250,
-          "max": null
-        },
-        "advanced": {
-          "min": 200,
-          "max": 250
-        },
-        "intermediate": {
-          "min": 150,
-          "max": 200
-        },
-        "beginner": {
-          "min": 0,
-          "max": 150
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Hard",
-    "difficulty_explanation": "Interval format tests power output",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "1"
   },
   {
@@ -20753,30 +20443,13 @@
     "description": "3 Rounds for Time of:\n50 Wall Ball Shots (20/14 lb)\n50 Lateral Burpee Box Jump-Overs (24/20 in)\n\nTime Cap: 20 minutes",
     "benchmarks": {
       "type": "time",
-      "levels": {
-        "elite": {
-          "min": 900,
-          "max": 1020
-        },
-        "advanced": {
-          "min": 1021,
-          "max": 1140
-        },
-        "intermediate": {
-          "min": 1141,
-          "max": 1200
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1200
-        }
-      }
+      "levels": null
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "High volume wall balls and lateral burpees",
+    "difficulty": null,
+    "difficulty_explanation": null,
     "count_likes": "2"
   },
   {
@@ -20787,24 +20460,20 @@
       "type": "reps",
       "levels": {
         "elite": {
-          "min": 100,
-          "max": null,
-          "unit": "% of Rx"
+          "min": 150,
+          "max": null
         },
         "advanced": {
-          "min": 90,
-          "max": 100,
-          "unit": "% of Rx"
+          "min": 120,
+          "max": 150
         },
         "intermediate": {
-          "min": 80,
-          "max": 90,
-          "unit": "% of Rx"
+          "min": 90,
+          "max": 120
         },
         "beginner": {
           "min": 0,
-          "max": 80,
-          "unit": "% of Rx"
+          "max": 90
         }
       }
     },
@@ -20822,8 +20491,8 @@
     ],
     "category": "Quarterfinals",
     "tags": ["For Time", "Chipper"],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Strength endurance test",
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Quarterfinals WOD (Chipper). Rounds of HSPU/T2B, then Strict HSPU/Rope Climbs, then Chest-to-Wall HSPU/Muscle-Ups. Extreme gymnastics skill/volume progression.",
     "count_likes": 1
   },
   {

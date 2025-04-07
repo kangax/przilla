@@ -57,31 +57,43 @@ export const getPerformanceLevel = (
   const numericScore = getNumericScore(wod, result);
   if (numericScore === null) return null;
 
+  // Add check for levels existence and non-emptiness
   const { levels } = wod.benchmarks;
+  if (
+    !levels ||
+    typeof levels !== "object" ||
+    Object.keys(levels).length === 0
+  ) {
+    return null; // Cannot determine level without defined levels
+  }
 
   if (wod.benchmarks.type === "time") {
     // Lower is better for time
-    if (levels.elite.max !== null && numericScore <= levels.elite.max)
+    // Add optional chaining for safety, though the check above should cover it
+    if (levels.elite?.max !== null && numericScore <= levels.elite.max)
       return "elite";
-    if (levels.advanced.max !== null && numericScore <= levels.advanced.max)
+    if (levels.advanced?.max !== null && numericScore <= levels.advanced.max)
       return "advanced";
     if (
-      levels.intermediate.max !== null &&
+      levels.intermediate?.max !== null &&
       numericScore <= levels.intermediate.max
     )
       return "intermediate";
+    // If score is higher than intermediate max (or intermediate max is null), it's beginner
     return "beginner";
   } else {
     // Higher is better for rounds/reps/load
-    if (levels.elite.min !== null && numericScore >= levels.elite.min)
+    // Add optional chaining for safety
+    if (levels.elite?.min !== null && numericScore >= levels.elite.min)
       return "elite";
-    if (levels.advanced.min !== null && numericScore >= levels.advanced.min)
+    if (levels.advanced?.min !== null && numericScore >= levels.advanced.min)
       return "advanced";
     if (
-      levels.intermediate.min !== null &&
+      levels.intermediate?.min !== null &&
       numericScore >= levels.intermediate.min
     )
       return "intermediate";
+    // If score is lower than intermediate min (or intermediate min is null), it's beginner
     return "beginner";
   }
 };
@@ -138,9 +150,19 @@ export const getPerformanceLevelColor = (level: string | null): string => {
  * Generates a multi-line string tooltip describing the benchmark levels for a WOD.
  */
 export const getPerformanceLevelTooltip = (wod: Wod): string => {
-  if (!wod.benchmarks) return "No benchmark data available";
+  if (!wod.benchmarks) return "No benchmark data available.";
 
+  // Add check for levels existence and non-emptiness
   const { levels, type } = wod.benchmarks;
+  if (
+    !levels ||
+    typeof levels !== "object" ||
+    Object.keys(levels).length === 0
+  ) {
+    return "Benchmark levels not defined.";
+  }
+
+  // Ensure levelOrder only contains keys actually present in levels, though standard keys are expected
   const levelOrder: Array<keyof typeof levels> = [
     "elite",
     "advanced",
@@ -151,21 +173,50 @@ export const getPerformanceLevelTooltip = (wod: Wod): string => {
 
   levelOrder.forEach((levelName) => {
     const levelData = levels[levelName];
+    // Check if levelData actually exists for the key
+    if (!levelData) {
+      tooltipLines.push(
+        `${levelName.charAt(0).toUpperCase() + levelName.slice(1)}: N/A`,
+      );
+      return; // Skip to next iteration
+    }
+
     let formattedRange = "";
 
     if (type === "time") {
       // Lower is better for time
+      // Use optional chaining just in case, though levelData check helps
       const min =
-        levelData.min !== null ? formatSecondsToMMSS(levelData.min) : "0:00";
+        levelData?.min !== null ? formatSecondsToMMSS(levelData.min) : "0:00";
       const max =
-        levelData.max !== null ? formatSecondsToMMSS(levelData.max) : "∞";
-      formattedRange = `${min} - ${max}`;
+        levelData?.max !== null ? formatSecondsToMMSS(levelData.max) : "∞";
+      // Handle edge case where min is 0 for elite (means less than max)
+      if (levelName === "elite" && levelData?.min === 0) {
+        formattedRange = `< ${max}`;
+      } else if (levelName === "beginner" && levelData?.max === null) {
+        formattedRange = `> ${min}`;
+      } else {
+        formattedRange = `${min} - ${max}`;
+      }
     } else {
       // Higher is better for reps, load, rounds
-      const min = levelData.min !== null ? levelData.min.toString() : "0";
-      const max = levelData.max !== null ? levelData.max.toString() : "∞";
-      const unit = type === "load" ? "lbs" : type; // Add unit
-      formattedRange = `${min} - ${max} ${unit}`;
+      const min = levelData?.min !== null ? levelData.min.toString() : "0";
+      const max = levelData?.max !== null ? levelData.max.toString() : "∞";
+      const unit =
+        type === "load"
+          ? " lbs"
+          : type === "reps" || type === "rounds"
+            ? ""
+            : ` ${String(type)}`; // Explicitly cast type to string for template literal
+
+      // Handle edge case where max is null for elite (means greater than min)
+      if (levelName === "elite" && levelData?.max === null) {
+        formattedRange = `> ${min}${unit}`;
+      } else if (levelName === "beginner" && levelData?.min === 0) {
+        formattedRange = `< ${max}${unit}`;
+      } else {
+        formattedRange = `${min} - ${max}${unit}`;
+      }
     }
 
     const capitalizedLevelName =

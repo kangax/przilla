@@ -7,8 +7,11 @@
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
 - **Authentication Shell:** Basic authentication controls (`AuthControls.tsx`) and setup (`src/server/auth/`) exist, though a potential switch is noted in `todo.md`.
-- **WodTable Notes Tooltip:** The "Notes" column in `WodTable.tsx` has been removed; notes are now displayed via a tooltip on the score itself.
-- **WodTable Search Highlighting:** Search terms entered in `WodViewer` now highlight matches in the WOD Name, Category, Tags, and Description columns within `WodTable`.
+- **WodTable UI:**
+  - Notes column removed; notes shown in score tooltip.
+  - Search highlighting implemented for Name, Category, Tags, Description.
+  - Category and Tags columns combined into one, displaying tags below the category.
+  - Variable row height enabled using `useVirtualizer`'s `measureElement` to correctly display wrapped content (like descriptions and tags).
 
 ## What's Left to Build
 

@@ -150,53 +150,61 @@ const createColumns = (
           </Tooltip>
         );
       },
-      size: 220, // Estimate size
-    }),
-    columnHelper.accessor("category", {
-      header: "Category", // Changed header
-      cell: (info) => {
-        const row = info.row.original;
-        // Only render category on the first row for that WOD
-        if (!row.isFirstResult || !row.category) return null;
-        return (
-          <Badge color="indigo" variant="soft" radius="full" className="w-fit">
-            <HighlightMatch text={row.category} highlight={searchTerm} />
-          </Badge>
-        );
-      },
-      size: 110, // Adjusted size
-    }),
-    // New column for Tags
-    columnHelper.accessor("tags", {
-      header: "Tags",
-      cell: (info) => {
-        const row = info.row.original;
-        // Only render tags on the first row for that WOD
-        if (!row.isFirstResult || !row.tags || row.tags.length === 0)
-          return null;
-        return (
-          <Flex
-            gap="1"
-            className="flex-nowrap overflow-hidden" // Ensure single line
-            title={row.tags.join(", ")} // Tooltip for overflow
-          >
-            {row.tags.map((tag) => (
-              <Badge
-                key={tag}
-                color="gray"
-                variant="soft"
-                radius="full"
-                className="flex-shrink-0 text-xs" // Prevent shrinking
-              >
-                <HighlightMatch text={tag} highlight={searchTerm} />
-              </Badge>
-            ))}
-          </Flex>
-        );
-      },
-      // tags column
       size: 200,
     }),
+    // Combined Category and Tags Column
+    columnHelper.accessor(
+      (row) => ({ category: row.category, tags: row.tags }),
+      {
+        id: "categoryAndTags", // Unique ID for combined column
+        header: "Category / Tags",
+        cell: (info) => {
+          const { category, tags } = info.getValue();
+          const row = info.row.original;
+
+          // Only render on the first row for that WOD
+          if (!row.isFirstResult) return null;
+          if (!category && (!tags || tags.length === 0)) return null; // Render nothing if both are empty
+
+          return (
+            <Flex direction="column" gap="1" align="start">
+              {/* Category Badge */}
+              {category && (
+                <Badge
+                  color="indigo"
+                  variant="soft"
+                  radius="full"
+                  className="w-fit"
+                >
+                  <HighlightMatch text={category} highlight={searchTerm} />
+                </Badge>
+              )}
+              {/* Tags Badges */}
+              {tags && tags.length > 0 && (
+                <Flex
+                  gap="1"
+                  wrap="wrap" // Allow tags to wrap
+                  className="mt-1" // Add some margin top
+                >
+                  {tags.map((tag) => (
+                    <Badge
+                      key={tag}
+                      color="gray"
+                      variant="soft"
+                      radius="full"
+                      className="flex-shrink-0 text-xs" // Prevent shrinking
+                    >
+                      <HighlightMatch text={tag} highlight={searchTerm} />
+                    </Badge>
+                  ))}
+                </Flex>
+              )}
+            </Flex>
+          );
+        },
+        size: 180, // Adjusted size for combined content
+      },
+    ),
     // --- Moved Level column after Score ---
     columnHelper.accessor("difficulty", {
       header: () => (
@@ -329,7 +337,7 @@ const createColumns = (
             return scoreDisplay;
           }
         },
-        size: 150,
+        size: 140,
       },
     ),
     // --- Level Column (Moved) ---
@@ -475,8 +483,10 @@ const WodTable: React.FC<WodTableProps> = ({
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 49, // Estimate row height in px (adjust as needed)
-    overscan: 5, // Render a few extra rows above/below viewport
+    estimateSize: () => 49, // Still provide an estimate
+    overscan: 5,
+    // Add measurement function for dynamic height, casting element
+    measureElement: (element) => (element as HTMLElement).offsetHeight,
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
@@ -538,12 +548,15 @@ const WodTable: React.FC<WodTableProps> = ({
           return (
             <div
               key={row.id}
-              className="absolute left-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
+              className="absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt" // Added top-0
               style={{
-                height: `${virtualRow.size}px`,
+                // Remove fixed height, let content determine it
                 transform: `translateY(${virtualRow.start}px)`, // Positions row within the padded container
                 width: table.getTotalSize(),
               }}
+              // Add ref for measurement
+              ref={rowVirtualizer.measureElement}
+              data-index={virtualRow.index} // Required by measureElement
               role="row"
             >
               {row.getVisibleCells().map((cell) => (

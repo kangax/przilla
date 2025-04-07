@@ -32,9 +32,11 @@
 - **WodTable Search Highlighting:** Implemented search term highlighting in `WodTable.tsx`.
   - Added a `HighlightMatch` component to wrap matching text in `<mark>` tags.
   - Added a new "Description" column to the table (displayed last) and enabled highlighting within it (using full text, not truncated).
-  - Enabled highlighting in "Workout", "Category", and "Tags" columns.
+  - Enabled highlighting in "Workout", "Category", and "Tags" columns (Note: Category and Tags are now combined).
   - Passed the `searchTerm` state from `WodViewer.tsx` down to `WodTable.tsx`.
   - Added global CSS styles for the `<mark>` tag in `src/styles/globals.css` for light/dark modes.
+- **WodTable Column Consolidation:** Combined the "Category" and "Tags" columns into a single column in `WodTable.tsx`. The category is displayed first, with tags listed below it. Highlighting still applies to both.
+- **WodTable Variable Row Height:** Fixed virtualization in `WodTable.tsx` to support variable row heights by implementing the `measureElement` option in `useVirtualizer`. This allows rows to expand correctly for wrapped descriptions and the combined category/tags column.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

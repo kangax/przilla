@@ -16,6 +16,12 @@
   - Corrected benchmark estimation logic for time-capped WODs (e.g., Open 25.2) to use `reps` type.
   - Filtered missing benchmarks to exclude existing "Girl" WODs and ensure only verified source WODs were considered.
 - **Script Generation:** Created Node.js scripts (`scripts/add_benchmarks_*.js`) to batch-add transformed WODs and sort `wods.json`. Execution of these scripts was deferred/skipped by user request.
+- **Benchmark Level Correction:**
+  - Identified WODs in `public/data/wods.json` with empty `benchmarks.levels` objects using `jq`.
+  - Performed sophisticated analysis for each identified WOD to determine appropriate benchmark levels (Elite, Advanced, Intermediate, Beginner) based on description, type, movements, weights, etc.
+  - Created a new script (`scripts/apply_estimated_levels.js`) containing a map of WOD names to their pre-analyzed benchmark levels.
+  - Executed the script, successfully updating 183 WODs. 72 WODs were skipped (e.g., partner WODs, ambiguous scoring types, or those not found in the initial `jq` query results used for analysis).
+  - The `wods.json` file was updated and sorted alphabetically.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

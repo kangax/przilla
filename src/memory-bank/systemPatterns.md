@@ -38,6 +38,6 @@ _What design patterns are used in the codebase?_
 ## Critical Implementation Paths
 
 - **Database Migration:** Moving from static JSON to a dynamic, user-specific database (Drizzle + LibSQL/Turso) is a critical and complex task involving schema design, data migration, and updating all data access logic (tRPC routers, etc.).
-- **Authentication Integration:** Ensuring authentication (NextAuth or BetterAuth) correctly protects user data and integrates seamlessly with the database and tRPC.
+- **Authentication Integration:** Ensuring authentication (likely BetterAuth) correctly protects user data and integrates seamlessly with the database and tRPC.
 - **Data Import/Scraping:** Implementing reliable data import from external sources (Wodwell, SugarWod) involves handling different formats, potential API limitations, and error conditions.
 - **Stats/Analysis Engine:** Developing the logic for calculating and displaying meaningful user statistics could become complex depending on the desired insights.

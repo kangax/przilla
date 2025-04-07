@@ -39,9 +39,55 @@ _(Based on `todo.md`):_
 ## Known Issues
 
 - **Data Scalability/Personalization:** Current reliance on static JSON files limits scalability and prevents storing user-specific scores effectively (addressed by the "JSON -> database" TODO item).
-- **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod).
+- **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
 
 ## Evolution of Project Decisions
 
 _Document significant changes in direction or decisions made over time._
+
+Example of a wod from wods.json:
+
+```
+{
+  "wodUrl": "https://wodwell.com/wod/adambrown/",
+  "wodName": "AdamBrown",
+  "description": "2 Rounds For Time\n24 Deadlifts (295/205 lb)\n24 Box Jumps (24/20 in)\n24 Wall Ball Shots (20/14 lb)\n24 Bench Press (195/125 lb)\n24 Box Jumps (24/20 in)\n24 Wall Ball Shots (20/14 lb)\n24 Cleans (145/100 lb)",
+  "benchmarks": {
+    "type": "time",
+    "levels": {
+      "elite": {
+        "min": 0,
+        "max": 1500
+      },
+      "advanced": {
+        "min": 1500,
+        "max": 2100
+      },
+      "intermediate": {
+        "min": 2100,
+        "max": 2700
+      },
+      "beginner": {
+        "min": 2700,
+        "max": null
+      }
+    }
+  },
+  "results": [],
+  "category": "Hero",
+  "tags": ["For Time"],
+  "difficulty": "Very Hard",
+  "difficulty_explanation": "Hero WOD. 2 rounds featuring very heavy deadlifts (295lb), heavy bench press (195lb), and moderately heavy cleans (145lb), interspersed with high-volume box jumps and wall balls. Extremely demanding on strength and conditioning due to heavy loads and volume.",
+  "count_likes": 292
+},
+```
+
+- **WOD Transformation Process (Apr 2025):**
+  - Identified missing Open workouts (11.x-18.x, 19.2, 25.x) and numerous Benchmark workouts by comparing `wodwell_workouts.json` and `wods.json`.
+  - Established a process to transform source data to the target `Wod` format, including inferring categories/tags and estimating benchmarks/difficulty using AI capabilities.
+  - Encountered issues with shell escaping when using `jq` for batch insertions, leading to the adoption of Node.js scripts for safer data manipulation (`scripts/add_benchmarks_*.js`).
+  - Generated scripts for adding large batches of benchmarks, but execution was deferred/skipped by user request.
+  - Refined benchmark estimation logic for time-capped workouts (e.g., Open 25.2) to use `reps` type.
+  - Corrected filtering logic to accurately identify missing, verified, non-Girl benchmarks.
+- We've inferred difficulty and filled in difficulty_explanation based on your AI capabilities of assessing workout scores of a crossfit wod.

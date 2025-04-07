@@ -150,7 +150,7 @@ const createColumns = (
           </Tooltip>
         );
       },
-      size: 200,
+      size: 180,
     }),
     // Combined Category and Tags Column
     columnHelper.accessor(
@@ -422,8 +422,7 @@ const WodTable: React.FC<WodTableProps> = ({
   searchTerm, // Destructure searchTerm
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null); // Ref for header
-  // Removed unused headerHeight state and useLayoutEffect
+  const headerRef = useRef<HTMLDivElement>(null); // Ref for header, but height measurement no longer needed
 
   // Flatten the data for virtualization
   const flatData = useMemo(() => {
@@ -500,49 +499,49 @@ const WodTable: React.FC<WodTableProps> = ({
       className="w-full overflow-auto rounded-md border border-table-border"
       style={{ height: `${tableHeight}px` }}
     >
+      {/* Sticky Header - Now directly inside scroll container */}
+      <div
+        ref={headerRef}
+        className="sticky top-0 z-10 bg-table-header"
+        style={{ width: table.getTotalSize() }}
+      >
+        {headerGroups.map((headerGroup) => (
+          <div key={headerGroup.id} className="flex" role="row">
+            {headerGroup.headers.map((header) => (
+              <div
+                key={header.id}
+                className="flex-shrink-0 flex-grow-0 border-b border-r border-table-border px-3 py-2 text-sm font-medium text-foreground last:border-r-0"
+                style={{ width: `${header.getSize()}px` }}
+                role="columnheader"
+                aria-sort={
+                  header.column.id === sortBy
+                    ? sortDirection === "asc"
+                      ? "ascending"
+                      : "descending"
+                    : undefined
+                }
+              >
+                {header.isPlaceholder
+                  ? null
+                  : flexRender(
+                      header.column.columnDef.header,
+                      header.getContext(),
+                    )}
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+
+      {/* Virtual Row Container - Positioned relative, scrolls under header */}
       <div
         style={{
-          height: `${totalSize}px`,
+          height: `${totalSize}px`, // Height is just the total size of rows
           width: "100%",
           position: "relative",
         }}
       >
-        {/* Sticky Header */}
-        {/* Ensure header stays sticky, remove incorrect absolute positioning */}
-        <div
-          ref={headerRef} // Attach ref here
-          className="sticky top-0 z-10 bg-table-header"
-          style={{ width: table.getTotalSize() }} // Rely on sticky class for positioning
-        >
-          {headerGroups.map((headerGroup) => (
-            <div key={headerGroup.id} className="flex" role="row">
-              {headerGroup.headers.map((header) => (
-                <div
-                  key={header.id}
-                  className="flex-shrink-0 flex-grow-0 border-b border-r border-table-border px-3 py-2 text-sm font-medium text-foreground last:border-r-0"
-                  style={{ width: `${header.getSize()}px` }}
-                  role="columnheader"
-                  aria-sort={
-                    header.column.id === sortBy
-                      ? sortDirection === "asc"
-                        ? "ascending"
-                        : "descending"
-                      : undefined
-                  }
-                >
-                  {header.isPlaceholder
-                    ? null
-                    : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext(),
-                      )}
-                </div>
-              ))}
-            </div>
-          ))}
-        </div>
-
-        {/* Virtualized Rows - These are positioned absolutely relative to the padded container */}
+        {/* Virtualized Rows - These are positioned absolutely relative to this container */}
         {virtualRows.map((virtualRow) => {
           const row = rows[virtualRow.index];
           return (

@@ -5,7 +5,6 @@
 ## Data
 
 - Add Games workouts
-- Add benchmark workouts (e.g. King Kong)
 - Add remaining workouts from SugarWod
 
 ### Stats

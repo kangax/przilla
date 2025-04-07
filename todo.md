@@ -1,7 +1,3 @@
-### General UI
-
-- Add search box to filter wods?
-
 ## Data
 
 - Add Games workouts

@@ -132,6 +132,10 @@ export default function WodViewer({
     return DEFAULT_SORT_DIRECTIONS[initialSortBy];
   };
 
+  const getInitialSearchTerm = (): string => {
+    return searchParams.get("search") ?? ""; // Read 'search' param or default to empty
+  };
+
   // State Hooks - Initialized from URL search params
   const [selectedCategories, setSelectedCategories] =
     useState<string[]>(getInitialCategories);
@@ -145,7 +149,7 @@ export default function WodViewer({
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">(() =>
     getInitialSortDirection(sortBy),
   );
-  const [searchTerm, setSearchTerm] = useState<string>(""); // Add search term state
+  const [searchTerm, setSearchTerm] = useState<string>(getInitialSearchTerm); // Initialize from URL
   // --- End Initialize State ---
 
   // --- Calculate Table Height ---

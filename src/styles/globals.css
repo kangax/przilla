@@ -25,7 +25,7 @@
     --border: 214.3 31.8% 85.4%;
     --input: 214.3 31.8% 85.4%;
     --ring: 221.2 83.2% 53.3%;
-    
+
     /* Table specific colors for light mode */
     --table-header-bg: 210 40% 96.1%;
     --table-row-bg: 0 0% 100%;
@@ -55,11 +55,18 @@
     --border: 217.2 32.6% 17.5%;
     --input: 217.2 32.6% 17.5%;
     --ring: 224.3 76.3% 48%;
-    
+
     /* Table specific colors for dark mode */
     --table-header-bg: 217.2 32.6% 17.5%;
     --table-row-bg: 222.2 84% 4.9%;
     --table-row-alt-bg: 223 47% 11%;
     --table-border: 217.2 32.6% 17.5%;
+  }
+}
+
+@layer components {
+  /* Styling for search result highlighting */
+  mark {
+    @apply rounded bg-yellow-300 px-0.5 text-black dark:bg-yellow-500 dark:text-black;
   }
 }

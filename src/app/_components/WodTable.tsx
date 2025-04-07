@@ -28,6 +28,7 @@ interface WodTableProps {
   sortBy: SortByType;
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
+  searchTerm: string; // Added for highlighting
 }
 
 // Represents a single row in the flattened data structure
@@ -65,6 +66,34 @@ const getDifficultyColor = (difficulty: string | undefined): string => {
   }
 };
 
+// --- Highlight Component ---
+// Simple component to highlight matches in text
+const HighlightMatch: React.FC<{ text: string; highlight: string }> = ({
+  text,
+  highlight,
+}) => {
+  if (!highlight.trim()) {
+    return <>{text}</>;
+  }
+  const regex = new RegExp(
+    `(${highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+    "gi",
+  );
+  const parts = text.split(regex);
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        regex.test(part) ? (
+          <mark key={i}>{part}</mark>
+        ) : (
+          <React.Fragment key={i}>{part}</React.Fragment>
+        ),
+      )}
+    </>
+  );
+};
+
 // --- Column Definitions ---
 
 const columnHelper = createColumnHelper<FlatWodRow>();
@@ -73,6 +102,7 @@ const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
+  searchTerm: string, // Added searchTerm
 ): ColumnDef<FlatWodRow, unknown>[] => {
   // Changed any to unknown
   const getSortIndicator = (columnName: SortByType) => {
@@ -107,14 +137,14 @@ const createColumns = (
                 target="_blank"
                 className="flex max-w-[200px] items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
               >
-                {row.wodName}
+                <HighlightMatch text={row.wodName} highlight={searchTerm} />
                 <span className="ml-1 flex-shrink-0 text-xs opacity-70">
                   ↗
                 </span>
               </Link>
             ) : (
               <span className="max-w-[200px] truncate whitespace-nowrap font-medium">
-                {row.wodName}
+                <HighlightMatch text={row.wodName} highlight={searchTerm} />
               </span>
             )}
           </Tooltip>
@@ -130,7 +160,7 @@ const createColumns = (
         if (!row.isFirstResult || !row.category) return null;
         return (
           <Badge color="indigo" variant="soft" radius="full" className="w-fit">
-            {row.category}
+            <HighlightMatch text={row.category} highlight={searchTerm} />
           </Badge>
         );
       },
@@ -158,7 +188,7 @@ const createColumns = (
                 radius="full"
                 className="flex-shrink-0 text-xs" // Prevent shrinking
               >
-                {tag}
+                <HighlightMatch text={tag} highlight={searchTerm} />
               </Badge>
             ))}
           </Flex>
@@ -355,6 +385,21 @@ const createColumns = (
         size: 110,
       },
     ),
+    // --- Description Column (New) ---
+    columnHelper.accessor("description", {
+      header: "Description",
+      cell: (info) => {
+        const row = info.row.original;
+        // Only render description on the first row for that WOD
+        if (!row.isFirstResult || !row.description) return null;
+        return (
+          <span className="whitespace-normal break-words">
+            <HighlightMatch text={row.description} highlight={searchTerm} />
+          </span>
+        );
+      },
+      size: 300, // Adjust size as needed
+    }),
   ];
 };
 
@@ -366,6 +411,7 @@ const WodTable: React.FC<WodTableProps> = ({
   sortBy,
   sortDirection,
   handleSort,
+  searchTerm, // Destructure searchTerm
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const headerRef = useRef<HTMLDivElement>(null); // Ref for header
@@ -413,8 +459,8 @@ const WodTable: React.FC<WodTableProps> = ({
   }, [wods]);
 
   const columns = useMemo(
-    () => createColumns(handleSort, sortBy, sortDirection),
-    [handleSort, sortBy, sortDirection],
+    () => createColumns(handleSort, sortBy, sortDirection, searchTerm), // Pass searchTerm
+    [handleSort, sortBy, sortDirection, searchTerm], // Add searchTerm dependency
   );
 
   const table = useReactTable({

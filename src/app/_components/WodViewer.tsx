@@ -478,6 +478,7 @@ export default function WodViewer({
           sortBy={sortBy}
           sortDirection={sortDirection}
           handleSort={handleSort}
+          searchTerm={searchTerm} // Pass search term prop
         />
       ) : (
         <WodTimeline

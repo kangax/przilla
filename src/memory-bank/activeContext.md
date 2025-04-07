@@ -29,6 +29,12 @@
   - Executed the script, successfully updating the type and levels for 42 additional WODs.
   - The `wods.json` file was updated and sorted alphabetically again.
 - **WodTable UI Update:** Modified `src/app/_components/WodTable.tsx` to remove the dedicated "Notes" column. Result notes are now displayed in a tooltip when hovering over the score in the "Score" column, using Radix UI's `<Tooltip>`.
+- **WodTable Search Highlighting:** Implemented search term highlighting in `WodTable.tsx`.
+  - Added a `HighlightMatch` component to wrap matching text in `<mark>` tags.
+  - Added a new "Description" column to the table (displayed last) and enabled highlighting within it (using full text, not truncated).
+  - Enabled highlighting in "Workout", "Category", and "Tags" columns.
+  - Passed the `searchTerm` state from `WodViewer.tsx` down to `WodTable.tsx`.
+  - Added global CSS styles for the `<mark>` tag in `src/styles/globals.css` for light/dark modes.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

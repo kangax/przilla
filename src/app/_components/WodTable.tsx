@@ -268,17 +268,36 @@ const createColumns = (
             );
           }
 
-          // Original score display logic
-          return (
-            <span className="whitespace-nowrap font-mono">
+          // Score display logic with optional notes tooltip
+          const scoreDisplay = (
+            <span className="whitespace-nowrap">
               {formatScore(result)}{" "}
               {result.rxStatus && (
-                <span className="text-sm opacity-80">
+                <Badge
+                  color="gray"
+                  variant="soft"
+                  radius="full"
+                  className="w-fit"
+                >
                   {safeString(result.rxStatus)}
-                </span>
+                </Badge>
               )}
             </span>
           );
+
+          if (result.notes) {
+            return (
+              <Tooltip
+                content={
+                  <span style={{ whiteSpace: "pre-wrap" }}>{result.notes}</span>
+                }
+              >
+                {scoreDisplay}
+              </Tooltip>
+            );
+          } else {
+            return scoreDisplay;
+          }
         },
         size: 150,
       },
@@ -336,21 +355,6 @@ const createColumns = (
         size: 110,
       },
     ),
-    // --- Notes Column ---
-    columnHelper.accessor((row) => row.result?.notes, {
-      id: "notes",
-      header: "Notes",
-      cell: (info) => {
-        const notes = safeString(info.getValue());
-        if (!notes) return <span>-</span>;
-        return (
-          <Tooltip content={notes}>
-            <span className="block max-w-[250px] truncate">{notes}</span>
-          </Tooltip>
-        );
-      },
-      size: 250,
-    }),
   ];
 };
 

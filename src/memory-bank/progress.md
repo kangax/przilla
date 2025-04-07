@@ -7,6 +7,7 @@
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
 - **Authentication Shell:** Basic authentication controls (`AuthControls.tsx`) and setup (`src/server/auth/`) exist, though a potential switch is noted in `todo.md`.
+- **WodTable Notes Tooltip:** The "Notes" column in `WodTable.tsx` has been removed; notes are now displayed via a tooltip on the score itself.
 
 ## What's Left to Build
 

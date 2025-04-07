@@ -28,6 +28,7 @@
   - Created a new script (`scripts/fix_incorrect_type_levels.js`) containing a map with the corrected `type` ('reps') and pre-analyzed benchmark levels.
   - Executed the script, successfully updating the type and levels for 42 additional WODs.
   - The `wods.json` file was updated and sorted alphabetically again.
+- **WodTable UI Update:** Modified `src/app/_components/WodTable.tsx` to remove the dedicated "Notes" column. Result notes are now displayed in a tooltip when hovering over the score in the "Score" column, using Radix UI's `<Tooltip>`.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

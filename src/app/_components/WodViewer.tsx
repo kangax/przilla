@@ -348,6 +348,24 @@ export default function WodViewer({
 
   return (
     <Box>
+      <Flex justify="end">
+        <SegmentedControl.Root
+          size="1"
+          value={view}
+          onValueChange={(value) => setView(value as "table" | "timeline")}
+        >
+          <SegmentedControl.Item value="timeline" aria-label="Timeline View">
+            <Tooltip content="Timeline View">
+              <List size={16} />
+            </Tooltip>
+          </SegmentedControl.Item>
+          <SegmentedControl.Item value="table" aria-label="Table View">
+            <Tooltip content="Table View">
+              <TableIcon size={16} />
+            </Tooltip>
+          </SegmentedControl.Item>
+        </SegmentedControl.Root>
+      </Flex>
       {/* Filter Bar - Add ref */}
       <Flex ref={filterBarRef} className="mb-4 mt-4 items-center" gap="2">
         {" "}
@@ -358,7 +376,7 @@ export default function WodViewer({
           placeholder="Search..."
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)}
-          className="placeholder:text-muted-foreground w-48 rounded border border-input bg-background px-3 py-1 text-sm shadow-sm transition-colors file:border-0 file:bg-transparent file:text-sm file:font-medium focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50" // Adjusted width and styling
+          className="placeholder:text-muted-foreground w-40 rounded border border-input bg-background px-3 py-1.5 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
         />
         {/* Category Select */}
         <Select.Root
@@ -371,7 +389,7 @@ export default function WodViewer({
             }
           }}
         >
-          <Select.Trigger className="mr-2 flex min-w-[130px] items-center justify-between rounded-md border border-border bg-card px-3 py-2 text-xs text-card-foreground hover:bg-accent">
+          <Select.Trigger className="mr-2 flex min-w-[170px] items-center justify-between rounded-md border border-border bg-card px-3 py-2 text-xs text-card-foreground hover:bg-accent">
             <Select.Value placeholder="Select category" className="text-xs">
               {selectedCategories.length > 0
                 ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
@@ -451,24 +469,6 @@ export default function WodViewer({
             </Tooltip>
           </SegmentedControl.Item>
         </SegmentedControl.Root>
-        <Flex justify="center">
-          <SegmentedControl.Root
-            size="1"
-            value={view}
-            onValueChange={(value) => setView(value as "table" | "timeline")}
-          >
-            <SegmentedControl.Item value="timeline" aria-label="Timeline View">
-              <Tooltip content="Timeline View">
-                <List size={16} />
-              </Tooltip>
-            </SegmentedControl.Item>
-            <SegmentedControl.Item value="table" aria-label="Table View">
-              <Tooltip content="Table View">
-                <TableIcon size={16} />
-              </Tooltip>
-            </SegmentedControl.Item>
-          </SegmentedControl.Root>
-        </Flex>
       </Flex>
       {/* Render Table or Timeline View - Pass calculated height */}
       {view === "table" ? (

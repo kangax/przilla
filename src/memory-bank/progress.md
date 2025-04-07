@@ -108,4 +108,8 @@ Example of a wod from wods.json:
 - **Quarterfinals WOD Addition (Apr 2025):**
   - Identified missing Quarterfinals workouts by comparing `title` in `wodwell_workouts.json` against `wodName` in `wods.json` using `jq`.
   - Created and executed `scripts/add_quarterfinals_wods.js` to transform and add these workouts, mapping source fields (`title`, `url`, `workout`, `count_likes`) to target fields (`wodName`, `wodUrl`, `description`, `count_likes`), setting `category` to "Quarterfinals", inferring tags, and using placeholder functions for benchmark/difficulty estimation. Added 20 WODs.
+  - Subsequently, performed detailed AI-based estimation of **benchmarks.levels** (converted to seconds or reps as appropriate) for all Quarterfinal workouts.
+  - Added tailored **difficulty** ratings and **difficulty_explanation** fields based on workout structure, load, and skill requirements.
+  - Applied these updates via a comprehensive jq batch update targeting all ~20 Quarterfinal entries.
+  - This enrichment aligned Quarterfinal workouts with the rest of the dataset, improving data quality and consistency.
 - We've inferred difficulty and filled in difficulty_explanation based on your AI capabilities of assessing workout scores of a crossfit wod.

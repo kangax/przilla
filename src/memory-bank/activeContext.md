@@ -43,6 +43,11 @@
   - Updated `WodTimelineProps` to accept the `searchTerm`.
   - Updated `WodViewer.tsx` to pass the `searchTerm` to `WodTimeline`.
   - Modified `createColumns` in `WodTimeline.tsx` to accept `searchTerm` and use `HighlightMatch` for the "Workout" and "Description" columns.
+- **Quarterfinals WOD Addition:**
+  - Identified missing Quarterfinals workouts by comparing `title` in `wodwell_workouts.json` against `wodName` in `wods.json` using `jq`.
+  - Created a new script `scripts/add_quarterfinals_wods.js` to transform and add these workouts.
+  - The script maps source fields (`title`, `url`, `workout`, `count_likes`) to target fields (`wodName`, `wodUrl`, `description`, `count_likes`), sets `category` to "Quarterfinals", infers tags, and uses placeholder functions for benchmark/difficulty estimation.
+  - Executed the script, successfully adding 20 Quarterfinals WODs to `wods.json` and sorting the file.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

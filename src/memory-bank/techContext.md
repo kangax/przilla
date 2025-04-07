@@ -56,3 +56,58 @@
   - Integration tests for API endpoints.
   - E2E tests for critical user flows.
   - Ensure tests exist for additions/changes.
+
+## Example of a workout from wodwell_workouts.json
+
+```
+{
+    "id": 29321,
+    "title": "Quarterfinals 21.1",
+    "url": "https://wodwell.com/wod/quarterfinals-21-1/",
+    "has_video": true,
+    "posted_by": {
+      "text": "CrossFit Games Quarterfinals Test 1",
+      "avatar": "",
+      "coach": false
+    },
+    "posted_date": "2021-04-08",
+    "days_since_posted": 1446,
+    "workout": [
+      "For Time",
+      "3 Rounds of:",
+      "10 Strict Handstand Push-Ups",
+      "10 Dumbbell Hang Power Cleans (2x50/35 lb)",
+      "50 Double-Unders",
+      "",
+      "Rest 1 minute",
+      "",
+      "Then, 3 Rounds of:",
+      "10 Kipping Handstand Push-Ups",
+      "10 Dumbbell Shoulder-to-Overheads  (2x50/35 lb)",
+      "50 Double-Unders",
+      "",
+      "Time Cap: 10 minutes"
+    ],
+    "date": 1617907473,
+    "relevance": 0,
+    "popularity": 49,
+    "terms": [],
+    "preview_class": "wod-preview",
+    "thumbnail": "https://wodwell.com/wp-content/uploads/2023/11/garage-gym-med.jpg",
+    "count_likes": "8",
+    "count_comments": 6,
+    "is_verified_wod": true,
+    "is_allowed_flag": false,
+    "is_allowed_edit": false,
+    "edit_link": "",
+    "collection_buttons": {
+      "allowed": false,
+      "favorite": {
+        "title": ""
+      },
+      "add": {
+        "title": ""
+      }
+    }
+  },
+```

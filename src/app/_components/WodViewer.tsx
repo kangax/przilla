@@ -389,11 +389,11 @@ export default function WodViewer({
             }
           }}
         >
-          <Select.Trigger className="mr-2 flex min-w-[170px] items-center justify-between rounded-md border border-border bg-card px-3 py-2 text-xs text-card-foreground hover:bg-accent">
+          <Select.Trigger className="mr-2 flex min-w-[150px] items-center justify-between rounded-md border border-border bg-card px-3 py-2 text-xs text-card-foreground hover:bg-accent">
             <Select.Value placeholder="Select category" className="text-xs">
               {selectedCategories.length > 0
                 ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
-                : `All Categories (${originalTotalWodCount})`}
+                : `All (${originalTotalWodCount})`}
             </Select.Value>
             <Select.Icon>
               <ChevronDown className="ml-2 h-4 w-4 opacity-70" />
@@ -410,7 +410,7 @@ export default function WodViewer({
                   className="cursor-pointer px-3 py-2 text-xs text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
                 >
                   <Select.ItemText>
-                    All Categories ({originalTotalWodCount})
+                    All ({originalTotalWodCount})
                   </Select.ItemText>
                 </Select.Item>
                 {categoryOrder.map((category) => (

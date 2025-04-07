@@ -202,7 +202,7 @@ const createColumns = (
             </Flex>
           );
         },
-        size: 180, // Adjusted size for combined content
+        size: 154, // Adjusted size for combined content
       },
     ),
     // --- Moved Level column after Score ---

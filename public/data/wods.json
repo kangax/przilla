@@ -2386,10 +2386,10 @@
         "score_partial_reps": null
       }
     ],
-    "category": "Benchmark",
+    "category": "Girl",
     "tags": ["For Time"],
     "difficulty": "Hard",
-    "difficulty_explanation": "Benchmark WOD. High volume over 5 rounds (100 HSPU, 150 DL @ 135lb, 200 Sit-ups, 250 DU). Combines gymnastics skill, moderate lifting, core, and cardio/skill, making it very demanding due to volume.",
+    "difficulty_explanation": "High volume over 5 rounds (100 HSPU, 150 DL @ 135lb, 200 Sit-ups, 250 DU). Combines gymnastics skill, moderate lifting, core, and cardio/skill, making it very demanding due to volume.",
     "count_likes": 70
   },
   {
@@ -14157,7 +14157,7 @@
       }
     },
     "results": [],
-    "category": "Benchmark",
+    "category": "Girl",
     "tags": ["For Time", "Triplet"],
     "difficulty": "Medium",
     "difficulty_explanation": "A classic 21-15-9 triplet combining burpees, kettlebell swings, and double-unders. Tests conditioning and skill under fatigue.",
@@ -24063,38 +24063,6 @@
     "count_likes": 246
   },
   {
-    "wodUrl": "https://wodwell.com/wod/tabata-this/",
-    "wodName": "Tabata This",
-    "description": "Five Tabatas in 24 minutes\nTabata Row\nTabata Air Squats\nTabata Pull-Ups\nTabata Push-Ups\nTabata Sit-Ups\n1 minute Rest between each Tabata",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 400,
-          "max": null
-        },
-        "advanced": {
-          "min": 300,
-          "max": 399
-        },
-        "intermediate": {
-          "min": 200,
-          "max": 299
-        },
-        "beginner": {
-          "min": 100,
-          "max": 199
-        }
-      }
-    },
-    "results": [],
-    "category": "Benchmark",
-    "tags": ["Tabata"],
-    "difficulty": "Medium",
-    "difficulty_explanation": "Five Tabata intervals (Row, Squat, Pull-up, Push-up, Sit-up) separated by rest. Score is total reps across all intervals.",
-    "count_likes": 301
-  },
-  {
     "wodName": "Tabata This!",
     "wodUrl": "https://wodwell.com/wod/tabata-this/",
     "description": "Tabata Row, Squat, Pull-up, Push-up, Sit-up. Score is the sum of the lowest reps for each exercise.",
@@ -24823,7 +24791,18 @@
         }
       }
     },
-    "results": [],
+    "results": [
+      {
+        "date": "5 Oct'23",
+        "rxStatus": "Rx",
+        "notes": "Rowing + burpees = you're a mashed potato. Good luck with those dubs.",
+        "score_time_seconds": null,
+        "score_reps": 496,
+        "score_load": null,
+        "score_rounds_completed": null,
+        "score_partial_reps": null
+      }
+    ],
     "category": "Benchmark",
     "tags": ["AMRAP"],
     "difficulty": "Medium",
@@ -27025,5 +27004,1125 @@
     "difficulty": "Very Hard",
     "difficulty_explanation": "Hero WOD (AMRAP). 25 mins combining C2B, very heavy deadlifts (315lb), and HSPU. Demanding long-duration strength/skill endurance.",
     "count_likes": 75
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/triple-g-chipper/",
+    "wodName": "Triple-G Chipper",
+    "description": "For Time\n100 Pull-Ups\n80 GHD Sit-Ups\n60 Pistols (alternating legs)\n40 calorie Row\n20 Dumbbell Push Presses (100/70 lb)\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": 1500
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Extremely Hard",
+    "difficulty_explanation": "High volume chipper with advanced gymnastics, pistols, and heavy dumbbell push presses.",
+    "count_likes": 26
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/amanda-45/",
+    "wodName": "Amanda .45",
+    "description": "13-11-9-7-5 Reps for Time\nMuscle-Ups\nSquat Snatches (135/95 lb)\n\nTime cap: 13 minutes for males, 15 minutes for females",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High-skill muscle-ups combined with heavy squat snatches.",
+    "count_likes": 37
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/run-swim-run/",
+    "wodName": "Run Swim Run",
+    "description": "For Time\n1.5 mile Run\n500 meter Swim\n1.5 mile Run\n\nTime Cap: 60 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": 3600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Long endurance event with running and swimming.",
+    "count_likes": 22
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/170804/",
+    "wodName": "Amanda .45",
+    "description": "\"Amanda .45\"\n13-11-9-7-5 reps for time of:\nMuscle-ups\nSquat snatches\nMen use 135-lb. barbell\nWomen use 95-lb. barbell",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High-skill muscle-ups combined with heavy squat snatches.",
+    "count_likes": 1
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/180731/",
+    "wodName": "Doubles and Oly",
+    "description": "\"Doubles and Oly\"\nFor Time:\n50 double-unders\n5 squat snatches\n50 double-unders\n4 squat snatches\n50 double-unders\n3 squat snatches\n50 double-unders\n2 squat snatches\n\nAdd weight to the snatch each round.\n\nMen: 185-205-225-245 lb.\nWomen: 135-145-155-165 lb.",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Extremely Hard",
+    "difficulty_explanation": "Heavy ascending squat snatches combined with high volume double-unders demand elite strength and skill.",
+    "count_likes": 9
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/180806/",
+    "wodName": "Complex Fran",
+    "description": "\"Complex Fran\"\nFor time:\n7 bar muscle-ups\n7 chest-to-bar pull-ups\n7 chin-over-bar pull-ups\n21 thrusters\n5 bar muscle-ups\n5 chest-to-bar pull-ups\n5 chin-over-bar pull-ups\n15 thrusters\n3 bar muscle-ups\n3 chest-to-bar pull-ups\n3 chin-over-bar pull-ups\n9 thrusters\n\nMen: 95 lb.\nWomen: 65 lb.",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Combines high-skill gymnastics progressions with barbell cycling in a descending sprint.",
+    "count_likes": 9
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/complex-fran/",
+    "wodName": "Complex Fran",
+    "description": "For Time\n7 Bar Muscle-Ups\n7 Chest-to-Bar Pull-Ups\n7 Chin-Over-Bar Pull-Ups\n21 Thrusters (95/65 lb)\n5 Bar Muscle-Ups\n5 Chest-to-Bar Pull-Ups\n5 Chin-Over-Bar Pull-Ups\n15 Thrusters (95/65 lb)\n3 Bar Muscle-Ups\n3 Chest-to-Bar Pull-Ups\n3 Chin-Over-Bar Pull-Ups\n9 Thrusters (95/65 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Combines high-skill gymnastics progressions with barbell cycling in a descending sprint.",
+    "count_likes": 24
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/the-standard/",
+    "wodName": "The Standard",
+    "description": "For Time\n30 Clean-and-Jerks (135/95 lb)\n30 Muscle-Ups\n30 Snatches (135/95 lb)\n\nTime Cap: 12 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy barbell cycling and muscle-ups for time.",
+    "count_likes": 17
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/190807/",
+    "wodName": "The Standard",
+    "description": "For Time\n30 clean and jerks\n30 muscle-ups\n30 snatches\n\n♀ 95 lb.\n♂ 135 lb.",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy barbell cycling and muscle-ups for time.",
+    "count_likes": 2
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/ringer-1-ringer-2/",
+    "wodName": "Ringer 1 & Ringer 2",
+    "description": "Ringer 1\n30-20-10 Reps for Time\nCalorie Air Bike\nToes-to-Rings\n\nTime Cap: 7/6 minutes\n\nRinger 2\n15-10-5 Reps for Time\nBurpees with Ring Touch\nOverhead Squats (135/95 lb)\n\nTime Cap: 5 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 720
+        },
+        "intermediate": {
+          "min": 721,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": 1200
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Two back-to-back sprints combining high power output, gymnastics, and heavy overhead squats.",
+    "count_likes": 10
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/swim-paddle/",
+    "wodName": "Swim Paddle",
+    "description": "For Time\n1000 meter Swim\n1000 meter Paddle\n\nTime Cap: 50 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": 3600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Long-distance swim and paddle event testing endurance and pacing.",
+    "count_likes": 1
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/sprint-couplet/",
+    "wodName": "Sprint Couplet",
+    "description": "For Time\n172 foot Sled Push\n18/15 Bar Muscle-Ups\n172 foot Sled Push\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 420
+        },
+        "beginner": {
+          "min": 421,
+          "max": 600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Fast sled push and gymnastics sprint.",
+    "count_likes": 3
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/ruck/",
+    "wodName": "Ruck",
+    "description": "For Time\n6000 meter Ruck Run\n\nMale and Female: 20-30-40-50 lb, increasing each lap\n\nTime Cap: 40 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": 3600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Long weighted run with increasing load.",
+    "count_likes": 6
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/second-cut/",
+    "wodName": "Second Cut",
+    "description": "For Time\n800 meter Row\n66 Kettlebell Shoulder-to-Overheads (2x16/12 kg)\n132 foot Handstand Walk\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": 1500
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Rowing, kettlebell work, and handstand walk under time cap.",
+    "count_likes": 5
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/first-cut/",
+    "wodName": "First Cut",
+    "description": "4 Rounds for Time\n400 meter Run\n3 Legless Rope Climbs\n7 Squat Snatches (130/185 lb)\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1500
+        },
+        "intermediate": {
+          "min": 1501,
+          "max": 1800
+        },
+        "beginner": {
+          "min": 1801,
+          "max": 2100
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Running, rope climbs, and heavy snatches.",
+    "count_likes": 8
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/sid-sanctional-20-2/",
+    "wodName": "The Standard",
+    "description": "For Time\n30 Clean-and-Jerks (62.5/42.5 kg)\n30 Ring Muscle-Ups\n30 Snatches (62.5/42.5 kg)\n\nTime Cap: 12/14 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy barbell cycling and muscle-ups for time.",
+    "count_likes": 3
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/handstand-hold/",
+    "wodName": "Handstand Hold",
+    "description": "For Max Time\nFreestanding Handstand Hold\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": 60,
+          "max": null
+        },
+        "advanced": {
+          "min": 30,
+          "max": 59
+        },
+        "intermediate": {
+          "min": 10,
+          "max": 29
+        },
+        "beginner": {
+          "min": null,
+          "max": 9
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Max freestanding handstand hold for time.",
+    "count_likes": 3
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/nasty-nancy/",
+    "wodName": "Nasty Nancy",
+    "description": "5 Rounds for Time\n500 meter Run\n15 Overhead Squats (185/125 lb)\n15 Bar Facing Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": 1800
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High volume running combined with heavy overhead squats and burpees demands elite endurance and strength.",
+    "count_likes": 31
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/damn-diane/",
+    "wodName": "Damn Diane",
+    "description": "3 Rounds for Time\n15 Deadlifts (315/205 lb)\n15 Strict Deficit Handstand Push-Ups (3.5/2 in)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy deadlifts combined with strict deficit handstand push-ups demand elite strength and skill.",
+    "count_likes": 12
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/friendly-fran/",
+    "wodName": "Friendly Fran",
+    "description": "3 Rounds for Time\n21 Thrusters (115/85 lb)\n21 Chest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High volume thrusters at a heavier load combined with advanced gymnastics increase difficulty over classic Fran.",
+    "count_likes": 39
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/awful-annie/",
+    "wodName": "Awful Annie",
+    "description": "For Time\n50 Double-Unders\n50 GHD Sit-Ups\n5 Cleans (275/185 lb)\n\n40 Double-Unders\n40 GHD Sit-Ups\n4 Cleans (275/185 lb)\n\n30 Double-Unders\n30 GHD Sit-Ups\n3 Cleans (275/185 lb)\n\n20 Double-Unders\n20 GHD Sit-Ups\n2 Cleans (275/185 lb)\n\n10 Double-Unders\n10 GHD Sit-Ups\n1 Clean (275/185 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 720
+        },
+        "intermediate": {
+          "min": 721,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": 1200
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High volume GHD sit-ups with heavy cleans descending.",
+    "count_likes": 47
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/snatch-speed-triple/",
+    "wodName": "Snatch Speed Triple",
+    "description": "For Time\n1 Snatch at each Bar\n\nQuarterfinal:\nMen: 225-235-245 lb\nWomen: 145-150-155 lb\nTime Cap: 1 minute\n\nSemifinal:\nMen: 245-255-265 lb\nWomen: 160-165-170 lb\nTime Cap: 2 minutes\n\nFinal:\nMen: 265-275-285 lb\nWomen: 175-180-185 lb\nTime Cap: 3 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 420
+        },
+        "beginner": {
+          "min": 421,
+          "max": 600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Progressive heavy snatch ladder under time pressure.",
+    "count_likes": 0
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/toes-to-bar-lunge/",
+    "wodName": "Toes-to-Bar/Lunge",
+    "description": "30-20-10 Reps for Time\nToes-to-Bars\nKettlebell Lunges (2x32/24 kg, yards)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 720
+        },
+        "intermediate": {
+          "min": 721,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": 1200
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High volume toes-to-bars combined with heavy kettlebell lunges challenge grip, core, and leg endurance.",
+    "count_likes": 20
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/corn-sack-sprint/",
+    "wodName": "Corn Sack Sprint",
+    "description": "For Time\n320 meter Hill Sprint with Corn Sack (50/30 lb)\n\nTime Cap: 8 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 240
+        },
+        "advanced": {
+          "min": 241,
+          "max": 360
+        },
+        "intermediate": {
+          "min": 361,
+          "max": 480
+        },
+        "beginner": {
+          "min": 481,
+          "max": 600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Uphill sprint with a heavy sandbag demands elite power and endurance.",
+    "count_likes": 0
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/bike-repeater/",
+    "wodName": "Bike Repeater",
+    "description": "10 Rounds for Time\n440 meter Bike Sprint\n1 Legless Rope Climb (15 ft)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": 1800
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Multiple rounds of bike sprints and rope climbs.",
+    "count_likes": 0
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/2007-reload/",
+    "wodName": "2007 Reload",
+    "description": "For Time\n1,500 meter Row\n\nThen, 5 Rounds of:\n10 Bar Muscle-Ups\n7 Shoulder-to-Overheads (235/145 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": 1800
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Extremely Hard",
+    "difficulty_explanation": "Long row followed by high-skill gymnastics and heavy shoulder-to-overheads demand elite capacity and strength.",
+    "count_likes": 1
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/sprint-sled-sprint/",
+    "wodName": "Sprint Sled Sprint",
+    "description": "For Time\n100 yard Sprint\n100 yard Sled Push (105/85 lb)\n100 yard Sprint",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 120
+        },
+        "advanced": {
+          "min": 121,
+          "max": 180
+        },
+        "intermediate": {
+          "min": 181,
+          "max": 240
+        },
+        "beginner": {
+          "min": 241,
+          "max": 300
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Short, intense sprint event with heavy sled push demands elite power and speed.",
+    "count_likes": 1
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/atalanta/",
+    "wodName": "Atalanta",
+    "description": "For Time\n1 mile Run\n100 Handstand Push-Ups\n200 Alternating Pistols\n300 Pull-Ups\n1 mile Run\n\nWear a Weight Vest (20/14 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3000
+        },
+        "intermediate": {
+          "min": 3001,
+          "max": 3600
+        },
+        "beginner": {
+          "min": 3601,
+          "max": 4500
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Extremely Hard",
+    "difficulty_explanation": "Long Murph-style chipper with vest, high volume gymnastics.",
+    "count_likes": 10
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/happy-star/",
+    "wodName": "Happy Star",
+    "description": "For Time\n300 meter Hill Run\n5 Burpees\n5 Thrusters (135/95 lb)\n\n300 meter Hill Run\n7 Burpees\n7 Thrusters (145/105 lb)\n\n300 meter Hill Run\n9 Burpees\n9 Thrusters (155/110 lb)\n\n300 meter Hill Run\n11 Burpees\n11 Thrusters (165/115 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": 1800
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Extremely Hard",
+    "difficulty_explanation": "Progressively heavier thrusters combined with hill sprints and increasing burpees demand elite strength and endurance.",
+    "count_likes": 9
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/ranch-loop/",
+    "wodName": "Ranch Loop",
+    "description": "For Time\n3 mile Run through varying terrain",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": 3600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Long trail run with varied terrain.",
+    "count_likes": 1
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/handstand-sprint/",
+    "wodName": "Handstand Sprint",
+    "description": "For Time\n100 yard Handstand Walk",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 60
+        },
+        "advanced": {
+          "min": 61,
+          "max": 120
+        },
+        "intermediate": {
+          "min": 121,
+          "max": 180
+        },
+        "beginner": {
+          "min": 181,
+          "max": 300
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Maximal effort handstand walk over a long distance demands elite balance, strength, and skill.",
+    "count_likes": 0
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/the-standard-2/",
+    "wodName": "The Standard",
+    "description": "AMRAP in 5 minutes\n10 Thrusters (95/65 lb)\n10 Bar Facing Burpees\n10 Power Cleans (95/65 lb)\n10 Bar Facing Burpees\n10 Hang Power Snatches (95/65 lb)\n10 Bar Facing Burpees",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy barbell cycling and muscle-ups for time.",
+    "count_likes": 12
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/run-swim-run-2/",
+    "wodName": "Run Swim Run",
+    "description": "For Time\n2,000 meter Run\n500 meter Swim\n2,000 meter Run\n\nTime Cap: 40 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": 3600
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "Long endurance event with running and swimming.",
+    "count_likes": 0
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/handstand-hold-2/",
+    "wodName": "Handstand Hold",
+    "description": "For Time\nMax Handstand Hold\n\nTime Cap: 4 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": 60,
+          "max": null
+        },
+        "advanced": {
+          "min": 30,
+          "max": 59
+        },
+        "intermediate": {
+          "min": 10,
+          "max": 29
+        },
+        "beginner": {
+          "min": null,
+          "max": 9
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Max freestanding handstand hold for time.",
+    "count_likes": 0
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/amanda-45-2/",
+    "wodName": "Amanda .45",
+    "description": "13-11-9-7-5 Reps for Time\nMuscle-Ups\nSquat Snatches (135/95 lb)\n\nTime cap: 12 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": 900
+        }
+      }
+    },
+    "results": [],
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "High-skill muscle-ups combined with heavy squat snatches.",
+    "count_likes": 0
   }
 ]

@@ -11,7 +11,7 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { Wod, SortByType } from "~/types/wodTypes";
+import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Added WodResult
 import {
   getPerformanceLevelColor,
   getPerformanceLevel,
@@ -27,11 +27,39 @@ interface WodTimelineProps {
   sortBy: SortByType;
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
+  searchTerm: string; // Added searchTerm prop
 }
 
 // --- Helper Functions ---
 
 const safeString = (value: string | undefined | null): string => value ?? "";
+
+// --- Highlight Component (Copied from WodTable.tsx) ---
+const HighlightMatch: React.FC<{ text: string; highlight: string }> = ({
+  text,
+  highlight,
+}) => {
+  if (!highlight.trim()) {
+    return <>{text}</>;
+  }
+  const regex = new RegExp(
+    `(${highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+    "gi",
+  );
+  const parts = text.split(regex);
+
+  return (
+    <>
+      {parts.map((part, i) =>
+        regex.test(part) ? (
+          <mark key={i}>{part}</mark>
+        ) : (
+          <React.Fragment key={i}>{part}</React.Fragment>
+        ),
+      )}
+    </>
+  );
+};
 
 // --- Column Definitions ---
 
@@ -41,6 +69,7 @@ const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
+  searchTerm: string, // Added searchTerm parameter
 ): ColumnDef<Wod, unknown>[] => {
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
@@ -64,12 +93,12 @@ const createColumns = (
             target="_blank"
             className="flex max-w-[200px] items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
           >
-            {wod.wodName}
+            <HighlightMatch text={wod.wodName} highlight={searchTerm} />
             <span className="ml-1 flex-shrink-0 text-xs opacity-70">↗</span>
           </Link>
         ) : (
           <span className="max-w-[200px] truncate whitespace-nowrap font-medium">
-            {wod.wodName}
+            <HighlightMatch text={wod.wodName} highlight={searchTerm} />
           </span>
         );
       },
@@ -166,11 +195,15 @@ const createColumns = (
     }),
     columnHelper.accessor("description", {
       header: "Description",
-      cell: (info) => (
-        <Text className="font-small whitespace-pre-line text-sm">
-          {info.getValue()}
-        </Text>
-      ),
+      cell: (info) => {
+        const description = info.getValue<string>(); // Explicitly type the value
+        if (!description) return null;
+        return (
+          <Text className="font-small whitespace-pre-line text-sm">
+            <HighlightMatch text={description} highlight={searchTerm} />
+          </Text>
+        );
+      },
       size: 400, // Estimate size
     }),
   ];
@@ -183,12 +216,13 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
   sortBy,
   sortDirection,
   handleSort,
+  searchTerm, // Destructure searchTerm
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
   const columns = useMemo(
-    () => createColumns(handleSort, sortBy, sortDirection),
-    [handleSort, sortBy, sortDirection],
+    () => createColumns(handleSort, sortBy, sortDirection, searchTerm), // Pass searchTerm
+    [handleSort, sortBy, sortDirection, searchTerm], // Add searchTerm dependency
   );
 
   const table = useReactTable({

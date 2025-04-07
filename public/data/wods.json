@@ -2564,8 +2564,25 @@
     "wodName": "Baz",
     "description": "AMRAP in 30 minutes\n30 Double-Unders\n8 Squat Cleans (155/110 lb)\n11 Hand Release Push-Ups",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 450,
+          "max": null
+        },
+        "advanced": {
+          "min": 350,
+          "max": 450
+        },
+        "intermediate": {
+          "min": 250,
+          "max": 350
+        },
+        "beginner": {
+          "min": 0,
+          "max": 250
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -6494,8 +6511,25 @@
     "wodName": "Dunn",
     "description": "AMRAP in 19 minutes\n3 Muscle-Ups\nShuttle Sprint (5, 10, 15 yards)\n6 Burpee Box Jump Overs (20 in)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 180,
+          "max": null
+        },
+        "advanced": {
+          "min": 140,
+          "max": 180
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 140
+        },
+        "beginner": {
+          "min": 0,
+          "max": 100
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -6835,8 +6869,25 @@
     "wodName": "Emanuele Reali",
     "description": "AMRAP in 30 minutes\n6 Deadlifts (70% of 1RM)\n11 Box Jumps (24/20 in)\n18 Burpees",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -6896,8 +6947,25 @@
     "wodName": "Enis",
     "description": "AMRAP in 31 minutes\nBuy-In: 51 Burpees\n\nThen in the remaining time, AMRAP of:\n3 Bear Complexes (135/95 lb)*\n15/10 Cal Assault Bike \n18 Pull-Ups\n\nEvery 7 minutes, complete: \n51 Double Unders\n\n*1 Bear Complex consists of: 1 Power Clean, 1 Front Squat, 1 Push Press, 1 Back Squat, 1 Push Press",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -7082,8 +7150,25 @@
     "wodName": "Falkel",
     "description": "AMRAP in 25 minutes\n8 Handstand Push-Ups\n8 Box Jumps (30/24 in)\n1 Rope Climb (15 ft)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -8056,8 +8141,25 @@
     "wodName": "Gale Force",
     "description": "AMRAP in 30 minutes of:\n20 Box Step-Ups with a weighted backpack (24/20 in, 50/35 lb)\n23 Burpees-Over-Backpack\n19 Air Squats*\n\nWhen 30 minutes have elapsed, complete at least one more set of 19 Air Squats together as a group.",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -8164,8 +8266,25 @@
     "wodName": "Garbo",
     "description": "On a 21-minute clock:\n\n400 meter run\n\nThen, AMRAP in remaining time of:\n10 Hand-Release Push-Ups\n4 Strict Pull-Ups\n20 Kettlebell Swings (53/35 lb)\n4 Single-Arm Kettlebell Snatches (53/35 lb)\n10 Kettlebell Goblet Squats (53/35 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 150,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 150
+        },
+        "beginner": {
+          "min": 0,
+          "max": 100
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -9238,8 +9357,25 @@
     "wodName": "Harper",
     "description": "AMRAP in 23 minutes\n9 Chest-to-Bar Pull-Ups\n15 Power Cleans (135/95 lb)\n21 Air Squats\n400 meter Run with a Plate (45/35 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -9911,8 +10047,25 @@
     "wodName": "Hortman",
     "description": "AMRAP in 45 minutes\n800 meter Run\n80 Air Squats\n8 Muscle-Ups",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10225,8 +10378,25 @@
     "wodName": "Indy 08",
     "description": "Buy-In: 2,013 meter Air Bike\n\nAMRAP in 30 minutes\n4 Toes-to-Bars\n4 Burpees \n27 Wall Ball Shots (20/14 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 350,
+          "max": null
+        },
+        "advanced": {
+          "min": 280,
+          "max": 350
+        },
+        "intermediate": {
+          "min": 210,
+          "max": 280
+        },
+        "beginner": {
+          "min": 0,
+          "max": 210
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10478,8 +10648,25 @@
     "wodName": "Jack",
     "description": "AMRAP in 20 minutes\n10 Push Presses (115/85 lb)\n10 Kettlebell Swings (1.5/1 pood)\n10 Box Jumps (24/20 in)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10663,8 +10850,25 @@
     "wodName": "Jaime L. Campbell",
     "description": "AMRAP in 25 minutes\n7 Deadlifts (185/135 lb)\n6 Kettlebell Swings (53/35 lb)\n7 Barbell Hack Squats (185/155 lb)\n6 Plate Sit-Ups (45/25 lb)\n\n1 Burpee at the top of every minute",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10802,8 +11006,25 @@
     "wodName": "Jay",
     "description": "AMRAP in 20 minutes\n22 Air Squats\n12 Toes-to-Bars\n9 Burpees\n\nWear a weight vest (20/14 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10824,8 +11045,25 @@
     "wodName": "JBo",
     "description": "AMRAP in 28 minutes\n9 Overhead Squats (115/75 lb)\n1 Legless Rope Climb (15 ft rope, from seated position)\n12 Bench Presses (115/75 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 110,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 70,
+          "max": 110
+        },
+        "beginner": {
+          "min": 0,
+          "max": 70
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10846,8 +11084,25 @@
     "wodName": "Jennifer",
     "description": "AMRAP in 26 minutes\n10 Pull-Ups\n15 Kettlebell Swings (1.5/1 Pood)\n20 Box Jumps (24/20 in)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 360,
+          "max": null
+        },
+        "advanced": {
+          "min": 300,
+          "max": 360
+        },
+        "intermediate": {
+          "min": 240,
+          "max": 300
+        },
+        "beginner": {
+          "min": 0,
+          "max": 240
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10868,8 +11123,25 @@
     "wodName": "Jenny",
     "description": "AMRAP in 20 minutes\n20 Overhead Squats (45/35 lb bar)\n20 Back Squats (45/35 lb bar)\n400 meter Run",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10929,8 +11201,25 @@
     "wodName": "Jimmy",
     "description": "AMRAP in 30 minutes\n5 Deadlifts (120/90 kg)\n7 Pull-Ups\n9 Push-Ups",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -10983,8 +11272,25 @@
     "wodName": "Johnson",
     "description": "AMRAP in 20 minutes\n9 Deadlifts (245/165 lb)\n8 Muscle-Ups\n9 Squat Cleans (155/105 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 110,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 70,
+          "max": 110
+        },
+        "beginner": {
+          "min": 0,
+          "max": 70
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -12101,8 +12407,25 @@
     "wodName": "Ledesma",
     "description": "AMRAP in 20 minutes\n5 Parallette Handstand Push-Ups (6&quot; Deficit)\n10 Toes Through Rings\n15 Medicine Ball Cleans (20/14 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 240,
+          "max": null
+        },
+        "advanced": {
+          "min": 180,
+          "max": 240
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 180
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -12496,8 +12819,25 @@
     "wodName": "Lt. Brian Sullivan",
     "description": "AMRAP in 20 minutes\n20 calorie Row\n10 Dumbbell Overhead Presses (2x50/35 lb)\n20 Sandbag Alternating Lunges (100/75 lb)\n20 Box Step-Ups (24/20 in)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -13454,8 +13794,25 @@
     "wodName": "Matt Would Go",
     "description": "AMRAP in 33 minutes\n2 Clusters (205/155 lb)\n19 Bar Facing Burpees\n13 calorie Bike",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 110,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 70,
+          "max": 110
+        },
+        "beginner": {
+          "min": 0,
+          "max": 70
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -13701,8 +14058,25 @@
     "wodName": "McLaren",
     "description": "AMRAP in 20 minutes\n3 Thrusters (50% bodyweight)\n5 Box Jumps (24/20 in)\n7 Hand Release Push-Ups",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -14214,8 +14588,25 @@
     "wodName": "Mote",
     "description": "AMRAP in 20 minutes\n8 Deadlifts (155/105 lb)\n10 Cleans (155/105 lb)\n12 Shoulder-to-Overheads (155/105 lb)\n200 Single-Unders",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -14602,8 +14993,25 @@
     "wodName": "Never Forget 31.01.2022",
     "description": "AMRAP in 20 minutes 22 seconds\n24 Burpees\n29 Air Squats\n1 minute Plank Hold\n31 Alternating Lunges",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -14745,8 +15153,25 @@
     "wodName": "Nookie",
     "description": "AMRAP in 20 minutes\n7 Squat Cleans (40/30 kg)\n7 Push Press (40/30 kg)\n7 Back Squats (40/30 kg)\n200 meter Run",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -14984,8 +15409,25 @@
     "wodName": "Officer Jason Knox",
     "description": "AMRAP in 20 minutes\n5 Dumbbell Deadlifts (2x50/35 lb)\n6 Dumbbell Hang Cleans (2x50/35 lb)\n7 Dumbbell Front Squats (2x50/35 lb)\n8 Dumbbell Push Presses (2x50/35 lb)\n35 Double-Unders\n200 meter Run\n\nBuy-In: 54 second Silence",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -15070,8 +15512,25 @@
     "wodName": "Ollis",
     "description": "AMRAP in 22 minutes\n200 meter Run\n22 Deadlifts (185/125 lb)\n22 Pull-Ups\n22 Burpees\n22 Russian Kettlebell Swings (53/35 lb)\n22 Walking Lunges (L+R=1)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -19094,8 +19553,25 @@
     "wodName": "Paz",
     "description": "Cash-In: 1,000 meter Run\n\nDirectly into AMRAP in 22 minutes of:\n23 Air Squats\n7 Burpees\n14 Push-Ups\n\nCash-Out: 1,000 meter Run",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 180,
+          "max": 240
+        },
+        "beginner": {
+          "min": 0,
+          "max": 180
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -19778,8 +20254,25 @@
     "wodName": "Rahoi",
     "description": "AMRAP in 12 minutes\n12 Box Jumps (24/20 in)\n6 Thrusters (95/65 lb)\n6 Bar Facing Burpees",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 240,
+          "max": null
+        },
+        "advanced": {
+          "min": 190,
+          "max": 240
+        },
+        "intermediate": {
+          "min": 140,
+          "max": 190
+        },
+        "beginner": {
+          "min": 0,
+          "max": 140
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -19882,8 +20375,25 @@
     "wodName": "Rankel",
     "description": "AMRAP in 20 minutes\n6 Deadlifts (225/155 lb)\n7 Burpee Pull-Ups\n10 Kettlebell Swings (2/1.5 pood)\n200 meter Run",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -19975,8 +20485,25 @@
     "wodName": "Red Horse",
     "description": "AMRAP in 10 minutes 17 seconds\n9 Thrusters (95/65 lb)\n22 Burpees\n13 Kettlebell Swings (53/35 lb)\n500 meter Row",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 120,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 90,
+          "max": 120
+        },
+        "beginner": {
+          "min": 0,
+          "max": 90
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -20214,8 +20741,25 @@
     "wodName": "Ricky",
     "description": "AMRAP in 20 minutes\n10 Pull-Ups\n5 Dumbbell Deadlifts (75/55 lb)\n8 Push-Presses (135/95 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -20575,8 +21119,25 @@
     "wodName": "Rosenbloom",
     "description": "AMRAP in 28 minutes\nBuy-In: 1,971 meter Row\n\nThen, AMRAP of:\n2 Thrusters (115/95 lb)\n9 Burpee Box Jump Overs (24/20 in)\n11 Pull-Ups\n8 Hang Cleans (115/95 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -20860,8 +21421,25 @@
     "wodName": "Runyan",
     "description": "AMRAP in 24 minutes\n21 Bar Over Burpees\n7 Deadlifts (1.5x bodyweight)\n10 Pull-Ups",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -21399,8 +21977,25 @@
     "wodName": "Scotty",
     "description": "AMRAP in 11 minutes\n5 Deadlifts (315/205 lb)\n18 Wall Ball Shots (20/14 lb)\n17 Bar Over Burpees",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 120,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 90,
+          "max": 120
+        },
+        "beginner": {
+          "min": 0,
+          "max": 90
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -21860,8 +22455,25 @@
     "wodName": "Sisson",
     "description": "AMRAP in 20 minutes\n1 Rope Climb (15 ft)\n5 Burpees\n200 meter Run\n\nWear a weight vest (20/14 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 180,
+          "max": null
+        },
+        "advanced": {
+          "min": 140,
+          "max": 180
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 140
+        },
+        "beginner": {
+          "min": 0,
+          "max": 100
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -24115,8 +24727,25 @@
     "wodName": "Tiff",
     "description": "With a running clock in 25 minutes\n1.5 mile Run\n\nThen AMRAP in remaining time:\n11 Chest-to-Bar Pull-Ups\n7 Hang Squat Cleans (155/105 lb)\n7 Push Presses (155/105 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 110,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 70,
+          "max": 110
+        },
+        "beginner": {
+          "min": 0,
+          "max": 70
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -24272,8 +24901,25 @@
     "wodName": "TK",
     "description": "AMRAP in 20 minutes\n8 Strict Pull-Ups\n8 Box Jumps (36/30 in)\n12 Kettlebell Swings (2/1.5 pood)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 240,
+          "max": null
+        },
+        "advanced": {
+          "min": 190,
+          "max": 240
+        },
+        "intermediate": {
+          "min": 140,
+          "max": 190
+        },
+        "beginner": {
+          "min": 0,
+          "max": 140
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -24294,8 +24940,25 @@
     "wodName": "Tom",
     "description": "AMRAP in 25 minutes\n7 Muscle-Ups\n11 Thrusters (155/105 lb)\n14 Toes-to-Bar",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 180,
+          "max": null
+        },
+        "advanced": {
+          "min": 140,
+          "max": 180
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 140
+        },
+        "beginner": {
+          "min": 0,
+          "max": 100
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -24789,8 +25452,25 @@
     "wodName": "Viola",
     "description": "AMRAP in 20 minutes\n400 meter Run\n11 Power Snatches (95/65 lb)\n17 Pull-Ups\n13 Power Cleans (95/65 lb)",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 200,
+          "max": null
+        },
+        "advanced": {
+          "min": 160,
+          "max": 200
+        },
+        "intermediate": {
+          "min": 120,
+          "max": 160
+        },
+        "beginner": {
+          "min": 0,
+          "max": 120
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -25060,8 +25740,25 @@
     "wodName": "Wesley",
     "description": "On a 35-minute clock:\n\n800 meter Run\n\nThen, AMRAP of:\n8 Box Jumps\n6 Strict Pull-Ups\n21-yard Overhead Walking Lunge, with a 45-lb plate",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 250
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 200
+        },
+        "beginner": {
+          "min": 0,
+          "max": 150
+        }
+      }
     },
     "results": [],
     "category": "Hero",
@@ -25664,8 +26361,25 @@
     "wodName": "Zimmerman",
     "description": "AMRAP in 25 minutes\n11 Chest-to-Bar Pull-Ups\n2 Deadlifts (315/205 lb)\n10 Handstand Push-Ups",
     "benchmarks": {
-      "type": "time",
-      "levels": {}
+      "type": "reps",
+      "levels": {
+        "elite": {
+          "min": 180,
+          "max": null
+        },
+        "advanced": {
+          "min": 140,
+          "max": 180
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 140
+        },
+        "beginner": {
+          "min": 0,
+          "max": 100
+        }
+      }
     },
     "results": [],
     "category": "Hero",

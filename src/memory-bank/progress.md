@@ -39,7 +39,7 @@ _(Based on `todo.md`):_
 ## Known Issues
 
 - **Data Scalability/Personalization:** Current reliance on static JSON files limits scalability and prevents storing user-specific scores effectively (addressed by the "JSON -> database" TODO item).
-- **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Partially Addressed)** Some WODs previously had empty `benchmarks.levels` objects; this has been corrected for 183 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels.
+- **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
 
 ## Evolution of Project Decisions
@@ -96,4 +96,8 @@ Example of a wod from wods.json:
   - Performed sophisticated AI analysis for each affected WOD based on its description and type.
   - Created a new script (`apply_estimated_levels.js`) containing a map of WOD names to their pre-analyzed benchmark levels derived from the AI analysis.
   - Executed the script to update `wods.json`, successfully filling levels for 183 WODs while skipping those that were ambiguous (partner WODs, complex scoring) or not found in the initial analysis set.
+- **Benchmark Type/Level Correction Round 2 (Apr 2025):**
+  - Identified WODs previously skipped due to incorrect `benchmarks.type` ('time' instead of 'reps') using `jq`.
+  - Performed AI analysis for these WODs.
+  - Created and executed `scripts/fix_incorrect_type_levels.js` containing a map with corrected types and pre-analyzed levels, updating 42 additional WODs.
 - We've inferred difficulty and filled in difficulty_explanation based on your AI capabilities of assessing workout scores of a crossfit wod.

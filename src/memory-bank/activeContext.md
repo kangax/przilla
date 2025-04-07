@@ -22,6 +22,12 @@
   - Created a new script (`scripts/apply_estimated_levels.js`) containing a map of WOD names to their pre-analyzed benchmark levels.
   - Executed the script, successfully updating 183 WODs. 72 WODs were skipped (e.g., partner WODs, ambiguous scoring types, or those not found in the initial `jq` query results used for analysis).
   - The `wods.json` file was updated and sorted alphabetically.
+- **Benchmark Type/Level Correction (Round 2):**
+  - Identified WODs previously skipped due to having an incorrect `benchmarks.type` ('time' instead of 'reps' for AMRAPs/EMOMs) using `jq`.
+  - Performed sophisticated analysis for these WODs.
+  - Created a new script (`scripts/fix_incorrect_type_levels.js`) containing a map with the corrected `type` ('reps') and pre-analyzed benchmark levels.
+  - Executed the script, successfully updating the type and levels for 42 additional WODs.
+  - The `wods.json` file was updated and sorted alphabetically again.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

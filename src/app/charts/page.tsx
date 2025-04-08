@@ -118,7 +118,33 @@ export default async function ChartsPage() {
       "calories", // Often follows Bike/Row/Ski
       "men",
       "women",
+      "men use", // Exclude specific phrase
+      "women use", // Exclude specific phrase
+      "amanda", // Exclude specific WOD name
+      "doubles and oly",
       "ringer",
+      // Add introductory words that might start a line but aren't movements
+      "if you complete",
+      "complete",
+      "perform",
+      "then rest",
+      "rest",
+      "each round",
+      "round",
+      "part",
+    ]);
+
+    // Set of words that often start structural phrases, even if capitalized
+    const introductoryWords = new Set([
+      "if",
+      "for",
+      "then",
+      "rest",
+      "each",
+      "complete",
+      "perform",
+      "round",
+      "rounds",
     ]);
 
     wodsData.forEach((wod) => {
@@ -169,13 +195,18 @@ export default async function ChartsPage() {
               const allCommon = wordsInPhrase.every(
                 (word) => commonWords.has(word) || word.length <= 1,
               );
+              const startsWithIntroductory =
+                wordsInPhrase.length > 0 &&
+                introductoryWords.has(wordsInPhrase[0]);
 
               if (
                 phrase.length > 2 &&
                 !commonWords.has(phraseLower) &&
-                !allCommon
+                !allCommon &&
+                !startsWithIntroductory // <-- Add this check
               ) {
                 // Check if the entire phrase is just common words (e.g., "Rounds For Time")
+                // This check might be redundant now with the introductory check, but keep for safety
                 if (!wordsInPhrase.every((word) => commonWords.has(word))) {
                   rawPhrases.push(phrase);
                 }

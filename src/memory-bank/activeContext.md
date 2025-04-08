@@ -62,7 +62,13 @@
 - **Chart Data Calculation Refactor:** Extracted the `categoryCounts` calculation logic from `src/app/charts/page.tsx` into a new utility function `calculateCategoryCounts` within `src/utils/wodUtils.ts`. Refactored `src/app/charts/page.tsx` to import and use this new function.
 - **Movement Frequency Chart Tooltip Fix:** Corrected the tooltip in `MovementFrequencyChart.tsx` to display unique workout names. Modified the data preparation logic in `src/app/charts/page.tsx` to deduplicate the `wodNames` array using `Array.from(new Set(...))` before passing it to the chart component.
 - **Movement Frequency Chart Value Fix:** Aligned the bar chart's value (x-axis length) with the tooltip count in `MovementFrequencyChart.tsx`. Modified the data preparation logic in `src/app/charts/page.tsx` to set the `value` property for each movement to the length of the _unique_ `wodNames` array, ensuring consistency between the visual bar length and the tooltip information.
+- **Movement Frequency Chart Parsing Fix:** Refined the movement parsing logic in `src/app/charts/page.tsx` by adding checks for introductory words (e.g., "if", "for", "then") to prevent structural phrases like "If You Complete TheRound Of" from being incorrectly identified as movements.
+- **Movement Frequency Chart X-Axis Label:** Added an X-axis label ("Frequency (Number of Workouts)") to `src/app/_components/MovementFrequencyChart.tsx` for better clarity.
+- **Movement Normalization Fix:** Corrected an issue in `src/utils/movementMapping.ts` where the key for "Dumbbell Hang Power Cleans" in the `movementNormalizationMap` was incorrectly capitalized and missing a space. The key was changed to lowercase and the space added (`dumbbell hang power cleans`) to ensure proper normalization to "Dumbbell Clean".
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
+- **Movement Frequency Chart Fixes:**
+  - Updated parsing logic in `src/app/charts/page.tsx` to exclude specific phrases ("Men Use") and WOD names ("Amanda") from being identified as movements by adding them to the `commonWords` exclusion set.
+  - Updated normalization rules in `src/utils/movementMapping.ts` to map "dumbbell push presses" to "Push Press" and "kettlebell lunges" to "Lunge".
 
 ## Next Steps
 

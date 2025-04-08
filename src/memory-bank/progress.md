@@ -16,6 +16,11 @@
   - Displays top 20 movements by frequency per category, based on the count of _unique_ workouts the movement appears in.
   - Bar length (x-axis value) now correctly reflects the count of unique workouts.
   - Tooltip shows the count and the unique list of workouts where the movement appears.
+  - Parsing logic improved to filter out structural phrases (e.g., "If You Complete...") from being counted as movements.
+  - Added an X-axis label ("Frequency (Number of Workouts)") for clarity.
+  - Movement normalization map (`src/utils/movementMapping.ts`) corrected to properly handle "Dumbbell Hang Power Cleans" by ensuring the map key is lowercase and includes the space (`dumbbell hang power cleans`).
+  - Parsing logic in `src/app/charts/page.tsx` updated to exclude specific phrases ("Men Use") and WOD names ("Amanda") from being counted as movements.
+  - Normalization rules in `src/utils/movementMapping.ts` updated to map "dumbbell push presses" to "Push Press" and "kettlebell lunges" to "Lunge".
 
 ## What's Left to Build
 

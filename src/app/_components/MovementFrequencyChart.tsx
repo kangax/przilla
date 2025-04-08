@@ -10,9 +10,10 @@ import {
   Tooltip,
   ResponsiveContainer,
   LabelList,
+  Label, // <-- Import Label
   type TooltipProps, // Import TooltipProps type
 } from "recharts";
-import { Box, Card, Heading, Tabs, Text } from "@radix-ui/themes"; // Removed Flex
+import { Box, Card, Heading, Tabs, Text } from "@radix-ui/themes";
 import { useTheme } from "next-themes";
 
 // Update interface to include wodNames
@@ -146,7 +147,16 @@ export default function MovementFrequencyChart({
                     margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} />
-                    <XAxis type="number" stroke={axisAndTextColor} />
+                    <XAxis type="number" stroke={axisAndTextColor}>
+                      {/* Add X-axis label */}
+                      <Label
+                        value="Frequency (Number of Workouts)"
+                        position="insideBottom"
+                        offset={-5} // Adjust offset as needed
+                        fill={axisAndTextColor}
+                        fontSize={12}
+                      />
+                    </XAxis>
                     <YAxis
                       type="category"
                       dataKey="name"

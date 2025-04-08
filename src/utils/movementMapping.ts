@@ -21,12 +21,15 @@ const movementNormalizationMap: Record<string, string> = {
   "power cleans": "Clean",
   "hang power cleans": "Clean",
   "hang squat cleans": "Clean",
-  "dumbbell cleans": "Dumbbell Clean", // Assuming we want dumbbell cleans distinct too
+  "dumbbell cleans": "Dumbbell Clean",
+  "dumbbell hang power cleans": "Dumbbell Clean", // Key changed to lowercase WITH space
 
   // Jerks
   jerks: "Jerk",
   "push jerk": "Jerk",
   "split jerk": "Jerk",
+  "push presses": "Push Press",
+  "dumbbell push presses": "Push Press", // Added normalization
 
   // Clean & Jerk
   "clean-and-jerks": "Clean & Jerk",
@@ -77,6 +80,7 @@ const movementNormalizationMap: Record<string, string> = {
   lunges: "Lunge",
   "walking lunges": "Lunge",
   "overhead lunges": "Lunge", // Or keep distinct?
+  "kettlebell lunges": "Lunge", // Added normalization
 
   // Burpees
   burpee: "Burpee",

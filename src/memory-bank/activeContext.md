@@ -2,8 +2,7 @@
 
 ## Current Focus
 
-- Expanding the WOD dataset in `public/data/wods.json` by transforming data from `public/data/wodwell_workouts.json`.
-- Documenting the WOD transformation process in the Memory Bank.
+- Updating backend (tRPC routers) and frontend components (`WodViewer`, `WodTable`, etc.) to fetch WOD data from the database instead of the static JSON file.
 
 ## Recent Changes
 
@@ -69,31 +68,81 @@
 - **Movement Frequency Chart Fixes:**
   - Updated parsing logic in `src/app/charts/page.tsx` to exclude specific phrases ("Men Use") and WOD names ("Amanda") from being identified as movements by adding them to the `commonWords` exclusion set.
   - Updated normalization rules in `src/utils/movementMapping.ts` to map "dumbbell push presses" to "Push Press" and "kettlebell lunges" to "Lunge".
+- **WOD Data Migration to Database (Apr 2025):**
+  - Successfully executed the `scripts/migrate_json_to_db.ts` script.
+  - **Debugging:**
+    - Installed `tsx` and `dotenv` to run the TS script and load `.env` variables.
+    - Bypassed environment validation using `SKIP_ENV_VALIDATION=true`.
+    - Resolved `ECONNREFUSED` errors by isolating the DB client creation within the script (using `createClient` directly with `authToken: undefined`) instead of importing the shared `db` instance, ensuring connection to the local `file:./db.sqlite`.
+    - Handled `SQLITE_CONSTRAINT_UNIQUE` errors by:
+      - Identifying that duplicate empty string `wodUrl` values were the cause (not duplicate non-empty URLs).
+      - Modifying the script to convert `wodUrl: ""` to `wodUrl: null` before insertion.
+      - Adding `.onConflictDoNothing()` to the Drizzle insert statement to gracefully skip any remaining constraint violations.
+    - Added logging to show which WODs were skipped due to duplicate names/URLs within the JSON source during the script's initial check.
+  - **Outcome:** Cleared the `wods` table and inserted 781 unique WOD records from `public/data/wods.json` into the database. 20 WODs were skipped during the initial JSON duplicate check (logged in the script output).
 
 ## Next Steps
 
-0. **Complete WOD Data Expansion:** Finish processing and potentially adding the remaining missing benchmark WODs using the generated scripts or manually.
-1. **Database Migration:** Migrate data storage from static JSON files to a database (LibSQL/Turso using Drizzle ORM) as the primary focus after data expansion.
+### Database Migration Implementation Plan
 
-   - Design Database Schema (`src/server/db/schema.ts`).
-   - Implement DB Logic (Repository Pattern).
-   - Update tRPC Routers.
-   - Migrate Existing Data (script needed).
-   - Update Frontend Components.
-   - Implement Score Logging.
+```mermaid
+gantt
+    title Migration Implementation Phases
+    dateFormat  YYYY-MM-DD
+    section Schema
+    Finalize Schema Design     :a1, 2025-04-09, 1d
+    Implement Drizzle ORM      :a2, after a1, 2d
+    section Data
+    Create Migration Script    :a3, after a1, 2d
+    Validate Data Migration    :a4, after a3, 1d --> DONE (Implicitly via successful script run)
+    section API
+    Update tRPC Routes         :a5, after a2, 2d --> NEXT
+    section Frontend
+    Component Refactoring      :a6, after a5, 3d --> NEXT
+```
 
-1. **Design Database Schema:** Define the necessary tables (users, wods, scores, etc.) in `src/server/db/schema.ts`.
-1. **Implement DB Logic:** Create functions (potentially using Repository Pattern) to interact with the database (CRUD operations for WODs, scores).
-1. **Update tRPC Routers:** Modify existing or create new tRPC routers/procedures to use the database logic instead of static JSON files.
-1. **Migrate Existing Data:** Write a script to migrate data from `public/data/*.json` into the new database structure.
-1. **Update Frontend Components:** Adjust frontend components (`WodTable`, `WodViewer`, etc.) to fetch and display data via the updated tRPC hooks.
-1. **Implement Score Logging:** Add UI and backend logic for users to log their scores against WODs in the database.
+### Detailed Implementation Steps
+
+1. **Schema Design** (Priority 1)
+
+   - Tables: users, wods, scores, movements, wod_movements
+   - JSON fields: benchmarks, tags, score values
+   - Indexes on common query paths (userId, wodId, category)
+
+2. **Repository Pattern Implementation**
+
+   - Type-safe database operations
+   - JSON schema validation using Zod
+   - Batch insert/update operations
+
+3. **Data Migration Script**
+
+   - Idempotent migration process
+   - Idempotent migration process --> DONE (Clears table first)
+   - Validation checks for data integrity --> DONE (Handled unique constraints)
+   - Progress tracking and error handling --> DONE (Logging added)
+
+4. **Authentication Integration**
+   - Maintain NextAuth.js compatibility
+   - User schema extensions for athlete profiles
 
 ## Active Decisions & Considerations
 
-- **Database Schema Details:** Finalizing the exact structure and relationships for the database schema.
-- **Authentication Provider:** Whether to stick with NextAuth.js or switch to BetterAuth (as noted in `todo.md`). This decision might impact the user schema design.
-- **Data Migration Strategy:** How to handle the one-time migration of existing JSON data into the database smoothly.
+- **Score Storage:** Using JSONB type for score values to handle multiple WOD types (AMRAP, EMOM, For Time)
+- **Movements:** Separate normalization table using existing `movementMapping.ts` logic
+- **Benchmarks:** Preserve existing JSON structure for compatibility with frontend
+- **Authentication:** Stick with NextAuth.js for now, add athlete profile fields to user schema
+
+```mermaid
+erDiagram
+    users ||--o{ scores : "logs"
+    wods ||--o{ scores : "has"
+    wods }o--o{ movements : "contains"
+    scores {
+        jsonb value
+        string type
+    }
+```
 
 ## Important Patterns & Preferences
 

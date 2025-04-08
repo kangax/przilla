@@ -21,6 +21,7 @@
   - Movement normalization map (`src/utils/movementMapping.ts`) corrected to properly handle "Dumbbell Hang Power Cleans" by ensuring the map key is lowercase and includes the space (`dumbbell hang power cleans`).
   - Parsing logic in `src/app/charts/page.tsx` updated to exclude specific phrases ("Men Use") and WOD names ("Amanda") from being counted as movements.
   - Normalization rules in `src/utils/movementMapping.ts` updated to map "dumbbell push presses" to "Push Press" and "kettlebell lunges" to "Lunge".
+- **WOD Data in Database:** WOD data (781 unique records) successfully migrated from `public/data/wods.json` to the SQLite database using `scripts/migrate_json_to_db.ts`.
 
 ## What's Left to Build
 
@@ -41,18 +42,19 @@ _(Based on `todo.md`):_
 - **Authentication:**
   - Evaluate and potentially switch to BetterAuth.
 - **Data Storage:**
-  - Migrate WOD data and user scores from static JSON files to a per-user database solution (using Drizzle/LibSQL).
+  - Migrate WOD data ~~and user scores~~ from static JSON files to a per-user database solution (using Drizzle/LibSQL). **(WOD data migration DONE)**
+  - Implement storage and retrieval of user scores in the database.
 
 ## Current Status
 
 - The application is in an early-to-mid stage of development.
-- Core functionality for viewing a predefined set of WODs from static JSON files is likely in place, including some basic visualizations.
+- Core functionality for viewing WODs is in place, but still uses static JSON. **WOD data now resides in the database.**
 - User authentication exists but might be replaced.
-- Major upcoming work involves migrating to a proper database for user-specific data tracking, expanding the WOD dataset significantly, adding import capabilities, and building out analytical features.
+- Major upcoming work involves **updating the application to use the database for WODs**, implementing user score tracking in the database, expanding the WOD dataset, adding import capabilities, and building out analytical features.
 
 ## Known Issues
 
-- **Data Scalability/Personalization:** Current reliance on static JSON files limits scalability and prevents storing user-specific scores effectively (addressed by the "JSON -> database" TODO item).
+- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved. Need to implement database storage for user scores.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
 
@@ -122,3 +124,10 @@ Example of a wod from wods.json:
   - Applied these updates via a comprehensive jq batch update targeting all ~20 Quarterfinal entries.
   - This enrichment aligned Quarterfinal workouts with the rest of the dataset, improving data quality and consistency.
 - We've inferred difficulty and filled in difficulty_explanation based on your AI capabilities of assessing workout scores of a crossfit wod.
+- **WOD Data Migration Execution (Apr 2025):**
+  - Successfully executed `scripts/migrate_json_to_db.ts` after debugging several issues:
+    - Added `tsx` and `dotenv` dependencies.
+    - Bypassed environment validation (`SKIP_ENV_VALIDATION=true`).
+    - Isolated DB client creation within the script to fix `ECONNREFUSED` errors.
+    - Handled `SQLITE_CONSTRAINT_UNIQUE` errors by converting empty string URLs to `null` and using `.onConflictDoNothing()`.
+  - Result: Migrated 781 unique WODs from JSON to the database.

@@ -357,3 +357,18 @@ export const sortWods = (
     return 0;
   });
 };
+
+/**
+ * Calculates the count of WODs per category for WODs that are considered "done".
+ */
+export const calculateCategoryCounts = (
+  wods: Wod[],
+): Record<string, number> => {
+  const counts: Record<string, number> = {};
+  wods.forEach((wod) => {
+    if (isWodDone(wod) && wod.category) {
+      counts[wod.category] = (counts[wod.category] || 0) + 1;
+    }
+  });
+  return counts;
+};

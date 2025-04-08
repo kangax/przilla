@@ -116,12 +116,12 @@ const movementNormalizationMap: Record<string, string> = {
   "ring dips": "Ring Dip",
   "muscle-ups": "Muscle-Up",
   "bar muscle-ups": "Bar Muscle-Up", // Keep distinct
-  "ring muscle-ups": "Muscle-Up", // Keep distinct? Defaulting to Muscle-Up
+  "ring muscle-ups": "Muscle-Up",
   "bench press": "Bench Press",
   "wall walk": "Wall Walk",
   "rope climb": "Rope Climb",
   "toes-to-bar": "Toes-to-Bar",
-  "ghd sit-ups": "GHD Sit-Up", // Keep distinct
+  "ghd sit-ups": "GHD Sit-Up",
 };
 
 // Function to normalize a movement name using the map.

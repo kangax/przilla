@@ -125,4 +125,4 @@ Note: When triggered by **update memory bank**, I MUST review every memory bank 
 
 REMEMBER: After every memory reset, I begin completely fresh. The Memory Bank is my only link to previous work. It must be maintained with precision and clarity, as my effectiveness depends entirely on its accuracy.
 
-Important: Attempt to batch requests to model services where reasonable, avoiding excessive small requests
+Important: Batch requests to your services, avoid multipl small requests

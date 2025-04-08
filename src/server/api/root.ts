@@ -3,6 +3,7 @@ import {
   createTRPCRouter,
   publicProcedure,
 } from "~/server/api/trpc";
+import { wodRouter } from "~/server/api/routers/wod";
 
 /**
  * This is the primary router for your server.
@@ -10,7 +11,7 @@ import {
  * All routers added in /api/routers should be manually added here.
  */
 export const appRouter = createTRPCRouter({
-  // post: postRouter, // Removed post router
+  wod: wodRouter, // Add the WOD router
   health: publicProcedure.query(() => {
     return "ok";
   }),

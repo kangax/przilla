@@ -30,18 +30,18 @@
 ## Technical Constraints
 
 - **NextAuth Beta:** Using a beta version (`5.0.0-beta.25`) might introduce instability or breaking changes upon updates. Need to monitor its development.
-- **Static Data Source:** Current reliance on static JSON files (`public/data/`) for WODs limits real-time updates and user-specific data storage. Performance might degrade as JSON files grow before database migration.
+- **Static Data Source:** Reliance on static JSON files (`public/data/`) for WODs is being phased out. `WodViewer` now uses the database via tRPC. Other parts of the app (e.g., charts page) may still use JSON and need updating.
 - **LibSQL/Turso:** If using a free tier, be mindful of potential usage limits (storage, read/write operations, connections).
-- **tRPC:** While providing type safety, it tightly couples the frontend and backend, requiring careful consideration during refactoring.
+- **tRPC:** While providing type safety, it tightly couples the frontend and backend, requiring careful consideration during refactoring. `SuperJSON` is now enabled as the transformer to handle complex types like Dates.
 
 ## Dependencies
 
 - **Core:** Next.js, React, tRPC, Drizzle ORM, NextAuth.js, TanStack Query, Zod
 - **UI:** Radix UI (Themes, Select, Icons), Tailwind CSS, Lucide Icons, Recharts, TanStack Table/Virtual
 - **Database:** `@libsql/client`
-- **Utility:** `superjson`, `geist`, `server-only`
+- **Utility:** `superjson` (enabled as tRPC transformer), `geist`, `server-only`
 - **Dev/Build:** TypeScript, ESLint, Prettier, Vitest, Husky, lint-staged, PostCSS, `@t3-oss/env-nextjs`
-- **Scripts/Internal Tools:** `axios`, `chalk`, `cheerio`, `fs-extra` (used in `scripts/`)
+- **Scripts/Internal Tools:** `axios`, `chalk`, `cheerio`, `fs-extra`, `dotenv`, `tsx` (used in `scripts/`)
 
 ## Tool Usage Patterns
 

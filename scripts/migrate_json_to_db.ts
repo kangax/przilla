@@ -101,7 +101,8 @@ async function migrateData() {
     // 1. Read JSON data
     console.log(`📄 Reading WOD data from ${WODS_JSON_PATH}...`);
     const jsonData = await fs.readFile(WODS_JSON_PATH, "utf-8");
-    const wodsData = JSON.parse(jsonData) as Wod[];
+    // Use any[] to reflect the raw JSON structure before mapping
+    const wodsData = JSON.parse(jsonData) as any[];
     console.log(`✅ Found ${wodsData.length} WODs in JSON file.`);
 
     // 1b. Fetch existing WOD names and URLs from DB (Should be empty now)
@@ -162,6 +163,7 @@ async function migrateData() {
         category: wod.category,
         tags: validTags ? JSON.stringify(validTags) : null, // Stringify the filtered array
         difficulty: wod.difficulty,
+        // Map from snake_case (JSON source) to camelCase (DB schema target)
         difficultyExplanation: wod.difficulty_explanation,
         countLikes: wod.count_likes,
       };

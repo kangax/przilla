@@ -80,6 +80,28 @@
       - Adding `.onConflictDoNothing()` to the Drizzle insert statement to gracefully skip any remaining constraint violations.
     - Added logging to show which WODs were skipped due to duplicate names/URLs within the JSON source during the script's initial check.
   - **Outcome:** Cleared the `wods` table and inserted 781 unique WOD records from `public/data/wods.json` into the database. 20 WODs were skipped during the initial JSON duplicate check (logged in the script output).
+- **tRPC Endpoint for WODs:**
+  - Created a new tRPC router `src/server/api/routers/wod.ts`.
+  - Implemented a `getAll` public procedure in `wodRouter` to fetch all WODs from the database using Drizzle, ordered by name.
+  - Updated the `getAll` procedure to map snake_case database fields (e.g., `count_likes`) to camelCase fields (`countLikes`) expected by the frontend `Wod` type.
+  - Registered the `wodRouter` in the main `appRouter` (`src/server/api/root.ts`).
+- **Type Definition Update:**
+  - Modified the `Wod` type in `src/types/wodTypes.ts`: removed the `results` property, added `id`, `createdAt`, `updatedAt`, and updated nullability and case to match the database schema and tRPC output.
+  - Corrected `SortByType` in `src/types/wodTypes.ts` to use `countLikes` (camelCase).
+- **SuperJSON Transformer:**
+  - Enabled the `SuperJSON` transformer in both the client (`src/trpc/react.tsx`) and server (`src/server/api/trpc.ts`) tRPC configurations to handle serialization/deserialization of complex types like `Date`.
+- **Utility Function Updates (`wodUtils.ts`):**
+  - Modified `isWodDone` to always return `false` as WOD definitions alone don't indicate completion status.
+  - Updated `sortWods` to temporarily disable sorting by `date`, `attempts`, `level`, and `latestLevel` (as they require score data) and corrected the check for `countLikes`.
+  - Updated `calculateCategoryCounts` to count all WODs per category, ignoring the (now always false) `isWodDone` check.
+- **WodViewer Refactor:**
+  - Refactored `src/app/_components/WodViewer.tsx` to fetch data using the `api.wod.getAll.useQuery()` hook instead of receiving props.
+  - Handled loading and error states from the query.
+  - Derived `categoryOrder` and `tagOrder` from the fetched data.
+  - Resolved TypeScript errors related to type mismatches between fetched data and the updated `Wod` type, including Date serialization issues (fixed by SuperJSON) and explicit typing.
+- **Migration Script Fix (`scripts/migrate_json_to_db.ts`):**
+  - Corrected property name mapping in `wodInsertData` to correctly assign `wod.difficulty_explanation` and `wod.count_likes` (from JSON) to the camelCase properties expected by Drizzle.
+  - Changed the type assertion for parsed JSON data to `any[]` to avoid type errors when accessing original snake_case properties.
 
 ## Next Steps
 
@@ -96,9 +118,9 @@ gantt
     Create Migration Script    :a3, after a1, 2d
     Validate Data Migration    :a4, after a3, 1d --> DONE (Implicitly via successful script run)
     section API
-    Update tRPC Routes         :a5, after a2, 2d --> NEXT
+    Update tRPC Routes         :a5, after a2, 2d --> DONE (for wod.getAll)
     section Frontend
-    Component Refactoring      :a6, after a5, 3d --> NEXT
+    Component Refactoring      :a6, after a5, 3d --> IN PROGRESS (WodViewer done)
 ```
 
 ### Detailed Implementation Steps
@@ -130,8 +152,10 @@ gantt
 
 - **Score Storage:** Using JSONB type for score values to handle multiple WOD types (AMRAP, EMOM, For Time)
 - **Movements:** Separate normalization table using existing `movementMapping.ts` logic
-- **Benchmarks:** Preserve existing JSON structure for compatibility with frontend
+- **Benchmarks:** Preserve existing JSON structure for compatibility with frontend. Drizzle handles JSON parsing/stringification via `$type`.
 - **Authentication:** Stick with NextAuth.js for now, add athlete profile fields to user schema
+- **Data Fetching:** `WodViewer` now uses tRPC. Other components (e.g., charts page) still using static JSON need refactoring.
+- **Sorting/Filtering:** Sorting/filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is temporarily disabled in `WodViewer` / `wodUtils` until score fetching is implemented.
 
 ```mermaid
 erDiagram

@@ -5,6 +5,7 @@ import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
 import { createTRPCReact } from "@trpc/react-query";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
+import SuperJSON from "superjson"; // Import SuperJSON
 
 import { type AppRouter } from "~/server/api/root";
 import { createQueryClient } from "./query-client";
@@ -47,7 +48,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             (op.direction === "down" && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
-          // transformer: SuperJSON, // Leave commented out for now
+          transformer: SuperJSON, // Uncomment SuperJSON transformer
           url: getBaseUrl() + "/api/trpc",
           headers: () => {
             const headers = new Headers();

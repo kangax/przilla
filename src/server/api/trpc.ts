@@ -8,7 +8,7 @@
  */
 
 import { initTRPC, TRPCError } from "@trpc/server";
-
+import SuperJSON from "superjson"; // Import SuperJSON
 import { ZodError } from "zod";
 
 import { auth } from "~/server/auth";
@@ -44,7 +44,7 @@ export const createTRPCContext = async (opts: { headers: Headers }) => {
  * errors on the backend.
  */
 const t = initTRPC.context<typeof createTRPCContext>().create({
-  // transformer: superjson, // Leave commented out for now
+  transformer: SuperJSON, // Uncomment SuperJSON transformer
   errorFormatter({ shape, error }) {
     return {
       ...shape,

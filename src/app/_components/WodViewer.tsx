@@ -8,6 +8,7 @@ import {
   useMemo,
   useCallback,
 } from "react";
+import { api } from "~/trpc/react"; // Import tRPC api
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, SegmentedControl, Tooltip } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -17,7 +18,7 @@ import WodTimeline from "./WodTimeline";
 // Removed unused WodDistributionChart
 // Removed unused WodTimelineChart
 import { type Wod, type SortByType } from "~/types/wodTypes";
-import { sortWods, isWodDone } from "~/utils/wodUtils"; // Removed unused hasScore
+import { sortWods, isWodDone } from "~/utils/wodUtils";
 
 // --- URL State Management ---
 const DEFAULT_COMPLETION_FILTER = "done";
@@ -50,7 +51,7 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
     "attempts",
     "latestLevel",
     "difficulty", // Added difficulty
-    "count_likes", // Added likes
+    "countLikes", // Corrected to camelCase
   ];
   return validSortKeys.includes(sortBy as SortByType);
 };
@@ -68,32 +69,61 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   attempts: "desc",
   latestLevel: "desc",
   difficulty: "asc", // Added difficulty, default asc (Easy -> Hard)
-  count_likes: "desc", // Added likes, default desc (Most likes first)
+  countLikes: "desc", // Corrected to camelCase
 };
 // --- End URL State Management ---
 
-interface WodViewerProps {
-  wods: Wod[];
-  categoryOrder: string[];
-  tagOrder: string[];
-}
+// Remove props wods, categoryOrder, tagOrder
+// interface WodViewerProps {
+//   wods: Wod[];
+//   categoryOrder: string[];
+//   tagOrder: string[];
+// }
 
-export default function WodViewer({
-  wods,
-  categoryOrder,
-  tagOrder,
-}: WodViewerProps) {
+export default function WodViewer() {
+  // Fetch WOD data using tRPC
+  const { data: wodsData, isLoading, error } = api.wod.getAll.useQuery();
+  // Explicitly parse date strings to Date objects as a workaround for TS inference issue
+  const wods = useMemo(() => {
+    // Explicitly type 'wod' parameter in map to help TS inference
+    return (wodsData ?? []).map(
+      (wod: {
+        createdAt: string | Date;
+        updatedAt?: string | Date | null;
+      }) => ({
+        ...wod,
+        // Ensure createdAt and updatedAt are Date objects
+        createdAt: new Date(wod.createdAt),
+        updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : null,
+      }),
+    ) as Wod[]; // Cast final result to Wod[]
+  }, [wodsData]);
+
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
   const filterBarRef = useRef<HTMLDivElement>(null); // Ref for filter bar
   const [tableHeight, setTableHeight] = useState<number>(600); // Default height
 
+  // Derive categoryOrder and tagOrder from fetched data
+  const categoryOrder = useMemo(() => {
+    if (!wods) return [];
+    const categories = new Set(wods.map((wod) => wod.category).filter(Boolean));
+    return Array.from(categories).sort();
+  }, [wods]);
+
+  const tagOrder = useMemo(() => {
+    if (!wods) return [];
+    const tags = new Set(wods.flatMap((wod) => wod.tags ?? []).filter(Boolean));
+    return Array.from(tags).sort();
+  }, [wods]);
+
   // --- Initialize State from URL or Defaults ---
   // Note: These functions run on every render, but useState only uses them for the *initial* value.
+  // Update initial state functions to use derived categoryOrder/tagOrder
   const getInitialCategories = (): string[] => {
     const urlCategory = searchParams.get("category");
-    return urlCategory && categoryOrder.includes(urlCategory)
+    return urlCategory && categoryOrder.includes(urlCategory) // Use derived categoryOrder
       ? [urlCategory]
       : [];
   };
@@ -101,7 +131,7 @@ export default function WodViewer({
   const getInitialTags = (): string[] => {
     const urlTags = searchParams.get("tags");
     return urlTags
-      ? urlTags.split(",").filter((tag) => tagOrder.includes(tag))
+      ? urlTags.split(",").filter((tag) => tagOrder.includes(tag)) // Use derived tagOrder
       : [];
   };
 
@@ -183,7 +213,7 @@ export default function WodViewer({
 
     // Cleanup listener on component unmount
     return () => window.removeEventListener("resize", calculateHeight);
-  }, []); // Empty dependency array ensures this runs once on mount and cleans up on unmount
+  }, [filterBarRef]); // Add filterBarRef dependency
 
   // --- Sync State TO URL ---
   // Update URL when internal state changes
@@ -245,17 +275,20 @@ export default function WodViewer({
   ]);
   // --- End Sync State TO URL ---
 
-  // Calculate counts for categories based on the original list for the dropdown
-  const categoryCounts = wods.reduce(
-    (acc, wod) => {
-      if (wod.category) {
-        acc[wod.category] = (acc[wod.category] || 0) + 1;
-      }
-      return acc;
-    },
-    {} as Record<string, number>,
-  );
-  const originalTotalWodCount = wods.length;
+  // Calculate counts for categories based on the *fetched* list for the dropdown
+  const categoryCounts = useMemo(() => {
+    return wods.reduce(
+      (acc, wod) => {
+        if (wod.category) {
+          acc[wod.category] = (acc[wod.category] || 0) + 1;
+        }
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+  }, [wods]);
+
+  const originalTotalWodCount = useMemo(() => wods.length, [wods]);
 
   // --- Memoized Filtering and Sorting Logic ---
 
@@ -349,6 +382,20 @@ export default function WodViewer({
   }, []);
 
   // --- End Event Handlers ---
+
+  // Handle Loading and Error States
+  if (isLoading) {
+    return <Box>Loading WODs...</Box>;
+  }
+
+  if (error) {
+    return <Box>Error loading WODs: {error.message}</Box>;
+  }
+
+  // Ensure wods data is available before rendering the main content
+  if (!wods) {
+    return <Box>No WOD data available.</Box>; // Or some other placeholder
+  }
 
   return (
     <Box>

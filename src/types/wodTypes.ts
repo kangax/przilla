@@ -48,16 +48,19 @@ export type WodCategory =
   | "Other";
 
 export type Wod = {
-  wodUrl: string;
+  id: string; // Added from DB schema
+  wodUrl: string | null; // Updated to match DB schema (can be null)
   wodName: string;
-  description?: string;
-  benchmarks?: Benchmarks;
-  results: WodResult[];
-  category?: WodCategory;
-  tags?: WodTag[];
-  difficulty?: string; // Added difficulty
-  difficulty_explanation?: string; // Added explanation for tooltip
-  count_likes?: number; // Added likes count
+  description?: string | null; // Updated to match DB schema (can be null)
+  benchmarks?: Benchmarks | null; // Updated to match DB schema (can be null)
+  // results: WodResult[]; // Removed - results are fetched separately
+  category?: string | null; // Simplified type to match DB 'text' column, resolving lint error
+  tags?: string[] | null; // Simplified type to match DB 'text' column (JSON array), resolving lint error
+  difficulty?: string | null; // Updated to match DB schema (can be null)
+  difficultyExplanation?: string | null; // Renamed from difficulty_explanation, match DB (can be null)
+  countLikes?: number | null; // Renamed from count_likes, match DB (can be null)
+  createdAt: Date; // Added from DB schema (Drizzle returns Date)
+  updatedAt?: Date | null; // Added from DB schema (Drizzle returns Date or null)
 };
 
 // Type for chart data points (used in WodViewer and passed from page.tsx)
@@ -84,4 +87,4 @@ export type SortByType =
   | "attempts"
   | "latestLevel"
   | "difficulty"
-  | "count_likes";
+  | "countLikes"; // Corrected to camelCase

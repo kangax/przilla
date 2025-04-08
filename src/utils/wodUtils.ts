@@ -99,10 +99,14 @@ export const getPerformanceLevel = (
 };
 
 /**
- * Checks if a WOD is considered "done" (has at least one result with a date and score).
+ * Checks if a WOD is considered "done".
+ * NOTE: This currently always returns false as WOD definitions fetched via
+ * `api.wod.getAll` do not include user-specific results. Determining "doneness"
+ * requires fetching associated scores separately.
  */
 export const isWodDone = (wod: Wod): boolean => {
-  return wod.results.some((r) => r.date && hasScore(r));
+  // return wod.results.some((r) => r.date && hasScore(r)); // Old logic based on results prop
+  return false; // Cannot determine doneness from WOD definition alone
 };
 
 /**
@@ -244,85 +248,19 @@ export const sortWods = (
       if (nameA < nameB) return -1 * directionMultiplier;
       if (nameA > nameB) return 1 * directionMultiplier;
       return 0;
-    } else if (sortBy === "date") {
-      // Find the earliest valid date for comparison
-      const earliestDateA =
-        [...a.results]
-          .filter((r) => r.date && hasScore(r))
-          .map((r) => new Date(r.date).getTime()) // Removed unnecessary non-null assertion
-          .sort((d1, d2) => d1 - d2)[0] ?? Infinity;
-      const earliestDateB =
-        [...b.results]
-          .filter((r) => r.date && hasScore(r))
-          .map((r) => new Date(r.date).getTime()) // Removed unnecessary non-null assertion
-          .sort((d1, d2) => d1 - d2)[0] ?? Infinity;
-
-      if (earliestDateA === Infinity && earliestDateB === Infinity) {
-        return a.wodName.localeCompare(b.wodName);
-      } else if (earliestDateA === Infinity) {
-        return 1 * directionMultiplier;
-      } else if (earliestDateB === Infinity) {
-        return -1 * directionMultiplier;
-      }
-
-      if (earliestDateA !== earliestDateB) {
-        return (earliestDateA - earliestDateB) * directionMultiplier;
-      } else {
-        return a.wodName.localeCompare(b.wodName);
-      }
-    } else if (sortBy === "attempts") {
-      const attemptsA = a.results.filter((r) => r.date && hasScore(r)).length;
-      const attemptsB = b.results.filter((r) => r.date && hasScore(r)).length;
-      return (attemptsA - attemptsB) * directionMultiplier;
-    } else if (sortBy === "level" || sortBy === "latestLevel") {
-      let resultA: WodResult | null = null;
-      let resultB: WodResult | null = null;
-
-      const findResult = (wod: Wod): WodResult | null => {
-        const validResults = wod.results.filter((r) => r.date && hasScore(r));
-        if (validResults.length === 0) return null;
-
-        if (sortBy === "level") {
-          return validResults.sort(
-            (r1, r2) =>
-              new Date(r1.date).getTime() - new Date(r2.date).getTime(), // Removed unnecessary non-null assertion
-          )[0];
-        } else {
-          return validResults.sort(
-            (r1, r2) =>
-              new Date(r2.date).getTime() - new Date(r1.date).getTime(), // Removed unnecessary non-null assertion
-          )[0];
-        }
-      };
-
-      resultA = findResult(a);
-      resultB = findResult(b);
-
-      const levelA = resultA ? getPerformanceLevel(a, resultA) : null;
-      const levelB = resultB ? getPerformanceLevel(b, resultB) : null;
-
-      const levelValueA = levelA ? (PERFORMANCE_LEVEL_VALUES[levelA] ?? 0) : 0;
-      const levelValueB = levelB ? (PERFORMANCE_LEVEL_VALUES[levelB] ?? 0) : 0;
-
-      const isScaledA =
-        resultA && resultA.rxStatus && resultA.rxStatus !== "Rx";
-      const isScaledB =
-        resultB && resultB.rxStatus && resultB.rxStatus !== "Rx";
-      const baseScoreA = resultA ? (isScaledA ? 0 : 10) : 0;
-      const baseScoreB = resultB ? (isScaledB ? 0 : 10) : 0;
-
-      const finalScoreA = baseScoreA + levelValueA;
-      const finalScoreB = baseScoreB + levelValueB;
-
-      if (finalScoreA !== finalScoreB) {
-        return (finalScoreA - finalScoreB) * directionMultiplier;
-      }
-
-      const nameCompare = a.wodName.localeCompare(b.wodName);
-      if (nameCompare !== 0) {
-        return nameCompare * directionMultiplier;
-      }
-      return 0;
+    } else if (
+      sortBy === "date" ||
+      sortBy === "attempts" ||
+      sortBy === "level" ||
+      sortBy === "latestLevel"
+    ) {
+      // TODO: Implement sorting for date, attempts, level, latestLevel
+      // These currently require fetching associated scores, which is not done here.
+      // For now, fall back to sorting by name for these columns.
+      console.warn(
+        `Sorting by "${sortBy}" is not yet implemented without score data.`,
+      );
+      return a.wodName.localeCompare(b.wodName) * directionMultiplier;
     } else if (sortBy === "difficulty") {
       // Define a mapping for difficulty levels to numeric values
       const difficultyValues: Record<string, number> = {
@@ -343,10 +281,12 @@ export const sortWods = (
       }
       // Secondary sort by name if difficulties are the same
       return a.wodName.localeCompare(b.wodName) * directionMultiplier;
-    } else if (sortBy === "count_likes") {
+    } else if (sortBy === "countLikes") {
+      // Corrected sortBy check
+      // Corrected property name
       // Treat null/undefined likes as 0 for comparison
-      const likesA = a.count_likes ?? 0;
-      const likesB = b.count_likes ?? 0;
+      const likesA = a.countLikes ?? 0; // Corrected property name
+      const likesB = b.countLikes ?? 0; // Corrected property name
 
       if (likesA !== likesB) {
         return (likesA - likesB) * directionMultiplier;
@@ -359,14 +299,18 @@ export const sortWods = (
 };
 
 /**
- * Calculates the count of WODs per category for WODs that are considered "done".
+ * Calculates the count of WODs per category.
+ * NOTE: This currently counts all WODs per category, as `isWodDone` always returns false.
+ * It might need adjustment later if filtering by "done" status based on fetched scores is required.
  */
 export const calculateCategoryCounts = (
   wods: Wod[],
 ): Record<string, number> => {
   const counts: Record<string, number> = {};
   wods.forEach((wod) => {
-    if (isWodDone(wod) && wod.category) {
+    // if (isWodDone(wod) && wod.category) { // Old logic checking isWodDone
+    if (wod.category) {
+      // Count all WODs in the category
       counts[wod.category] = (counts[wod.category] || 0) + 1;
     }
   });

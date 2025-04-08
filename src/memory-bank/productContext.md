@@ -8,7 +8,7 @@
 
 ## How It Works
 
-- Users can view a list or database of WODs (sourced from `public/data/wods.json`).
+- Users can view a list or database of WODs (sourced from the database via tRPC in `WodViewer`, previously `public/data/wods.json`).
 - (not yet) Users can select a WOD to see its details (description, type, etc.).
 - (not yet) Users can log their scores/times/results for specific WODs, likely associated with a date.
 - The application displays progress over time, through charts (`WodTimelineChart`, `WodDistributionChart`) or tables (`WodTable`, `WodTimeline`).

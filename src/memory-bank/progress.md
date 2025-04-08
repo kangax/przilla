@@ -2,7 +2,7 @@
 
 ## What Works
 
-- **WOD Display:** Core components for displaying WOD information seem functional (`WodViewer`, `WodTable`). Data is likely sourced from static JSON files in `public/data/`.
+- **WOD Display:** Core components for displaying WOD information (`WodViewer`, `WodTable`, `WodTimeline`) are functional. `WodViewer` now fetches data directly from the database via tRPC (`api.wod.getAll`).
 - **WOD Visualization:** Basic charts for visualizing WOD data might be implemented (`WodTimelineChart`, `WodDistributionChart`).
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
@@ -44,19 +44,21 @@ _(Based on `todo.md`):_
 - **Data Storage:**
   - Migrate WOD data ~~and user scores~~ from static JSON files to a per-user database solution (using Drizzle/LibSQL). **(WOD data migration DONE)**
   - Implement storage and retrieval of user scores in the database.
+  - Refactor other components (e.g., charts page) to use tRPC/database instead of static JSON.
 
 ## Current Status
 
 - The application is in an early-to-mid stage of development.
-- Core functionality for viewing WODs is in place, but still uses static JSON. **WOD data now resides in the database.**
+- Core functionality for viewing WODs (`WodViewer`) now uses the database via tRPC. Other parts (e.g., charts) may still use static JSON.
 - User authentication exists but might be replaced.
-- Major upcoming work involves **updating the application to use the database for WODs**, implementing user score tracking in the database, expanding the WOD dataset, adding import capabilities, and building out analytical features.
+- Major upcoming work involves **continuing the migration away from static JSON**, implementing user score tracking in the database, expanding the WOD dataset, adding import capabilities, and building out analytical features.
 
 ## Known Issues
 
-- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved. Need to implement database storage for user scores.
+- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to implement database storage for user scores and update other components (e.g., charts).
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
+- **Sorting/Filtering Limitations:** Sorting and filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is temporarily disabled in `WodViewer` as score data is not yet fetched alongside WOD definitions.
 
 ## Evolution of Project Decisions
 
@@ -131,3 +133,9 @@ Example of a wod from wods.json:
     - Isolated DB client creation within the script to fix `ECONNREFUSED` errors.
     - Handled `SQLITE_CONSTRAINT_UNIQUE` errors by converting empty string URLs to `null` and using `.onConflictDoNothing()`.
   - Result: Migrated 781 unique WODs from JSON to the database.
+- **tRPC Implementation (Apr 2025):**
+  - Created `wodRouter` with `getAll` procedure to fetch WODs from DB.
+  - Updated `Wod` type definition, removing `results` and aligning with DB schema.
+  - Enabled `SuperJSON` transformer on client and server for proper Date serialization.
+  - Refactored `WodViewer` to use `api.wod.getAll.useQuery()`.
+  - Updated `wodUtils` (`isWodDone`, `sortWods`) to handle the lack of score data in `getAll` results.

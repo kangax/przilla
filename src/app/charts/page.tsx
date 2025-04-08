@@ -1,15 +1,17 @@
 import fs from "fs";
 import path from "path";
-import { Box, Container, Flex, Heading } from "@radix-ui/themes";
+import { Box, Container, Flex } from "@radix-ui/themes"; // Removed Heading
 
 import WodDistributionChart from "~/app/_components/WodDistributionChart";
 import WodTimelineChart from "~/app/_components/WodTimelineChart";
-import ThemeToggle from "~/app/_components/ThemeToggle";
+import MovementFrequencyChart from "~/app/_components/MovementFrequencyChart"; // Import the new chart
+// Removed ThemeToggle import
 import Header from "~/app/_components/Header";
+import { normalizeMovementName } from "~/utils/movementMapping";
 import { type Wod } from "~/types/wodTypes";
 import {
   DESIRED_TAG_ORDER,
-  ALLOWED_TAGS,
+  ALLOWED_TAGS, // Keep ALLOWED_TAGS if still used, remove if not
   DESIRED_CATEGORY_ORDER,
   PERFORMANCE_LEVEL_VALUES,
 } from "~/config/constants";
@@ -17,12 +19,18 @@ import { hasScore, getPerformanceLevel, isWodDone } from "~/utils/wodUtils";
 
 export default async function ChartsPage() {
   let wodsData: Wod[] = [];
-  const tagCounts: Record<string, number> = {};
-  const categoryCounts: Record<string, number> = {};
+  const tagCounts: Record<string, number> = {}; // For existing chart
+  const categoryCounts: Record<string, number> = {}; // For existing chart
   const monthlyData: Record<
+    // For existing chart
     string,
     { count: number; totalLevelScore: number }
   > = {};
+  // Update structure to hold count and WOD names
+  const movementDataByCategory: Record<
+    string,
+    Record<string, { count: number; wodNames: string[] }>
+  > = {}; // For new chart
 
   try {
     const filePath = path.join(process.cwd(), "public", "data", "wods.json");
@@ -30,7 +38,80 @@ export default async function ChartsPage() {
     wodsData = JSON.parse(fileContents) as Wod[];
     console.log("Loaded WODs data for charts:", wodsData.length);
 
+    // --- Start: Movement Frequency Calculation ---
+    const commonWords = new Set([
+      "for",
+      "time",
+      "reps",
+      "rounds",
+      "of",
+      "min",
+      "rest",
+      "between",
+      "then",
+      "amrap",
+      "emom",
+      "in",
+      "minutes",
+      "seconds",
+      "with",
+      "meter",
+      "meters",
+      "lb",
+      "kg",
+      "pood",
+      "bodyweight",
+      "alternating",
+      "legs",
+      "unbroken",
+      "max",
+      "needed",
+      "set",
+      "score",
+      "is",
+      "load",
+      "the",
+      "a",
+      "and",
+      "or",
+      "each",
+      "total",
+      "cap",
+      "as",
+      "many",
+      "possible",
+      "on",
+      "every",
+      "minute",
+      "from",
+      "if",
+      "completed",
+      "before",
+      // Add more structural/non-movement phrases to exclude
+      "rounds for time",
+      "reps for time",
+      "rep for time",
+      "for time",
+      "amrap in",
+      "emom in",
+      "time cap",
+      "with a",
+      "minute rest",
+      "rest between rounds",
+      "alternating legs", // Often part of pistol description, but not the movement itself
+      "over the bar", // Often part of burpee description
+      "bar facing", // Often part of burpee description
+      "dumbbell", // Often a modifier, handle via normalization map
+      "kettlebell", // Often a modifier, handle via normalization map
+      "barbell", // Often implied or a modifier
+      "assault bike", // Normalize to Bike
+      "echo bike", // Normalize to Bike
+      "cals", // Often follows Bike/Row/Ski
+      "calories", // Often follows Bike/Row/Ski
+    ]);
+
     wodsData.forEach((wod) => {
+      // Process for existing charts (if WOD is done)
       if (isWodDone(wod)) {
         if (wod.category) {
           categoryCounts[wod.category] =
@@ -46,7 +127,81 @@ export default async function ChartsPage() {
         }
       }
 
-      // Process results for timeline chart
+      // Process description for movement frequency (regardless of done status)
+      if (wod.category && wod.description && wod.wodName) {
+        // Ensure wodName exists
+        if (!movementDataByCategory[wod.category]) {
+          movementDataByCategory[wod.category] = {};
+        }
+
+        const lines = wod.description.split("\n");
+        lines.forEach((line) => {
+          // Attempt to extract potential movement names from each line
+          // Regex to find potential multi-word movements (often capitalized)
+          // or single capitalized words. Very heuristic.
+          const movementRegex = /([A-Z][a-zA-Z\s-]+)/g;
+          let match: RegExpExecArray | null; // Add type annotation
+          const rawPhrases: string[] = [];
+          while ((match = movementRegex.exec(line)) !== null) {
+            // Ensure match and match[1] are valid strings before proceeding
+            if (match && typeof match[1] === "string") {
+              // Further clean the matched phrase
+              const phrase = match[1]
+                .replace(/\s+\(.*?\)/g, "") // Remove trailing parenthesized text
+                .replace(
+                  /(\d+(\.\d+)?\/?\d*(\.\d+)?)\s*(lb|kg|pood|in|meter|meters)/gi,
+                  "",
+                ) // Remove weights/units
+                .replace(/[:\-.,]$/, "") // Remove trailing punctuation
+                .trim();
+
+              // Additional check to exclude phrases that are *only* common words after cleaning
+              const phraseLower = phrase.toLowerCase();
+              const wordsInPhrase = phraseLower.split(/\s+/);
+              const allCommon = wordsInPhrase.every(
+                (word) => commonWords.has(word) || word.length <= 1,
+              );
+
+              if (
+                phrase.length > 2 &&
+                !commonWords.has(phraseLower) &&
+                !allCommon
+              ) {
+                // Check if the entire phrase is just common words (e.g., "Rounds For Time")
+                if (!wordsInPhrase.every((word) => commonWords.has(word))) {
+                  rawPhrases.push(phrase);
+                }
+              }
+            } // End of check for valid match[1]
+          }
+
+          // Normalize and count the found phrases
+          // Keep track of unique normalized movements found in *this* WOD description
+          const movementsInThisWod = new Set<string>();
+          rawPhrases.forEach((rawPhrase) => {
+            const normalized = normalizeMovementName(rawPhrase);
+            if (normalized) {
+              movementsInThisWod.add(normalized);
+            }
+          });
+
+          // Add this WOD name to the list for each unique movement found
+          movementsInThisWod.forEach((normalizedMovement) => {
+            if (!movementDataByCategory[wod.category][normalizedMovement]) {
+              movementDataByCategory[wod.category][normalizedMovement] = {
+                count: 0,
+                wodNames: [],
+              };
+            }
+            movementDataByCategory[wod.category][normalizedMovement].count++;
+            movementDataByCategory[wod.category][
+              normalizedMovement
+            ].wodNames.push(wod.wodName);
+          });
+        });
+      }
+
+      // Process results for timeline chart (existing logic)
       wod.results.forEach((result) => {
         if (result.date && hasScore(result)) {
           try {
@@ -81,10 +236,15 @@ export default async function ChartsPage() {
       categoryCounts,
     );
     console.log("Calculated Monthly Data for charts:", monthlyData);
+    console.log(
+      "Calculated Movement Data by Category (with WOD names):",
+      movementDataByCategory,
+    ); // Log new data
   } catch (error) {
     console.error("Error loading or processing WODs data for charts:", error);
   }
 
+  // --- Prepare data for existing charts ---
   const tagChartData = DESIRED_TAG_ORDER.map((tagName) => ({
     name: tagName,
     value: tagCounts[tagName] || 0,
@@ -107,6 +267,25 @@ export default async function ChartsPage() {
         : 0,
   }));
 
+  // --- Prepare data for new movement frequency chart ---
+  // Update structure to include wodNames
+  const topMovementsData: Record<
+    string,
+    { name: string; value: number; wodNames: string[] }[]
+  > = {};
+  Object.keys(movementDataByCategory).forEach((category) => {
+    const movements = movementDataByCategory[category];
+    topMovementsData[category] = Object.entries(movements)
+      .map(([name, data]) => ({
+        name,
+        value: data.count,
+        wodNames: data.wodNames,
+      }))
+      .sort((a, b) => b.value - a.value) // Sort descending by frequency
+      .slice(0, 20); // Take top 20
+  });
+  console.log("Top 20 Movements by Category:", topMovementsData); // Log processed data
+
   return (
     <Box className="min-h-screen bg-background text-foreground">
       <Header />
@@ -126,6 +305,8 @@ export default async function ChartsPage() {
               />
             </Box>
           </Flex>
+          {/* Add the new chart below the existing row */}
+          <MovementFrequencyChart data={topMovementsData} />
         </Flex>
       </Container>
     </Box>

@@ -48,6 +48,17 @@
   - Created a new script `scripts/add_quarterfinals_wods.js` to transform and add these workouts.
   - The script maps source fields (`title`, `url`, `workout`, `count_likes`) to target fields (`wodName`, `wodUrl`, `description`, `count_likes`), sets `category` to "Quarterfinals", infers tags, and uses placeholder functions for benchmark/difficulty estimation.
   - Executed the script, successfully adding 20 Quarterfinals WODs to `wods.json` and sorting the file.
+- **Movement Frequency Chart:**
+  - Added a new chart to `src/app/charts/page.tsx` displaying the "Top 20 Movements by Frequency" per WOD category (Girl, Hero, Benchmark, etc.).
+  - Implemented dynamic parsing logic within `src/app/charts/page.tsx` to extract potential movement phrases from WOD descriptions in `public/data/wods.json`.
+  - Created `src/utils/movementMapping.ts` to define rules for normalizing extracted movement names (e.g., grouping variations like "Dumbbell Thruster" with "Thruster", but keeping "Dumbbell Snatch" separate from "Snatch").
+  - Created the `src/app/_components/MovementFrequencyChart.tsx` component using Recharts (BarChart) and Radix UI (Tabs) to display the data and allow category selection.
+  - Refined the description parsing logic in `src/app/charts/page.tsx` to better filter out common non-movement phrases (e.g., "For Time", "Rounds For Time"), aggregate the list of WOD names where each movement appears, and select the top 20 movements.
+  - Updated the tooltip in `MovementFrequencyChart.tsx` to display the list of WOD names for the hovered movement, instead of just the count.
+  - Increased the width allocated to the Y-axis labels in `MovementFrequencyChart.tsx` to prevent long movement names from being cut off.
+  - Increased the height of the chart container in `MovementFrequencyChart.tsx` to accommodate 20 bars.
+  - Added "Games" to the list of selectable category tabs in `MovementFrequencyChart.tsx`.
+  - Acknowledged that the description parsing approach still has inherent limitations and may not be perfectly accurate.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

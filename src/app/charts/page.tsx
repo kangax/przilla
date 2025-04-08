@@ -15,12 +15,17 @@ import {
   DESIRED_CATEGORY_ORDER,
   PERFORMANCE_LEVEL_VALUES,
 } from "~/config/constants";
-import { hasScore, getPerformanceLevel, isWodDone } from "~/utils/wodUtils";
+import {
+  hasScore,
+  getPerformanceLevel,
+  isWodDone,
+  calculateCategoryCounts, // Import the new function
+} from "~/utils/wodUtils";
 
 export default async function ChartsPage() {
   let wodsData: Wod[] = [];
   const tagCounts: Record<string, number> = {}; // For existing chart
-  const categoryCounts: Record<string, number> = {}; // For existing chart
+  let categoryCounts: Record<string, number> = {}; // Initialize categoryCounts here
   const monthlyData: Record<
     // For existing chart
     string,
@@ -37,6 +42,9 @@ export default async function ChartsPage() {
     const fileContents = fs.readFileSync(filePath, "utf8");
     wodsData = JSON.parse(fileContents) as Wod[];
     console.log("Loaded WODs data for charts:", wodsData.length);
+
+    // Calculate category counts using the new utility function and assign
+    categoryCounts = calculateCategoryCounts(wodsData);
 
     // --- Start: Movement Frequency Calculation ---
     const commonWords = new Set([
@@ -108,15 +116,15 @@ export default async function ChartsPage() {
       "echo bike", // Normalize to Bike
       "cals", // Often follows Bike/Row/Ski
       "calories", // Often follows Bike/Row/Ski
+      "men",
+      "women",
+      "ringer",
     ]);
 
     wodsData.forEach((wod) => {
       // Process for existing charts (if WOD is done)
       if (isWodDone(wod)) {
-        if (wod.category) {
-          categoryCounts[wod.category] =
-            (categoryCounts[wod.category] || 0) + 1;
-        }
+        // Removed categoryCounts calculation here
 
         if (wod.tags) {
           wod.tags.forEach((tag) => {
@@ -276,12 +284,18 @@ export default async function ChartsPage() {
   Object.keys(movementDataByCategory).forEach((category) => {
     const movements = movementDataByCategory[category];
     topMovementsData[category] = Object.entries(movements)
-      .map(([name, data]) => ({
-        name,
-        value: data.count,
-        wodNames: data.wodNames,
-      }))
-      .sort((a, b) => b.value - a.value) // Sort descending by frequency
+      .map(([name, data]) => {
+        // Deduplicate the list of WOD names first
+        const uniqueWodNames = Array.from(new Set(data.wodNames));
+        return {
+          name,
+          // Set the value (bar length) to the count of unique WODs
+          value: uniqueWodNames.length,
+          // Keep the deduplicated list for the tooltip
+          wodNames: uniqueWodNames,
+        };
+      })
+      .sort((a, b) => b.value - a.value) // Sort descending by frequency (now based on unique WOD count)
       .slice(0, 20); // Take top 20
   });
   console.log("Top 20 Movements by Category:", topMovementsData); // Log processed data

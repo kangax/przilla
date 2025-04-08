@@ -59,6 +59,9 @@
   - Increased the height of the chart container in `MovementFrequencyChart.tsx` to accommodate 20 bars.
   - Added "Games" to the list of selectable category tabs in `MovementFrequencyChart.tsx`.
   - Acknowledged that the description parsing approach still has inherent limitations and may not be perfectly accurate.
+- **Chart Data Calculation Refactor:** Extracted the `categoryCounts` calculation logic from `src/app/charts/page.tsx` into a new utility function `calculateCategoryCounts` within `src/utils/wodUtils.ts`. Refactored `src/app/charts/page.tsx` to import and use this new function.
+- **Movement Frequency Chart Tooltip Fix:** Corrected the tooltip in `MovementFrequencyChart.tsx` to display unique workout names. Modified the data preparation logic in `src/app/charts/page.tsx` to deduplicate the `wodNames` array using `Array.from(new Set(...))` before passing it to the chart component.
+- **Movement Frequency Chart Value Fix:** Aligned the bar chart's value (x-axis length) with the tooltip count in `MovementFrequencyChart.tsx`. Modified the data preparation logic in `src/app/charts/page.tsx` to set the `value` property for each movement to the length of the _unique_ `wodNames` array, ensuring consistency between the visual bar length and the tooltip information.
 - Memory Bank initialization and population based on project analysis and `previous_clinerules.md`.
 
 ## Next Steps

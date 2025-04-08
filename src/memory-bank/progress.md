@@ -12,6 +12,10 @@
   - Search highlighting implemented for Name, Category, Tags, Description.
   - Category and Tags columns combined into one, displaying tags below the category.
   - Variable row height enabled using `useVirtualizer`'s `measureElement` to correctly display wrapped content (like descriptions and tags).
+- **Movement Frequency Chart:**
+  - Displays top 20 movements by frequency per category, based on the count of _unique_ workouts the movement appears in.
+  - Bar length (x-axis value) now correctly reflects the count of unique workouts.
+  - Tooltip shows the count and the unique list of workouts where the movement appears.
 
 ## What's Left to Build
 

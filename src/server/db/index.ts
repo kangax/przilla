@@ -14,7 +14,7 @@ const globalForDb = globalThis as unknown as {
 
 export const client =
   globalForDb.client ??
-  createClient({ url: env.DATABASE_URL, authToken: undefined }); // Explicitly undefined authToken for local file handling
+  createClient({ url: env.DATABASE_URL, authToken: env.TURSO_AUTH_TOKEN }); // Use validated token from env
 if (env.NODE_ENV !== "production") globalForDb.client = client;
 
 export const db = drizzle(client, { schema });

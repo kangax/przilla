@@ -14,6 +14,7 @@ export const env = createEnv({
     AUTH_DISCORD_ID: z.string(),
     AUTH_DISCORD_SECRET: z.string(),
     DATABASE_URL: z.string().url(),
+    TURSO_AUTH_TOKEN: z.string().optional(), // Added for explicit Turso auth
     NODE_ENV: z
       .enum(["development", "test", "production"])
       .default("development"),
@@ -41,6 +42,7 @@ export const env = createEnv({
       !!process.env.SKIP_ENV_VALIDATION && !process.env.DATABASE_URL
         ? "http://localhost:8080" // Dummy URL for build only
         : process.env.DATABASE_URL,
+    TURSO_AUTH_TOKEN: process.env.TURSO_AUTH_TOKEN, // Added for explicit Turso auth
     NODE_ENV: process.env.NODE_ENV,
   },
   /**

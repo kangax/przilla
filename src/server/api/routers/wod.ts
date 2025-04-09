@@ -1,10 +1,7 @@
 import { asc } from "drizzle-orm";
-import { z } from "zod";
 
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
-import { db } from "~/server/db";
 import { wods } from "~/server/db/schema";
-import type { Wod } from "~/types/wodTypes"; // Import Wod type
 
 export const wodRouter = createTRPCRouter({
   /**

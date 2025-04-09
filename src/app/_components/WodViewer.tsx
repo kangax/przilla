@@ -422,32 +422,32 @@ export default function WodViewer() {
   return (
     <Box>
       <Flex justify="end">
-        <SegmentedControl.Root
-          size="1"
-          value={view}
-          // Only allow changing to timeline if logged in
-          onValueChange={(value) => {
-            if (value === "timeline" && !isLoggedIn) {
-              // Prevent switching to timeline if not logged in (shouldn't happen with conditional rendering, but belt-and-suspenders)
-              return;
-            }
-            setView(value as "table" | "timeline");
-          }}
-        >
-          {/* Conditionally render Timeline button */}
-          {isLoggedIn && (
+        {/* Conditionally render Timeline button */}
+        {isLoggedIn && (
+          <SegmentedControl.Root
+            size="1"
+            value={view}
+            // Only allow changing to timeline if logged in
+            onValueChange={(value) => {
+              if (value === "timeline" && !isLoggedIn) {
+                // Prevent switching to timeline if not logged in (shouldn't happen with conditional rendering, but belt-and-suspenders)
+                return;
+              }
+              setView(value as "table" | "timeline");
+            }}
+          >
             <SegmentedControl.Item value="timeline" aria-label="Timeline View">
               <Tooltip content="Timeline View">
                 <List size={16} />
               </Tooltip>
             </SegmentedControl.Item>
-          )}
-          <SegmentedControl.Item value="table" aria-label="Table View">
-            <Tooltip content="Table View">
-              <TableIcon size={16} />
-            </Tooltip>
-          </SegmentedControl.Item>
-        </SegmentedControl.Root>
+            <SegmentedControl.Item value="table" aria-label="Table View">
+              <Tooltip content="Table View">
+                <TableIcon size={16} />
+              </Tooltip>
+            </SegmentedControl.Item>
+          </SegmentedControl.Root>
+        )}
       </Flex>
       {/* Filter Bar - Add ref */}
       <Flex ref={filterBarRef} className="mb-4 mt-4 items-center" gap="2">
@@ -528,30 +528,32 @@ export default function WodViewer() {
           ))}
         </Flex>
         {/* New Segmented Control Filter - always show */}
-        <SegmentedControl.Root
-          size="1"
-          value={completionFilter}
-          onValueChange={(value) =>
-            setCompletionFilter(value as "all" | "done" | "notDone")
-          }
-          className="ml-auto"
-        >
-          <SegmentedControl.Item value="all">
-            <Tooltip content="Show All Workouts">
-              <span>All ({dynamicTotalWodCount})</span>
-            </Tooltip>
-          </SegmentedControl.Item>
-          <SegmentedControl.Item value="done">
-            <Tooltip content="Show Done Workouts">
-              <span>Done ({dynamicDoneWodsCount})</span>
-            </Tooltip>
-          </SegmentedControl.Item>
-          <SegmentedControl.Item value="notDone">
-            <Tooltip content="Show Not Done Workouts">
-              <span>Todo ({dynamicNotDoneWodsCount})</span>
-            </Tooltip>
-          </SegmentedControl.Item>
-        </SegmentedControl.Root>
+        {isLoggedIn && (
+          <SegmentedControl.Root
+            size="1"
+            value={completionFilter}
+            onValueChange={(value) =>
+              setCompletionFilter(value as "all" | "done" | "notDone")
+            }
+            className="ml-auto"
+          >
+            <SegmentedControl.Item value="all">
+              <Tooltip content="Show All Workouts">
+                <span>All ({dynamicTotalWodCount})</span>
+              </Tooltip>
+            </SegmentedControl.Item>
+            <SegmentedControl.Item value="done">
+              <Tooltip content="Show Done Workouts">
+                <span>Done ({dynamicDoneWodsCount})</span>
+              </Tooltip>
+            </SegmentedControl.Item>
+            <SegmentedControl.Item value="notDone">
+              <Tooltip content="Show Not Done Workouts">
+                <span>Todo ({dynamicNotDoneWodsCount})</span>
+              </Tooltip>
+            </SegmentedControl.Item>
+          </SegmentedControl.Root>
+        )}
       </Flex>
       {/* Render Table or Timeline View - Pass calculated height */}
       {view === "table" ? (

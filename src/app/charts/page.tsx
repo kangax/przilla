@@ -13,13 +13,12 @@ import {
   DESIRED_TAG_ORDER,
   ALLOWED_TAGS, // Keep ALLOWED_TAGS if still used, remove if not
   DESIRED_CATEGORY_ORDER,
-  PERFORMANCE_LEVEL_VALUES,
+  // PERFORMANCE_LEVEL_VALUES, // No longer used
 } from "~/config/constants";
 import {
-  hasScore,
-  getPerformanceLevel,
   isWodDone,
   calculateCategoryCounts, // Import the new function
+  parseTags, // Import the new parseTags function
 } from "~/utils/wodUtils";
 
 export default async function ChartsPage() {
@@ -152,9 +151,13 @@ export default async function ChartsPage() {
       if (isWodDone(wod)) {
         // Removed categoryCounts calculation here
 
-        if (wod.tags) {
-          wod.tags.forEach((tag) => {
-            if (ALLOWED_TAGS.includes(tag)) {
+        // Use parseTags to handle potential stringified JSON
+        const parsedTags = parseTags(wod.tags);
+        if (parsedTags.length > 0) {
+          parsedTags.forEach((tag) => {
+            // Cast ALLOWED_TAGS to string[] for the includes check to satisfy TS
+            if ((ALLOWED_TAGS as string[]).includes(tag)) {
+              // Assuming ALLOWED_TAGS is still relevant
               tagCounts[tag] = (tagCounts[tag] || 0) + 1;
             }
           });
@@ -240,36 +243,37 @@ export default async function ChartsPage() {
         });
       }
 
-      // Process results for timeline chart (existing logic)
-      wod.results.forEach((result) => {
-        if (result.date && hasScore(result)) {
-          try {
-            const date = new Date(result.date);
-            const monthKey = `${date.getFullYear()}-${(date.getMonth() + 1)
-              .toString()
-              .padStart(2, "0")}`;
-
-            if (!monthlyData[monthKey]) {
-              monthlyData[monthKey] = { count: 0, totalLevelScore: 0 };
-            }
-
-            monthlyData[monthKey].count++;
-
-            const level = getPerformanceLevel(wod, result);
-            const levelScore = level
-              ? (PERFORMANCE_LEVEL_VALUES[level] ?? 0)
-              : 0;
-            monthlyData[monthKey].totalLevelScore += levelScore;
-          } catch (e) {
-            console.warn(
-              `Skipping result due to invalid date format: ${result.date} for WOD ${wod.wodName}. Error: ${e}`,
-            );
-          }
-        }
-      });
+      // REMOVED: Processing of wod.results as it no longer exists on Wod type
+      // // Process results for timeline chart (existing logic)
+      // wod.results.forEach((result) => {
+      //   if (result.date && hasScore(result)) {
+      //     try {
+      //       const date = new Date(result.date);
+      //       const monthKey = `${date.getFullYear()}-${(date.getMonth() + 1)
+      //         .toString()
+      //         .padStart(2, "0")}`;
+      //
+      //       if (!monthlyData[monthKey]) {
+      //         monthlyData[monthKey] = { count: 0, totalLevelScore: 0 };
+      //       }
+      //
+      //       monthlyData[monthKey].count++;
+      //
+      //       const level = getPerformanceLevel(wod, result);
+      //       const levelScore = level
+      //         ? (PERFORMANCE_LEVEL_VALUES[level] ?? 0)
+      //         : 0;
+      //       monthlyData[monthKey].totalLevelScore += levelScore;
+      //     } catch (e) {
+      //       console.warn(
+      //         `Skipping result due to invalid date format: ${result.date} for WOD ${wod.wodName}. Error: ${e}`,
+      //       );
+      //     }
+      //   }
+      // });
     });
 
-    console.log("Calculated Tag Counts (Done WODs) for charts:", tagCounts);
+    console.log("Calculated Tag Counts (Done WODs) for charts:", tagCounts); // Note: tagCounts might be empty if isWodDone always returns false
     console.log(
       "Calculated Category Counts (Done WODs) for charts:",
       categoryCounts,

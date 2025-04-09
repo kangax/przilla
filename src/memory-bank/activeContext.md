@@ -1,3 +1,7 @@
+- Changed the type assertion for parsed JSON data to `any[]` to avoid type errors when accessing original snake_case properties.
+
+## Next Steps
+
 # Active Context
 
 ## Current Focus
@@ -102,6 +106,23 @@
 - **Migration Script Fix (`scripts/migrate_json_to_db.ts`):**
   - Corrected property name mapping in `wodInsertData` to correctly assign `wod.difficulty_explanation` and `wod.count_likes` (from JSON) to the camelCase properties expected by Drizzle.
   - Changed the type assertion for parsed JSON data to `any[]` to avoid type errors when accessing original snake_case properties.
+- **Database Schema Reset & Repopulation (Apr 2025):**
+  - **Diagnosis:** Persistent `SQLITE_ERROR: no such column: przilla_session.user_id` despite previous migration attempts indicated an inconsistent database state in `./db.sqlite`. Running `npm run db:migrate` failed with `table przilla_account already exists`, confirming partial application of migrations.
+  - **Resolution:**
+    - Deleted the existing `./db.sqlite` file (`rm ./db.sqlite`).
+    - Re-ran all migrations successfully (`npm run db:migrate`), creating a fresh database with the correct schema.
+    - Re-populated the `wods` table by executing the WOD migration script (`SKIP_ENV_VALIDATION=true npx tsx scripts/migrate_json_to_db.ts`), inserting 781 unique WODs.
+  - **Outcome:** Resolved the database schema inconsistency and the original `SQLITE_ERROR`.
+- **Tag Parsing Fix:**
+  - Added `parseTags` helper to `wodUtils.ts` to handle `tags` being either `string[]` or stringified JSON.
+  - Updated `WodViewer`, `WodTable`, and `charts/page.tsx` to use `parseTags` or rely on pre-parsed tags.
+- **Performance Optimizations:**
+  - Investigated sorting slowness using performance profiles.
+  - Optimized `sortWods` in `wodUtils.ts` by moving `difficultyValues` map out and reverting `wodName` sort to `toUpperCase()` (as `localeCompare` was slower).
+  - Memoized `HighlightMatch`, `WodTable`, and `WodTimeline` components using `React.memo`.
+- **Timeline View Fixes:**
+  - Conditionally rendered the Timeline view option in `WodViewer` based on login status (`useSession`).
+  - Removed the non-functional "Progress Timeline" column from `WodTimeline` as it relied on `wod.results` which is no longer available in the fetched data.
 
 ## Next Steps
 
@@ -120,7 +141,7 @@ gantt
     section API
     Update tRPC Routes         :a5, after a2, 2d --> DONE (for wod.getAll)
     section Frontend
-    Component Refactoring      :a6, after a5, 3d --> IN PROGRESS (WodViewer done)
+    Component Refactoring      :a6, after a5, 3d --> IN PROGRESS (WodViewer done, WodTable/Timeline memoized)
 ```
 
 ### Detailed Implementation Steps

@@ -9,6 +9,7 @@ import {
   useCallback,
 } from "react";
 import { api } from "~/trpc/react"; // Import tRPC api
+import { useSession } from "next-auth/react"; // Import useSession
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, SegmentedControl, Tooltip } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -18,10 +19,10 @@ import WodTimeline from "./WodTimeline";
 // Removed unused WodDistributionChart
 // Removed unused WodTimelineChart
 import { type Wod, type SortByType } from "~/types/wodTypes";
-import { sortWods, isWodDone } from "~/utils/wodUtils";
+import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils"; // Import parseTags
 
 // --- URL State Management ---
-const DEFAULT_COMPLETION_FILTER = "done";
+const DEFAULT_COMPLETION_FILTER = "all"; // Changed default to 'all'
 const ALLOWED_COMPLETION_STATUSES: ReadonlyArray<"all" | "done" | "notDone"> = [
   "all",
   "done",
@@ -82,22 +83,26 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 
 export default function WodViewer() {
   // Fetch WOD data using tRPC
+  const { status: sessionStatus } = useSession(); // Only get session status, removed unused 'session'
+  const isLoggedIn = sessionStatus === "authenticated";
+
   const { data: wodsData, isLoading, error } = api.wod.getAll.useQuery();
   // Explicitly parse date strings to Date objects as a workaround for TS inference issue
   const wods = useMemo(() => {
-    // Explicitly type 'wod' parameter in map to help TS inference
-    return (wodsData ?? []).map(
-      (wod: {
-        createdAt: string | Date;
-        updatedAt?: string | Date | null;
-      }) => ({
-        ...wod,
-        // Ensure createdAt and updatedAt are Date objects
-        createdAt: new Date(wod.createdAt),
-        updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : null,
-      }),
-    ) as Wod[]; // Cast final result to Wod[]
+    // Let TS infer the type of 'wod' from wodsData
+    return (wodsData ?? []).map((wod) => ({
+      // Removed explicit type annotation for wod
+      ...wod,
+      // Ensure createdAt and updatedAt are Date objects
+      // Need to ensure wod.createdAt exists before creating Date
+      createdAt: wod.createdAt ? new Date(wod.createdAt) : new Date(), // Provide fallback or handle potential undefined
+      updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : null,
+      // Pre-parse tags here to ensure it's always an array
+      tags: parseTags(wod.tags),
+    })) as Wod[]; // Cast final result to Wod[]
   }, [wodsData]);
+
+  // Removed DEBUG log
 
   const router = useRouter();
   const pathname = usePathname();
@@ -114,7 +119,8 @@ export default function WodViewer() {
 
   const tagOrder = useMemo(() => {
     if (!wods) return [];
-    const tags = new Set(wods.flatMap((wod) => wod.tags ?? []).filter(Boolean));
+    // Now that wods.tags is guaranteed to be string[], we can simplify
+    const tags = new Set(wods.flatMap((wod) => wod.tags).filter(Boolean)); // Removed parseTags call here
     return Array.from(tags).sort();
   }, [wods]);
 
@@ -173,7 +179,11 @@ export default function WodViewer() {
   const [completionFilter, setCompletionFilter] = useState<
     "all" | "done" | "notDone"
   >(getInitialCompletionFilter);
-  const [view, setView] = useState<"table" | "timeline">(getInitialView);
+  const [view, setView] = useState<"table" | "timeline">(() => {
+    // Force table view if not logged in, otherwise get initial from URL/default
+    const initialView = getInitialView();
+    return isLoggedIn ? initialView : "table";
+  });
   // Need to get initial sortBy before getting initial sortDirection
   const [sortBy, setSortBy] = useState<SortByType>(() => getInitialSortBy());
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">(() =>
@@ -218,6 +228,11 @@ export default function WodViewer() {
   // --- Sync State TO URL ---
   // Update URL when internal state changes
   useEffect(() => {
+    // Also force view back to table if user logs out while timeline is selected
+    if (!isLoggedIn && view === "timeline") {
+      setView("table");
+    }
+
     const urlParams: Record<string, string> = {};
 
     // Collect params based on current state, omitting defaults
@@ -272,6 +287,7 @@ export default function WodViewer() {
     pathname,
     router,
     searchParams,
+    isLoggedIn, // Add missing dependency
   ]);
   // --- End Sync State TO URL ---
 
@@ -308,9 +324,12 @@ export default function WodViewer() {
       const categoryMatch = wod.category
         ?.toLowerCase()
         .includes(lowerCaseSearchTerm);
-      const tagsMatch =
-        wod.tags &&
-        wod.tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchTerm));
+      // wods.tags is now guaranteed to be string[]
+      const tagsMatch = wod.tags.some(
+        (
+          tag, // Use wod.tags directly
+        ) => tag.toLowerCase().includes(lowerCaseSearchTerm),
+      );
       return nameMatch || descMatch || categoryMatch || tagsMatch;
     });
   }, [wods, searchTerm]);
@@ -321,9 +340,10 @@ export default function WodViewer() {
       const categoryMatch =
         selectedCategories.length === 0 ||
         (wod.category && selectedCategories.includes(wod.category));
+      // wods.tags is now guaranteed to be string[]
       const tagMatch =
         selectedTags.length === 0 ||
-        (wod.tags && wod.tags.some((tag) => selectedTags.includes(tag)));
+        wod.tags.some((tag) => selectedTags.includes(tag)); // Use wod.tags directly
       return categoryMatch && tagMatch;
     });
   }, [searchedWods, selectedCategories, selectedTags]);
@@ -355,6 +375,8 @@ export default function WodViewer() {
   const sortedWods = useMemo(() => {
     return sortWods(finalFilteredWods, sortBy, sortDirection);
   }, [finalFilteredWods, sortBy, sortDirection]);
+
+  // Removed DEBUG log
 
   // --- End Memoized Filtering and Sorting Logic ---
 
@@ -403,13 +425,23 @@ export default function WodViewer() {
         <SegmentedControl.Root
           size="1"
           value={view}
-          onValueChange={(value) => setView(value as "table" | "timeline")}
+          // Only allow changing to timeline if logged in
+          onValueChange={(value) => {
+            if (value === "timeline" && !isLoggedIn) {
+              // Prevent switching to timeline if not logged in (shouldn't happen with conditional rendering, but belt-and-suspenders)
+              return;
+            }
+            setView(value as "table" | "timeline");
+          }}
         >
-          <SegmentedControl.Item value="timeline" aria-label="Timeline View">
-            <Tooltip content="Timeline View">
-              <List size={16} />
-            </Tooltip>
-          </SegmentedControl.Item>
+          {/* Conditionally render Timeline button */}
+          {isLoggedIn && (
+            <SegmentedControl.Item value="timeline" aria-label="Timeline View">
+              <Tooltip content="Timeline View">
+                <List size={16} />
+              </Tooltip>
+            </SegmentedControl.Item>
+          )}
           <SegmentedControl.Item value="table" aria-label="Table View">
             <Tooltip content="Table View">
               <TableIcon size={16} />

@@ -1,7 +1,7 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "1055ce79-5f21-4641-828c-89dd0bd30820",
+  "id": "b63b84ec-51ee-4a92-9d82-5a5915eabfa9",
   "prevId": "00000000-0000-0000-0000-000000000000",
   "tables": {
     "przilla_account": {
@@ -118,59 +118,6 @@
           "name": "przilla_account_provider_provider_account_id_pk"
         }
       },
-      "uniqueConstraints": {}
-    },
-    "przilla_movement": {
-      "name": "przilla_movement",
-      "columns": {
-        "id": {
-          "name": "id",
-          "type": "text",
-          "primaryKey": true,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "name": {
-          "name": "name",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(unixepoch())"
-        },
-        "updated_at": {
-          "name": "updated_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        }
-      },
-      "indexes": {
-        "przilla_movement_name_unique": {
-          "name": "przilla_movement_name_unique",
-          "columns": [
-            "name"
-          ],
-          "isUnique": true
-        },
-        "movement_name_idx": {
-          "name": "movement_name_idx",
-          "columns": [
-            "name"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "przilla_score": {
@@ -434,87 +381,6 @@
             "token"
           ],
           "name": "przilla_verification_token_identifier_token_pk"
-        }
-      },
-      "uniqueConstraints": {}
-    },
-    "przilla_wod_movement": {
-      "name": "przilla_wod_movement",
-      "columns": {
-        "wod_id": {
-          "name": "wod_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "movement_id": {
-          "name": "movement_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "created_at": {
-          "name": "created_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false,
-          "default": "(unixepoch())"
-        }
-      },
-      "indexes": {
-        "wm_wod_id_idx": {
-          "name": "wm_wod_id_idx",
-          "columns": [
-            "wod_id"
-          ],
-          "isUnique": false
-        },
-        "wm_movement_id_idx": {
-          "name": "wm_movement_id_idx",
-          "columns": [
-            "movement_id"
-          ],
-          "isUnique": false
-        }
-      },
-      "foreignKeys": {
-        "przilla_wod_movement_wod_id_przilla_wod_id_fk": {
-          "name": "przilla_wod_movement_wod_id_przilla_wod_id_fk",
-          "tableFrom": "przilla_wod_movement",
-          "tableTo": "przilla_wod",
-          "columnsFrom": [
-            "wod_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        },
-        "przilla_wod_movement_movement_id_przilla_movement_id_fk": {
-          "name": "przilla_wod_movement_movement_id_przilla_movement_id_fk",
-          "tableFrom": "przilla_wod_movement",
-          "tableTo": "przilla_movement",
-          "columnsFrom": [
-            "movement_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
-          "onDelete": "cascade",
-          "onUpdate": "no action"
-        }
-      },
-      "compositePrimaryKeys": {
-        "przilla_wod_movement_wod_id_movement_id_pk": {
-          "columns": [
-            "wod_id",
-            "movement_id"
-          ],
-          "name": "przilla_wod_movement_wod_id_movement_id_pk"
         }
       },
       "uniqueConstraints": {}

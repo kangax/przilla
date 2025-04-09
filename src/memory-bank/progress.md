@@ -22,6 +22,13 @@
   - Parsing logic in `src/app/charts/page.tsx` updated to exclude specific phrases ("Men Use") and WOD names ("Amanda") from being counted as movements.
   - Normalization rules in `src/utils/movementMapping.ts` updated to map "dumbbell push presses" to "Push Press" and "kettlebell lunges" to "Lunge".
 - **WOD Data in Database:** WOD data (781 unique records) successfully migrated from `public/data/wods.json` to the SQLite database using `scripts/migrate_json_to_db.ts`.
+- **Tag Parsing:** Implemented robust tag parsing (`parseTags` in `wodUtils.ts`) to handle stringified JSON and updated relevant components (`WodViewer`, `WodTable`, `charts/page.tsx`).
+- **Performance:**
+  - Optimized `sortWods` function based on performance profiling (reverted `localeCompare` for name sort, kept external `difficultyValues` map).
+  - Memoized `HighlightMatch`, `WodTable`, and `WodTimeline` components using `React.memo`.
+- **Timeline View:**
+  - Conditionally rendered based on login status in `WodViewer`.
+  - Removed non-functional "Progress Timeline" column from `WodTimeline` due to missing `results` data.
 
 ## What's Left to Build
 

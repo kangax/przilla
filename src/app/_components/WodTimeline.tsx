@@ -2,7 +2,8 @@
 
 import React, { useRef, useMemo } from "react";
 import Link from "next/link";
-import { Flex, Text, Tooltip, Badge } from "@radix-ui/themes";
+// Removed unused Flex, Tooltip, Badge
+import { Text } from "@radix-ui/themes";
 import {
   useReactTable,
   getCoreRowModel,
@@ -11,13 +12,15 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Added WodResult
-import {
-  getPerformanceLevelColor,
-  getPerformanceLevel,
-  formatScore,
-  hasScore,
-} from "~/utils/wodUtils";
+// Removed unused WodResult
+import type { Wod, SortByType } from "~/types/wodTypes";
+// Removed unused utils
+// import {
+//   getPerformanceLevelColor,
+//   getPerformanceLevel,
+//   formatScore,
+//   hasScore,
+// } from "~/utils/wodUtils";
 
 // --- Interfaces & Types ---
 
@@ -29,10 +32,8 @@ interface WodTimelineProps {
   handleSort: (column: SortByType) => void;
   searchTerm: string; // Added searchTerm prop
 }
-
-// --- Helper Functions ---
-
-const safeString = (value: string | undefined | null): string => value ?? "";
+// Removed unused safeString function
+// const safeString = (value: string | undefined | null): string => value ?? "";
 
 // --- Highlight Component (Copied from WodTable.tsx) ---
 const HighlightMatch: React.FC<{ text: string; highlight: string }> = ({
@@ -104,95 +105,8 @@ const createColumns = (
       },
       size: 220, // Estimate size
     }),
-    columnHelper.accessor("results", {
-      // Access results array for rendering the timeline
-      id: "progressTimeline", // Custom ID needed as accessor is not a simple string
-      header: () => (
-        <span
-          onClick={() => handleSort("latestLevel")}
-          className="cursor-pointer"
-        >
-          Progress Timeline{" "}
-          <span className="text-xs opacity-70">(latest level)</span>
-          {getSortIndicator("latestLevel")}
-        </span>
-      ),
-      cell: (info) => {
-        const wod = info.row.original; // Get the full Wod object
-        const sortedResults = [...wod.results]
-          .filter((r) => r.date && hasScore(r))
-          .sort((a, b) => {
-            const dateA = safeString(a.date);
-            const dateB = safeString(b.date);
-            if (!dateA) return 1;
-            if (!dateB) return -1;
-            return new Date(dateA).getTime() - new Date(dateB).getTime();
-          });
-
-        const isAttempted = sortedResults.length > 0;
-
-        if (!isAttempted) {
-          return (
-            <Text size="1" className="italic text-foreground/60">
-              n/a
-            </Text>
-          );
-        }
-
-        return (
-          <Flex align="center" className="flex-nowrap">
-            {sortedResults.map((result, index) => (
-              <Flex key={index} align="center" className="mb-1 flex-shrink-0">
-                <Tooltip
-                  content={
-                    <>
-                      <Text size="1" weight="bold">
-                        {safeString(result?.date)}
-                      </Text>
-                      {result.notes && (
-                        <>
-                          <br />
-                          <Text
-                            size="1"
-                            style={{
-                              whiteSpace: "pre-wrap",
-                              maxWidth: "300px",
-                            }}
-                          >
-                            {safeString(result.notes)}
-                          </Text>
-                        </>
-                      )}
-                    </>
-                  }
-                >
-                  <Text className="cursor-help whitespace-nowrap">
-                    <span
-                      className={`font-mono ${result.rxStatus && result.rxStatus !== "Rx" ? getPerformanceLevelColor(null) : getPerformanceLevelColor(getPerformanceLevel(wod, result))}`}
-                    >
-                      {formatScore(result)}
-                    </span>
-                    {result.rxStatus && (
-                      <Badge
-                        className="ml-1 rounded-full"
-                        size="1"
-                        color="gray"
-                      >
-                        {safeString(result.rxStatus)}
-                      </Badge>
-                    )}
-                  </Text>
-                </Tooltip>
-                {index < sortedResults.length - 1 && (
-                  <Text className="mx-2 flex-shrink-0">→</Text>
-                )}
-              </Flex>
-            ))}
-          </Flex>
-        );
-      },
-      size: 500, // Estimate size for timeline
-    }),
+    // REMOVED Progress Timeline column as wod.results is not available
+    // columnHelper.accessor("results", { ... }),
     columnHelper.accessor("description", {
       header: "Description",
       cell: (info) => {
@@ -327,4 +241,8 @@ const WodTimeline: React.FC<WodTimelineProps> = ({
   );
 };
 
-export default WodTimeline;
+// Memoize the component
+const MemoizedWodTimeline = React.memo(WodTimeline);
+MemoizedWodTimeline.displayName = "WodTimeline"; // Add display name
+
+export default MemoizedWodTimeline;

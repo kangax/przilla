@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useRef, useMemo } from "react"; // Removed useState, useLayoutEffect
+import React, { useRef, useMemo } from "react";
 import Link from "next/link";
 import { Tooltip, Text, Flex, Badge } from "@radix-ui/themes";
-import { Info } from "lucide-react"; // Added Info icon
+import { Info } from "lucide-react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -12,46 +12,34 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { Wod, WodResult, SortByType } from "~/types/wodTypes";
+import type { Wod, SortByType } from "~/types/wodTypes"; // Removed WodResult
 import {
-  getPerformanceLevel,
-  getPerformanceLevelColor,
+  // getPerformanceLevel, // Removed as result data is unavailable
   getPerformanceLevelTooltip,
-  formatScore,
+  // formatScore, // Removed as result data is unavailable
 } from "~/utils/wodUtils";
 
 // --- Interfaces & Types ---
 
 interface WodTableProps {
   wods: Wod[];
-  tableHeight: number; // Add prop for dynamic height
+  tableHeight: number;
   sortBy: SortByType;
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
-  searchTerm: string; // Added for highlighting
+  searchTerm: string;
 }
 
-// Represents a single row in the flattened data structure
-interface FlatWodRow {
-  wodName: string;
-  wodUrl?: string;
-  description?: string;
-  category?: string;
-  tags?: string[];
-  difficulty?: string;
-  difficulty_explanation?: string;
-  count_likes?: number;
-  benchmarks?: Wod["benchmarks"]; // Keep benchmarks for level calculation
-  resultIndex: number; // Index of the result within the original Wod.results array
-  result?: WodResult; // The specific result for this row (optional if no results)
-  isFirstResult: boolean; // Flag if this is the first result row for a WOD
-}
+// No longer need FlatWodRow interface
 
 // --- Helper Functions ---
 
-const safeString = (value: string | undefined): string => value || "";
+const safeString = (value: string | undefined | null): string => value || "";
 
-const getDifficultyColor = (difficulty: string | undefined): string => {
+// NOTE: getDifficultyColor is defined but reported as unused by ESLint in the commit error,
+// however, it IS used within the 'difficulty' column cell renderer.
+// Let's keep it for now and see if fixing other files resolves the lint error.
+const getDifficultyColor = (difficulty: string | undefined | null): string => {
   switch (difficulty?.toLowerCase()) {
     case "easy":
       return "text-green-500";
@@ -61,50 +49,52 @@ const getDifficultyColor = (difficulty: string | undefined): string => {
       return "text-orange-500";
     case "very hard":
       return "text-red-500";
+    case "extremely hard": // Added Extremely Hard
+      return "text-purple-500"; // Example color
     default:
       return "text-foreground";
   }
 };
 
-// --- Highlight Component ---
-// Simple component to highlight matches in text
-const HighlightMatch: React.FC<{ text: string; highlight: string }> = ({
-  text,
-  highlight,
-}) => {
-  if (!highlight.trim()) {
-    return <>{text}</>;
-  }
-  const regex = new RegExp(
-    `(${highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-    "gi",
-  );
-  const parts = text.split(regex);
+// --- Highlight Component (Memoized) ---
+const HighlightMatch: React.FC<{ text: string; highlight: string }> =
+  React.memo(({ text, highlight }) => {
+    if (!highlight.trim() || !text) {
+      // Added check for text existence
+      return <>{text}</>;
+    }
+    const regex = new RegExp(
+      `(${highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
+      "gi",
+    );
+    const parts = text.split(regex);
 
-  return (
-    <>
-      {parts.map((part, i) =>
-        regex.test(part) ? (
-          <mark key={i}>{part}</mark>
-        ) : (
-          <React.Fragment key={i}>{part}</React.Fragment>
-        ),
-      )}
-    </>
-  );
-};
+    return (
+      <>
+        {parts.map((part, i) =>
+          regex.test(part) ? (
+            <mark key={i}>{part}</mark>
+          ) : (
+            <React.Fragment key={i}>{part}</React.Fragment>
+          ),
+        )}
+      </>
+    );
+  });
+// Add display name for better debugging
+HighlightMatch.displayName = "HighlightMatch";
 
 // --- Column Definitions ---
 
-const columnHelper = createColumnHelper<FlatWodRow>();
+const columnHelper = createColumnHelper<Wod>(); // Use Wod type directly
 
 const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
-  searchTerm: string, // Added searchTerm
-): ColumnDef<FlatWodRow, unknown>[] => {
-  // Changed any to unknown
+  searchTerm: string,
+): ColumnDef<Wod, unknown>[] => {
+  // Use Wod type
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? " ▲" : " ▼";
@@ -120,9 +110,7 @@ const createColumns = (
         </span>
       ),
       cell: (info) => {
-        const row = info.row.original;
-        // Only render WOD name/link on the first row for that WOD
-        if (!row.isFirstResult) return null;
+        const row = info.row.original; // row is now a Wod object
         return (
           <Tooltip
             content={
@@ -154,21 +142,22 @@ const createColumns = (
     }),
     // Combined Category and Tags Column
     columnHelper.accessor(
-      (row) => ({ category: row.category, tags: row.tags }),
+      (row) => ({ category: row.category, tags: row.tags }), // Access directly from Wod
       {
-        id: "categoryAndTags", // Unique ID for combined column
+        id: "categoryAndTags",
         header: "Category / Tags",
         cell: (info) => {
+          // Destructure directly as 'tags' since it's pre-parsed in WodViewer
           const { category, tags } = info.getValue();
-          const row = info.row.original;
 
-          // Only render on the first row for that WOD
-          if (!row.isFirstResult) return null;
-          if (!category && (!tags || tags.length === 0)) return null; // Render nothing if both are empty
+          // 'tags' is now guaranteed to be string[] | null | undefined
+          const safeTags = tags ?? []; // Use empty array for null/undefined
+
+          // Return null if neither category nor safe tags exist
+          if (!category && safeTags.length === 0) return null;
 
           return (
             <Flex direction="column" gap="1" align="start">
-              {/* Category Badge */}
               {category && (
                 <Badge
                   color="indigo"
@@ -179,20 +168,16 @@ const createColumns = (
                   <HighlightMatch text={category} highlight={searchTerm} />
                 </Badge>
               )}
-              {/* Tags Badges */}
-              {tags && tags.length > 0 && (
-                <Flex
-                  gap="1"
-                  wrap="wrap" // Allow tags to wrap
-                  className="mt-1" // Add some margin top
-                >
-                  {tags.map((tag) => (
+              {/* Use safeTags */}
+              {safeTags.length > 0 && (
+                <Flex gap="1" wrap="wrap" className="mt-1">
+                  {safeTags.map((tag) => (
                     <Badge
                       key={tag}
                       color="gray"
                       variant="soft"
                       radius="full"
-                      className="flex-shrink-0 text-xs" // Prevent shrinking
+                      className="flex-shrink-0 text-xs"
                     >
                       <HighlightMatch text={tag} highlight={searchTerm} />
                     </Badge>
@@ -202,10 +187,9 @@ const createColumns = (
             </Flex>
           );
         },
-        size: 154, // Adjusted size for combined content
+        size: 154,
       },
     ),
-    // --- Moved Level column after Score ---
     columnHelper.accessor("difficulty", {
       header: () => (
         <span
@@ -217,14 +201,12 @@ const createColumns = (
       ),
       cell: (info) => {
         const row = info.row.original;
-        // Only render difficulty on the first row for that WOD
-        if (!row.isFirstResult) return null;
         if (!row.difficulty) return <Text>-</Text>;
         return (
           <Tooltip
             content={
               <span style={{ whiteSpace: "pre-wrap" }}>
-                {safeString(row.difficulty_explanation)}
+                {safeString(row.difficultyExplanation)}
               </span>
             }
           >
@@ -238,175 +220,93 @@ const createColumns = (
       },
       size: 90,
     }),
-    columnHelper.accessor("count_likes", {
+    columnHelper.accessor("countLikes", {
+      // Use camelCase from Wod type
       header: () => (
         <span
-          onClick={() => handleSort("count_likes")}
+          onClick={() => handleSort("countLikes")} // Use camelCase
           className="cursor-pointer whitespace-nowrap"
         >
-          Likes{getSortIndicator("count_likes")}
+          Likes{getSortIndicator("countLikes")} {/* Use camelCase */}
         </span>
       ),
       cell: (info) => {
         const row = info.row.original;
-        // Only render likes on the first row for that WOD
-        if (!row.isFirstResult) return null;
         return (
-          <span className="whitespace-nowrap">{row.count_likes ?? "-"} </span>
+          <span className="whitespace-nowrap">{row.countLikes ?? "-"} </span>
         );
       },
       size: 70,
     }),
-    // --- Date Column (Moved) ---
-    columnHelper.accessor((row) => row.result?.date, {
+    // --- Date Column (Placeholder - No result data) ---
+    columnHelper.accessor(() => null, {
+      // No date available directly on Wod definition
       id: "date",
       header: () => (
         <span onClick={() => handleSort("date")} className="cursor-pointer">
           Date{getSortIndicator("date")}
         </span>
       ),
-      cell: (info) => {
-        const dateValue = safeString(info.getValue());
+      cell: () => {
         return (
-          <span className="whitespace-nowrap">{dateValue || "-"}</span> // Render dash if date is empty
+          <span className="whitespace-nowrap">-</span> // Render dash as placeholder
         );
       },
       size: 90,
     }),
-    // --- Score Column (Moved) ---
-    // Accessor now includes benchmarks for the tooltip
-    columnHelper.accessor(
-      (row) => ({ result: row.result, benchmarks: row.benchmarks }),
-      {
-        id: "score",
-        header: "Score",
-        cell: (info) => {
-          // Destructure result and benchmarks
-          const value = info.getValue() as {
-            result?: WodResult;
-            benchmarks?: Wod["benchmarks"];
-          };
-          const { result, benchmarks } = value;
+    // --- Score Column (Placeholder - No result data) ---
+    columnHelper.accessor("benchmarks", {
+      // Access benchmarks directly
+      id: "score",
+      header: "Score",
+      cell: (info) => {
+        const benchmarks = info.getValue(); // Get benchmarks directly
 
-          // If no result, show Info icon with benchmark tooltip
-          if (!result) {
-            // Ensure benchmarks exist before showing tooltip
-            if (!benchmarks)
-              return <span className="whitespace-nowrap font-mono">-</span>;
-            return (
-              <Tooltip
-                content={
-                  <span style={{ whiteSpace: "pre-wrap" }}>
-                    {getPerformanceLevelTooltip({ benchmarks } as Wod)}
-                  </span>
-                }
-              >
-                <Info size={14} className="text-muted-foreground" />
-              </Tooltip>
-            );
-          }
+        // Show Info icon with benchmark tooltip if benchmarks exist
+        if (!benchmarks)
+          return <span className="whitespace-nowrap font-mono">-</span>;
 
-          // Score display logic with optional notes tooltip
-          const scoreDisplay = (
-            <span className="whitespace-nowrap">
-              {formatScore(result)}{" "}
-              {result.rxStatus && (
-                <Badge
-                  color="gray"
-                  variant="soft"
-                  radius="full"
-                  className="w-fit"
-                >
-                  {safeString(result.rxStatus)}
-                </Badge>
-              )}
-            </span>
-          );
-
-          if (result.notes) {
-            return (
-              <Tooltip
-                content={
-                  <span style={{ whiteSpace: "pre-wrap" }}>{result.notes}</span>
-                }
-              >
-                {scoreDisplay}
-              </Tooltip>
-            );
-          } else {
-            return scoreDisplay;
-          }
-        },
-        size: 140,
+        return (
+          <Tooltip
+            content={
+              <span style={{ whiteSpace: "pre-wrap" }}>
+                {getPerformanceLevelTooltip({ benchmarks } as Wod)}
+              </span>
+            }
+          >
+            <Info size={14} className="text-muted-foreground" />
+          </Tooltip>
+        );
       },
-    ),
-    // --- Level Column (Moved) ---
-    columnHelper.accessor(
-      (row) => ({ result: row.result, benchmarks: row.benchmarks }),
-      {
-        id: "level",
-        header: () => (
-          <span onClick={() => handleSort("level")} className="cursor-pointer">
-            Level{getSortIndicator("level")}
-          </span>
-        ),
-        cell: (info) => {
-          // Type assertion for the destructured value
-          const value = info.getValue() as {
-            result?: WodResult;
-            benchmarks?: Wod["benchmarks"];
-          };
-          const { result, benchmarks } = value;
-          if (!result || !benchmarks) return <Text>-</Text>;
-
-          const level = getPerformanceLevel(
-            { benchmarks } as Wod, // Cast needed for util function
-            result,
-          );
-          const levelText =
-            level?.charAt(0).toUpperCase() + level?.slice(1) || "N/A";
-
-          return (
-            <Tooltip
-              content={
-                <span style={{ whiteSpace: "pre-wrap" }}>
-                  {getPerformanceLevelTooltip({ benchmarks } as Wod)}
-                </span>
-              }
-            >
-              {result.rxStatus && result.rxStatus !== "Rx" ? (
-                <Text
-                  className={`font-medium ${getPerformanceLevelColor(null)}`}
-                >
-                  Scaled
-                </Text>
-              ) : (
-                <Text
-                  className={`font-medium ${getPerformanceLevelColor(level)}`}
-                >
-                  {levelText}
-                </Text>
-              )}
-            </Tooltip>
-          );
-        },
-        size: 110,
+      size: 140,
+    }),
+    // --- Level Column (Placeholder - No result data) ---
+    columnHelper.accessor(() => null, {
+      // No level available directly on Wod definition
+      id: "level",
+      header: () => (
+        <span onClick={() => handleSort("level")} className="cursor-pointer">
+          Level{getSortIndicator("level")}
+        </span>
+      ),
+      cell: () => {
+        return <Text>-</Text>; // Render dash as placeholder
       },
-    ),
-    // --- Description Column (New) ---
+      size: 110,
+    }),
+    // --- Description Column ---
     columnHelper.accessor("description", {
       header: "Description",
       cell: (info) => {
         const row = info.row.original;
-        // Only render description on the first row for that WOD
-        if (!row.isFirstResult || !row.description) return null;
+        if (!row.description) return null;
         return (
           <span className="whitespace-normal break-words">
             <HighlightMatch text={row.description} highlight={searchTerm} />
           </span>
         );
       },
-      size: 300, // Adjust size as needed
+      size: 300,
     }),
   ];
 };
@@ -414,83 +314,49 @@ const createColumns = (
 // --- Main Table Component ---
 
 const WodTable: React.FC<WodTableProps> = ({
-  wods,
-  tableHeight, // Destructure the new prop
+  wods, // Now directly using the Wod[] prop
+  tableHeight,
   sortBy,
   sortDirection,
   handleSort,
-  searchTerm, // Destructure searchTerm
+  searchTerm,
 }) => {
+  console.log("WodTable - Received wods prop:", wods); // DEBUG: Check prop value on render
   const parentRef = useRef<HTMLDivElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null); // Ref for header, but height measurement no longer needed
 
-  // Flatten the data for virtualization
-  const flatData = useMemo(() => {
-    const rows: FlatWodRow[] = [];
-    wods.forEach((wod) => {
-      if (wod.results.length === 0) {
-        rows.push({
-          wodName: wod.wodName,
-          wodUrl: wod.wodUrl,
-          description: wod.description,
-          category: wod.category,
-          tags: wod.tags,
-          difficulty: wod.difficulty,
-          difficulty_explanation: wod.difficulty_explanation,
-          count_likes: wod.count_likes,
-          benchmarks: wod.benchmarks,
-          resultIndex: 0,
-          result: undefined,
-          isFirstResult: true,
-        });
-      } else {
-        wod.results.forEach((result, index) => {
-          rows.push({
-            wodName: wod.wodName,
-            wodUrl: wod.wodUrl,
-            description: wod.description,
-            category: wod.category,
-            tags: wod.tags,
-            difficulty: wod.difficulty,
-            difficulty_explanation: wod.difficulty_explanation,
-            count_likes: wod.count_likes,
-            benchmarks: wod.benchmarks,
-            resultIndex: index,
-            result: result,
-            isFirstResult: index === 0,
-          });
-        });
-      }
-    });
-    return rows;
-  }, [wods]);
+  // No longer need flatData calculation
+  // const flatData = useMemo(() => { ... }, [wods]);
 
   const columns = useMemo(
-    () => createColumns(handleSort, sortBy, sortDirection, searchTerm), // Pass searchTerm
-    [handleSort, sortBy, sortDirection, searchTerm], // Add searchTerm dependency
+    () => createColumns(handleSort, sortBy, sortDirection, searchTerm),
+    [handleSort, sortBy, sortDirection, searchTerm],
   );
 
   const table = useReactTable({
-    data: flatData,
+    data: wods, // Use the wods prop directly
     columns,
     getCoreRowModel: getCoreRowModel(),
-    manualSorting: true, // We handle sorting externally
+    manualSorting: true,
   });
 
   const { rows } = table.getRowModel();
+  console.log("WodTable - Row Model Length:", rows.length); // DEBUG
 
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 49, // Still provide an estimate
+    estimateSize: () => 49, // Estimate remains useful
     overscan: 5,
-    // Add measurement function for dynamic height, casting element
     measureElement: (element) => (element as HTMLElement).offsetHeight,
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
   const totalSize = rowVirtualizer.getTotalSize();
-
+  console.log(
+    // DEBUG
+    "WodTable - Virtualizer:",
+    `Items: ${virtualRows.length}, TotalSize: ${totalSize}`,
+  );
   const headerGroups = table.getHeaderGroups();
 
   return (
@@ -499,9 +365,8 @@ const WodTable: React.FC<WodTableProps> = ({
       className="w-full overflow-auto rounded-md border border-table-border"
       style={{ height: `${tableHeight}px` }}
     >
-      {/* Sticky Header - Now directly inside scroll container */}
+      {/* Sticky Header */}
       <div
-        ref={headerRef}
         className="sticky top-0 z-10 bg-table-header"
         style={{ width: table.getTotalSize() }}
       >
@@ -514,7 +379,8 @@ const WodTable: React.FC<WodTableProps> = ({
                 style={{ width: `${header.getSize()}px` }}
                 role="columnheader"
                 aria-sort={
-                  header.column.id === sortBy
+                  // Check if header.column.id is a valid SortByType before accessing it
+                  isValidSortBy(header.column.id) && header.column.id === sortBy
                     ? sortDirection === "asc"
                       ? "ascending"
                       : "descending"
@@ -533,29 +399,30 @@ const WodTable: React.FC<WodTableProps> = ({
         ))}
       </div>
 
-      {/* Virtual Row Container - Positioned relative, scrolls under header */}
+      {/* Virtual Row Container */}
       <div
         style={{
-          height: `${totalSize}px`, // Height is just the total size of rows
+          height: `${totalSize}px`,
           width: "100%",
           position: "relative",
         }}
       >
-        {/* Virtualized Rows - These are positioned absolutely relative to this container */}
         {virtualRows.map((virtualRow) => {
           const row = rows[virtualRow.index];
+          console.log(
+            "WodTable - Rendering virtual row index:",
+            virtualRow.index,
+          ); // DEBUG
           return (
             <div
               key={row.id}
-              className="absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt" // Added top-0
+              className="absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
               style={{
-                // Remove fixed height, let content determine it
-                transform: `translateY(${virtualRow.start}px)`, // Positions row within the padded container
+                transform: `translateY(${virtualRow.start}px)`,
                 width: table.getTotalSize(),
               }}
-              // Add ref for measurement
               ref={rowVirtualizer.measureElement}
-              data-index={virtualRow.index} // Required by measureElement
+              data-index={virtualRow.index}
               role="row"
             >
               {row.getVisibleCells().map((cell) => (
@@ -576,4 +443,22 @@ const WodTable: React.FC<WodTableProps> = ({
   );
 };
 
-export default WodTable;
+// Helper function to validate sort by type (needed for aria-sort)
+const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
+  const validSortKeys: SortByType[] = [
+    "wodName",
+    "date",
+    "level",
+    "attempts",
+    "latestLevel",
+    "difficulty",
+    "countLikes",
+  ];
+  return validSortKeys.includes(sortBy as SortByType);
+};
+
+// Memoize the component
+const MemoizedWodTable = React.memo(WodTable);
+MemoizedWodTable.displayName = "WodTable"; // Add display name
+
+export default MemoizedWodTable;

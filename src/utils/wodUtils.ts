@@ -1,8 +1,5 @@
 import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Added SortByType
-import {
-  PERFORMANCE_LEVEL_COLORS,
-  PERFORMANCE_LEVEL_VALUES, // Added PERFORMANCE_LEVEL_VALUES
-} from "~/config/constants";
+import { PERFORMANCE_LEVEL_COLORS } from "~/config/constants";
 
 /**
  * Checks if a WodResult has any score value recorded.
@@ -104,7 +101,8 @@ export const getPerformanceLevel = (
  * `api.wod.getAll` do not include user-specific results. Determining "doneness"
  * requires fetching associated scores separately.
  */
-export const isWodDone = (wod: Wod): boolean => {
+export const isWodDone = (_wod: Wod): boolean => {
+  // Prefix unused 'wod'
   // return wod.results.some((r) => r.date && hasScore(r)); // Old logic based on results prop
   return false; // Cannot determine doneness from WOD definition alone
 };
@@ -231,6 +229,15 @@ export const getPerformanceLevelTooltip = (wod: Wod): string => {
   return tooltipLines.join("\n");
 };
 
+// Define difficulty map outside the sort function for efficiency
+const difficultyValues: Record<string, number> = {
+  easy: 1,
+  medium: 2,
+  hard: 3,
+  "very hard": 4,
+  "extremely hard": 5, // Added extremely hard based on getDifficultyColor
+};
+
 /**
  * Sorts an array of WODs based on the specified column and direction.
  */
@@ -243,10 +250,12 @@ export const sortWods = (
     const directionMultiplier = sortDirection === "asc" ? 1 : -1;
 
     if (sortBy === "wodName") {
+      // Revert to toUpperCase comparison as localeCompare was slower
       const nameA = a.wodName.toUpperCase();
       const nameB = b.wodName.toUpperCase();
       if (nameA < nameB) return -1 * directionMultiplier;
       if (nameA > nameB) return 1 * directionMultiplier;
+      // No secondary sort needed if primary is name
       return 0;
     } else if (
       sortBy === "date" ||
@@ -260,17 +269,10 @@ export const sortWods = (
       console.warn(
         `Sorting by "${sortBy}" is not yet implemented without score data.`,
       );
+      // Fallback uses localeCompare, apply multiplier here
       return a.wodName.localeCompare(b.wodName) * directionMultiplier;
     } else if (sortBy === "difficulty") {
-      // Define a mapping for difficulty levels to numeric values
-      const difficultyValues: Record<string, number> = {
-        easy: 1,
-        medium: 2,
-        hard: 3,
-        "very hard": 4,
-      };
-
-      // Get the numeric value for each WOD's difficulty, defaulting to 0 if undefined/null or not in map
+      // Use pre-defined map
       const difficultyA =
         difficultyValues[a.difficulty?.toLowerCase() ?? ""] ?? 0;
       const difficultyB =
@@ -279,21 +281,21 @@ export const sortWods = (
       if (difficultyA !== difficultyB) {
         return (difficultyA - difficultyB) * directionMultiplier;
       }
-      // Secondary sort by name if difficulties are the same
-      return a.wodName.localeCompare(b.wodName) * directionMultiplier;
+      // Secondary sort by name (using localeCompare is fine here)
+      return a.wodName.localeCompare(b.wodName); // directionMultiplier already applied if primary sort differed
     } else if (sortBy === "countLikes") {
-      // Corrected sortBy check
-      // Corrected property name
-      // Treat null/undefined likes as 0 for comparison
-      const likesA = a.countLikes ?? 0; // Corrected property name
-      const likesB = b.countLikes ?? 0; // Corrected property name
+      // Treat null/undefined likes as 0
+      const likesA = a.countLikes ?? 0;
+      const likesB = b.countLikes ?? 0;
 
       if (likesA !== likesB) {
         return (likesA - likesB) * directionMultiplier;
       }
-      // Secondary sort by name if likes are the same
-      return a.wodName.localeCompare(b.wodName) * directionMultiplier;
+      // Secondary sort by name (using localeCompare is fine here)
+      return a.wodName.localeCompare(b.wodName); // directionMultiplier already applied if primary sort differed
     }
+
+    // Default case if sortBy is unrecognized (shouldn't happen with TS)
     return 0;
   });
 };
@@ -315,4 +317,36 @@ export const calculateCategoryCounts = (
     }
   });
   return counts;
+};
+
+/**
+ * Parses the tags property of a WOD, which might be a stringified JSON array,
+ * into an actual array of strings. Returns an empty array if parsing fails or input is invalid.
+ */
+export const parseTags = (
+  tags: string | string[] | null | undefined,
+): string[] => {
+  if (Array.isArray(tags)) {
+    // Already an array, ensure elements are strings
+    return tags.map(String);
+  }
+  if (typeof tags === "string") {
+    try {
+      // Cast to unknown first, then check if it's an array
+      const parsed = JSON.parse(tags) as unknown;
+      // Ensure the parsed result is an array and its elements are strings
+      if (Array.isArray(parsed)) {
+        // Cast to unknown[] before mapping to satisfy linter
+        // eslint-disable-next-line @typescript-eslint/no-base-to-string
+        return (parsed as unknown[]).map((item: unknown) => String(item));
+      }
+      console.warn("Parsed tags JSON was not an array:", tags);
+      return []; // Return empty array if parsed JSON is not an array
+    } catch (e) {
+      console.error("Failed to parse tags JSON string:", tags, e);
+      return []; // Return empty array on parsing error
+    }
+  }
+  // Return empty array for null, undefined, or other types
+  return [];
 };

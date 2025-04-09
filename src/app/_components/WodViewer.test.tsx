@@ -21,12 +21,13 @@ let mockSearchParams = new URLSearchParams(); // Default empty params - MUTABLE
 // Mock router.replace to ALSO update the mockSearchParams
 // Correct signature to accept both arguments
 const mockRouterReplace = vi.fn(
-  (pathWithQuery: string, options?: { scroll: boolean }) => {
+  (pathWithQuery: string, _options?: { scroll: boolean }) => {
+    // Prefix unused 'options'
     try {
       // Use a dummy base URL as we only care about the search part
       const url = new URL(pathWithQuery, "http://localhost");
       mockSearchParams = new URLSearchParams(url.search);
-    } catch (e) {
+    } catch {
       // Handle potential URL parsing errors if needed, though unlikely for test paths
       mockSearchParams = new URLSearchParams(); // Default to empty on error
     }
@@ -35,13 +36,14 @@ const mockRouterReplace = vi.fn(
 
 // Correct signature to accept both arguments
 const mockRouterPush = vi.fn(
-  (pathWithQuery: string, options?: { scroll: boolean }) => {
+  (pathWithQuery: string, _options?: { scroll: boolean }) => {
+    // Prefix unused 'options'
     // Also update params on push if used
     try {
       // Use a dummy base URL as we only care about the search part
       const url = new URL(pathWithQuery, "http://localhost");
       mockSearchParams = new URLSearchParams(url.search);
-    } catch (e) {
+    } catch {
       // Handle potential URL parsing errors if needed
       mockSearchParams = new URLSearchParams(); // Default to empty on error
     }
@@ -57,8 +59,9 @@ const mockPathname = "/"; // Example pathname
 
 // Corrected vi.mock structure
 vi.mock("next/navigation", async () => {
+  // eslint-disable-next-line @typescript-eslint/consistent-type-imports
   const actual =
-    await vi.importActual<typeof import("next/navigation")>("next/navigation");
+    await vi.importActual<typeof import("next/navigation")>("next/navigation"); // Disable rule for this line
   return {
     ...actual, // Include original exports like ReadonlyURLSearchParams
     useRouter: () => mockRouter,
@@ -74,7 +77,10 @@ type SortDirection = "asc" | "desc";
 
 // --- Mocks and Test Data ---
 
+// Add id and createdAt, remove results
 const mockWodTime: Wod = {
+  id: "mock-time",
+  createdAt: new Date(),
   wodUrl: "test.com/fran",
   wodName: "Fran",
   benchmarks: {
@@ -86,10 +92,13 @@ const mockWodTime: Wod = {
       beginner: { min: null, max: 480 }, // 8:00
     },
   },
-  results: [], // Results added per test case
+  // results removed
 };
 
+// Add id and createdAt, remove results
 const mockWodRounds: Wod = {
+  id: "mock-rounds",
+  createdAt: new Date(),
   wodUrl: "test.com/cindy",
   wodName: "Cindy",
   benchmarks: {
@@ -101,10 +110,13 @@ const mockWodRounds: Wod = {
       beginner: { min: 10, max: null },
     },
   },
-  results: [],
+  // results removed
 };
 
+// Add id and createdAt, remove results
 const mockWodLoad: Wod = {
+  id: "mock-load",
+  createdAt: new Date(),
   wodUrl: "test.com/deadlift",
   wodName: "Deadlift 1RM",
   benchmarks: {
@@ -116,10 +128,13 @@ const mockWodLoad: Wod = {
       beginner: { min: 135, max: null },
     },
   },
-  results: [],
+  // results removed
 };
 
+// Add id and createdAt, remove results
 const mockWodReps: Wod = {
+  id: "mock-reps",
+  createdAt: new Date(),
   wodUrl: "test.com/max-pullups",
   wodName: "Max Pull-ups",
   benchmarks: {
@@ -131,15 +146,19 @@ const mockWodReps: Wod = {
       beginner: { min: 5, max: null },
     },
   },
-  results: [],
+  // results removed
 };
 
+// Add id and createdAt, remove results
 const mockWodNoBenchmark: Wod = {
+  id: "mock-no-bench",
+  createdAt: new Date(),
   wodUrl: "test.com/random",
   wodName: "Random WOD",
-  results: [],
+  // results removed
 };
 
+// WodResult type is still needed for helper function tests
 const mockResultTime = (seconds: number | null, rx = true): WodResult => ({
   score_time_seconds: seconds,
   score_reps: null,
@@ -197,7 +216,9 @@ const mockResultNoScore = (): WodResult => ({
 // --- Tests ---
 
 describe("WodViewer Helper Functions", () => {
-  // ... (helper function tests remain the same) ...
+  // These tests use the mock Wod/WodResult data defined above,
+  // but they test utility functions, not the component itself.
+  // They don't need the `results` property on the Wod objects.
   describe("getPerformanceLevelColor", () => {
     it("should return correct color class for each level", () => {
       expect(getPerformanceLevelColor("elite")).toBe(
@@ -236,7 +257,6 @@ describe("WodViewer Helper Functions", () => {
   });
 
   describe("getPerformanceLevelTooltip", () => {
-    // Note: The 'currentLevel' parameter is no longer used to select the output, but we still pass it for function signature compatibility.
     it("should return correct multi-line tooltip for time benchmarks", () => {
       const expectedTooltip = [
         "Elite: 0:00 - 2:00",
@@ -244,9 +264,6 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 0:00 - 5:00",
         "Beginner: 0:00 - 8:00",
       ].join("\n");
-      // Call with only one argument
-      expect(getPerformanceLevelTooltip(mockWodTime)).toBe(expectedTooltip);
-      // The output should be the same regardless of the 'currentLevel' passed
       expect(getPerformanceLevelTooltip(mockWodTime)).toBe(expectedTooltip);
     });
 
@@ -257,20 +274,16 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 15 - ∞ rounds",
         "Beginner: 10 - ∞ rounds",
       ].join("\n");
-      // Call with only one argument
-      expect(getPerformanceLevelTooltip(mockWodRounds)).toBe(expectedTooltip);
       expect(getPerformanceLevelTooltip(mockWodRounds)).toBe(expectedTooltip);
     });
 
     it("should return correct multi-line tooltip for load benchmarks", () => {
       const expectedTooltip = [
-        "Elite: 405 - ∞ lbs", // Updated unit
-        "Advanced: 315 - ∞ lbs", // Updated unit
-        "Intermediate: 225 - ∞ lbs", // Updated unit
-        "Beginner: 135 - ∞ lbs", // Updated unit
+        "Elite: 405 - ∞ lbs",
+        "Advanced: 315 - ∞ lbs",
+        "Intermediate: 225 - ∞ lbs",
+        "Beginner: 135 - ∞ lbs",
       ].join("\n");
-      // Call with only one argument
-      expect(getPerformanceLevelTooltip(mockWodLoad)).toBe(expectedTooltip);
       expect(getPerformanceLevelTooltip(mockWodLoad)).toBe(expectedTooltip);
     });
 
@@ -281,31 +294,13 @@ describe("WodViewer Helper Functions", () => {
         "Intermediate: 10 - ∞ reps",
         "Beginner: 5 - ∞ reps",
       ].join("\n");
-      // Call with only one argument
-      expect(getPerformanceLevelTooltip(mockWodReps)).toBe(expectedTooltip);
       expect(getPerformanceLevelTooltip(mockWodReps)).toBe(expectedTooltip);
     });
 
     it("should return default message if no benchmarks", () => {
-      // The function now ignores the 'currentLevel' if benchmarks are missing
-      // Call with only one argument
       expect(getPerformanceLevelTooltip(mockWodNoBenchmark)).toBe(
         "No benchmark data available",
       );
-      expect(getPerformanceLevelTooltip(mockWodNoBenchmark)).toBe(
-        "No benchmark data available",
-      );
-    });
-    // Test case where benchmarks exist but currentLevel is null (should still show all levels)
-    it("should return all levels even if currentLevel is null", () => {
-      const expectedTooltip = [
-        "Elite: 0:00 - 2:00",
-        "Advanced: 0:00 - 3:00",
-        "Intermediate: 0:00 - 5:00",
-        "Beginner: 0:00 - 8:00",
-      ].join("\n");
-      // Call with only one argument
-      expect(getPerformanceLevelTooltip(mockWodTime)).toBe(expectedTooltip);
     });
   });
 
@@ -323,7 +318,7 @@ describe("WodViewer Helper Functions", () => {
     });
 
     it("should format rounds scores", () => {
-      expect(formatScore(mockResultRounds(15))).toBe("15 rounds"); // Updated expectation
+      expect(formatScore(mockResultRounds(15))).toBe("15 rounds");
     });
 
     it("should format rounds + partial reps scores", () => {
@@ -331,12 +326,12 @@ describe("WodViewer Helper Functions", () => {
     });
 
     it("should return dash if no score", () => {
-      // Updated test description
-      expect(formatScore(mockResultNoScore())).toBe("-"); // Updated expectation
+      expect(formatScore(mockResultNoScore())).toBe("-");
     });
   });
 
   describe("getNumericScore", () => {
+    // These tests still need WodResult, but not the Wod.results property
     it("should return time in seconds for time benchmarks", () => {
       expect(getNumericScore(mockWodTime, mockResultTime(110))).toBe(110);
     });
@@ -376,32 +371,33 @@ describe("WodViewer Helper Functions", () => {
   });
 
   describe("getPerformanceLevel", () => {
+    // These tests still need WodResult, but not the Wod.results property
     // Time (lower is better)
     it("should return correct level for time benchmarks", () => {
       expect(getPerformanceLevel(mockWodTime, mockResultTime(110))).toBe(
         "elite",
-      ); // 1:50
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(120))).toBe(
         "elite",
-      ); // 2:00
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(121))).toBe(
         "advanced",
-      ); // 2:01
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(180))).toBe(
         "advanced",
-      ); // 3:00
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(181))).toBe(
         "intermediate",
-      ); // 3:01
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(300))).toBe(
         "intermediate",
-      ); // 5:00
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(301))).toBe(
         "beginner",
-      ); // 5:01
+      );
       expect(getPerformanceLevel(mockWodTime, mockResultTime(500))).toBe(
         "beginner",
-      ); // 8:20
+      );
     });
 
     // Rounds (higher is better)
@@ -433,13 +429,12 @@ describe("WodViewer Helper Functions", () => {
       expect(getPerformanceLevel(mockWodRounds, mockResultRounds(9))).toBe(
         "beginner",
       );
-      // With partial reps
       expect(getPerformanceLevel(mockWodRounds, mockResultRounds(24, 5))).toBe(
         "advanced",
-      ); // 24.05
+      );
       expect(getPerformanceLevel(mockWodRounds, mockResultRounds(19, 99))).toBe(
         "intermediate",
-      ); // 19.99
+      );
     });
 
     // Load (higher is better)
@@ -512,11 +507,12 @@ describe("WodViewer Helper Functions", () => {
 
     it("should return null if no numeric score can be determined", () => {
       expect(getPerformanceLevel(mockWodTime, mockResultNoScore())).toBe(null);
-      expect(getPerformanceLevel(mockWodTime, mockResultReps(20))).toBe(null); // Mismatch
+      expect(getPerformanceLevel(mockWodTime, mockResultReps(20))).toBe(null);
     });
   });
 
   describe("hasScore", () => {
+    // These tests only need WodResult
     it("should return true if any score field is present", () => {
       expect(hasScore(mockResultTime(120))).toBe(true);
       expect(hasScore(mockResultReps(10))).toBe(true);
@@ -527,7 +523,6 @@ describe("WodViewer Helper Functions", () => {
 
     it("should return false if no score fields are present", () => {
       expect(hasScore(mockResultNoScore())).toBe(false);
-      // Ensure the object conforms to WodResult type
       const resultWithNoScores: WodResult = {
         date: "2023-01-01",
         rxStatus: "Rx",
@@ -542,82 +537,85 @@ describe("WodViewer Helper Functions", () => {
   });
 
   describe("sortWods", () => {
+    // Remove results from wodsToSort and add id/createdAt
     const wodsToSort: Wod[] = [
       {
-        // Wod A - Fran, faster time, older date, 1 attempt, elite
+        id: "sort-A",
+        createdAt: new Date("2024-01-15"),
         ...mockWodTime,
         wodName: "Fran",
-        results: [mockResultTime(110, true)], // Elite
         category: "Girl",
         tags: ["For Time", "Couplet"],
-        count_likes: 100, // Added likes
+        countLikes: 100, // Use camelCase
+        // results removed
       },
       {
-        // Wod B - Cindy, fewer rounds, newer date, 2 attempts, intermediate
+        id: "sort-B",
+        createdAt: new Date("2024-02-10"),
         ...mockWodRounds,
         wodName: "Cindy",
-        results: [
-          { ...mockResultRounds(18, 0, true), date: "2024-02-10" }, // Intermediate
-          { ...mockResultRounds(15, 0, true), date: "2023-11-05" }, // Intermediate
-        ],
         category: "Girl",
         tags: ["AMRAP"],
-        count_likes: 50, // Added likes
+        countLikes: 50, // Use camelCase
+        // results removed
       },
       {
-        // Wod C - Deadlift, lower weight, middle date, 1 attempt, beginner (scaled)
+        id: "sort-C",
+        createdAt: new Date("2024-01-17"),
         ...mockWodLoad,
         wodName: "Deadlift",
-        results: [mockResultLoad(200, false)], // Beginner (Scaled)
         category: "Benchmark",
         tags: ["Ladder"],
-        count_likes: 75, // Added likes
+        countLikes: 75, // Use camelCase
+        // results removed
       },
       {
-        // Wod D - Fran, slower time, latest date, 1 attempt, advanced
+        id: "sort-D",
+        createdAt: new Date("2024-03-01"),
         ...mockWodTime,
         wodName: "Fran", // Same name as A
-        results: [{ ...mockResultTime(150, true), date: "2024-03-01" }], // Advanced
         category: "Girl",
         tags: ["For Time", "Couplet"],
-        count_likes: 100, // Same as A
+        countLikes: 100, // Use camelCase
+        // results removed
       },
       {
-        // Wod E - Cindy, more rounds, earliest date, 1 attempt, elite (scaled)
+        id: "sort-E",
+        createdAt: new Date("2023-05-15"),
         ...mockWodRounds,
         wodName: "Cindy", // Same name as B
-        results: [{ ...mockResultRounds(26, 0, false), date: "2023-05-15" }], // Elite (Scaled)
         category: "Girl",
         tags: ["AMRAP"],
-        count_likes: 25, // Added likes
+        countLikes: 25, // Use camelCase
+        // results removed
       },
       {
-        // Wod F - No results
+        id: "sort-F",
+        createdAt: new Date("2023-01-01"), // Placeholder
         ...mockWodReps,
         wodName: "Pull-ups",
-        results: [],
         category: "Benchmark",
-        count_likes: 10, // Added likes
+        countLikes: 10, // Use camelCase
+        // results removed
       },
       {
-        // Wod G - Result with no score
+        id: "sort-G",
+        createdAt: new Date("2023-01-02"), // Placeholder
         ...mockWodReps,
         wodName: "Push-ups",
-        results: [mockResultNoScore()],
         category: "Benchmark",
-        // No count_likes, should default to 0
+        countLikes: undefined, // Use camelCase (defaults to 0 in sort)
+        // results removed
       },
       {
-        // Wod H - Cindy, latest result is better
+        id: "sort-H",
+        createdAt: new Date("2024-04-01"),
         ...mockWodRounds,
         wodName: "Cindy", // Same name as B, E
-        results: [
-          { ...mockResultRounds(15, 0, true), date: "2023-10-01" }, // Intermediate
-          { ...mockResultRounds(22, 0, true), date: "2024-04-01" }, // Advanced (Latest)
-        ],
         category: "Girl",
         tags: ["AMRAP"],
-        count_likes: 50, // Same as B
+        countLikes: 50, // Use camelCase
+        // results removed
       },
     ];
 
@@ -649,160 +647,10 @@ describe("WodViewer Helper Functions", () => {
       ]);
     });
 
-    it("should sort by date ascending (using first result date)", () => {
-      const sorted = sortWods(wodsToSort, "date", "asc");
-      // Expected order (Ascending): E (23-05-15), H (23-10-01), B (23-11-05), A (24-01-15), C (24-01-17), D (24-03-01), F (Inf), G (Inf)
-      // Expected Names (Ascending): ['Cindy', 'Cindy', 'Cindy', 'Fran', 'Deadlift', 'Fran', 'Pull-ups', 'Push-ups']
-      expect(sorted.map((w) => w.wodName)).toEqual([
-        "Cindy",
-        "Cindy",
-        "Cindy",
-        "Fran",
-        "Deadlift",
-        "Fran",
-        "Pull-ups",
-        "Push-ups",
-      ]);
-    });
+    // Remove tests for date, attempts, level, latestLevel as they are disabled
 
-    it("should sort by date descending (using first result date)", () => {
-      const sorted = sortWods(wodsToSort, "date", "desc");
-      // Expected Order (Descending): F (Inf), G (Inf), D (24-03-01), C (24-01-17), A (24-01-15), B (23-11-05), H (23-10-01), E (23-05-15)
-      // Expected Names (Descending): ['Pull-ups', 'Push-ups', 'Fran', 'Deadlift', 'Fran', 'Cindy', 'Cindy', 'Cindy']
-      expect(sorted.map((w) => w.wodName)).toEqual([
-        "Pull-ups",
-        "Push-ups",
-        "Fran",
-        "Deadlift",
-        "Fran",
-        "Cindy",
-        "Cindy",
-        "Cindy",
-      ]);
-    });
-
-    it("should sort by attempts ascending", () => {
-      const sorted = sortWods(wodsToSort, "attempts", "asc");
-      // Attempts: F(0), G(0), A(1), C(1), D(1), E(1), B(2), H(2)
-      // Order within same attempt count might vary based on original order or other factors if stable sort isn't guaranteed.
-      // We expect F, G first, then A, C, D, E, then B, H
-      const attempts = sorted.map(
-        (w) => w.results.filter((r) => r.date && hasScore(r)).length,
-      );
-      expect(attempts).toEqual([0, 0, 1, 1, 1, 1, 2, 2]);
-      // Check names for grouping
-      expect(
-        sorted
-          .slice(0, 2)
-          .map((w) => w.wodName)
-          .sort(),
-      ).toEqual(["Pull-ups", "Push-ups"]);
-      expect(
-        sorted
-          .slice(2, 6)
-          .map((w) => w.wodName)
-          .sort(),
-      ).toEqual(["Cindy", "Deadlift", "Fran", "Fran"]);
-      // Removed incorrect screen.getByRole assertion from helper test
-    });
-
-    it("should sort by attempts descending", () => {
-      const sorted = sortWods(wodsToSort, "attempts", "desc");
-      // Attempts: B(2), H(2), A(1), C(1), D(1), E(1), F(0), G(0)
-      const attempts = sorted.map(
-        (w) => w.results.filter((r) => r.date && hasScore(r)).length,
-      );
-      expect(attempts).toEqual([2, 2, 1, 1, 1, 1, 0, 0]);
-      // Check names for grouping
-      expect(
-        sorted
-          .slice(0, 2)
-          .map((w) => w.wodName)
-          .sort(),
-      ).toEqual(["Cindy", "Cindy"]);
-      expect(
-        sorted
-          .slice(2, 6)
-          .map((w) => w.wodName)
-          .sort(),
-      ).toEqual(["Cindy", "Deadlift", "Fran", "Fran"]);
-      expect(
-        sorted
-          .slice(6, 8)
-          .map((w) => w.wodName)
-          .sort(),
-      ).toEqual(["Pull-ups", "Push-ups"]);
-    });
-
-    // 'level' uses the *first* result for comparison
-    it("should sort by level ascending (using first result)", () => {
-      const sorted = sortWods(wodsToSort, "level", "asc");
-      // Levels (first result): A(Elite Rx), B(Inter Rx), C(Beginner Scaled), D(Adv Rx), E(Elite Scaled), F(None), G(None), H(Inter Rx)
-      // Expected Order (Ascending Score): F(0), G(0), C(1), E(4), B(12), H(12), D(13), A(14)
-      // Expected Names (Ascending): ['Pull-ups', 'Push-ups', 'Deadlift', 'Cindy', 'Cindy', 'Cindy', 'Fran', 'Fran'] (B before H due to secondary sort)
-      expect(sorted.map((w) => w.wodName)).toEqual([
-        "Pull-ups",
-        "Push-ups",
-        "Deadlift",
-        "Cindy",
-        "Cindy",
-        "Cindy",
-        "Fran",
-        "Fran",
-      ]);
-    });
-
-    it("should sort by level descending (using first result)", () => {
-      const sorted = sortWods(wodsToSort, "level", "desc");
-      // Expected Order (Score): A(14), D(13), B(12), H(12), E(4), C(1), F(0), G(0)
-      // Secondary Sort (Name Desc): A, D, H, B, E, C, G, F
-      expect(sorted.map((w) => w.wodName)).toEqual([
-        "Fran",
-        "Fran",
-        "Cindy",
-        "Cindy",
-        "Cindy",
-        "Deadlift",
-        "Push-ups",
-        "Pull-ups",
-      ]);
-    });
-
-    // 'latestLevel' uses the *latest valid* result for comparison
-    it("should sort by latestLevel ascending", () => {
-      const sorted = sortWods(wodsToSort, "latestLevel", "asc");
-      // Expected Order (Score): F(0), G(0), C(1), E(4), B(12), D(13), H(13), A(14)
-      // Secondary Sort (Name Asc): F, G, C, E, B, H, D, A (Cindy before Fran when scores are equal)
-      expect(sorted.map((w) => w.wodName)).toEqual([
-        "Pull-ups",
-        "Push-ups",
-        "Deadlift",
-        "Cindy",
-        "Cindy",
-        "Cindy",
-        "Fran",
-        "Fran",
-      ]);
-    });
-
-    it("should sort by latestLevel descending", () => {
-      const sorted = sortWods(wodsToSort, "latestLevel", "desc");
-      // Expected Order (Score): A(14), D(13), H(13), B(12), E(4), C(1), F(0), G(0)
-      // Secondary Sort (Name Desc): A, D, H, B, E, C, G, F (Fran before Cindy when scores are equal)
-      expect(sorted.map((w) => w.wodName)).toEqual([
-        "Fran",
-        "Fran",
-        "Cindy",
-        "Cindy",
-        "Cindy",
-        "Deadlift",
-        "Push-ups",
-        "Pull-ups",
-      ]);
-    });
-
-    it("should sort by count_likes ascending", () => {
-      const sorted = sortWods(wodsToSort, "count_likes", "asc");
+    it("should sort by countLikes ascending", () => {
+      const sorted = sortWods(wodsToSort, "countLikes", "asc");
       // Likes: G(0), F(10), E(25), B(50), H(50), C(75), A(100), D(100)
       // Secondary sort name asc: G, F, E, B, H, C, A, D
       expect(sorted.map((w) => w.wodName)).toEqual([
@@ -817,8 +665,8 @@ describe("WodViewer Helper Functions", () => {
       ]);
     });
 
-    it("should sort by count_likes descending", () => {
-      const sorted = sortWods(wodsToSort, "count_likes", "desc");
+    it("should sort by countLikes descending", () => {
+      const sorted = sortWods(wodsToSort, "countLikes", "desc");
       // Likes: A(100), D(100), C(75), B(50), H(50), E(25), F(10), G(0)
       // Secondary sort name desc: D, A, C, H, B, E, F, G
       expect(sorted.map((w) => w.wodName)).toEqual([
@@ -838,29 +686,28 @@ describe("WodViewer Helper Functions", () => {
 // --- Mock Child Components ---
 // Mock WodTable and WodTimeline to check props passed to them
 vi.mock("./WodTable", () => ({
-  // Use default export syntax for mocked component
-  // Add explicit types to parameters using locally defined types
   default: vi.fn(
     ({
       wods,
       sortBy,
       sortDirection,
       handleSort,
+      searchTerm, // Add searchTerm
+      tableHeight, // Add tableHeight
     }: {
       wods: Wod[];
       sortBy: SortByType;
       sortDirection: SortDirection;
       handleSort: (column: SortByType) => void;
+      searchTerm: string; // Add type
+      tableHeight: number; // Add type
     }) => (
-      <div data-testid="wod-table">
-        {/* Render something identifiable */}
+      <div data-testid="wod-table" style={{ height: `${tableHeight}px` }}>
         <span>WodTable Mock</span>
-        {/* Optionally render props for easier debugging in tests */}
-        <span data-testid="table-wod-count">{wods.length}</span>{" "}
-        {/* Safe: wods is Wod[] */}
+        <span data-testid="table-wod-count">{wods.length}</span>
         <span data-testid="table-sort-by">{sortBy}</span>
         <span data-testid="table-sort-direction">{sortDirection}</span>
-        {/* Mock button to trigger handleSort */}
+        <span data-testid="table-search-term">{searchTerm}</span>
         <button onClick={() => handleSort("wodName")}>
           Sort Table By Name
         </button>
@@ -870,28 +717,32 @@ vi.mock("./WodTable", () => ({
 }));
 
 vi.mock("./WodTimeline", () => ({
-  // Add explicit types to parameters using locally defined types
   default: vi.fn(
     ({
       wods,
       sortBy,
       sortDirection,
       handleSort,
+      searchTerm, // Add searchTerm
+      tableHeight, // Add tableHeight
     }: {
       wods: Wod[];
       sortBy: SortByType;
       sortDirection: SortDirection;
       handleSort: (column: SortByType) => void;
+      searchTerm: string; // Add type
+      tableHeight: number; // Add type
     }) => (
-      <div data-testid="wod-timeline">
+      <div data-testid="wod-timeline" style={{ height: `${tableHeight}px` }}>
         <span>WodTimeline Mock</span>
-        <span data-testid="timeline-wod-count">{wods.length}</span>{" "}
-        {/* Safe: wods is Wod[] */}
+        <span data-testid="timeline-wod-count">{wods.length}</span>
         <span data-testid="timeline-sort-by">{sortBy}</span>
         <span data-testid="timeline-sort-direction">{sortDirection}</span>
-        {/* Mock button to trigger handleSort */}
-        <button onClick={() => handleSort("date")}>
-          Sort Timeline By Date
+        <span data-testid="timeline-search-term">{searchTerm}</span>
+        <button onClick={() => handleSort("wodName")}>
+          {" "}
+          {/* Changed to wodName as date sort is disabled */}
+          Sort Timeline By Name
         </button>
       </div>
     ),
@@ -900,131 +751,167 @@ vi.mock("./WodTimeline", () => ({
 
 // --- Component Tests ---
 describe("WodViewer Component", () => {
-  // Mock chart data and category/tag order
-  const mockCategoryOrder = [
-    "Girl",
-    "Benchmark",
-    "Hero",
-    "Skill",
-    "Open",
-    "Quarterfinals",
-    "Games",
-    "Other",
-  ];
-  const mockTagOrder = [
-    "For Time",
-    "AMRAP",
-    "Couplet",
-    "Triplet",
-    "Chipper",
-    "Ladder",
-    "EMOM",
-  ];
-  const mockViewerProps = {
-    categoryOrder: mockCategoryOrder,
-    tagOrder: mockTagOrder,
-  };
+  // WodViewer no longer takes categoryOrder/tagOrder as props, they are derived internally
 
-  // Use the same mock data from helper tests where applicable
+  // Use the same mock data from helper tests where applicable, remove results, add id/createdAt
   const testWods: Wod[] = [
     {
-      // Wod A - Fran, Done, Girl, For Time, Couplet
+      id: "test-A",
+      createdAt: new Date(),
       wodUrl: "test.com/fran",
       wodName: "Fran",
       category: "Girl",
       tags: ["For Time", "Couplet"],
-      results: [mockResultTime(110, true)], // Elite
+      countLikes: 100,
+      benchmarks: mockWodTime.benchmarks, // Reuse benchmark structure
+      // results removed
     },
     {
-      // Wod B - Cindy, Done, Girl, AMRAP
+      id: "test-B",
+      createdAt: new Date(),
       wodUrl: "test.com/cindy",
       wodName: "Cindy",
       category: "Girl",
       tags: ["AMRAP"],
-      results: [mockResultRounds(18, 0, true)], // Intermediate
+      countLikes: 50,
+      benchmarks: mockWodRounds.benchmarks,
+      // results removed
     },
     {
-      // Wod C - Deadlift, Done (Scaled), Benchmark, Ladder
+      id: "test-C",
+      createdAt: new Date(),
       wodUrl: "test.com/deadlift",
       wodName: "Deadlift",
       category: "Benchmark",
       tags: ["Ladder"],
-      results: [mockResultLoad(200, false)], // Beginner (Scaled)
+      countLikes: 75,
+      benchmarks: mockWodLoad.benchmarks,
+      // results removed
     },
     {
-      // Wod D - Pull-ups, Not Done, Benchmark
+      id: "test-D",
+      createdAt: new Date(),
       wodUrl: "test.com/pullups",
       wodName: "Pull-ups",
       category: "Benchmark",
-      results: [],
+      tags: [], // Ensure tags is an array
+      countLikes: 10,
+      benchmarks: mockWodReps.benchmarks,
+      // results removed
     },
     {
-      // Wod E - Push-ups, Not Done (no score), Benchmark
+      id: "test-E",
+      createdAt: new Date(),
       wodUrl: "test.com/pushups",
       wodName: "Push-ups",
       category: "Benchmark",
-      results: [mockResultNoScore()],
+      tags: [],
+      countLikes: 0, // Explicitly 0 if undefined
+      benchmarks: mockWodReps.benchmarks,
+      // results removed
     },
     {
-      // Wod F - Hero WOD, Done, Hero, Chipper
+      id: "test-F",
+      createdAt: new Date(),
       wodUrl: "test.com/murph",
       wodName: "Murph",
       category: "Hero",
       tags: ["Chipper", "For Time"],
-      results: [mockResultTime(2400, true)], // Example time
+      countLikes: 500,
+      benchmarks: mockWodTime.benchmarks, // Example benchmark
+      // results removed
     },
   ];
 
-  // Add likes to the testWods used in component tests
-  const testWodsWithLikes = testWods.map((wod, index) => ({
-    ...wod,
-    count_likes: [100, 50, 75, 10, 0, 500][index], // Assign some likes
+  // Mock tRPC hook
+  const mockUseQuery = vi.fn();
+  vi.mock("~/trpc/react", () => ({
+    api: {
+      wod: {
+        getAll: {
+          // Ensure the mock implementation returns a typed object
+          useQuery: () =>
+            mockUseQuery() as {
+              // Cast the return value
+              data: Wod[] | undefined;
+              isLoading: boolean;
+              isError: boolean;
+              error: { message: string } | null;
+            },
+        },
+      },
+    },
   }));
 
   beforeEach(() => {
     // Reset mocks and search params before each test
     vi.clearAllMocks();
     mockSearchParams = new URLSearchParams(); // Reset to empty
+    // Default successful query result
+    mockUseQuery.mockReturnValue({
+      data: testWods,
+      isLoading: false,
+      isError: false,
+      error: null,
+    });
   });
 
   afterEach(() => {
     vi.restoreAllMocks(); // Ensure mocks are fully restored
   });
 
-  it("should render table view by default and show only done WODs (no URL params)", () => {
-    // No specific params set for this test
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+  it("should show loading state", () => {
+    mockUseQuery.mockReturnValue({
+      data: undefined,
+      isLoading: true,
+      isError: false,
+      error: null,
+    });
+    render(<WodViewer />);
+    expect(screen.getByText(/Loading WODs.../i)).toBeInTheDocument();
+  });
+
+  it("should show error state", () => {
+    mockUseQuery.mockReturnValue({
+      data: undefined,
+      isLoading: false,
+      isError: true,
+      error: { message: "Failed to fetch" },
+    });
+    render(<WodViewer />);
+    expect(
+      screen.getByText(/Error loading WODs: Failed to fetch/i),
+    ).toBeInTheDocument();
+  });
+
+  it("should render table view by default (no URL params)", () => {
+    render(<WodViewer />);
 
     // Check table is rendered by default
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
     expect(screen.queryByTestId("wod-timeline")).not.toBeInTheDocument();
 
-    // Table view with "Done" filter should show WODs A, B, C, F
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
+    // Table view with default filters (no completion filter applied initially)
+    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6"); // All WODs shown initially
 
-    // Check default sort state passed to table (date/desc)
-    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("date");
-    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
-      "desc",
-    );
+    // Check default sort state passed to table (wodName/asc)
+    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
+    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent("asc");
 
-    // Completion filter should be visible and default to "Done"
+    // Completion filter should NOT be visible initially
     expect(
-      screen.getByRole("radio", { name: /All \(\d+\)/i }),
-    ).toBeInTheDocument();
+      screen.queryByRole("radio", { name: /All \(\d+\)/i }),
+    ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("radio", { name: /Done \(\d+\)/i }),
-    ).toBeInTheDocument();
+      screen.queryByRole("radio", { name: /Done \(\d+\)/i }),
+    ).not.toBeInTheDocument();
     expect(
-      screen.getByRole("radio", { name: /Todo \(\d+\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(\d+\)/i, checked: true }),
-    ).toBeInTheDocument(); // Check Done is checked
+      screen.queryByRole("radio", { name: /Todo \(\d+\)/i }),
+    ).not.toBeInTheDocument();
   });
 
-  it("should switch to timeline view and show only done WODs initially", () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+  it("should switch to timeline view", async () => {
+    render(<WodViewer />);
 
     // Find the view switcher and switch to timeline
     const timelineViewButton = screen.getByRole("radio", {
@@ -1033,339 +920,159 @@ describe("WodViewer Component", () => {
     fireEvent.click(timelineViewButton);
 
     // Check timeline is rendered
-    expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
-    expect(screen.queryByTestId("wod-table")).not.toBeInTheDocument();
+    await waitFor(() => {
+      expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
+      expect(screen.queryByTestId("wod-table")).not.toBeInTheDocument();
+    });
 
-    // Timeline view should still reflect the "Done" filter initially (A, B, C, F)
-    expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("4");
+    // Timeline view should show all WODs initially
+    expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("6");
 
-    // Check default sort state passed to timeline (date/desc)
-    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("date");
+    // Check default sort state passed to timeline (wodName/asc)
+    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("wodName");
     expect(screen.getByTestId("timeline-sort-direction")).toHaveTextContent(
-      "desc",
+      "asc",
     );
 
-    // Completion filter should be visible and default to "Done"
+    // Completion filter should NOT be visible
     expect(
-      screen.getByRole("radio", { name: /All \(\d+\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(\d+\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(\d+\)/i }),
-    ).toBeInTheDocument();
-    // Check that the "Done" filter is still checked after switching views
-    expect(
-      screen.getByRole("radio", { name: /Done \(\d+\)/i, checked: true }),
-    ).toBeInTheDocument(); // Check Done is checked
-
-    // Check initial counts (All: 6, Done: 4, Todo: 2)
-    expect(
-      screen.getByRole("radio", { name: /All \(6\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(4\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(2\)/i }),
-    ).toBeInTheDocument();
+      screen.queryByRole("radio", { name: /All \(\d+\)/i }),
+    ).not.toBeInTheDocument();
   });
 
-  it('should filter by category, update counts, and update URL (starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-    // Table view is default, "Done" filter is default (A, B, C, F)
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-    // Initial counts
-    expect(
-      screen.getByRole("radio", { name: /All \(6\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(4\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(2\)/i }),
-    ).toBeInTheDocument();
+  it("should filter by category and update URL", async () => {
+    render(<WodViewer />);
+    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6"); // All WODs initially
 
     // Find the category select trigger
     const categorySelect = screen.getByRole("combobox");
-    fireEvent.click(categorySelect); // Open the dropdown with click
+    fireEvent.click(categorySelect);
 
-    // Use screen.findByText directly (no timers)
+    // Select Benchmark category (C, D, E)
     const benchmarkItem = await screen.findByText(/Benchmark \(\d+\)/i);
     fireEvent.click(benchmarkItem);
 
-    // Check that only "Done" Benchmark WODs are passed to the table (C)
-    // Need to wait for the state update and re-render
     await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("1");
-      // Check updated counts for Benchmark category (All: 3, Done: 1, Todo: 2)
-      expect(
-        screen.getByRole("radio", { name: /All \(3\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Done \(1\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Todo \(2\)/i }),
-      ).toBeInTheDocument();
-      // Check URL update
+      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("3");
       expect(mockRouterReplace).toHaveBeenCalledWith("/?category=Benchmark", {
         scroll: false,
       });
     });
-    mockRouterReplace.mockClear(); // Clear mock for next assertion
+    mockRouterReplace.mockClear();
 
-    // Select 'All Categories' again by clicking
-    fireEvent.click(categorySelect); // Re-open with click
-
-    // Use screen.findByText directly (no timers)
+    // Select 'All Categories' again
+    fireEvent.click(categorySelect);
     const allCategoriesItem = await screen.findByText(
       /All Categories \(\d+\)/i,
     );
     fireEvent.click(allCategoriesItem);
 
     await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4"); // Back to all "Done" WODs
-      // Check counts reset to original (All: 6, Done: 4, Todo: 2)
-      expect(
-        screen.getByRole("radio", { name: /All \(6\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Done \(4\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Todo \(2\)/i }),
-      ).toBeInTheDocument();
-      // Check final URL state after returning to default (allow '/' or '/?')
+      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6");
       const lastCall = mockRouterReplace.mock.lastCall;
-      expect(lastCall[0]).toMatch(/^\/\??$/); // Matches '/' or '/?'
+      expect(lastCall[0]).toMatch(/^\/\??$/);
       expect(lastCall[1]).toEqual({ scroll: false });
     });
   });
 
-  it('should filter by tags, update counts, and update URL (multiple, starting from default "Done" filter)', async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-    // Table view, Done filter default (A, B, C, F)
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-    // Initial counts
-    expect(
-      screen.getByRole("radio", { name: /All \(6\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(4\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(2\)/i }),
-    ).toBeInTheDocument();
+  it("should filter by tags and update URL (multiple)", async () => {
+    render(<WodViewer />);
+    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6");
 
-    // Click 'For Time' tag (Done WODs: A, F)
+    // Click 'For Time' tag (A, F)
     fireEvent.click(screen.getByText("For Time"));
     await waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("2");
-      // Check counts for 'For Time' tag (All: 2, Done: 2, Todo: 0)
-      expect(
-        screen.getByRole("radio", { name: /All \(2\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Done \(2\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Todo \(0\)/i }),
-      ).toBeInTheDocument();
-      // Check URL update (URLSearchParams encodes space as '+')
       expect(mockRouterReplace).toHaveBeenCalledWith("/?tags=For+Time", {
         scroll: false,
       });
     });
     mockRouterReplace.mockClear();
 
-    // Click 'AMRAP' tag (Done WODs: B)
-    // Tag match means: no tags selected OR wod.tags includes *any* selected tag
-    // Let's re-evaluate the filtering logic based on the code:
-    // categoryMatch = selectedCategories.length === 0 || (wod.category && selectedCategories.includes(wod.category));
-    // tagMatch = selectedTags.length === 0 || (wod.tags && wod.tags.some(tag => selectedTags.includes(tag)));
-    // return categoryMatch && tagMatch;
-    // So, clicking multiple tags acts as an OR filter within tags.
-
-    // Click 'AMRAP' tag - now filters for ('For Time' OR 'AMRAP') among Done WODs (A, B, F)
+    // Click 'AMRAP' tag - now filters for ('For Time' OR 'AMRAP') -> (A, B, F)
     fireEvent.click(screen.getByText("AMRAP"));
     await waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("3");
-      // Check counts for 'For Time' OR 'AMRAP' tags (All: 3, Done: 3, Todo: 0)
-      expect(
-        screen.getByRole("radio", { name: /All \(3\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Done \(3\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Todo \(0\)/i }),
-      ).toBeInTheDocument();
-      // Check URL update (URLSearchParams encodes space as '+', comma as '%2C')
-      // Tags are joined in selection order, not alphabetized within the value.
       expect(mockRouterReplace).toHaveBeenCalledWith(
-        "/?tags=For+Time%2CAMRAP", // Order: For Time, AMRAP
+        "/?tags=For+Time%2CAMRAP",
         { scroll: false },
       );
     });
     mockRouterReplace.mockClear();
 
-    // Click 'For Time' again to deselect it - should show only 'AMRAP' among Done WODs (B)
+    // Click 'For Time' again to deselect it - should show only 'AMRAP' (B)
     fireEvent.click(screen.getByText("For Time"));
     await waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("1");
-      // Check counts for 'AMRAP' tag (All: 1, Done: 1, Todo: 0)
-      expect(
-        screen.getByRole("radio", { name: /All \(1\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Done \(1\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Todo \(0\)/i }),
-      ).toBeInTheDocument();
-      // Check URL update (URLSearchParams encodes space as '+')
       expect(mockRouterReplace).toHaveBeenCalledWith("/?tags=AMRAP", {
         scroll: false,
       });
     });
     mockRouterReplace.mockClear();
 
-    // Click 'AMRAP' again to deselect - should show all Done WODs again
+    // Click 'AMRAP' again to deselect - should show all WODs again
     fireEvent.click(screen.getByText("AMRAP"));
     await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-      // Check counts reset to original (All: 6, Done: 4, Todo: 2)
-      expect(
-        screen.getByRole("radio", { name: /All \(6\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Done \(4\)/i }),
-      ).toBeInTheDocument();
-      expect(
-        screen.getByRole("radio", { name: /Todo \(2\)/i }),
-      ).toBeInTheDocument();
-      // Check final URL state after returning to default (allow '/' or '/?')
-      const lastCall = mockRouterReplace.mock.lastCall;
-      expect(lastCall[0]).toMatch(/^\/\??$/); // Matches '/' or '/?'
-      expect(lastCall[1]).toEqual({ scroll: false });
-    });
-  });
-
-  it("should filter by completion status, update counts, and update URL", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-    // Table view, Done filter default (A, B, C, F)
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-
-    // Click 'Done' filter again (should have no effect on URL as it's default)
-    const doneFilter = screen.getByRole("radio", { name: /Done \(\d+\)/i });
-    fireEvent.click(doneFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-      // Initial render might call replace if searchParams is initially different from calculated default
-    });
-    mockRouterReplace.mockClear(); // Clear after initial render check
-
-    // Click 'Done' filter again (should have no effect)
-    fireEvent.click(doneFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-      // Should NOT call replace again because state hasn't changed from default
-      expect(mockRouterReplace).not.toHaveBeenCalled();
-    });
-
-    // Click 'Todo' filter (D, E)
-    const todoFilter = screen.getByRole("radio", { name: /Todo \(\d+\)/i });
-    fireEvent.click(todoFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("2");
-      // Check URL update
-      expect(mockRouterReplace).toHaveBeenCalledWith("/?completion=notDone", {
-        scroll: false,
-      });
-    });
-    // mockRouterReplace.mockClear(); // Keep checking subsequent calls
-
-    // Click 'All' filter - Use radio role
-    const allFilter = screen.getByRole("radio", { name: /All \(\d+\)/i });
-    fireEvent.click(allFilter);
-    await waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6");
-      // Check URL update
-      expect(mockRouterReplace).toHaveBeenCalledWith("/?completion=all", {
-        scroll: false,
-      });
-    });
-    // mockRouterReplace.mockClear();
-
-    // Click 'Done' filter again (back to default)
-    fireEvent.click(doneFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4");
-      // Check final URL state after returning to default (allow '/' or '/?')
       const lastCall = mockRouterReplace.mock.lastCall;
-      expect(lastCall[0]).toMatch(/^\/\??$/); // Matches '/' or '/?'
+      expect(lastCall[0]).toMatch(/^\/\??$/);
       expect(lastCall[1]).toEqual({ scroll: false });
     });
   });
+
+  // Completion filter tests removed as the filter is no longer rendered
 
   it("should handle sorting correctly and update URL", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-    // Table view is default
-
-    // Initial sort check (date/desc) - Default, so no URL params expected initially
-    await waitFor(() => {
-      expect(screen.getByTestId("table-sort-by")).toHaveTextContent("date");
-      expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
-        "desc",
-      );
-      // Check that router was NOT called initially for default sort/view
-      // Initial render might call replace if searchParams is initially different from calculated default
-    });
-    mockRouterReplace.mockClear(); // Clear after initial render check
-
-    // Simulate sort trigger from mocked child component (e.g., clicking name header)
-    const sortButton = screen.getByRole("button", {
-      name: /Sort Table By Name/i,
-    }); // Mock button in WodTable mock
-    fireEvent.click(sortButton);
-
-    // Check sort state updated and passed down, and URL updated
+    render(<WodViewer />);
     await waitFor(() => {
       expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
       expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
         "asc",
-      ); // Default asc for new column
-      // URL should update: sortBy=wodName (sortDir=asc is default for wodName and omitted)
-      expect(mockRouterReplace).toHaveBeenCalledWith("/?sortBy=wodName", {
-        scroll: false,
-      });
+      );
     });
-    // mockRouterReplace.mockClear();
+    mockRouterReplace.mockClear();
 
-    // Click again to toggle direction
-    fireEvent.click(sortButton);
+    // Simulate sort trigger from mocked child component (clicking name header)
+    const sortButton = screen.getByRole("button", {
+      name: /Sort Table By Name/i,
+    });
+    fireEvent.click(sortButton); // Click once (already wodName/asc, should toggle to desc)
+
     await waitFor(() => {
       expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
       expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
         "desc",
       );
-      // URL should update: sortBy=wodName&sortDir=desc (params sorted)
       expect(mockRouterReplace).toHaveBeenCalledWith(
         "/?sortBy=wodName&sortDir=desc",
         { scroll: false },
       );
     });
-    // Removed attempt to click timeline sort button while table view is active
+
+    // Click again to toggle back to asc
+    fireEvent.click(sortButton);
+    await waitFor(() => {
+      expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
+      expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
+        "asc",
+      );
+      // sortDir=asc is default for wodName, so it should be removed from URL
+      expect(mockRouterReplace).toHaveBeenCalledWith("/?sortBy=wodName", {
+        scroll: false,
+      });
+    });
   });
 
-  it("should render correctly with empty wods array (defaulting to table view)", () => {
-    render(<WodViewer wods={[]} {...mockViewerProps} />); // Use updated props
+  it("should render correctly with empty wods array", () => {
+    mockUseQuery.mockReturnValue({
+      data: [] as Wod[], // Explicitly type empty array
+      isLoading: false,
+      isError: false,
+      error: null,
+    });
+    render(<WodViewer />);
 
-    // Should default to table view
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
-    expect(screen.queryByTestId("wod-timeline")).not.toBeInTheDocument();
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("0");
 
     // Switch to timeline view
@@ -1374,101 +1081,28 @@ describe("WodViewer Component", () => {
     expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("0");
 
     // Filters should still be present
-    expect(screen.getByRole("combobox")).toBeInTheDocument(); // Category select
-    // Check for a tag from the mockTagOrder
+    expect(screen.getByRole("combobox")).toBeInTheDocument();
     expect(screen.getByText("For Time")).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(\d+\)/i, checked: true }),
-    ).toBeInTheDocument(); // Default filter is Done
-  });
-
-  it("should filter by completion status in timeline view and update URL (after switching)", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-    // Switch to timeline view first
-    fireEvent.click(screen.getByRole("radio", { name: /Timeline View/i }));
-
-    // Timeline view starts with "Done" filter (A, B, C, F)
-    await waitFor(() => {
-      expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
-      expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("4");
-      // Initial render/switch might call replace
-    });
-    mockRouterReplace.mockClear(); // Clear after initial render/switch
-
-    // Click 'Done' filter again (no effect)
-    const doneFilter = screen.getByRole("radio", { name: /Done \(\d+\)/i });
-    fireEvent.click(doneFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("4");
-      expect(mockRouterReplace).not.toHaveBeenCalled();
-    });
-
-    // Click 'Todo' filter (D, E)
-    const todoFilter = screen.getByRole("radio", { name: /Todo \(\d+\)/i });
-    fireEvent.click(todoFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("2");
-      // URL should include view=timeline and completion=notDone (params sorted)
-      expect(mockRouterReplace).toHaveBeenCalledWith(
-        "/?completion=notDone&view=timeline",
-        { scroll: false },
-      );
-    });
-    // mockRouterReplace.mockClear();
-
-    // Click 'All' filter
-    const allFilter = screen.getByRole("radio", { name: /All \(\d+\)/i });
-    fireEvent.click(allFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("6");
-      // URL should include view=timeline and completion=all (params sorted)
-      expect(mockRouterReplace).toHaveBeenCalledWith(
-        "/?completion=all&view=timeline",
-        { scroll: false },
-      );
-    });
-    // mockRouterReplace.mockClear();
-
-    // Click 'Done' filter again (back to default completion)
-    fireEvent.click(doneFilter);
-    await waitFor(() => {
-      expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("4");
-      // URL should only include view=timeline
-      expect(mockRouterReplace).toHaveBeenLastCalledWith("/?view=timeline", {
-        scroll: false,
-      });
-    });
+    // Completion filter is gone
   });
 
   // --- Tests for Initialization from URL ---
 
   it("should initialize with category from URL", () => {
     mockSearchParams = new URLSearchParams("?category=Benchmark");
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    render(<WodViewer />);
 
-    // Check category select reflects the URL param
     expect(screen.getByRole("combobox")).toHaveTextContent(
       /Benchmark \(\d+\)/i,
     );
-    // Check filtered WODs (Done + Benchmark = Wod C)
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("1");
-    // Check counts reflect the category filter (Benchmark: All 3, Done 1, Todo 2)
-    expect(
-      screen.getByRole("radio", { name: /All \(3\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(1\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(2\)/i }),
-    ).toBeInTheDocument();
+    // Check filtered WODs (Benchmark = C, D, E)
+    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("3");
   });
 
   it("should initialize with tags from URL", () => {
-    mockSearchParams = new URLSearchParams("?tags=AMRAP%2CLadder"); // Cindy (B), Deadlift (C) are Done
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    mockSearchParams = new URLSearchParams("?tags=AMRAP%2CLadder"); // B, C
+    render(<WodViewer />);
 
-    // Check tags are selected visually (assuming class indicates selection)
     expect(screen.getByText("AMRAP")).toHaveClass(
       "border-primary bg-primary text-primary-foreground",
     );
@@ -1479,95 +1113,47 @@ describe("WodViewer Component", () => {
       "border-primary bg-primary text-primary-foreground",
     );
 
-    // Check filtered WODs (Done + (AMRAP or Ladder) = Wod B, Wod C)
+    // Check filtered WODs (AMRAP or Ladder = B, C)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("2");
-    // Check counts reflect the tag filter (AMRAP/Ladder: All 2, Done 2, Todo 0) - Corrected calculation
-    // Wods with AMRAP or Ladder: B(Done), C(Done) -> Total 2
-    expect(
-      screen.getByRole("radio", { name: /All \(2\)/i }), // Corrected count
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(2\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(0\)/i }), // Corrected count
-    ).toBeInTheDocument();
   });
 
-  it("should initialize with completion status from URL", () => {
-    mockSearchParams = new URLSearchParams("?completion=all"); // view/sort default
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-
-    // Check completion filter is set to 'All'
-    expect(
-      screen.getByRole("radio", { name: /All \(\d+\)/i, checked: true }),
-    ).toBeInTheDocument();
-    // Check filtered WODs (All = 6)
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6");
-    // Check view/sort are defaults
-    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("date");
-    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
-      "desc",
-    );
-    expect(
-      screen.getByRole("radio", { name: /Table View/i, checked: true }),
-    ).toBeInTheDocument();
-  });
+  // Completion filter tests removed
 
   it("should initialize with view=timeline from URL", () => {
     mockSearchParams = new URLSearchParams("?view=timeline");
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    render(<WodViewer />);
 
-    // Check timeline view is active
     expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
     expect(screen.queryByTestId("wod-table")).not.toBeInTheDocument();
     expect(
       screen.getByRole("radio", { name: /Timeline View/i, checked: true }),
     ).toBeInTheDocument();
 
-    // Check default filters/sort
-    expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("4"); // Default "Done" filter
-    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("date");
+    // Check default sort
+    expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("6"); // All WODs
+    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("wodName");
     expect(screen.getByTestId("timeline-sort-direction")).toHaveTextContent(
-      "desc",
+      "asc",
     );
   });
 
   it("should initialize with sortBy and sortDir from URL", () => {
-    mockSearchParams = new URLSearchParams("?sortBy=wodName&sortDir=asc");
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    mockSearchParams = new URLSearchParams("?sortBy=countLikes&sortDir=asc");
+    render(<WodViewer />);
 
-    // Check sort state is applied (table view is default)
-    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
+    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("countLikes");
     expect(screen.getByTestId("table-sort-direction")).toHaveTextContent("asc");
 
     // Check default view/filters
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4"); // Default "Done" filter
-  });
-
-  it("should initialize with sortBy=count_likes from URL", () => {
-    mockSearchParams = new URLSearchParams("?sortBy=count_likes"); // Default direction is desc
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-
-    // Check sort state is applied (table view is default)
-    expect(screen.getByTestId("table-sort-by")).toHaveTextContent(
-      "count_likes",
-    );
-    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
-      "desc",
-    ); // Default desc for count_likes
-
-    // Check default view/filters
-    expect(screen.getByTestId("wod-table")).toBeInTheDocument();
-    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("4"); // Default "Done" filter
+    expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6");
   });
 
   it("should initialize with multiple parameters from URL including view/sort", () => {
     mockSearchParams = new URLSearchParams(
-      "?category=Girl&tags=AMRAP&completion=all&view=timeline&sortBy=latestLevel&sortDir=asc",
+      "?category=Girl&tags=AMRAP&view=timeline&sortBy=countLikes&sortDir=desc",
     );
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    render(<WodViewer />);
 
     // Check category
     expect(screen.getByRole("combobox")).toHaveTextContent(/Girl \(\d+\)/i);
@@ -1575,30 +1161,23 @@ describe("WodViewer Component", () => {
     expect(screen.getByText("AMRAP")).toHaveClass(
       "border-primary bg-primary text-primary-foreground",
     );
-    // Check completion
-    expect(
-      screen.getByRole("radio", { name: /All \(\d+\)/i, checked: true }),
-    ).toBeInTheDocument();
 
-    // Check filtered WODs (All + Girl + AMRAP = Wod B) - Should be timeline view
+    // Check filtered WODs (Girl + AMRAP = Wod B) - Should be timeline view
     expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("1");
-    // Check counts reflect filters (Girl + AMRAP: All 1, Done 1, Todo 0)
-    expect(
-      screen.getByRole("radio", { name: /All \(1\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(1\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(0\)/i }),
-    ).toBeInTheDocument();
+    // Check sort
+    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent(
+      "countLikes",
+    );
+    expect(screen.getByTestId("timeline-sort-direction")).toHaveTextContent(
+      "desc",
+    );
   });
 
   it("should ignore invalid URL parameters and use defaults", () => {
     mockSearchParams = new URLSearchParams(
-      "?category=InvalidCat&tags=InvalidTag,AMRAP&completion=invalidStatus&view=invalidView&sortBy=invalidSort&sortDir=invalidDir",
+      "?category=InvalidCat&tags=InvalidTag,AMRAP&view=invalidView&sortBy=invalidSort&sortDir=invalidDir",
     );
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    render(<WodViewer />);
 
     // Check category defaults to 'All Categories'
     expect(screen.getByRole("combobox")).toHaveTextContent(/All Categories/i);
@@ -1606,95 +1185,54 @@ describe("WodViewer Component", () => {
     expect(screen.getByText("AMRAP")).toHaveClass(
       "border-primary bg-primary text-primary-foreground",
     );
-    expect(screen.queryByText("InvalidTag")).toBeNull(); // Corrected check
-    // Check completion defaults to 'Done'
-    expect(
-      screen.getByRole("radio", { name: /Done \(\d+\)/i, checked: true }),
-    ).toBeInTheDocument();
+    expect(screen.queryByText("InvalidTag")).toBeNull();
 
-    // Check filtered WODs (Done + AMRAP = Wod B)
+    // Check filtered WODs (AMRAP = Wod B)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("1");
-    // Check counts reflect filters (AMRAP: All 1, Done 1, Todo 0)
-    expect(
-      screen.getByRole("radio", { name: /All \(1\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Done \(1\)/i }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("radio", { name: /Todo \(0\)/i }),
-    ).toBeInTheDocument();
 
     // Check view/sort defaults
     expect(screen.getByTestId("wod-table")).toBeInTheDocument(); // Default view
-    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("date"); // Default sort
-    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
-      "desc",
-    ); // Default direction
+    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName"); // Default sort
+    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent("asc"); // Default direction
   });
 
   it("should update URL correctly when changing view", async () => {
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
-    // Initial state: table view, no params in URL yet
-    mockRouterReplace.mockClear(); // Clear after initial render
+    render(<WodViewer />);
+    mockRouterReplace.mockClear();
 
     // Switch to timeline
-    const timelineViewButton = screen.getByRole("radio", {
-      name: /Timeline View/i,
-    });
-    fireEvent.click(timelineViewButton);
-
+    fireEvent.click(screen.getByRole("radio", { name: /Timeline View/i }));
     await waitFor(() => {
       expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
       expect(mockRouterReplace).toHaveBeenCalledWith("/?view=timeline", {
         scroll: false,
       });
     });
-    // mockRouterReplace.mockClear(); // Don't clear, check final state
 
     // Switch back to table
-    const tableViewButton = screen.getByRole("radio", { name: /Table View/i });
-    fireEvent.click(tableViewButton);
-
+    fireEvent.click(screen.getByRole("radio", { name: /Table View/i }));
     await waitFor(() => {
       expect(screen.getByTestId("wod-table")).toBeInTheDocument();
-      // Check final URL state after returning to default view (allow '/' or '/?')
       const lastCall = mockRouterReplace.mock.lastCall;
-      expect(lastCall[0]).toMatch(/^\/\??$/); // Matches '/' or '/?'
+      expect(lastCall[0]).toMatch(/^\/\??$/);
       expect(lastCall[1]).toEqual({ scroll: false });
     });
   });
 
   it("should update URL correctly when changing filters and view/sort are non-default", async () => {
-    // Start with non-default view and sort
-    mockSearchParams = new URLSearchParams("?view=timeline&sortBy=wodName"); // sortDir=asc is default for wodName
-    render(<WodViewer wods={testWodsWithLikes} {...mockViewerProps} />); // Use updated props
+    mockSearchParams = new URLSearchParams("?view=timeline&sortBy=countLikes"); // sortDir=desc is default
+    render(<WodViewer />);
 
-    // Check initial state
     await waitFor(() => {
       expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
       expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent(
-        "wodName",
+        "countLikes",
       );
       expect(screen.getByTestId("timeline-sort-direction")).toHaveTextContent(
-        "asc",
-      ); // Default for wodName
-    });
-    mockRouterReplace.mockClear(); // Clear after initial render/state sync
-
-    // Change completion filter to 'All'
-    const allFilter = screen.getByRole("radio", { name: /All \(\d+\)/i });
-    fireEvent.click(allFilter);
-
-    await waitFor(() => {
-      // URL should include view, sortBy, and completion. sortDir=asc is default for wodName and should be omitted.
-      // Parameters sorted alphabetically: completion, sortBy, view
-      expect(mockRouterReplace).toHaveBeenCalledWith(
-        "/?completion=all&sortBy=wodName&view=timeline",
-        { scroll: false },
+        "desc",
       );
     });
-    // mockRouterReplace.mockClear(); // Don't clear, check final state
+    mockRouterReplace.mockClear();
 
     // Change category filter to 'Benchmark'
     const categorySelect = screen.getByRole("combobox");
@@ -1703,12 +1241,51 @@ describe("WodViewer Component", () => {
     fireEvent.click(benchmarkItem);
 
     await waitFor(() => {
-      // URL should include view, sortBy, completion, and category. sortDir=asc is default for wodName and should be omitted.
-      // Parameters sorted alphabetically: category, completion, sortBy, view
-      expect(mockRouterReplace).toHaveBeenLastCalledWith(
-        "/?category=Benchmark&completion=all&sortBy=wodName&view=timeline",
+      // Params sorted: category, sortBy, view (sortDir=desc is default for countLikes)
+      expect(mockRouterReplace).toHaveBeenCalledWith(
+        "/?category=Benchmark&sortBy=countLikes&view=timeline",
         { scroll: false },
       );
     });
+  });
+
+  it("should handle search term input and update URL", async () => {
+    render(<WodViewer />);
+    const searchInput = screen.getByPlaceholderText(/Search workouts.../i);
+
+    fireEvent.change(searchInput, { target: { value: "fran" } });
+
+    await waitFor(() => {
+      expect(searchInput).toHaveValue("fran");
+      // Check URL update after debounce
+      expect(mockRouterReplace).toHaveBeenCalledWith("/?search=fran", {
+        scroll: false,
+      });
+      // Check search term passed to table mock
+      expect(screen.getByTestId("table-search-term")).toHaveTextContent("fran");
+    });
+
+    // Clear search
+    fireEvent.change(searchInput, { target: { value: "" } });
+    await waitFor(() => {
+      expect(searchInput).toHaveValue("");
+      // Check URL update after debounce (back to root)
+      const lastCall = mockRouterReplace.mock.lastCall;
+      expect(lastCall[0]).toMatch(/^\/\??$/);
+      expect(lastCall[1]).toEqual({ scroll: false });
+      // Check search term passed to table mock
+      expect(screen.getByTestId("table-search-term")).toHaveTextContent("");
+    });
+  });
+
+  it("should initialize search term from URL", () => {
+    mockSearchParams = new URLSearchParams("?search=cindy");
+    render(<WodViewer />);
+
+    expect(screen.getByPlaceholderText(/Search workouts.../i)).toHaveValue(
+      "cindy",
+    );
+    // Check search term passed to table mock
+    expect(screen.getByTestId("table-search-term")).toHaveTextContent("cindy");
   });
 });

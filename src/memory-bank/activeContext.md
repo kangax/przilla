@@ -126,7 +126,48 @@
 
 ## Next Steps
 
-### Database Migration Implementation Plan
+### Score Data Migration Plan (kangax@gmail.com)
+
+**Goal:** Migrate historical workout results for user `kangax@gmail.com` from the structure previously used in `public/data/wods.json` into the `scores` database table.
+
+**Chosen Approach:** Store score components in separate, nullable columns within the `scores` table for better query performance and clearer schema, rather than using a single JSON column.
+
+**Steps:**
+
+1.  **Modify Database Schema (`src/server/db/schema.ts`):**
+    - Remove the `scoreValue: text("score_value")...` column definition from the `scores` table.
+    - Add the following new nullable integer columns to the `scores` table:
+      - `time_seconds: int("time_seconds")`
+      - `reps: int("reps")`
+      - `load: int("load")`
+      - `rounds_completed: int("rounds_completed")`
+      - `partial_reps: int("partial_reps")`
+2.  **Generate SQL Migration:** Execute `npm run db:generate` to create a new SQL migration file reflecting the schema changes.
+3.  **Apply Database Migration:** Execute `npm run db:migrate` to apply the generated SQL migration to the database, altering the `scores` table structure.
+4.  **Create Score Data Migration Script (`scripts/migrate_user_scores.ts`):**
+    - Create a new TypeScript script (`scripts/migrate_user_scores.ts`).
+    - The script will:
+      - Connect to the database using Drizzle.
+      - Fetch the `userId` for `kangax@gmail.com`.
+      - Efficiently stream-parse `public/data/wods.json`.
+      - Iterate through each WOD and its `results` array.
+      - For each `result`:
+        - Look up the corresponding `wodId` from the `wods` table (using caching).
+        - Map the source `score_*` fields (e.g., `score_time_seconds`, `score_reps` from the JSON) directly to the new database columns (`time_seconds`, `reps`, etc.).
+        - Parse the `date` string into a timestamp for the `scoreDate` column.
+        - Include the `notes`.
+        - Prepare the score record for insertion.
+      - Perform a batch insert of all prepared score records for the target user into the `scores` table.
+      - Include logging for progress and any skipped records (e.g., WOD not found, invalid date).
+5.  **Execute Score Data Migration Script:** Run the script using `SKIP_ENV_VALIDATION=true npx tsx scripts/migrate_user_scores.ts`.
+6.  **Verification:** Manually check the `scores` table to confirm data has been inserted correctly for the user.
+
+**Follow-up Actions (Separate Task):**
+
+- Update backend tRPC routers (for fetching/creating/updating scores) to use the new separate score columns.
+- Update frontend components (e.g., `WodTable`, `WodTimeline`, score display/input forms) to fetch, display, and handle score data using the new separate columns instead of the previous `scoreValue` structure.
+
+### Previous Database Migration Implementation Plan
 
 ```mermaid
 gantt
@@ -171,7 +212,7 @@ gantt
 
 ## Active Decisions & Considerations
 
-- **Score Storage:** Using JSONB type for score values to handle multiple WOD types (AMRAP, EMOM, For Time)
+- **Score Storage:** Decided to use **separate nullable columns** (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`) in the `scores` table instead of a single JSON column. This improves query performance and schema clarity. Migration script planned to handle historical data. UI updates will be required subsequently.
 - **Movements:** Separate normalization table using existing `movementMapping.ts` logic
 - **Benchmarks:** Preserve existing JSON structure for compatibility with frontend. Drizzle handles JSON parsing/stringification via `$type`.
 - **Authentication:** Stick with NextAuth.js for now, add athlete profile fields to user schema

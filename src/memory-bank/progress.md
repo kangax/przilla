@@ -48,21 +48,29 @@ _(Based on `todo.md`):_
   - Implement import from SugarWod exports.
 - **Authentication:**
   - Evaluate and potentially switch to BetterAuth.
-- **Data Storage:**
+- **Data Storage & Score Migration:**
   - Migrate WOD data ~~and user scores~~ from static JSON files to a per-user database solution (using Drizzle/LibSQL). **(WOD data migration DONE)**
-  - Implement storage and retrieval of user scores in the database.
-  - Refactor other components (e.g., charts page) to use tRPC/database instead of static JSON.
+  - **Implement storage for user scores:** Decided to use separate nullable columns (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`) in the `scores` table. Database schema modification and migration are required.
+  - **Migrate historical scores:** Execute a script (`scripts/migrate_user_scores.ts`) to port historical results for `kangax@gmail.com` from `public/data/wods.json` into the new `scores` table structure.
+  - **Update UI for new score structure:** Refactor tRPC endpoints and frontend components to work with the separate score columns (follow-up task).
+  - Refactor other components (e.g., charts page) still using static JSON to use tRPC/database.
 
 ## Current Status
 
 - The application is in an early-to-mid stage of development.
 - Core functionality for viewing WODs (`WodViewer`) now uses the database via tRPC. Other parts (e.g., charts) may still use static JSON.
 - User authentication exists but might be replaced.
-- Major upcoming work involves **continuing the migration away from static JSON**, implementing user score tracking in the database, expanding the WOD dataset, adding import capabilities, and building out analytical features.
+- Major upcoming work involves:
+  - **Implementing the new score storage structure:** Modifying the `scores` table schema to use separate columns.
+  - **Migrating historical scores:** Porting data for `kangax@gmail.com`.
+  - **Updating UI:** Refactoring components to use the new score structure (follow-up).
+  - Continuing the migration away from static JSON for other components (e.g., charts).
+  - Expanding the WOD dataset, adding import capabilities, and building out analytical features.
 
 ## Known Issues
 
-- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to implement database storage for user scores and update other components (e.g., charts).
+- **Score Data Storage & UI:** The database schema for the `scores` table is being changed to use separate columns (`time_seconds`, `reps`, etc.) instead of JSON. Historical data migration is planned. **UI components and tRPC endpoints will need updating** to work with this new structure after the migration.
+- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
 - **Sorting/Filtering Limitations:** Sorting and filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is temporarily disabled in `WodViewer` as score data is not yet fetched alongside WOD definitions.

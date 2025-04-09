@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 // Removed fs, path imports
 import { Box, Container, Flex } from "@radix-ui/themes";
 
@@ -11,7 +12,9 @@ export default async function Home() {
       <Container size="4" className="pb-8 pt-6">
         <Flex direction="column" gap="6">
           {/* Removed props from WodViewer */}
-          <WodViewer />
+          <Suspense fallback={<Box>Loading...</Box>}>
+            <WodViewer />
+          </Suspense>
         </Flex>
       </Container>
     </Box>

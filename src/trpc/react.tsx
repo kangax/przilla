@@ -48,7 +48,8 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             (op.direction === "down" && op.result instanceof Error),
         }),
         unstable_httpBatchStreamLink({
-          transformer: SuperJSON, // Uncomment SuperJSON transformer
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
+          transformer: SuperJSON as any, // Workaround for persistent type error
           url: getBaseUrl() + "/api/trpc",
           headers: () => {
             const headers = new Headers();

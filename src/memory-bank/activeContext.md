@@ -2,38 +2,34 @@
 
 ## Current Focus
 
-### WOD Table Score Display Redesign - Phase 2 Complete
+### Simplified to Single Table View
 
-**Problem**: Score display was too compact, hiding useful historical context
-**Solution**: Show all scores inline with performance level and date information
+**Problem**: Maintaining both table and timeline views added complexity
+**Solution**: Removed timeline view to focus on table view
 
 **Implementation**:
 
-1. Modified `WodTable.tsx` to:
+1. Deleted timeline component files:
 
-   - Display all scores in "Results" column (sorted newest first)
-   - Format each score as: "4:32 {Rx} on Sep 12, '24 (Advanced)"
-   - Show performance level in parentheses
-   - Include notes icon with tooltip when notes exist
-   - Make date text smaller (`text-xs`)
+   - `src/app/_components/WodTimeline.tsx`
+   - `src/app/_components/WodTimeline.test.tsx`
 
-2. Added utility functions:
-
-   - `formatShortDate()` for consistent date formatting
-   - Updated `getPerformanceBadgeDetails()` to handle color coding
-
-3. Color Scheme:
-   - Elite: purple
-   - Advanced: green
-   - Intermediate: yellow (updated from blue)
-   - Beginner: gray
-   - Rx-only (no level): green
+2. Modified `WodViewer.tsx` to:
+   - Remove view toggle UI
+   - Remove timeline-related state and effects
+   - Only render WodTable component
+   - Clean up unused imports
+   - Fix resulting TypeScript errors
 
 **Next Steps**:
 
-- Consider adding visual indicators for PRs or personal bests
-
-- Updating backend (tRPC routers) and frontend components (`WodViewer`, `WodTable`, etc.) to fetch WOD data from the database instead of the static JSON file.
+- [Switch to betterAuth](https://www.better-auth.com/)
+- Optimize table view layout for better mobile experience
+- Wodwell
+  - write a script for scraping
+  - bookmarklet so users can use?
+- Sugarwod (allows export!)
+  - write import functionality
 
 ## Recent Changes
 
@@ -175,10 +171,10 @@
   - Investigated sorting slowness using performance profiles.
   - Optimized `sortWods` in `wodUtils.ts` by moving `difficultyValues` map out and reverting `wodName` sort to `toUpperCase()` (as `localeCompare` was slower).
   - Memoized `HighlightMatch`, `WodTable`, and `WodTimeline` components using `React.memo`.
-- **Timeline View Fixes:**
-  - Conditionally rendered the Timeline view option in `WodViewer` based on login status (`useSession`).
-  - Removed the non-functional "Progress Timeline" column from `WodTimeline` as it relied on `wod.results` which is no longer available in the fetched data.
-- **URL Parameter Initialization Fix (Apr 2025):** Fixed issues where the `tags` and `category` URL parameters (e.g., `?tags=AMRAP&category=Hero`) were not correctly initializing the filter state in `WodViewer.tsx` on page load. The initial state was being filtered against `tagOrder`/`categoryOrder` before those lists were populated from async data. Resolved by initializing the raw state directly from the URL, then filtering against the available orders in memoized variables (`validSelectedTags`, `validSelectedCategories`) used for filtering and URL syncing.
+- **View Simplification:**
+  - Removed timeline view entirely to reduce complexity
+  - Focused all development efforts on table view improvements
+- **View Simplification (Apr 2025):** Removed timeline view entirely, simplifying the codebase to focus on table view functionality. Updated URL parameter handling to no longer track view state.
 - **Rx Badge & Conditional Tooltip (Apr 2025):**
   - Added `is_rx` boolean column (defaulting to false) to `scores` table schema (`src/server/db/schema.ts`).
   - Generated and applied the database migration (`drizzle/0002_tearful_fenris.sql`).
@@ -278,7 +274,7 @@ gantt
 
 ## Active Decisions & Considerations
 
-- **Score Storage:** Decided to use **separate nullable columns** (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`) in the `scores` table instead of a single JSON column. This improves query performance and schema clarity. Migration script planned to handle historical data. UI updates will be required subsequently.
+- **View Architecture:** Decided to simplify to single table view rather than maintaining both table and timeline views. This reduces complexity while maintaining all core functionality in the more flexible table view.
 - **Movements:** Separate normalization table using existing `movementMapping.ts` logic
 - **Benchmarks:** Preserve existing JSON structure for compatibility with frontend. Drizzle handles JSON parsing/stringification via `$type`.
 - **Authentication:** Stick with NextAuth.js for now, add athlete profile fields to user schema

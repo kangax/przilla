@@ -1,12 +1,8 @@
-- Changed the type assertion for parsed JSON data to `any[]` to avoid type errors when accessing original snake_case properties.
-
-## Next Steps
-
 # Active Context
 
 ## Current Focus
 
-### WOD Table Score Display Redesign
+### WOD Table Score Display Redesign - Phase 1 Complete
 
 **Problem**: Table currently shows only latest score per WOD, hiding multiple attempts
 **Solution**: Compact score preview showing latest attempt + count with click-to-expand functionality
@@ -15,25 +11,34 @@
 
 1. Modify `WodTable.tsx` to:
 
-   - Replace current score/level columns with single "Results" column
-   - Display formatted latest score (e.g. "4:32 Rx")
-   - Show attempt count badge (e.g. "and 2 more")
-   - Make entire cell clickable (future panel integration)
+   - Replace current score/level columns with single "Results" column **(DONE)**
+   - Display formatted latest score (e.g. "4:32 Rx") **(DONE)**
+   - Show attempt count badge (e.g. "+ 2 more") **(DONE)**
+   - Make entire cell clickable (future panel integration) **(DONE - Added cursor-pointer)**
 
 2. Data Flow:
-   - Keep existing `scoresByWodId` structure
-   - Extract first score for preview
-   - Calculate total attempts per WOD
+   - Keep existing `scoresByWodId` structure **(DONE)**
+   - Extract first score for preview **(DONE)**
+   - Calculate total attempts per WOD **(DONE)**
 
 **Next Steps**:
 
-- Implement compact preview
-- Later: Add side panel for full attempt history
+- Implement side panel for full attempt history (Phase 2)
 
 - Updating backend (tRPC routers) and frontend components (`WodViewer`, `WodTable`, etc.) to fetch WOD data from the database instead of the static JSON file.
 
 ## Recent Changes
 
+- **WOD Table Score Display Redesign (Apr 2025):**
+  - Replaced the "Date", "Score", and "Level" columns in `src/app/_components/WodTable.tsx` with a single "Results" column.
+  - The "Results" column now displays:
+    - The formatted latest score (e.g., "4:32").
+    - An "Rx" badge if the score was logged as Rx.
+    - A badge indicating the number of additional attempts (e.g., "+ 2 more").
+    - A tooltip showing the score notes (if any) when hovered.
+    - A tooltip showing benchmark levels if no score exists but benchmarks are defined.
+  - Made the "Results" cell clickable (`cursor-pointer`) in preparation for future panel integration.
+  - Updated the `isValidSortBy` helper function to remove sorting options for the removed columns.
 - **Date Sorting Fix (Apr 2025):**
   - Modified `sortWods` in `src/utils/wodUtils.ts` to accept an optional `scoresByWodId` map.
   - Implemented logic within `sortWods` to sort by the latest score date when `sortBy` is "date", using the provided map. WODs without scores are sorted after those with scores (or before if sorting ascending). Secondary sort is by WOD name.

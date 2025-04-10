@@ -14,10 +14,10 @@ import {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Import Score
 import {
-  getPerformanceLevel, // Re-enable
+  getPerformanceLevel, // Keep for potential future use or tooltip
   getPerformanceLevelTooltip,
   formatScore, // Re-enable
-  getPerformanceLevelColor, // Import color helper
+  getPerformanceLevelColor, // Keep for potential future use or tooltip
 } from "~/utils/wodUtils";
 
 // --- Interfaces & Types ---
@@ -32,15 +32,10 @@ interface WodTableProps {
   scoresByWodId: Record<string, Score[]>; // Add scores map prop
 }
 
-// No longer need FlatWodRow interface
-
 // --- Helper Functions ---
 
 const safeString = (value: string | undefined | null): string => value || "";
 
-// NOTE: getDifficultyColor is defined but reported as unused by ESLint in the commit error,
-// however, it IS used within the 'difficulty' column cell renderer.
-// Let's keep it for now and see if fixing other files resolves the lint error.
 const getDifficultyColor = (difficulty: string | undefined | null): string => {
   switch (difficulty?.toLowerCase()) {
     case "easy":
@@ -51,8 +46,8 @@ const getDifficultyColor = (difficulty: string | undefined | null): string => {
       return "text-orange-500";
     case "very hard":
       return "text-red-500";
-    case "extremely hard": // Added Extremely Hard
-      return "text-purple-500"; // Example color
+    case "extremely hard":
+      return "text-purple-500";
     default:
       return "text-foreground";
   }
@@ -62,7 +57,6 @@ const getDifficultyColor = (difficulty: string | undefined | null): string => {
 const HighlightMatch: React.FC<{ text: string; highlight: string }> =
   React.memo(({ text, highlight }) => {
     if (!highlight.trim() || !text) {
-      // Added check for text existence
       return <>{text}</>;
     }
     const regex = new RegExp(
@@ -83,21 +77,19 @@ const HighlightMatch: React.FC<{ text: string; highlight: string }> =
       </>
     );
   });
-// Add display name for better debugging
 HighlightMatch.displayName = "HighlightMatch";
 
 // --- Column Definitions ---
 
-const columnHelper = createColumnHelper<Wod>(); // Use Wod type directly
+const columnHelper = createColumnHelper<Wod>();
 
 const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
   searchTerm: string,
-  scoresByWodId: Record<string, Score[]>, // Accept scores map
+  scoresByWodId: Record<string, Score[]>,
 ): ColumnDef<Wod, unknown>[] => {
-  // Use Wod type
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? " ▲" : " ▼";
@@ -113,7 +105,7 @@ const createColumns = (
         </span>
       ),
       cell: (info) => {
-        const row = info.row.original; // row is now a Wod object
+        const row = info.row.original;
         return (
           <Tooltip
             content={
@@ -145,18 +137,13 @@ const createColumns = (
     }),
     // Combined Category and Tags Column
     columnHelper.accessor(
-      (row) => ({ category: row.category, tags: row.tags }), // Access directly from Wod
+      (row) => ({ category: row.category, tags: row.tags }),
       {
         id: "categoryAndTags",
         header: "Category / Tags",
         cell: (info) => {
-          // Destructure directly as 'tags' since it's pre-parsed in WodViewer
           const { category, tags } = info.getValue();
-
-          // 'tags' is now guaranteed to be string[] | null | undefined
-          const safeTags = tags ?? []; // Use empty array for null/undefined
-
-          // Return null if neither category nor safe tags exist
+          const safeTags = tags ?? [];
           if (!category && safeTags.length === 0) return null;
 
           return (
@@ -171,7 +158,6 @@ const createColumns = (
                   <HighlightMatch text={category} highlight={searchTerm} />
                 </Badge>
               )}
-              {/* Use safeTags */}
               {safeTags.length > 0 && (
                 <Flex gap="1" wrap="wrap" className="mt-1">
                   {safeTags.map((tag) => (
@@ -224,13 +210,12 @@ const createColumns = (
       size: 90,
     }),
     columnHelper.accessor("countLikes", {
-      // Use camelCase from Wod type
       header: () => (
         <span
-          onClick={() => handleSort("countLikes")} // Use camelCase
+          onClick={() => handleSort("countLikes")}
           className="cursor-pointer whitespace-nowrap"
         >
-          Likes{getSortIndicator("countLikes")} {/* Use camelCase */}
+          Likes{getSortIndicator("countLikes")}
         </span>
       ),
       cell: (info) => {
@@ -241,70 +226,73 @@ const createColumns = (
       },
       size: 70,
     }),
-    // --- Date Column ---
+    // --- NEW Results Column ---
     columnHelper.accessor(
-      (row) => scoresByWodId[row.id]?.[0]?.scoreDate, // Get latest score date
+      (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
       {
-        id: "date",
-        header: () => (
-          <span onClick={() => handleSort("date")} className="cursor-pointer">
-            Date{getSortIndicator("date")}
-          </span>
-        ),
-        cell: (info) => {
-          const date = info.getValue();
-          return (
-            <span className="whitespace-nowrap">
-              {date ? date.toLocaleDateString() : "-"}
-            </span>
-          );
-        },
-        size: 90,
-      },
-    ),
-    // --- Score Column ---
-    columnHelper.accessor(
-      (row) => ({ wod: row, scores: scoresByWodId[row.id] }), // Pass WOD and scores
-      {
-        id: "score",
-        header: "Score",
+        id: "results",
+        header: "Results", // No sorting for now
         cell: (info) => {
           const { wod, scores } = info.getValue();
           const latestScore = scores?.[0]; // Assuming scores are sorted descending by date
 
+          // --- Case 1: No Score ---
           if (!latestScore) {
-            // If no score, show benchmark tooltip if benchmarks exist
-            if (!wod.benchmarks)
-              return <span className="whitespace-nowrap">-</span>;
+            // Show benchmark tooltip if benchmarks exist
+            if (wod.benchmarks) {
+              return (
+                <Tooltip
+                  content={
+                    <span style={{ whiteSpace: "pre-wrap" }}>
+                      {getPerformanceLevelTooltip(wod)}
+                    </span>
+                  }
+                >
+                  <Info
+                    size={14}
+                    className="text-muted-foreground cursor-help"
+                  />
+                </Tooltip>
+              );
+            }
+            // Otherwise, show placeholder
             return (
-              <Tooltip
-                content={
-                  <span style={{ whiteSpace: "pre-wrap" }}>
-                    {getPerformanceLevelTooltip(wod)}
-                  </span>
-                }
-              >
-                <Info size={14} className="text-muted-foreground" />
-              </Tooltip>
+              <span className="text-muted-foreground whitespace-nowrap">-</span>
             );
           }
 
-          // If score exists, display it
-          const scoreContent = (
-            <Flex align="center" gap="1" asChild>
-              <span className="whitespace-nowrap">
-                {formatScore(latestScore)}
-                {latestScore.isRx && (
-                  <Badge
-                    color="green"
-                    variant="solid"
-                    size="1"
-                    className="ml-1"
-                  >
-                    Rx
-                  </Badge>
-                )}
+          // --- Case 2: Score Exists ---
+          const formattedScore = formatScore(latestScore);
+          const isRxBadge = latestScore.isRx ? (
+            <Badge color="green" variant="solid" size="1" className="ml-1">
+              Rx
+            </Badge>
+          ) : null;
+          const attemptCount = scores.length;
+          const additionalAttempts = attemptCount > 1 ? attemptCount - 1 : 0;
+          const attemptsBadge =
+            additionalAttempts > 0 ? (
+              <Badge
+                color="gray"
+                variant="soft"
+                size="1"
+                radius="full"
+                className="ml-2"
+              >
+                + {additionalAttempts} more
+              </Badge>
+            ) : null;
+
+          // Combine score, Rx badge, and attempts badge
+          const resultsContent = (
+            <Flex align="center" gap="1" className="cursor-pointer">
+              {" "}
+              {/* Added cursor-pointer */}
+              <span className="whitespace-nowrap font-medium">
+                {formattedScore}
               </span>
+              {isRxBadge}
+              {attemptsBadge}
             </Flex>
           );
 
@@ -318,45 +306,18 @@ const createColumns = (
                   </span>
                 }
               >
-                {scoreContent}
+                {resultsContent}
               </Tooltip>
             );
           }
 
-          // Otherwise, just return the score content
-          return scoreContent;
+          // Otherwise, just return the results content
+          return resultsContent;
         },
-        size: 140,
+        size: 160, // Adjusted size
       },
     ),
-    // --- Level Column ---
-    columnHelper.accessor(
-      (row) => ({ wod: row, scores: scoresByWodId[row.id] }), // Pass WOD and scores
-      {
-        id: "level",
-        header: () => (
-          <span onClick={() => handleSort("level")} className="cursor-pointer">
-            Level{getSortIndicator("level")}
-          </span>
-        ),
-        cell: (info) => {
-          const { wod, scores } = info.getValue();
-          const latestScore = scores?.[0];
-          if (!latestScore) return <Text>-</Text>;
-
-          // Use the updated getPerformanceLevel function
-          const level = getPerformanceLevel(wod, latestScore);
-
-          return (
-            <Text className={getPerformanceLevelColor(level)}>
-              {level ?? "-"}
-            </Text>
-          );
-        },
-        size: 110,
-      },
-    ),
-    // --- Description Column ---
+    // --- Description Column (kept at end) ---
     columnHelper.accessor("description", {
       header: "Description",
       cell: (info) => {
@@ -376,18 +337,15 @@ const createColumns = (
 // --- Main Table Component ---
 
 const WodTable: React.FC<WodTableProps> = ({
-  wods, // Now directly using the Wod[] prop
+  wods,
   tableHeight,
   sortBy,
   sortDirection,
   handleSort,
   searchTerm,
-  scoresByWodId, // Destructure new prop
+  scoresByWodId,
 }) => {
-  // console.log("WodTable - Received wods prop:", wods); // DEBUG: Check prop value on render
   const parentRef = useRef<HTMLDivElement>(null);
-
-  // No longer need flatData calculation
 
   const columns = useMemo(
     () =>
@@ -397,34 +355,29 @@ const WodTable: React.FC<WodTableProps> = ({
         sortDirection,
         searchTerm,
         scoresByWodId,
-      ), // Pass scores map
-    [handleSort, sortBy, sortDirection, searchTerm, scoresByWodId], // Add dependency
+      ),
+    [handleSort, sortBy, sortDirection, searchTerm, scoresByWodId],
   );
 
   const table = useReactTable({
-    data: wods, // Use the wods prop directly
+    data: wods,
     columns,
     getCoreRowModel: getCoreRowModel(),
     manualSorting: true,
   });
 
   const { rows } = table.getRowModel();
-  // console.log("WodTable - Row Model Length:", rows.length); // DEBUG
 
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
     getScrollElement: () => parentRef.current,
-    estimateSize: () => 49, // Estimate remains useful
+    estimateSize: () => 49,
     overscan: 5,
     measureElement: (element) => (element as HTMLElement).offsetHeight,
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
   const totalSize = rowVirtualizer.getTotalSize();
-  // console.log( // DEBUG
-  //   "WodTable - Virtualizer:",
-  //   `Items: ${virtualRows.length}, TotalSize: ${totalSize}`,
-  // );
   const headerGroups = table.getHeaderGroups();
 
   return (
@@ -447,7 +400,6 @@ const WodTable: React.FC<WodTableProps> = ({
                 style={{ width: `${header.getSize()}px` }}
                 role="columnheader"
                 aria-sort={
-                  // Check if header.column.id is a valid SortByType before accessing it
                   isValidSortBy(header.column.id) && header.column.id === sortBy
                     ? sortDirection === "asc"
                       ? "ascending"
@@ -477,7 +429,6 @@ const WodTable: React.FC<WodTableProps> = ({
       >
         {virtualRows.map((virtualRow) => {
           const row = rows[virtualRow.index];
-          // console.log("WodTable - Rendering virtual row index:", virtualRow.index); // DEBUG
           return (
             <div
               key={row.id}
@@ -508,22 +459,23 @@ const WodTable: React.FC<WodTableProps> = ({
   );
 };
 
-// Helper function to validate sort by type (needed for aria-sort)
+// Helper function to validate sort by type (updated)
 const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
   const validSortKeys: SortByType[] = [
     "wodName",
-    "date",
-    "level",
-    "attempts",
-    "latestLevel",
+    // "date", // Removed
+    // "level", // Removed
+    "attempts", // Keep for potential future sorting
+    "latestLevel", // Keep for potential future sorting
     "difficulty",
     "countLikes",
   ];
+  // Note: Sorting by the new 'results' column isn't implemented yet.
   return validSortKeys.includes(sortBy as SortByType);
 };
 
 // Memoize the component
 const MemoizedWodTable = React.memo(WodTable);
-MemoizedWodTable.displayName = "WodTable"; // Add display name
+MemoizedWodTable.displayName = "WodTable";
 
 export default MemoizedWodTable;

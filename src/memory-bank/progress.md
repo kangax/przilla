@@ -8,12 +8,19 @@
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
 - **Authentication Shell:** Basic authentication controls (`AuthControls.tsx`) and setup (`src/server/auth/`) exist, though a potential switch is noted in `todo.md`.
 - **WodTable UI:**
-  - Notes column removed; notes shown in score tooltip.
+  - **New "Results" Column:** Replaced "Date", "Score", and "Level" columns with a single "Results" column displaying:
+    - Latest score (formatted, e.g., "4:32").
+    - "Rx" badge if applicable.
+    - Badge for additional attempts (e.g., "+ 2 more").
+    - Tooltip for score notes (if present).
+    - Tooltip for benchmark levels (if no score exists).
+    - Cell is clickable (`cursor-pointer`) for future panel integration.
+  - Notes column removed; notes shown in score tooltip (now part of Results column tooltip).
   - Search highlighting implemented for Name, Category, Tags, Description.
   - Category and Tags columns combined into one, displaying tags below the category.
   - Variable row height enabled using `useVirtualizer`'s `measureElement` to correctly display wrapped content (like descriptions and tags).
-  - Score column now displays an "Rx" badge if the score was logged as Rx.
-  - Score column tooltip (showing notes) is now only displayed if notes exist for the score.
+  - Score column now displays an "Rx" badge if the score was logged as Rx (now part of Results column).
+  - Score column tooltip (showing notes) is now only displayed if notes exist for the score (now part of Results column).
 - **URL Parameter Handling:**
   - `search`, `tags`, and `category` parameters correctly initialize state and persist in the URL.
   - `view=timeline` parameter now correctly initializes the view state on page load. Fixed a bug where it defaulted to `table` during session loading by using a `useRef` hook to track the previous login state and only resetting the view on an actual logout event.
@@ -36,14 +43,15 @@
   - Removed non-functional "Progress Timeline" column from `WodTimeline` due to missing `results` data.
   - Corrected `wodName` sorting by reverting to `localeCompare()` in `sortWods` utility function.
   - Implemented `date` sorting in `sortWods` using the latest score date from the `scoresByWodId` map (passed from `WodViewer`).
-- **Performance Level Display:** The "Level" column in `WodTable` now correctly displays calculated performance levels (Elite, Advanced, etc.) based on user scores and WOD benchmarks. Fixed issue where benchmarks were treated as strings instead of objects.
+- **Performance Level Display:** The "Level" column in `WodTable` now correctly displays calculated performance levels (Elite, Advanced, etc.) based on user scores and WOD benchmarks. Fixed issue where benchmarks were treated as strings instead of objects. **(Note: Level is no longer a separate column but logic might be reused for tooltips/panels).**
 
 ## What's Left to Build
 
 _(Based on `todo.md`):_
 
 - **UI Enhancements:**
-  - Redesign WOD table score display to show compact preview of latest attempt + count with click-to-expand functionality
+  - Redesign WOD table score display: **(Phase 1 - Compact Preview DONE)**
+    - **TODO:** Implement click-to-expand functionality (side panel for full attempt history - Phase 2).
   - Refine search/filter functionality for WODs (highlighting is done, filtering logic exists, but UI/UX could be improved)
 - **Data Expansion:**
   - Add Games workouts.
@@ -64,26 +72,28 @@ _(Based on `todo.md`):_
   - Update UI (`WodViewer`, `WodTable`, `WodTimeline`, `wodUtils`) and create tRPC endpoint (`score.getAllByUser`) to fetch and display scores using the new structure. **(DONE - Initial implementation)**
   - **TODO:** Refactor other components (e.g., charts page) still using static JSON to use tRPC/database.
   - **TODO:** Implement score creation/editing functionality.
-  - **TODO:** Refine score-based sorting/filtering.
+  - **TODO:** Refine score-based sorting/filtering (sorting by results column needed).
 
 ## Current Status
 
 - The application is in an early-to-mid stage of development.
-- Core functionality for viewing WODs (`WodViewer`) now uses the database via tRPC. Other parts (e.g., charts) may still use static JSON.
+- Core functionality for viewing WODs (`WodViewer`, `WodTable`) now uses the database via tRPC for both WODs and scores. Other parts (e.g., charts) may still use static JSON.
+- WOD Table UI updated with a compact "Results" column.
 - User authentication exists but might be replaced.
 - Major upcoming work involves:
+  - Implementing the expandable score history panel (Phase 2 of table redesign).
   - Implementing score creation/editing.
-  - Refining score-based sorting/filtering.
+  - Refining score-based sorting/filtering (including sorting by the new Results column).
   - Continuing the migration away from static JSON for other components (e.g., charts).
   - Expanding the WOD dataset, adding import capabilities, and building out analytical features.
 
 ## Known Issues
 
-- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated (including Rx status). UI (`WodViewer`, `WodTable`, `WodTimeline`) updated to fetch and display this data. **Further UI work needed** for score input/editing and potentially refining display/sorting.
+- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodTimeline`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
 - **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
-  - **Sorting/Filtering Limitations:** Sorting by `date` is now implemented. Sorting by `attempts`, `level`, and `latestLevel` still needs implementation in `wodUtils.ts` using the `scoresByWodId` map. Filtering by `isDone` works based on the presence of scores.
+  - **Sorting/Filtering Limitations:** Sorting by `date` is now implemented. Sorting by `attempts`, `level`, and `latestLevel` still needs implementation in `wodUtils.ts` using the `scoresByWodId` map. Sorting by the new "Results" column is not yet implemented. Filtering by `isDone` works based on the presence of scores.
 - **Benchmark Data Parsing:** Identified and fixed an issue where `benchmarks` data fetched via tRPC was being treated as a string in the frontend (`WodViewer.tsx`), preventing performance level calculation. Added explicit JSON parsing in the component to resolve this.
 - **URL Parameter Initialization (`tags`, `category`, `view`):** Fixed issues where URL parameters were not correctly initializing the filter state in `WodViewer.tsx` on page load due to dependencies on asynchronously loaded data (`tagOrder`/`categoryOrder`) or session status (`isLoggedIn`). State is now initialized directly from the URL and validated/adjusted later in effects. **(Fix for `view` parameter refined using `useRef` to track previous login state and avoid race conditions)**.
 
@@ -166,3 +176,4 @@ Example of a wod from wods.json:
   - Enabled `SuperJSON` transformer on client and server for proper Date serialization.
   - Refactored `WodViewer` to use `api.wod.getAll.useQuery()`.
   - Updated `wodUtils` (`isWodDone`, `sortWods`) to handle the lack of score data in `getAll` results.
+- **WOD Table Redesign - Phase 1 (Apr 2025):** Replaced "Date", "Score", and "Level" columns with a single "Results" column showing compact latest score, Rx status, and attempt count.

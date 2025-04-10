@@ -106,34 +106,22 @@ const createColumns = (
       ),
       cell: (info) => {
         const row = info.row.original;
-        return (
-          <Tooltip
-            content={
-              <span style={{ whiteSpace: "pre-wrap" }}>
-                {safeString(row.description)}
-              </span>
-            }
+        return row.wodUrl ? (
+          <Link
+            href={row.wodUrl}
+            target="_blank"
+            className="flex max-w-[200px] items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
           >
-            {row.wodUrl ? (
-              <Link
-                href={row.wodUrl}
-                target="_blank"
-                className="flex max-w-[200px] items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
-              >
-                <HighlightMatch text={row.wodName} highlight={searchTerm} />
-                <span className="ml-1 flex-shrink-0 text-xs opacity-70">
-                  ↗
-                </span>
-              </Link>
-            ) : (
-              <span className="max-w-[200px] truncate whitespace-nowrap font-medium">
-                <HighlightMatch text={row.wodName} highlight={searchTerm} />
-              </span>
-            )}
-          </Tooltip>
+            <HighlightMatch text={row.wodName} highlight={searchTerm} />
+            <span className="ml-1 flex-shrink-0 text-xs opacity-70">↗</span>
+          </Link>
+        ) : (
+          <span className="max-w-[200px] truncate whitespace-nowrap font-medium">
+            <HighlightMatch text={row.wodName} highlight={searchTerm} />
+          </span>
         );
       },
-      size: 180,
+      size: 250,
     }),
     // Combined Category and Tags Column
     columnHelper.accessor(
@@ -176,7 +164,7 @@ const createColumns = (
             </Flex>
           );
         },
-        size: 154,
+        size: 200,
       },
     ),
     columnHelper.accessor("difficulty", {
@@ -207,7 +195,7 @@ const createColumns = (
           </Tooltip>
         );
       },
-      size: 90,
+      size: 100,
     }),
     columnHelper.accessor("countLikes", {
       header: () => (
@@ -231,7 +219,7 @@ const createColumns = (
       (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
       {
         id: "results",
-        header: "Results", // No sorting for now
+        header: "Your scores", // No sorting for now
         cell: (info) => {
           const { wod, scores } = info.getValue();
           const latestScore = scores?.[0]; // Assuming scores are sorted descending by date
@@ -314,7 +302,7 @@ const createColumns = (
           // Otherwise, just return the results content
           return resultsContent;
         },
-        size: 160, // Adjusted size
+        size: 214, // Adjusted size
       },
     ),
     // --- Description Column (kept at end) ---
@@ -324,7 +312,7 @@ const createColumns = (
         const row = info.row.original;
         if (!row.description) return null;
         return (
-          <span className="whitespace-normal break-words">
+          <span className="whitespace-pre-wrap break-words">
             <HighlightMatch text={row.description} highlight={searchTerm} />
           </span>
         );

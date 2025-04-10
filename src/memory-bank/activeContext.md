@@ -10,6 +10,8 @@
 
 ## Recent Changes
 
+- **Level Display Fix (Apr 2025):** Resolved issue where the "Level" column in `WodTable.tsx` showed "-" for all scores. The root cause was the `benchmarks` data being passed as a string instead of an object from the tRPC query (`api.wod.getAll`) to the component. Fixed by adding explicit `JSON.parse()` for the `benchmarks` field within the `useMemo` hook in `src/app/_components/WodViewer.tsx` where WOD data is processed. Removed temporary debugging logs.
+- **Level Calculation Fix (Apr 2025):** Updated `src/app/_components/WodViewer.tsx` to sort scores by date descending within the `scoresByWodId` map. This ensures the `WodTable` uses the latest score when calling `getPerformanceLevel`, fixing the level display.
 - **Score Data Migration & UI Update (Apr 2025):**
   - **Schema Change:** Modified the `scores` table schema (`src/server/db/schema.ts`) to use separate nullable columns (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`) instead of a single `scoreValue` JSON column. Generated and applied the corresponding database migration (`drizzle/0001_lively_callisto.sql`).
   - **Historical Data Migration:** Created and executed `scripts/migrate_user_scores.ts` to port 111 historical scores for user `kangax@gmail.com` from `public/data/wods.json` into the new `scores` table structure.

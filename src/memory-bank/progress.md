@@ -29,6 +29,7 @@
 - **Timeline View:**
   - Conditionally rendered based on login status in `WodViewer`.
   - Removed non-functional "Progress Timeline" column from `WodTimeline` due to missing `results` data.
+- **Performance Level Display:** The "Level" column in `WodTable` now correctly displays calculated performance levels (Elite, Advanced, etc.) based on user scores and WOD benchmarks. Fixed issue where benchmarks were treated as strings instead of objects.
 
 ## What's Left to Build
 
@@ -74,7 +75,8 @@ _(Based on `todo.md`):_
 - **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
-- **Sorting/Filtering Limitations:** Sorting and filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is now partially possible via `WodTable` using the fetched score data, but requires further refinement (e.g., implementing sorting logic in `wodUtils.ts`).
+  - **Sorting/Filtering Limitations:** Sorting and filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is now partially possible via `WodTable` using the fetched score data, but requires further refinement (e.g., implementing sorting logic in `wodUtils.ts`).
+- **Benchmark Data Parsing:** Identified and fixed an issue where `benchmarks` data fetched via tRPC was being treated as a string in the frontend (`WodViewer.tsx`), preventing performance level calculation. Added explicit JSON parsing in the component to resolve this.
 
 ## Evolution of Project Decisions
 

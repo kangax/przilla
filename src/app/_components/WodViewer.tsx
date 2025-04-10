@@ -105,7 +105,8 @@ export default function WodViewer() {
   // Process WODs once loaded
   const wods = useMemo(() => {
     // Let TS infer the type of 'wod' from wodsData
-    return (wodsData ?? []).map((wod) => ({
+    const processedWods = (wodsData ?? []).map((wod) => ({
+      // Assign to temp variable
       ...wod,
       // Ensure createdAt and updatedAt are Date objects
       // Need to ensure wod.createdAt exists before creating Date
@@ -113,7 +114,16 @@ export default function WodViewer() {
       updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : null,
       // Pre-parse tags here to ensure it's always an array
       tags: parseTags(wod.tags),
-    })) as Wod[];
+      // Explicitly parse benchmarks if it's a string
+      benchmarks:
+        typeof wod.benchmarks === "string"
+          ? (JSON.parse(wod.benchmarks) as Wod["benchmarks"])
+          : wod.benchmarks,
+    })); // End map
+
+    // Remove previous debug logging
+
+    return processedWods as Wod[]; // Return the processed wods
   }, [wodsData]);
 
   // Process scores into a map by wodId for easy lookup
@@ -134,8 +144,10 @@ export default function WodViewer() {
           acc[score.wodId] = [];
         }
         acc[score.wodId].push(score);
-        // Optional: Sort scores within each WOD entry if needed
-        // acc[score.wodId].sort((a, b) => b.scoreDate.getTime() - a.scoreDate.getTime());
+        // Sort scores within each WOD entry by date descending
+        acc[score.wodId].sort(
+          (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
+        );
         return acc;
       },
       {} as Record<string, Score[]>, // Map wodId to array of Scores

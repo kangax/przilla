@@ -324,7 +324,6 @@ const createColumns = (
 
           // Use the updated getPerformanceLevel function
           const level = getPerformanceLevel(wod, latestScore);
-          // const level = "N/A"; // Placeholder until getPerformanceLevel is updated
 
           return (
             <Text className={getPerformanceLevelColor(level)}>

@@ -135,6 +135,7 @@
 - **Timeline View Fixes:**
   - Conditionally rendered the Timeline view option in `WodViewer` based on login status (`useSession`).
   - Removed the non-functional "Progress Timeline" column from `WodTimeline` as it relied on `wod.results` which is no longer available in the fetched data.
+- **URL Parameter Initialization Fix (Apr 2025):** Fixed issues where the `tags` and `category` URL parameters (e.g., `?tags=AMRAP&category=Hero`) were not correctly initializing the filter state in `WodViewer.tsx` on page load. The initial state was being filtered against `tagOrder`/`categoryOrder` before those lists were populated from async data. Resolved by initializing the raw state directly from the URL, then filtering against the available orders in memoized variables (`validSelectedTags`, `validSelectedCategories`) used for filtering and URL syncing.
 
 ## Next Steps
 

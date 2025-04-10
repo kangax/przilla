@@ -177,18 +177,16 @@ export default function WodViewer() {
   // --- Initialize State from URL or Defaults ---
   // Note: These functions run on every render, but useState only uses them for the *initial* value.
   // Update initial state functions to use derived categoryOrder/tagOrder
-  const getInitialCategories = (): string[] => {
+  // Initialize directly from URL string, don't filter yet
+  const getInitialCategoriesRaw = (): string[] => {
     const urlCategory = searchParams.get("category");
-    return urlCategory && categoryOrder.includes(urlCategory) // Use derived categoryOrder
-      ? [urlCategory]
-      : [];
+    return urlCategory ? [urlCategory] : [];
   };
 
-  const getInitialTags = (): string[] => {
+  // Initialize directly from URL string, split but don't filter yet
+  const getInitialTagsRaw = (): string[] => {
     const urlTags = searchParams.get("tags");
-    return urlTags
-      ? urlTags.split(",").filter((tag) => tagOrder.includes(tag)) // Use derived tagOrder
-      : [];
+    return urlTags ? urlTags.split(",") : [];
   };
 
   const getInitialCompletionFilter = (): "all" | "done" | "notDone" => {
@@ -223,9 +221,10 @@ export default function WodViewer() {
   };
 
   // State Hooks - Initialized from URL search params
-  const [selectedCategories, setSelectedCategories] =
-    useState<string[]>(getInitialCategories);
-  const [selectedTags, setSelectedTags] = useState<string[]>(getInitialTags);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>(
+    getInitialCategoriesRaw,
+  ); // Use raw initializer
+  const [selectedTags, setSelectedTags] = useState<string[]>(getInitialTagsRaw); // Use raw initializer
   const [completionFilter, setCompletionFilter] = useState<
     "all" | "done" | "notDone"
   >(getInitialCompletionFilter);
@@ -285,11 +284,22 @@ export default function WodViewer() {
 
     const urlParams: Record<string, string> = {};
 
+    // Filter selected categories against available categoryOrder before putting in URL
+    const validCategoryForUrl =
+      selectedCategories.length > 0 &&
+      categoryOrder.includes(selectedCategories[0])
+        ? selectedCategories[0]
+        : null;
+
     // Collect params based on current state, omitting defaults
-    if (selectedCategories.length > 0) {
-      urlParams.category = selectedCategories[0];
+    if (validCategoryForUrl) {
+      urlParams.category = validCategoryForUrl;
     }
-    if (selectedTags.length > 0) {
+    // Filter selected tags against available tagOrder before putting in URL
+    const validTagsForUrl = selectedTags.filter((tag) =>
+      tagOrder.includes(tag),
+    );
+    if (validTagsForUrl.length > 0) {
       urlParams.tags = selectedTags.join(",");
     }
     if (completionFilter !== DEFAULT_COMPLETION_FILTER) {
@@ -317,18 +327,32 @@ export default function WodViewer() {
       params.set(key, urlParams[key]);
     });
 
-    const newSearch = params.toString();
-    const currentSearch = searchParams.toString(); // Get current URL search string
+    // Removed unused newSearch and currentSearch variables
+
+    // Now, build the final search string *once* (The validTagsForUrl logic was already applied when setting urlParams.tags earlier)
+    const finalSortedKeys = Object.keys(urlParams).sort();
+    const finalParams = new URLSearchParams();
+    finalSortedKeys.forEach((key) => {
+      finalParams.set(key, urlParams[key]);
+    });
+
+    const finalNewSearch = finalParams.toString();
+    const finalCurrentSearch = searchParams.toString(); // Get current URL search string
 
     // Only push update if the calculated search string differs from the current one
     // Add NODE_ENV check for test stability
-    if (process.env.NODE_ENV === "test" || newSearch !== currentSearch) {
-      router.replace(`${pathname}?${newSearch}`, { scroll: false });
+    if (
+      process.env.NODE_ENV === "test" ||
+      finalNewSearch !== finalCurrentSearch
+    ) {
+      router.replace(`${pathname}?${finalNewSearch}`, { scroll: false });
     }
     // Depend only on internal state variables that should trigger a URL update
   }, [
-    selectedCategories,
-    selectedTags,
+    selectedCategories, // Keep raw state as dependency
+    categoryOrder, // Add categoryOrder as dependency
+    selectedTags, // Keep raw state as dependency
+    tagOrder, // Add tagOrder as dependency
     completionFilter,
     view,
     sortBy,
@@ -357,6 +381,20 @@ export default function WodViewer() {
   const originalTotalWodCount = useMemo(() => wods.length, [wods]);
 
   // --- Memoized Filtering and Sorting Logic ---
+
+  // Filter selectedCategories against available categoryOrder
+  const validSelectedCategories = useMemo(() => {
+    // Since we only allow one category selection, check if the first (and only) item exists in categoryOrder
+    return selectedCategories.length > 0 &&
+      categoryOrder.includes(selectedCategories[0])
+      ? selectedCategories // Return the array with the valid category
+      : []; // Return empty array if invalid or no category selected
+  }, [selectedCategories, categoryOrder]);
+
+  // Filter selectedTags against available tagOrder
+  const validSelectedTags = useMemo(() => {
+    return selectedTags.filter((tag) => tagOrder.includes(tag));
+  }, [selectedTags, tagOrder]);
 
   // 1. Filter by search term first
   const searchedWods = useMemo(() => {
@@ -387,16 +425,17 @@ export default function WodViewer() {
   // 2. Filter by category and tags (using the result of search filter)
   const categoryTagFilteredWods = useMemo(() => {
     return searchedWods.filter((wod) => {
+      // Use validSelectedCategories for filtering
       const categoryMatch =
-        selectedCategories.length === 0 ||
-        (wod.category && selectedCategories.includes(wod.category));
-      // wods.tags is now guaranteed to be string[]
+        validSelectedCategories.length === 0 ||
+        (wod.category && validSelectedCategories.includes(wod.category));
+      // Use validSelectedTags for filtering
       const tagMatch =
-        selectedTags.length === 0 ||
-        wod.tags.some((tag) => selectedTags.includes(tag)); // Use wod.tags directly
+        validSelectedTags.length === 0 ||
+        wod.tags.some((tag) => validSelectedTags.includes(tag));
       return categoryMatch && tagMatch;
     });
-  }, [searchedWods, selectedCategories, selectedTags]);
+  }, [searchedWods, validSelectedCategories, validSelectedTags]); // Depend on valid categories/tags
 
   const {
     dynamicTotalWodCount,

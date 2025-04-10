@@ -77,6 +77,7 @@ _(Based on `todo.md`):_
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
   - **Sorting/Filtering Limitations:** Sorting and filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is now partially possible via `WodTable` using the fetched score data, but requires further refinement (e.g., implementing sorting logic in `wodUtils.ts`).
 - **Benchmark Data Parsing:** Identified and fixed an issue where `benchmarks` data fetched via tRPC was being treated as a string in the frontend (`WodViewer.tsx`), preventing performance level calculation. Added explicit JSON parsing in the component to resolve this.
+- **URL Parameter Initialization (`tags`, `category`):** Fixed issues where the `tags` and `category` URL parameters were not correctly initializing the filter state in `WodViewer.tsx` on page load due to dependency on asynchronously loaded `tagOrder`/`categoryOrder`. State is now initialized directly from the URL and validated later.
 
 ## Evolution of Project Decisions
 

@@ -232,7 +232,7 @@ describe("WodTimeline Component", () => {
       />,
     );
     const row = findRowByName(/WOD Alpha/i); // Use helper
-    const descriptionCell = within(row).getAllByRole("cell")[2];
+    const descriptionCell = within(row).getAllByRole("cell")[1]; // Corrected index from 2 to 1
     // Check for text content, whitespace might be tricky
     expect(descriptionCell).toHaveTextContent(/Desc Alpha/); // Use regex for flexibility
     expect(descriptionCell).toHaveTextContent("Line 2");

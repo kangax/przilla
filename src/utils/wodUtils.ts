@@ -1,15 +1,16 @@
-import type { Wod, Score, WodResult, SortByType } from "~/types/wodTypes"; // Added Score, SortByType
+import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Added Score, SortByType, removed WodResult
 import { PERFORMANCE_LEVEL_COLORS } from "~/config/constants";
 
 /**
- * Checks if a WodResult has any score value recorded.
+ * Checks if a Score has any score value recorded.
  */
-export const hasScore = (result: WodResult): boolean => {
+export const hasScore = (score: Score): boolean => {
   return (
-    result.score_time_seconds !== null ||
-    result.score_reps !== null ||
-    result.score_load !== null ||
-    result.score_rounds_completed !== null
+    score.time_seconds !== null ||
+    score.reps !== null ||
+    score.load !== null ||
+    score.rounds_completed !== null
+    // partial_reps doesn't count as a primary score value on its own
   );
 };
 

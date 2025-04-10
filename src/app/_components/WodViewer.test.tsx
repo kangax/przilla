@@ -12,7 +12,7 @@ import {
   hasScore,
   sortWods,
 } from "~/utils/wodUtils"; // Import helpers from utils
-import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Import types
+import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Import types
 import { type ReadonlyURLSearchParams } from "next/navigation"; // Keep this import
 
 // --- Mocks for next/navigation ---
@@ -158,65 +158,44 @@ const mockWodNoBenchmark: Wod = {
   // results removed
 };
 
-// WodResult type is still needed for helper function tests
-const mockResultTime = (seconds: number | null, rx = true): WodResult => ({
-  score_time_seconds: seconds,
-  score_reps: null,
-  score_load: null,
-  score_rounds_completed: null,
-  score_partial_reps: null,
-  rxStatus: rx ? "Rx" : "Scaled",
-  date: "2024-01-15",
+// --- New Mock Score Data ---
+const createMockScore = (
+  wodId: string,
+  scoreData: Partial<Score>,
+  idSuffix = "",
+): Score => ({
+  id: `score-${wodId}-${idSuffix || Date.now()}`,
+  userId: "test-user",
+  wodId: wodId,
+  scoreDate: new Date("2024-01-15T12:00:00Z"), // Default date
+  createdAt: new Date("2024-01-15T12:00:00Z"),
+  updatedAt: new Date("2024-01-15T12:00:00Z"),
+  time_seconds: null,
+  reps: null,
+  load: null,
+  rounds_completed: null,
+  partial_reps: null,
+  notes: null,
+  ...scoreData, // Override defaults
 });
 
-const mockResultRounds = (
-  rounds: number | null,
-  partialReps: number | null = 0,
-  rx = true,
-): WodResult => ({
-  score_time_seconds: null,
-  score_reps: null,
-  score_load: null,
-  score_rounds_completed: rounds,
-  score_partial_reps: partialReps,
-  rxStatus: rx ? "Rx" : "Scaled",
-  date: "2024-01-16",
+const mockScoreTime = createMockScore(mockWodTime.id, { time_seconds: 155 });
+const mockScoreReps = createMockScore(mockWodReps.id, { reps: 25 });
+const mockScoreLoad = createMockScore(mockWodLoad.id, { load: 225 });
+const mockScoreRounds = createMockScore(mockWodRounds.id, {
+  rounds_completed: 15,
+  partial_reps: 0,
 });
-
-const mockResultLoad = (load: number | null, rx = true): WodResult => ({
-  score_time_seconds: null,
-  score_reps: null,
-  score_load: load,
-  score_rounds_completed: null,
-  score_partial_reps: null,
-  rxStatus: rx ? "Rx" : "Scaled",
-  date: "2024-01-17",
+const mockScoreRoundsPartial = createMockScore(mockWodRounds.id, {
+  rounds_completed: 15,
+  partial_reps: 10,
 });
-
-const mockResultReps = (reps: number | null, rx = true): WodResult => ({
-  score_time_seconds: null,
-  score_reps: reps,
-  score_load: null,
-  score_rounds_completed: null,
-  score_partial_reps: null,
-  rxStatus: rx ? "Rx" : "Scaled",
-  date: "2024-01-18",
-});
-
-const mockResultNoScore = (): WodResult => ({
-  score_time_seconds: null,
-  score_reps: null,
-  score_load: null,
-  score_rounds_completed: null,
-  score_partial_reps: null,
-  rxStatus: null,
-  date: "2024-01-19",
-});
+const mockScoreNoValue = createMockScore(mockWodTime.id, {}); // No score values
 
 // --- Tests ---
 
 describe("WodViewer Helper Functions", () => {
-  // These tests use the mock Wod/WodResult data defined above,
+  // These tests use the mock Wod data defined above and the new mock Score data
   // but they test utility functions, not the component itself.
   // They don't need the `results` property on the Wod objects.
   describe("getPerformanceLevelColor", () => {
@@ -269,17 +248,17 @@ describe("WodViewer Helper Functions", () => {
 
     it("should return correct multi-line tooltip for rounds benchmarks", () => {
       const expectedTooltip = [
-        "Elite: 25 - ∞ rounds",
-        "Advanced: 20 - ∞ rounds",
-        "Intermediate: 15 - ∞ rounds",
-        "Beginner: 10 - ∞ rounds",
+        "Elite: > 25",
+        "Advanced: 20 - ∞",
+        "Intermediate: 15 - ∞",
+        "Beginner: 10 - ∞",
       ].join("\n");
       expect(getPerformanceLevelTooltip(mockWodRounds)).toBe(expectedTooltip);
     });
 
     it("should return correct multi-line tooltip for load benchmarks", () => {
       const expectedTooltip = [
-        "Elite: 405 - ∞ lbs",
+        "Elite: > 405 lbs",
         "Advanced: 315 - ∞ lbs",
         "Intermediate: 225 - ∞ lbs",
         "Beginner: 135 - ∞ lbs",
@@ -289,250 +268,446 @@ describe("WodViewer Helper Functions", () => {
 
     it("should return correct multi-line tooltip for reps benchmarks", () => {
       const expectedTooltip = [
-        "Elite: 30 - ∞ reps",
-        "Advanced: 20 - ∞ reps",
-        "Intermediate: 10 - ∞ reps",
-        "Beginner: 5 - ∞ reps",
+        "Elite: > 30",
+        "Advanced: 20 - ∞",
+        "Intermediate: 10 - ∞",
+        "Beginner: 5 - ∞",
       ].join("\n");
       expect(getPerformanceLevelTooltip(mockWodReps)).toBe(expectedTooltip);
     });
 
     it("should return default message if no benchmarks", () => {
       expect(getPerformanceLevelTooltip(mockWodNoBenchmark)).toBe(
-        "No benchmark data available",
+        "No benchmark data available.",
       );
     });
   });
 
   describe("formatScore", () => {
+    // Use new mock Score objects
     it("should format time scores", () => {
-      expect(formatScore(mockResultTime(155))).toBe("2:35");
+      expect(formatScore(mockScoreTime)).toBe("2:35");
     });
 
     it("should format reps scores", () => {
-      expect(formatScore(mockResultReps(25))).toBe("25 reps");
+      expect(formatScore(mockScoreReps)).toBe("25 reps");
     });
 
     it("should format load scores", () => {
-      expect(formatScore(mockResultLoad(225))).toBe("225 lbs");
+      expect(formatScore(mockScoreLoad)).toBe("225 lbs");
     });
 
     it("should format rounds scores", () => {
-      expect(formatScore(mockResultRounds(15))).toBe("15 rounds");
+      expect(formatScore(mockScoreRounds)).toBe("15 rounds");
     });
 
     it("should format rounds + partial reps scores", () => {
-      expect(formatScore(mockResultRounds(15, 10))).toBe("15+10");
+      expect(formatScore(mockScoreRoundsPartial)).toBe("15+10");
     });
 
     it("should return dash if no score", () => {
-      expect(formatScore(mockResultNoScore())).toBe("-");
+      expect(formatScore(mockScoreNoValue)).toBe("-");
     });
   });
 
   describe("getNumericScore", () => {
-    // These tests still need WodResult, but not the Wod.results property
+    // Use new mock Score objects
     it("should return time in seconds for time benchmarks", () => {
-      expect(getNumericScore(mockWodTime, mockResultTime(110))).toBe(110);
+      expect(
+        getNumericScore(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 110 }),
+        ),
+      ).toBe(110);
     });
 
     it("should return reps for reps benchmarks", () => {
-      expect(getNumericScore(mockWodReps, mockResultReps(22))).toBe(22);
+      expect(
+        getNumericScore(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 22 }),
+        ),
+      ).toBe(22);
     });
 
     it("should return load for load benchmarks", () => {
-      expect(getNumericScore(mockWodLoad, mockResultLoad(350))).toBe(350);
+      expect(
+        getNumericScore(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 350 }),
+        ),
+      ).toBe(350);
     });
 
     it("should return rounds as integer for rounds benchmarks", () => {
-      expect(getNumericScore(mockWodRounds, mockResultRounds(18))).toBe(18);
+      expect(
+        getNumericScore(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 18,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe(18);
     });
 
     it("should return rounds + partial reps as decimal for rounds benchmarks", () => {
-      expect(getNumericScore(mockWodRounds, mockResultRounds(18, 5))).toBe(
-        18.05,
-      );
+      expect(
+        getNumericScore(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 18,
+            partial_reps: 5,
+          }),
+        ),
+      ).toBe(18.05);
     });
 
     it("should return null if benchmark type mismatch", () => {
-      expect(getNumericScore(mockWodTime, mockResultReps(20))).toBe(null);
-      expect(getNumericScore(mockWodReps, mockResultTime(120))).toBe(null);
+      expect(
+        getNumericScore(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { reps: 20 }),
+        ),
+      ).toBe(null);
+      expect(
+        getNumericScore(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { time_seconds: 120 }),
+        ),
+      ).toBe(null);
     });
 
     it("should return null if no benchmarks", () => {
-      expect(getNumericScore(mockWodNoBenchmark, mockResultTime(120))).toBe(
-        null,
-      );
+      expect(
+        getNumericScore(
+          mockWodNoBenchmark,
+          createMockScore(mockWodNoBenchmark.id, { time_seconds: 120 }),
+        ),
+      ).toBe(null);
     });
 
     it("should return null if no score", () => {
-      expect(getNumericScore(mockWodTime, mockResultNoScore())).toBe(null);
+      expect(getNumericScore(mockWodTime, mockScoreNoValue)).toBe(null);
     });
   });
 
   describe("getPerformanceLevel", () => {
-    // These tests still need WodResult, but not the Wod.results property
+    // Use new mock Score objects
     // Time (lower is better)
     it("should return correct level for time benchmarks", () => {
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(110))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(120))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(121))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(180))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(181))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(300))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(301))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodTime, mockResultTime(500))).toBe(
-        "beginner",
-      );
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 110 }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 120 }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 121 }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 180 }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 181 }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 300 }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 301 }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { time_seconds: 500 }),
+        ),
+      ).toBe("beginner");
     });
 
     // Rounds (higher is better)
     it("should return correct level for rounds benchmarks", () => {
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(26))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(25))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(24))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(20))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(19))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(15))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(14))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(10))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(9))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(24, 5))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodRounds, mockResultRounds(19, 99))).toBe(
-        "intermediate",
-      );
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 26,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 25,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 24,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 20,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 19,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 15,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 14,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 10,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 9,
+            partial_reps: 0,
+          }),
+        ),
+      ).toBe("beginner");
+      // Check with partial reps
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 24,
+            partial_reps: 5,
+          }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodRounds,
+          createMockScore(mockWodRounds.id, {
+            rounds_completed: 19,
+            partial_reps: 99,
+          }),
+        ),
+      ).toBe("intermediate");
     });
 
     // Load (higher is better)
     it("should return correct level for load benchmarks", () => {
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(410))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(405))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(400))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(315))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(310))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(225))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(220))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(135))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodLoad, mockResultLoad(130))).toBe(
-        "beginner",
-      );
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 410 }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 405 }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 400 }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 315 }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 310 }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 225 }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 220 }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 135 }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodLoad,
+          createMockScore(mockWodLoad.id, { load: 130 }),
+        ),
+      ).toBe("beginner");
     });
 
     // Reps (higher is better)
     it("should return correct level for reps benchmarks", () => {
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(35))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(30))).toBe(
-        "elite",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(29))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(20))).toBe(
-        "advanced",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(19))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(10))).toBe(
-        "intermediate",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(9))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(5))).toBe(
-        "beginner",
-      );
-      expect(getPerformanceLevel(mockWodReps, mockResultReps(4))).toBe(
-        "beginner",
-      );
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 35 }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 30 }),
+        ),
+      ).toBe("elite");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 29 }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 20 }),
+        ),
+      ).toBe("advanced");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 19 }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 10 }),
+        ),
+      ).toBe("intermediate");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 9 }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 5 }),
+        ),
+      ).toBe("beginner");
+      expect(
+        getPerformanceLevel(
+          mockWodReps,
+          createMockScore(mockWodReps.id, { reps: 4 }),
+        ),
+      ).toBe("beginner");
     });
 
     it("should return null if no benchmarks", () => {
-      expect(getPerformanceLevel(mockWodNoBenchmark, mockResultTime(120))).toBe(
-        null,
-      );
+      expect(
+        getPerformanceLevel(
+          mockWodNoBenchmark,
+          createMockScore(mockWodNoBenchmark.id, { time_seconds: 120 }),
+        ),
+      ).toBe(null);
     });
 
     it("should return null if no numeric score can be determined", () => {
-      expect(getPerformanceLevel(mockWodTime, mockResultNoScore())).toBe(null);
-      expect(getPerformanceLevel(mockWodTime, mockResultReps(20))).toBe(null);
+      expect(getPerformanceLevel(mockWodTime, mockScoreNoValue)).toBe(null);
+      // This case should now return null because getNumericScore returns null
+      expect(
+        getPerformanceLevel(
+          mockWodTime,
+          createMockScore(mockWodTime.id, { reps: 20 }),
+        ),
+      ).toBe(null);
     });
   });
 
   describe("hasScore", () => {
-    // These tests only need WodResult
+    // Use new mock Score objects
     it("should return true if any score field is present", () => {
-      expect(hasScore(mockResultTime(120))).toBe(true);
-      expect(hasScore(mockResultReps(10))).toBe(true);
-      expect(hasScore(mockResultLoad(135))).toBe(true);
-      expect(hasScore(mockResultRounds(5))).toBe(true);
-      expect(hasScore(mockResultRounds(5, 10))).toBe(true);
+      expect(hasScore(mockScoreTime)).toBe(true);
+      expect(hasScore(mockScoreReps)).toBe(true);
+      expect(hasScore(mockScoreLoad)).toBe(true);
+      expect(hasScore(mockScoreRounds)).toBe(true);
+      expect(hasScore(mockScoreRoundsPartial)).toBe(true);
     });
 
     it("should return false if no score fields are present", () => {
-      expect(hasScore(mockResultNoScore())).toBe(false);
-      const resultWithNoScores: WodResult = {
-        date: "2023-01-01",
-        rxStatus: "Rx",
-        score_time_seconds: null,
-        score_reps: null,
-        score_load: null,
-        score_rounds_completed: null,
-        score_partial_reps: null,
-      };
-      expect(hasScore(resultWithNoScores)).toBe(false);
+      expect(hasScore(mockScoreNoValue)).toBe(false);
+      // Test with a score object having only null values for score fields
+      const scoreWithNulls = createMockScore("null-test", {
+        time_seconds: null,
+        reps: null,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      });
+      expect(hasScore(scoreWithNulls)).toBe(false);
     });
   });
 
@@ -749,6 +924,43 @@ vi.mock("./WodTimeline", () => ({
   ),
 }));
 
+// --- Mock tRPC hook ---
+// Variable to hold the mock query result for WODs, defined OUTSIDE the describe block
+let mockWodQueryResult: {
+  data: Wod[] | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  error: { message: string } | null;
+};
+
+// Variable to hold the mock query result for Scores
+let mockScoreQueryResult: {
+  data: Score[] | undefined;
+  isLoading: boolean;
+  isError: boolean;
+  error: { message: string } | null;
+};
+
+vi.mock("~/trpc/react", () => {
+  return {
+    api: {
+      wod: {
+        getAll: {
+          // Return the mockWodQueryResult variable
+          useQuery: vi.fn(() => mockWodQueryResult),
+        },
+      },
+      score: {
+        getAllByUser: {
+          // Return the mockScoreQueryResult variable
+          useQuery: vi.fn(() => mockScoreQueryResult),
+        },
+      },
+    },
+  };
+});
+// --- End Mock tRPC hook ---
+
 // --- Component Tests ---
 describe("WodViewer Component", () => {
   // WodViewer no longer takes categoryOrder/tagOrder as props, they are derived internally
@@ -823,37 +1035,24 @@ describe("WodViewer Component", () => {
     },
   ];
 
-  // Mock tRPC hook
-  const mockUseQuery = vi.fn();
-  vi.mock("~/trpc/react", () => ({
-    api: {
-      wod: {
-        getAll: {
-          // Ensure the mock implementation returns a typed object
-          useQuery: () =>
-            mockUseQuery() as {
-              // Cast the return value
-              data: Wod[] | undefined;
-              isLoading: boolean;
-              isError: boolean;
-              error: { message: string } | null;
-            },
-        },
-      },
-    },
-  }));
-
   beforeEach(() => {
     // Reset mocks and search params before each test
     vi.clearAllMocks();
     mockSearchParams = new URLSearchParams(); // Reset to empty
-    // Default successful query result
-    mockUseQuery.mockReturnValue({
+    // Set the default successful query result for WODs
+    mockWodQueryResult = {
       data: testWods,
       isLoading: false,
       isError: false,
       error: null,
-    });
+    };
+    // Set the default successful query result for Scores (empty array)
+    mockScoreQueryResult = {
+      data: [],
+      isLoading: false,
+      isError: false,
+      error: null,
+    };
   });
 
   afterEach(() => {
@@ -861,23 +1060,25 @@ describe("WodViewer Component", () => {
   });
 
   it("should show loading state", () => {
-    mockUseQuery.mockReturnValue({
+    // Directly set the mock result for WODs
+    mockWodQueryResult = {
       data: undefined,
       isLoading: true,
       isError: false,
       error: null,
-    });
+    }; // End assignment
     render(<WodViewer />);
-    expect(screen.getByText(/Loading WODs.../i)).toBeInTheDocument();
+    expect(screen.getByText(/Loading data.../i)).toBeInTheDocument();
   });
 
   it("should show error state", () => {
-    mockUseQuery.mockReturnValue({
+    // Directly set the mock result for WODs
+    mockWodQueryResult = {
       data: undefined,
       isLoading: false,
       isError: true,
       error: { message: "Failed to fetch" },
-    });
+    }; // End assignment
     render(<WodViewer />);
     expect(
       screen.getByText(/Error loading WODs: Failed to fetch/i),
@@ -894,20 +1095,22 @@ describe("WodViewer Component", () => {
     // Table view with default filters (no completion filter applied initially)
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6"); // All WODs shown initially
 
-    // Check default sort state passed to table (wodName/asc)
-    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("wodName");
-    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent("asc");
+    // Check default sort state passed to table (date/desc)
+    expect(screen.getByTestId("table-sort-by")).toHaveTextContent("date");
+    expect(screen.getByTestId("table-sort-direction")).toHaveTextContent(
+      "desc",
+    );
 
-    // Completion filter should NOT be visible initially
+    // Completion filter should be visible
     expect(
-      screen.queryByRole("radio", { name: /All \(\d+\)/i }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("radio", { name: /All \(\d+\)/i }),
+    ).toBeInTheDocument();
     expect(
-      screen.queryByRole("radio", { name: /Done \(\d+\)/i }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("radio", { name: /Done \(\d+\)/i }),
+    ).toBeInTheDocument();
     expect(
-      screen.queryByRole("radio", { name: /Todo \(\d+\)/i }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("radio", { name: /Todo \(\d+\)/i }),
+    ).toBeInTheDocument();
   });
 
   it("should switch to timeline view", async () => {
@@ -928,16 +1131,16 @@ describe("WodViewer Component", () => {
     // Timeline view should show all WODs initially
     expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("6");
 
-    // Check default sort state passed to timeline (wodName/asc)
-    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("wodName");
+    // Check default sort state passed to timeline (date/desc as per component default)
+    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("date");
     expect(screen.getByTestId("timeline-sort-direction")).toHaveTextContent(
-      "asc",
+      "desc",
     );
 
-    // Completion filter should NOT be visible
+    // Completion filter should be visible
     expect(
-      screen.queryByRole("radio", { name: /All \(\d+\)/i }),
-    ).not.toBeInTheDocument();
+      screen.getByRole("radio", { name: /All \(\d+\)/i }),
+    ).toBeInTheDocument();
   });
 
   it("should filter by category and update URL", async () => {
@@ -949,7 +1152,7 @@ describe("WodViewer Component", () => {
     fireEvent.click(categorySelect);
 
     // Select Benchmark category (C, D, E)
-    const benchmarkItem = await screen.findByText(/Benchmark \(\d+\)/i);
+    const benchmarkItem = await screen.findByText("Benchmark");
     fireEvent.click(benchmarkItem);
 
     await waitFor(() => {
@@ -960,12 +1163,10 @@ describe("WodViewer Component", () => {
     });
     mockRouterReplace.mockClear();
 
-    // Select 'All Categories' again
+    // Select 'All' again
     fireEvent.click(categorySelect);
-    const allCategoriesItem = await screen.findByText(
-      /All Categories \(\d+\)/i,
-    );
-    fireEvent.click(allCategoriesItem);
+    const allItem = await screen.findByText("All");
+    fireEvent.click(allItem);
 
     await waitFor(() => {
       expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6");
@@ -1064,12 +1265,13 @@ describe("WodViewer Component", () => {
   });
 
   it("should render correctly with empty wods array", () => {
-    mockUseQuery.mockReturnValue({
+    // Directly set the mock result for WODs
+    mockWodQueryResult = {
       data: [] as Wod[], // Explicitly type empty array
       isLoading: false,
       isError: false,
       error: null,
-    });
+    }; // End assignment
     render(<WodViewer />);
 
     expect(screen.getByTestId("wod-table")).toBeInTheDocument();
@@ -1179,8 +1381,8 @@ describe("WodViewer Component", () => {
     );
     render(<WodViewer />);
 
-    // Check category defaults to 'All Categories'
-    expect(screen.getByRole("combobox")).toHaveTextContent(/All Categories/i);
+    // Check category defaults to 'All'
+    expect(screen.getByRole("combobox")).toHaveTextContent(/All \(\d+\)/i);
     // Check only valid tag 'AMRAP' is selected
     expect(screen.getByText("AMRAP")).toHaveClass(
       "border-primary bg-primary text-primary-foreground",
@@ -1251,7 +1453,7 @@ describe("WodViewer Component", () => {
 
   it("should handle search term input and update URL", async () => {
     render(<WodViewer />);
-    const searchInput = screen.getByPlaceholderText(/Search workouts.../i);
+    const searchInput = screen.getByPlaceholderText(/Search.../i);
 
     fireEvent.change(searchInput, { target: { value: "fran" } });
 
@@ -1282,9 +1484,8 @@ describe("WodViewer Component", () => {
     mockSearchParams = new URLSearchParams("?search=cindy");
     render(<WodViewer />);
 
-    expect(screen.getByPlaceholderText(/Search workouts.../i)).toHaveValue(
-      "cindy",
-    );
+    const searchInput = screen.getByPlaceholderText(/Search.../i);
+    expect(searchInput).toHaveValue("cindy");
     // Check search term passed to table mock
     expect(screen.getByTestId("table-search-term")).toHaveTextContent("cindy");
   });

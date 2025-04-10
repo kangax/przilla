@@ -176,6 +176,7 @@ const createMockScore = (
   rounds_completed: null,
   partial_reps: null,
   notes: null,
+  isRx: false, // Add default isRx
   ...scoreData, // Override defaults
 });
 

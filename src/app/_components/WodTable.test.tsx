@@ -175,11 +175,10 @@ type MockScore = {
   rounds_completed: number | null;
   partial_reps: number | null;
   notes: string | null;
+  isRx: boolean; // Added required isRx field
   // Add createdAt/updatedAt if needed by tests, otherwise omit for simplicity
   createdAt: Date; // Added
   updatedAt: Date | null; // Added
-  // Add rxStatus if needed for testing logic that derives it
-  rxStatus?: "Rx" | "Scaled" | null;
 };
 
 // Create mock scores (adjust data based on old results)
@@ -196,7 +195,7 @@ const mockScoreWod2: MockScore = {
   rounds_completed: null,
   partial_reps: null,
   notes: "Felt good",
-  rxStatus: "Rx",
+  isRx: true, // Derived from rxStatus: "Rx"
 };
 const mockScoreWod3: MockScore = {
   id: "102",
@@ -211,7 +210,7 @@ const mockScoreWod3: MockScore = {
   rounds_completed: 12,
   partial_reps: 5,
   notes: "Used lighter weight",
-  rxStatus: "Scaled",
+  isRx: false, // Derived from rxStatus: "Scaled"
 };
 const mockScoreWod4_1: MockScore = {
   id: "103",
@@ -226,7 +225,7 @@ const mockScoreWod4_1: MockScore = {
   rounds_completed: null,
   partial_reps: null,
   notes: "First attempt",
-  rxStatus: "Rx",
+  isRx: true, // Derived from rxStatus: "Rx"
 };
 const mockScoreWod4_2: MockScore = {
   id: "104",
@@ -241,7 +240,7 @@ const mockScoreWod4_2: MockScore = {
   rounds_completed: null,
   partial_reps: null,
   notes: "PR!",
-  rxStatus: "Rx",
+  isRx: true, // Derived from rxStatus: "Rx"
 };
 const mockScoreWod5: MockScore = {
   id: "105",
@@ -256,7 +255,7 @@ const mockScoreWod5: MockScore = {
   rounds_completed: 10,
   partial_reps: 0,
   notes: null,
-  rxStatus: "Rx",
+  isRx: true, // Derived from rxStatus: "Rx"
 };
 
 // Create mock scoresByWodId Record (object)
@@ -513,13 +512,9 @@ describe("WodTable Component", () => {
 
     // Find the first result row (latest date: 2024-03-12) by its unique date
     const row1 = findRenderedRowByContent("WOD Delta");
-    expect(
-      within(row1).getByText("WOD Delta"),
-    ).toBeInTheDocument(); // Assert type
+    expect(within(row1).getByText("WOD Delta")).toBeInTheDocument(); // Assert type
     expect(within(row1).getByText("Open")).toBeInTheDocument(); // Assert type
-    expect(
-      within(row1).getByText("Couplet"),
-    ).toBeInTheDocument(); // Assert type
+    expect(within(row1).getByText("Couplet")).toBeInTheDocument(); // Assert type
     expect(
       within(row1).getByText(
         /3\/12\/2024|Mar 12, 2024|March 12, 2024|3\/11\/2024|Mar 11, 2024|March 11, 2024/,

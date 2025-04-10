@@ -20,10 +20,31 @@ export const scoreRouter = createTRPCRouter({
       //       wodName: true, // Example: only fetch wodName
       //     },
       //   },
-      // },
+      // Explicitly select columns to ensure is_rx is included and map to camelCase
+      columns: {
+        id: true,
+        userId: true,
+        wodId: true,
+        time_seconds: true,
+        reps: true,
+        load: true,
+        rounds_completed: true,
+        partial_reps: true,
+        scoreDate: true,
+        notes: true,
+        is_rx: true, // Select the snake_case column
+        createdAt: true,
+        updatedAt: true,
+      },
     });
-    // The result will include time_seconds, reps, load, rounds_completed, partial_reps, etc.
-    return userScores;
+
+    // Map snake_case is_rx to camelCase isRx
+    const mappedScores = userScores.map((score) => ({
+      ...score,
+      isRx: score.is_rx, // Map to camelCase
+    }));
+
+    return mappedScores;
   }),
 
   // Placeholder for future procedures

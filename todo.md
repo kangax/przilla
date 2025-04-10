@@ -1,6 +1,6 @@
 ## Data
 
-- Add Games workouts
+- Add Regionals workouts
 - Add remaining workouts from SugarWod
 
 ### Stats

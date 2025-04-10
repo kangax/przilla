@@ -73,6 +73,7 @@ export type Score = {
   load: number | null;
   rounds_completed: number | null;
   partial_reps: number | null;
+  isRx: boolean; // Added Rx status
   scoreDate: Date; // Drizzle returns Date for timestamp mode
   notes: string | null;
   createdAt: Date; // Drizzle returns Date for timestamp mode

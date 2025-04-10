@@ -275,7 +275,7 @@ const createColumns = (
           if (!latestScore) {
             // If no score, show benchmark tooltip if benchmarks exist
             if (!wod.benchmarks)
-              return <span className="whitespace-nowrap font-mono">-</span>;
+              return <span className="whitespace-nowrap">-</span>;
             return (
               <Tooltip
                 content={
@@ -289,20 +289,42 @@ const createColumns = (
             );
           }
 
-          // If score exists, display it with notes tooltip
-          return (
-            <Tooltip
-              content={
-                <span style={{ whiteSpace: "pre-wrap" }}>
-                  {safeString(latestScore.notes)}
-                </span>
-              }
-            >
-              <span className="whitespace-nowrap font-mono">
+          // If score exists, display it
+          const scoreContent = (
+            <Flex align="center" gap="1" asChild>
+              <span className="whitespace-nowrap">
                 {formatScore(latestScore)}
+                {latestScore.isRx && (
+                  <Badge
+                    color="green"
+                    variant="solid"
+                    size="1"
+                    className="ml-1"
+                  >
+                    Rx
+                  </Badge>
+                )}
               </span>
-            </Tooltip>
+            </Flex>
           );
+
+          // Conditionally wrap with Tooltip if notes exist
+          if (latestScore.notes) {
+            return (
+              <Tooltip
+                content={
+                  <span style={{ whiteSpace: "pre-wrap" }}>
+                    {safeString(latestScore.notes)}
+                  </span>
+                }
+              >
+                {scoreContent}
+              </Tooltip>
+            );
+          }
+
+          // Otherwise, just return the score content
+          return scoreContent;
         },
         size: 140,
       },

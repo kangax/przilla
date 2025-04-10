@@ -142,6 +142,14 @@
   - Conditionally rendered the Timeline view option in `WodViewer` based on login status (`useSession`).
   - Removed the non-functional "Progress Timeline" column from `WodTimeline` as it relied on `wod.results` which is no longer available in the fetched data.
 - **URL Parameter Initialization Fix (Apr 2025):** Fixed issues where the `tags` and `category` URL parameters (e.g., `?tags=AMRAP&category=Hero`) were not correctly initializing the filter state in `WodViewer.tsx` on page load. The initial state was being filtered against `tagOrder`/`categoryOrder` before those lists were populated from async data. Resolved by initializing the raw state directly from the URL, then filtering against the available orders in memoized variables (`validSelectedTags`, `validSelectedCategories`) used for filtering and URL syncing.
+- **Rx Badge & Conditional Tooltip (Apr 2025):**
+  - Added `is_rx` boolean column (defaulting to false) to `scores` table schema (`src/server/db/schema.ts`).
+  - Generated and applied the database migration (`drizzle/0002_tearful_fenris.sql`).
+  - Updated score migration script (`scripts/migrate_user_scores.ts`) to clear existing scores before insertion and correctly map `rxStatus === "Rx"` from JSON to the `is_rx` database field. Re-ran the script successfully.
+  - Updated `scoreRouter` (`src/server/api/routers/score.ts`) to explicitly select and map `is_rx` to `isRx` in the `getAllByUser` procedure.
+  - Added `isRx: boolean` to the `Score` type in `src/types/wodTypes.ts`.
+  - Updated mock data in `WodTable.test.tsx` and `WodViewer.test.tsx` to include the `isRx` field.
+  - Updated `WodTable.tsx` component to display an "Rx" badge next to the score if `latestScore.isRx` is true, and to only show the score tooltip if `latestScore.notes` has content.
 
 ## Next Steps
 

@@ -12,6 +12,8 @@
   - Search highlighting implemented for Name, Category, Tags, Description.
   - Category and Tags columns combined into one, displaying tags below the category.
   - Variable row height enabled using `useVirtualizer`'s `measureElement` to correctly display wrapped content (like descriptions and tags).
+  - Score column now displays an "Rx" badge if the score was logged as Rx.
+  - Score column tooltip (showing notes) is now only displayed if notes exist for the score.
 - **URL Parameter Handling:**
   - `search`, `tags`, and `category` parameters correctly initialize state and persist in the URL.
   - `view=timeline` parameter now correctly initializes the view state on page load. Fixed a bug where it defaulted to `table` during session loading by using a `useRef` hook to track the previous login state and only resetting the view on an actual logout event.
@@ -76,7 +78,7 @@ _(Based on `todo.md`):_
 
 ## Known Issues
 
-- **Score Data Storage & UI:** The `scores` table now uses separate columns. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodTimeline`) updated to fetch and display this data. **Further UI work needed** for score input/editing and potentially refining display/sorting.
+- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated (including Rx status). UI (`WodViewer`, `WodTable`, `WodTimeline`) updated to fetch and display this data. **Further UI work needed** for score input/editing and potentially refining display/sorting.
 - **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.

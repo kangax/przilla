@@ -66,6 +66,7 @@ export const scores = createTable(
     load: int("load"), // Nullable integer, assuming lbs or kg - needs context
     rounds_completed: int("rounds_completed"), // Nullable integer
     partial_reps: int("partial_reps"), // Nullable integer
+    is_rx: int("is_rx", { mode: "boolean" }).default(false), // Added Rx status flag (SQLite uses INT 0/1)
     // Original fields
     scoreDate: int("score_date", { mode: "timestamp" }).notNull(),
     notes: text("notes"),

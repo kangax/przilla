@@ -1,0 +1,1 @@
+ALTER TABLE `przilla_score` ADD `is_rx` integer DEFAULT false;

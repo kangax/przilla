@@ -19,7 +19,7 @@ type SourceResult = {
   score_load?: number | null;
   score_rounds_completed?: number | null;
   score_partial_reps?: number | null;
-  // Add any other fields if they exist in the source results
+  rxStatus?: string | null; // Added rxStatus from original JSON structure
 };
 
 type SourceWod = {
@@ -59,6 +59,17 @@ async function migrateScores() {
   const userId = user.id;
   console.log(`User ID found: ${userId}`);
 
+  // --- Clear existing scores for the user ---
+  console.log(`Deleting existing scores for user ID: ${userId}...`);
+  try {
+    await db.delete(schema.scores).where(eq(schema.scores.userId, userId));
+    console.log("Existing scores deleted successfully.");
+  } catch (deleteError) {
+    console.error("Error deleting existing scores:", deleteError);
+    process.exit(1); // Exit if deletion fails
+  }
+  // --- End clearing scores ---
+
   // --- Efficiently process large JSON file ---
   console.log(`Reading JSON file: ${JSON_FILE_PATH}`);
   const fileStream = fs.createReadStream(JSON_FILE_PATH);
@@ -82,7 +93,21 @@ async function migrateScores() {
     process.exit(1); // Exit if JSON parsing fails
   }
 
-  const scoresToInsert: (typeof schema.scores.$inferInsert)[] = [];
+  // Explicitly define the type for insertion, including nullable fields
+  type ScoreInsert = {
+    userId: string;
+    wodId: string;
+    time_seconds: number | null;
+    reps: number | null;
+    load: number | null;
+    rounds_completed: number | null;
+    partial_reps: number | null;
+    is_rx: boolean;
+    scoreDate: Date;
+    notes: string | null;
+  };
+
+  const scoresToInsert: ScoreInsert[] = []; // Use the explicit type
   const wodIdCache: Record<string, string | null> = {}; // Cache WOD IDs (null if not found)
   let processedWods = 0;
   let processedResults = 0;
@@ -156,19 +181,21 @@ async function migrateScores() {
         continue;
       }
 
+      const typedResult = result as SourceResult; // Explicitly cast result
+
       scoresToInsert.push({
         userId: userId,
         wodId: wodId,
-        // Map source fields directly to new columns
-        // @ts-ignore
-        time_seconds: result.score_time_seconds ?? null,
-        reps: result.score_reps ?? null,
-        load: result.score_load ?? null,
-        rounds_completed: result.score_rounds_completed ?? null,
-        partial_reps: result.score_partial_reps ?? null,
+        // Map source fields directly to new columns, using typedResult
+        time_seconds: typedResult.score_time_seconds ?? null,
+        reps: typedResult.score_reps ?? null,
+        load: typedResult.score_load ?? null,
+        rounds_completed: typedResult.score_rounds_completed ?? null,
+        partial_reps: typedResult.score_partial_reps ?? null,
         // Original fields
         scoreDate: scoreDate,
-        notes: result.notes ?? null,
+        notes: typedResult.notes ?? null,
+        is_rx: typedResult.rxStatus === "Rx" ? true : false, // Explicitly map to true/false
         // id, createdAt, updatedAt will be handled by DB defaults/triggers
       });
     }

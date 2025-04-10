@@ -160,6 +160,7 @@ async function migrateScores() {
         userId: userId,
         wodId: wodId,
         // Map source fields directly to new columns
+        // @ts-ignore
         time_seconds: result.score_time_seconds ?? null,
         reps: result.score_reps ?? null,
         load: result.score_load ?? null,

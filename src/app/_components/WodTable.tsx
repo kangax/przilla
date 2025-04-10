@@ -19,6 +19,8 @@ import {
   formatShortDate,
   getPerformanceBadgeDetails, // Added
 } from "~/utils/wodUtils";
+import { C } from "vitest/dist/chunks/reporters.d.CfRkRKN2.js";
+import { Separator } from "@radix-ui/react-select";
 
 // --- Interfaces & Types ---
 
@@ -265,7 +267,7 @@ const createColumns = (
           // --- Case 2: Scores Exist ---
           // Assuming scores are sorted descending by date (newest first)
           return (
-            <Flex direction="column" gap="1" align="start">
+            <Flex direction="column" gap="2" align="start" className="my-2">
               {scores.map((score) => {
                 const formattedScore = formatScore(score);
                 const formattedDate = formatShortDate(score.scoreDate);
@@ -274,8 +276,26 @@ const createColumns = (
                   score,
                 );
 
+                const CustomTooltip = () => (
+                  <>
+                    <span>Your level: {displayLevel}</span>
+                    {score.notes ? (
+                      <>
+                        <br />
+                        {"--"}
+                        <br />
+                        <span style={{ whiteSpace: "pre-wrap" }}>
+                          {safeString(score.notes)}
+                        </span>
+                      </>
+                    ) : (
+                      ""
+                    )}
+                  </>
+                );
+
                 const scoreBadge = (
-                  <Tooltip content={displayLevel}>
+                  <Tooltip content={<CustomTooltip />}>
                     <Badge
                       color={
                         color as
@@ -299,21 +319,13 @@ const createColumns = (
 
                 return (
                   <Flex key={score.id} align="center" gap="1" wrap="nowrap">
-                    <Tooltip
-                      content={
-                        <span style={{ whiteSpace: "pre-wrap" }}>
-                          {safeString(score.notes)}
-                        </span>
-                      }
-                    >
-                      <div>
-                        {scoreBadge}
-                        <span className="text-muted-foreground ml-1 whitespace-nowrap text-xs">
-                          {" "}
-                          on {formattedDate}
-                        </span>
-                      </div>
-                    </Tooltip>
+                    <div>
+                      {scoreBadge}
+                      <span className="text-muted-foreground ml-1 whitespace-nowrap text-xs">
+                        {" "}
+                        on {formattedDate}
+                      </span>
+                    </div>
                   </Flex>
                 );
               })}

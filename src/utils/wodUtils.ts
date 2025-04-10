@@ -152,7 +152,9 @@ export const getPerformanceBadgeDetails = (
 
   if (level) {
     const capitalizedLevel = level.charAt(0).toUpperCase() + level.slice(1);
-    displayLevel = score.isRx ? `${capitalizedLevel} Rx` : capitalizedLevel;
+    displayLevel = score.isRx
+      ? capitalizedLevel
+      : `${capitalizedLevel + " (Scaled)"}`;
 
     switch (level) {
       case "elite":

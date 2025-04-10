@@ -229,9 +229,8 @@ export default function WodViewer() {
     "all" | "done" | "notDone"
   >(getInitialCompletionFilter);
   const [view, setView] = useState<"table" | "timeline">(() => {
-    // Force table view if not logged in, otherwise get initial from URL/default
-    const initialView = getInitialView();
-    return isLoggedIn ? initialView : "table";
+    // Always initialize from the URL parameter or default
+    return getInitialView();
   });
   // Need to get initial sortBy before getting initial sortDirection
   const [sortBy, setSortBy] = useState<SortByType>(() => getInitialSortBy());
@@ -277,10 +276,10 @@ export default function WodViewer() {
   // --- Sync State TO URL ---
   // Update URL when internal state changes
   useEffect(() => {
-    // Also force view back to table if user logs out while timeline is selected
-    if (!isLoggedIn && view === "timeline") {
-      setView("table");
-    }
+    // REMOVED: Logic to force view to table if !isLoggedIn (handled in separate effect)
+    // if (!isLoggedIn && view === "timeline") {
+    //   setView("table");
+    // }
 
     const urlParams: Record<string, string> = {};
 
@@ -364,6 +363,23 @@ export default function WodViewer() {
     isLoggedIn, // Add missing dependency
   ]);
   // --- End Sync State TO URL ---
+
+  // --- Effect to handle logout while on timeline view ---
+  const prevIsLoggedInRef = useRef<boolean | undefined>();
+
+  useEffect(() => {
+    const prevIsLoggedIn = prevIsLoggedInRef.current;
+    // Update the ref *after* reading the previous value but *before* the check
+    prevIsLoggedInRef.current = isLoggedIn;
+
+    // Only force back to table if the user *was* logged in and *now* is not,
+    // and they were on the timeline view.
+    if (prevIsLoggedIn === true && !isLoggedIn && view === "timeline") {
+      setView("table");
+    }
+    // Depend on isLoggedIn and view
+  }, [isLoggedIn, view]);
+  // --- End Logout Effect ---
 
   // Calculate counts for categories based on the *fetched* list for the dropdown
   const categoryCounts = useMemo(() => {
@@ -470,8 +486,9 @@ export default function WodViewer() {
   }, [categoryTagFilteredWods, completionFilter, scoresByWodId]); // Add scoresByWodId dependency
 
   const sortedWods = useMemo(() => {
-    return sortWods(finalFilteredWods, sortBy, sortDirection);
-  }, [finalFilteredWods, sortBy, sortDirection]);
+    // Pass scoresByWodId map to enable score-based sorting (like date)
+    return sortWods(finalFilteredWods, sortBy, sortDirection, scoresByWodId);
+  }, [finalFilteredWods, sortBy, sortDirection, scoresByWodId]); // Add scoresByWodId dependency
 
   // Removed DEBUG log
 

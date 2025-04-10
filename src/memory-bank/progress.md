@@ -12,6 +12,9 @@
   - Search highlighting implemented for Name, Category, Tags, Description.
   - Category and Tags columns combined into one, displaying tags below the category.
   - Variable row height enabled using `useVirtualizer`'s `measureElement` to correctly display wrapped content (like descriptions and tags).
+- **URL Parameter Handling:**
+  - `search`, `tags`, and `category` parameters correctly initialize state and persist in the URL.
+  - `view=timeline` parameter now correctly initializes the view state on page load. Fixed a bug where it defaulted to `table` during session loading by using a `useRef` hook to track the previous login state and only resetting the view on an actual logout event.
 - **Movement Frequency Chart:**
   - Displays top 20 movements by frequency per category, based on the count of _unique_ workouts the movement appears in.
   - Bar length (x-axis value) now correctly reflects the count of unique workouts.
@@ -29,6 +32,8 @@
 - **Timeline View:**
   - Conditionally rendered based on login status in `WodViewer`.
   - Removed non-functional "Progress Timeline" column from `WodTimeline` due to missing `results` data.
+  - Corrected `wodName` sorting by reverting to `localeCompare()` in `sortWods` utility function.
+  - Implemented `date` sorting in `sortWods` using the latest score date from the `scoresByWodId` map (passed from `WodViewer`).
 - **Performance Level Display:** The "Level" column in `WodTable` now correctly displays calculated performance levels (Elite, Advanced, etc.) based on user scores and WOD benchmarks. Fixed issue where benchmarks were treated as strings instead of objects.
 
 ## What's Left to Build
@@ -75,9 +80,9 @@ _(Based on `todo.md`):_
 - **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
-  - **Sorting/Filtering Limitations:** Sorting and filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is now partially possible via `WodTable` using the fetched score data, but requires further refinement (e.g., implementing sorting logic in `wodUtils.ts`).
+  - **Sorting/Filtering Limitations:** Sorting by `date` is now implemented. Sorting by `attempts`, `level`, and `latestLevel` still needs implementation in `wodUtils.ts` using the `scoresByWodId` map. Filtering by `isDone` works based on the presence of scores.
 - **Benchmark Data Parsing:** Identified and fixed an issue where `benchmarks` data fetched via tRPC was being treated as a string in the frontend (`WodViewer.tsx`), preventing performance level calculation. Added explicit JSON parsing in the component to resolve this.
-- **URL Parameter Initialization (`tags`, `category`):** Fixed issues where the `tags` and `category` URL parameters were not correctly initializing the filter state in `WodViewer.tsx` on page load due to dependency on asynchronously loaded `tagOrder`/`categoryOrder`. State is now initialized directly from the URL and validated later.
+- **URL Parameter Initialization (`tags`, `category`, `view`):** Fixed issues where URL parameters were not correctly initializing the filter state in `WodViewer.tsx` on page load due to dependencies on asynchronously loaded data (`tagOrder`/`categoryOrder`) or session status (`isLoggedIn`). State is now initialized directly from the URL and validated/adjusted later in effects. **(Fix for `view` parameter refined using `useRef` to track previous login state and avoid race conditions)**.
 
 ## Evolution of Project Decisions
 

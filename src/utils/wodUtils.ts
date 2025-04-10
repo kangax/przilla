@@ -250,23 +250,29 @@ const difficultyValues: Record<string, number> = {
 
 /**
  * Sorts an array of WODs based on the specified column and direction.
+ * Requires scoresByWodId map for sorting by date, level, etc.
  */
 export const sortWods = (
   wodsToSort: Wod[],
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
+  scoresByWodId?: Record<string, Score[]>, // Optional map for score-based sorting
 ): Wod[] => {
+  // Helper to get the latest score date for a WOD
+  const getLatestScoreDate = (wodId: number): Date | null => {
+    const scores = scoresByWodId?.[wodId];
+    // Scores are pre-sorted descending in WodViewer, so the first one is the latest
+    return scores && scores.length > 0 ? scores[0].scoreDate : null;
+  };
+
   return [...wodsToSort].sort((a, b) => {
     const directionMultiplier = sortDirection === "asc" ? 1 : -1;
 
     if (sortBy === "wodName") {
-      // Revert to toUpperCase comparison as localeCompare was slower
-      const nameA = a.wodName.toUpperCase();
-      const nameB = b.wodName.toUpperCase();
-      if (nameA < nameB) return -1 * directionMultiplier;
-      if (nameA > nameB) return 1 * directionMultiplier;
+      // Use localeCompare for proper string comparison
+      const compareResult = a.wodName.localeCompare(b.wodName);
       // No secondary sort needed if primary is name
-      return 0;
+      return compareResult * directionMultiplier;
     } else if (
       sortBy === "date" ||
       sortBy === "attempts" ||
@@ -280,7 +286,34 @@ export const sortWods = (
         `Sorting by "${sortBy}" is not yet implemented without score data.`,
       );
       // Fallback uses localeCompare, apply multiplier here
-      return a.wodName.localeCompare(b.wodName) * directionMultiplier;
+      // return a.wodName.localeCompare(b.wodName) * directionMultiplier; // Keep old fallback for now
+
+      // --- NEW Date Sorting Logic ---
+      if (sortBy === "date") {
+        const dateA = getLatestScoreDate(a.id);
+        const dateB = getLatestScoreDate(b.id);
+
+        // Handle cases where one or both WODs have no scores
+        if (dateA === null && dateB === null)
+          return a.wodName.localeCompare(b.wodName); // Secondary sort by name
+        if (dateA === null) return 1 * directionMultiplier; // Sort WODs without scores after those with scores (asc) or before (desc)
+        if (dateB === null) return -1 * directionMultiplier; // Sort WODs without scores after those with scores (asc) or before (desc)
+
+        // Both have dates, compare them
+        const timeDiff = dateA.getTime() - dateB.getTime();
+        if (timeDiff !== 0) {
+          return timeDiff * directionMultiplier;
+        }
+        // Secondary sort by name if dates are the same
+        return a.wodName.localeCompare(b.wodName);
+      }
+      // --- END Date Sorting Logic ---
+
+      // TODO: Implement sorting for attempts, level, latestLevel using scoresByWodId
+      console.warn(
+        `Sorting by "${sortBy}" is not yet fully implemented. Falling back to name sort.`,
+      );
+      return a.wodName.localeCompare(b.wodName) * directionMultiplier; // Fallback for other score-based sorts
     } else if (sortBy === "difficulty") {
       // Use pre-defined map
       const difficultyA =

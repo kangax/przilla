@@ -10,6 +10,12 @@
 
 ## Recent Changes
 
+- **Date Sorting Fix (Apr 2025):**
+  - Modified `sortWods` in `src/utils/wodUtils.ts` to accept an optional `scoresByWodId` map.
+  - Implemented logic within `sortWods` to sort by the latest score date when `sortBy` is "date", using the provided map. WODs without scores are sorted after those with scores (or before if sorting ascending). Secondary sort is by WOD name.
+  - Updated the `sortedWods` memoization in `WodViewer.tsx` to pass the `scoresByWodId` map to `sortWods`, enabling the new date sorting logic.
+- **WOD Name Sorting Fix (Apr 2025):** Reverted the `wodName` sorting logic in `src/utils/wodUtils.ts` back to using `localeCompare()` instead of `toUpperCase()`. This ensures correct alphabetical sorting, addressing an issue where the timeline view wasn't sorting correctly by name and potentially fixing related test failures. Performance implications of `localeCompare` vs `toUpperCase` might need re-evaluation later if necessary.
+- **View Parameter Initialization Fix (Round 3 - Apr 2025):** Implemented a more robust fix in `WodViewer.tsx` for the `?view=timeline` parameter initialization. Used a `useRef` hook (`prevIsLoggedInRef`) to track the previous `isLoggedIn` state. The `useEffect` hook responsible for handling logout now checks if the _previous_ state was `true` and the _current_ state is `false` before resetting the view to `table`. This prevents the view from being incorrectly reset during initial session loading and only triggers on an actual logout event.
 - **Level Display Fix (Apr 2025):** Resolved issue where the "Level" column in `WodTable.tsx` showed "-" for all scores. The root cause was the `benchmarks` data being passed as a string instead of an object from the tRPC query (`api.wod.getAll`) to the component. Fixed by adding explicit `JSON.parse()` for the `benchmarks` field within the `useMemo` hook in `src/app/_components/WodViewer.tsx` where WOD data is processed. Removed temporary debugging logs.
 - **Level Calculation Fix (Apr 2025):** Updated `src/app/_components/WodViewer.tsx` to sort scores by date descending within the `scoresByWodId` map. This ensures the `WodTable` uses the latest score when calling `getPerformanceLevel`, fixing the level display.
 - **Score Data Migration & UI Update (Apr 2025):**

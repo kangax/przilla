@@ -646,9 +646,6 @@ describe("WodTable Component", () => {
     fireEvent.click(screen.getByText(/Date/));
     expect(handleSortMock).toHaveBeenCalledWith("date");
 
-    fireEvent.click(screen.getByText(/Level/));
-    expect(handleSortMock).toHaveBeenCalledWith("level");
-
     fireEvent.click(screen.getByText(/Difficulty/));
     expect(handleSortMock).toHaveBeenCalledWith("difficulty");
 

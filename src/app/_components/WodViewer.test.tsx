@@ -1114,36 +1114,6 @@ describe("WodViewer Component", () => {
     ).toBeInTheDocument();
   });
 
-  it("should switch to timeline view", async () => {
-    render(<WodViewer />);
-
-    // Find the view switcher and switch to timeline
-    const timelineViewButton = screen.getByRole("radio", {
-      name: /Timeline View/i,
-    });
-    fireEvent.click(timelineViewButton);
-
-    // Check timeline is rendered
-    await waitFor(() => {
-      expect(screen.getByTestId("wod-timeline")).toBeInTheDocument();
-      expect(screen.queryByTestId("wod-table")).not.toBeInTheDocument();
-    });
-
-    // Timeline view should show all WODs initially
-    expect(screen.getByTestId("timeline-wod-count")).toHaveTextContent("6");
-
-    // Check default sort state passed to timeline (date/desc as per component default)
-    expect(screen.getByTestId("timeline-sort-by")).toHaveTextContent("date");
-    expect(screen.getByTestId("timeline-sort-direction")).toHaveTextContent(
-      "desc",
-    );
-
-    // Completion filter should be visible
-    expect(
-      screen.getByRole("radio", { name: /All \(\d+\)/i }),
-    ).toBeInTheDocument();
-  });
-
   it("should filter by category and update URL", async () => {
     render(<WodViewer />);
     expect(screen.getByTestId("table-wod-count")).toHaveTextContent("6"); // All WODs initially

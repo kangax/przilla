@@ -467,14 +467,10 @@ const WodTable: React.FC<WodTableProps> = ({
 const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
   const validSortKeys: SortByType[] = [
     "wodName",
-    // "date", // Removed
-    // "level", // Removed
-    "attempts", // Keep for potential future sorting
-    "latestLevel", // Keep for potential future sorting
+    "date",
     "difficulty",
     "countLikes",
   ];
-  // Note: Sorting by the new 'results' column isn't implemented yet.
   return validSortKeys.includes(sortBy as SortByType);
 };
 

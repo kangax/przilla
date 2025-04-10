@@ -54,9 +54,6 @@ const isValidSortDirection = (dir: string | null): dir is "asc" | "desc" => {
 const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   wodName: "asc",
   date: "desc",
-  level: "desc",
-  attempts: "desc",
-  latestLevel: "desc",
   difficulty: "asc",
   countLikes: "desc",
 };

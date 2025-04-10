@@ -327,21 +327,7 @@ export const sortWods = (
       const compareResult = a.wodName.localeCompare(b.wodName);
       // No secondary sort needed if primary is name
       return compareResult * directionMultiplier;
-    } else if (
-      sortBy === "date" ||
-      sortBy === "attempts" ||
-      sortBy === "level" ||
-      sortBy === "latestLevel"
-    ) {
-      // TODO: Implement sorting for date, attempts, level, latestLevel
-      // These currently require fetching associated scores, which is not done here.
-      // For now, fall back to sorting by name for these columns.
-      console.warn(
-        `Sorting by "${sortBy}" is not yet implemented without score data.`,
-      );
-      // Fallback uses localeCompare, apply multiplier here
-      // return a.wodName.localeCompare(b.wodName) * directionMultiplier; // Keep old fallback for now
-
+    } else if (sortBy === "date") {
       // --- NEW Date Sorting Logic ---
       if (sortBy === "date") {
         const dateA = getLatestScoreDate(a.id);
@@ -362,11 +348,6 @@ export const sortWods = (
         return a.wodName.localeCompare(b.wodName);
       }
       // --- END Date Sorting Logic ---
-
-      // TODO: Implement sorting for attempts, level, latestLevel using scoresByWodId
-      console.warn(
-        `Sorting by "${sortBy}" is not yet fully implemented. Falling back to name sort.`,
-      );
       return a.wodName.localeCompare(b.wodName) * directionMultiplier; // Fallback for other score-based sorts
     } else if (sortBy === "difficulty") {
       // Use pre-defined map

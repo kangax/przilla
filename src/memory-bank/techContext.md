@@ -1,6 +1,6 @@
 # Tech Context
 
-ALways use write_to_file, never replace_file
+ALways use `write_to_file`, never `replace_in_file`
 
 ## Technologies Used
 

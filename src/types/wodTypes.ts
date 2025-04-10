@@ -97,11 +97,4 @@ export type PerformanceDataPoint = {
 };
 
 // Type for sorting columns in WodTable/WodViewer
-export type SortByType =
-  | "wodName"
-  | "date"
-  | "level"
-  | "attempts"
-  | "latestLevel"
-  | "difficulty"
-  | "countLikes"; // Corrected to camelCase
+export type SortByType = "wodName" | "date" | "difficulty" | "countLikes";

@@ -6,7 +6,7 @@
 ### Stats
 
 - Short excerpt about your data (what to focus on, strength/weaknesses)
-- Use AI endpoint?
+  - Use AI endpoint?
 
 ### Import from wodwell / sugarwod
 

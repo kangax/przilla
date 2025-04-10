@@ -9,9 +9,8 @@ export default async function Home() {
   return (
     <Box className="min-h-screen bg-background text-foreground">
       <Header />
-      <Container size="4" className="pb-8 pt-6">
+      <Container size="4" className="pb-8 pt-2">
         <Flex direction="column" gap="6">
-          {/* Removed props from WodViewer */}
           <Suspense fallback={<Box>Loading...</Box>}>
             <WodViewer />
           </Suspense>

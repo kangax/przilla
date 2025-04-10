@@ -1,5 +1,7 @@
 # Tech Context
 
+ALways use write_to_file, never replace_file
+
 ## Technologies Used
 
 - **Language:** TypeScript

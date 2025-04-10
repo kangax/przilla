@@ -43,7 +43,8 @@
 _(Based on `todo.md`):_
 
 - **UI Enhancements:**
-  - Refine search/filter functionality for WODs (highlighting is done, filtering logic exists, but UI/UX could be improved).
+  - Redesign WOD table score display to show compact preview of latest attempt + count with click-to-expand functionality
+  - Refine search/filter functionality for WODs (highlighting is done, filtering logic exists, but UI/UX could be improved)
 - **Data Expansion:**
   - Add Games workouts.
   - Add Benchmark workouts (e.g., King Kong).

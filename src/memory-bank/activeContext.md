@@ -6,6 +6,30 @@
 
 ## Current Focus
 
+### WOD Table Score Display Redesign
+
+**Problem**: Table currently shows only latest score per WOD, hiding multiple attempts
+**Solution**: Compact score preview showing latest attempt + count with click-to-expand functionality
+
+**Implementation Plan**:
+
+1. Modify `WodTable.tsx` to:
+
+   - Replace current score/level columns with single "Results" column
+   - Display formatted latest score (e.g. "4:32 Rx")
+   - Show attempt count badge (e.g. "and 2 more")
+   - Make entire cell clickable (future panel integration)
+
+2. Data Flow:
+   - Keep existing `scoresByWodId` structure
+   - Extract first score for preview
+   - Calculate total attempts per WOD
+
+**Next Steps**:
+
+- Implement compact preview
+- Later: Add side panel for full attempt history
+
 - Updating backend (tRPC routers) and frontend components (`WodViewer`, `WodTable`, etc.) to fetch WOD data from the database instead of the static JSON file.
 
 ## Recent Changes

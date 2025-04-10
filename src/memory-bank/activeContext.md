@@ -2,28 +2,36 @@
 
 ## Current Focus
 
-### WOD Table Score Display Redesign - Phase 1 Complete
+### WOD Table Score Display Redesign - Phase 2 Complete
 
-**Problem**: Table currently shows only latest score per WOD, hiding multiple attempts
-**Solution**: Compact score preview showing latest attempt + count with click-to-expand functionality
+**Problem**: Score display was too compact, hiding useful historical context
+**Solution**: Show all scores inline with performance level and date information
 
-**Implementation Plan**:
+**Implementation**:
 
-1. Modify `WodTable.tsx` to:
+1. Modified `WodTable.tsx` to:
 
-   - Replace current score/level columns with single "Results" column **(DONE)**
-   - Display formatted latest score (e.g. "4:32 Rx") **(DONE)**
-   - Show attempt count badge (e.g. "+ 2 more") **(DONE)**
-   - Make entire cell clickable (future panel integration) **(DONE - Added cursor-pointer)**
+   - Display all scores in "Results" column (sorted newest first)
+   - Format each score as: "4:32 {Rx} on Sep 12, '24 (Advanced)"
+   - Show performance level in parentheses
+   - Include notes icon with tooltip when notes exist
+   - Make date text smaller (`text-xs`)
 
-2. Data Flow:
-   - Keep existing `scoresByWodId` structure **(DONE)**
-   - Extract first score for preview **(DONE)**
-   - Calculate total attempts per WOD **(DONE)**
+2. Added utility functions:
+
+   - `formatShortDate()` for consistent date formatting
+   - Updated `getPerformanceBadgeDetails()` to handle color coding
+
+3. Color Scheme:
+   - Elite: purple
+   - Advanced: green
+   - Intermediate: yellow (updated from blue)
+   - Beginner: gray
+   - Rx-only (no level): green
 
 **Next Steps**:
 
-- Implement side panel for full attempt history (Phase 2)
+- Consider adding visual indicators for PRs or personal bests
 
 - Updating backend (tRPC routers) and frontend components (`WodViewer`, `WodTable`, etc.) to fetch WOD data from the database instead of the static JSON file.
 

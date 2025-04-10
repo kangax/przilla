@@ -9,11 +9,17 @@
 - **Authentication Shell:** Basic authentication controls (`AuthControls.tsx`) and setup (`src/server/auth/`) exist, though a potential switch is noted in `todo.md`.
 - **WodTable UI:**
   - **New "Results" Column:** Replaced "Date", "Score", and "Level" columns with a single "Results" column displaying:
-    - Latest score (formatted, e.g., "4:32").
-    - "Rx" badge if applicable.
-    - Badge for additional attempts (e.g., "+ 2 more").
-    - Tooltip for score notes (if present).
-    - Tooltip for benchmark levels (if no score exists).
+    - All scores listed vertically (newest first)
+    - Each score displays formatted value (e.g., "4:32"), Rx status if applicable, and date (e.g., "on Sep 12, '24")
+    - Performance level shown in parentheses (e.g., "(Advanced)")
+    - Notes icon with tooltip when notes exist
+    - Color-coded performance levels:
+      - Elite: purple
+      - Advanced: green
+      - Intermediate: yellow
+      - Beginner: gray
+      - Rx-only (no level): green
+    - Dates are smaller text (`text-xs`) for better visual hierarchy
     - Cell is clickable (`cursor-pointer`) for future panel integration.
   - Notes column removed; notes shown in score tooltip (now part of Results column tooltip).
   - Search highlighting implemented for Name, Category, Tags, Description.

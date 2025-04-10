@@ -127,6 +127,57 @@ export const formatSecondsToMMSS = (seconds: number): string => {
 };
 
 /**
+ * Formats a Date object into a short "Mon DD, 'YY" format.
+ */
+export const formatShortDate = (date: Date): string => {
+  if (!(date instanceof Date) || isNaN(date.getTime())) {
+    return "Invalid Date"; // Handle invalid date input
+  }
+  const month = date.toLocaleString("default", { month: "short" });
+  const day = date.getDate();
+  const year = date.getFullYear().toString().slice(-2);
+  return `${month} ${day}, '${year}`;
+};
+
+/**
+ * Determines the display text and Radix color for a performance badge based on level and Rx status.
+ */
+export const getPerformanceBadgeDetails = (
+  wod: Wod,
+  score: Score,
+): { displayLevel: string; color: string } => {
+  const level = getPerformanceLevel(wod, score);
+  let displayLevel = "Score"; // Default if no level
+  let color = "gray"; // Default Radix color
+
+  if (level) {
+    const capitalizedLevel = level.charAt(0).toUpperCase() + level.slice(1);
+    displayLevel = score.isRx ? `${capitalizedLevel} Rx` : capitalizedLevel;
+
+    switch (level) {
+      case "elite":
+        color = "purple";
+        break;
+      case "advanced":
+        color = "green";
+        break;
+      case "intermediate":
+        color = "yellow";
+        break;
+      case "beginner":
+        color = "gray"; // Keep gray for beginner
+        break;
+    }
+  } else if (score.isRx) {
+    // Handle case where there's no benchmark level but it was Rx
+    displayLevel = "Rx";
+    color = "green"; // Use green for Rx when no level is available
+  }
+
+  return { displayLevel, color };
+};
+
+/**
  * Formats a Score object into a displayable score string based on available fields.
  */
 export const formatScore = (score: Score): string => {
@@ -259,7 +310,8 @@ export const sortWods = (
   scoresByWodId?: Record<string, Score[]>, // Optional map for score-based sorting
 ): Wod[] => {
   // Helper to get the latest score date for a WOD
-  const getLatestScoreDate = (wodId: number): Date | null => {
+  const getLatestScoreDate = (wodId: string): Date | null => {
+    // Changed number to string
     const scores = scoresByWodId?.[wodId];
     // Scores are pre-sorted descending in WodViewer, so the first one is the latest
     return scores && scores.length > 0 ? scores[0].scoreDate : null;

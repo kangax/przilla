@@ -14,10 +14,10 @@ import {
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Import Score
 import {
-  getPerformanceLevel, // Keep for potential future use or tooltip
-  getPerformanceLevelTooltip,
-  formatScore, // Re-enable
-  getPerformanceLevelColor, // Keep for potential future use or tooltip
+  getPerformanceLevelTooltip, // Keep for benchmark info tooltip
+  formatScore,
+  formatShortDate,
+  getPerformanceBadgeDetails, // Added
 } from "~/utils/wodUtils";
 
 // --- Interfaces & Types ---
@@ -121,7 +121,7 @@ const createColumns = (
           </span>
         );
       },
-      size: 250,
+      size: 200,
     }),
     // Combined Category and Tags Column
     columnHelper.accessor(
@@ -214,6 +214,20 @@ const createColumns = (
       },
       size: 70,
     }),
+    // --- Description Column ---
+    columnHelper.accessor("description", {
+      header: "Description",
+      cell: (info) => {
+        const row = info.row.original;
+        if (!row.description) return null;
+        return (
+          <span className="whitespace-pre-wrap break-words">
+            <HighlightMatch text={row.description} highlight={searchTerm} />
+          </span>
+        );
+      },
+      size: 364,
+    }),
     // --- NEW Results Column ---
     columnHelper.accessor(
       (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
@@ -222,10 +236,9 @@ const createColumns = (
         header: "Your scores", // No sorting for now
         cell: (info) => {
           const { wod, scores } = info.getValue();
-          const latestScore = scores?.[0]; // Assuming scores are sorted descending by date
 
-          // --- Case 1: No Score ---
-          if (!latestScore) {
+          // --- Case 1: No Scores ---
+          if (!scores || scores.length === 0) {
             // Show benchmark tooltip if benchmarks exist
             if (wod.benchmarks) {
               return (
@@ -249,76 +262,67 @@ const createColumns = (
             );
           }
 
-          // --- Case 2: Score Exists ---
-          const formattedScore = formatScore(latestScore);
-          const isRxBadge = latestScore.isRx ? (
-            <Badge color="green" variant="solid" size="1" className="ml-1">
-              Rx
-            </Badge>
-          ) : null;
-          const attemptCount = scores.length;
-          const additionalAttempts = attemptCount > 1 ? attemptCount - 1 : 0;
-          const attemptsBadge =
-            additionalAttempts > 0 ? (
-              <Badge
-                color="gray"
-                variant="soft"
-                size="1"
-                radius="full"
-                className="ml-2"
-              >
-                + {additionalAttempts} more
-              </Badge>
-            ) : null;
+          // --- Case 2: Scores Exist ---
+          // Assuming scores are sorted descending by date (newest first)
+          return (
+            <Flex direction="column" gap="1" align="start">
+              {scores.map((score) => {
+                const formattedScore = formatScore(score);
+                const formattedDate = formatShortDate(score.scoreDate);
+                const { displayLevel, color } = getPerformanceBadgeDetails(
+                  wod,
+                  score,
+                );
 
-          // Combine score, Rx badge, and attempts badge
-          const resultsContent = (
-            <Flex align="center" gap="1" className="cursor-pointer">
-              {" "}
-              {/* Added cursor-pointer */}
-              <span className="whitespace-nowrap font-medium">
-                {formattedScore}
-              </span>
-              {isRxBadge}
-              {attemptsBadge}
+                const scoreBadge = (
+                  <Tooltip content={displayLevel}>
+                    <Badge
+                      color={
+                        color as
+                          | "red"
+                          | "blue"
+                          | "green"
+                          | "yellow"
+                          | "purple"
+                          | "gray"
+                          | "indigo"
+                      } // All possible Radix Badge colors
+                      variant="soft" // Use soft variant for less visual weight
+                      radius="full"
+                      size="2"
+                      className="cursor-help" // Indicate tooltip
+                    >
+                      {formattedScore}
+                    </Badge>
+                  </Tooltip>
+                );
+
+                return (
+                  <Flex key={score.id} align="center" gap="1" wrap="nowrap">
+                    <Tooltip
+                      content={
+                        <span style={{ whiteSpace: "pre-wrap" }}>
+                          {safeString(score.notes)}
+                        </span>
+                      }
+                    >
+                      <div>
+                        {scoreBadge}
+                        <span className="text-muted-foreground ml-1 whitespace-nowrap text-xs">
+                          {" "}
+                          on {formattedDate}
+                        </span>
+                      </div>
+                    </Tooltip>
+                  </Flex>
+                );
+              })}
             </Flex>
           );
-
-          // Conditionally wrap with Tooltip if notes exist
-          if (latestScore.notes) {
-            return (
-              <Tooltip
-                content={
-                  <span style={{ whiteSpace: "pre-wrap" }}>
-                    {safeString(latestScore.notes)}
-                  </span>
-                }
-              >
-                {resultsContent}
-              </Tooltip>
-            );
-          }
-
-          // Otherwise, just return the results content
-          return resultsContent;
         },
-        size: 214, // Adjusted size
+        size: 200, // Reduced size slightly as level text is now in tooltip
       },
     ),
-    // --- Description Column (kept at end) ---
-    columnHelper.accessor("description", {
-      header: "Description",
-      cell: (info) => {
-        const row = info.row.original;
-        if (!row.description) return null;
-        return (
-          <span className="whitespace-pre-wrap break-words">
-            <HighlightMatch text={row.description} highlight={searchTerm} />
-          </span>
-        );
-      },
-      size: 300,
-    }),
   ];
 };
 

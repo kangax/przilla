@@ -19,6 +19,12 @@
 - **Styling:** Tailwind CSS used for utility-first styling, combined with Radix UI for accessible, unstyled component primitives.
 - **State Management:** TanStack Query (React Query) for managing server state, caching, and data fetching, integrating well with tRPC.
 - **Error Handling:** Ensure robust error handling is implemented throughout the application. (From previous rules)
+- **Score Badge Colors:** Performance levels are color-coded for quick visual identification:
+  - Elite: purple
+  - Advanced: green
+  - Intermediate: yellow
+  - Beginner: gray
+  - Rx-only (no level): green
 
 ## Design Patterns
 

@@ -1,4 +1,4 @@
-import type { Wod, WodResult, SortByType } from "~/types/wodTypes"; // Added SortByType
+import type { Wod, Score, WodResult, SortByType } from "~/types/wodTypes"; // Added Score, SortByType
 import { PERFORMANCE_LEVEL_COLORS } from "~/config/constants";
 
 /**
@@ -17,25 +17,34 @@ export const hasScore = (result: WodResult): boolean => {
  * Calculates a single numeric value representing the score for comparison,
  * based on the WOD's benchmark type. Returns null if no benchmark or score.
  */
-export const getNumericScore = (wod: Wod, result: WodResult): number | null => {
-  if (!wod.benchmarks || !hasScore(result)) return null;
+export const getNumericScore = (wod: Wod, score: Score): number | null => {
+  if (!wod.benchmarks) return null; // No benchmarks to compare against
 
-  if (wod.benchmarks.type === "time" && result.score_time_seconds !== null) {
-    return result.score_time_seconds;
-  } else if (wod.benchmarks.type === "reps" && result.score_reps !== null) {
-    return result.score_reps;
-  } else if (wod.benchmarks.type === "load" && result.score_load !== null) {
-    return result.score_load;
+  // Check if score object has any relevant value
+  const hasAnyScoreValue =
+    score.time_seconds !== null ||
+    score.reps !== null ||
+    score.load !== null ||
+    score.rounds_completed !== null;
+
+  if (!hasAnyScoreValue) return null; // No score value recorded
+
+  if (wod.benchmarks.type === "time" && score.time_seconds !== null) {
+    return score.time_seconds;
+  } else if (wod.benchmarks.type === "reps" && score.reps !== null) {
+    return score.reps;
+  } else if (wod.benchmarks.type === "load" && score.load !== null) {
+    return score.load;
   } else if (
     wod.benchmarks.type === "rounds" &&
-    result.score_rounds_completed !== null
+    score.rounds_completed !== null
   ) {
     // Convert rounds+reps to a decimal number (e.g., 5+10 becomes 5.10)
-    const partialReps = result.score_partial_reps || 0;
+    const partialReps = score.partial_reps || 0;
     // Ensure partial reps don't overflow (e.g., treat 100 reps as 0.99 for comparison)
     // This assumes no WOD has 100+ reps in a partial round for scoring benchmarks.
     const partialDecimal = Math.min(partialReps, 99) / 100;
-    return result.score_rounds_completed + partialDecimal;
+    return score.rounds_completed + partialDecimal;
   }
 
   return null;
@@ -45,13 +54,10 @@ export const getNumericScore = (wod: Wod, result: WodResult): number | null => {
  * Determines the performance level (elite, advanced, etc.) based on the numeric score
  * and the WOD's benchmark levels. Returns null if no benchmark or score.
  */
-export const getPerformanceLevel = (
-  wod: Wod,
-  result: WodResult,
-): string | null => {
+export const getPerformanceLevel = (wod: Wod, score: Score): string | null => {
   if (!wod.benchmarks) return null;
 
-  const numericScore = getNumericScore(wod, result);
+  const numericScore = getNumericScore(wod, score);
   if (numericScore === null) return null;
 
   // Add check for levels existence and non-emptiness
@@ -100,11 +106,13 @@ export const getPerformanceLevel = (
  * NOTE: This currently always returns false as WOD definitions fetched via
  * `api.wod.getAll` do not include user-specific results. Determining "doneness"
  * requires fetching associated scores separately.
+ * @param wod The WOD definition.
+ * @param scores An array of Score objects associated with this WOD for the current user.
  */
-export const isWodDone = (_wod: Wod): boolean => {
+export const isWodDone = (_wod: Wod, scores?: Score[] | null): boolean => {
   // Prefix unused 'wod'
-  // return wod.results.some((r) => r.date && hasScore(r)); // Old logic based on results prop
-  return false; // Cannot determine doneness from WOD definition alone
+  // Check if there's at least one score associated with this WOD
+  return !!scores && scores.length > 0;
 };
 
 /**
@@ -118,20 +126,21 @@ export const formatSecondsToMMSS = (seconds: number): string => {
 };
 
 /**
- * Formats a WodResult into a displayable score string based on available fields.
+ * Formats a Score object into a displayable score string based on available fields.
  */
-export const formatScore = (result: WodResult): string => {
-  if (result.score_time_seconds !== null) {
-    return formatSecondsToMMSS(result.score_time_seconds);
-  } else if (result.score_reps !== null) {
-    return `${result.score_reps} reps`;
-  } else if (result.score_load !== null) {
-    return `${result.score_load} lbs`;
-  } else if (result.score_rounds_completed !== null) {
-    if (result.score_partial_reps !== null && result.score_partial_reps > 0) {
-      return `${result.score_rounds_completed}+${result.score_partial_reps}`;
+export const formatScore = (score: Score): string => {
+  if (score.time_seconds !== null) {
+    return formatSecondsToMMSS(score.time_seconds);
+  } else if (score.reps !== null) {
+    return `${score.reps} reps`;
+  } else if (score.load !== null) {
+    // TODO: Add unit (lbs/kg) based on user preference or WOD context if available
+    return `${score.load} lbs`;
+  } else if (score.rounds_completed !== null) {
+    if (score.partial_reps !== null && score.partial_reps > 0) {
+      return `${score.rounds_completed}+${score.partial_reps}`;
     } else {
-      return `${result.score_rounds_completed} rounds`; // Be explicit for full rounds
+      return `${score.rounds_completed} rounds`; // Be explicit for full rounds
     }
   }
   return "-"; // Return a dash if no score is found

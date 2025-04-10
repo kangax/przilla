@@ -10,6 +10,16 @@
 
 ## Recent Changes
 
+- **Score Data Migration & UI Update (Apr 2025):**
+  - **Schema Change:** Modified the `scores` table schema (`src/server/db/schema.ts`) to use separate nullable columns (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`) instead of a single `scoreValue` JSON column. Generated and applied the corresponding database migration (`drizzle/0001_lively_callisto.sql`).
+  - **Historical Data Migration:** Created and executed `scripts/migrate_user_scores.ts` to port 111 historical scores for user `kangax@gmail.com` from `public/data/wods.json` into the new `scores` table structure.
+  - **Backend API:** Created a new tRPC router (`src/server/api/routers/score.ts`) with a `getAllByUser` procedure to fetch scores using the new schema and registered it in the `appRouter` (`src/server/api/root.ts`).
+  - **Frontend Integration:**
+    - Updated `src/types/wodTypes.ts` to include a `Score` type matching the new schema.
+    - Refactored `src/app/_components/WodViewer.tsx` to fetch scores using `api.score.getAllByUser` and pass a `scoresByWodId` map to child components.
+    - Updated `src/app/_components/WodTable.tsx` props and column definitions to accept and display data from `scoresByWodId` (including score date, formatted score, and basic level display).
+    - Updated `src/app/_components/WodTimeline.tsx` props to accept `scoresByWodId`.
+    - Updated utility functions (`src/utils/wodUtils.ts`: `isWodDone`, `formatScore`, `getPerformanceLevel`, `getNumericScore`) to work with the `Score` type and the new data structure.
 - **WOD Data Transformation:** Identified missing Open workouts (11.x, 13.x, 14.x, 15.x, 16.x, 17.x, 18.x, 19.2, 25.x) and numerous Benchmark workouts by comparing `wodwell_workouts.json` and `wods.json`.
 - **Data Transformation Process:**
   - Retrieved source data for missing WODs (preferring verified entries).
@@ -126,7 +136,7 @@
 
 ## Next Steps
 
-### Score Data Migration Plan (kangax@gmail.com)
+### Score Data Migration Plan (kangax@gmail.com) - COMPLETED
 
 **Goal:** Migrate historical workout results for user `kangax@gmail.com` from the structure previously used in `public/data/wods.json` into the `scores` database table.
 
@@ -164,8 +174,10 @@
 
 **Follow-up Actions (Separate Task):**
 
-- Update backend tRPC routers (for fetching/creating/updating scores) to use the new separate score columns.
-- Update frontend components (e.g., `WodTable`, `WodTimeline`, score display/input forms) to fetch, display, and handle score data using the new separate columns instead of the previous `scoreValue` structure.
+- Implement score creation/editing functionality (tRPC procedures and UI forms).
+- Refine score-based sorting/filtering in `WodViewer`/`wodUtils`.
+- Complete implementation of `getPerformanceLevel` in `WodTable` (currently placeholder).
+- Update other components still using static JSON (e.g., charts page).
 
 ### Previous Database Migration Implementation Plan
 

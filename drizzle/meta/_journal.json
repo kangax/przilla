@@ -8,6 +8,13 @@
       "when": 1744157416583,
       "tag": "0000_wild_silver_samurai",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1744242634474,
+      "tag": "0001_lively_callisto",
+      "breakpoints": true
     }
   ]
 }

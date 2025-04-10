@@ -10,13 +10,6 @@ import {
 import { type AdapterAccount } from "next-auth/adapters";
 import type { Benchmarks } from "~/types/wodTypes"; // Import the actual Benchmarks type
 
-// Define a more specific type for ScoreValue JSON, aligning with Benchmark types where possible
-type ScoreValue = {
-  type: "time" | "reps" | "load" | "rounds"; // Use specific known types
-  value: number | string | { rounds: number; reps?: number }; // Allow number, string, or rounds/reps object
-  // Add other potential fields if needed, e.g., notes, rxStatus
-};
-
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same
  * database instance for multiple projects.
@@ -67,7 +60,13 @@ export const scores = createTable(
     wodId: text("wod_id")
       .notNull()
       .references(() => wods.id, { onDelete: "cascade" }), // Cascade delete scores if WOD is deleted
-    scoreValue: text("score_value").notNull().$type<ScoreValue>(), // Storing JSON as text
+    // Score components stored as separate columns
+    time_seconds: int("time_seconds"), // Nullable integer
+    reps: int("reps"), // Nullable integer
+    load: int("load"), // Nullable integer, assuming lbs or kg - needs context
+    rounds_completed: int("rounds_completed"), // Nullable integer
+    partial_reps: int("partial_reps"), // Nullable integer
+    // Original fields
     scoreDate: int("score_date", { mode: "timestamp" }).notNull(),
     notes: text("notes"),
     createdAt: int("created_at", { mode: "timestamp" })

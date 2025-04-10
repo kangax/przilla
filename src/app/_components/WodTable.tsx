@@ -12,11 +12,12 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { Wod, SortByType } from "~/types/wodTypes"; // Removed WodResult
+import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Import Score
 import {
-  // getPerformanceLevel, // Removed as result data is unavailable
+  getPerformanceLevel, // Re-enable
   getPerformanceLevelTooltip,
-  // formatScore, // Removed as result data is unavailable
+  formatScore, // Re-enable
+  getPerformanceLevelColor, // Import color helper
 } from "~/utils/wodUtils";
 
 // --- Interfaces & Types ---
@@ -28,6 +29,7 @@ interface WodTableProps {
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
   searchTerm: string;
+  scoresByWodId: Record<string, Score[]>; // Add scores map prop
 }
 
 // No longer need FlatWodRow interface
@@ -93,6 +95,7 @@ const createColumns = (
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
   searchTerm: string,
+  scoresByWodId: Record<string, Score[]>, // Accept scores map
 ): ColumnDef<Wod, unknown>[] => {
   // Use Wod type
   const getSortIndicator = (columnName: SortByType) => {
@@ -238,62 +241,100 @@ const createColumns = (
       },
       size: 70,
     }),
-    // --- Date Column (Placeholder - No result data) ---
-    columnHelper.accessor(() => null, {
-      // No date available directly on Wod definition
-      id: "date",
-      header: () => (
-        <span onClick={() => handleSort("date")} className="cursor-pointer">
-          Date{getSortIndicator("date")}
-        </span>
-      ),
-      cell: () => {
-        return (
-          <span className="whitespace-nowrap">-</span> // Render dash as placeholder
-        );
+    // --- Date Column ---
+    columnHelper.accessor(
+      (row) => scoresByWodId[row.id]?.[0]?.scoreDate, // Get latest score date
+      {
+        id: "date",
+        header: () => (
+          <span onClick={() => handleSort("date")} className="cursor-pointer">
+            Date{getSortIndicator("date")}
+          </span>
+        ),
+        cell: (info) => {
+          const date = info.getValue();
+          return (
+            <span className="whitespace-nowrap">
+              {date ? date.toLocaleDateString() : "-"}
+            </span>
+          );
+        },
+        size: 90,
       },
-      size: 90,
-    }),
-    // --- Score Column (Placeholder - No result data) ---
-    columnHelper.accessor("benchmarks", {
-      // Access benchmarks directly
-      id: "score",
-      header: "Score",
-      cell: (info) => {
-        const benchmarks = info.getValue(); // Get benchmarks directly
+    ),
+    // --- Score Column ---
+    columnHelper.accessor(
+      (row) => ({ wod: row, scores: scoresByWodId[row.id] }), // Pass WOD and scores
+      {
+        id: "score",
+        header: "Score",
+        cell: (info) => {
+          const { wod, scores } = info.getValue();
+          const latestScore = scores?.[0]; // Assuming scores are sorted descending by date
 
-        // Show Info icon with benchmark tooltip if benchmarks exist
-        if (!benchmarks)
-          return <span className="whitespace-nowrap font-mono">-</span>;
+          if (!latestScore) {
+            // If no score, show benchmark tooltip if benchmarks exist
+            if (!wod.benchmarks)
+              return <span className="whitespace-nowrap font-mono">-</span>;
+            return (
+              <Tooltip
+                content={
+                  <span style={{ whiteSpace: "pre-wrap" }}>
+                    {getPerformanceLevelTooltip(wod)}
+                  </span>
+                }
+              >
+                <Info size={14} className="text-muted-foreground" />
+              </Tooltip>
+            );
+          }
 
-        return (
-          <Tooltip
-            content={
-              <span style={{ whiteSpace: "pre-wrap" }}>
-                {getPerformanceLevelTooltip({ benchmarks } as Wod)}
+          // If score exists, display it with notes tooltip
+          return (
+            <Tooltip
+              content={
+                <span style={{ whiteSpace: "pre-wrap" }}>
+                  {safeString(latestScore.notes)}
+                </span>
+              }
+            >
+              <span className="whitespace-nowrap font-mono">
+                {formatScore(latestScore)}
               </span>
-            }
-          >
-            <Info size={14} className="text-muted-foreground" />
-          </Tooltip>
-        );
+            </Tooltip>
+          );
+        },
+        size: 140,
       },
-      size: 140,
-    }),
-    // --- Level Column (Placeholder - No result data) ---
-    columnHelper.accessor(() => null, {
-      // No level available directly on Wod definition
-      id: "level",
-      header: () => (
-        <span onClick={() => handleSort("level")} className="cursor-pointer">
-          Level{getSortIndicator("level")}
-        </span>
-      ),
-      cell: () => {
-        return <Text>-</Text>; // Render dash as placeholder
+    ),
+    // --- Level Column ---
+    columnHelper.accessor(
+      (row) => ({ wod: row, scores: scoresByWodId[row.id] }), // Pass WOD and scores
+      {
+        id: "level",
+        header: () => (
+          <span onClick={() => handleSort("level")} className="cursor-pointer">
+            Level{getSortIndicator("level")}
+          </span>
+        ),
+        cell: (info) => {
+          const { wod, scores } = info.getValue();
+          const latestScore = scores?.[0];
+          if (!latestScore) return <Text>-</Text>;
+
+          // Use the updated getPerformanceLevel function
+          const level = getPerformanceLevel(wod, latestScore);
+          // const level = "N/A"; // Placeholder until getPerformanceLevel is updated
+
+          return (
+            <Text className={getPerformanceLevelColor(level)}>
+              {level ?? "-"}
+            </Text>
+          );
+        },
+        size: 110,
       },
-      size: 110,
-    }),
+    ),
     // --- Description Column ---
     columnHelper.accessor("description", {
       header: "Description",
@@ -320,16 +361,23 @@ const WodTable: React.FC<WodTableProps> = ({
   sortDirection,
   handleSort,
   searchTerm,
+  scoresByWodId, // Destructure new prop
 }) => {
-  console.log("WodTable - Received wods prop:", wods); // DEBUG: Check prop value on render
+  // console.log("WodTable - Received wods prop:", wods); // DEBUG: Check prop value on render
   const parentRef = useRef<HTMLDivElement>(null);
 
   // No longer need flatData calculation
-  // const flatData = useMemo(() => { ... }, [wods]);
 
   const columns = useMemo(
-    () => createColumns(handleSort, sortBy, sortDirection, searchTerm),
-    [handleSort, sortBy, sortDirection, searchTerm],
+    () =>
+      createColumns(
+        handleSort,
+        sortBy,
+        sortDirection,
+        searchTerm,
+        scoresByWodId,
+      ), // Pass scores map
+    [handleSort, sortBy, sortDirection, searchTerm, scoresByWodId], // Add dependency
   );
 
   const table = useReactTable({
@@ -340,7 +388,7 @@ const WodTable: React.FC<WodTableProps> = ({
   });
 
   const { rows } = table.getRowModel();
-  console.log("WodTable - Row Model Length:", rows.length); // DEBUG
+  // console.log("WodTable - Row Model Length:", rows.length); // DEBUG
 
   const rowVirtualizer = useVirtualizer({
     count: rows.length,
@@ -352,11 +400,10 @@ const WodTable: React.FC<WodTableProps> = ({
 
   const virtualRows = rowVirtualizer.getVirtualItems();
   const totalSize = rowVirtualizer.getTotalSize();
-  console.log(
-    // DEBUG
-    "WodTable - Virtualizer:",
-    `Items: ${virtualRows.length}, TotalSize: ${totalSize}`,
-  );
+  // console.log( // DEBUG
+  //   "WodTable - Virtualizer:",
+  //   `Items: ${virtualRows.length}, TotalSize: ${totalSize}`,
+  // );
   const headerGroups = table.getHeaderGroups();
 
   return (
@@ -409,10 +456,7 @@ const WodTable: React.FC<WodTableProps> = ({
       >
         {virtualRows.map((virtualRow) => {
           const row = rows[virtualRow.index];
-          console.log(
-            "WodTable - Rendering virtual row index:",
-            virtualRow.index,
-          ); // DEBUG
+          // console.log("WodTable - Rendering virtual row index:", virtualRow.index); // DEBUG
           return (
             <div
               key={row.id}

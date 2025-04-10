@@ -63,6 +63,22 @@ export type Wod = {
   updatedAt?: Date | null; // Added from DB schema (Drizzle returns Date or null)
 };
 
+// Define the structure for an individual score record based on the DB schema
+export type Score = {
+  id: string;
+  userId: string;
+  wodId: string;
+  time_seconds: number | null;
+  reps: number | null;
+  load: number | null;
+  rounds_completed: number | null;
+  partial_reps: number | null;
+  scoreDate: Date; // Drizzle returns Date for timestamp mode
+  notes: string | null;
+  createdAt: Date; // Drizzle returns Date for timestamp mode
+  updatedAt: Date | null; // Drizzle returns Date or null for timestamp mode
+};
+
 // Type for chart data points (used in WodViewer and passed from page.tsx)
 export type ChartDataPoint = {
   name: string;

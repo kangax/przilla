@@ -18,7 +18,7 @@ import WodTable from "./WodTable";
 import WodTimeline from "./WodTimeline";
 // Removed unused WodDistributionChart
 // Removed unused WodTimelineChart
-import { type Wod, type SortByType } from "~/types/wodTypes";
+import { type Wod, type Score, type SortByType } from "~/types/wodTypes"; // Import Score type
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils"; // Import parseTags
 
 // --- URL State Management ---
@@ -83,26 +83,64 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 
 export default function WodViewer() {
   // Fetch WOD data using tRPC
-  const { status: sessionStatus } = useSession(); // Only get session status, removed unused 'session'
+  const { status: sessionStatus } = useSession();
   const isLoggedIn = sessionStatus === "authenticated";
 
-  const { data: wodsData, isLoading, error } = api.wod.getAll.useQuery();
-  // Explicitly parse date strings to Date objects as a workaround for TS inference issue
+  // Fetch WOD definitions
+  const {
+    data: wodsData,
+    isLoading: isLoadingWods,
+    error: errorWods,
+  } = api.wod.getAll.useQuery();
+
+  // Fetch user scores if logged in
+  const {
+    data: scoresData,
+    isLoading: isLoadingScores,
+    error: errorScores,
+  } = api.score.getAllByUser.useQuery(undefined, {
+    enabled: isLoggedIn, // Only fetch if logged in
+  });
+
+  // Process WODs once loaded
   const wods = useMemo(() => {
     // Let TS infer the type of 'wod' from wodsData
     return (wodsData ?? []).map((wod) => ({
-      // Removed explicit type annotation for wod
       ...wod,
       // Ensure createdAt and updatedAt are Date objects
       // Need to ensure wod.createdAt exists before creating Date
-      createdAt: wod.createdAt ? new Date(wod.createdAt) : new Date(), // Provide fallback or handle potential undefined
+      createdAt: wod.createdAt ? new Date(wod.createdAt) : new Date(),
       updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : null,
       // Pre-parse tags here to ensure it's always an array
       tags: parseTags(wod.tags),
-    })) as Wod[]; // Cast final result to Wod[]
+    })) as Wod[];
   }, [wodsData]);
 
-  // Removed DEBUG log
+  // Process scores into a map by wodId for easy lookup
+  const scoresByWodId = useMemo(() => {
+    if (!scoresData) return {};
+    // Ensure date fields are Date objects
+    const processedScores = scoresData.map((score) => ({
+      ...score,
+      scoreDate: new Date(score.scoreDate),
+      // Convert createdAt and updatedAt as well, handling potential null for updatedAt
+      createdAt: new Date(score.createdAt),
+      updatedAt: score.updatedAt ? new Date(score.updatedAt) : null,
+    })) as Score[]; // Cast to Score type defined in wodTypes.ts
+
+    return processedScores.reduce(
+      (acc, score) => {
+        if (!acc[score.wodId]) {
+          acc[score.wodId] = [];
+        }
+        acc[score.wodId].push(score);
+        // Optional: Sort scores within each WOD entry if needed
+        // acc[score.wodId].sort((a, b) => b.scoreDate.getTime() - a.scoreDate.getTime());
+        return acc;
+      },
+      {} as Record<string, Score[]>, // Map wodId to array of Scores
+    );
+  }, [scoresData]);
 
   const router = useRouter();
   const pathname = usePathname();
@@ -354,23 +392,31 @@ export default function WodViewer() {
     dynamicNotDoneWodsCount,
   } = useMemo(() => {
     const total = categoryTagFilteredWods.length;
-    const done = categoryTagFilteredWods.filter(isWodDone).length;
+    // Update isWodDone logic to use the new scoresByWodId map
+    const done = categoryTagFilteredWods.filter((wod) =>
+      isWodDone(wod, scoresByWodId[wod.id]),
+    ).length;
     const notDone = total - done;
     return {
       dynamicTotalWodCount: total,
       dynamicDoneWodsCount: done,
       dynamicNotDoneWodsCount: notDone,
     };
-  }, [categoryTagFilteredWods]);
+  }, [categoryTagFilteredWods, scoresByWodId]); // Add scoresByWodId dependency
 
   const finalFilteredWods = useMemo(() => {
+    // Update filtering logic based on scoresByWodId
     if (completionFilter === "done") {
-      return categoryTagFilteredWods.filter(isWodDone);
+      return categoryTagFilteredWods.filter((wod) =>
+        isWodDone(wod, scoresByWodId[wod.id]),
+      );
     } else if (completionFilter === "notDone") {
-      return categoryTagFilteredWods.filter((wod) => !isWodDone(wod));
+      return categoryTagFilteredWods.filter(
+        (wod) => !isWodDone(wod, scoresByWodId[wod.id]),
+      );
     }
     return categoryTagFilteredWods;
-  }, [categoryTagFilteredWods, completionFilter]);
+  }, [categoryTagFilteredWods, completionFilter, scoresByWodId]); // Add scoresByWodId dependency
 
   const sortedWods = useMemo(() => {
     return sortWods(finalFilteredWods, sortBy, sortDirection);
@@ -405,19 +451,24 @@ export default function WodViewer() {
 
   // --- End Event Handlers ---
 
-  // Handle Loading and Error States
-  if (isLoading) {
-    return <Box>Loading WODs...</Box>;
+  // Handle Loading and Error States for both queries
+  if (isLoadingWods || (isLoggedIn && isLoadingScores)) {
+    return <Box>Loading data...</Box>;
   }
 
-  if (error) {
-    return <Box>Error loading WODs: {error.message}</Box>;
+  if (errorWods) {
+    return <Box>Error loading WODs: {errorWods.message}</Box>;
+  }
+  // Only check score error if logged in and query was enabled
+  if (isLoggedIn && errorScores) {
+    return <Box>Error loading scores: {errorScores.message}</Box>;
   }
 
   // Ensure wods data is available before rendering the main content
   if (!wods) {
     return <Box>No WOD data available.</Box>; // Or some other placeholder
   }
+  // Scores data might be undefined if not logged in, which is fine
 
   return (
     <Box>
@@ -564,6 +615,7 @@ export default function WodViewer() {
           sortDirection={sortDirection}
           handleSort={handleSort}
           searchTerm={searchTerm} // Pass search term prop
+          scoresByWodId={scoresByWodId} // Pass scores map
         />
       ) : (
         <WodTimeline
@@ -573,6 +625,7 @@ export default function WodViewer() {
           sortDirection={sortDirection}
           handleSort={handleSort}
           searchTerm={searchTerm} // Pass search term prop
+          scoresByWodId={scoresByWodId} // Pass scores map
         />
       )}
     </Box>

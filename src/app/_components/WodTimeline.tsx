@@ -12,8 +12,7 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-// Removed unused WodResult
-import type { Wod, SortByType } from "~/types/wodTypes";
+import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Import Score
 // Removed unused utils
 // import {
 //   getPerformanceLevelColor,
@@ -31,6 +30,7 @@ interface WodTimelineProps {
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
   searchTerm: string; // Added searchTerm prop
+  scoresByWodId: Record<string, Score[]>; // Add scores map prop
 }
 // Removed unused safeString function
 // const safeString = (value: string | undefined | null): string => value ?? "";

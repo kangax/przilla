@@ -30,16 +30,14 @@
   - bookmarklet so users can use?
 - Sugarwod (allows export!)
   - write import functionality --> IN PROGRESS (UI built)
-- **CSV Score Import UI (Apr 2025):**
-  - Created UI components for CSV score import (`src/app/_components/ScoreImport/`).
-  - Implemented file upload (`CsvUploadZone`) using `react-dropzone`.
-  - Added client-side CSV parsing (`papaparse`) and WOD matching logic within `ScoreImportWizard`.
-  - Built a review table (`ScoreReviewTable`) using `@tanstack/react-table` and Radix UI `Table` components for display and selection of matched scores.
-  - Added progress (`ImportProgress`) and confirmation (`ImportConfirmation`) steps.
-  - Integrated the wizard into the main page (`src/app/page.tsx`).
-  - Addressed rendering errors by marking components with `"use client";`.
-  - Refactored table styling to use Radix UI `Table` for better theme/dark mode integration.
-  - **Status:** UI flow is functional up to the confirmation step. Backend insertion logic is pending.
+- **CSV Score Import UI Migration (Apr 2025):**
+  - Moved all ScoreImport components to dedicated `/import` route (`src/app/import/components/`)
+  - Created new import page (`src/app/import/page.tsx`) to host ScoreImportWizard
+  - Added Import link to main navigation in Header
+  - Removed ScoreImportWizard from home page
+  - Implemented case-insensitive WOD name matching
+  - Added debug logging for WOD matching process
+  - **Status:** UI flow is fully functional via new route. Backend insertion logic is pending.
 
 ## Recent Changes
 

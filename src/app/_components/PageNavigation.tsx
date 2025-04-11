@@ -3,12 +3,13 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Flex } from "@radix-ui/themes";
-import { BarChart3, ListChecks } from "lucide-react";
+import { BarChart3, ListChecks, Upload } from "lucide-react";
 
 export default function PageNavigation() {
   const pathname = usePathname();
   const isChartsActive = pathname === "/charts";
-  const isWorkoutsActive = !isChartsActive;
+  const isImportActive = pathname === "/import";
+  const isWorkoutsActive = !isChartsActive && !isImportActive;
 
   const linkBaseClasses =
     "flex items-center gap-1.5 px-4 py-2 text-sm font-medium cursor-pointer transition-colors duration-150 ease-in-out rounded-md";
@@ -31,6 +32,13 @@ export default function PageNavigation() {
       >
         <BarChart3 size={16} />
         Charts
+      </Link>
+      <Link
+        href="/import"
+        className={`${linkBaseClasses} ${isImportActive ? activeClasses : inactiveClasses}`}
+      >
+        <Upload size={16} />
+        Import
       </Link>
     </Flex>
   );

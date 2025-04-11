@@ -41,6 +41,17 @@
 
 ## Recent Changes
 
+- **PageLayout Implementation (Apr 2025):**
+
+  - Created new `PageLayout` component (`src/app/_components/PageLayout.tsx`) to standardize page structure
+  - Includes Header and consistent content container styling
+  - Updated both main page (`src/app/page.tsx`) and import page (`src/app/import/page.tsx`) to use PageLayout
+  - Benefits:
+    - Consistent header across all pages
+    - Single source of truth for layout
+    - Cleaner individual page files
+    - Easier future maintenance
+
 - **WOD Table Score Display Redesign (Apr 2025):**
   - Replaced the "Date", "Score", and "Level" columns in `src/app/_components/WodTable.tsx` with a single "Results" column.
   - The "Results" column now displays:

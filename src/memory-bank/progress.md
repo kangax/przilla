@@ -2,6 +2,8 @@
 
 ## What Works
 
+- **PageLayout:** Consistent page structure with Header component now implemented across all pages via `PageLayout` component. Includes standardized content container styling and ensures uniform header display.
+
 - **WOD Display:** Core components for displaying WOD information (`WodViewer`, `WodTable`, `WodTimeline`) are functional. `WodViewer` now fetches data directly from the database via tRPC (`api.wod.getAll`).
 - **WOD Visualization:** Basic charts for visualizing WOD data might be implemented (`WodTimelineChart`, `WodDistributionChart`).
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.

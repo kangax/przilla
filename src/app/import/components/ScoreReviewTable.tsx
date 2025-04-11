@@ -121,9 +121,8 @@ export function ScoreReviewTable({
       columnHelper.accessor((row) => row.proposedScore?.isRx, {
         id: "rx",
         header: "RX",
-        cell: (
-          info: IsRxCellContext,
-        ): React.ReactNode => (info.getValue() ? "✔️" : "❌"), // Add explicit type and return type
+        cell: (info: IsRxCellContext): React.ReactNode =>
+          info.getValue() ? "Rx" : "Scaled", // Add explicit type and return type
         enableSorting: true,
       }),
       columnHelper.accessor((row) => row.csvRow.notes, {
@@ -132,32 +131,9 @@ export function ScoreReviewTable({
         cell: (
           info: NotesCellContext,
         ): React.ReactNode => ( // Add explicit type and return type
-          <span className="text-xs text-gray-600">
-            {info.getValue() || "-"}
-          </span>
+          <span>{info.getValue() || "-"}</span>
         ),
         enableSorting: false,
-      }),
-      columnHelper.accessor((row) => row.validation, {
-        id: "status",
-        header: "Status",
-        cell: (info: ValidationCellContext): React.ReactNode => {
-          // Add explicit type and return type
-          const validationInfo = info.getValue();
-          if (!validationInfo)
-            return <span className="text-gray-500">Unknown</span>;
-          const { isValid, errors } = validationInfo;
-          const matched = !!info.row.original.matchedWod;
-          if (!matched) return <span className="text-yellow-600">Skipped</span>;
-          if (!isValid)
-            return (
-              <span className="text-red-600" title={errors.join(", ")}>
-                Error ({errors.length})
-              </span>
-            );
-          return <span className="text-green-600">Valid</span>;
-        },
-        enableSorting: true,
       }),
     ],
     [], // Empty dependency array is correct here
@@ -185,11 +161,10 @@ export function ScoreReviewTable({
 
   return (
     <div>
-      <h3 className="mb-3 text-lg font-medium">Review Scores for Import</h3>
-      <p className="mb-4 text-sm text-gray-600">
-        Select the scores you wish to import. Rows with errors or no matching
-        WOD cannot be selected.
-      </p>
+      <h3 className="mb-3 text-lg font-medium">
+        Scores matching those available in PRZilla. Select the ones you wish to
+        import.
+      </h3>
 
       {/* Use Radix Table Components */}
       <Table.Root variant="surface" size="1">

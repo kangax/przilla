@@ -81,7 +81,24 @@ export function ScoreImportWizard() {
               }
 
               const csvRow: CsvRow = rawRow; // Now we know it's a CsvRow
-              const matchedWod = wodsMap.get(csvRow.title) || null; // Exact title match
+
+              // Case-insensitive matching
+              const normalizedTitle = csvRow.title.toLowerCase().trim();
+              const matchedWod =
+                Array.from(wodsMap.entries()).find(
+                  ([wodName]) =>
+                    wodName.toLowerCase().trim() === normalizedTitle,
+                )?.[1] || null;
+
+              console.log("Match result:", matchedWod);
+              if (!matchedWod) {
+                console.log(
+                  "Similar WODs:",
+                  Array.from(wodsMap.keys()).filter((name) =>
+                    name.toLowerCase().includes(normalizedTitle),
+                  ),
+                );
+              }
 
               // Basic validation example (add more as needed)
               const validationErrors: string[] = [];
@@ -123,7 +140,8 @@ export function ScoreImportWizard() {
                   return isNaN(num) ? null : num;
                 };
 
-                const scoreTypeLower = csvRow.score_type?.toLowerCase() || "";
+                const scoreTypeLower =
+                  csvRow.score_type?.toLowerCase() || "time"; // "" means it's time based
                 const rawScore = csvRow.best_result_raw || "";
                 const isRounds = scoreTypeLower.includes("rounds");
                 const roundsParts = isRounds ? rawScore.split("+") : [];

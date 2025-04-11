@@ -54,8 +54,6 @@ export function isCsvRow(obj: unknown): obj is CsvRow {
     typeof record.description === "string" && // Allow empty description
     typeof record.best_result_raw === "string" && // Allow empty raw result
     typeof record.best_result_display === "string" && // Allow empty display result
-    typeof record.score_type === "string" &&
-    !!record.score_type &&
     typeof record.rx_or_scaled === "string" &&
     !!record.rx_or_scaled
     // Add checks for other required fields if any

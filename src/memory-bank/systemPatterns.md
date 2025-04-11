@@ -47,6 +47,7 @@ _What design patterns are used in the codebase?_
 - **Authentication Integration:** Ensuring authentication (likely BetterAuth) correctly protects user data and integrates seamlessly with the database and tRPC.
 - **Data Import/Scraping:** Implementing reliable data import from external sources (Wodwell, SugarWod) involves handling different formats, potential API limitations, and error conditions.
 - **Stats/Analysis Engine:** Developing the logic for calculating and displaying meaningful user statistics could become complex depending on the desired insights.
+- **CSV Import Processing:** Score import from CSV uses client-side parsing (`papaparse`) and matching against WOD data fetched via tRPC. This avoids server load for parsing but requires fetching all WODs to the client for matching.
 
 ## Workout Difficulty & Benchmark Estimation Heuristics
 

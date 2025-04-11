@@ -39,9 +39,9 @@ ALways use `write_to_file`, never `replace_in_file`
 ## Dependencies
 
 - **Core:** Next.js, React, tRPC, Drizzle ORM, NextAuth.js, TanStack Query, Zod
-- **UI:** Radix UI (Themes, Select, Icons), Tailwind CSS, Lucide Icons, Recharts, TanStack Table/Virtual
+- **UI:** Radix UI (Themes, Select, Icons), Tailwind CSS, Lucide Icons, Recharts, TanStack Table/Virtual, `react-dropzone`
 - **Database:** `@libsql/client`
-- **Utility:** `superjson` (enabled as tRPC transformer), `geist`, `server-only`
+- **Utility:** `superjson` (enabled as tRPC transformer), `geist`, `server-only`, `papaparse`
 - **Dev/Build:** TypeScript, ESLint, Prettier, Vitest, Husky, lint-staged, PostCSS, `@t3-oss/env-nextjs`
 - **Scripts/Internal Tools:** `axios`, `chalk`, `cheerio`, `fs-extra`, `dotenv`, `tsx` (used in `scripts/`)
 

@@ -23,6 +23,7 @@
     - Cell is clickable (`cursor-pointer`) for future panel integration.
   - Notes column removed; notes shown in score tooltip (now part of Results column tooltip).
   - Search highlighting implemented for Name, Category, Tags, Description.
+  - CSV Score Import UI (upload, parse, match, review steps functional).
   - Category and Tags columns combined into one, displaying tags below the category.
   - Variable row height enabled using `useVirtualizer`'s `measureElement` to correctly display wrapped content (like descriptions and tags).
   - Score column now displays an "Rx" badge if the score was logged as Rx (now part of Results column).
@@ -78,6 +79,7 @@ _(Based on `todo.md`):_
   - Update UI (`WodViewer`, `WodTable`, `WodTimeline`, `wodUtils`) and create tRPC endpoint (`score.getAllByUser`) to fetch and display scores using the new structure. **(DONE - Initial implementation)**
   - **TODO:** Refactor other components (e.g., charts page) still using static JSON to use tRPC/database.
   - **TODO:** Implement score creation/editing functionality.
+  - **TODO:** Implement backend logic for CSV score import (bulk insertion).
   - **TODO:** Refine score-based sorting/filtering (sorting by results column needed).
 
 ## Current Status

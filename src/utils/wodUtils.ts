@@ -18,8 +18,11 @@ export const hasScore = (score: Score): boolean => {
  * Calculates a single numeric value representing the score for comparison,
  * based on the WOD's benchmark type. Returns null if no benchmark or score.
  */
-export const getNumericScore = (wod: Wod, score: Score): number | null => {
-  if (!wod.benchmarks) return null; // No benchmarks to compare against
+export const getNumericScore = (
+  wod: Wod | null,
+  score: Score,
+): number | null => {
+  if (!wod || !wod.benchmarks) return null; // No benchmarks to compare against
 
   // Check if score object has any relevant value
   const hasAnyScoreValue =
@@ -55,8 +58,11 @@ export const getNumericScore = (wod: Wod, score: Score): number | null => {
  * Determines the performance level (elite, advanced, etc.) based on the numeric score
  * and the WOD's benchmark levels. Returns null if no benchmark or score.
  */
-export const getPerformanceLevel = (wod: Wod, score: Score): string | null => {
-  if (!wod.benchmarks) return null;
+export const getPerformanceLevel = (
+  wod: Wod | null,
+  score: Score,
+): string | null => {
+  if (!wod || !wod.benchmarks) return null;
 
   const numericScore = getNumericScore(wod, score);
   if (numericScore === null) return null;
@@ -214,8 +220,8 @@ export const getPerformanceLevelColor = (level: string | null): string => {
 /**
  * Generates a multi-line string tooltip describing the benchmark levels for a WOD.
  */
-export const getPerformanceLevelTooltip = (wod: Wod): string => {
-  if (!wod.benchmarks) return "No benchmark data available.";
+export const getPerformanceLevelTooltip = (wod: Wod | null): string => {
+  if (!wod || !wod.benchmarks) return "No benchmark data available.";
 
   // Add check for levels existence and non-emptiness
   const { levels, type } = wod.benchmarks;
@@ -255,11 +261,13 @@ export const getPerformanceLevelTooltip = (wod: Wod): string => {
         levelData?.min !== null ? formatSecondsToMMSS(levelData.min) : "0:00";
       const max =
         levelData?.max !== null ? formatSecondsToMMSS(levelData.max) : "∞";
-      // Handle edge case where min is 0 for elite (means less than max)
-      if (levelName === "elite" && levelData?.min === 0) {
-        formattedRange = `< ${max}`;
+      // For time benchmarks, format ranges based on level
+      if (levelName === "elite") {
+        formattedRange = `0:00 - ${max}`;
       } else if (levelName === "beginner" && levelData?.max === null) {
-        formattedRange = `> ${min}`;
+        formattedRange = `${min} - ∞`;
+      } else if (levelName === "beginner" && levelData?.min === null) {
+        formattedRange = `0:00 - ${max}`;
       } else {
         formattedRange = `${min} - ${max}`;
       }
@@ -277,8 +285,8 @@ export const getPerformanceLevelTooltip = (wod: Wod): string => {
       // Handle edge case where max is null for elite (means greater than min)
       if (levelName === "elite" && levelData?.max === null) {
         formattedRange = `> ${min}${unit}`;
-      } else if (levelName === "beginner" && levelData?.min === 0) {
-        formattedRange = `< ${max}${unit}`;
+      } else if (levelName === "beginner" && levelData?.min === null) {
+        formattedRange = `0 - ${max}${unit}`;
       } else {
         formattedRange = `${min} - ${max}${unit}`;
       }

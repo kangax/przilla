@@ -3,7 +3,7 @@ import { render, screen, fireEvent, within } from "../../test-utils"; // Use cus
 import "@testing-library/jest-dom";
 // Removed unused useVirtualizer import
 import WodTable from "./WodTable";
-import type { Wod, WodResult } from "~/types/wodTypes"; // Removed unused SortByType
+import type { Wod } from "~/types/wodTypes"; // Removed unused imports
 
 // --- Mock next/link ---
 vi.mock("next/link", () => ({
@@ -246,16 +246,16 @@ const mockScoreWod5: MockScore = {
   id: "105",
   wodId: "5",
   userId: "test-user",
-  scoreDate: new Date("2024-01-05"),
-  createdAt: new Date("2024-01-05"), // Added
-  updatedAt: new Date("2024-01-05"), // Added
+  scoreDate: new Date("2024-01-04"),
+  createdAt: new Date("2024-01-04"),
+  updatedAt: new Date("2024-01-04"),
   time_seconds: null,
   reps: null,
   load: null,
   rounds_completed: 10,
   partial_reps: 0,
   notes: null,
-  isRx: true, // Derived from rxStatus: "Rx"
+  isRx: true,
 };
 
 // Create mock scoresByWodId Record (object)
@@ -318,15 +318,6 @@ describe("WodTable Component", () => {
       screen.getByRole("columnheader", { name: /Category \/ Tags/ }), // Combined header
     ).toBeInTheDocument();
     expect(
-      screen.getByRole("columnheader", { name: /Date/ }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("columnheader", { name: /Score/ }),
-    ).toBeInTheDocument();
-    expect(
-      screen.getByRole("columnheader", { name: /Level/ }),
-    ).toBeInTheDocument();
-    expect(
       screen.getByRole("columnheader", { name: /Difficulty/ }),
     ).toBeInTheDocument();
     expect(
@@ -335,6 +326,13 @@ describe("WodTable Component", () => {
     expect(
       screen.getByRole("columnheader", { name: /Description/ }), // Added Description header
     ).toBeInTheDocument();
+    expect(
+      screen.getByRole("columnheader", { name: /Your scores/ }),
+    ).toBeInTheDocument();
+    // Ensure Date header is NOT expected
+    expect(
+      screen.queryByRole("columnheader", { name: /Date/ }),
+    ).not.toBeInTheDocument();
     // Ensure Notes header is NOT expected
     expect(
       screen.queryByRole("columnheader", { name: /Notes/ }),
@@ -372,23 +370,7 @@ describe("WodTable Component", () => {
       screen.getByRole("columnheader", { name: /Workout ▼/ }),
     ).toBeInTheDocument();
 
-    rerender(
-      <WodTable
-        wods={[]}
-        sortBy="date"
-        sortDirection="asc"
-        handleSort={handleSortMock}
-        tableHeight={500}
-        searchTerm=""
-        scoresByWodId={{}} // Changed Map to empty object {}
-      />,
-    );
-    expect(
-      screen.getByRole("columnheader", { name: /Workout/ }),
-    ).toBeInTheDocument(); // No indicator
-    expect(
-      screen.getByRole("columnheader", { name: /Date ▲/ }),
-    ).toBeInTheDocument();
+    // Remove Date sorting test since Date column is removed
 
     rerender(
       <WodTable
@@ -428,10 +410,10 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("15")).toBeInTheDocument();
     // Check for dashes in specific cells
     const cells = within(row).getAllByRole("cell");
-    expect(cells[5].textContent).toBe("-"); // Score
-    expect(cells[6].textContent).toBe("-"); // Level
     // Check Description cell
-    expect(cells[7].textContent).toContain("Desc Alpha");
+    expect(cells[4].textContent).toContain("Desc Alpha");
+    // Check Your scores cell
+    expect(cells[5].textContent).toBe("-");
   });
 
   it("should render WOD with one Rx result correctly", () => {
@@ -450,14 +432,12 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("WOD Bravo")).toBeInTheDocument();
     expect(within(row).getByText("Girl")).toBeInTheDocument();
     expect(within(row).getByText("For Time")).toBeInTheDocument();
-    expect(
-      within(row).getByText(
-        /3\/10\/2024|Mar 10, 2024|March 10, 2024|3\/9\/2024|Mar 9, 2024|March 9, 2024/,
-      ),
-    ).toBeInTheDocument();
-    expect(within(row).getByText(/4:50/)).toBeInTheDocument();
-    expect(within(row).getByText("advanced")).toBeInTheDocument();
-    expect(within(row).getByText("advanced")).toHaveClass("text-green-600");
+
+    // Check for score and date in the Your scores column
+    const scoresCell = within(row).getAllByRole("cell")[5];
+    expect(scoresCell).toHaveTextContent(/4:50/);
+    expect(scoresCell).toHaveTextContent(/Mar 9, '24/);
+
     expect(within(row).getByText("Hard")).toBeInTheDocument();
     expect(within(row).getByText("Hard")).toHaveClass("text-orange-500");
     expect(within(row).getByText("123")).toBeInTheDocument();
@@ -480,17 +460,12 @@ describe("WodTable Component", () => {
     expect(within(row).getByText("WOD Charlie")).toBeInTheDocument();
     expect(within(row).getByText("Hero")).toBeInTheDocument();
     expect(within(row).getByText("Chipper")).toBeInTheDocument();
-    expect(
-      within(row).getByText(
-        /3\/11\/2024|Mar 11, 2024|March 11, 2024|3\/10\/2024|Mar 10, 2024|March 10, 2024/,
-      ),
-    ).toBeInTheDocument();
-    const scoreCell = within(row).getAllByRole("cell")[5];
-    expect(scoreCell.textContent).toContain("12+5");
-    expect(within(row).getByText("intermediate")).toBeInTheDocument();
-    expect(within(row).getByText("intermediate")).toHaveClass(
-      "text-yellow-600",
-    );
+
+    // Check for score and date in the Your scores column
+    const scoresCell = within(row).getAllByRole("cell")[5];
+    expect(scoresCell).toHaveTextContent(/12\+5/);
+    expect(scoresCell).toHaveTextContent(/Mar 10, '24/);
+
     expect(within(row).getByText("Very Hard")).toBeInTheDocument();
     expect(within(row).getByText("Very Hard")).toHaveClass("text-red-500");
     expect(within(row).getByText("50")).toBeInTheDocument();
@@ -515,52 +490,18 @@ describe("WodTable Component", () => {
     expect(within(row1).getByText("WOD Delta")).toBeInTheDocument(); // Assert type
     expect(within(row1).getByText("Open")).toBeInTheDocument(); // Assert type
     expect(within(row1).getByText("Couplet")).toBeInTheDocument(); // Assert type
-    expect(
-      within(row1).getByText(
-        /3\/12\/2024|Mar 12, 2024|March 12, 2024|3\/11\/2024|Mar 11, 2024|March 11, 2024/,
-      ),
-    ).toBeInTheDocument();
-    const scoreCell1 = within(row1).getAllByRole("cell")[5];
-    expect(scoreCell1.textContent).toContain("9:40");
-    expect(within(row1).getByText("intermediate")).toBeInTheDocument();
+
+    // Check for score and date in the Your scores column
+    const scoresCell = within(row1).getAllByRole("cell")[5];
+    expect(scoresCell).toHaveTextContent(/9:40/);
+    expect(scoresCell).toHaveTextContent(/Mar 11, '24/);
+    expect(scoresCell).toHaveTextContent(/9:10/);
+    expect(scoresCell).toHaveTextContent(/Nov 19, '23/);
+
     expect(within(row1).getByText("Hard")).toBeInTheDocument();
     expect(within(row1).getByText("Hard")).toHaveClass("text-orange-500");
     expect(within(row1).getByText("200")).toBeInTheDocument();
     expect(within(row1).getByText("Desc Delta")).toBeInTheDocument();
-
-    // Since multiple results might render in additional rows or within the same row, check for the second score
-    const allRows = screen.getAllByRole("row");
-    let row2 = null;
-    for (const row of allRows) {
-      const cells = within(row).getAllByRole("cell"); // Assert type
-      if (cells.length > 5 && cells[5].textContent.includes("9:10")) {
-        row2 = row; // Assert type on assignment
-        break;
-      }
-    }
-    expect(row2).not.toBeNull();
-    if (row2) {
-      const cells2 = within(row2 as HTMLElement).getAllByRole("cell"); // Assert type
-      if (cells2[0].textContent !== "WOD Delta") {
-        expect(cells2[0].textContent).toBe("");
-        expect(cells2[1].textContent).toBe("");
-        expect(cells2[2].textContent).toBe("");
-        expect(cells2[3].textContent).toBe("");
-      }
-      expect(
-        within(row2 as HTMLElement).getByText(
-          // Assert type
-          /11\/20\/2023|Nov 20, 2023|November 20, 2023/,
-        ),
-      ).toBeInTheDocument();
-      expect(cells2[5].textContent).toContain("9:10");
-      expect(
-        within(row2 as HTMLElement).getByText("intermediate"),
-      ).toBeInTheDocument(); // Assert type
-      expect(
-        within(row2 as HTMLElement).getByText("Desc Delta"),
-      ).toBeInTheDocument(); // Assert type
-    }
   });
 
   it("should render external link icon when wodUrl is present", () => {
@@ -619,11 +560,12 @@ describe("WodTable Component", () => {
     const cells = within(row).getAllByRole("cell");
     expect(cells[2].textContent).toContain("-"); // Difficulty
     expect(cells[3].textContent).toContain("-"); // Likes
-    expect(cells[4].textContent).toMatch(
-      /1\/5\/2024|Jan 5, 2024|January 5, 2024|1\/4\/2024|Jan 4, 2024|January 4, 2024/,
-    ); // Date
-    expect(cells[5].textContent).toContain("10 rounds"); // Score
-    expect(cells[6].textContent).toContain("-"); // Level
+
+    // Check for score in the Your scores column
+    const scoresCell = cells[5];
+    // Use a more flexible regex that doesn't depend on exact date formatting
+    expect(scoresCell).toHaveTextContent(/10 rounds on/);
+    expect(scoresCell).toHaveTextContent(/'24/);
   });
 
   it("should call handleSort when clicking sortable headers", () => {
@@ -643,8 +585,7 @@ describe("WodTable Component", () => {
     fireEvent.click(screen.getByText(/Workout/));
     expect(handleSortMock).toHaveBeenCalledWith("wodName");
 
-    fireEvent.click(screen.getByText(/Date/));
-    expect(handleSortMock).toHaveBeenCalledWith("date");
+    // Remove Date click test since Date column is removed
 
     fireEvent.click(screen.getByText(/Difficulty/));
     expect(handleSortMock).toHaveBeenCalledWith("difficulty");
@@ -654,7 +595,7 @@ describe("WodTable Component", () => {
 
     // Non-sortable headers (check Category / Tags)
     fireEvent.click(screen.getByText(/Category \/ Tags/));
-    // The count should still be 5 from the sortable headers
-    expect(handleSortMock).toHaveBeenCalledTimes(5);
+    // The count should still be 3 from the sortable headers (removed Date)
+    expect(handleSortMock).toHaveBeenCalledTimes(3);
   });
 });

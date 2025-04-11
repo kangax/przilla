@@ -13,7 +13,7 @@ import { useSession } from "next-auth/react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, Tooltip, SegmentedControl } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
-import { ChevronDown, TableIcon } from "lucide-react";
+import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
 import { type Wod, type Score, type SortByType } from "~/types/wodTypes";
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
@@ -38,9 +38,6 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
   const validSortKeys: SortByType[] = [
     "wodName",
     "date",
-    "level",
-    "attempts",
-    "latestLevel",
     "difficulty",
     "countLikes",
   ];

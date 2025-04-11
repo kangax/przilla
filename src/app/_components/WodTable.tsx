@@ -19,8 +19,6 @@ import {
   formatShortDate,
   getPerformanceBadgeDetails, // Added
 } from "~/utils/wodUtils";
-import { C } from "vitest/dist/chunks/reporters.d.CfRkRKN2.js";
-import { Separator } from "@radix-ui/react-select";
 
 // --- Interfaces & Types ---
 

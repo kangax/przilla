@@ -1,4 +1,3 @@
-import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { scores } from "~/server/db/schema";
 import { eq } from "drizzle-orm";

@@ -69,7 +69,7 @@ export function ImportConfirmation({
       </div>
 
       <p className="mb-6 text-sm text-gray-600 dark:text-gray-400">
-        Clicking 'Confirm Import' will add {/* Use ' */}
+        Clicking &apos;Confirm Import&apos; will add
         <span className="font-semibold">{selectedCount}</span> score(s) to your
         history. This action cannot be undone easily.
       </p>

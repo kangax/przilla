@@ -57,7 +57,7 @@ export function CsvUploadZone({
         </p>
       ) : (
         <p className="text-gray-500 dark:text-gray-400">
-          Drag 'n' drop a CSV file here, or click to select file {/* Use ' */}
+          Drag &apos;n&apos; drop a CSV file here, or click to select file
         </p>
       )}
       <p className="mt-2 text-xs text-gray-400 dark:text-gray-500">

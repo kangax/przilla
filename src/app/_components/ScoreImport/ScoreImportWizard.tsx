@@ -36,10 +36,10 @@ export function ScoreImportWizard() {
       // Filter out any potential entries without an ID (shouldn't happen based on schema/query)
       // and assert the type to satisfy TS if needed, though filtering is safer.
       allWods
-        .filter((wod): wod is Wod & { id: string } => !!wod.id) // Ensure wod.id is truthy (string)
+        .filter((wod) => !!wod?.id) // Filter for existence of wod and wod.id, remove type predicate
         .forEach((wod) => {
-          // Now TS knows wod.id is a string here if the filter passes
-          map.set(wod.wodName, wod as Wod); // Assert type if filter isn't enough for TS
+          // Assume wod structure matches Wod after filtering, cast explicitly via unknown
+          map.set(wod.wodName, wod as unknown as Wod); // Cast via unknown to bypass strict overlap check
         });
       setWodsMap(map);
     }
@@ -103,7 +103,8 @@ export function ScoreImportWizard() {
                 } else {
                   validationErrors.push("Invalid date format");
                 }
-              } catch (_e) {
+              } catch {
+                // Removed unused variable binding '_e'
                 // Prefix unused variable
                 validationErrors.push("Error parsing date");
               }
@@ -267,7 +268,7 @@ export function ScoreImportWizard() {
       .filter((row) => selectedRows.has(row.id) && row.proposedScore)
       .map((row) => {
         // Ensure scoreDate is formatted as needed by the backend (e.g., ISO string)
-        const score = row.proposedScore!;
+        const score = row.proposedScore;
         return {
           ...score,
           scoreDate:

@@ -9,7 +9,6 @@ import ChartLoginOverlay from "~/app/_components/ChartLoginOverlay"; // Import t
 import { normalizeMovementName } from "~/utils/movementMapping";
 import { type Wod } from "~/types/wodTypes";
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
-import { isWodDone, parseTags } from "~/utils/wodUtils";
 import {
   generatePlaceholderDistributionData,
   generatePlaceholderTimelineData,

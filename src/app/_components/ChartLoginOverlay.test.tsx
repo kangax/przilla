@@ -2,7 +2,7 @@ import { describe, it, expect, vi, beforeEach } from "vitest";
 import { render, screen, fireEvent } from "../../test-utils"; // Use custom render
 import "@testing-library/jest-dom";
 import ChartLoginOverlay from "./ChartLoginOverlay";
-import { signIn, SessionProvider } from "next-auth/react"; // Import signIn and SessionProvider to mock
+import { signIn } from "next-auth/react";
 
 // --- Mock next-auth/react ---
 // Mock SessionProvider as a simple pass-through component

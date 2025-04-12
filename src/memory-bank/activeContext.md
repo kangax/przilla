@@ -41,6 +41,12 @@
 
 ## Recent Changes
 
+- **ChartLoginOverlay Update (Apr 2025):**
+
+  - Increased overlay darkness (bg-black/30)
+  - Reduced content panel opacity (bg-white/80)
+  - Maintained blur effect and overall styling
+
 - **Performance Chart Fixes (Apr 2025):**
 
   - Updated performance level calculation in `wodRouter` to properly use benchmark data

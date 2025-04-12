@@ -11,7 +11,11 @@
 - Users can view a list or database of WODs (sourced from the database via tRPC in `WodViewer`, previously `public/data/wods.json`).
 - (not yet) Users can select a WOD to see its details (description, type, etc.).
 - (not yet) Users can log their scores/times/results for specific WODs, likely associated with a date.
-- The application displays progress over time, through charts (`WodTimelineChart`, `WodDistributionChart`) or tables (`WodTable`, `WodTimeline`).
+- The application displays comprehensive progress visualization through:
+  - Timeline charts showing workout frequency and performance trends
+  - Distribution charts for WOD categories and types
+  - Movement frequency analysis across WOD categories
+  - Interactive tables with score history and filtering
 - (not yet) Users might be able to add personal notes to their logged scores.
 - (not yet) Authentication (`AuthControls`, NextAuth) allows users to manage their personal data.
 

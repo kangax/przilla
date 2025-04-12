@@ -13,7 +13,11 @@ ALways use `write_to_file`, never `replace_in_file`
 - **Database:** LibSQL/Turso (inferred from `@libsql/client`)
 - **Authentication:** NextAuth.js (v5 beta)
 - **Schema Validation:** Zod
-- **Charting:** Recharts
+- **Charting:**
+  - Recharts for all visualization components
+  - Authentication-aware data display
+  - Theme-aware styling (dark/light mode)
+  - Server-side data processing for movement frequency analysis
 - **Tables:** TanStack Table
 - **Virtualization:** TanStack Virtual
 - **Fonts:** Geist

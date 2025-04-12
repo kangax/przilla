@@ -314,7 +314,7 @@ export function ScoreImportWizard() {
 
   // Render Loading state while WODs are fetching initially
   if (isLoadingWods && step === "upload" && !file) {
-    return <LoadingIndicator message="Loading..." />;
+    return <LoadingIndicator message="Loading..." />; // Updated component name
   }
 
   // Render Error state if WOD fetching failed

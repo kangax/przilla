@@ -41,6 +41,13 @@
 
 ## Recent Changes
 
+- **Chart Login Overlay (Apr 2025):**
+  - Implemented placeholder data generation functions (`src/utils/placeholderData.ts`) for `WodDistributionChart` and `WodTimelineChart`.
+  - Created `ChartLoginOverlay` component (`src/app/_components/ChartLoginOverlay.tsx`) displaying a centered, opaque "Sign In" button that triggers the NextAuth sign-in flow.
+  - Modified `src/app/charts/page.tsx` to:
+    - Always render the top two chart components.
+    - Conditionally fetch real data (if logged in) or generate placeholder data (if logged out).
+    - Display the `ChartLoginOverlay` on top of the placeholder charts for logged-out users.
 - **Performance Chart Fixes (Apr 2025):**
 
   - Updated performance level calculation in `wodRouter` to properly use benchmark data

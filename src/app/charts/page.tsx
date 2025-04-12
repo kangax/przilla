@@ -5,10 +5,29 @@ import WodDistributionChart from "~/app/_components/WodDistributionChart";
 import WodTimelineChart from "~/app/_components/WodTimelineChart";
 import MovementFrequencyChart from "~/app/_components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
+import ChartLoginOverlay from "~/app/_components/ChartLoginOverlay"; // Import the overlay
 import { normalizeMovementName } from "~/utils/movementMapping";
 import { type Wod } from "~/types/wodTypes";
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
 import { isWodDone, parseTags } from "~/utils/wodUtils";
+import {
+  generatePlaceholderDistributionData,
+  generatePlaceholderTimelineData,
+} from "~/utils/placeholderData"; // Import placeholder functions
+
+// Define types for chart data points locally or import if shared
+type ChartDataPoint = {
+  name: string;
+  value: number;
+};
+type FrequencyDataPoint = {
+  month: string;
+  count: number;
+};
+type PerformanceDataPoint = {
+  month: string;
+  averageLevel: number;
+};
 
 export default async function ChartsPage() {
   const session = await auth();
@@ -26,24 +45,29 @@ export default async function ChartsPage() {
     console.error("Error loading WODs data:", error);
   }
 
-  // Protected data - only fetched when signed in
-  const tagCounts: Record<string, number> = {};
-  let categoryCounts: Record<string, number> = {};
-  let frequencyData: { month: string; count: number }[] = [];
-  let performanceData: { month: string; averageLevel: number }[] = [];
+  // Initialize chart data variables
+  let tagChartData: ChartDataPoint[] = [];
+  let categoryChartData: ChartDataPoint[] = [];
+  let frequencyData: FrequencyDataPoint[] = [];
+  let performanceData: PerformanceDataPoint[] = [];
 
   if (session?.user) {
+    // --- Logged In: Fetch real data ---
     try {
       const chartData = await api.wod.getChartData();
-      categoryCounts = chartData.categoryCounts;
+      const categoryCounts = chartData.categoryCounts;
       const chartTagCounts = chartData.tagCounts;
       const monthlyScores = chartData.monthlyData;
 
-      DESIRED_TAG_ORDER.forEach((tag) => {
-        if (chartTagCounts[tag]) {
-          tagCounts[tag] = chartTagCounts[tag];
-        }
-      });
+      // Prepare real data for charts
+      tagChartData = DESIRED_TAG_ORDER.map((tag) => ({
+        name: tag,
+        value: chartTagCounts[tag] || 0,
+      }));
+      categoryChartData = DESIRED_CATEGORY_ORDER.map((category) => ({
+        name: category,
+        value: categoryCounts[category] || 0,
+      }));
 
       const sortedMonths = Object.keys(monthlyScores).sort();
       frequencyData = sortedMonths.map((month) => ({
@@ -59,10 +83,21 @@ export default async function ChartsPage() {
       }));
     } catch (error) {
       console.error("Error loading protected chart data:", error);
+      // Optionally set placeholder data even on error for logged-in users?
+      // For now, arrays will remain empty if fetch fails
     }
+  } else {
+    // --- Logged Out: Generate placeholder data ---
+    tagChartData = generatePlaceholderDistributionData(DESIRED_TAG_ORDER);
+    categoryChartData = generatePlaceholderDistributionData(
+      DESIRED_CATEGORY_ORDER,
+    );
+    const placeholderTimeline = generatePlaceholderTimelineData();
+    frequencyData = placeholderTimeline.frequencyData;
+    performanceData = placeholderTimeline.performanceData;
   }
 
-  // Process movement data (uses public WOD data)
+  // Process movement data (uses public WOD data - remains unchanged)
   const commonWords = new Set([
     "for",
     "time",
@@ -228,16 +263,7 @@ export default async function ChartsPage() {
     }
   });
 
-  // Prepare chart data
-  const tagChartData = DESIRED_TAG_ORDER.map((tagName) => ({
-    name: tagName,
-    value: tagCounts[tagName] || 0,
-  }));
-  const categoryChartData = DESIRED_CATEGORY_ORDER.map((categoryName) => ({
-    name: categoryName,
-    value: categoryCounts[categoryName] || 0,
-  }));
-
+  // Prepare movement chart data (remains unchanged)
   const topMovementsData: Record<
     string,
     { name: string; value: number; wodNames: string[] }[]
@@ -259,22 +285,26 @@ export default async function ChartsPage() {
       <Header />
       <Container size="4" className="pb-8 pt-6">
         <Flex direction="column" gap="6">
-          {session?.user && (
-            <Flex gap="4" direction={{ initial: "column", sm: "row" }}>
-              <Box className="flex-1">
-                <WodDistributionChart
-                  tagData={tagChartData}
-                  categoryData={categoryChartData}
-                />
-              </Box>
-              <Box className="flex-1">
-                <WodTimelineChart
-                  frequencyData={frequencyData}
-                  performanceData={performanceData}
-                />
-              </Box>
-            </Flex>
-          )}
+          {/* Always render the container for the top two charts */}
+          <Flex gap="4" direction={{ initial: "column", sm: "row" }}>
+            {/* Add relative positioning and overlay for logged-out state */}
+            <Box className="relative flex-1">
+              <WodDistributionChart
+                tagData={tagChartData}
+                categoryData={categoryChartData}
+              />
+              {!session?.user && <ChartLoginOverlay />}
+            </Box>
+            {/* Add relative positioning and overlay for logged-out state */}
+            <Box className="relative flex-1">
+              <WodTimelineChart
+                frequencyData={frequencyData}
+                performanceData={performanceData}
+              />
+              {!session?.user && <ChartLoginOverlay />}
+            </Box>
+          </Flex>
+          {/* Movement frequency chart remains unchanged */}
           <MovementFrequencyChart data={topMovementsData} />
         </Flex>
       </Container>

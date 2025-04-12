@@ -53,6 +53,11 @@
   - Corrected `wodName` sorting by reverting to `localeCompare()` in `sortWods` utility function.
   - Implemented `date` sorting in `sortWods` using the latest score date from the `scoresByWodId` map (passed from `WodViewer`).
 - **Performance Level Display:** The "Level" column in `WodTable` now correctly displays calculated performance levels (Elite, Advanced, etc.) based on user scores and WOD benchmarks. Fixed issue where benchmarks were treated as strings instead of objects. **(Note: Level is no longer a separate column but logic might be reused for tooltips/panels).**
+- **Charts Page:**
+  - Top two charts (`WodDistributionChart`, `WodTimelineChart`) now display placeholder data and a "Sign In" button overlay for logged-out users.
+  - Logged-in users continue to see their real data.
+  - Placeholder data utilities created (`src/utils/placeholderData.ts`).
+  - Overlay component created (`src/app/_components/ChartLoginOverlay.tsx`).
 
 ## What's Left to Build
 

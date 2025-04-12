@@ -41,7 +41,14 @@
 
 ## Recent Changes
 
-- **PageLayout Implementation (Apr 2025):**
+- **Performance Chart Fixes (Apr 2025):**
+
+  - Updated performance level calculation in `wodRouter` to properly use benchmark data
+  - Added color-coded performance levels in `WodTimelineChart`
+  - Improved tooltip display with descriptive levels and trend indicators
+  - Fixed backend calculation to properly account for Rx scores
+
+- \*\*PageLayout Implementation (Apr 2025):"
 
   - Created new `PageLayout` component (`src/app/_components/PageLayout.tsx`) to standardize page structure
   - Includes Header and consistent content container styling

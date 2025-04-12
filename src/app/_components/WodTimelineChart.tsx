@@ -76,13 +76,24 @@ const calculateRollingAverage = (
 // Helper function to get descriptive level from numerical average
 const getDescriptiveLevel = (level: number): string => {
   if (level < 1.5) return "Beginner";
-  if (level < 2) return "Beginner-Intermediate";
+  if (level < 2) return "Beginner+";
   if (level < 2.5) return "Intermediate";
-  if (level < 3) return "Intermediate-Advanced";
+  if (level < 3) return "Intermediate+";
   if (level < 3.5) return "Advanced";
-  if (level < 4) return "Advanced-Elite";
+  if (level < 4) return "Advanced+";
   if (level === 4) return "Elite";
-  return "Unknown"; // Should not happen with domain [0, 4]
+  return "Unknown";
+};
+
+const getLevelColor = (level: number): string => {
+  if (level < 1.5) return "text-gray-500";
+  if (level < 2) return "text-gray-400";
+  if (level < 2.5) return "text-yellow-500";
+  if (level < 3) return "text-yellow-400";
+  if (level < 3.5) return "text-green-500";
+  if (level < 4) return "text-green-400";
+  if (level === 4) return "text-purple-500";
+  return "text-gray-500";
 };
 
 // Custom Tooltip for better display
@@ -139,10 +150,29 @@ const CustomTimelineTooltip = ({
     return (
       <Box className="rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
         <Text className="font-bold">{String(label)}</Text> {/* Month */}
-        <Text>
-          : {displayValue}
-          {rollingAvgDisplay}
-        </Text>
+        {name === "averageLevel" ? (
+          <Flex direction="column" gap="1" mt="1">
+            <Flex align="center" gap="1">
+              <Text>Level:</Text>
+              <Text className={getLevelColor(Number(value))}>
+                {displayValue}
+              </Text>
+            </Flex>
+            {rollingAvgDisplay && (
+              <Flex align="center" gap="1">
+                <Text>Trend:</Text>
+                <Text className={getLevelColor(Number(rollingAverage))}>
+                  {rollingAvgDisplay.replace("(Avg: ", "").replace(")", "")}
+                </Text>
+              </Flex>
+            )}
+          </Flex>
+        ) : (
+          <Text>
+            : {displayValue}
+            {rollingAvgDisplay}
+          </Text>
+        )}
       </Box>
     );
   }

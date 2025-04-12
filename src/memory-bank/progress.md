@@ -56,22 +56,18 @@
 
 ## What's Left to Build
 
-_(Based on `todo.md`):_
+- **Adding more WOD's**
+- Add Regionals workouts
+- Add remaining workouts from SugarWod
 
 - **UI Enhancements:**
-  - Redesign WOD table score display: **(Phase 1 - Compact Preview DONE)**
-    - **TODO:** Implement click-to-expand functionality (side panel for full attempt history - Phase 2).
-  - Refine search/filter functionality for WODs (highlighting is done, filtering logic exists, but UI/UX could be improved)
 - **Data Expansion:**
-  - Add Games workouts.
-  - Add Benchmark workouts (e.g., King Kong).
   - Add remaining workouts from SugarWod data source.
 - **Stats & Analysis:**
   - Develop features for personalized stats analysis (strengths/weaknesses).
   - Potentially integrate an AI endpoint for analysis.
 - **Data Import:**
   - Implement scraping/import from Wodwell (script or bookmarklet).
-  - Implement import from SugarWod exports.
 - **Authentication:**
   - Evaluate and potentially switch to BetterAuth.
 - **Data Storage & Score Migration:**
@@ -100,6 +96,26 @@ _(Based on `todo.md`):_
 ## Known Issues
 
 - **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodTimeline`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
+
+## Performance Chart Fixes (Apr 2025)
+
+- **Backend Improvements:**
+
+  - Updated performance level calculation in `wodRouter` to properly use benchmark data
+  - Added Rx bonus to performance scores
+  - More accurate monthly aggregation
+
+- **Frontend Enhancements:**
+
+  - Added color-coded performance levels (Beginner to Elite)
+  - Improved tooltip layout with descriptive levels and trend indicators
+  - Clear visualization of performance progression
+  - Consistent UI styling with other charts
+
+- **Impact:**
+  - Performance chart now accurately reflects workout performance
+  - Provides clearer insights into progress over time
+  - Maintains data consistency with other components
 - **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.

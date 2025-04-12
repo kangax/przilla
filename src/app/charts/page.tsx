@@ -1,49 +1,49 @@
-import fs from "fs";
-import path from "path";
-import { Box, Container, Flex } from "@radix-ui/themes"; // Removed Heading
-
+import { Box, Container, Flex } from "@radix-ui/themes";
+import { auth } from "~/server/auth";
+import { api } from "~/trpc/server";
 import WodDistributionChart from "~/app/_components/WodDistributionChart";
 import WodTimelineChart from "~/app/_components/WodTimelineChart";
-import MovementFrequencyChart from "~/app/_components/MovementFrequencyChart"; // Import the new chart
-// Removed ThemeToggle import
+import MovementFrequencyChart from "~/app/_components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
 import { normalizeMovementName } from "~/utils/movementMapping";
 import { type Wod } from "~/types/wodTypes";
-import {
-  DESIRED_TAG_ORDER,
-  ALLOWED_TAGS, // Keep ALLOWED_TAGS if still used, remove if not
-  DESIRED_CATEGORY_ORDER,
-  // PERFORMANCE_LEVEL_VALUES, // No longer used
-} from "~/config/constants";
-import {
-  isWodDone,
-  calculateCategoryCounts, // Import the new function
-  parseTags, // Import the new parseTags function
-} from "~/utils/wodUtils";
+import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
+import { isWodDone, parseTags } from "~/utils/wodUtils";
 
 export default async function ChartsPage() {
+  const session = await auth();
+  if (!session?.user) {
+    return <Box>Please sign in to view charts</Box>;
+  }
+
   let wodsData: Wod[] = [];
-  const tagCounts: Record<string, number> = {}; // For existing chart
-  let categoryCounts: Record<string, number> = {}; // Initialize categoryCounts here
-  const monthlyData: Record<
-    // For existing chart
-    string,
-    { count: number; totalLevelScore: number }
-  > = {};
-  // Update structure to hold count and WOD names
+  const tagCounts: Record<string, number> = {};
+  let categoryCounts: Record<string, number> = {};
+  let frequencyData: { month: string; count: number }[] = [];
+  let performanceData: { month: string; averageLevel: number }[] = [];
   const movementDataByCategory: Record<
     string,
     Record<string, { count: number; wodNames: string[] }>
-  > = {}; // For new chart
+  > = {};
 
   try {
-    const filePath = path.join(process.cwd(), "public", "data", "wods.json");
-    const fileContents = fs.readFileSync(filePath, "utf8");
-    wodsData = JSON.parse(fileContents) as Wod[];
+    // Get chart data from tRPC
+    const chartData = await api.wod.getChartData();
+    const allWods = await api.wod.getAll();
+    wodsData = allWods;
     console.log("Loaded WODs data for charts:", wodsData.length);
 
-    // Calculate category counts using the new utility function and assign
-    categoryCounts = calculateCategoryCounts(wodsData);
+    // Use pre-calculated data from tRPC
+    categoryCounts = chartData.categoryCounts;
+    const chartTagCounts = chartData.tagCounts;
+    const monthlyScores = chartData.monthlyData;
+
+    // Process tags to match desired order
+    DESIRED_TAG_ORDER.forEach((tag) => {
+      if (chartTagCounts[tag]) {
+        tagCounts[tag] = chartTagCounts[tag];
+      }
+    });
 
     // --- Start: Movement Frequency Calculation ---
     const commonWords = new Set([
@@ -155,11 +155,7 @@ export default async function ChartsPage() {
         const parsedTags = parseTags(wod.tags);
         if (parsedTags.length > 0) {
           parsedTags.forEach((tag) => {
-            // Cast ALLOWED_TAGS to string[] for the includes check to satisfy TS
-            if ((ALLOWED_TAGS as string[]).includes(tag)) {
-              // Assuming ALLOWED_TAGS is still relevant
-              tagCounts[tag] = (tagCounts[tag] || 0) + 1;
-            }
+            tagCounts[tag] = (tagCounts[tag] || 0) + 1;
           });
         }
       }
@@ -278,11 +274,25 @@ export default async function ChartsPage() {
       "Calculated Category Counts (Done WODs) for charts:",
       categoryCounts,
     );
-    console.log("Calculated Monthly Data for charts:", monthlyData);
+    console.log("Calculated Monthly Data for charts:", monthlyScores);
     console.log(
       "Calculated Movement Data by Category (with WOD names):",
       movementDataByCategory,
     ); // Log new data
+
+    // Prepare timeline chart data from monthly scores
+    const sortedMonths = Object.keys(monthlyScores).sort();
+    frequencyData = sortedMonths.map((month) => ({
+      month,
+      count: monthlyScores[month].count,
+    }));
+    performanceData = sortedMonths.map((month) => ({
+      month,
+      averageLevel:
+        monthlyScores[month].count > 0
+          ? monthlyScores[month].totalLevelScore / monthlyScores[month].count
+          : 0,
+    }));
   } catch (error) {
     console.error("Error loading or processing WODs data for charts:", error);
   }
@@ -295,19 +305,6 @@ export default async function ChartsPage() {
   const categoryChartData = DESIRED_CATEGORY_ORDER.map((categoryName) => ({
     name: categoryName,
     value: categoryCounts[categoryName] || 0,
-  }));
-
-  const sortedMonths = Object.keys(monthlyData).sort();
-  const frequencyData = sortedMonths.map((month) => ({
-    month,
-    count: monthlyData[month].count,
-  }));
-  const performanceData = sortedMonths.map((month) => ({
-    month,
-    averageLevel:
-      monthlyData[month].count > 0
-        ? monthlyData[month].totalLevelScore / monthlyData[month].count
-        : 0,
   }));
 
   // --- Prepare data for new movement frequency chart ---

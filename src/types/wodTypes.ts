@@ -47,6 +47,7 @@ export type WodCategory =
   | "Skill" // Added Skill based on page.tsx
   | "Other";
 
+// Final client-side Wod type (after parsing/transformation)
 export type Wod = {
   id: string; // Added from DB schema
   wodUrl: string | null; // Updated to match DB schema (can be null)
@@ -63,7 +64,18 @@ export type Wod = {
   updatedAt?: Date | null; // Added from DB schema (Drizzle returns Date or null)
 };
 
-// Define the structure for an individual score record based on the DB schema
+// Intermediate type representing Wod data as potentially received from tRPC query (before client parsing)
+export type WodFromQuery = Omit<
+  Wod,
+  "createdAt" | "updatedAt" | "tags" | "benchmarks"
+> & {
+  createdAt: string | Date; // Could be string or Date depending on serialization
+  updatedAt?: string | Date | null; // Could be string or Date depending on serialization
+  tags?: string | string[] | null; // Could be stringified JSON or array
+  benchmarks?: string | Benchmarks | null; // Could be stringified JSON or object
+};
+
+// Final client-side Score type (after parsing/transformation)
 export type Score = {
   id: string;
   userId: string;
@@ -78,6 +90,16 @@ export type Score = {
   notes: string | null;
   createdAt: Date; // Drizzle returns Date for timestamp mode
   updatedAt: Date | null; // Drizzle returns Date or null for timestamp mode
+};
+
+// Intermediate type representing Score data as potentially received from tRPC query (before client parsing)
+export type ScoreFromQuery = Omit<
+  Score,
+  "scoreDate" | "createdAt" | "updatedAt"
+> & {
+  scoreDate: string | Date; // Could be string or Date depending on serialization
+  createdAt: string | Date; // Could be string or Date depending on serialization
+  updatedAt?: string | Date | null; // Could be string or Date depending on serialization
 };
 
 // Type for chart data points (used in WodViewer and passed from page.tsx)

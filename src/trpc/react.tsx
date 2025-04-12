@@ -49,7 +49,7 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
         }),
         unstable_httpBatchStreamLink({
           // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
-          transformer: SuperJSON as any, // Workaround for persistent type error
+          transformer: SuperJSON, // Removed 'as any'
           url: getBaseUrl() + "/api/trpc",
           headers: () => {
             const headers = new Headers();

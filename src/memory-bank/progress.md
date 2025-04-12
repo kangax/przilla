@@ -58,6 +58,8 @@
   - Logged-in users continue to see their real data.
   - Placeholder data utilities created (`src/utils/placeholderData.ts`).
   - Overlay component created (`src/app/_components/ChartLoginOverlay.tsx`).
+- **Component Testing:**
+  - Basic tests added for `ChartLoginOverlay.tsx` (`src/app/_components/ChartLoginOverlay.test.tsx`) verifying rendering and click behavior.
 
 ## What's Left to Build
 
@@ -84,6 +86,8 @@
   - **TODO:** Implement score creation/editing functionality.
   - **TODO:** Implement backend logic for CSV score import (bulk insertion).
   - **TODO:** Refine score-based sorting/filtering (sorting by results column needed).
+- **Testing:**
+  - **TODO:** Add tests for `WodDistributionChart.tsx` and `WodTimelineChart.tsx` covering placeholder and real data scenarios.
 
 ## Current Status
 
@@ -91,12 +95,14 @@
 - Core functionality for viewing WODs (`WodViewer`, `WodTable`) now uses the database via tRPC for both WODs and scores. Other parts (e.g., charts) may still use static JSON.
 - WOD Table UI updated with a compact "Results" column.
 - User authentication exists but might be replaced.
+- Basic component tests exist for `ChartLoginOverlay`.
 - Major upcoming work involves:
   - Implementing the expandable score history panel (Phase 2 of table redesign).
   - Implementing score creation/editing.
   - Refining score-based sorting/filtering (including sorting by the new Results column).
   - Continuing the migration away from static JSON for other components (e.g., charts).
   - Expanding the WOD dataset, adding import capabilities, and building out analytical features.
+  - Adding more component tests.
 
 ## Known Issues
 

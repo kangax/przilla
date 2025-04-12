@@ -41,6 +41,19 @@
 
 ## Recent Changes
 
+- **Loading Indicator Refactor (Apr 2025):**
+  - Renamed `src/app/import/components/ImportProgress.tsx` to `src/app/_components/LoadingIndicator.tsx`.
+  - Updated the component name from `ImportProgress` to `LoadingIndicator`.
+  - Moved the component to the shared `_components` directory to make it reusable.
+  - Updated `src/app/import/components/ScoreImportWizard.tsx` to use the renamed/relocated component.
+  - Updated `src/app/_components/WodViewer.tsx` to replace its simple text loading state with the new `LoadingIndicator`, ensuring it's centered.
+  - Deleted the old `src/app/import/components/ImportProgress.tsx` file.
+- **ChartLoginOverlay Tests (Apr 2025):**
+  - Created `src/app/_components/ChartLoginOverlay.test.tsx` to test the login overlay component used on the charts page for unauthenticated users.
+  - Added tests using Vitest and React Testing Library to verify:
+    - The component renders the "Sign In" button.
+    - Clicking the button calls the mocked `signIn` function from `next-auth/react`.
+  - Fixed initial test failures by updating the `next-auth/react` mock to include a basic `SessionProvider`.
 - **Chart Login Overlay (Apr 2025):**
   - Implemented placeholder data generation functions (`src/utils/placeholderData.ts`) for `WodDistributionChart` and `WodTimelineChart`.
   - Created `ChartLoginOverlay` component (`src/app/_components/ChartLoginOverlay.tsx`) displaying a centered, opaque "Sign In" button that triggers the NextAuth sign-in flow.
@@ -260,7 +273,7 @@
 - Implement score creation/editing functionality (tRPC procedures and UI forms).
 - Refine score-based sorting/filtering in `WodViewer`/`wodUtils`.
 - Complete implementation of `getPerformanceLevel` in `WodTable` (currently placeholder).
-- Update other components still using static JSON (e.g., charts page).
+- Use <ImportProgress> for loading in other places such as main wod table
 
 ### Previous Database Migration Implementation Plan
 

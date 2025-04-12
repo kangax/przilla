@@ -4,7 +4,7 @@ import React, { useState, useEffect, useCallback } from "react"; // Added useCal
 import Papa from "papaparse";
 import { api } from "~/trpc/react";
 import { CsvUploadZone } from "./CsvUploadZone";
-import { ImportProgress } from "./ImportProgress";
+import { LoadingIndicator } from "../../_components/LoadingIndicator"; // Updated path and name
 import { ScoreReviewTable } from "./ScoreReviewTable";
 import { ImportConfirmation } from "./ImportConfirmation";
 // Import types
@@ -314,7 +314,7 @@ export function ScoreImportWizard() {
 
   // Render Loading state while WODs are fetching initially
   if (isLoadingWods && step === "upload" && !file) {
-    return <ImportProgress message="Loading WOD data..." />;
+    return <LoadingIndicator message="Loading..." />;
   }
 
   // Render Error state if WOD fetching failed
@@ -343,7 +343,7 @@ export function ScoreImportWizard() {
 
       {/* Show processing for both file parsing and submission */}
       {step === "processing" && (
-        <ImportProgress
+        <LoadingIndicator // Updated component name
           message={
             file
               ? "Processing CSV and matching WODs..."

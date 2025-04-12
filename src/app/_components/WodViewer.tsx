@@ -15,6 +15,7 @@ import { Box, Flex, Tooltip, SegmentedControl } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
+import { LoadingIndicator } from "./LoadingIndicator"; // Import the new component
 import { type Wod, type Score, type SortByType } from "~/types/wodTypes";
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
 
@@ -352,7 +353,16 @@ export default function WodViewer() {
   }, []);
 
   if (isLoadingWods || (isLoggedIn && isLoadingScores)) {
-    return <Box>Loading data...</Box>;
+    // Use Flex to center the LoadingIndicator vertically and horizontally
+    return (
+      <Flex
+        align="center"
+        justify="center"
+        className="h-[300px] w-full" // Give it some height to center within
+      >
+        <LoadingIndicator message="Loading data..." />
+      </Flex>
+    );
   }
 
   if (errorWods) {

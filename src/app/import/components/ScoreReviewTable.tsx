@@ -25,11 +25,6 @@ interface ScoreReviewTableProps {
 
 const columnHelper = createColumnHelper<ProcessedRow>();
 
-// Helper type for validation cell context
-type ValidationCellContext = CellContext<
-  ProcessedRow,
-  ProcessedRow["validation"]
->;
 // Helper type for proposedScore cell context
 type ProposedScoreCellContext = CellContext<
   ProcessedRow,

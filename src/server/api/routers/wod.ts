@@ -1,5 +1,4 @@
-import { asc, eq, and } from "drizzle-orm";
-import { type SQL } from "drizzle-orm";
+import { asc, eq } from "drizzle-orm";
 
 import {
   createTRPCRouter,
@@ -7,7 +6,7 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 import { wods, scores } from "~/server/db/schema";
-import { type Wod, type Score } from "~/types/wodTypes";
+import { type Wod, type Score, type Benchmarks } from "~/types/wodTypes";
 import { isWodDone } from "~/utils/wodUtils";
 
 export const wodRouter = createTRPCRouter({
@@ -73,9 +72,10 @@ export const wodRouter = createTRPCRouter({
     const categoryCounts: Record<string, number> = {};
 
     allWods.forEach((wod) => {
-      const parsedTags = Array.isArray(wod.tags)
-        ? wod.tags
-        : JSON.parse(wod.tags || "[]");
+      const tagsInput = wod.tags || "[]";
+      const parsedTags: string[] = Array.isArray(tagsInput)
+        ? tagsInput
+        : (JSON.parse(tagsInput) as string[]);
       const isDone = isWodDone(wod as Wod, scoresByWodId[wod.id]);
 
       if (isDone) {
@@ -108,10 +108,11 @@ export const wodRouter = createTRPCRouter({
       // Calculate performance level score based on benchmarks
       const wod = allWods.find((w) => w.id === score.wodId);
       if (wod?.benchmarks) {
-        const benchmarks =
-          typeof wod.benchmarks === "string"
-            ? JSON.parse(wod.benchmarks)
-            : wod.benchmarks;
+        const benchmarksInput = wod.benchmarks || "{}";
+        const benchmarks: Benchmarks =
+          typeof benchmarksInput === "string"
+            ? (JSON.parse(benchmarksInput) as Benchmarks)
+            : benchmarksInput;
 
         // Get numeric score value (time in seconds, reps, etc.)
         const scoreValue = score.time_seconds || score.reps || 0;

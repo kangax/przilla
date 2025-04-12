@@ -36,13 +36,6 @@ _What design patterns are used in the codebase?_
 
 ## Component Relationships
 
-- **Charts Implementation:**
-
-  - `charts/page.tsx` serves as the entry point for all visualization components
-  - Uses `WodTimelineChart`, `WodDistributionChart`, and `MovementFrequencyChart` components
-  - Fetches data via tRPC (`api.wod.getChartData`)
-  - Handles authentication states with `ChartLoginOverlay`
-
 - Frontend components (in `src/app/_components/` and `src/app/page.tsx`, etc.) use tRPC hooks (via `src/trpc/react.tsx`) to fetch data from the backend.
 - The tRPC server (`src/app/api/trpc/[trpc]/route.ts`) routes requests to specific routers defined in `src/server/api/routers/`.
 - Routers interact with database logic (potentially using the Repository Pattern, as preferred) likely located within or called from the routers, using Drizzle ORM (`src/server/db/`).

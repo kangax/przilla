@@ -16,10 +16,24 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
 import { LoadingIndicator } from "./LoadingIndicator"; // Import the new component
-import { type Wod, type Score, type SortByType } from "~/types/wodTypes";
+import {
+  type Wod,
+  type Score,
+  type SortByType,
+  type WodFromQuery, // Import intermediate type
+  type ScoreFromQuery, // Import intermediate type
+  type Benchmarks, // Import Benchmarks type
+} from "~/types/wodTypes";
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
+// Removed AppRouter and inferRouterOutputs imports
 
 // --- URL State Management ---
+
+// Define props interface using the client-side Wod type
+interface WodViewerProps {
+  initialWods: Wod[]; // Expect the type with Date objects directly
+}
+
 const DEFAULT_COMPLETION_FILTER = "all";
 const ALLOWED_COMPLETION_STATUSES: ReadonlyArray<"all" | "done" | "notDone"> = [
   "all",
@@ -56,15 +70,20 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   countLikes: "desc",
 };
 
-export default function WodViewer() {
+// Update component signature to accept props
+export default function WodViewer({ initialWods }: WodViewerProps) {
   const { status: sessionStatus } = useSession();
   const isLoggedIn = sessionStatus === "authenticated";
 
+  // Fetch data, but initial render will use the prop
   const {
-    data: wodsData,
-    isLoading: isLoadingWods,
+    data: wodsData, // Data fetched by useQuery (might be undefined initially)
+    isLoading: isLoadingWods, // Reflects query loading state
     error: errorWods,
-  } = api.wod.getAll.useQuery();
+  } = api.wod.getAll.useQuery(undefined, {
+    // Removed initialData
+    staleTime: 5 * 60 * 1000, // Keep data fresh for 5 mins
+  });
 
   const {
     data: scoresData,
@@ -74,34 +93,85 @@ export default function WodViewer() {
     enabled: isLoggedIn,
   });
 
+  // Process the data: Prioritize initialWods prop for first render, then use fetched data.
+  // Use intermediate types to handle potential string dates/JSON from query.
   const wods = useMemo(() => {
-    return (wodsData ?? []).map((wod) => ({
-      ...wod,
-      createdAt: wod.createdAt ? new Date(wod.createdAt) : new Date(),
-      updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : null,
-      tags: parseTags(wod.tags),
+    // Use initialWods if wodsData from query isn't available yet, otherwise use wodsData
+    // Treat incoming data as potentially having string dates/JSON
+    const dataToProcess =
+      (wodsData as WodFromQuery[] | undefined) ?? initialWods ?? [];
+    return dataToProcess.map((wod: WodFromQuery) => ({
+      // Type map parameter with intermediate type
+      // Spread properties that don't need transformation
+      id: wod.id,
+      wodUrl: wod.wodUrl,
+      wodName: wod.wodName,
+      description: wod.description,
+      category: wod.category,
+      difficulty: wod.difficulty,
+      difficultyExplanation: wod.difficultyExplanation,
+      countLikes: wod.countLikes,
+      // Transform properties
+      createdAt:
+        wod.createdAt instanceof Date
+          ? wod.createdAt
+          : new Date(wod.createdAt ?? Date.now()), // Handle string or Date
+      updatedAt:
+        wod.updatedAt instanceof Date
+          ? wod.updatedAt
+          : wod.updatedAt
+            ? new Date(wod.updatedAt) // Handle string or Date
+            : null,
+      tags: parseTags(wod.tags), // Handle string or string[]
       benchmarks:
-        typeof wod.benchmarks === "string"
-          ? (JSON.parse(wod.benchmarks) as Wod["benchmarks"])
+        typeof wod.benchmarks === "string" // Handle stringified JSON
+          ? (JSON.parse(wod.benchmarks) as Benchmarks | null) // Use Benchmarks type here
           : wod.benchmarks,
-    })) as Wod[];
-  }, [wodsData]);
+    })) as Wod[]; // Final assertion to Wod[] is correct after transformation
+  }, [wodsData, initialWods]); // Depend on both
 
   const scoresByWodId = useMemo(() => {
     if (!scoresData) return {};
-    const processedScores = scoresData.map((score) => ({
-      ...score,
-      scoreDate: new Date(score.scoreDate),
-      createdAt: new Date(score.createdAt),
-      updatedAt: score.updatedAt ? new Date(score.updatedAt) : null,
-    })) as Score[];
+    // Treat incoming score data as potentially having string dates
+    const processedScores = (scoresData as ScoreFromQuery[] | undefined)?.map(
+      (score: ScoreFromQuery) => ({
+        // Type map parameter with intermediate type
+        // Spread properties that don't need transformation
+        id: score.id,
+        userId: score.userId,
+        wodId: score.wodId,
+        time_seconds: score.time_seconds,
+        reps: score.reps,
+        load: score.load,
+        rounds_completed: score.rounds_completed,
+        partial_reps: score.partial_reps,
+        isRx: score.isRx,
+        notes: score.notes,
+        // Transform date properties
+        scoreDate:
+          score.scoreDate instanceof Date
+            ? score.scoreDate
+            : new Date(score.scoreDate), // Handle string or Date
+        createdAt:
+          score.createdAt instanceof Date
+            ? score.createdAt
+            : new Date(score.createdAt), // Handle string or Date
+        updatedAt:
+          score.updatedAt instanceof Date
+            ? score.updatedAt
+            : score.updatedAt
+              ? new Date(score.updatedAt) // Handle string or Date
+              : null,
+      }),
+    ) as Score[]; // Final assertion to Score[] is correct after transformation
 
-    return processedScores.reduce(
+    return (processedScores ?? []).reduce(
       (acc, score) => {
         if (!acc[score.wodId]) {
           acc[score.wodId] = [];
         }
         acc[score.wodId].push(score);
+        // Sort by Date object directly
         acc[score.wodId].sort(
           (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
         );
@@ -352,15 +422,21 @@ export default function WodViewer() {
     );
   }, []);
 
-  if (isLoadingWods || (isLoggedIn && isLoadingScores)) {
-    // Use Flex to center the LoadingIndicator vertically and horizontally
+  // Adjust loading state logic: Show loading only if scores are loading (for logged-in users)
+  // or if the WOD query is loading AND we don't have initialWods (shouldn't happen here)
+  const showWodLoading = isLoadingWods && !wodsData && !initialWods; // Check if query is loading without data/prop
+  const showScoreLoading = isLoggedIn && isLoadingScores;
+
+  if (showWodLoading || showScoreLoading) {
     return (
       <Flex
         align="center"
         justify="center"
         className="h-[300px] w-full" // Give it some height to center within
       >
-        <LoadingIndicator message="Loading data..." />
+        <LoadingIndicator
+          message={showScoreLoading ? "Loading scores..." : "Loading data..."}
+        />
       </Flex>
     );
   }
@@ -373,7 +449,8 @@ export default function WodViewer() {
     return <Box>Error loading scores: {errorScores.message}</Box>;
   }
 
-  if (!wods) {
+  // Use wods derived from useMemo which processes initialWods or wodsData
+  if (!wods || wods.length === 0) {
     return <Box>No WOD data available.</Box>;
   }
 

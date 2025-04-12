@@ -3,8 +3,8 @@
 ## What Works
 
 - **PageLayout:** Consistent page structure with Header component now implemented across all pages via `PageLayout` component. Includes standardized content container styling and ensures uniform header display.
-
-- **WOD Display:** Core components for displaying WOD information (`WodViewer`, `WodTable`, `WodTimeline`) are functional. `WodViewer` now fetches data directly from the database via tRPC (`api.wod.getAll`).
+- **Initial Load Performance:** WOD data is now fetched server-side in `src/app/page.tsx` and passed as a prop (`initialWods`) to `WodViewer`, significantly improving initial load time and LCP.
+- **WOD Display:** Core components for displaying WOD information (`WodViewer`, `WodTable`) are functional. `WodViewer` uses initial data from props for the first render and fetches scores client-side via tRPC (`api.score.getAllByUser`). The `api.wod.getAll` query remains for caching/updates.
 - **WOD Visualization:** Basic charts for visualizing WOD data might be implemented (`WodTimelineChart`, `WodDistributionChart`).
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
@@ -47,11 +47,7 @@
 - **Performance:**
   - Optimized `sortWods` function based on performance profiling (reverted `localeCompare` for name sort, kept external `difficultyValues` map).
   - Memoized `HighlightMatch`, `WodTable`, and `WodTimeline` components using `React.memo`.
-- **Timeline View:**
-  - Conditionally rendered based on login status in `WodViewer`.
-  - Removed non-functional "Progress Timeline" column from `WodTimeline` due to missing `results` data.
-  - Corrected `wodName` sorting by reverting to `localeCompare()` in `sortWods` utility function.
-  - Implemented `date` sorting in `sortWods` using the latest score date from the `scoresByWodId` map (passed from `WodViewer`).
+- **Timeline View:** (Removed)
 - **Performance Level Display:** The "Level" column in `WodTable` now correctly displays calculated performance levels (Elite, Advanced, etc.) based on user scores and WOD benchmarks. Fixed issue where benchmarks were treated as strings instead of objects. **(Note: Level is no longer a separate column but logic might be reused for tooltips/panels).**
 - **Charts Page:**
   - Top two charts (`WodDistributionChart`, `WodTimelineChart`) now display placeholder data and a "Sign In" button overlay for logged-out users.
@@ -60,6 +56,7 @@
   - Overlay component created (`src/app/_components/ChartLoginOverlay.tsx`).
 - **Component Testing:**
   - Basic tests added for `ChartLoginOverlay.tsx` (`src/app/_components/ChartLoginOverlay.test.tsx`) verifying rendering and click behavior.
+- **ESLint Error Resolution (Type-Safe):** Fixed `@typescript-eslint/no-unsafe-*` errors in `WodViewer.tsx` by defining and using intermediate types (`WodFromQuery`, `ScoreFromQuery`) to accurately type data before client-side transformation within `useMemo` hooks. This avoids using `any` and ensures type safety throughout the parsing process.
 
 ## What's Left to Build
 
@@ -81,7 +78,7 @@
   - Migrate WOD data from static JSON files to a per-user database solution (using Drizzle/LibSQL). **(DONE)**
   - Implement storage for user scores using separate nullable columns (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`) in the `scores` table. **(DONE - Schema changed & migrated)**
   - Migrate historical scores for `kangax@gmail.com` from `public/data/wods.json` into the new `scores` table structure using `scripts/migrate_user_scores.ts`. **(DONE)**
-  - Update UI (`WodViewer`, `WodTable`, `WodTimeline`, `wodUtils`) and create tRPC endpoint (`score.getAllByUser`) to fetch and display scores using the new structure. **(DONE - Initial implementation)**
+  - Update UI (`WodViewer`, `WodTable`, `wodUtils`) and create tRPC endpoint (`score.getAllByUser`) to fetch and display scores using the new structure. **(DONE - Initial implementation)**
   - **TODO:** Refactor other components (e.g., charts page) still using static JSON to use tRPC/database.
   - **TODO:** Implement score creation/editing functionality.
   - **TODO:** Implement backend logic for CSV score import (bulk insertion).
@@ -92,7 +89,7 @@
 ## Current Status
 
 - The application is in an early-to-mid stage of development.
-- Core functionality for viewing WODs (`WodViewer`, `WodTable`) now uses the database via tRPC for both WODs and scores. Other parts (e.g., charts) may still use static JSON.
+- Core functionality for viewing WODs (`WodViewer`, `WodTable`) now uses server-side fetched initial WOD data and client-side fetched scores via tRPC. Other parts (e.g., charts) may still use static JSON.
 - WOD Table UI updated with a compact "Results" column.
 - User authentication exists but might be replaced.
 - Basic component tests exist for `ChartLoginOverlay`.
@@ -106,7 +103,7 @@
 
 ## Known Issues
 
-- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodTimeline`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
+- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
 
 ## Performance Chart Fixes (Apr 2025)
 
@@ -127,7 +124,7 @@
   - Performance chart now accurately reflects workout performance
   - Provides clearer insights into progress over time
   - Maintains data consistency with other components
-- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer`. Need to update other components (e.g., charts) to use the database.
+- **Data Scalability/Personalization:** Reliance on static JSON files for WODs is resolved for `WodViewer` via server-side initial data fetch. Need to update other components (e.g., charts) to use the database.
 - **Limited WOD Data:** The current dataset needs expansion (Games, Benchmarks, SugarWod). Significant progress made on identifying and preparing missing Open and Benchmark WODs from `wodwell_workouts.json`, though insertion into `wods.json` was deferred. **(Largely Addressed)** WODs with empty `benchmarks.levels` objects or incorrect benchmark types ('time' for AMRAPs/EMOMs) have been corrected for 183 + 42 = 225 WODs via scripting (see Evolution below). Some WODs (e.g., partner, complex scoring) still lack levels or have ambiguous types.
 - **Authentication Provider:** Potential limitations or desire for different features driving the consideration to switch from NextAuth to BetterAuth.
   - **Sorting/Filtering Limitations:** Sorting by `date` is now implemented. Sorting by `attempts`, `level`, and `latestLevel` still needs implementation in `wodUtils.ts` using the `scoresByWodId` map. Sorting by the new "Results" column is not yet implemented. Filtering by `isDone` works based on the presence of scores.
@@ -214,3 +211,5 @@ Example of a wod from wods.json:
   - Refactored `WodViewer` to use `api.wod.getAll.useQuery()`.
   - Updated `wodUtils` (`isWodDone`, `sortWods`) to handle the lack of score data in `getAll` results.
 - **WOD Table Redesign - Phase 1 (Apr 2025):** Replaced "Date", "Score", and "Level" columns with a single "Results" column showing compact latest score, Rx status, and attempt count.
+- **Initial Load Performance Optimization (Apr 2025):** Refactored `page.tsx` and `WodViewer.tsx` to fetch static WOD data server-side and pass it as a prop (`initialWods`) to the client component. This avoids the large initial client-side fetch, improving LCP. `WodViewer` uses the prop for initial render and keeps the `useQuery` hook for caching/updates.
+- **ESLint `no-unsafe-*` Fix in WodViewer (Apr 2025 - Final):** Resolved multiple `@typescript-eslint/no-unsafe-*` errors in the `useMemo` hooks in `WodViewer.tsx`. The root cause was data arriving from tRPC with serialized types (e.g., string dates) despite SuperJSON being configured. The fix involved defining intermediate types (`WodFromQuery`, `ScoreFromQuery`) to represent the data before client-side transformation, and using these types within the `.map()` callbacks while retaining the manual parsing logic (`new Date()`, `parseTags()`, etc.). This ensures type safety without using `any`.

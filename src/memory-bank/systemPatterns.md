@@ -9,10 +9,11 @@
 - **Authentication:** NextAuth.js handles user authentication. Configuration is likely in `src/server/auth/`.
 - **Client-Side State:** TanStack Query (React Query) manages server state and caching on the client, integrated with tRPC.
 - **Component Structure:** React components are organized within `src/app/_components/`.
+- **Data Fetching Pattern:** For pages requiring large static datasets on initial load (e.g., the main WOD list on `page.tsx`), data is fetched server-side within the page's Server Component and passed as props to the relevant Client Component (`WodViewer`). The Client Component uses this prop for initial rendering and retains its `useQuery` hook for caching and background updates. User-specific data (e.g., scores) is typically fetched client-side within the Client Component.
 
 ## Key Technical Decisions
 
-- **Framework Choice:** Next.js (App Router) chosen for its full-stack capabilities, routing, and React ecosystem integration.
+- **Framework Choice:** Next.js (App Router) chosen for its full-stack capabilities, routing, React Server Components, and React ecosystem integration.
 - **API Layer:** tRPC selected for end-to-end type safety between backend and frontend.
 - **Database ORM:** Drizzle ORM chosen, likely for its TypeScript focus, performance, and compatibility with edge databases like LibSQL/Turso.
 - **Authentication:** NextAuth.js currently used, providing a standard way to handle authentication in Next.js (though potentially under review).
@@ -36,10 +37,11 @@ _What design patterns are used in the codebase?_
 
 ## Component Relationships
 
-- Frontend components (in `src/app/_components/` and `src/app/page.tsx`, etc.) use tRPC hooks (via `src/trpc/react.tsx`) to fetch data from the backend.
-- The tRPC server (`src/app/api/trpc/[trpc]/route.ts`) routes requests to specific routers defined in `src/server/api/routers/`.
-- Routers interact with database logic (potentially using the Repository Pattern, as preferred) likely located within or called from the routers, using Drizzle ORM (`src/server/db/`).
-- Authentication state is managed by NextAuth.js and likely accessed both on the server (for protecting routes/data) and client (for UI changes via `useSession` or similar).
+- **Server -> Client Data Flow:** Server Components (like `src/app/page.tsx`) can fetch data using the server tRPC client (`~/trpc/server`) and pass it as props to Client Components (`src/app/_components/WodViewer.tsx`).
+- **Client Data Fetching:** Client Components use tRPC hooks (via `~/trpc/react`) to fetch data from the backend (e.g., user scores in `WodViewer`).
+- **API Routing:** The tRPC server (`src/app/api/trpc/[trpc]/route.ts`) routes requests to specific routers defined in `src/server/api/routers/`.
+- **Database Interaction:** Routers interact with database logic (potentially using the Repository Pattern, as preferred) likely located within or called from the routers, using Drizzle ORM (`src/server/db/`).
+- **Authentication:** Authentication state is managed by NextAuth.js and likely accessed both on the server (for protecting routes/data) and client (for UI changes via `useSession` or similar).
 
 ## Critical Implementation Paths
 
@@ -47,7 +49,7 @@ _What design patterns are used in the codebase?_
 - **Authentication Integration:** Ensuring authentication (likely BetterAuth) correctly protects user data and integrates seamlessly with the database and tRPC.
 - **Data Import/Scraping:** Implementing reliable data import from external sources (Wodwell, SugarWod) involves handling different formats, potential API limitations, and error conditions.
 - **Stats/Analysis Engine:** Developing the logic for calculating and displaying meaningful user statistics could become complex depending on the desired insights.
-- **CSV Import Processing:** Score import from CSV uses client-side parsing (`papaparse`) and matching against WOD data fetched via tRPC. This avoids server load for parsing but requires fetching all WODs to the client for matching.
+- **CSV Import Processing:** Score import from CSV uses client-side parsing (`papaparse`) and matching against WOD data fetched via tRPC. This avoids server load for parsing but requires fetching all WODs to the client for matching. **Note:** The initial WOD fetch for matching might be optimizable now that `page.tsx` fetches WODs server-side.
 
 ## Workout Difficulty & Benchmark Estimation Heuristics
 
@@ -108,7 +110,7 @@ This enables consistent, scalable enrichment of new workouts.
   - Volume (e.g., "high volume GHD sit-ups")
   - Format (e.g., "fast-paced 10-minute cap")
 
-**Example:**  
+**Example:**
 _"Strict HSPU, heavy dumbbells, and double-unders in a fast-paced 10-minute cap"_
 
 ---

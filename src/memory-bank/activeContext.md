@@ -41,6 +41,33 @@
 
 ## Recent Changes
 
+- **ESLint `no-unsafe-*` Fix in WodViewer (Apr 2025 - Final):**
+  - **Problem:** Multiple `@typescript-eslint/no-unsafe-*` errors occurred in the `useMemo` hooks responsible for processing WOD and Score data in `src/app/_components/WodViewer.tsx`. Initial attempts using `any` or incorrect type assertions failed.
+  - **Cause:** The data arriving from the tRPC queries (`wodsData`, `scoresData`) contained serialized representations (e.g., strings for dates, potentially stringified JSON for tags/benchmarks) that didn't match the final client-side types (`Wod`, `Score`) which expect `Date` objects and parsed structures. SuperJSON, while configured, wasn't automatically handling the deserialization as expected in this context. Trying to map directly or use `any` led to type errors or unsafe code.
+  - **Solution:**
+    1.  Defined intermediate types (`WodFromQuery`, `ScoreFromQuery`) in `src/types/wodTypes.ts` to accurately represent the data structure _before_ client-side transformation (e.g., `createdAt: string | Date`).
+    2.  Updated the `useMemo` hooks in `src/app/_components/WodViewer.tsx` to:
+        - Treat the incoming `wodsData` and `scoresData` as arrays of these intermediate types (`WodFromQuery[]`, `ScoreFromQuery[]`).
+        - Explicitly type the `.map()` callback parameters with these intermediate types (e.g., `.map((wod: WodFromQuery) => ...)`).
+        - Retain the existing manual transformation logic within the map (e.g., `new Date(...)`, `parseTags(...)`, `JSON.parse(...)`) to convert the intermediate types into the final `Wod` and `Score` types.
+  - **Outcome:** Resolved the original ESLint errors and subsequent TypeScript errors in a type-safe manner by accurately modeling the data transformation process, without using `any`.
+- **SuperJSON Investigation (Apr 2025):**
+  - Verified SuperJSON transformer is configured in server (`src/server/api/trpc.ts`) and client (`src/trpc/react.tsx`) configs.
+  - Identified a potential issue in the client config where `transformer: SuperJSON as any` was used, likely masking a type error and preventing proper deserialization.
+  - Removed the `as any` assertion.
+  - Resolved the resulting TypeScript error by exporting the `t` object from `src/server/api/trpc.ts` to ensure the client's `AppRouter` type inference included the transformer information.
+  - Despite fixing the config, manual parsing in `WodViewer` remained necessary, indicating SuperJSON wasn't fully handling deserialization automatically in this specific data flow.
+- **Initial Load Performance Optimization (Apr 2025):**
+  - **Problem:** Fetching all WODs (~780) client-side in `WodViewer` caused slow initial load (1.5s) and high LCP.
+  - **Solution:** Leveraged Next.js Server Components for initial data fetching.
+  - **Implementation:**
+    - Modified `src/app/page.tsx` (Server Component) to fetch the WOD list using the server tRPC client (`api.wod.getAll()`).
+    - Passed the fetched `initialWods` data as a prop to `WodViewer`.
+    - Updated `src/app/_components/WodViewer.tsx` (Client Component) to accept the `initialWods` prop.
+    - `WodViewer` now uses the `initialWods` prop for its initial render calculations, avoiding the client-side fetch on load.
+    - The `api.wod.getAll.useQuery()` hook in `WodViewer` remains (without `initialData`) to handle caching and background updates.
+    - User scores (`api.score.getAllByUser`) are still fetched client-side within `WodViewer`.
+  - **Outcome:** Significantly improved initial page load time and LCP by fetching static WOD data server-side.
 - **Loading Indicator Refactor (Apr 2025):**
   - Renamed `src/app/import/components/ImportProgress.tsx` to `src/app/_components/LoadingIndicator.tsx`.
   - Updated the component name from `ImportProgress` to `LoadingIndicator`.
@@ -324,7 +351,7 @@ gantt
 - **Movements:** Separate normalization table using existing `movementMapping.ts` logic
 - **Benchmarks:** Preserve existing JSON structure for compatibility with frontend. Drizzle handles JSON parsing/stringification via `$type`.
 - **Authentication:** Stick with NextAuth.js for now, add athlete profile fields to user schema
-- **Data Fetching:** `WodViewer` now uses tRPC. Other components (e.g., charts page) still using static JSON need refactoring.
+- **Data Fetching:** `WodViewer` now uses tRPC. Other components (e.g., charts page) still using static JSON need refactoring. **Update:** `WodViewer` now receives initial WOD data via props from the server component (`page.tsx`) to improve initial load performance. The client-side `useQuery` remains for caching/updates.
 - **Sorting/Filtering:** Sorting/filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is temporarily disabled in `WodViewer` / `wodUtils` until score fetching is implemented.
 
 ```mermaid
@@ -350,3 +377,4 @@ _Are there any specific coding patterns, style preferences, or architectural cho
 - As an AI, you are trained on a large crossfit dataset and are perfectly capable of estimating workout scores based on their description. You've done it many times in the past.
 - The project relies heavily on WOD data, and managing this data effectively (moving from JSON to DB) is the most critical next step for enabling core functionality like personalized progress tracking.
 - The tech stack is modern (Next.js 15, tRPC, Drizzle, Radix) but includes some beta components (NextAuth v5) that require monitoring.
+- Passing data fetched in Server Components directly to Client Components requires careful type handling, especially with serialized data like dates. Using props for initial render and `useQuery` for subsequent state management is a viable pattern.

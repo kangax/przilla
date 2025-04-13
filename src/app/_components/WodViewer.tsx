@@ -15,14 +15,15 @@ import { Box, Flex, Tooltip, SegmentedControl } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
-// Removed LoadingIndicator import as it's now handled inside WodTable
+import WodListMobile from "./WodListMobile";
+import { useMediaQuery } from "../../utils/useMediaQuery";
 import {
   type Wod,
   type Score,
   type SortByType,
-  type WodFromQuery, // Import intermediate type
-  type ScoreFromQuery, // Import intermediate type
-  type Benchmarks, // Import Benchmarks type
+  type WodFromQuery,
+  type ScoreFromQuery,
+  type Benchmarks,
 } from "~/types/wodTypes";
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
 
@@ -73,6 +74,9 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 export default function WodViewer({ initialWods }: WodViewerProps) {
   const { status: sessionStatus } = useSession();
   const isLoggedIn = sessionStatus === "authenticated";
+
+  // Responsive: show card list on mobile/tablet, table on desktop
+  const isMobile = useMediaQuery("(max-width: 767px)");
 
   // Fetch data, but initial render will use the prop
   const {
@@ -450,124 +454,156 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return <Box>No WOD data available.</Box>;
   }
 
-  // Render the main content (Filter Bar + Table)
+  // Render the main content (Filter Bar + Table or Card List)
   return (
     <Box>
       {/* Filter Bar */}
-      <Flex ref={filterBarRef} className="mb-4 mt-4 items-center" gap="2">
-        <input
-          type="text"
-          placeholder="Search..."
-          value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
-          className="placeholder:text-muted-foreground w-40 rounded border border-input bg-background px-3 py-1.5 text-sm shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
-        />
+      <div
+        ref={filterBarRef}
+        className={`mb-4 mt-4 ${
+          isMobile ? "flex flex-col gap-2 px-2" : "flex items-center gap-2"
+        }`}
+      >
+        <div className={isMobile ? "flex gap-2" : "flex flex-grow gap-2"}>
+          <input
+            type="text"
+            placeholder="Search..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={`placeholder:text-muted-foreground rounded border border-input bg-background px-3 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${
+              isMobile ? "flex-1 py-2 text-base" : "w-40 py-1.5 text-sm"
+            }`}
+          />
 
-        <Select.Root
-          value={selectedCategories.length > 0 ? selectedCategories[0] : "all"}
-          onValueChange={(value) => {
-            if (value === "all") {
-              setSelectedCategories([]);
-            } else {
-              setSelectedCategories([value]);
+          <Select.Root
+            value={
+              selectedCategories.length > 0 ? selectedCategories[0] : "all"
             }
-          }}
-        >
-          <Select.Trigger className="mr-2 flex min-w-[150px] items-center justify-between rounded-md border border-border bg-card px-3 py-2 text-xs text-card-foreground hover:bg-accent">
-            <Select.Value placeholder="Select category" className="text-xs">
-              {selectedCategories.length > 0
-                ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
-                : `All (${originalTotalWodCount})`}
-            </Select.Value>
-            <Select.Icon>
-              <ChevronDown className="ml-2 h-4 w-4 opacity-70" />
-            </Select.Icon>
-          </Select.Trigger>
-          <Select.Portal>
-            <Select.Content
-              className="z-50 rounded-md border border-border bg-popover shadow-md"
-              position="popper"
+            onValueChange={(value) => {
+              if (value === "all") {
+                setSelectedCategories([]);
+              } else {
+                setSelectedCategories([value]);
+              }
+            }}
+          >
+            <Select.Trigger
+              className={`flex min-w-[120px] items-center justify-between rounded-md border border-border bg-card px-3 text-card-foreground hover:bg-accent ${
+                isMobile ? "py-2 text-base" : "mr-2 py-2 text-xs"
+              }`}
             >
-              <Select.Viewport>
-                <Select.Item
-                  value="all"
-                  className="cursor-pointer px-3 py-2 text-xs text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
-                >
-                  <Select.ItemText>
-                    All ({originalTotalWodCount})
-                  </Select.ItemText>
-                </Select.Item>
-                {categoryOrder.map((category) => (
+              <Select.Value placeholder="Select category">
+                {selectedCategories.length > 0
+                  ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
+                  : `All (${originalTotalWodCount})`}
+              </Select.Value>
+              <Select.Icon>
+                <ChevronDown className="ml-2 h-4 w-4 opacity-70" />
+              </Select.Icon>
+            </Select.Trigger>
+            <Select.Portal>
+              <Select.Content
+                className="z-50 rounded-md border border-border bg-popover shadow-md"
+                position="popper"
+              >
+                <Select.Viewport>
                   <Select.Item
-                    key={category}
-                    value={category}
-                    className="cursor-pointer px-3 py-2 text-xs text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
+                    value="all"
+                    className="cursor-pointer px-3 py-2 text-base text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
                   >
                     <Select.ItemText>
-                      {category} ({categoryCounts[category] || 0})
+                      All ({originalTotalWodCount})
                     </Select.ItemText>
                   </Select.Item>
-                ))}
-              </Select.Viewport>
-            </Select.Content>
-          </Select.Portal>
-        </Select.Root>
+                  {categoryOrder.map((category) => (
+                    <Select.Item
+                      key={category}
+                      value={category}
+                      className="cursor-pointer px-3 py-2 text-base text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
+                    >
+                      <Select.ItemText>
+                        {category} ({categoryCounts[category] || 0})
+                      </Select.ItemText>
+                    </Select.Item>
+                  ))}
+                </Select.Viewport>
+              </Select.Content>
+            </Select.Portal>
+          </Select.Root>
+        </div>
 
-        <Flex wrap="wrap" gap="1" className="flex-grow">
+        {/* Tag chips */}
+        <div
+          className={`${
+            isMobile
+              ? "scrollbar-thin scrollbar-thumb-slate-200 flex w-full gap-2 overflow-x-auto pb-1 pt-1"
+              : "flex flex-grow flex-wrap gap-1"
+          }`}
+        >
           {tagOrder.map((tag) => (
             <Box
               key={tag}
-              className={`cursor-pointer rounded-full border px-3 py-1 text-xs ${
+              className={`cursor-pointer whitespace-nowrap rounded-full border transition-colors duration-150 ${
                 selectedTags.includes(tag)
-                  ? "border-primary bg-primary text-primary-foreground"
-                  : "border-border bg-card text-card-foreground hover:bg-accent"
-              }`}
+                  ? "border-blue-300 bg-blue-100 text-blue-700"
+                  : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
+              } ${isMobile ? "px-4 py-1 text-sm font-medium" : "px-3 py-1 text-xs font-medium"}`}
               onClick={() => toggleTag(tag)}
             >
               {tag}
             </Box>
           ))}
-        </Flex>
+        </div>
 
         {isLoggedIn && (
           <SegmentedControl.Root
-            size="1"
+            size={isMobile ? "2" : "1"}
             value={completionFilter}
             onValueChange={(value) =>
               setCompletionFilter(value as "all" | "done" | "notDone")
             }
-            className="ml-auto"
+            className={`${isMobile ? "mt-2 w-full" : "ml-auto"}`}
           >
             <SegmentedControl.Item value="all">
               <Tooltip content="Show All Workouts">
-                <span>All ({dynamicTotalWodCount})</span>
+                <span className={isMobile ? "text-base" : ""}>
+                  All ({dynamicTotalWodCount})
+                </span>
               </Tooltip>
             </SegmentedControl.Item>
             <SegmentedControl.Item value="done">
               <Tooltip content="Show Done Workouts">
-                <span>Done ({dynamicDoneWodsCount})</span>
+                <span className={isMobile ? "text-base" : ""}>
+                  Done ({dynamicDoneWodsCount})
+                </span>
               </Tooltip>
             </SegmentedControl.Item>
             <SegmentedControl.Item value="notDone">
               <Tooltip content="Show Not Done Workouts">
-                <span>Todo ({dynamicNotDoneWodsCount})</span>
+                <span className={isMobile ? "text-base" : ""}>
+                  Todo ({dynamicNotDoneWodsCount})
+                </span>
               </Tooltip>
             </SegmentedControl.Item>
           </SegmentedControl.Root>
         )}
-      </Flex>
+      </div>
 
-      {/* Render WodTable and pass down the score loading state */}
-      <WodTable
-        wods={sortedWods}
-        tableHeight={tableHeight}
-        sortBy={sortBy}
-        sortDirection={sortDirection}
-        handleSort={handleSort}
-        searchTerm={searchTerm}
-        scoresByWodId={scoresByWodId}
-        isLoadingScores={showScoreLoading} // Pass the loading state here
-      />
+      {/* Conditionally render card list or table */}
+      {isMobile ? (
+        <WodListMobile wods={sortedWods} />
+      ) : (
+        <WodTable
+          wods={sortedWods}
+          tableHeight={tableHeight}
+          sortBy={sortBy}
+          sortDirection={sortDirection}
+          handleSort={handleSort}
+          searchTerm={searchTerm}
+          scoresByWodId={scoresByWodId}
+          isLoadingScores={showScoreLoading}
+        />
+      )}
     </Box>
   );
 }

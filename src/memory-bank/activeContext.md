@@ -42,6 +42,18 @@
 
 ## Recent Changes
 
+- **Mobile View Improvements (Apr 2025):**
+  - **Problem:** Table view was not optimized for mobile devices, making it difficult to use on smaller screens.
+  - **Solution:** Created a responsive mobile-friendly card-based layout for smaller screens.
+  - **Implementation:**
+    - Created `WodListMobile.tsx` component to display workouts as cards instead of table rows on mobile.
+    - Added `useMediaQuery` hook to detect mobile screen sizes.
+    - Updated `WodViewer.tsx` to conditionally render either `WodTable` or `WodListMobile` based on screen size.
+    - Styled mobile cards with proper spacing, borders, and shadows for better visibility.
+    - Implemented horizontally scrollable tag chips for mobile view.
+    - Optimized filter controls for touch interaction on mobile screens.
+    - Ensured proper styling for both light and dark modes.
+  - **Outcome:** Significantly improved usability on mobile devices while maintaining all functionality.
 - **ESLint `no-unsafe-*` Fix in WodViewer (Apr 2025 - Final):**
   - **Problem:** Multiple `@typescript-eslint/no-unsafe-*` errors occurred in the `useMemo` hooks responsible for processing WOD and Score data in `src/app/_components/WodViewer.tsx`. Initial attempts using `any` or incorrect type assertions failed.
   - **Cause:** The data arriving from the tRPC queries (`wodsData`, `scoresData`) contained serialized representations (e.g., strings for dates, potentially stringified JSON for tags/benchmarks) that didn't match the final client-side types (`Wod`, `Score`) which expect `Date` objects and parsed structures. SuperJSON, while configured, wasn't automatically handling the deserialization as expected in this context. Trying to map directly or use `any` led to type errors or unsafe code.
@@ -281,101 +293,4 @@
 4.  **Create Score Data Migration Script (`scripts/migrate_user_scores.ts`):**
     - Create a new TypeScript script (`scripts/migrate_user_scores.ts`).
     - The script will:
-      - Connect to the database using Drizzle.
-      - Fetch the `userId` for `kangax@gmail.com`.
-      - Efficiently stream-parse `public/data/wods.json`.
-      - Iterate through each WOD and its `results` array.
-      - For each `result`:
-        - Look up the corresponding `wodId` from the `wods` table (using caching).
-        - Map the source `score_*` fields (e.g., `score_time_seconds`, `score_reps` from the JSON) directly to the new database columns (`time_seconds`, `reps`, etc.).
-        - Parse the `date` string into a timestamp for the `scoreDate` column.
-        - Include the `notes`.
-        - Prepare the score record for insertion.
-      - Perform a batch insert of all prepared score records for the target user into the `scores` table.
-      - Include logging for progress and any skipped records (e.g., WOD not found, invalid date).
-5.  **Execute Score Data Migration Script:** Run the script using `SKIP_ENV_VALIDATION=true npx tsx scripts/migrate_user_scores.ts`.
-6.  **Verification:** Manually check the `scores` table to confirm data has been inserted correctly for the user.
-
-**Follow-up Actions (Separate Task):**
-
-- Implement score creation/editing functionality (tRPC procedures and UI forms).
-- Refine score-based sorting/filtering in `WodViewer`/`wodUtils`.
-- Complete implementation of `getPerformanceLevel` in `WodTable` (currently placeholder).
-- Use <ImportProgress> for loading in other places such as main wod table
-
-### Previous Database Migration Implementation Plan
-
-```mermaid
-gantt
-    title Migration Implementation Phases
-    dateFormat  YYYY-MM-DD
-    section Schema
-    Finalize Schema Design     :a1, 2025-04-09, 1d
-    Implement Drizzle ORM      :a2, after a1, 2d
-    section Data
-    Create Migration Script    :a3, after a1, 2d
-    Validate Data Migration    :a4, after a3, 1d --> DONE (Implicitly via successful script run)
-    section API
-    Update tRPC Routes         :a5, after a2, 2d --> DONE (for wod.getAll)
-    section Frontend
-    Component Refactoring      :a6, after a5, 3d --> IN PROGRESS (WodViewer done, WodTable/Timeline memoized)
-```
-
-### Detailed Implementation Steps
-
-1. **Schema Design** (Priority 1)
-
-   - Tables: users, wods, scores, movements, wod_movements
-   - JSON fields: benchmarks, tags, score values
-   - Indexes on common query paths (userId, wodId, category)
-
-2. **Repository Pattern Implementation**
-
-   - Type-safe database operations
-   - JSON schema validation using Zod
-   - Batch insert/update operations
-
-3. **Data Migration Script**
-
-   - Idempotent migration process
-   - Idempotent migration process --> DONE (Clears table first)
-   - Validation checks for data integrity --> DONE (Handled unique constraints)
-   - Progress tracking and error handling --> DONE (Logging added)
-
-4. **Authentication Integration**
-   - Maintain NextAuth.js compatibility
-   - User schema extensions for athlete profiles
-
-## Active Decisions & Considerations
-
-- **View Architecture:** Decided to simplify to single table view rather than maintaining both table and timeline views. This reduces complexity while maintaining all core functionality in the more flexible table view.
-- **Movements:** Separate normalization table using existing `movementMapping.ts` logic
-- **Benchmarks:** Preserve existing JSON structure for compatibility with frontend. Drizzle handles JSON parsing/stringification via `$type`.
-- **Authentication:** Stick with NextAuth.js for now, add athlete profile fields to user schema
-- **Data Fetching:** `WodViewer` now uses tRPC. Other components (e.g., charts page) still using static JSON need refactoring. **Update:** `WodViewer` now receives initial WOD data via props from the server component (`page.tsx`) to improve initial load performance. The client-side `useQuery` remains for caching/updates.
-- **Sorting/Filtering:** Sorting/filtering by score-related data (`date`, `attempts`, `level`, `isDone`) is temporarily disabled in `WodViewer` / `wodUtils` until score fetching is implemented.
-
-```mermaid
-erDiagram
-    users ||--o{ scores : "logs"
-    wods ||--o{ scores : "has"
-    wods }o--o{ movements : "contains"
-    scores {
-        jsonb value
-        string type
-    }
-```
-
-## Important Patterns & Preferences
-
-_Are there any specific coding patterns, style preferences, or architectural choices to keep in mind for the current work?_
-
-- **JSX/TSX Comments:** Do not add comments explaining changes directly within JSX/TSX code. Use commit messages or other documentation methods.
-- **Commit Messages:** Use meaningful commit messages. (Approval is implicit via the command approval process).
-
-## Learnings & Insights
-
-- As an AI, you are trained on a large crossfit dataset and are perfectly capable of estimating workout scores based on their description. You've done it many times in the past.
-- The project relies heavily on WOD data, and managing this data effectively (moving from JSON to DB) is the most critical next step for enabling core functionality like personalized progress tracking.
-- The tech stack is modern (Next.js 15, tRPC, Drizzle, Radix) but includes some beta components (NextAuth v5) that require monitoring.
-- Passing data fetched in Server Components directly to Client Components requires careful type handling, especially with serialized data like dates. Using props for initial render and `useQuery` for subsequent state management is a viable pattern.
+      - Connect to the database using Drizz

@@ -58,10 +58,14 @@ export function WodListMobile({ wods }: WodListMobileProps) {
                 {wod.countLikes} likes
               </span>
             </div>
-            <div className="mt-2 flex flex-wrap gap-2">
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              {" "}
+              {/* Added items-center */}
               <span
-                className={`rounded-full border px-2 py-0.5 text-xs font-semibold ${diff.light} dark:${diff.dark} ${diff.text}`}
+                className={`whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold ${diff.light} dark:${diff.dark} ${diff.text}`}
               >
+                {" "}
+                {/* Moved comment outside template literal */}
                 {wod.difficulty}
               </span>
               {Array.isArray(wod.tags)

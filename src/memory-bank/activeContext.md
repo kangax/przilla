@@ -42,6 +42,23 @@
 
 ## Recent Changes
 
+- **Mobile Header & Badge Fixes (Apr 2025):**
+  - **Problem:** Top navigation links overlapped on mobile due to absolute positioning, and difficulty badges in the mobile WOD list were illegible due to text wrapping and insufficient padding. Responsive classes (`md:hidden`, `hidden md:flex`) for showing/hiding elements were not consistently applied, possibly due to CSS specificity issues.
+  - **Solution Attempted:** Implemented a responsive hamburger menu for the header using responsive classes and adjusted badge styling. Further attempted to fix responsive visibility by removing an explicit `block` class that conflicted with `md:hidden`.
+  - **Implementation:**
+    - Modified `src/app/_components/Header.tsx`:
+      - Added state (`useState`) to manage mobile menu visibility.
+      - Added a hamburger `IconButton` trigger using Radix UI `DropdownMenu` and Lucide `Menu` icon, wrapped in a `Box` intended to be shown only below `md` (`md:hidden`).
+      - Wrapped the desktop `PageNavigation` in a `Box` intended to be hidden below `md` (`hidden md:flex`).
+      - Removed the absolute positioning for the navigation, integrating it into the flex layout.
+      - Added `flex-shrink-0` to the Logo `Heading` and the right-side controls `Flex` container.
+      - Adjusted padding and gaps.
+      - Removed a potentially conflicting `block` class from the hamburger menu `Box`.
+    - Modified `src/app/_components/PageNavigation.tsx`:
+      - Added an optional `mobile` prop to adjust layout for the dropdown.
+    - Modified `src/app/_components/WodListMobile.tsx`:
+      - Added `whitespace-nowrap` and increased padding (`px-2.5`) to the difficulty badge `<span>`.
+  - **Outcome:** Mobile difficulty badges are now fully legible. However, the responsive header navigation is **still not working correctly**; the hamburger menu remains visible on desktop, and the desktop links remain visible on mobile, indicating the Tailwind responsive classes are still being overridden or not applying as expected. Further investigation or an alternative approach (like `useMediaQuery`) may be needed.
 - **Mobile View Improvements (Apr 2025):**
   - **Problem:** Table view was not optimized for mobile devices, making it difficult to use on smaller screens.
   - **Solution:** Created a responsive mobile-friendly card-based layout for smaller screens.

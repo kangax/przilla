@@ -15,7 +15,7 @@ import { Box, Flex, Tooltip, SegmentedControl } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
-import { LoadingIndicator } from "./LoadingIndicator"; // Import the new component
+// Removed LoadingIndicator import as it's now handled inside WodTable
 import {
   type Wod,
   type Score,
@@ -25,7 +25,6 @@ import {
   type Benchmarks, // Import Benchmarks type
 } from "~/types/wodTypes";
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
-// Removed AppRouter and inferRouterOutputs imports
 
 // --- URL State Management ---
 
@@ -422,38 +421,36 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     );
   }, []);
 
-  // Adjust loading state logic: Show loading only if scores are loading (for logged-in users)
-  // or if the WOD query is loading AND we don't have initialWods (shouldn't happen here)
-  const showWodLoading = isLoadingWods && !wodsData && !initialWods; // Check if query is loading without data/prop
+  // Determine loading state for scores
   const showScoreLoading = isLoggedIn && isLoadingScores;
 
-  if (showWodLoading || showScoreLoading) {
+  // Handle initial WOD loading state (should be rare with initialWods prop)
+  const showWodLoading = isLoadingWods && !wodsData && !initialWods;
+  if (showWodLoading) {
+    // Still show a basic loading indicator if initial WODs somehow aren't available
+    // and the query is running.
     return (
-      <Flex
-        align="center"
-        justify="center"
-        className="h-[300px] w-full" // Give it some height to center within
-      >
-        <LoadingIndicator
-          message={showScoreLoading ? "Loading scores..." : "Loading data..."}
-        />
+      <Flex align="center" justify="center" className="h-[300px] w-full">
+        {/* Using a simple text indicator here as LoadingIndicator was removed */}
+        Loading WOD data...
       </Flex>
     );
   }
 
+  // Handle errors
   if (errorWods) {
     return <Box>Error loading WODs: {errorWods.message}</Box>;
   }
-
   if (isLoggedIn && errorScores) {
     return <Box>Error loading scores: {errorScores.message}</Box>;
   }
 
-  // Use wods derived from useMemo which processes initialWods or wodsData
+  // Handle case where WODs are loaded but empty
   if (!wods || wods.length === 0) {
     return <Box>No WOD data available.</Box>;
   }
 
+  // Render the main content (Filter Bar + Table)
   return (
     <Box>
       {/* Filter Bar */}
@@ -560,7 +557,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         )}
       </Flex>
 
-      {/* Render only WodTable */}
+      {/* Render WodTable and pass down the score loading state */}
       <WodTable
         wods={sortedWods}
         tableHeight={tableHeight}
@@ -569,6 +566,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         handleSort={handleSort}
         searchTerm={searchTerm}
         scoresByWodId={scoresByWodId}
+        isLoadingScores={showScoreLoading} // Pass the loading state here
       />
     </Box>
   );

@@ -25,6 +25,7 @@
 
 - [Switch to betterAuth](https://www.better-auth.com/)
 - Optimize table view layout for better mobile experience
+- Marston shows "Advanced" even though we did it scaled
 - Wodwell
   - write a script for scraping
   - bookmarklet so users can use?

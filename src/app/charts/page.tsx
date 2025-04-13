@@ -282,7 +282,7 @@ export default async function ChartsPage() {
   return (
     <Box className="min-h-screen bg-background text-foreground">
       <Header />
-      <Container size="4" className="pb-8 pt-6">
+      <Container size="4" className="pb-8">
         <Flex direction="column" gap="6">
           {/* Always render the container for the top two charts */}
           <Flex gap="4" direction={{ initial: "column", sm: "row" }}>

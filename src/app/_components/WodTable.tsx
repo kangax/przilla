@@ -19,6 +19,7 @@ import {
   formatShortDate,
   getPerformanceBadgeDetails, // Added
 } from "~/utils/wodUtils";
+import { LoadingIndicator } from "./LoadingIndicator"; // Import LoadingIndicator
 
 // --- Interfaces & Types ---
 
@@ -30,6 +31,7 @@ interface WodTableProps {
   handleSort: (column: SortByType) => void;
   searchTerm: string;
   scoresByWodId: Record<string, Score[]>; // Add scores map prop
+  isLoadingScores: boolean; // Add loading state prop
 }
 
 // --- Helper Functions ---
@@ -346,6 +348,7 @@ const WodTable: React.FC<WodTableProps> = ({
   handleSort,
   searchTerm,
   scoresByWodId,
+  isLoadingScores, // Destructure the new prop
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -371,7 +374,8 @@ const WodTable: React.FC<WodTableProps> = ({
   const { rows } = table.getRowModel();
 
   const rowVirtualizer = useVirtualizer({
-    count: rows.length,
+    // Adjust count based on loading state to prevent virtualization errors
+    count: isLoadingScores ? 0 : rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 49,
     overscan: 5,
@@ -379,8 +383,16 @@ const WodTable: React.FC<WodTableProps> = ({
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
-  const totalSize = rowVirtualizer.getTotalSize();
+  // Calculate totalSize based on actual rows, not loading state
+  const totalSize = isLoadingScores
+    ? 0
+    : rows.length * rowVirtualizer.options.estimateSize();
   const headerGroups = table.getHeaderGroups();
+
+  // Calculate the height available for the body content
+  // Assuming header height is roughly 40px (adjust if needed)
+  const headerHeightEstimate = 40;
+  const bodyHeight = tableHeight - headerHeightEstimate;
 
   return (
     <div
@@ -421,41 +433,65 @@ const WodTable: React.FC<WodTableProps> = ({
         ))}
       </div>
 
-      {/* Virtual Row Container */}
+      {/* Body Container - Handles Loading/No Results/Rows */}
       <div
         style={{
-          height: `${totalSize}px`,
+          height: `${totalSize}px`, // Use calculated total size for rows
           width: "100%",
           position: "relative",
         }}
       >
-        {virtualRows.map((virtualRow) => {
-          const row = rows[virtualRow.index];
-          return (
-            <div
-              key={row.id}
-              className="absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
-              style={{
-                transform: `translateY(${virtualRow.start}px)`,
-                width: table.getTotalSize(),
-              }}
-              ref={rowVirtualizer.measureElement}
-              data-index={virtualRow.index}
-              role="row"
-            >
-              {row.getVisibleCells().map((cell) => (
-                <div
-                  key={cell.id}
-                  className="flex flex-shrink-0 flex-grow-0 items-center border-r border-table-border px-3 py-2 text-sm last:border-r-0"
-                  style={{ width: `${cell.column.getSize()}px` }}
-                  role="cell"
-                >
-                  {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                </div>
-              ))}
-            </div>
-          );
-        })}
+        {isLoadingScores ? (
+          // Show loading indicator centered in the available body height
+          <Flex
+            align="center"
+            justify="center"
+            className="absolute inset-0" // Position absolutely within the body container
+            style={{ height: `${bodyHeight}px` }} // Use calculated body height
+          >
+            <LoadingIndicator message="Loading scores..." />
+          </Flex>
+        ) : virtualRows.length === 0 ? (
+          // Show no results message centered
+          <Flex
+            align="center"
+            justify="center"
+            className="text-muted-foreground absolute inset-0"
+            style={{ height: `${bodyHeight}px` }}
+          >
+            {/* This creates blinking on initial load so comment it out for now */}
+            {/* No results found. */}
+          </Flex>
+        ) : (
+          // Render virtual rows
+          virtualRows.map((virtualRow) => {
+            const row = rows[virtualRow.index];
+            return (
+              <div
+                key={row.id}
+                className="absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
+                style={{
+                  transform: `translateY(${virtualRow.start}px)`,
+                  width: table.getTotalSize(),
+                }}
+                ref={rowVirtualizer.measureElement}
+                data-index={virtualRow.index}
+                role="row"
+              >
+                {row.getVisibleCells().map((cell) => (
+                  <div
+                    key={cell.id}
+                    className="flex flex-shrink-0 flex-grow-0 items-center border-r border-table-border px-3 py-2 text-sm last:border-r-0"
+                    style={{ width: `${cell.column.getSize()}px` }}
+                    role="cell"
+                  >
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                  </div>
+                ))}
+              </div>
+            );
+          })
+        )}
       </div>
     </div>
   );

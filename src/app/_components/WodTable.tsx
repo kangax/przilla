@@ -386,7 +386,7 @@ const WodTable: React.FC<WodTableProps> = ({
   // Calculate totalSize based on actual rows, not loading state
   const totalSize = isLoadingScores
     ? 0
-    : rows.length * rowVirtualizer.options.estimateSize();
+    : rows.length * rowVirtualizer.options.estimateSize(0); // Pass index 0
   const headerGroups = table.getHeaderGroups();
 
   // Calculate the height available for the body content

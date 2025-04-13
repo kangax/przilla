@@ -269,6 +269,21 @@
   - Added `isRx: boolean` to the `Score` type in `src/types/wodTypes.ts`.
   - Updated mock data in `WodTable.test.tsx` and `WodViewer.test.tsx` to include the `isRx` field.
   - Updated `WodTable.tsx` component to display an "Rx" badge next to the score if `latestScore.isRx` is true, and to only show the score tooltip if `latestScore.notes` has content.
+- **tRPC Transformer Type Error Investigation (Apr 2025):**
+  - **Problem:** Persistent TypeScript error in `src/trpc/react.tsx` (`Type 'typeof SuperJSON' is not assignable to type 'TypeError<"You must define a transformer on your your \`initTRPC\`-object first">'.`) despite SuperJSON being configured on the server (`src/server/api/trpc.ts`) and client link. This indicated a type inference failure where the client setup didn't recognize the transformer associated with the imported `AppRouter` type.
+  - **Troubleshooting Steps (all unsuccessful in resolving the static type error without using `any`):**
+    - Verified server config (`trpc.ts`) exports initialized `t` with transformer.
+    - Verified router config (`root.ts`) uses correct `t` and exports `AppRouter` type.
+    - Attempted exporting `t` from `root.ts` and importing into `react.tsx`.
+    - Attempted adding `transformer: SuperJSON` directly to `createTRPCReact` (invalid option).
+    - Verified tRPC package versions (`@trpc/server`, `@trpc/client`, `@trpc/react-query`) were consistent.
+    - Attempted casting `SuperJSON` to `DataTransformer` (incorrect type).
+    - Switched `AppRouter` import path in `react.tsx` between alias (`~/`) and relative (`../`).
+    - Removed potentially confusing unused `t` import from `react.tsx`.
+    - Used `typeof appRouter` directly in `createTRPCReact` and inference helpers instead of the `AppRouter` type alias.
+    - Switched from `unstable_httpBatchStreamLink` to the stable `httpBatchLink`.
+    - Rewrote `tsconfig.json` to attempt resetting type inference cache.
+  - **Outcome:** The static type error could not be resolved through configuration or type manipulation without resorting to `any`. The final state uses `httpBatchLink` with `transformer: SuperJSON` in `src/trpc/react.tsx`, leaving the type error unresolved.
 
 ## Next Steps
 

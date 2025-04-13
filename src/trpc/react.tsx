@@ -1,13 +1,13 @@
 "use client";
 
 import { QueryClientProvider, type QueryClient } from "@tanstack/react-query";
-import { loggerLink, unstable_httpBatchStreamLink } from "@trpc/client";
+import { httpBatchLink, loggerLink } from "@trpc/client"; // Import httpBatchLink
 import { createTRPCReact } from "@trpc/react-query";
 import { type inferRouterInputs, type inferRouterOutputs } from "@trpc/server";
 import { useState } from "react";
 import SuperJSON from "superjson"; // Import SuperJSON
 
-import { type AppRouter } from "~/server/api/root";
+import { type appRouter } from "~/server/api/root"; // Import appRouter value
 import { createQueryClient } from "./query-client";
 
 let clientQueryClientSingleton: QueryClient | undefined = undefined;
@@ -20,21 +20,21 @@ const getQueryClient = () => {
   return (clientQueryClientSingleton ??= createQueryClient());
 };
 
-export const api = createTRPCReact<AppRouter>();
+export const api = createTRPCReact<typeof appRouter>(); // Use typeof directly
 
 /**
  * Inference helper for inputs.
  *
  * @example type HelloInput = RouterInputs['example']['hello']
  */
-export type RouterInputs = inferRouterInputs<AppRouter>;
+export type RouterInputs = inferRouterInputs<typeof appRouter>; // Use typeof directly
 
 /**
  * Inference helper for outputs.
  *
  * @example type HelloOutput = RouterOutputs['example']['hello']
  */
-export type RouterOutputs = inferRouterOutputs<AppRouter>;
+export type RouterOutputs = inferRouterOutputs<typeof appRouter>; // Use typeof directly
 
 export function TRPCReactProvider(props: { children: React.ReactNode }) {
   const queryClient = getQueryClient();
@@ -47,9 +47,10 @@ export function TRPCReactProvider(props: { children: React.ReactNode }) {
             process.env.NODE_ENV === "development" ||
             (op.direction === "down" && op.result instanceof Error),
         }),
-        unstable_httpBatchStreamLink({
+        httpBatchLink({
+          // Use stable httpBatchLink
           // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
-          transformer: SuperJSON, // Removed 'as any'
+          transformer: SuperJSON as any, // Removed 'as any'
           url: getBaseUrl() + "/api/trpc",
           headers: () => {
             const headers = new Headers();

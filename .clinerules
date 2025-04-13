@@ -114,9 +114,10 @@ Start[Update Process]
         P1[Review ALL Files]
         P2[Document Current State]
         P3[Clarify Next Steps]
-        P4[Document Insights & Patterns]
+        P4[Ask user if satisfied with update]
+        P5[Document Insights & Patterns]
 
-        P1 --> P2 --> P3 --> P4
+        P1 --> P2 --> P3 --> P4 --> P5
     end
 
     Start --> Process

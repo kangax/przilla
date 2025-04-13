@@ -4,12 +4,19 @@
 
 - **PageLayout:** Consistent page structure with Header component now implemented across all pages via `PageLayout` component. Includes standardized content container styling and ensures uniform header display.
 - **Initial Load Performance:** WOD data is now fetched server-side in `src/app/page.tsx` and passed as a prop (`initialWods`) to `WodViewer`, significantly improving initial load time and LCP.
-- **WOD Display:** Core components for displaying WOD information (`WodViewer`, `WodTable`) are functional. `WodViewer` uses initial data from props for the first render and fetches scores client-side via tRPC (`api.score.getAllByUser`). The `api.wod.getAll` query remains for caching/updates.
+- **WOD Display:**
+  - Core components for displaying WOD information (`WodViewer`, `WodTable`, `WodListMobile`) are functional.
+  - `WodViewer` uses initial data from props for the first render and fetches scores client-side via tRPC (`api.score.getAllByUser`). The `api.wod.getAll` query remains for caching/updates.
+  - **Mobile View (`WodListMobile.tsx`):**
+    - Displays WODs as cards.
+    - Cards are expandable via click on the header area (chevron icon indicates state).
+    - Expanded view shows WOD description and user scores (with correct dates).
+    - Includes a visual separator between description and scores.
 - **WOD Visualization:** Basic charts for visualizing WOD data might be implemented (`WodTimelineChart`, `WodDistributionChart`).
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
 - **Authentication Shell:** Basic authentication controls (`AuthControls.tsx`) and setup (`src/server/auth/`) exist, though a potential switch is noted in `todo.md`.
-- **WodTable UI:**
+- **WodTable UI (Desktop):**
   - **New "Results" Column:** Replaced "Date", "Score", and "Level" columns with a single "Results" column displaying:
     - All scores listed vertically (newest first)
     - Each score displays formatted value (e.g., "4:32"), Rx status if applicable, and date (e.g., "on Sep 12, '24")
@@ -89,8 +96,9 @@
 ## Current Status
 
 - The application is in an early-to-mid stage of development.
-- Core functionality for viewing WODs (`WodViewer`, `WodTable`) now uses server-side fetched initial WOD data and client-side fetched scores via tRPC. Other parts (e.g., charts) may still use static JSON.
+- Core functionality for viewing WODs (`WodViewer`, `WodTable`, `WodListMobile`) now uses server-side fetched initial WOD data and client-side fetched scores via tRPC. Other parts (e.g., charts) may still use static JSON.
 - WOD Table UI updated with a compact "Results" column.
+- Mobile view (`WodListMobile`) uses expandable cards to show details.
 - User authentication exists but might be replaced.
 - Basic component tests exist for `ChartLoginOverlay`.
 - Major upcoming work involves:
@@ -103,7 +111,7 @@
 
 ## Known Issues
 
-- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
+- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodListMobile`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
 
 ## Performance Chart Fixes (Apr 2025)
 

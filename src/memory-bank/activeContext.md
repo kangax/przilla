@@ -42,6 +42,24 @@
 
 ## Recent Changes
 
+- **Mobile Card Expansion (Apr 2025):**
+  - **Problem:** Mobile view (`WodListMobile.tsx`) showed basic WOD info but lacked details like description and user scores.
+  - **Solution:** Implemented an expandable card interface.
+  - **Implementation:**
+    - Modified `src/app/_components/WodListMobile.tsx`:
+      - Added state (`useState`) to track the currently expanded card ID (using string IDs).
+      - Added a click handler to the card header to toggle expansion state.
+      - Added ChevronUp/ChevronDown icons (from `lucide-react`) to indicate expansion state.
+      - Conditionally rendered a section below the tags containing the WOD description and user scores when the card is expanded.
+      - Fetched scores by passing `scoresByWodId` prop from `WodViewer.tsx`.
+      - Used `formatScore` utility to display scores.
+      - Added a separator line between description and scores.
+      - Fixed initial TypeScript errors related to `wod.id` type mismatch (changed state/handler to use string).
+      - Fixed runtime error by adding optional chaining (`?.`) when accessing `scoresByWodId`.
+      - Fixed date display bug by using `score.scoreDate` instead of `score.createdAt`.
+    - Modified `src/app/_components/WodViewer.tsx`:
+      - Passed the `scoresByWodId` prop to `WodListMobile` during conditional rendering.
+  - **Outcome:** Mobile view now features expandable cards showing WOD description and user scores with correct dates.
 - **Mobile Header & Badge Fixes (Apr 2025):**
   - **Problem:** Top navigation links overlapped on mobile due to absolute positioning, and difficulty badges in the mobile WOD list were illegible due to text wrapping and insufficient padding. Responsive classes (`md:hidden`, `hidden md:flex`) for showing/hiding elements were not consistently applied, possibly due to CSS specificity issues.
   - **Solution Attempted:** Implemented a responsive hamburger menu for the header using responsive classes and adjusted badge styling. Further attempted to fix responsive visibility by removing an explicit `block` class that conflicted with `md:hidden`.

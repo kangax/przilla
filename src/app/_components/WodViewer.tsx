@@ -591,7 +591,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
 
       {/* Conditionally render card list or table */}
       {isMobile ? (
-        <WodListMobile wods={sortedWods} />
+        <WodListMobile wods={sortedWods} scoresByWodId={scoresByWodId} />
       ) : (
         <WodTable
           wods={sortedWods}

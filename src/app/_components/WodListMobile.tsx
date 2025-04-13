@@ -1,8 +1,13 @@
-import React from "react";
-import type { Wod } from "../../types/wodTypes";
+import React, { useState } from "react";
+import { ChevronDown, ChevronUp } from "lucide-react";
+import type { Wod, Score } from "../../types/wodTypes";
+import { formatScore } from "../../utils/wodUtils"; // Import formatScore
+
+type ScoresByWodId = Record<string, Score[]>;
 
 type WodListMobileProps = {
   wods: Wod[];
+  scoresByWodId: ScoresByWodId; // Add scoresByWodId prop
 };
 
 const difficultyStyles: Record<
@@ -11,41 +16,54 @@ const difficultyStyles: Record<
 > = {
   Hard: {
     light: "bg-orange-100 border-orange-300",
-    dark: "bg-orange-600", // Updated dark background
-    text: "text-orange-800 dark:text-white", // Updated dark text to white
+    dark: "bg-orange-600",
+    text: "text-orange-800 dark:text-white",
   },
   Medium: {
     light: "bg-yellow-100 border-yellow-300",
-    dark: "bg-yellow-600", // Updated dark background
-    text: "text-yellow-800 dark:text-white", // Updated dark text to white
+    dark: "bg-yellow-600",
+    text: "text-yellow-800 dark:text-white",
   },
   Easy: {
     light: "bg-green-100 border-green-300",
-    dark: "bg-green-600", // Updated dark background
-    text: "text-green-800 dark:text-white", // Updated dark text to white
+    dark: "bg-green-600",
+    text: "text-green-800 dark:text-white",
   },
   "Very Hard": {
     light: "bg-red-100 border-red-300",
-    dark: "bg-red-600", // Updated dark background
-    text: "text-red-800 dark:text-white", // Updated dark text to white
+    dark: "bg-red-600",
+    text: "text-red-800 dark:text-white",
   },
   "Extremely Hard": {
     light: "bg-purple-100 border-purple-300",
-    dark: "bg-purple-600", // Updated dark background
-    text: "text-purple-800 dark:text-white", // Updated dark text to white
+    dark: "bg-purple-600",
+    text: "text-purple-800 dark:text-white",
   },
 };
 
-export function WodListMobile({ wods }: WodListMobileProps) {
+export function WodListMobile({ wods, scoresByWodId }: WodListMobileProps) {
+  // Change state type to string | null
+  const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
+
+  // Change function parameter type to string
+  const toggleExpand = (wodId: string) => {
+    setExpandedWodId(expandedWodId === wodId ? null : wodId);
+  };
+
   return (
     <div className="space-y-4 px-2 pb-4">
       {wods.map((wod) => {
-        const diff = difficultyStyles[wod.difficulty] || {
+        // Comparison is now string === string
+        const isExpanded = expandedWodId === wod.id;
+        // Use optional chaining for safety when accessing scoresByWodId
+        const wodScores = scoresByWodId?.[wod.id] || [];
+
+        const diff = difficultyStyles[wod.difficulty ?? ""] || {
+          // Added nullish coalescing for safety
           light: "bg-slate-100 border-slate-300",
-          dark: "bg-slate-700", // Adjusted default dark slightly
-          text: "text-slate-800 dark:text-slate-100", // Adjusted default dark text slightly
+          dark: "bg-slate-700",
+          text: "text-slate-800 dark:text-slate-100",
         };
-        // Construct className, removing dark:border-* if dark bg is set
         const darkClasses = diff.dark.includes("bg-")
           ? diff.dark
           : `dark:${diff.dark}`;
@@ -54,16 +72,30 @@ export function WodListMobile({ wods }: WodListMobileProps) {
         return (
           <div
             key={wod.id}
-            className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-md shadow-slate-100 transition-colors dark:border-slate-700 dark:bg-[#23293a] dark:shadow-md" // Adjusted dark border
+            className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-md shadow-slate-100 transition-colors dark:border-slate-700 dark:bg-[#23293a] dark:shadow-md"
           >
-            <div className="flex items-center justify-between">
+            {/* Header Section */}
+            <div
+              className="flex cursor-pointer items-center justify-between"
+              onClick={() => toggleExpand(wod.id)} // Pass string wod.id
+            >
               <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
                 {wod.wodName}
               </span>
-              <span className="text-sm text-slate-600 dark:text-slate-400">
-                {wod.countLikes} likes
-              </span>
+              <div className="flex items-center gap-2">
+                <span className="text-sm text-slate-600 dark:text-slate-400">
+                  {wod.countLikes} likes
+                </span>
+                {/* Chevron Icon */}
+                {isExpanded ? (
+                  <ChevronUp className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+                ) : (
+                  <ChevronDown className="h-5 w-5 text-slate-500 dark:text-slate-400" />
+                )}
+              </div>
             </div>
+
+            {/* Tags Section (Always Visible) */}
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <span className={badgeClasses}>{wod.difficulty}</span>
               {Array.isArray(wod.tags)
@@ -77,6 +109,65 @@ export function WodListMobile({ wods }: WodListMobileProps) {
                   ))
                 : null}
             </div>
+
+            {/* Expandable Section */}
+            {isExpanded && (
+              <div className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-700">
+                {/* Description */}
+                <div className="mb-3">
+                  <p className="text-md whitespace-pre-wrap text-slate-600 dark:text-slate-400">
+                    {wod.description}
+                  </p>
+                </div>
+
+                {/* Separator */}
+                <div className="my-3 border-t border-slate-200 dark:border-slate-700"></div>
+
+                {/* Scores */}
+                {wodScores.length > 0 && (
+                  <div>
+                    <h4 className="mb-2 text-sm font-semibold text-slate-700 dark:text-slate-300">
+                      Your Scores:
+                    </h4>
+                    <ul className="space-y-2">
+                      {wodScores.map((score) => (
+                        <li
+                          key={score.id} // score.id is also string
+                          className="flex items-center justify-between rounded-md bg-slate-100 p-2 dark:bg-slate-700"
+                        >
+                          <div className="flex items-center gap-2">
+                            <span className="font-semibold text-blue-600 dark:text-blue-400">
+                              {formatScore(score)}
+                            </span>
+                            {score.isRx && (
+                              <span className="rounded bg-green-200 px-1.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-700 dark:text-green-100">
+                                Rx
+                              </span>
+                            )}
+                          </div>
+                          <span className="text-xs text-slate-500 dark:text-slate-400">
+                            {new Date(score.scoreDate).toLocaleDateString(
+                              // Use scoreDate here
+                              "en-US",
+                              {
+                                year: "2-digit",
+                                month: "short",
+                                day: "numeric",
+                              },
+                            )}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {wodScores.length === 0 && (
+                  <p className="text-sm text-slate-500 dark:text-slate-400">
+                    No scores recorded yet.
+                  </p>
+                )}
+              </div>
+            )}
           </div>
         );
       })}

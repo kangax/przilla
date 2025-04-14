@@ -42,6 +42,17 @@
 
 ## Recent Changes
 
+- **Mobile Score Notes Display (Apr 2025):**
+
+  - **Problem:** Score notes were not visible in the mobile list view (`WodListMobile.tsx`).
+  - **Solution:** Added the display of score notes below the score details within each expanded mobile card.
+  - **Implementation:**
+    - Modified `src/app/_components/WodListMobile.tsx`:
+      - Changed the score list item (`<li>`) layout to `flex-col`.
+      - Added a conditional paragraph (`<p>`) below the score/Rx/date row to render `score.notes` if present.
+      - Styled the notes text to be smaller (`text-xs text-slate-500 dark:text-slate-400`).
+  - **Outcome:** Score notes are now visible in the mobile view when a WOD card is expanded.
+
 - **Mobile Search Highlighting & Auto-Expand (Apr 2025):**
 
   - **Problem:** Mobile view lacked search result highlighting and didn't visually indicate matches clearly.

@@ -13,6 +13,7 @@
     - **Search Highlighting & Auto-Expand:** Cards automatically expand if their content (name, tags, description) matches the active search term. Matching text is highlighted using the shared `HighlightMatch` component (`src/utils/uiUtils.tsx`).
     - Expanded view shows WOD description and user scores (with correct dates).
     - Includes a visual separator between description and scores.
+    - **Score Notes:** Displays score notes (if they exist) below the score/Rx/date line in a smaller font.
 - **WOD Visualization:** Basic charts for visualizing WOD data might be implemented (`WodTimelineChart`, `WodDistributionChart`).
 - **Basic UI:** A general application layout (`src/app/layout.tsx`) and header (`Header.tsx`) exist.
 - **Theme Switching:** Dark/light mode toggle (`ThemeToggle.tsx`) is present.
@@ -99,7 +100,7 @@
 - The application is in an early-to-mid stage of development.
 - Core functionality for viewing WODs (`WodViewer`, `WodTable`, `WodListMobile`) now uses server-side fetched initial WOD data and client-side fetched scores via tRPC. Other parts (e.g., charts) may still use static JSON.
 - WOD Table UI updated with a compact "Results" column.
-- Mobile view (`WodListMobile`) uses expandable cards to show details.
+- Mobile view (`WodListMobile`) uses expandable cards to show details, including score notes.
 - User authentication exists but might be replaced.
 - Basic component tests exist for `ChartLoginOverlay`.
 - Major upcoming work involves:
@@ -112,7 +113,7 @@
 
 ## Known Issues
 
-- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodListMobile`) updated to fetch and display this data. WodTable shows compact results. **Further UI work needed** for score input/editing and the expandable results panel.
+- **Score Data Storage & UI:** The `scores` table now uses separate columns, including `is_rx`. Historical data for one user migrated. UI (`WodViewer`, `WodTable`, `WodListMobile`) updated to fetch and display this data. WodTable shows compact results. Mobile view now shows notes. **Further UI work needed** for score input/editing and the expandable results panel.
 
 ## Performance Chart Fixes (Apr 2025)
 

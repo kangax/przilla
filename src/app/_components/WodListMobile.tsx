@@ -174,30 +174,41 @@ export function WodListMobile({
                     <ul className="space-y-2">
                       {wodScores.map((score) => (
                         <li
-                          key={score.id} // score.id is also string
-                          className="flex items-center justify-between rounded-md bg-slate-100 p-2 dark:bg-slate-700"
+                          key={score.id}
+                          className="flex flex-col rounded-md bg-slate-100 p-2 dark:bg-slate-700" // Changed to flex-col
                         >
-                          <div className="flex items-center gap-2">
-                            <span className="font-semibold text-blue-600 dark:text-blue-400">
-                              {formatScore(score)}
-                            </span>
-                            {score.isRx && (
-                              <span className="rounded bg-green-200 px-1.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-700 dark:text-green-100">
-                                Rx
+                          {/* Top row: Score, Rx, Date */}
+                          <div className="flex w-full items-center justify-between">
+                            {" "}
+                            {/* Added wrapper div */}
+                            <div className="flex items-center gap-2">
+                              <span className="font-semibold text-blue-600 dark:text-blue-400">
+                                {formatScore(score)}
                               </span>
-                            )}
+                              {score.isRx && (
+                                <span className="rounded bg-green-200 px-1.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-700 dark:text-green-100">
+                                  Rx
+                                </span>
+                              )}
+                            </div>
+                            <span className="text-xs text-slate-500 dark:text-slate-400">
+                              {new Date(score.scoreDate).toLocaleDateString(
+                                // Use scoreDate here
+                                "en-US",
+                                {
+                                  year: "2-digit",
+                                  month: "short",
+                                  day: "numeric",
+                                },
+                              )}
+                            </span>
                           </div>
-                          <span className="text-xs text-slate-500 dark:text-slate-400">
-                            {new Date(score.scoreDate).toLocaleDateString(
-                              // Use scoreDate here
-                              "en-US",
-                              {
-                                year: "2-digit",
-                                month: "short",
-                                day: "numeric",
-                              },
-                            )}
-                          </span>
+                          {/* Notes (conditionally rendered) */}
+                          {score.notes && (
+                            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                              {score.notes}
+                            </p>
+                          )}
                         </li>
                       ))}
                     </ul>

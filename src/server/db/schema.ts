@@ -7,7 +7,6 @@ import {
   text,
   uniqueIndex,
 } from "drizzle-orm/sqlite-core";
-// import { type AdapterAccount } from "next-auth/adapters"; // Removed unused import
 import type { Benchmarks } from "~/types/wodTypes"; // Import the actual Benchmarks type
 
 /**

@@ -1,9 +1,11 @@
-"use client"; // Required for onClick handler
+"use client"; // Required for onClick handler and useRouter
 
 import { Box, Button } from "@radix-ui/themes";
-import { signIn } from "next-auth/react"; // Import signIn
+import { useRouter } from "next/navigation"; // Import useRouter
 
 export default function ChartLoginOverlay() {
+  const router = useRouter(); // Get router instance
+
   return (
     <Box
       className="absolute inset-0 z-10 flex items-center justify-center rounded-lg bg-background/80"
@@ -11,7 +13,8 @@ export default function ChartLoginOverlay() {
       style={{ display: "flex" }}
     >
       {/* Remove variant="soft" to use the default solid variant */}
-      <Button size="3" onClick={() => signIn()}>
+      {/* Update onClick to navigate to the login page */}
+      <Button size="3" onClick={() => router.push("/login")}>
         Sign In to See Your Data
       </Button>
     </Box>

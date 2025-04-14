@@ -2,6 +2,7 @@
 
 ## What Works
 
+- **Authentication Migration:** Successfully migrated from NextAuth.js to Better Auth, including database schema updates, API routes, client/server integration, and new login/signup/password reset pages.
 - **Wodwell icon link in mobile view:** A circular Wodwell icon (white "w" on black) now appears to the left of the likes count in each mobile WOD card header if `wod.wodUrl` exists. The icon links to the WOD's Wodwell.com page, opens in a new tab, is accessible, and does not interfere with card expand/collapse.
 - **Scaled badge display:** All non-Rx (scaled) scores now show a "Scaled" badge in grey, both in table and mobile views, ensuring accurate and consistent level display.
 - **PageLayout:** Consistent page structure with Header component now implemented across all pages via `PageLayout` component. Includes standardized content container styling and ensures uniform header display.

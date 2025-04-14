@@ -5,7 +5,7 @@ import { ThemeProvider } from "next-themes";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
-import { SessionProvider } from "next-auth/react";
+// Removed SessionProvider import from next-auth/react
 
 import { TRPCReactProvider } from "~/trpc/react";
 
@@ -26,13 +26,12 @@ export default function RootLayout({
       suppressHydrationWarning
     >
       <body>
-        <SessionProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-            <Theme accentColor="blue" grayColor="slate">
-              <TRPCReactProvider>{children}</TRPCReactProvider>
-            </Theme>
-          </ThemeProvider>
-        </SessionProvider>
+        {/* Removed SessionProvider wrapper */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <Theme accentColor="blue" grayColor="slate">
+            <TRPCReactProvider>{children}</TRPCReactProvider>
+          </Theme>
+        </ThemeProvider>
       </body>
     </html>
   );

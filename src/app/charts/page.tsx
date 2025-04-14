@@ -1,5 +1,5 @@
 import { Box, Container, Flex } from "@radix-ui/themes";
-import { auth } from "~/server/auth";
+import { getSession } from "~/server/auth"; // Import getSession instead of auth
 import { api } from "~/trpc/server";
 import WodDistributionChart from "~/app/_components/WodDistributionChart";
 import WodTimelineChart from "~/app/_components/WodTimelineChart";
@@ -29,7 +29,7 @@ type PerformanceDataPoint = {
 };
 
 export default async function ChartsPage() {
-  const session = await auth();
+  const session = await getSession(); // Use getSession()
   let wodsData: Wod[] = [];
   const movementDataByCategory: Record<
     string,

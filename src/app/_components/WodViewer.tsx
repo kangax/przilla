@@ -9,7 +9,7 @@ import {
   useCallback,
 } from "react";
 import { api } from "~/trpc/react";
-import { useSession } from "next-auth/react";
+import { useSession } from "~/lib/auth-client"; // Corrected import
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, Tooltip, SegmentedControl } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -72,8 +72,9 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 
 // Update component signature to accept props
 export default function WodViewer({ initialWods }: WodViewerProps) {
-  const { status: sessionStatus } = useSession();
-  const isLoggedIn = sessionStatus === "authenticated";
+  // Use Better Auth hook and check isPending instead of status
+  const { data: session, isPending: isSessionLoading } = useSession();
+  const isLoggedIn = !!session?.user; // Check if user object exists in session data
 
   // Responsive: show card list on mobile/tablet, table on desktop
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -93,7 +94,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     isLoading: isLoadingScores,
     error: errorScores,
   } = api.score.getAllByUser.useQuery(undefined, {
-    enabled: isLoggedIn,
+    enabled: isLoggedIn, // Only fetch scores if logged in
   });
 
   // Process the data: Prioritize initialWods prop for first render, then use fetched data.
@@ -425,8 +426,8 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     );
   }, []);
 
-  // Determine loading state for scores
-  const showScoreLoading = isLoggedIn && isLoadingScores;
+  // Determine loading state for scores, consider session loading state too
+  const showScoreLoading = isLoggedIn && (isLoadingScores || isSessionLoading);
 
   // Handle initial WOD loading state (should be rare with initialWods prop)
   const showWodLoading = isLoadingWods && !wodsData && !initialWods;

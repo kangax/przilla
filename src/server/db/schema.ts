@@ -7,7 +7,7 @@ import {
   text,
   uniqueIndex,
 } from "drizzle-orm/sqlite-core";
-import { type AdapterAccount } from "next-auth/adapters";
+// import { type AdapterAccount } from "next-auth/adapters"; // Removed unused import
 import type { Benchmarks } from "~/types/wodTypes"; // Import the actual Benchmarks type
 
 /**
@@ -56,7 +56,7 @@ export const scores = createTable(
       .$defaultFn(() => crypto.randomUUID()),
     userId: text("user_id")
       .notNull()
-      .references(() => users.id, { onDelete: "cascade" }), // Cascade delete scores if user is deleted
+      .references(() => user.id, { onDelete: "cascade" }), // Corrected reference to 'user' table
     wodId: text("wod_id")
       .notNull()
       .references(() => wods.id, { onDelete: "cascade" }), // Cascade delete scores if WOD is deleted
@@ -86,94 +86,107 @@ export const scores = createTable(
   }),
 );
 
-// --- NextAuth.js Tables ---
+// --- Better Auth Tables (Adapted from generated schema) ---
 
-export const users = createTable("user", {
-  id: text("id")
-    .notNull()
-    .primaryKey()
-    .$defaultFn(() => crypto.randomUUID()), // Using text UUIDs for consistency
-  name: text("name"),
-  email: text("email").notNull(),
-  emailVerified: int("email_verified", { mode: "timestamp" }).default(
-    sql`(unixepoch())`,
-  ), // Using integer timestamp
+// User Table (Replaces old 'users' table)
+export const user = createTable("user", {
+  id: text("id").primaryKey(), // Using text ID as generated
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  emailVerified: int("email_verified", { mode: "boolean" }).notNull(), // Using int boolean for SQLite
   image: text("image"),
-  // Add any custom user profile fields here if needed later
+  createdAt: int("created_at", { mode: "timestamp" }).notNull(), // Using int timestamp for SQLite
+  updatedAt: int("updated_at", { mode: "timestamp" }).notNull(), // Using int timestamp for SQLite
 });
 
-export const usersRelations = relations(users, ({ many }) => ({
-  accounts: many(accounts),
-  scores: many(scores), // A user can have many scores
-}));
+// Session Table (Replaces old 'sessions' table)
+export const session = createTable("session", {
+  id: text("id").primaryKey(), // Using text ID as generated
+  expiresAt: int("expires_at", { mode: "timestamp" }).notNull(), // Using int timestamp
+  token: text("token").notNull().unique(),
+  createdAt: int("created_at", { mode: "timestamp" }).notNull(), // Using int timestamp
+  updatedAt: int("updated_at", { mode: "timestamp" }).notNull(), // Using int timestamp
+  ipAddress: text("ip_address"),
+  userAgent: text("user_agent"),
+  userId: text("user_id")
+    .notNull()
+    .references(() => user.id, { onDelete: "cascade" }), // References adapted 'user' table
+});
 
-export const accounts = createTable(
+// Account Table (Replaces old 'accounts' table)
+export const account = createTable(
   "account",
   {
+    id: text("id").primaryKey(), // Using text ID as generated
+    accountId: text("account_id").notNull(),
+    providerId: text("provider_id").notNull(),
     userId: text("user_id")
       .notNull()
-      .references(() => users.id, { onDelete: "cascade" }), // Cascade delete accounts if user is deleted
-    type: text("type").$type<AdapterAccount["type"]>().notNull(),
-    provider: text("provider").notNull(),
-    providerAccountId: text("provider_account_id").notNull(),
-    refresh_token: text("refresh_token"), // Potential TEXT type for longer tokens
-    access_token: text("access_token"), // Potential TEXT type for longer tokens
-    expires_at: int("expires_at"),
-    token_type: text("token_type"),
+      .references(() => user.id, { onDelete: "cascade" }), // References adapted 'user' table
+    accessToken: text("access_token"),
+    refreshToken: text("refresh_token"),
+    idToken: text("id_token"),
+    accessTokenExpiresAt: int("access_token_expires_at", { mode: "timestamp" }), // Using int timestamp
+    refreshTokenExpiresAt: int("refresh_token_expires_at", {
+      mode: "timestamp",
+    }), // Using int timestamp
     scope: text("scope"),
-    id_token: text("id_token"), // Potential TEXT type for longer tokens
-    session_state: text("session_state"),
+    password: text("password"), // For email/password provider
+    createdAt: int("created_at", { mode: "timestamp" }).notNull(), // Using int timestamp
+    updatedAt: int("updated_at", { mode: "timestamp" }).notNull(), // Using int timestamp
   },
   (account) => ({
-    compoundKey: primaryKey({
-      columns: [account.provider, account.providerAccountId],
-    }),
+    // Optional: Add indexes if needed, e.g., on userId
     userIdIdx: index("account_user_id_idx").on(account.userId),
+    // Optional: Compound key for provider/accountId if needed for uniqueness guarantee
+    // compoundKey: primaryKey({ columns: [account.providerId, account.accountId] }), // Note: 'id' is already PK
   }),
 );
 
-export const accountsRelations = relations(accounts, ({ one }) => ({
-  user: one(users, { fields: [accounts.userId], references: [users.id] }), // An account belongs to one user
-}));
-
-export const sessions = createTable(
-  "session",
+// Verification Table (Replaces old 'verificationTokens' table)
+export const verification = createTable(
+  "verification",
   {
-    sessionToken: text("session_token").notNull().primaryKey(),
-    userId: text("user_id") // Corrected column name to match convention
-      .notNull()
-      .references(() => users.id, { onDelete: "cascade" }), // Cascade delete sessions if user is deleted
-    expires: int("expires", { mode: "timestamp" }).notNull(), // Using integer timestamp
-  },
-  (session) => ({
-    userIdIdx: index("session_user_id_idx").on(session.userId), // Corrected index name
-  }),
-);
-
-export const sessionsRelations = relations(sessions, ({ one }) => ({
-  user: one(users, { fields: [sessions.userId], references: [users.id] }), // A session belongs to one user
-}));
-
-export const verificationTokens = createTable(
-  "verification_token",
-  {
+    id: text("id").primaryKey(), // Using text ID as generated
     identifier: text("identifier").notNull(),
-    token: text("token").notNull().unique(), // Token should be unique
-    expires: int("expires", { mode: "timestamp" }).notNull(), // Using integer timestamp
+    value: text("value").notNull(),
+    expiresAt: int("expires_at", { mode: "timestamp" }).notNull(), // Using int timestamp
+    createdAt: int("created_at", { mode: "timestamp" }), // Using int timestamp
+    updatedAt: int("updated_at", { mode: "timestamp" }), // Using int timestamp
   },
-  (vt) => ({
-    compoundKey: primaryKey({ columns: [vt.identifier, vt.token] }),
-    tokenIndex: uniqueIndex("vt_token_idx").on(vt.token), // Added unique index on token
+  (verification) => ({
+    // Optional: Add indexes if needed
+    identifierIdx: index("verification_identifier_idx").on(
+      verification.identifier,
+    ),
   }),
 );
 
-// --- App-Specific Relations ---
+// --- Relations ---
+
+// App-Specific Relations (WODs <-> Scores)
 
 export const wodsRelations = relations(wods, ({ many }) => ({
   scores: many(scores), // A WOD can have many scores logged against it
 }));
 
+// Updated Auth Relations
+export const userRelations = relations(user, ({ many }) => ({
+  accounts: many(account), // User can have multiple accounts (social, email/pass)
+  sessions: many(session), // User can have multiple active sessions
+  scores: many(scores), // A user can have many scores (App-specific relation)
+}));
+
+export const sessionRelations = relations(session, ({ one }) => ({
+  user: one(user, { fields: [session.userId], references: [user.id] }), // Session belongs to one user
+}));
+
+export const accountRelations = relations(account, ({ one }) => ({
+  user: one(user, { fields: [account.userId], references: [user.id] }), // Account belongs to one user
+}));
+
+// App-Specific Relations (Scores <-> User/WOD)
 export const scoresRelations = relations(scores, ({ one }) => ({
-  user: one(users, { fields: [scores.userId], references: [users.id] }), // A score belongs to one user
-  wod: one(wods, { fields: [scores.wodId], references: [wods.id] }), // A score belongs to one WOD
+  user: one(user, { fields: [scores.userId], references: [user.id] }), // Score belongs to one user (references updated 'user' table)
+  wod: one(wods, { fields: [scores.wodId], references: [wods.id] }), // Score belongs to one WOD
 }));

@@ -2,7 +2,6 @@ import {
   createCallerFactory,
   createTRPCRouter,
   publicProcedure,
-  t, // Import t
 } from "~/server/api/trpc";
 import { wodRouter } from "~/server/api/routers/wod";
 import { scoreRouter } from "~/server/api/routers/score"; // Import the score router

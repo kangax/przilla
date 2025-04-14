@@ -6,9 +6,9 @@
 - **Language:** TypeScript throughout (frontend and backend).
 - **API Layer:** tRPC is used for type-safe API communication between the client and server. API routers are defined in `src/server/api/routers/`.
 - **Database Interaction:** Drizzle ORM is used to interact with the database (likely LibSQL/Turso based on `techContext.md`). Schema is defined in `src/server/db/schema.ts`.
-- **Authentication:** NextAuth.js handles user authentication. Configuration is likely in `src/server/auth/`.
+- **Authentication:** Better Auth handles user authentication. Configuration is in `src/server/auth.ts`, using the Drizzle adapter. API routes are handled by `src/app/api/auth/[...all]/route.ts`.
 - **Client-Side State:** TanStack Query (React Query) manages server state and caching on the client, integrated with tRPC.
-- **Component Structure:** React components are organized within `src/app/_components/`.
+- **Component Structure:** React components are organized within `src/app/_components/` and feature-specific directories (e.g., `src/app/import/components/`, `src/components/`).
 - **Data Fetching Pattern:** For pages requiring large static datasets on initial load (e.g., the main WOD list on `page.tsx`), data is fetched server-side within the page's Server Component and passed as props to the relevant Client Component (`WodViewer`). The Client Component uses this prop for initial rendering and retains its `useQuery` hook for caching and background updates. User-specific data (e.g., scores) is typically fetched client-side within the Client Component.
 
 ## Key Technical Decisions
@@ -16,7 +16,7 @@
 - **Framework Choice:** Next.js (App Router) chosen for its full-stack capabilities, routing, React Server Components, and React ecosystem integration.
 - **API Layer:** tRPC selected for end-to-end type safety between backend and frontend.
 - **Database ORM:** Drizzle ORM chosen, likely for its TypeScript focus, performance, and compatibility with edge databases like LibSQL/Turso.
-- **Authentication:** NextAuth.js currently used, providing a standard way to handle authentication in Next.js (though potentially under review).
+- **Authentication:** Better Auth chosen to replace NextAuth.js, providing authentication services (email/password, social logins) integrated with Drizzle via its adapter.
 - **Styling:** Tailwind CSS used for utility-first styling, combined with Radix UI for accessible, unstyled component primitives.
 - **State Management:** TanStack Query (React Query) for managing server state, caching, and data fetching, integrating well with tRPC.
 - **Error Handling:** Ensure robust error handling is implemented throughout the application. (From previous rules)
@@ -39,14 +39,14 @@ _What design patterns are used in the codebase?_
 
 - **Server -> Client Data Flow:** Server Components (like `src/app/page.tsx`) can fetch data using the server tRPC client (`~/trpc/server`) and pass it as props to Client Components (`src/app/_components/WodViewer.tsx`).
 - **Client Data Fetching:** Client Components use tRPC hooks (via `~/trpc/react`) to fetch data from the backend (e.g., user scores in `WodViewer`).
-- **API Routing:** The tRPC server (`src/app/api/trpc/[trpc]/route.ts`) routes requests to specific routers defined in `src/server/api/routers/`.
+- **API Routing:** The tRPC server (`src/app/api/trpc/[trpc]/route.ts`) routes requests to specific routers defined in `src/server/api/routers/`. The Better Auth API handler (`src/app/api/auth/[...all]/route.ts`) manages auth-specific routes.
 - **Database Interaction:** Routers interact with database logic (potentially using the Repository Pattern, as preferred) likely located within or called from the routers, using Drizzle ORM (`src/server/db/`).
-- **Authentication:** Authentication state is managed by NextAuth.js and likely accessed both on the server (for protecting routes/data) and client (for UI changes via `useSession` or similar).
+- **Authentication:** Authentication state is managed by Better Auth (`src/server/auth.ts`). Server-side access via `getSession` (`~/server/auth.ts`), client-side access via `useSession` (`~/lib/auth-client.ts`).
 
 ## Critical Implementation Paths
 
-- **Database Migration:** Moving from static JSON to a dynamic, user-specific database (Drizzle + LibSQL/Turso) is a critical and complex task involving schema design, data migration, and updating all data access logic (tRPC routers, etc.).
-- **Authentication Integration:** Ensuring authentication (likely BetterAuth) correctly protects user data and integrates seamlessly with the database and tRPC.
+- **Database Migration:** Moving from static JSON to a dynamic, user-specific database (Drizzle + LibSQL/Turso) is a critical and complex task involving schema design, data migration, and updating all data access logic (tRPC routers, etc.). The auth schema migration from NextAuth to Better Auth was part of this.
+- **Authentication Integration:** Ensuring Better Auth correctly protects user data and integrates seamlessly with the database (via Drizzle adapter) and tRPC (via context).
 - **Data Import/Scraping:** Implementing reliable data import from external sources (Wodwell, SugarWod) involves handling different formats, potential API limitations, and error conditions.
 - **Stats/Analysis Engine:** Developing the logic for calculating and displaying meaningful user statistics could become complex depending on the desired insights.
 - **CSV Import Processing:** Score import from CSV uses client-side parsing (`papaparse`) and matching against WOD data fetched via tRPC. This avoids server load for parsing but requires fetching all WODs to the client for matching. **Note:** The initial WOD fetch for matching might be optimizable now that `page.tsx` fetches WODs server-side.

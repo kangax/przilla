@@ -1,3 +1,24 @@
+# Recent Changes
+
+- **Authentication Migration to Better Auth (Apr 2025):**
+
+  - **Goal:** Replaced NextAuth.js with Better Auth for handling user authentication.
+  - **Implementation:**
+    - Installed `better-auth`, `oslo`, and `better-auth/adapters/drizzle`. Uninstalled `next-auth`.
+    - Updated environment variables (`.env`, `.env.example`, `src/env.js`) for Better Auth secrets and social providers (GitHub, Google).
+    - Generated new Drizzle schema definitions for auth tables (`user`, `session`, `account`, `verification`) using `@better-auth/cli`.
+    - Replaced old NextAuth tables with new Better Auth tables in `src/server/db/schema.ts`, adapting syntax for SQLite.
+    - Reset local SQLite database (`db.sqlite`, `drizzle/meta/_journal.json`) and recreated schema using `drizzle-kit push` due to migration complexities. Backed up scores to `scores_backup.json` beforehand.
+    - Configured Better Auth instance in `src/server/auth.ts` with Drizzle adapter, email/password provider, social providers, and `getSession` helper.
+    - Created new API route handler `src/app/api/auth/[...all]/route.ts` using `toNextJsHandler`.
+    - Updated tRPC context (`src/server/api/trpc.ts`) to use the new `getSession`.
+    - Created client-side helpers `src/lib/auth-client.ts` and `src/lib/social-login.ts`.
+    - Updated `AuthControls.tsx` to use `useSession` and `signOut` from `auth-client`.
+    - Created new pages and components for Login, Sign Up, Forget Password, and Reset Password flows under `src/app/(auth)/`, `src/components/`, `src/app/forget-password/`, `src/app/reset-password/`.
+    - Updated server-side session checks in `src/app/charts/page.tsx` to use `getSession`.
+    - Removed old NextAuth files (`src/server/auth/*`, `src/app/api/auth/[...nextauth]/*`).
+  - **Outcome:** Authentication is now handled by Better Auth, providing email/password and social login capabilities integrated with the existing Drizzle/tRPC stack.
+
 - **Wodwell Icon Link in Mobile View (Apr 2025):**
 
   - **Feature:** Added a circular Wodwell icon (white "w" on black) as a link to the WOD's Wodwell.com page, rendered to the left of the "XX likes" text in each mobile WOD card header.
@@ -8,8 +29,6 @@
       - Used an inline SVG for a crisp, circular "w" icon.
       - Ensured accessibility and proper event handling.
   - **Outcome:** Users can quickly access the WOD's Wodwell.com page from mobile view without interfering with card expand/collapse.
-
-# Recent Changes
 
 - **Scaled Level Badge Fix (Apr 2025):**
 

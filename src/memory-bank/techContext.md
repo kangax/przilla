@@ -11,7 +11,7 @@ ALways use `write_to_file`, never `replace_in_file`
 - **State Management/Data Fetching:** tRPC, TanStack Query (React Query)
 - **Database ORM:** Drizzle ORM
 - **Database:** LibSQL/Turso (inferred from `@libsql/client`)
-- **Authentication:** NextAuth.js (v5 beta)
+- **Authentication:** Better Auth (v1.2.7) - Replaced NextAuth.js
 - **Schema Validation:** Zod
 - **Charting:** Recharts
 - **Tables:** TanStack Table
@@ -25,24 +25,23 @@ ALways use `write_to_file`, never `replace_in_file`
 - **Build Project:** `npm run build`
 - **Start Production Server:** `npm run start` or `npm run preview`
 - **Database Migrations:** Use `drizzle-kit` scripts (`db:generate`, `db:migrate`, `db:push`, `db:studio`).
-- **Environment Variables:** Managed via `.env` files and validated using `@t3-oss/env-nextjs`. See `.env.example`.
+- **Environment Variables:** Managed via `.env` files and validated using `@t3-oss/env-nextjs`. Requires `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`. Optionally uses `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` for social login. See `.env.example`.
 - Use `;` to string commands in the terminal (e.g., `cd some/dir ; npm install`) as `&&` can have escaping issues.
 - Do not create backup files; rely on the version control system (Git).
 
 ## Technical Constraints
 
-- **NextAuth Beta:** Using a beta version (`5.0.0-beta.25`) might introduce instability or breaking changes upon updates. Need to monitor its development.
 - **Static Data Source:** Reliance on static JSON files (`public/data/`) for WODs is being phased out. `WodViewer` now uses the database via tRPC. Other parts of the app (e.g., charts page) may still use JSON and need updating.
 - **LibSQL/Turso:** If using a free tier, be mindful of potential usage limits (storage, read/write operations, connections).
 - **tRPC:** While providing type safety, it tightly couples the frontend and backend, requiring careful consideration during refactoring. `SuperJSON` is now enabled as the transformer to handle complex types like Dates.
 
 ## Dependencies
 
-- **Core:** Next.js, React, tRPC, Drizzle ORM, NextAuth.js, TanStack Query, Zod
+- **Core:** Next.js, React, tRPC, Drizzle ORM, Better Auth, Oslo, TanStack Query, Zod
 - **UI:** Radix UI (Themes, Select, Icons), Tailwind CSS, Lucide Icons, Recharts, TanStack Table/Virtual, `react-dropzone`
-- **Database:** `@libsql/client`
+- **Database:** `@libsql/client`, `better-auth/adapters/drizzle`
 - **Utility:** `superjson` (enabled as tRPC transformer), `geist`, `server-only`, `papaparse`
-- **Dev/Build:** TypeScript, ESLint, Prettier, Vitest, Husky, lint-staged, PostCSS, `@t3-oss/env-nextjs`
+- **Dev/Build:** TypeScript, ESLint, Prettier, Vitest, Husky, lint-staged, PostCSS, `@t3-oss/env-nextjs`, `@better-auth/cli`
 - **Scripts/Internal Tools:** `axios`, `chalk`, `cheerio`, `fs-extra`, `dotenv`, `tsx` (used in `scripts/`)
 
 ## Tool Usage Patterns

@@ -1,5 +1,20 @@
 # Recent Changes
 
+- **CSV/SugarWOD Score Import Backend (Apr 2025):**
+
+  - **Goal:** Implement the backend logic to receive and store imported scores from the CSV/SugarWOD import UI.
+  - **Implementation:**
+    - Defined Zod schemas (`scoreImportSchema`, `importScoresInputSchema`) in `src/server/api/routers/score.ts` to validate the incoming array of score data.
+    - Added a new protected tRPC mutation `importScores` to `scoreRouter` (`src/server/api/routers/score.ts`).
+    - The mutation retrieves the `userId` from the session, maps the input score data (including `wodId`, `scoreDate`, `isRx`, `notes`, and score components like `time_seconds`, `reps`, etc.) to the database schema, and performs a bulk insert into the `scores` table using `ctx.db.insert(scores).values(...)`. Includes basic error handling and logging.
+    - Integrated the frontend `ScoreImportWizard` component (`src/app/import/components/ScoreImportWizard.tsx`) with the new mutation:
+      - Added `api.score.importScores.useMutation` hook.
+      - Updated the `handleConfirm` function to filter selected rows, ensure `scoreDate` is a `Date` object, and call `importScoresMutation.mutate` with the prepared data.
+      - Implemented UI feedback for loading (`isPending`), success (`onSuccess`), and error (`onError`) states, updating the wizard step accordingly.
+      - Added state (`importSuccessCount`) to display the number of successfully imported scores on the completion step.
+      - Fixed a TypeScript error by using `isPending` instead of `isLoading` for the mutation status check.
+  - **Outcome:** The score import feature is now fully functional end-to-end. Users can upload a CSV, review/select scores, and confirm the import, which triggers the backend mutation to save the scores to the database.
+
 - **Authentication Migration to Better Auth (Apr 2025):**
 
   - **Goal:** Replaced NextAuth.js with Better Auth for handling user authentication.

@@ -20,6 +20,7 @@ export function ScoreImportWizard() {
   const [processedRows, setProcessedRows] = useState<ProcessedRow[]>([]);
   const [selectedRows, setSelectedRows] = useState<Set<string>>(new Set()); // Keep track of user selections
   const [processingError, setProcessingError] = useState<string | null>(null);
+  const [importSuccessCount, setImportSuccessCount] = useState<number>(0); // Track success count
 
   // Fetch all WODs for client-side matching
   const {
@@ -28,6 +29,21 @@ export function ScoreImportWizard() {
     error: wodsError,
   } = api.wod.getAll.useQuery();
   const [wodsMap, setWodsMap] = useState<Map<string, Wod>>(new Map());
+
+  // tRPC mutation for importing scores
+  const importScoresMutation = api.score.importScores.useMutation({
+    onSuccess: (data) => {
+      console.log("Import successful:", data);
+      setImportSuccessCount(data.count); // Store the count of imported scores
+      setStep("complete");
+      setProcessingError(null); // Clear any previous errors
+    },
+    onError: (error) => {
+      console.error("Import failed:", error);
+      setProcessingError(`Import failed: ${error.message}`);
+      setStep("confirm"); // Go back to confirm step on error
+    },
+  });
 
   // Create a map for faster WOD lookup once data is loaded
   useEffect(() => {
@@ -280,28 +296,42 @@ export function ScoreImportWizard() {
 
   const handleConfirm = () => {
     setStep("processing"); // Show processing state during submission
-    // TODO: Add submission logic using tRPC mutation `score.bulkCreate`
-    // Filter processedRows based on selectedRows
+    setProcessingError(null); // Clear previous errors before submitting
+
+    // Filter processedRows based on selectedRows and ensure proposedScore exists
     const scoresToSubmit = processedRows
       .filter((row) => selectedRows.has(row.id) && row.proposedScore)
       .map((row) => {
-        // Ensure scoreDate is formatted as needed by the backend (e.g., ISO string)
+        // We know proposedScore exists due to the filter
         const score = row.proposedScore;
+        // Ensure scoreDate is a Date object as expected by the backend schema
+        if (!(score.scoreDate instanceof Date)) {
+          console.error("Invalid scoreDate type before submission:", score);
+          // Handle error or attempt conversion if possible, otherwise skip/throw
+          // For now, we'll rely on earlier validation ensuring it's a Date
+        }
         return {
-          ...score,
-          scoreDate:
-            score.scoreDate instanceof Date
-              ? score.scoreDate.toISOString()
-              : score.scoreDate, // Convert Date to ISO string if needed
+          wodId: score.wodId,
+          scoreDate: score.scoreDate, // Pass Date object directly
+          isRx: score.isRx,
+          notes: score.notes,
+          time_seconds: score.time_seconds,
+          reps: score.reps,
+          load: score.load,
+          rounds_completed: score.rounds_completed,
+          partial_reps: score.partial_reps,
         };
       });
 
-    console.log("Submitting scores:", scoresToSubmit);
-    // Replace with actual tRPC call
-    setTimeout(() => {
-      console.log("Simulated submission complete.");
-      setStep("complete");
-    }, 2000);
+    if (scoresToSubmit.length === 0) {
+      console.warn("No valid scores selected for submission.");
+      setProcessingError("No valid scores were selected for import.");
+      setStep("confirm"); // Go back if nothing to submit
+      return;
+    }
+
+    console.log("Submitting scores via tRPC:", scoresToSubmit);
+    importScoresMutation.mutate(scoresToSubmit); // Call the tRPC mutation
   };
 
   const handleReset = () => {
@@ -309,12 +339,13 @@ export function ScoreImportWizard() {
     setProcessedRows([]);
     setSelectedRows(new Set());
     setProcessingError(null);
+    setImportSuccessCount(0); // Reset success count
     setStep("upload");
   };
 
   // Render Loading state while WODs are fetching initially
   if (isLoadingWods && step === "upload" && !file) {
-    return <LoadingIndicator message="Loading..." />; // Updated component name
+    return <LoadingIndicator message="Loading WOD data..." />; // Updated message
   }
 
   // Render Error state if WOD fetching failed
@@ -331,11 +362,13 @@ export function ScoreImportWizard() {
       <h2 className="mb-4 text-xl font-semibold">
         Import Scores from SugarWOD
       </h2>
-      {processingError && (
-        <div className="mb-4 rounded border border-red-300 bg-red-50 p-3 text-red-700">
-          Error: {processingError}
-        </div>
-      )}
+      {/* Display processing error prominently */}
+      {processingError &&
+        step !== "processing" && ( // Don't show parsing error during submission loading
+          <div className="mb-4 rounded border border-red-300 bg-red-50 p-3 text-red-700">
+            Error: {processingError}
+          </div>
+        )}
 
       {step === "upload" && (
         <CsvUploadZone onFileAccepted={handleFileAccepted} />
@@ -345,9 +378,9 @@ export function ScoreImportWizard() {
       {step === "processing" && (
         <LoadingIndicator // Updated component name
           message={
-            file
-              ? "Processing CSV and matching WODs..."
-              : "Submitting scores..."
+            importScoresMutation.isPending // Use isPending instead of isLoading
+              ? "Submitting scores..."
+              : "Processing CSV and matching WODs..."
           }
         />
       )}
@@ -365,17 +398,24 @@ export function ScoreImportWizard() {
           selectedIds={selectedRows}
           onConfirm={handleConfirm}
           onBack={() => setStep("review")} // Allow going back
+          // Disable confirm button while submitting
+          // isSubmitting={importScoresMutation.isPending} // Pass loading state if needed by component
         />
       )}
 
       {step === "complete" && (
-        <div>
-          <p className="text-green-600">Import Complete!</p>
-          {/* TODO: Show summary of imported/skipped */}
-          <p>Successfully processed {selectedRows.size} scores.</p>
+        <div className="rounded-lg border border-green-300 bg-green-50 p-6 text-center shadow-md dark:border-green-700 dark:bg-gray-800">
+          <h3 className="mb-4 text-lg font-medium text-green-700 dark:text-green-400">
+            Import Complete!
+          </h3>
+          <p className="mb-6 text-gray-700 dark:text-gray-300">
+            Successfully imported{" "}
+            <span className="font-semibold">{importSuccessCount}</span>{" "}
+            score(s).
+          </p>
           <button
             onClick={handleReset}
-            className="mt-4 rounded bg-blue-500 px-4 py-2 text-white hover:bg-blue-600"
+            className="rounded bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
           >
             Import Another File
           </button>

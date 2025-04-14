@@ -10,6 +10,7 @@
   - **Mobile View (`WodListMobile.tsx`):**
     - Displays WODs as cards.
     - Cards are expandable via click on the header area (chevron icon indicates state).
+    - **Search Highlighting & Auto-Expand:** Cards automatically expand if their content (name, tags, description) matches the active search term. Matching text is highlighted using the shared `HighlightMatch` component (`src/utils/uiUtils.tsx`).
     - Expanded view shows WOD description and user scores (with correct dates).
     - Includes a visual separator between description and scores.
 - **WOD Visualization:** Basic charts for visualizing WOD data might be implemented (`WodTimelineChart`, `WodDistributionChart`).

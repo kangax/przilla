@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react"; // Added useMemo
 import { ChevronDown, ChevronUp } from "lucide-react";
 import type { Wod, Score } from "../../types/wodTypes";
-import { formatScore } from "../../utils/wodUtils"; // Import formatScore
+import { formatScore, parseTags } from "../../utils/wodUtils"; // Import formatScore and parseTags
+import { HighlightMatch } from "~/utils/uiUtils"; // Import HighlightMatch
 
 type ScoresByWodId = Record<string, Score[]>;
 
 type WodListMobileProps = {
   wods: Wod[];
-  scoresByWodId: ScoresByWodId; // Add scoresByWodId prop
+  scoresByWodId: ScoresByWodId;
+  searchTerm: string; // Add searchTerm prop
 };
 
 const difficultyStyles: Record<
@@ -41,8 +43,35 @@ const difficultyStyles: Record<
   },
 };
 
-export function WodListMobile({ wods, scoresByWodId }: WodListMobileProps) {
-  // Change state type to string | null
+// Helper function to check if the search term matches WOD content
+const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
+  if (!searchTerm.trim()) return false;
+  const lowerSearchTerm = searchTerm.toLowerCase();
+
+  // Check WOD Name
+  if (wod.wodName?.toLowerCase().includes(lowerSearchTerm)) {
+    return true;
+  }
+
+  // Check Description
+  if (wod.description?.toLowerCase().includes(lowerSearchTerm)) {
+    return true;
+  }
+
+  // Check Tags (handle potential stringified JSON)
+  const tags = parseTags(wod.tags); // Use parseTags utility
+  if (tags.some((tag) => tag.toLowerCase().includes(lowerSearchTerm))) {
+    return true;
+  }
+
+  return false;
+};
+
+export function WodListMobile({
+  wods,
+  scoresByWodId,
+  searchTerm,
+}: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
 
   // Change function parameter type to string
@@ -50,13 +79,25 @@ export function WodListMobile({ wods, scoresByWodId }: WodListMobileProps) {
     setExpandedWodId(expandedWodId === wodId ? null : wodId);
   };
 
+  // Memoize the matched WOD IDs to avoid recalculating on every render
+  const matchedWodIds = useMemo(() => {
+    if (!searchTerm.trim()) return new Set<string>();
+    return new Set(
+      wods.filter((wod) => checkWodMatch(wod, searchTerm)).map((wod) => wod.id),
+    );
+  }, [wods, searchTerm]);
+
   return (
     <div className="space-y-4 px-2 pb-4">
       {wods.map((wod) => {
-        // Comparison is now string === string
-        const isExpanded = expandedWodId === wod.id;
-        // Use optional chaining for safety when accessing scoresByWodId
+        const isManuallyExpanded = expandedWodId === wod.id;
+        const isSearchMatch = matchedWodIds.has(wod.id);
+        // Expand if manually toggled OR if it's a search match and hasn't been explicitly collapsed
+        const isExpanded =
+          isManuallyExpanded || (isSearchMatch && expandedWodId !== wod.id);
+
         const wodScores = scoresByWodId?.[wod.id] || [];
+        const tags = parseTags(wod.tags); // Parse tags for consistent handling
 
         const diff = difficultyStyles[wod.difficulty ?? ""] || {
           // Added nullish coalescing for safety
@@ -77,10 +118,10 @@ export function WodListMobile({ wods, scoresByWodId }: WodListMobileProps) {
             {/* Header Section */}
             <div
               className="flex cursor-pointer items-center justify-between"
-              onClick={() => toggleExpand(wod.id)} // Pass string wod.id
+              onClick={() => toggleExpand(wod.id)}
             >
               <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
-                {wod.wodName}
+                <HighlightMatch text={wod.wodName} highlight={searchTerm} />
               </span>
               <div className="flex items-center gap-2">
                 <span className="text-sm text-slate-600 dark:text-slate-400">
@@ -95,28 +136,29 @@ export function WodListMobile({ wods, scoresByWodId }: WodListMobileProps) {
               </div>
             </div>
 
-            {/* Tags Section (Always Visible) */}
+            {/* Tags Section (Always Visible) - Use parsed tags */}
             <div className="mt-2 flex flex-wrap items-center gap-2">
               <span className={badgeClasses}>{wod.difficulty}</span>
-              {Array.isArray(wod.tags)
-                ? wod.tags.map((tag) => (
-                    <span
-                      key={tag}
-                      className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-300"
-                    >
-                      {tag}
-                    </span>
-                  ))
-                : null}
+              {tags.map((tag) => (
+                <span
+                  key={tag}
+                  className="rounded-full bg-slate-200 px-2 py-0.5 text-xs font-medium text-slate-700 dark:bg-slate-700 dark:text-slate-300"
+                >
+                  <HighlightMatch text={tag} highlight={searchTerm} />
+                </span>
+              ))}
             </div>
 
             {/* Expandable Section */}
             {isExpanded && (
               <div className="mt-4 border-t border-slate-200 pt-3 dark:border-slate-700">
-                {/* Description */}
+                {/* Description - Apply HighlightMatch */}
                 <div className="mb-3">
                   <p className="text-md whitespace-pre-wrap text-slate-600 dark:text-slate-400">
-                    {wod.description}
+                    <HighlightMatch
+                      text={wod.description ?? ""}
+                      highlight={searchTerm}
+                    />
                   </p>
                 </div>
 

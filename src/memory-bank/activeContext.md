@@ -42,9 +42,25 @@
 
 ## Recent Changes
 
-- **Mobile Card Expansion (Apr 2025):**
+- **Mobile Search Highlighting & Auto-Expand (Apr 2025):**
+
+  - **Problem:** Mobile view lacked search result highlighting and didn't visually indicate matches clearly.
+  - **Solution:** Implemented search term highlighting and automatic card expansion in the mobile list view.
+  - **Implementation:**
+    - Extracted the `HighlightMatch` component from `src/app/_components/WodTable.tsx` into a shared utility file `src/utils/uiUtils.tsx`.
+    - Updated `src/app/_components/WodTable.tsx` to import `HighlightMatch` from the shared location.
+    - Modified `src/app/_components/WodListMobile.tsx`:
+      - Added `searchTerm` prop.
+      - Imported and used the shared `HighlightMatch` component for WOD name, tags, and description.
+      - Added `checkWodMatch` helper function to detect search term matches in WOD content.
+      - Updated card expansion logic: cards now expand automatically if their content matches the `searchTerm`, while still allowing manual override via click. Used `useMemo` to optimize match checking.
+    - Modified `src/app/_components/WodViewer.tsx`:
+      - Passed the `searchTerm` state down to `WodListMobile` to enable highlighting and fix TypeScript errors.
+  - **Outcome:** Mobile view now highlights search terms in WOD name, tags, and description, and automatically expands matching cards for better visibility. Code reuse improved by sharing `HighlightMatch`.
+
+- **Mobile Card Expansion (Previous - Apr 2025):**
   - **Problem:** Mobile view (`WodListMobile.tsx`) showed basic WOD info but lacked details like description and user scores.
-  - **Solution:** Implemented an expandable card interface.
+  - **Solution:** Implemented an expandable card interface (now enhanced with search highlighting/auto-expand).
   - **Implementation:**
     - Modified `src/app/_components/WodListMobile.tsx`:
       - Added state (`useState`) to track the currently expanded card ID (using string IDs).

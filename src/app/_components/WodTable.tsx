@@ -20,6 +20,7 @@ import {
   getPerformanceBadgeDetails, // Added
 } from "~/utils/wodUtils";
 import { LoadingIndicator } from "./LoadingIndicator"; // Import LoadingIndicator
+import { HighlightMatch } from "~/utils/uiUtils"; // Import HighlightMatch
 
 // --- Interfaces & Types ---
 
@@ -54,32 +55,6 @@ const getDifficultyColor = (difficulty: string | undefined | null): string => {
       return "text-foreground";
   }
 };
-
-// --- Highlight Component (Memoized) ---
-const HighlightMatch: React.FC<{ text: string; highlight: string }> =
-  React.memo(({ text, highlight }) => {
-    if (!highlight.trim() || !text) {
-      return <>{text}</>;
-    }
-    const regex = new RegExp(
-      `(${highlight.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`,
-      "gi",
-    );
-    const parts = text.split(regex);
-
-    return (
-      <>
-        {parts.map((part, i) =>
-          regex.test(part) ? (
-            <mark key={i}>{part}</mark>
-          ) : (
-            <React.Fragment key={i}>{part}</React.Fragment>
-          ),
-        )}
-      </>
-    );
-  });
-HighlightMatch.displayName = "HighlightMatch";
 
 // --- Column Definitions ---
 

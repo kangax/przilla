@@ -1,12 +1,5 @@
 import { relations, sql } from "drizzle-orm";
-import {
-  index,
-  int,
-  primaryKey,
-  sqliteTableCreator,
-  text,
-  uniqueIndex,
-} from "drizzle-orm/sqlite-core";
+import { index, int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
 import type { Benchmarks } from "~/types/wodTypes"; // Import the actual Benchmarks type
 
 /**

@@ -1,6 +1,5 @@
 import { getSession } from "~/server/auth"; // Use our getSession
 import React from "react";
-import { headers } from "next/headers";
 import { redirect } from "next/navigation";
 
 // This layout prevents logged-in users from accessing login/signup pages

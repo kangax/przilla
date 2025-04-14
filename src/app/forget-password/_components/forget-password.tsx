@@ -58,7 +58,7 @@ export default function ForgetPasswordForm() {
               Check your email!
             </Text>
             <Text size="2" color="gray">
-              We've sent password reset instructions to {email}.
+              We&apos;ve sent password reset instructions to {email}.
             </Text>
             <Link href="/login">
               <Button variant="soft" color="gray" size="2" mt="2">

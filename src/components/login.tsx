@@ -171,7 +171,7 @@ export default function Login() {
         </Grid>
 
         <Text size="2" align="center" color="gray">
-          Don't have an account?{" "}
+          Don&apos;t have an account?{" "}
           <Link href="/signup">
             <span className="font-medium text-white hover:underline">
               Sign up

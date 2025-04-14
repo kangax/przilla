@@ -122,6 +122,42 @@ export function WodListMobile({
                 <HighlightMatch text={wod.wodName} highlight={searchTerm} />
               </span>
               <div className="flex items-center gap-2">
+                {wod.wodUrl && (
+                  <a
+                    href={wod.wodUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="View on Wodwell"
+                    className="mr-1 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onClick={(e) => e.stopPropagation()}
+                    tabIndex={0}
+                  >
+                    {/* SVG "w" icon for crispness and accessibility */}
+                    <svg
+                      width="16"
+                      height="16"
+                      viewBox="0 0 16 16"
+                      fill="none"
+                      xmlns="http://www.w3.org/2000/svg"
+                      aria-hidden="true"
+                      focusable="false"
+                    >
+                      <circle cx="8" cy="8" r="8" fill="black" />
+                      <text
+                        x="8"
+                        y="11.5"
+                        textAnchor="middle"
+                        fontFamily="Geist, Arial, sans-serif"
+                        fontWeight="bold"
+                        fontSize="10"
+                        fill="white"
+                        aria-hidden="true"
+                      >
+                        w
+                      </text>
+                    </svg>
+                  </a>
+                )}
                 <span className="text-sm text-slate-600 dark:text-slate-400">
                   {wod.countLikes} likes
                 </span>

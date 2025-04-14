@@ -1,3 +1,16 @@
+- **Wodwell Icon Link in Mobile View (Apr 2025):**
+
+  - **Feature:** Added a circular Wodwell icon (white "w" on black) as a link to the WOD's Wodwell.com page, rendered to the left of the "XX likes" text in each mobile WOD card header.
+  - **Behavior:** The icon only appears if `wod.wodUrl` exists. Tapping/clicking the icon opens the link in a new tab and does not toggle the card (event propagation is stopped). The icon is accessible and styled for both light and dark mode.
+  - **Implementation:**
+    - Modified `src/app/_components/WodListMobile.tsx`:
+      - Inserted the icon/link in the header's right-side area, before the likes count.
+      - Used an inline SVG for a crisp, circular "w" icon.
+      - Ensured accessibility and proper event handling.
+  - **Outcome:** Users can quickly access the WOD's Wodwell.com page from mobile view without interfering with card expand/collapse.
+
+# Recent Changes
+
 - **Scaled Level Badge Fix (Apr 2025):**
 
   - **Problem:** Marston (and other WODs) showed "Advanced" (green) even when completed as "Scaled" (should be "Scaled" and grey).
@@ -9,8 +22,6 @@
       - Updated score display to use `getPerformanceBadgeDetails`, showing the correct badge and color for both Rx and Scaled scores.
     - Confirmed `WodTable.tsx` already uses the centralized logic.
   - **Outcome:** All non-Rx (scaled) scores now display a "Scaled" badge in grey, ensuring accurate and consistent level display across both desktop and mobile views.
-
-# Recent Changes
 
 - **Light Theme Contrast Improvements (Apr 2025):**
 

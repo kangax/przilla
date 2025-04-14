@@ -2,6 +2,9 @@
 
 ## Current Focus
 
+- CSV Score Import UI Migration (Apr 2025): Dedicated import route and UI for score import is functional; backend insertion logic is pending.
+- **Wodwell icon link in mobile view:** Implemented a circular Wodwell icon (white "w" on black) as a link to the WOD's Wodwell.com page, shown to the left of the likes count in each mobile WOD card header. The icon is accessible, styled for both themes, and does not interfere with card expand/collapse.
+
 ## Next Steps
 
 ### Must have

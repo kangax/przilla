@@ -546,7 +546,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
               className={`cursor-pointer whitespace-nowrap rounded-full border transition-colors duration-150 ${
                 selectedTags.includes(tag)
                   ? "border-blue-300 bg-blue-100 text-blue-700"
-                  : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100"
+                  : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
               } ${isMobile ? "px-4 py-1 text-sm font-medium" : "px-3 py-1 text-xs font-medium"}`}
               onClick={() => toggleTag(tag)}
             >

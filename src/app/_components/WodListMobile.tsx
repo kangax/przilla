@@ -12,58 +12,52 @@ type WodListMobileProps = {
   searchTerm: string; // Add searchTerm prop
 };
 
+// Updated badge colors for more prominence and consistency
 const difficultyStyles: Record<
   string,
   { light: string; dark: string; text: string }
 > = {
   Hard: {
-    light: "bg-orange-100 border-orange-300",
-    dark: "bg-orange-600",
-    text: "text-orange-800 dark:text-white",
+    light: "bg-red-300 border-red-400", // True red, matches WodTable
+    dark: "dark:bg-red-700",
+    text: "text-red-800 dark:text-white",
   },
   Medium: {
-    light: "bg-yellow-100 border-yellow-300",
-    dark: "bg-yellow-600",
+    light: "bg-yellow-200 border-yellow-300",
+    dark: "dark:bg-yellow-600",
     text: "text-yellow-800 dark:text-white",
   },
   Easy: {
-    light: "bg-green-100 border-green-300",
-    dark: "bg-green-600",
-    text: "text-green-800 dark:text-white",
+    light: "bg-green-300 border-green-400", // More prominent green
+    dark: "dark:bg-green-700",
+    text: "text-green-900 dark:text-white",
   },
   "Very Hard": {
-    light: "bg-red-100 border-red-300",
-    dark: "bg-red-600",
+    light: "bg-red-200 border-red-300",
+    dark: "dark:bg-red-600",
     text: "text-red-800 dark:text-white",
   },
   "Extremely Hard": {
-    light: "bg-purple-100 border-purple-300",
-    dark: "bg-purple-600",
+    light: "bg-purple-200 border-purple-300",
+    dark: "dark:bg-purple-600",
     text: "text-purple-800 dark:text-white",
   },
 };
 
-// Helper function to check if the search term matches WOD content
 const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
   if (!searchTerm.trim()) return false;
   const lowerSearchTerm = searchTerm.toLowerCase();
 
-  // Check WOD Name
   if (wod.wodName?.toLowerCase().includes(lowerSearchTerm)) {
     return true;
   }
-
-  // Check Description
   if (wod.description?.toLowerCase().includes(lowerSearchTerm)) {
     return true;
   }
-
-  // Check Tags (handle potential stringified JSON)
-  const tags = parseTags(wod.tags); // Use parseTags utility
+  const tags = parseTags(wod.tags);
   if (tags.some((tag) => tag.toLowerCase().includes(lowerSearchTerm))) {
     return true;
   }
-
   return false;
 };
 
@@ -74,12 +68,10 @@ export function WodListMobile({
 }: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
 
-  // Change function parameter type to string
   const toggleExpand = (wodId: string) => {
     setExpandedWodId(expandedWodId === wodId ? null : wodId);
   };
 
-  // Memoize the matched WOD IDs to avoid recalculating on every render
   const matchedWodIds = useMemo(() => {
     if (!searchTerm.trim()) return new Set<string>();
     return new Set(
@@ -92,28 +84,23 @@ export function WodListMobile({
       {wods.map((wod) => {
         const isManuallyExpanded = expandedWodId === wod.id;
         const isSearchMatch = matchedWodIds.has(wod.id);
-        // Expand if manually toggled OR if it's a search match and hasn't been explicitly collapsed
         const isExpanded =
           isManuallyExpanded || (isSearchMatch && expandedWodId !== wod.id);
 
         const wodScores = scoresByWodId?.[wod.id] || [];
-        const tags = parseTags(wod.tags); // Parse tags for consistent handling
+        const tags = parseTags(wod.tags);
 
         const diff = difficultyStyles[wod.difficulty ?? ""] || {
-          // Added nullish coalescing for safety
-          light: "bg-slate-100 border-slate-300",
-          dark: "bg-slate-700",
+          light: "bg-green-300 border-green-400",
+          dark: "dark:bg-slate-700",
           text: "text-slate-800 dark:text-slate-100",
         };
-        const darkClasses = diff.dark.includes("bg-")
-          ? diff.dark
-          : `dark:${diff.dark}`;
-        const badgeClasses = `whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold ${diff.light} ${darkClasses} ${diff.text}`;
+        const badgeClasses = `whitespace-nowrap rounded-full border px-2.5 py-0.5 text-xs font-semibold ${diff.light} ${diff.dark} ${diff.text}`;
 
         return (
           <div
             key={wod.id}
-            className="flex flex-col rounded-xl border border-slate-200 bg-slate-50 px-4 py-3 shadow-md shadow-slate-100 transition-colors dark:border-slate-700 dark:bg-[#23293a] dark:shadow-md"
+            className="flex flex-col rounded-xl border border-slate-300 bg-slate-100 px-4 py-3 shadow-lg ring-1 ring-slate-100 transition-colors dark:border-slate-700 dark:bg-[#23293a] dark:shadow-md dark:ring-0"
           >
             {/* Header Section */}
             <div
@@ -127,7 +114,6 @@ export function WodListMobile({
                 <span className="text-sm text-slate-600 dark:text-slate-400">
                   {wod.countLikes} likes
                 </span>
-                {/* Chevron Icon */}
                 {isExpanded ? (
                   <ChevronUp className="h-5 w-5 text-slate-500 dark:text-slate-400" />
                 ) : (
@@ -175,12 +161,9 @@ export function WodListMobile({
                       {wodScores.map((score) => (
                         <li
                           key={score.id}
-                          className="flex flex-col rounded-md bg-slate-100 p-2 dark:bg-slate-700" // Changed to flex-col
+                          className="flex flex-col rounded-md bg-slate-100 p-2 dark:bg-slate-700"
                         >
-                          {/* Top row: Score, Rx, Date */}
                           <div className="flex w-full items-center justify-between">
-                            {" "}
-                            {/* Added wrapper div */}
                             <div className="flex items-center gap-2">
                               <span className="font-semibold text-blue-600 dark:text-blue-400">
                                 {formatScore(score)}
@@ -193,7 +176,6 @@ export function WodListMobile({
                             </div>
                             <span className="text-xs text-slate-500 dark:text-slate-400">
                               {new Date(score.scoreDate).toLocaleDateString(
-                                // Use scoreDate here
                                 "en-US",
                                 {
                                   year: "2-digit",
@@ -203,7 +185,6 @@ export function WodListMobile({
                               )}
                             </span>
                           </div>
-                          {/* Notes (conditionally rendered) */}
                           {score.notes && (
                             <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
                               {score.notes}

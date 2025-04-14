@@ -42,6 +42,17 @@
 
 ## Recent Changes
 
+- **Light Theme Contrast Improvements (Apr 2025):**
+
+  - **Problem:** Light mode had poor contrast, with white cards on a white background and low-contrast badges.
+  - **Solution:** Adjusted global background color and mobile badge styles for better visibility in light mode.
+  - **Implementation:**
+    - Modified `src/styles/globals.css`:
+      - Changed the light mode `--background` CSS variable from `0 0% 100%` (white) to `220 16% 96%` (light gray) to differentiate the page background from cards.
+    - Modified `src/app/_components/WodListMobile.tsx`:
+      - Updated the `difficultyStyles` map to use slightly darker background colors (e.g., `bg-orange-200` instead of `bg-orange-100`) for difficulty badges in light mode, improving their contrast against the white card background.
+  - **Outcome:** Improved visual separation between page background and cards, and enhanced readability of difficulty badges in the mobile view's light theme.
+
 - **Mobile Score Notes Display (Apr 2025):**
 
   - **Problem:** Score notes were not visible in the mobile list view (`WodListMobile.tsx`).

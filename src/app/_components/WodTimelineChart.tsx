@@ -211,10 +211,7 @@ export default function WodTimelineChart({
   }, [view, frequencyData, performanceData]);
 
   const dataKey = view === "frequency" ? "count" : "averageLevel";
-  const chartTitle =
-    view === "frequency"
-      ? "Workout Frequency Over Time"
-      : "Performance Over Time";
+  const chartTitle = view === "frequency" ? "WOD Frequency" : "WOD Performance";
   const yAxisLabel = view === "frequency" ? "WODs / Month" : "Avg Level";
   // Only set Y-axis domain for performance view
   const yDomain = view === "performance" ? [0, 4] : undefined;

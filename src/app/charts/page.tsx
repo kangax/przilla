@@ -282,23 +282,23 @@ export default async function ChartsPage() {
   return (
     <Box className="min-h-screen bg-background text-foreground">
       <Header />
-      <Container size="4" className="pb-8">
-        <Flex direction="column" gap="6">
+      <Container size="4" className="px-6 pb-8">
+        <Flex direction="column">
           {/* Always render the container for the top two charts */}
           <Flex gap="4" direction={{ initial: "column", sm: "row" }}>
-            {/* Add relative positioning and overlay for logged-out state */}
-            <Box className="relative flex-1">
-              <WodDistributionChart
-                tagData={tagChartData}
-                categoryData={categoryChartData}
-              />
-              {!session?.user && <ChartLoginOverlay />}
-            </Box>
             {/* Add relative positioning and overlay for logged-out state */}
             <Box className="relative flex-1">
               <WodTimelineChart
                 frequencyData={frequencyData}
                 performanceData={performanceData}
+              />
+              {!session?.user && <ChartLoginOverlay />}
+            </Box>
+            {/* Add relative positioning and overlay for logged-out state */}
+            <Box className="relative flex-1">
+              <WodDistributionChart
+                tagData={tagChartData}
+                categoryData={categoryChartData}
               />
               {!session?.user && <ChartLoginOverlay />}
             </Box>

@@ -1,7 +1,11 @@
 import React, { useState, useMemo } from "react"; // Added useMemo
 import { ChevronDown, ChevronUp } from "lucide-react";
 import type { Wod, Score } from "../../types/wodTypes";
-import { formatScore, parseTags } from "../../utils/wodUtils"; // Import formatScore and parseTags
+import {
+  formatScore,
+  parseTags,
+  getPerformanceBadgeDetails,
+} from "../../utils/wodUtils"; // Import getPerformanceBadgeDetails
 import { HighlightMatch } from "~/utils/uiUtils"; // Import HighlightMatch
 
 type ScoresByWodId = Record<string, Score[]>;
@@ -42,6 +46,13 @@ const difficultyStyles: Record<
     dark: "dark:bg-purple-600",
     text: "text-purple-800 dark:text-white",
   },
+};
+
+const badgeColorMap: Record<string, string> = {
+  purple: "bg-purple-200 text-purple-800 dark:bg-purple-700 dark:text-white",
+  green: "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-100",
+  yellow: "bg-yellow-200 text-yellow-800 dark:bg-yellow-600 dark:text-white",
+  gray: "bg-slate-200 text-slate-700 dark:bg-slate-600 dark:text-slate-100",
 };
 
 const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
@@ -158,40 +169,47 @@ export function WodListMobile({
                       Your Scores:
                     </h4>
                     <ul className="space-y-2">
-                      {wodScores.map((score) => (
-                        <li
-                          key={score.id}
-                          className="flex flex-col rounded-md bg-slate-100 p-2 dark:bg-slate-700"
-                        >
-                          <div className="flex w-full items-center justify-between">
-                            <div className="flex items-center gap-2">
-                              <span className="font-semibold text-blue-600 dark:text-blue-400">
-                                {formatScore(score)}
-                              </span>
-                              {score.isRx && (
-                                <span className="rounded bg-green-200 px-1.5 py-0.5 text-xs font-medium text-green-800 dark:bg-green-700 dark:text-green-100">
-                                  Rx
+                      {wodScores.map((score) => {
+                        const { displayLevel, color } =
+                          getPerformanceBadgeDetails(wod, score);
+                        const badgeColor =
+                          badgeColorMap[color] || badgeColorMap.gray;
+                        const suffix = score.isRx ? "Rx" : "Scaled";
+                        return (
+                          <li
+                            key={score.id}
+                            className="flex flex-col rounded-md bg-slate-100 p-2 dark:bg-slate-700"
+                          >
+                            <div className="flex w-full items-center justify-between">
+                              <div className="flex items-center gap-2">
+                                <span className="font-semibold text-blue-600 dark:text-blue-400">
+                                  {formatScore(score, suffix)}
                                 </span>
-                              )}
+                                <span
+                                  className={`rounded px-1.5 py-0.5 text-xs font-medium ${badgeColor}`}
+                                >
+                                  {displayLevel}
+                                </span>
+                              </div>
+                              <span className="text-xs text-slate-500 dark:text-slate-400">
+                                {new Date(score.scoreDate).toLocaleDateString(
+                                  "en-US",
+                                  {
+                                    year: "2-digit",
+                                    month: "short",
+                                    day: "numeric",
+                                  },
+                                )}
+                              </span>
                             </div>
-                            <span className="text-xs text-slate-500 dark:text-slate-400">
-                              {new Date(score.scoreDate).toLocaleDateString(
-                                "en-US",
-                                {
-                                  year: "2-digit",
-                                  month: "short",
-                                  day: "numeric",
-                                },
-                              )}
-                            </span>
-                          </div>
-                          {score.notes && (
-                            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-                              {score.notes}
-                            </p>
-                          )}
-                        </li>
-                      ))}
+                            {score.notes && (
+                              <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                                {score.notes}
+                              </p>
+                            )}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </div>
                 )}

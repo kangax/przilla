@@ -244,12 +244,13 @@ const createColumns = (
           return (
             <Flex direction="column" gap="2" align="start" className="my-2">
               {scores.map((score) => {
-                const formattedScore = formatScore(score);
-                const formattedDate = formatShortDate(score.scoreDate);
                 const { displayLevel, color } = getPerformanceBadgeDetails(
                   wod,
                   score,
                 );
+                const suffix = score.isRx ? "Rx" : "Scaled";
+                const formattedScore = formatScore(score, suffix);
+                const formattedDate = formatShortDate(score.scoreDate);
 
                 const CustomTooltip = () => (
                   <>

@@ -152,15 +152,18 @@ export const getPerformanceBadgeDetails = (
   wod: Wod,
   score: Score,
 ): { displayLevel: string; color: string } => {
+  // If the score is not Rx, always show "Scaled" and gray
+  if (!score.isRx) {
+    return { displayLevel: "Scaled", color: "gray" };
+  }
+
   const level = getPerformanceLevel(wod, score);
   let displayLevel = "Score"; // Default if no level
   let color = "gray"; // Default Radix color
 
   if (level) {
     const capitalizedLevel = level.charAt(0).toUpperCase() + level.slice(1);
-    displayLevel = score.isRx
-      ? capitalizedLevel
-      : `${capitalizedLevel + " (Scaled)"}`;
+    displayLevel = capitalizedLevel;
 
     switch (level) {
       case "elite":
@@ -187,23 +190,28 @@ export const getPerformanceBadgeDetails = (
 
 /**
  * Formats a Score object into a displayable score string based on available fields.
+ * Optionally appends a suffix (e.g., "Rx" or "Scaled").
  */
-export const formatScore = (score: Score): string => {
+export const formatScore = (score: Score, suffix?: string): string => {
+  let value = "-";
   if (score.time_seconds !== null) {
-    return formatSecondsToMMSS(score.time_seconds);
+    value = formatSecondsToMMSS(score.time_seconds);
   } else if (score.reps !== null) {
-    return `${score.reps} reps`;
+    value = `${score.reps} reps`;
   } else if (score.load !== null) {
     // TODO: Add unit (lbs/kg) based on user preference or WOD context if available
-    return `${score.load} lbs`;
+    value = `${score.load} lbs`;
   } else if (score.rounds_completed !== null) {
     if (score.partial_reps !== null && score.partial_reps > 0) {
-      return `${score.rounds_completed}+${score.partial_reps}`;
+      value = `${score.rounds_completed}+${score.partial_reps}`;
     } else {
-      return `${score.rounds_completed} rounds`; // Be explicit for full rounds
+      value = `${score.rounds_completed} rounds`; // Be explicit for full rounds
     }
   }
-  return "-"; // Return a dash if no score is found
+  if (suffix) {
+    return `${value} ${suffix}`;
+  }
+  return value;
 };
 
 /**

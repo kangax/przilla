@@ -144,7 +144,7 @@ export default function MovementFrequencyChart({
                   <BarChart
                     data={chartData}
                     layout="vertical"
-                    margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+                    margin={{ top: 5, right: 30, left: -10, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} />
                     <XAxis type="number" stroke={axisAndTextColor}>
@@ -160,7 +160,7 @@ export default function MovementFrequencyChart({
                     <YAxis
                       type="category"
                       dataKey="name"
-                      width={200} // Increased width for longer movement names
+                      width={150} // Increased width for longer movement names
                       stroke={axisAndTextColor}
                       fontSize={12}
                       interval={0} // Show all labels

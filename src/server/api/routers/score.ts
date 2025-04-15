@@ -34,6 +34,18 @@ const updateScoreSchema = z.object({
   partial_reps: z.number().int().nullable().optional(),
 });
 
+type UpdateScoreData = {
+  wodId?: string;
+  scoreDate?: Date;
+  is_rx?: boolean;
+  notes?: string | null;
+  time_seconds?: number | null;
+  reps?: number | null;
+  load?: number | null;
+  rounds_completed?: number | null;
+  partial_reps?: number | null;
+};
+
 export const scoreRouter = createTRPCRouter({
   /**
    * Fetches all scores logged by the current user.
@@ -102,7 +114,7 @@ export const scoreRouter = createTRPCRouter({
 
       try {
         // Perform bulk insert
-        const result = await ctx.db.insert(scores).values(scoresToInsert);
+        await ctx.db.insert(scores).values(scoresToInsert);
 
         console.log(
           `Successfully inserted ${input.length} scores for user ${userId}`,
@@ -229,7 +241,7 @@ export const scoreRouter = createTRPCRouter({
       }
 
       // Prepare update object, only include fields that are defined
-      const updateData: Record<string, any> = {};
+      const updateData: UpdateScoreData = {};
       if (input.wodId !== undefined) updateData.wodId = input.wodId;
       if (input.scoreDate !== undefined) updateData.scoreDate = input.scoreDate;
       if (input.isRx !== undefined) updateData.is_rx = input.isRx;

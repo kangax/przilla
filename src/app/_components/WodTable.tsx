@@ -10,7 +10,7 @@ import {
   IconButton,
   Dialog,
 } from "@radix-ui/themes";
-import { Info, Pencil, Trash } from "lucide-react";
+import { Pencil, Trash } from "lucide-react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -236,28 +236,20 @@ const createColumns = (
                     const formattedScore = formatScore(score, suffix);
                     const formattedDate = formatShortDate(score.scoreDate);
 
-                    const CustomTooltip = () => (
-                      <>
-                        <span>Your level: {displayLevel}</span>
-                        <br />
-                        <span>Logged: {formattedDate}</span>
-                        {score.notes ? (
-                          <>
-                            <br />
-                            {"--"}
-                            <br />
-                            <span style={{ whiteSpace: "pre-wrap" }}>
-                              {safeString(score.notes)}
-                            </span>
-                          </>
-                        ) : (
-                          ""
-                        )}
-                      </>
+                    // Compose the tooltip content as specified
+                    const tooltipContent = (
+                      <span style={{ whiteSpace: "pre-wrap" }}>
+                        {`Logged: ${formattedDate}
+Notes: ${score.notes ? safeString(score.notes) : "-"}
+
+Your level: ${displayLevel}
+
+${getPerformanceLevelTooltip(wod)}`}
+                      </span>
                     );
 
                     const scoreBadge = (
-                      <Tooltip content={<CustomTooltip />}>
+                      <Tooltip content={tooltipContent}>
                         <Badge
                           color={
                             color as
@@ -322,26 +314,8 @@ const createColumns = (
                   })}
                 </Flex>
               ) : (
-                <div>
-                  {wod.benchmarks ? (
-                    <Tooltip
-                      content={
-                        <span style={{ whiteSpace: "pre-wrap" }}>
-                          {getPerformanceLevelTooltip(wod)}
-                        </span>
-                      }
-                    >
-                      <Info
-                        size={14}
-                        className="text-muted-foreground cursor-help"
-                      />
-                    </Tooltip>
-                  ) : (
-                    <span className="text-muted-foreground whitespace-nowrap">
-                      -
-                    </span>
-                  )}
-                </div>
+                // No scores: just show LogScorePopover, no info icon or tooltip
+                <></>
               )}
               {/* Log Score button always visible, on new line */}
               {/* If editing this score, show LogScorePopover in edit mode */}

@@ -405,7 +405,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
 
   // Invalidate scores after logging
   const handleScoreLogged = useCallback(() => {
-    utils.score.getAllByUser.invalidate();
+    void utils.score.getAllByUser.invalidate();
   }, [utils.score.getAllByUser]);
 
   const showScoreLoading = isLoggedIn && (isLoadingScores || isSessionLoading);

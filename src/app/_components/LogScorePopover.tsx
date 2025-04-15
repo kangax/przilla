@@ -8,6 +8,19 @@ import { Plus, Check } from "lucide-react";
 import { api } from "~/trpc/react";
 import type { Wod, Score } from "~/types/wodTypes";
 
+// Define the payload type for logScore and updateScore mutations
+type ScorePayload = {
+  wodId: string;
+  scoreDate: Date;
+  isRx: boolean;
+  notes?: string | null;
+  time_seconds?: number | null;
+  reps?: number | null;
+  load?: number | null;
+  rounds_completed?: number | null;
+  partial_reps?: number | null;
+};
+
 interface LogScorePopoverProps {
   wod: Wod;
   onScoreLogged?: () => void;
@@ -82,7 +95,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
       if (onScoreLogged) onScoreLogged();
     },
     onError: (err) => {
-      setError(err.message || "Failed to log score.");
+      setError(err instanceof Error ? err.message : "Failed to log score.");
     },
   });
 
@@ -95,7 +108,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
       if (onClose) onClose();
     },
     onError: (err) => {
-      setError(err.message || "Failed to update score.");
+      setError(err instanceof Error ? err.message : "Failed to update score.");
     },
   });
 
@@ -180,6 +193,39 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     return null;
   };
 
+  const buildPayload = (): ScorePayload => {
+    const payload: ScorePayload = {
+      wodId: wod.id,
+      scoreDate: new Date(form.scoreDate),
+      isRx: form.isRx,
+      notes: form.notes || null,
+    };
+    if (showAll || showTime) {
+      // Convert minutes and seconds to total seconds
+      const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+      const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+      const totalSeconds =
+        (!isNaN(min) ? min : 0) * 60 + (!isNaN(sec) ? sec : 0);
+      payload.time_seconds =
+        min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds
+          ? null
+          : totalSeconds;
+    }
+    if (showAll || showReps)
+      payload.reps = form.reps ? parseInt(form.reps, 10) : null;
+    if (showAll || showLoad)
+      payload.load = form.load ? parseInt(form.load, 10) : null;
+    if (showAll || showRounds)
+      payload.rounds_completed = form.rounds_completed
+        ? parseInt(form.rounds_completed, 10)
+        : null;
+    if (showAll || showPartialReps)
+      payload.partial_reps = form.partial_reps
+        ? parseInt(form.partial_reps, 10)
+        : null;
+    return payload;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
@@ -193,35 +239,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     }
 
     try {
-      const payload: any = {
-        wodId: wod.id,
-        scoreDate: new Date(form.scoreDate),
-        isRx: form.isRx,
-        notes: form.notes || null,
-      };
-      if (showAll || showTime) {
-        // Convert minutes and seconds to total seconds
-        const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
-        const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
-        const totalSeconds =
-          (!isNaN(min) ? min : 0) * 60 + (!isNaN(sec) ? sec : 0);
-        payload.time_seconds =
-          min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds
-            ? null
-            : totalSeconds;
-      }
-      if (showAll || showReps)
-        payload.reps = form.reps ? parseInt(form.reps, 10) : null;
-      if (showAll || showLoad)
-        payload.load = form.load ? parseInt(form.load, 10) : null;
-      if (showAll || showRounds)
-        payload.rounds_completed = form.rounds_completed
-          ? parseInt(form.rounds_completed, 10)
-          : null;
-      if (showAll || showPartialReps)
-        payload.partial_reps = form.partial_reps
-          ? parseInt(form.partial_reps, 10)
-          : null;
+      const payload = buildPayload();
 
       if (isEditMode && initialScore) {
         await updateScoreMutation.mutateAsync({
@@ -231,8 +249,12 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
       } else {
         await logScoreMutation.mutateAsync(payload);
       }
-    } catch (err: any) {
-      setError(err.message || "Failed to submit score.");
+    } catch (err: unknown) {
+      if (err instanceof Error) {
+        setError(err.message || "Failed to submit score.");
+      } else {
+        setError("Failed to submit score.");
+      }
     } finally {
       setSubmitting(false);
     }

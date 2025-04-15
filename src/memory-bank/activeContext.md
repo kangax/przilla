@@ -2,6 +2,8 @@
 
 ## Current Focus
 
+- **Lint, Type Safety, and Code Cleanup (Apr 2025):** All outstanding TypeScript/ESLint errors and warnings have been resolved. The codebase is now fully type-safe and clean, with no unsafe `any` usage, floating promises, or unused variables/imports. This ensures a robust foundation for future development and aligns with project standards.
+- **Score Tooltip & Info Icon Update (Apr 2025):** The "your score" cell in the WOD table no longer displays an info icon for benchmark breakdown. Instead, the benchmark breakdown is now included in the main tooltip for each score badge, along with the user's level, notes, and date, in a clear, multi-line format. If there are no scores, only the LogScorePopover is shown (no icon, no tooltip). This change streamlines the UI and ensures all relevant context is available in a single, accessible tooltip.
 - **Score Edit/Delete & Validation (Apr 2025):** Users can now edit or delete any logged score directly from the WOD table. Edit and delete icons are shown for each score. The edit icon opens the log score popover in edit mode, pre-filled with the score's data, and updates the score on submit. The delete icon opens a confirmation dialog and deletes the score on confirm. Validation now prevents empty or invalid results from being logged for all score types.
 - **Log Score (Apr 2025):** Users can now log a score for any WOD directly from the main table via a minimal popover form. The scores list refreshes automatically after logging. Next: implement the always-visible log score button in the mobile list view.
   - The popover now allows direct input of minutes and seconds (e.g., "35min 24sec") for time-based WODs, matching the requested input format and improving clarity.
@@ -23,6 +25,12 @@
 - Wodwell
   - write a script for scraping
   - bookmarklet so users can use? (this has been difficult)
+
+## Learnings & Insights
+
+- Consolidating all relevant score and benchmark information into a single tooltip improves clarity and reduces UI clutter.
+- Removing redundant icons aligns with the project's minimal UI philosophy and enhances accessibility.
+- Tooltip formatting should always be clear, multi-line, and context-rich, especially for performance/benchmark data.
 
 ## Recent Changes
 

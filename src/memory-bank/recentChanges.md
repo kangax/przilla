@@ -1,4 +1,40 @@
+- **Lint, Type Safety, and Code Cleanup (Apr 2025):**
+
+  - **Goal:** Resolve all outstanding TypeScript/ESLint errors and warnings related to unsafe `any` usage, floating promises, and unused variables/imports.
+  - **Implementation:**
+    - **Frontend:**
+      - Updated `LogScorePopover` (`src/app/_components/LogScorePopover.tsx`):
+        - Replaced all `any` usage with explicit, type-safe payload and error types.
+        - Used type guards for error handling.
+        - Ensured all member accesses and mutation arguments are type-safe.
+      - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+        - Removed unused `Info` import.
+      - Updated `WodViewer` (`src/app/_components/WodViewer.tsx`):
+        - Fixed floating promise by prefixing cache invalidation with `void`.
+    - **Backend:**
+      - Updated `scoreRouter` (`src/server/api/routers/score.ts`):
+        - Removed unused `result` variable in `importScores`.
+        - Replaced `Record<string, any>` with a specific type for update data in `updateScore`.
+        - Ensured all update logic is type-safe.
+  - **Outcome:** All TypeScript/ESLint errors and warnings related to unsafe types, floating promises, and unused code are resolved. The codebase is now fully type-safe and clean, in line with project standards.
+
 # Recent Changes
+
+- **Score Tooltip & Info Icon Update (Apr 2025):**
+
+  - **Goal:** Remove the info icon (with benchmark breakdown tooltip) from the "your score" cell and instead include the benchmark breakdown in the main tooltip for each score, along with user level, notes, and date.
+  - **Implementation:**
+    - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+      - Removed the info icon and its tooltip from the "your score" cell when no scores are present.
+      - The tooltip for each score badge now includes:
+        - Logged date
+        - Notes (or "-")
+        - User level
+        - Full benchmark breakdown (from `getPerformanceLevelTooltip`)
+        - All formatted as specified in the product requirements.
+      - If there are no scores, only the LogScorePopover is shown (no icon, no tooltip).
+    - Ensured the new tooltip is accessible, minimal, and consistent with project UI/UX patterns.
+  - **Outcome:** The UI is now more concise and context-rich, with all relevant score and benchmark information available in a single tooltip, and no redundant info icon.
 
 - **Edit/Delete Score & Validation Improvements (Apr 2025):**
 

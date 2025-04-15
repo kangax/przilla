@@ -1,5 +1,22 @@
 # Recent Changes
 
+- **Log Score UI Refactor: Popover to Dialog (Apr 15, 2025):**
+
+  - **Goal:** Replace the score logging/editing Popover with a centered Modal Dialog for a more focused user experience, using Radix UI components, and ensure it inherits the Radix Theme context.
+  - **Implementation:**
+    - Created `LogScoreDialog.tsx` (`src/app/(main)/components/LogScoreDialog.tsx`) based on the logic from the previous `LogScorePopover.tsx`.
+    - Replaced Radix `Popover.*` components with `Dialog.*` components (`Root`, `Portal`, `Overlay`, `Content`, `Title`, `Close`).
+    - Styled `Dialog.Content` using Tailwind CSS for centering and appearance, consistent with Radix Themes.
+    - Updated `PageLayout.tsx` (`src/app/_components/PageLayout.tsx`) to add an ID (`page-layout-container`) to the main wrapping `Box`.
+    - Updated `LogScoreDialog.tsx` to find the container element by ID on mount and pass it to the `container` prop of `Dialog.Portal`. This ensures the dialog renders within the Radix Theme provider.
+    - Corrected import paths in `LogScoreDialog.tsx` after moving the component.
+    - Updated `WodTable.tsx` (`src/app/(main)/components/WodTable.tsx`):
+      - Added state management (`dialogState`) to control the dialog's open state and pass the relevant WOD and optional score (`initialScore`) to `LogScoreDialog`.
+      - Replaced the `LogScorePopover` component instance with `LogScoreDialog`.
+      - Updated the "+ Log score" button and the "Edit" icon's `onClick` handlers to manage the new `dialogState`.
+    - Deleted the old `LogScorePopover.tsx` component file.
+  - **Outcome:** The score logging and editing interface now uses a standard, centered modal dialog (`LogScoreDialog`) that correctly inherits Radix Theme styles. This improves focus and consistency with other dialogs in the application (like delete confirmation). The core form logic and state handling remain the same.
+
 - **Delete Confirmation Dialog Button Styling Fix (Apr 15, 2025):**
 
   - **Goal:** Align the delete confirmation dialog buttons with the project's Radix UI Theme styling.

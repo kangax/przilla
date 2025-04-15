@@ -11,7 +11,7 @@ import {
   Dialog,
   Button,
 } from "@radix-ui/themes";
-import { Pencil, Trash } from "lucide-react";
+import { Pencil, Trash, Plus } from "lucide-react"; // Added Plus icon
 import {
   useReactTable,
   getCoreRowModel,
@@ -29,7 +29,7 @@ import {
 } from "~/utils/wodUtils";
 import { LoadingIndicator } from "../../_components/LoadingIndicator";
 import { HighlightMatch } from "~/utils/uiUtils";
-import LogScorePopover from "./LogScorePopover";
+import { LogScoreDialog } from "./LogScoreDialog"; // Import the new Dialog component
 import { api } from "~/trpc/react";
 
 interface WodTableProps {
@@ -65,6 +65,7 @@ const getDifficultyColor = (difficulty: string | undefined | null): string => {
 
 const columnHelper = createColumnHelper<Wod>();
 
+// Updated createColumns signature
 const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
@@ -72,11 +73,9 @@ const createColumns = (
   searchTerm: string,
   scoresByWodId: Record<string, Score[]>,
   onScoreLogged?: () => void,
-  onEditScore?: (score: Score, wod: Wod) => void,
-  onDeleteScore?: (score: Score, wod: Wod) => void,
-  editingScoreId?: string | null,
-  editingWod?: Wod | null,
-  onCloseEdit?: () => void,
+  openLogDialog?: (wod: Wod) => void, // New handler prop
+  openEditDialog?: (score: Score, wod: Wod) => void, // New handler prop
+  handleDeleteScore?: (score: Score, wod: Wod) => void, // Renamed prop
 ): ColumnDef<Wod, unknown>[] => {
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
@@ -225,7 +224,7 @@ const createColumns = (
           return (
             <div className="flex min-h-[36px] flex-col items-start gap-2">
               {/* Scores list (if any) */}
-              {scores && scores.length > 0 ? (
+              {scores && scores.length > 0 && (
                 <Flex direction="column" gap="2" align="start" className="my-2">
                   {scores.map((score) => {
                     const { displayLevel, color } = getPerformanceBadgeDetails(
@@ -236,7 +235,6 @@ const createColumns = (
                     const formattedScore = formatScore(score, suffix);
                     const formattedDate = formatShortDate(score.scoreDate);
 
-                    // Compose the tooltip content as specified
                     const tooltipContent = (
                       <span style={{ whiteSpace: "pre-wrap" }}>
                         {`Logged: ${formattedDate}
@@ -288,8 +286,9 @@ ${getPerformanceLevelTooltip(wod)}`}
                               variant="ghost"
                               color="gray"
                               aria-label="Edit score"
-                              onClick={() =>
-                                onEditScore && onEditScore(score, wod)
+                              onClick={
+                                () =>
+                                  openEditDialog && openEditDialog(score, wod) // Use new handler
                               }
                             >
                               <Pencil size={16} />
@@ -301,8 +300,10 @@ ${getPerformanceLevelTooltip(wod)}`}
                               variant="ghost"
                               color="red"
                               aria-label="Delete score"
-                              onClick={() =>
-                                onDeleteScore && onDeleteScore(score, wod)
+                              onClick={
+                                () =>
+                                  handleDeleteScore &&
+                                  handleDeleteScore(score, wod) // Use new handler
                               }
                             >
                               <Trash size={16} />
@@ -313,27 +314,20 @@ ${getPerformanceLevelTooltip(wod)}`}
                     );
                   })}
                 </Flex>
-              ) : (
-                // No scores: just show LogScorePopover, no info icon or tooltip
-                <></>
               )}
-              {/* Log Score button always visible, on new line */}
-              {/* If editing this score, show LogScorePopover in edit mode */}
-              {editingScoreId && editingWod && editingWod.id === wod.id ? (
-                <LogScorePopover
-                  wod={editingWod}
-                  onScoreLogged={onScoreLogged}
-                  showText
-                  initialScore={scores?.find((s) => s.id === editingScoreId)}
-                  onClose={onCloseEdit}
-                />
-              ) : (
-                <LogScorePopover
-                  wod={wod}
-                  onScoreLogged={onScoreLogged}
-                  showText
-                />
-              )}
+              {/* Log Score button always visible */}
+              <Button
+                type="button"
+                aria-label="Log Score"
+                onClick={() => openLogDialog && openLogDialog(wod)} // Use new handler
+                variant="ghost"
+                color="green"
+                size="1"
+                className="flex items-center gap-1"
+              >
+                <Plus size={14} />
+                <span className="font-medium">Log score</span>
+              </Button>
             </div>
           );
         },
@@ -356,9 +350,14 @@ const WodTable: React.FC<WodTableProps> = ({
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
-  // State for editing and deleting
-  const [editingScoreId, setEditingScoreId] = useState<string | null>(null);
-  const [editingWod, setEditingWod] = useState<Wod | null>(null);
+  // State for Log/Edit Dialog
+  const [dialogState, setDialogState] = useState<{
+    isOpen: boolean;
+    wod: Wod | null;
+    score: Score | null;
+  }>({ isOpen: false, wod: null, score: null });
+
+  // State for Delete Confirmation Dialog
   const [deletingScore, setDeletingScore] = useState<{
     score: Score;
     wod: Wod;
@@ -368,18 +367,21 @@ const WodTable: React.FC<WodTableProps> = ({
   const deleteScoreMutation = api.score.deleteScore.useMutation({
     onSuccess: async () => {
       await utils.score.getAllByUser.invalidate();
-      if (onScoreLogged) onScoreLogged();
+      if (onScoreLogged) onScoreLogged(); // Refresh scores after delete
     },
   });
 
-  const handleEditScore = (score: Score, wod: Wod) => {
-    setEditingScoreId(score.id);
-    setEditingWod(wod);
+  // Handlers for Dialogs
+  const openLogDialog = (wod: Wod) => {
+    setDialogState({ isOpen: true, wod: wod, score: null });
   };
 
-  const handleCloseEdit = () => {
-    setEditingScoreId(null);
-    setEditingWod(null);
+  const openEditDialog = (score: Score, wod: Wod) => {
+    setDialogState({ isOpen: true, wod: wod, score: score });
+  };
+
+  const handleDialogChange = (open: boolean) => {
+    setDialogState((prev) => ({ ...prev, isOpen: open }));
   };
 
   const handleDeleteScore = (score: Score, wod: Wod) => {
@@ -405,12 +407,10 @@ const WodTable: React.FC<WodTableProps> = ({
         sortDirection,
         searchTerm,
         scoresByWodId,
-        onScoreLogged,
-        handleEditScore,
-        handleDeleteScore,
-        editingScoreId,
-        editingWod,
-        handleCloseEdit,
+        onScoreLogged, // Pass this down for refresh after log/edit
+        openLogDialog, // Pass dialog opener
+        openEditDialog, // Pass dialog opener
+        handleDeleteScore, // Pass delete handler
       ),
     [
       handleSort,
@@ -419,8 +419,7 @@ const WodTable: React.FC<WodTableProps> = ({
       searchTerm,
       scoresByWodId,
       onScoreLogged,
-      editingScoreId,
-      editingWod,
+      // Dependencies for handlers are implicitly covered by WodTable scope
     ],
   );
 
@@ -548,6 +547,7 @@ const WodTable: React.FC<WodTableProps> = ({
       {/* Body Container - Handles Loading/No Results/Rows */}
       <div
         style={{
+          height: `${rowVirtualizer.getTotalSize()}px`, // Use virtualizer total size
           width: "100%",
           position: "relative",
         }}
@@ -574,6 +574,21 @@ const WodTable: React.FC<WodTableProps> = ({
           renderedRows
         )}
       </div>
+
+      {/* Log/Edit Score Dialog */}
+      {dialogState.isOpen && dialogState.wod && (
+        <LogScoreDialog
+          isOpen={dialogState.isOpen}
+          onOpenChange={handleDialogChange}
+          wod={dialogState.wod}
+          initialScore={dialogState.score}
+          onScoreLogged={() => {
+            // Ensure scores are refreshed after dialog action
+            if (onScoreLogged) onScoreLogged();
+          }}
+        />
+      )}
+
       {/* Delete confirmation dialog */}
       {deletingScore && (
         <Dialog.Root open={!!deletingScore} onOpenChange={cancelDeleteScore}>

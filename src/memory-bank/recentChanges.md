@@ -15,7 +15,10 @@
       - Replaced the `LogScorePopover` component instance with `LogScoreDialog`.
       - Updated the "+ Log score" button and the "Edit" icon's `onClick` handlers to manage the new `dialogState`.
     - Deleted the old `LogScorePopover.tsx` component file.
-  - **Outcome:** The score logging and editing interface now uses a standard, centered modal dialog (`LogScoreDialog`) that correctly inherits Radix Theme styles. This improves focus and consistency with other dialogs in the application (like delete confirmation). The core form logic and state handling remain the same.
+    - **Update (Apr 15):** Replaced the Rx `Checkbox` with a Radix UI `Switch` component within `LogScoreDialog.tsx` for a toggle-style input.
+    - **Update 2 (Apr 15):** Rearranged the Date and Rx fields in `LogScoreDialog.tsx`. The Date input (with label) is now on the left, and the Rx Switch is on the right, aligned on the same row using Flexbox.
+    - **Update 3 (Apr 15):** Reduced the width of the "Minutes" and "Seconds" input fields in `LogScoreDialog.tsx` by applying a fixed width (`70px`) to their containing `Box` elements and removing `flexGrow`.
+  - **Outcome:** The score logging and editing interface now uses a standard, centered modal dialog (`LogScoreDialog`) that correctly inherits Radix Theme styles and uses a `Switch` for the Rx input. The Date and Rx fields are laid out horizontally, and the time input fields are narrower. This improves focus and consistency with other dialogs in the application (like delete confirmation). The core form logic and state handling remain the same.
 
 - **Delete Confirmation Dialog Button Styling Fix (Apr 15, 2025):**
 

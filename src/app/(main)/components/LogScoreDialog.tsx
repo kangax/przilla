@@ -6,7 +6,7 @@ import {
   Button,
   TextField,
   TextArea,
-  Checkbox,
+  Switch, // Import Switch
   Text,
   Flex,
   Box,
@@ -282,7 +282,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
         {" "}
         {/* Use the container prop */}
         <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 z-40 bg-black/50" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white p-6 shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white p-6 shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
           <Dialog.Title asChild>
             <Text size="4" weight="bold" mb="4" className="block">
               {isEditMode ? "Edit Score" : "Log Score"} for {wod.wodName}
@@ -293,8 +293,11 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
             <Flex direction="column" gap="3">
               {/* Input fields remain the same */}
               {(showAll || showTime) && (
-                <Flex gap="2">
-                  <Box flexGrow="1">
+                <Flex gap="2" align="end">
+                  {" "}
+                  {/* Align items to end for label alignment */}
+                  {/* Apply fixed width to the Box */}
+                  <Box style={{ width: "165px" }}>
                     <Text as="label" htmlFor="time_minutes" size="1" mb="1">
                       Minutes
                     </Text>
@@ -308,11 +311,12 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       value={form.time_minutes}
                       onChange={handleChange}
                       disabled={submitting}
-                      size="1"
+                      size="3" // Updated size
                       autoComplete="off"
                     />
                   </Box>
-                  <Box flexGrow="1">
+                  {/* Apply fixed width to the Box */}
+                  <Box style={{ width: "165px" }}>
                     <Text as="label" htmlFor="time_seconds" size="1" mb="1">
                       Seconds
                     </Text>
@@ -327,7 +331,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       value={form.time_seconds}
                       onChange={handleChange}
                       disabled={submitting}
-                      size="1"
+                      size="3" // Updated size
                       autoComplete="off"
                     />
                   </Box>
@@ -349,7 +353,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.reps}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="1"
+                    size="3" // Updated size
                     autoComplete="off"
                   />
                 </Box>
@@ -370,7 +374,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.load}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="1"
+                    size="3" // Updated size
                     autoComplete="off"
                   />
                 </Box>
@@ -391,7 +395,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.rounds_completed}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="1"
+                    size="3" // Updated size
                     autoComplete="off"
                   />
                 </Box>
@@ -412,37 +416,58 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.partial_reps}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="1"
+                    size="3" // Updated size
                     autoComplete="off"
                   />
                 </Box>
               )}
 
-              <Flex align="center" justify="between" gap="2">
-                <Text as="label" size="1">
+              {/* Rearranged Date and Rx - Align center, remove justify */}
+              <Flex align="center" gap="3">
+                {/* Date Input with Label on the left */}
+                <Box style={{ flexBasis: "140px" }}>
+                  {" "}
+                  {/* Give date a basis width */}
+                  <Text as="label" htmlFor="scoreDate" size="1" mb="1">
+                    Date
+                  </Text>
+                  <TextField.Root
+                    variant="classic"
+                    id="scoreDate"
+                    name="scoreDate"
+                    type="date"
+                    value={form.scoreDate}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    size="3" // Updated size
+                    autoComplete="off"
+                  />
+                </Box>
+
+                {/* Rx Switch with Label on the right */}
+                {/* Wrap Switch in a Box and add a visually hidden label */}
+                <Box>
+                  <Text
+                    as="label"
+                    htmlFor={`isRx-${wod.id}`}
+                    size="1"
+                    mb="1"
+                    className="opacity-0" // Use opacity-0 to hide but retain space
+                  >
+                    Rx
+                  </Text>
                   <Flex gap="2" align="center">
-                    <Checkbox
+                    <Switch
                       id={`isRx-${wod.id}`}
                       checked={form.isRx}
                       onCheckedChange={handleIsRxChange}
                       disabled={submitting}
                       color="green"
-                      size="1"
-                    />{" "}
-                    Rx
+                      size="3" // Updated size
+                    />
+                    <Text size="2">Rx</Text> {/* Keep visible Rx text */}
                   </Flex>
-                </Text>
-                <TextField.Root
-                  variant="classic"
-                  name="scoreDate"
-                  type="date"
-                  value={form.scoreDate}
-                  onChange={handleChange}
-                  disabled={submitting}
-                  size="1"
-                  style={{ width: "120px" }}
-                  autoComplete="off"
-                />
+                </Box>
               </Flex>
 
               <Box>
@@ -457,8 +482,8 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                   value={form.notes}
                   onChange={handleChange}
                   disabled={submitting}
-                  size="1"
-                  rows={2}
+                  size="3" // Updated size
+                  rows={4}
                   style={{ resize: "none" }}
                 />
               </Box>
@@ -476,7 +501,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     variant="soft"
                     color="gray"
                     disabled={submitting}
-                    size="2"
+                    size="3" // Updated size
                   >
                     Cancel
                   </Button>
@@ -485,7 +510,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                   type="submit"
                   color="green"
                   disabled={submitting}
-                  size="2"
+                  size="3" // Updated size
                 >
                   {submitting
                     ? isEditMode

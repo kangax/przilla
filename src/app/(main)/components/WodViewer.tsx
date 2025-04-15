@@ -444,7 +444,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-            className={`placeholder:text-muted-foreground rounded border border-input bg-background px-3 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${
+            className={`placeholder:text-muted-foreground rounded border border-input px-3 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${
               isMobile ? "flex-1 py-2 text-base" : "w-40 py-1.5 text-sm"
             }`}
           />

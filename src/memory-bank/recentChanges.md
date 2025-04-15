@@ -1,15 +1,33 @@
+# Recent Changes
+
+- **Component Refactoring (Apr 15, 2025):**
+
+  - **Goal:** Organize main page (root route `/`) components logically using a Next.js Route Group `(main)`, aligning with project structure patterns used elsewhere (e.g., `/charts`, `/import`).
+  - **Implementation:**
+    - Created the route group directory `src/app/(main)/` and its components subdirectory `src/app/(main)/components/`.
+    - Moved the root page file from `src/app/page.tsx` to `src/app/(main)/page.tsx`.
+    - Moved the following components and their tests from their previous location (`src/app/_components/main/` or `src/app/main/components/`) to `src/app/(main)/components/`:
+      - `LogScorePopover.tsx`
+      - `WodListMobile.tsx`
+      - `WodListMobileHeader.tsx`
+      - `WodTable.tsx` (and associated `*.test.tsx` files)
+      - `WodViewer.tsx` (and associated `*.test.tsx` file)
+    - Updated import paths in `src/app/(main)/page.tsx` and potentially within the moved components to reflect the new location.
+    - Deleted the intermediate directory `src/app/_components/main/` and the original `src/app/main/components/` directory.
+  - **Outcome:** Components related to the main page (`/`) are now logically grouped within the `src/app/(main)/` route group, specifically under `src/app/(main)/components/`, improving project organization and consistency with Next.js conventions.
+
 - **Lint, Type Safety, and Code Cleanup (Apr 2025):**
 
   - **Goal:** Resolve all outstanding TypeScript/ESLint errors and warnings related to unsafe `any` usage, floating promises, and unused variables/imports.
   - **Implementation:**
     - **Frontend:**
-      - Updated `LogScorePopover` (`src/app/_components/LogScorePopover.tsx`):
+      - Updated `LogScorePopover` (`src/app/(main)/components/LogScorePopover.tsx`): // Path updated
         - Replaced all `any` usage with explicit, type-safe payload and error types.
         - Used type guards for error handling.
         - Ensured all member accesses and mutation arguments are type-safe.
-      - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+      - Updated `WodTable` (`src/app/(main)/components/WodTable.tsx`): // Path updated
         - Removed unused `Info` import.
-      - Updated `WodViewer` (`src/app/_components/WodViewer.tsx`):
+      - Updated `WodViewer` (`src/app/(main)/components/WodViewer.tsx`): // Path updated
         - Fixed floating promise by prefixing cache invalidation with `void`.
     - **Backend:**
       - Updated `scoreRouter` (`src/server/api/routers/score.ts`):
@@ -20,28 +38,26 @@
 
   - **April 14, 2025: Lint/Type Safety Batch Fixes**
     - **Test files:** Added `// eslint-disable-next-line @typescript-eslint/no-empty-function` above all empty `mutate` and `reset` mock methods in:
-      - `src/app/_components/WodTable.actions.test.tsx`
-      - `src/app/_components/WodTable.headers.test.tsx`
-      - `src/app/_components/WodTable.links.test.tsx`
-      - `src/app/_components/WodTable.rows.test.tsx`
+      - `src/app/(main)/components/WodTable.actions.test.tsx` // Path updated
+      - `src/app/(main)/components/WodTable.headers.test.tsx` // Path updated
+      - `src/app/(main)/components/WodTable.links.test.tsx` // Path updated
+      - `src/app/(main)/components/WodTable.rows.test.tsx` // Path updated
     - **test-utils.tsx:**
       - Replaced all `any` usage with `Record<string, unknown>`.
       - Added eslint-disable comments for empty mock methods.
       - Replaced `@ts-ignore` with `@ts-expect-error` and then removed the directive when it was unused.
       - Ensured all assignments are type-safe.
-    - **WodTable.tsx:**
+    - **WodTable.tsx (`src/app/(main)/components/WodTable.tsx`):** // Path updated
       - Refactored to call `useVirtualizer` unconditionally, fixing the "React Hook called conditionally" lint error.
       - Restored the full `createColumns` function to resolve missing reference error.
       - Confirmed all code is type-safe and passes lint/typecheck.
     - **Outcome:** All reported ESLint and TypeScript errors are resolved. The codebase is now fully type-safe and clean, with all test mocks and hooks compliant with project linting rules.
 
-# Recent Changes
-
 - **Score Tooltip & Info Icon Update (Apr 2025):**
 
   - **Goal:** Remove the info icon (with benchmark breakdown tooltip) from the "your score" cell and instead include the benchmark breakdown in the main tooltip for each score, along with user level, notes, and date.
   - **Implementation:**
-    - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+    - Updated `WodTable` (`src/app/(main)/components/WodTable.tsx`): // Path updated
       - Removed the info icon and its tooltip from the "your score" cell when no scores are present.
       - The tooltip for each score badge now includes:
         - Logged date
@@ -60,11 +76,11 @@
     - **Backend:**
       - Added `deleteScore` and `updateScore` protected tRPC mutations to `scoreRouter` (`src/server/api/routers/score.ts`), allowing users to delete or update their own scores.
     - **Frontend:**
-      - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+      - Updated `WodTable` (`src/app/(main)/components/WodTable.tsx`): // Path updated
         - For each score, displays edit (pencil) and delete (trash) icons to the right.
         - Edit icon opens `LogScorePopover` in edit mode, pre-filled with the score's data, and calls `updateScore` on submit.
         - Delete icon opens a confirmation dialog and calls `deleteScore` on confirm, with UI refresh.
-      - Updated `LogScorePopover` (`src/app/_components/LogScorePopover.tsx`):
+      - Updated `LogScorePopover` (`src/app/(main)/components/LogScorePopover.tsx`): // Path updated
         - Supports both log and edit modes, with correct button labeling and form pre-fill.
         - Validation logic prevents submitting empty or invalid results for all score types (time, reps, load, etc.).
         - Cancel button for edit mode.
@@ -77,28 +93,27 @@
 
   - **Goal:** Allow users to input time in the popover UI as a combination of minutes and seconds (e.g., "35min 24sec"), not AM/PM or a single seconds field.
   - **Implementation:**
-    - Replaced the single seconds input with two fields: "Minutes" and "Seconds" for time-based WODs in `LogScorePopover` (`src/app/_components/LogScorePopover.tsx`).
+    - Replaced the single seconds input with two fields: "Minutes" and "Seconds" for time-based WODs in `LogScorePopover` (`src/app/(main)/components/LogScorePopover.tsx`). // Path updated
     - On submit, the values are converted to total seconds for backend compatibility.
     - Ensures clarity and matches product UI/UX goals for concise, minimal, and user-friendly input.
   - **Outcome:** Users can now enter their time in the requested format when logging scores for "For Time" WODs.
 
 - **Log Score Functionality for WODs (Apr 2025):**
-
   - **Goal:** Allow users to log a score for any WOD directly from the main table, with a minimal, context-aware form and automatic UI refresh.
   - **Implementation:**
     - **Backend:**
       - Added a new protected tRPC mutation `logScore` to `scoreRouter` (`src/server/api/routers/score.ts`), accepting a single score object (validated with `scoreImportSchema`) and inserting it into the `scores` table.
     - **Frontend:**
-      - Created `LogScorePopover` component (`src/app/_components/LogScorePopover.tsx`):
+      - Created `LogScorePopover` component (`src/app/(main)/components/LogScorePopover.tsx`): // Path updated
         - Renders a "Log Score" button (plus icon) that appears on row hover in the WOD table.
         - Clicking the button opens a Radix UI popover with a minimal form.
         - The form adapts fields based on WOD type/tags (For Time, AMRAP, Load, etc.), using only relevant fields.
         - Submits the score via `api.score.logScore.useMutation`.
         - On success, closes the popover, resets the form, and triggers a callback to refresh scores.
-      - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+      - Updated `WodTable` (`src/app/(main)/components/WodTable.tsx`): // Path updated
         - Added a new column for the log score action, rendering `LogScorePopover` for each row.
         - Passed a callback to `LogScorePopover` to trigger a scores refetch after logging.
-      - Updated `WodViewer` (`src/app/_components/WodViewer.tsx`):
+      - Updated `WodViewer` (`src/app/(main)/components/WodViewer.tsx`): // Path updated
         - Uses tRPC utils to invalidate the `getAllByUser` scores query after a score is logged, ensuring the table updates automatically.
     - **UI/UX:**
       - Button is only visible on row hover (desktop), always visible in mobile list view (to be implemented in mobile component).

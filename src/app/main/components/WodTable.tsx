@@ -26,7 +26,7 @@ import {
   formatShortDate,
   getPerformanceBadgeDetails,
 } from "~/utils/wodUtils";
-import { LoadingIndicator } from "./LoadingIndicator";
+import { LoadingIndicator } from "../../_components/LoadingIndicator";
 import { HighlightMatch } from "~/utils/uiUtils";
 import LogScorePopover from "./LogScorePopover";
 import { api } from "~/trpc/react";

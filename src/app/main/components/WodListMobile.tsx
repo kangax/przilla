@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react"; // Added useMemo
 import { ChevronDown, ChevronUp } from "lucide-react";
-import type { Wod, Score } from "../../types/wodTypes";
+import type { Wod, Score } from "~/types/wodTypes";
 import {
   formatScore,
   parseTags,
   getPerformanceBadgeDetails,
-} from "../../utils/wodUtils"; // Import getPerformanceBadgeDetails
+} from "~/utils/wodUtils"; // Import getPerformanceBadgeDetails
 import { HighlightMatch } from "~/utils/uiUtils"; // Import HighlightMatch
 
 type ScoresByWodId = Record<string, Score[]>;

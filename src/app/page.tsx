@@ -1,7 +1,7 @@
 import { Suspense } from "react";
 import { Box } from "@radix-ui/themes";
 
-import WodViewer from "~/app/_components/WodViewer";
+import WodViewer from "~/app/main/components/WodViewer";
 import PageLayout from "~/app/_components/PageLayout";
 import { api } from "~/trpc/server"; // Import server tRPC client
 // Removed Wod type import as we'll infer the type

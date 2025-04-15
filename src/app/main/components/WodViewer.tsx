@@ -16,7 +16,7 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDown } from "lucide-react";
 import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
-import { useMediaQuery } from "../../utils/useMediaQuery";
+import { useMediaQuery } from "~/utils/useMediaQuery";
 import {
   type Wod,
   type Score,

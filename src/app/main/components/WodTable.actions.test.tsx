@@ -1,5 +1,5 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, within, fireEvent } from "../../test-utils";
+import { render, screen, within, fireEvent } from "../../../test-utils";
 import "@testing-library/jest-dom";
 import WodTable from "./WodTable";
 

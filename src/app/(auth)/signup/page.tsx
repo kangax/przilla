@@ -1,4 +1,4 @@
-import SignUp from "~/components/signup"; // Import the new SignUp component
+import SignUp from "./SignUp";
 
 export default function SignUpPage() {
   return <SignUp />;

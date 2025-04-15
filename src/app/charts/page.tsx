@@ -1,11 +1,11 @@
 import { Box, Container, Flex } from "@radix-ui/themes";
 import { getSession } from "~/server/auth"; // Import getSession instead of auth
 import { api } from "~/trpc/server";
-import WodDistributionChart from "~/app/_components/WodDistributionChart";
-import WodTimelineChart from "~/app/_components/WodTimelineChart";
-import MovementFrequencyChart from "~/app/_components/MovementFrequencyChart";
+import WodDistributionChart from "./components/WodDistributionChart";
+import WodTimelineChart from "./components/WodTimelineChart";
+import MovementFrequencyChart from "./components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
-import ChartLoginOverlay from "~/app/_components/ChartLoginOverlay"; // Import the overlay
+import ChartLoginOverlay from "./components/ChartLoginOverlay"; // Import the overlay
 import { normalizeMovementName } from "~/utils/movementMapping";
 import { type Wod } from "~/types/wodTypes";
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";

@@ -2,6 +2,7 @@
 
 ## What Works
 
+- **Log Score (Apr 2025):** Users can log a score for any WOD directly from the main table via a minimal popover form. The form adapts to WOD type, and the scores list refreshes automatically after logging. (Next: implement always-visible log score button in mobile list view.)
 - **CSV/SugarWOD Score Import:** The full import flow is functional. Users can upload a CSV file via the dedicated `/import` route, review matched scores in `ScoreReviewTable`, confirm selections in `ImportConfirmation`, and the `ScoreImportWizard` component handles the process, submitting selected scores to the backend via the `api.score.importScores` tRPC mutation for insertion into the database. Includes client-side parsing, WOD matching (case-insensitive), validation, and UI feedback for loading/success/error states.
 - **Authentication Migration:** Successfully migrated from NextAuth.js to Better Auth, including database schema updates, API routes, client/server integration, and new login/signup/password reset pages.
 - **Wodwell icon link in mobile view:** A circular Wodwell icon (white "w" on black) now appears to the left of the likes count in each mobile WOD card header if `wod.wodUrl` exists. The icon links to the WOD's Wodwell.com page, opens in a new tab, is accessible, and does not interfere with card expand/collapse.

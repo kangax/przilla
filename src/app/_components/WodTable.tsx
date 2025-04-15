@@ -12,17 +12,16 @@ import {
   type ColumnDef,
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Import Score
+import type { Wod, Score, SortByType } from "~/types/wodTypes";
 import {
-  getPerformanceLevelTooltip, // Keep for benchmark info tooltip
+  getPerformanceLevelTooltip,
   formatScore,
   formatShortDate,
-  getPerformanceBadgeDetails, // Added
+  getPerformanceBadgeDetails,
 } from "~/utils/wodUtils";
-import { LoadingIndicator } from "./LoadingIndicator"; // Import LoadingIndicator
-import { HighlightMatch } from "~/utils/uiUtils"; // Import HighlightMatch
-
-// --- Interfaces & Types ---
+import { LoadingIndicator } from "./LoadingIndicator";
+import { HighlightMatch } from "~/utils/uiUtils";
+import LogScorePopover from "./LogScorePopover";
 
 interface WodTableProps {
   wods: Wod[];
@@ -31,11 +30,10 @@ interface WodTableProps {
   sortDirection: "asc" | "desc";
   handleSort: (column: SortByType) => void;
   searchTerm: string;
-  scoresByWodId: Record<string, Score[]>; // Add scores map prop
-  isLoadingScores: boolean; // Add loading state prop
+  scoresByWodId: Record<string, Score[]>;
+  isLoadingScores: boolean;
+  onScoreLogged?: () => void; // <-- Add this prop
 }
-
-// --- Helper Functions ---
 
 const safeString = (value: string | undefined | null): string => value || "";
 
@@ -56,8 +54,6 @@ const getDifficultyColor = (difficulty: string | undefined | null): string => {
   }
 };
 
-// --- Column Definitions ---
-
 const columnHelper = createColumnHelper<Wod>();
 
 const createColumns = (
@@ -66,6 +62,7 @@ const createColumns = (
   sortDirection: "asc" | "desc",
   searchTerm: string,
   scoresByWodId: Record<string, Score[]>,
+  onScoreLogged?: () => void, // <-- Accept as param
 ): ColumnDef<Wod, unknown>[] => {
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
@@ -75,6 +72,7 @@ const createColumns = (
   };
 
   return [
+    // ... (all previous columns unchanged)
     columnHelper.accessor("wodName", {
       header: () => (
         <span onClick={() => handleSort("wodName")} className="cursor-pointer">
@@ -100,7 +98,6 @@ const createColumns = (
       },
       size: 200,
     }),
-    // Combined Category and Tags Column
     columnHelper.accessor(
       (row) => ({ category: row.category, tags: row.tags }),
       {
@@ -191,7 +188,6 @@ const createColumns = (
       },
       size: 70,
     }),
-    // --- Description Column ---
     columnHelper.accessor("description", {
       header: "Description",
       cell: (info) => {
@@ -205,116 +201,118 @@ const createColumns = (
       },
       size: 364,
     }),
-    // --- NEW Results Column ---
     columnHelper.accessor(
       (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
       {
         id: "results",
-        header: "Your scores", // No sorting for now
+        header: "Your scores",
         cell: (info) => {
           const { wod, scores } = info.getValue();
 
-          // --- Case 1: No Scores ---
-          if (!scores || scores.length === 0) {
-            // Show benchmark tooltip if benchmarks exist
-            if (wod.benchmarks) {
-              return (
-                <Tooltip
-                  content={
-                    <span style={{ whiteSpace: "pre-wrap" }}>
-                      {getPerformanceLevelTooltip(wod)}
-                    </span>
-                  }
-                >
-                  <Info
-                    size={14}
-                    className="text-muted-foreground cursor-help"
-                  />
-                </Tooltip>
-              );
-            }
-            // Otherwise, show placeholder
-            return (
-              <span className="text-muted-foreground whitespace-nowrap">-</span>
-            );
-          }
-
-          // --- Case 2: Scores Exist ---
-          // Assuming scores are sorted descending by date (newest first)
           return (
-            <Flex direction="column" gap="2" align="start" className="my-2">
-              {scores.map((score) => {
-                const { displayLevel, color } = getPerformanceBadgeDetails(
-                  wod,
-                  score,
-                );
-                const suffix = score.isRx ? "Rx" : "Scaled";
-                const formattedScore = formatScore(score, suffix);
-                const formattedDate = formatShortDate(score.scoreDate);
+            <div className="flex min-h-[36px] flex-col items-start gap-2">
+              {/* Scores list (if any) */}
+              {scores && scores.length > 0 ? (
+                <Flex direction="column" gap="2" align="start" className="my-2">
+                  {scores.map((score) => {
+                    const { displayLevel, color } = getPerformanceBadgeDetails(
+                      wod,
+                      score,
+                    );
+                    const suffix = score.isRx ? "Rx" : "Scaled";
+                    const formattedScore = formatScore(score, suffix);
+                    const formattedDate = formatShortDate(score.scoreDate);
 
-                const CustomTooltip = () => (
-                  <>
-                    <span>Your level: {displayLevel}</span>
-                    {score.notes ? (
+                    const CustomTooltip = () => (
                       <>
-                        <br />
-                        {"--"}
-                        <br />
-                        <span style={{ whiteSpace: "pre-wrap" }}>
-                          {safeString(score.notes)}
-                        </span>
+                        <span>Your level: {displayLevel}</span>
+                        {score.notes ? (
+                          <>
+                            <br />
+                            {"--"}
+                            <br />
+                            <span style={{ whiteSpace: "pre-wrap" }}>
+                              {safeString(score.notes)}
+                            </span>
+                          </>
+                        ) : (
+                          ""
+                        )}
                       </>
-                    ) : (
-                      ""
-                    )}
-                  </>
-                );
+                    );
 
-                const scoreBadge = (
-                  <Tooltip content={<CustomTooltip />}>
-                    <Badge
-                      color={
-                        color as
-                          | "red"
-                          | "blue"
-                          | "green"
-                          | "yellow"
-                          | "purple"
-                          | "gray"
-                          | "indigo"
-                      } // All possible Radix Badge colors
-                      variant="soft" // Use soft variant for less visual weight
-                      radius="full"
-                      size="2"
-                      className="cursor-help" // Indicate tooltip
+                    const scoreBadge = (
+                      <Tooltip content={<CustomTooltip />}>
+                        <Badge
+                          color={
+                            color as
+                              | "red"
+                              | "blue"
+                              | "green"
+                              | "yellow"
+                              | "purple"
+                              | "gray"
+                              | "indigo"
+                          }
+                          variant="soft"
+                          radius="full"
+                          size="2"
+                          className="cursor-help"
+                        >
+                          {formattedScore}
+                        </Badge>
+                      </Tooltip>
+                    );
+
+                    return (
+                      <Flex key={score.id} align="center" gap="1" wrap="nowrap">
+                        <div>
+                          {scoreBadge}
+                          <span className="text-muted-foreground ml-1 whitespace-nowrap text-xs">
+                            {" "}
+                            on {formattedDate}
+                          </span>
+                        </div>
+                      </Flex>
+                    );
+                  })}
+                </Flex>
+              ) : (
+                <div>
+                  {wod.benchmarks ? (
+                    <Tooltip
+                      content={
+                        <span style={{ whiteSpace: "pre-wrap" }}>
+                          {getPerformanceLevelTooltip(wod)}
+                        </span>
+                      }
                     >
-                      {formattedScore}
-                    </Badge>
-                  </Tooltip>
-                );
-
-                return (
-                  <Flex key={score.id} align="center" gap="1" wrap="nowrap">
-                    <div>
-                      {scoreBadge}
-                      <span className="text-muted-foreground ml-1 whitespace-nowrap text-xs">
-                        {" "}
-                        on {formattedDate}
-                      </span>
-                    </div>
-                  </Flex>
-                );
-              })}
-            </Flex>
+                      <Info
+                        size={14}
+                        className="text-muted-foreground cursor-help"
+                      />
+                    </Tooltip>
+                  ) : (
+                    <span className="text-muted-foreground whitespace-nowrap">
+                      -
+                    </span>
+                  )}
+                </div>
+              )}
+              {/* Log Score button always visible, on new line */}
+              <LogScorePopover
+                wod={wod}
+                onScoreLogged={onScoreLogged}
+                showText
+              />
+            </div>
           );
         },
-        size: 200, // Reduced size slightly as level text is now in tooltip
+        size: 200,
       },
     ),
   ];
 };
-
-// --- Main Table Component ---
 
 const WodTable: React.FC<WodTableProps> = ({
   wods,
@@ -324,7 +322,8 @@ const WodTable: React.FC<WodTableProps> = ({
   handleSort,
   searchTerm,
   scoresByWodId,
-  isLoadingScores, // Destructure the new prop
+  isLoadingScores,
+  onScoreLogged,
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
@@ -336,8 +335,16 @@ const WodTable: React.FC<WodTableProps> = ({
         sortDirection,
         searchTerm,
         scoresByWodId,
+        onScoreLogged, // <-- Pass to columns
       ),
-    [handleSort, sortBy, sortDirection, searchTerm, scoresByWodId],
+    [
+      handleSort,
+      sortBy,
+      sortDirection,
+      searchTerm,
+      scoresByWodId,
+      onScoreLogged,
+    ],
   );
 
   const table = useReactTable({
@@ -350,7 +357,6 @@ const WodTable: React.FC<WodTableProps> = ({
   const { rows } = table.getRowModel();
 
   const rowVirtualizer = useVirtualizer({
-    // Adjust count based on loading state to prevent virtualization errors
     count: isLoadingScores ? 0 : rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 49,
@@ -359,14 +365,11 @@ const WodTable: React.FC<WodTableProps> = ({
   });
 
   const virtualRows = rowVirtualizer.getVirtualItems();
-  // Calculate totalSize based on actual rows, not loading state
   const totalSize = isLoadingScores
     ? 0
-    : rows.length * rowVirtualizer.options.estimateSize(0); // Pass index 0
+    : rows.length * rowVirtualizer.options.estimateSize(0);
   const headerGroups = table.getHeaderGroups();
 
-  // Calculate the height available for the body content
-  // Assuming header height is roughly 40px (adjust if needed)
   const headerHeightEstimate = 40;
   const bodyHeight = tableHeight - headerHeightEstimate;
 
@@ -412,40 +415,36 @@ const WodTable: React.FC<WodTableProps> = ({
       {/* Body Container - Handles Loading/No Results/Rows */}
       <div
         style={{
-          height: `${totalSize}px`, // Use calculated total size for rows
+          height: `${totalSize}px`,
           width: "100%",
           position: "relative",
         }}
       >
         {isLoadingScores ? (
-          // Show loading indicator centered in the available body height
           <Flex
             align="center"
             justify="center"
-            className="absolute inset-0" // Position absolutely within the body container
-            style={{ height: `${bodyHeight}px` }} // Use calculated body height
+            className="absolute inset-0"
+            style={{ height: `${bodyHeight}px` }}
           >
             <LoadingIndicator message="Loading scores..." />
           </Flex>
         ) : virtualRows.length === 0 ? (
-          // Show no results message centered
           <Flex
             align="center"
             justify="center"
             className="text-muted-foreground absolute inset-0"
             style={{ height: `${bodyHeight}px` }}
           >
-            {/* This creates blinking on initial load so comment it out for now */}
             {/* No results found. */}
           </Flex>
         ) : (
-          // Render virtual rows
           virtualRows.map((virtualRow) => {
             const row = rows[virtualRow.index];
             return (
               <div
                 key={row.id}
-                className="absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
+                className="group absolute left-0 top-0 flex w-full border-b border-table-border bg-table-row hover:bg-table-rowAlt"
                 style={{
                   transform: `translateY(${virtualRow.start}px)`,
                   width: table.getTotalSize(),
@@ -473,7 +472,6 @@ const WodTable: React.FC<WodTableProps> = ({
   );
 };
 
-// Helper function to validate sort by type (updated)
 const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
   const validSortKeys: SortByType[] = [
     "wodName",
@@ -484,7 +482,6 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
   return validSortKeys.includes(sortBy as SortByType);
 };
 
-// Memoize the component
 const MemoizedWodTable = React.memo(WodTable);
 MemoizedWodTable.displayName = "WodTable";
 

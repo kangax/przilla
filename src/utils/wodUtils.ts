@@ -133,6 +133,24 @@ export const formatSecondsToMMSS = (seconds: number): string => {
 };
 
 /**
+ * Formats a duration in seconds into "Xmin Ysec" format.
+ * Examples:
+ *   2124 -> "35min 24sec"
+ *   24   -> "24sec"
+ *   60   -> "1min 0sec"
+ *   0    -> "0sec"
+ */
+export const formatSecondsToMinSec = (seconds: number): string => {
+  if (isNaN(seconds) || seconds < 0) return "0sec";
+  const minutes = Math.floor(seconds / 60);
+  const remainingSeconds = Math.floor(seconds % 60);
+  if (minutes > 0) {
+    return `${minutes}min ${remainingSeconds}sec`;
+  }
+  return `${remainingSeconds}sec`;
+};
+
+/**
  * Formats a Date object into a short "Mon DD, 'YY" format.
  */
 export const formatShortDate = (date: Date): string => {

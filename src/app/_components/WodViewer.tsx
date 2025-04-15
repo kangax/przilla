@@ -9,7 +9,7 @@ import {
   useCallback,
 } from "react";
 import { api } from "~/trpc/react";
-import { useSession } from "~/lib/auth-client"; // Corrected import
+import { useSession } from "~/lib/auth-client";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { Box, Flex, Tooltip, SegmentedControl } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
@@ -29,9 +29,8 @@ import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
 
 // --- URL State Management ---
 
-// Define props interface using the client-side Wod type
 interface WodViewerProps {
-  initialWods: Wod[]; // Expect the type with Date objects directly
+  initialWods: Wod[];
 }
 
 const DEFAULT_COMPLETION_FILTER = "all";
@@ -70,23 +69,20 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   countLikes: "desc",
 };
 
-// Update component signature to accept props
 export default function WodViewer({ initialWods }: WodViewerProps) {
-  // Use Better Auth hook and check isPending instead of status
   const { data: session, isPending: isSessionLoading } = useSession();
-  const isLoggedIn = !!session?.user; // Check if user object exists in session data
-
-  // Responsive: show card list on mobile/tablet, table on desktop
+  const isLoggedIn = !!session?.user;
   const isMobile = useMediaQuery("(max-width: 767px)");
 
-  // Fetch data, but initial render will use the prop
+  // tRPC utils for query invalidation
+  const utils = api.useUtils();
+
   const {
-    data: wodsData, // Data fetched by useQuery (might be undefined initially)
-    isLoading: isLoadingWods, // Reflects query loading state
+    data: wodsData,
+    isLoading: isLoadingWods,
     error: errorWods,
   } = api.wod.getAll.useQuery(undefined, {
-    // Removed initialData
-    staleTime: 5 * 60 * 1000, // Keep data fresh for 5 mins
+    staleTime: 5 * 60 * 1000,
   });
 
   const {
@@ -94,19 +90,13 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     isLoading: isLoadingScores,
     error: errorScores,
   } = api.score.getAllByUser.useQuery(undefined, {
-    enabled: isLoggedIn, // Only fetch scores if logged in
+    enabled: isLoggedIn,
   });
 
-  // Process the data: Prioritize initialWods prop for first render, then use fetched data.
-  // Use intermediate types to handle potential string dates/JSON from query.
   const wods = useMemo(() => {
-    // Use initialWods if wodsData from query isn't available yet, otherwise use wodsData
-    // Treat incoming data as potentially having string dates/JSON
     const dataToProcess =
       (wodsData as WodFromQuery[] | undefined) ?? initialWods ?? [];
     return dataToProcess.map((wod: WodFromQuery) => ({
-      // Type map parameter with intermediate type
-      // Spread properties that don't need transformation
       id: wod.id,
       wodUrl: wod.wodUrl,
       wodName: wod.wodName,
@@ -115,32 +105,28 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
       difficulty: wod.difficulty,
       difficultyExplanation: wod.difficultyExplanation,
       countLikes: wod.countLikes,
-      // Transform properties
       createdAt:
         wod.createdAt instanceof Date
           ? wod.createdAt
-          : new Date(wod.createdAt ?? Date.now()), // Handle string or Date
+          : new Date(wod.createdAt ?? Date.now()),
       updatedAt:
         wod.updatedAt instanceof Date
           ? wod.updatedAt
           : wod.updatedAt
-            ? new Date(wod.updatedAt) // Handle string or Date
+            ? new Date(wod.updatedAt)
             : null,
-      tags: parseTags(wod.tags), // Handle string or string[]
+      tags: parseTags(wod.tags),
       benchmarks:
-        typeof wod.benchmarks === "string" // Handle stringified JSON
-          ? (JSON.parse(wod.benchmarks) as Benchmarks | null) // Use Benchmarks type here
+        typeof wod.benchmarks === "string"
+          ? (JSON.parse(wod.benchmarks) as Benchmarks | null)
           : wod.benchmarks,
-    })) as Wod[]; // Final assertion to Wod[] is correct after transformation
-  }, [wodsData, initialWods]); // Depend on both
+    })) as Wod[];
+  }, [wodsData, initialWods]);
 
   const scoresByWodId = useMemo(() => {
     if (!scoresData) return {};
-    // Treat incoming score data as potentially having string dates
     const processedScores = (scoresData as ScoreFromQuery[] | undefined)?.map(
       (score: ScoreFromQuery) => ({
-        // Type map parameter with intermediate type
-        // Spread properties that don't need transformation
         id: score.id,
         userId: score.userId,
         wodId: score.wodId,
@@ -151,23 +137,22 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         partial_reps: score.partial_reps,
         isRx: score.isRx,
         notes: score.notes,
-        // Transform date properties
         scoreDate:
           score.scoreDate instanceof Date
             ? score.scoreDate
-            : new Date(score.scoreDate), // Handle string or Date
+            : new Date(score.scoreDate),
         createdAt:
           score.createdAt instanceof Date
             ? score.createdAt
-            : new Date(score.createdAt), // Handle string or Date
+            : new Date(score.createdAt),
         updatedAt:
           score.updatedAt instanceof Date
             ? score.updatedAt
             : score.updatedAt
-              ? new Date(score.updatedAt) // Handle string or Date
+              ? new Date(score.updatedAt)
               : null,
       }),
-    ) as Score[]; // Final assertion to Score[] is correct after transformation
+    ) as Score[];
 
     return (processedScores ?? []).reduce(
       (acc, score) => {
@@ -175,7 +160,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
           acc[score.wodId] = [];
         }
         acc[score.wodId].push(score);
-        // Sort by Date object directly
         acc[score.wodId].sort(
           (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
         );
@@ -243,13 +227,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     const calculateHeight = () => {
       if (filterBarRef.current) {
         const filterBarHeight = filterBarRef.current.offsetHeight;
-        const TOTAL_VERTICAL_OFFSET =
-          64 + // HEADER_HEIGHT_ESTIMATE
-          24 + // PAGE_CONTAINER_PADDING_TOP
-          16 + // FILTER_BAR_MARGIN_TOP
-          filterBarHeight +
-          16 + // FILTER_BAR_MARGIN_BOTTOM
-          32; // PAGE_CONTAINER_PADDING_BOTTOM
+        const TOTAL_VERTICAL_OFFSET = 64 + 24 + 16 + filterBarHeight + 16 + 32;
 
         const availableHeight = window.innerHeight - TOTAL_VERTICAL_OFFSET;
         setTableHeight(Math.max(300, availableHeight));
@@ -350,7 +328,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return selectedTags.filter((tag) => tagOrder.includes(tag));
   }, [selectedTags, tagOrder]);
 
-  /* Filtering and sorting logic remains the same */
   const searchedWods = useMemo(() => {
     if (!searchTerm) return wods;
     const lowerCaseSearchTerm = searchTerm.toLowerCase();
@@ -426,23 +403,21 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     );
   }, []);
 
-  // Determine loading state for scores, consider session loading state too
-  const showScoreLoading = isLoggedIn && (isLoadingScores || isSessionLoading);
+  // Invalidate scores after logging
+  const handleScoreLogged = useCallback(() => {
+    utils.score.getAllByUser.invalidate();
+  }, [utils.score.getAllByUser]);
 
-  // Handle initial WOD loading state (should be rare with initialWods prop)
+  const showScoreLoading = isLoggedIn && (isLoadingScores || isSessionLoading);
   const showWodLoading = isLoadingWods && !wodsData && !initialWods;
   if (showWodLoading) {
-    // Still show a basic loading indicator if initial WODs somehow aren't available
-    // and the query is running.
     return (
       <Flex align="center" justify="center" className="h-[300px] w-full">
-        {/* Using a simple text indicator here as LoadingIndicator was removed */}
         Loading WOD data...
       </Flex>
     );
   }
 
-  // Handle errors
   if (errorWods) {
     return <Box>Error loading WODs: {errorWods.message}</Box>;
   }
@@ -450,12 +425,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return <Box>Error loading scores: {errorScores.message}</Box>;
   }
 
-  // Handle case where WODs are loaded but empty
   if (!wods || wods.length === 0) {
     return <Box>No WOD data available.</Box>;
   }
 
-  // Render the main content (Filter Bar + Table or Card List)
   return (
     <Box>
       {/* Filter Bar */}
@@ -595,7 +568,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         <WodListMobile
           wods={sortedWods}
           scoresByWodId={scoresByWodId}
-          searchTerm={searchTerm} // Pass searchTerm prop
+          searchTerm={searchTerm}
         />
       ) : (
         <WodTable
@@ -607,6 +580,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
           searchTerm={searchTerm}
           scoresByWodId={scoresByWodId}
           isLoadingScores={showScoreLoading}
+          onScoreLogged={handleScoreLogged}
         />
       )}
     </Box>

@@ -122,6 +122,59 @@ export const scoreRouter = createTRPCRouter({
       }
     }),
 
+  /**
+   * Logs a single score for the current user.
+   */
+  logScore: protectedProcedure
+    .input(scoreImportSchema)
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+
+      // Prepare data for insertion, mapping frontend fields to DB schema
+      const scoreToInsert = {
+        userId: userId,
+        wodId: input.wodId,
+        scoreDate: input.scoreDate,
+        is_rx: input.isRx,
+        notes: input.notes,
+        time_seconds: input.time_seconds ?? null,
+        reps: input.reps ?? null,
+        load: input.load ?? null,
+        rounds_completed: input.rounds_completed ?? null,
+        partial_reps: input.partial_reps ?? null,
+      };
+
+      try {
+        const [insertedScore] = await ctx.db
+          .insert(scores)
+          .values(scoreToInsert)
+          .returning();
+
+        if (!insertedScore) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to insert score.",
+          });
+        }
+
+        // Map snake_case is_rx to camelCase isRx for return value
+        return {
+          ...insertedScore,
+          isRx: insertedScore.is_rx,
+        };
+      } catch (error) {
+        console.error("Failed to log score:", error);
+        if (error instanceof Error) {
+          console.error("Error details:", error.message);
+        }
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to log score due to a database error.",
+          cause: error,
+        });
+      }
+    }),
+
   // Placeholder for future procedures
   // create: protectedProcedure
   //   .input(z.object({ /* Define input schema based on separate columns */ }))

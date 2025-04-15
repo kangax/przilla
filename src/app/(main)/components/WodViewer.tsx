@@ -440,7 +440,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
       >
         <div className={isMobile ? "flex gap-2" : "flex flex-grow gap-2"}>
           <input
-            type="text"
+            type="search"
             placeholder="Search..."
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}

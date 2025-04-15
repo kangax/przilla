@@ -1,5 +1,17 @@
 # Recent Changes
 
+- **Log Score Popover Behavior Fix (Apr 15, 2025):**
+
+  - **Goal:** Fix issues with `LogScorePopover` where state persisted between modes and the trigger button behavior was incorrect during edits.
+  - **Implementation:**
+    - Updated `LogScorePopover` (`src/app/(main)/components/LogScorePopover.tsx`):
+      - Ensured form state is reset correctly after successful submissions (log/update), cancellation, or closing the popover (`resetForm` function, `handleOpenChange`).
+      - Created a dedicated `openInLogMode` handler for the trigger button (`Popover.Trigger`) which resets the form before opening.
+      - Hardcoded the trigger button's text and `aria-label` to always be "Log Score".
+  - **Outcome:**
+    1. The popover form state is now correctly reset, preventing data persistence between edit and log modes.
+    2. The "+ Log score" trigger button consistently displays the correct text and always opens the popover in a clean "log" state, independent of any edit actions.
+
 - **Component Refactoring (Apr 15, 2025):**
 
   - **Goal:** Organize main page (root route `/`) components logically using a Next.js Route Group `(main)`, aligning with project structure patterns used elsewhere (e.g., `/charts`, `/import`).

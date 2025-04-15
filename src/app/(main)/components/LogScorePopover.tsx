@@ -2,8 +2,16 @@
 
 import React, { useState, useEffect } from "react";
 import * as Popover from "@radix-ui/react-popover";
-import * as Checkbox from "@radix-ui/react-checkbox";
-import { Button } from "@radix-ui/themes";
+import {
+  Button,
+  TextField,
+  TextArea,
+  Checkbox,
+  Text,
+  Flex,
+  Box,
+  IconButton,
+} from "@radix-ui/themes";
 import { Plus, Check } from "lucide-react";
 import { api } from "~/trpc/react";
 import type { Wod, Score } from "~/types/wodTypes";
@@ -30,6 +38,19 @@ interface LogScorePopoverProps {
   onClose?: () => void;
 }
 
+// Define initial state outside component for reuse
+const initialFormState = {
+  time_minutes: "",
+  time_seconds: "",
+  reps: "",
+  load: "",
+  rounds_completed: "",
+  partial_reps: "",
+  isRx: false,
+  notes: "",
+  scoreDate: new Date().toISOString().slice(0, 10),
+};
+
 export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   wod,
   onScoreLogged,
@@ -38,23 +59,15 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   initialScore,
   onClose,
 }) => {
+  // isEditMode is determined ONLY by the presence of initialScore prop
   const isEditMode = !!initialScore;
   const [open, setOpen] = useState(false);
-  const [form, setForm] = useState({
-    time_minutes: "",
-    time_seconds: "",
-    reps: "",
-    load: "",
-    rounds_completed: "",
-    partial_reps: "",
-    isRx: false,
-    notes: "",
-    scoreDate: new Date().toISOString().slice(0, 10),
-  });
+  // Initialize state using the constant
+  const [form, setForm] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  // Fill form with initialScore if editing
+  // Fill form with initialScore if editing AND the popover should open for editing
   useEffect(() => {
     if (isEditMode && initialScore) {
       setForm({
@@ -82,15 +95,17 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
           ? new Date(initialScore.scoreDate).toISOString().slice(0, 10)
           : new Date().toISOString().slice(0, 10),
       });
+      // Open the popover programmatically when in edit mode
       setOpen(true);
     }
+    // Dependency array ensures this runs when initialScore changes (entering edit mode)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialScore]);
+  }, [initialScore]); // isEditMode is derived, not needed here
 
   const logScoreMutation = api.score.logScore.useMutation({
     onSuccess: () => {
       setOpen(false);
-      resetForm();
+      resetForm(); // Reset form on success
       setError(null);
       if (onScoreLogged) onScoreLogged();
     },
@@ -102,10 +117,10 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   const updateScoreMutation = api.score.updateScore.useMutation({
     onSuccess: () => {
       setOpen(false);
-      resetForm();
+      resetForm(); // Reset form on success
       setError(null);
       if (onScoreLogged) onScoreLogged();
-      if (onClose) onClose();
+      if (onClose) onClose(); // Call onClose specific to edit mode
     },
     onError: (err) => {
       setError(err instanceof Error ? err.message : "Failed to update score.");
@@ -128,18 +143,11 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
-    const { name, value, type } = e.target as HTMLInputElement;
-    if (type === "checkbox") {
-      setForm((prev) => ({
-        ...prev,
-        [name]: (e.target as HTMLInputElement).checked,
-      }));
-    } else {
-      setForm((prev) => ({
-        ...prev,
-        [name]: value,
-      }));
-    }
+    const { name, value } = e.target as HTMLInputElement;
+    setForm((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
   };
 
   const handleIsRxChange = (checked: boolean) => {
@@ -149,20 +157,29 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     }));
   };
 
+  // Resets form to initial state
   const resetForm = () => {
-    setForm({
-      time_minutes: "",
-      time_seconds: "",
-      reps: "",
-      load: "",
-      rounds_completed: "",
-      partial_reps: "",
-      isRx: false,
-      notes: "",
-      scoreDate: new Date().toISOString().slice(0, 10),
-    });
+    setForm(initialFormState);
     setError(null);
-    if (onClose) onClose();
+    // Don't call onClose here, it's specific to edit mode cancellation/success
+  };
+
+  // Handler for the "+ Log Score" button click
+  const openInLogMode = () => {
+    resetForm(); // Ensure form is reset
+    setOpen(true); // Open the popover
+  };
+
+  // Handle popover open state changes (e.g., clicking outside)
+  const handleOpenChange = (newOpenState: boolean) => {
+    setOpen(newOpenState);
+    if (!newOpenState) {
+      // If closing, reset form and call onClose if in edit mode
+      resetForm();
+      if (isEditMode && onClose) {
+        onClose();
+      }
+    }
   };
 
   // Validation: prevent empty results
@@ -170,7 +187,8 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     if (showAll || showTime) {
       const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
       const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
-      if (min === 0 && sec === 0) {
+      if (min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds) {
+        // Check if both are empty strings too
         return "Please enter a time (minutes or seconds).";
       }
     }
@@ -241,6 +259,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     try {
       const payload = buildPayload();
 
+      // Use the isEditMode flag derived from initialScore prop presence
       if (isEditMode && initialScore) {
         await updateScoreMutation.mutateAsync({
           id: initialScore.id,
@@ -260,251 +279,274 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     }
   };
 
-  // Open popover if editing, otherwise controlled by user
-  useEffect(() => {
-    if (isEditMode && initialScore) {
-      setOpen(true);
-    }
-  }, [isEditMode, initialScore]);
+  // No need for the separate useEffect to open in edit mode,
+  // the main useEffect handling initialScore already does setOpen(true)
 
   return (
-    <Popover.Root open={open} onOpenChange={setOpen}>
+    // Use handleOpenChange to manage closing behavior
+    <Popover.Root open={open} onOpenChange={handleOpenChange}>
       <Popover.Trigger asChild>
-        <button
-          type="button"
-          className={`flex items-center gap-1 rounded px-1 py-0.5 text-xs text-green-600 transition hover:bg-green-50/10 hover:underline focus:outline-none ${className ?? ""}`}
-          aria-label={isEditMode ? "Edit Score" : "Log Score"}
-          onClick={() => setOpen(true)}
-        >
-          <Plus size={14} className="text-green-600" />
-          {showText && (
+        {/* Trigger button ALWAYS shows "Log score" and uses openInLogMode */}
+        {showText ? (
+          <Button
+            type="button"
+            aria-label="Log Score" // Always "Log Score"
+            onClick={openInLogMode} // Use specific handler for log mode
+            variant="ghost"
+            color="green"
+            size="1"
+            className={`flex items-center gap-1 ${className ?? ""}`}
+          >
+            <Plus size={14} />
             <span className="font-medium">
-              {isEditMode ? "Edit score" : "Log score"}
+              Log score {/* Always "Log score" */}
             </span>
-          )}
-        </button>
+          </Button>
+        ) : (
+          <IconButton
+            type="button"
+            aria-label="Log Score" // Always "Log Score"
+            onClick={openInLogMode} // Use specific handler for log mode
+            variant="ghost"
+            color="green"
+            size="1"
+            className={`flex items-center ${className ?? ""}`}
+          >
+            <Plus size={14} />
+          </IconButton>
+        )}
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
           align="end"
           sideOffset={8}
-          className="z-50 w-64 rounded-lg border bg-white p-4 shadow-lg dark:bg-neutral-900"
+          className="z-50 w-64 rounded-lg border bg-white p-4 shadow-lg dark:bg-neutral-900" // Keep existing popover content styling
         >
-          <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <div className="mb-1 text-base font-semibold">
-              {isEditMode ? "Edit Score" : "Log Score"}
-            </div>
-            {(showAll || showTime) && (
-              <div className="flex gap-2">
-                <div className="flex-1">
-                  <label
-                    htmlFor="time_minutes"
-                    className="mb-1 block text-xs font-medium"
-                  >
-                    Minutes
-                  </label>
-                  <input
-                    id="time_minutes"
-                    name="time_minutes"
-                    type="number"
-                    min={0}
-                    placeholder="min"
-                    value={form.time_minutes}
+          <Box asChild>
+            {/* Form content depends on isEditMode for title/submit button text */}
+            <form onSubmit={handleSubmit}>
+              <Flex direction="column" gap="3">
+                <Text size="3" weight="bold" mb="1">
+                  {/* Title changes based on mode */}
+                  {isEditMode ? "Edit Score" : "Log Score"}
+                </Text>
+
+                {/* Input fields remain the same */}
+                {(showAll || showTime) && (
+                  <Flex gap="2">
+                    <Box flexGrow="1">
+                      <Text as="label" htmlFor="time_minutes" size="1" mb="1">
+                        Minutes
+                      </Text>
+                      <TextField.Root
+                        variant="classic" // Use classic variant
+                        id="time_minutes"
+                        name="time_minutes"
+                        type="number"
+                        min={0}
+                        placeholder="min"
+                        value={form.time_minutes}
+                        onChange={handleChange}
+                        disabled={submitting}
+                        size="1"
+                        autoComplete="off"
+                      />
+                    </Box>
+                    <Box flexGrow="1">
+                      <Text as="label" htmlFor="time_seconds" size="1" mb="1">
+                        Seconds
+                      </Text>
+                      <TextField.Root
+                        variant="classic" // Use classic variant
+                        id="time_seconds"
+                        name="time_seconds"
+                        type="number"
+                        min={0}
+                        max={59}
+                        placeholder="sec"
+                        value={form.time_seconds}
+                        onChange={handleChange}
+                        disabled={submitting}
+                        size="1"
+                        autoComplete="off"
+                      />
+                    </Box>
+                  </Flex>
+                )}
+
+                {(showAll || showReps) && (
+                  <Box>
+                    <Text as="label" htmlFor="reps" size="1" mb="1">
+                      Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic" // Use classic variant
+                      id="reps"
+                      name="reps"
+                      type="number"
+                      min={0}
+                      placeholder="Reps"
+                      value={form.reps}
+                      onChange={handleChange}
+                      disabled={submitting}
+                      size="1"
+                      autoComplete="off"
+                    />
+                  </Box>
+                )}
+
+                {(showAll || showLoad) && (
+                  <Box>
+                    <Text as="label" htmlFor="load" size="1" mb="1">
+                      Load
+                    </Text>
+                    <TextField.Root
+                      variant="classic" // Use classic variant
+                      id="load"
+                      name="load"
+                      type="number"
+                      min={0}
+                      placeholder="Load"
+                      value={form.load}
+                      onChange={handleChange}
+                      disabled={submitting}
+                      size="1"
+                      autoComplete="off"
+                    />
+                  </Box>
+                )}
+
+                {(showAll || showRounds) && (
+                  <Box>
+                    <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
+                      Rounds
+                    </Text>
+                    <TextField.Root
+                      variant="classic" // Use classic variant
+                      id="rounds_completed"
+                      name="rounds_completed"
+                      type="number"
+                      min={0}
+                      placeholder="Rounds"
+                      value={form.rounds_completed}
+                      onChange={handleChange}
+                      disabled={submitting}
+                      size="1"
+                      autoComplete="off"
+                    />
+                  </Box>
+                )}
+
+                {(showAll || showPartialReps) && (
+                  <Box>
+                    <Text as="label" htmlFor="partial_reps" size="1" mb="1">
+                      Partial Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic" // Use classic variant
+                      id="partial_reps"
+                      name="partial_reps"
+                      type="number"
+                      min={0}
+                      placeholder="Partial Reps"
+                      value={form.partial_reps}
+                      onChange={handleChange}
+                      disabled={submitting}
+                      size="1"
+                      autoComplete="off"
+                    />
+                  </Box>
+                )}
+
+                <Flex align="center" justify="between" gap="2">
+                  <Text as="label" size="1">
+                    <Flex gap="2" align="center">
+                      <Checkbox
+                        id={`isRx-${wod.id}`}
+                        checked={form.isRx}
+                        onCheckedChange={handleIsRxChange}
+                        disabled={submitting}
+                        color="green"
+                        size="1"
+                      />{" "}
+                      Rx
+                    </Flex>
+                  </Text>
+                  <TextField.Root
+                    variant="classic" // Use classic variant
+                    name="scoreDate"
+                    type="date"
+                    value={form.scoreDate}
                     onChange={handleChange}
                     disabled={submitting}
-                    className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    size="1"
+                    style={{ width: "120px" }}
                     autoComplete="off"
                   />
-                </div>
-                <div className="flex-1">
-                  <label
-                    htmlFor="time_seconds"
-                    className="mb-1 block text-xs font-medium"
-                  >
-                    Seconds
-                  </label>
-                  <input
-                    id="time_seconds"
-                    name="time_seconds"
-                    type="number"
-                    min={0}
-                    max={59}
-                    placeholder="sec"
-                    value={form.time_seconds}
+                </Flex>
+
+                <Box>
+                  <Text as="label" htmlFor="notes" size="1" mb="1">
+                    Notes
+                  </Text>
+                  <TextArea
+                    variant="classic" // Use classic variant
+                    id="notes"
+                    name="notes"
+                    placeholder="Notes"
+                    value={form.notes}
                     onChange={handleChange}
                     disabled={submitting}
-                    className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                    autoComplete="off"
+                    size="1"
+                    rows={2}
+                    style={{ resize: "none" }}
                   />
-                </div>
-              </div>
-            )}
-            {(showAll || showReps) && (
-              <div>
-                <label
-                  htmlFor="reps"
-                  className="mb-1 block text-xs font-medium"
-                >
-                  Reps
-                </label>
-                <input
-                  id="reps"
-                  name="reps"
-                  type="number"
-                  min={0}
-                  placeholder="Reps"
-                  value={form.reps}
-                  onChange={handleChange}
-                  disabled={submitting}
-                  className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                  autoComplete="off"
-                />
-              </div>
-            )}
-            {(showAll || showLoad) && (
-              <div>
-                <label
-                  htmlFor="load"
-                  className="mb-1 block text-xs font-medium"
-                >
-                  Load
-                </label>
-                <input
-                  id="load"
-                  name="load"
-                  type="number"
-                  min={0}
-                  placeholder="Load"
-                  value={form.load}
-                  onChange={handleChange}
-                  disabled={submitting}
-                  className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                  autoComplete="off"
-                />
-              </div>
-            )}
-            {(showAll || showRounds) && (
-              <div>
-                <label
-                  htmlFor="rounds_completed"
-                  className="mb-1 block text-xs font-medium"
-                >
-                  Rounds
-                </label>
-                <input
-                  id="rounds_completed"
-                  name="rounds_completed"
-                  type="number"
-                  min={0}
-                  placeholder="Rounds"
-                  value={form.rounds_completed}
-                  onChange={handleChange}
-                  disabled={submitting}
-                  className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                  autoComplete="off"
-                />
-              </div>
-            )}
-            {(showAll || showPartialReps) && (
-              <div>
-                <label
-                  htmlFor="partial_reps"
-                  className="mb-1 block text-xs font-medium"
-                >
-                  Partial Reps
-                </label>
-                <input
-                  id="partial_reps"
-                  name="partial_reps"
-                  type="number"
-                  min={0}
-                  placeholder="Partial Reps"
-                  value={form.partial_reps}
-                  onChange={handleChange}
-                  disabled={submitting}
-                  className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                  autoComplete="off"
-                />
-              </div>
-            )}
-            <div className="flex items-center gap-2">
-              <Checkbox.Root
-                id={`isRx-${wod.id}`}
-                checked={form.isRx}
-                onCheckedChange={handleIsRxChange}
-                disabled={submitting}
-                className="flex h-4 w-4 items-center justify-center rounded border border-input bg-background focus:outline-none data-[state=checked]:border-green-600 data-[state=checked]:bg-green-600"
-                aria-label="Rx"
-              >
-                <Checkbox.Indicator>
-                  <Check size={14} className="text-white" />
-                </Checkbox.Indicator>
-              </Checkbox.Root>
-              <label
-                htmlFor={`isRx-${wod.id}`}
-                className="cursor-pointer select-none text-xs"
-              >
-                Rx
-              </label>
-              <input
-                name="scoreDate"
-                type="date"
-                value={form.scoreDate}
-                onChange={handleChange}
-                disabled={submitting}
-                className="input input-sm ml-auto w-[120px] rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                autoComplete="off"
-              />
-            </div>
-            <div>
-              <label htmlFor="notes" className="mb-1 block text-xs font-medium">
-                Notes
-              </label>
-              <textarea
-                id="notes"
-                name="notes"
-                placeholder="Notes"
-                value={form.notes}
-                onChange={handleChange}
-                disabled={submitting}
-                className="w-full resize-none rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
-                rows={2}
-              />
-            </div>
-            {error && <div className="text-xs text-red-600">{error}</div>}
-            <div className="flex gap-2">
-              <Button
-                type="submit"
-                color="green"
-                disabled={submitting}
-                size="2"
-                className="w-full"
-              >
-                {submitting
-                  ? isEditMode
-                    ? "Updating..."
-                    : "Logging..."
-                  : isEditMode
-                    ? "Update Score"
-                    : "Log Score"}
-              </Button>
-              {isEditMode && (
-                <Button
-                  type="button"
-                  color="gray"
-                  disabled={submitting}
-                  size="2"
-                  className="w-full"
-                  onClick={() => {
-                    setOpen(false);
-                    resetForm();
-                  }}
-                >
-                  Cancel
-                </Button>
-              )}
-            </div>
-          </form>
+                </Box>
+
+                {error && (
+                  <Text size="1" color="red">
+                    {error}
+                  </Text>
+                )}
+
+                <Flex direction="column" gap="1">
+                  <Button
+                    type="submit"
+                    color="green"
+                    disabled={submitting}
+                    size="2"
+                    className="w-full"
+                  >
+                    {/* Submit button text changes based on mode */}
+                    {submitting
+                      ? isEditMode
+                        ? "Updating..."
+                        : "Logging..."
+                      : isEditMode
+                        ? "Update Score"
+                        : "Log Score"}
+                  </Button>
+                  {/* Cancel button only shown in edit mode */}
+                  {isEditMode && (
+                    <Button
+                      type="button"
+                      variant="soft" // Use soft variant for cancel
+                      color="gray"
+                      disabled={submitting}
+                      size="2"
+                      className="w-full"
+                      onClick={() => {
+                        // Close popover using the handler
+                        handleOpenChange(false);
+                      }}
+                    >
+                      Cancel
+                    </Button>
+                  )}
+                </Flex>
+              </Flex>
+            </form>
+          </Box>
         </Popover.Content>
       </Popover.Portal>
     </Popover.Root>

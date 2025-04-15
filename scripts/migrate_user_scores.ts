@@ -47,8 +47,8 @@ async function migrateScores() {
   const db = drizzle(client, { schema });
 
   console.log(`Fetching user ID for ${TARGET_USER_EMAIL}...`);
-  const user = await db.query.users.findFirst({
-    where: eq(schema.users.email, TARGET_USER_EMAIL),
+  const user = await db.query.user.findFirst({
+    where: eq(schema.user.email, TARGET_USER_EMAIL),
     columns: { id: true },
   });
 

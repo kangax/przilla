@@ -1,21 +1,28 @@
-// vitest.setup.ts
 import "@testing-library/jest-dom";
-import { vi } from "vitest";
 
-// Mock window.matchMedia used by next-themes
-Object.defineProperty(window, "matchMedia", {
-  writable: true,
-  value: vi.fn().mockImplementation((query) => ({
-    matches: false,
-    media: query,
-    onchange: null,
-    addListener: vi.fn(), // deprecated
-    removeListener: vi.fn(), // deprecated
-    addEventListener: vi.fn(),
-    removeEventListener: vi.fn(),
-    dispatchEvent: vi.fn(),
-  })),
-});
+// Mock ResizeObserver for Radix UI components in jsdom
+if (typeof window !== "undefined" && !window.ResizeObserver) {
+  window.ResizeObserver = class {
+    observe() {}
+    unobserve() {}
+    disconnect() {}
+  };
+}
 
-// Mock scrollIntoView for Radix UI components in JSDOM
-Element.prototype.scrollIntoView = vi.fn();
+// Mock matchMedia for next-themes and responsive components
+if (typeof window !== "undefined" && !window.matchMedia) {
+  window.matchMedia = function (query) {
+    return {
+      matches: false,
+      media: query,
+      onchange: null,
+      addListener: function () {},
+      removeListener: function () {},
+      addEventListener: function () {},
+      removeEventListener: function () {},
+      dispatchEvent: function () {
+        return false;
+      },
+    };
+  };
+}

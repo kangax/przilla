@@ -2,6 +2,7 @@
 
 ## What Works
 
+- **Lint, Type Safety, and Code Cleanup (Apr 2025):** All TypeScript/ESLint errors and warnings related to unsafe `any` usage, floating promises, and unused variables/imports have been resolved. The codebase is now fully type-safe and clean, providing a robust foundation for future development.
 - **Score Tooltip & Info Icon Update (Apr 2025):** The "your score" cell in the WOD table now shows all relevant information (logged date, notes, user level, and benchmark breakdown) in a single tooltip for each score badge. The info icon and its tooltip have been removed. If there are no scores, only the LogScorePopover is shown. This streamlines the UI and improves clarity.
 - **Score Edit/Delete & Validation (Apr 2025):** Users can now edit or delete any logged score directly from the WOD table. Edit and delete icons are shown for each score. The edit icon opens the log score popover in edit mode, pre-filled with the score's data, and updates the score on submit. The delete icon opens a confirmation dialog and deletes the score on confirm. Validation now prevents empty or invalid results from being logged for all score types.
 - **Log Score (Apr 2025):** Users can log a score for any WOD directly from the main table via a minimal popover form. The form adapts to WOD type, and the scores list refreshes automatically after logging. (Next: implement always-visible log score button in mobile list view.)

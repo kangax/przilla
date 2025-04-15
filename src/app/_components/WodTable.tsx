@@ -1,9 +1,16 @@
 "use client";
 
-import React, { useRef, useMemo } from "react";
+import React, { useRef, useMemo, useState } from "react";
 import Link from "next/link";
-import { Tooltip, Text, Flex, Badge } from "@radix-ui/themes";
-import { Info } from "lucide-react";
+import {
+  Tooltip,
+  Text,
+  Flex,
+  Badge,
+  IconButton,
+  Dialog,
+} from "@radix-ui/themes";
+import { Info, Pencil, Trash } from "lucide-react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -22,6 +29,7 @@ import {
 import { LoadingIndicator } from "./LoadingIndicator";
 import { HighlightMatch } from "~/utils/uiUtils";
 import LogScorePopover from "./LogScorePopover";
+import { api } from "~/trpc/react";
 
 interface WodTableProps {
   wods: Wod[];
@@ -32,7 +40,7 @@ interface WodTableProps {
   searchTerm: string;
   scoresByWodId: Record<string, Score[]>;
   isLoadingScores: boolean;
-  onScoreLogged?: () => void; // <-- Add this prop
+  onScoreLogged?: () => void;
 }
 
 const safeString = (value: string | undefined | null): string => value || "";
@@ -62,7 +70,12 @@ const createColumns = (
   sortDirection: "asc" | "desc",
   searchTerm: string,
   scoresByWodId: Record<string, Score[]>,
-  onScoreLogged?: () => void, // <-- Accept as param
+  onScoreLogged?: () => void,
+  onEditScore?: (score: Score, wod: Wod) => void,
+  onDeleteScore?: (score: Score, wod: Wod) => void,
+  editingScoreId?: string | null,
+  editingWod?: Wod | null,
+  onCloseEdit?: () => void,
 ): ColumnDef<Wod, unknown>[] => {
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
@@ -226,6 +239,8 @@ const createColumns = (
                     const CustomTooltip = () => (
                       <>
                         <span>Your level: {displayLevel}</span>
+                        <br />
+                        <span>Logged: {formattedDate}</span>
                         {score.notes ? (
                           <>
                             <br />
@@ -265,13 +280,42 @@ const createColumns = (
                     );
 
                     return (
-                      <Flex key={score.id} align="center" gap="1" wrap="nowrap">
-                        <div>
-                          {scoreBadge}
-                          <span className="text-muted-foreground ml-1 whitespace-nowrap text-xs">
-                            {" "}
-                            on {formattedDate}
-                          </span>
+                      <Flex
+                        key={score.id}
+                        align="center"
+                        gap="1"
+                        wrap="nowrap"
+                        className="group/score relative"
+                      >
+                        <div>{scoreBadge}</div>
+                        {/* Edit and Delete Icons: only visible on hover */}
+                        <div className="ml-1 flex space-x-1 opacity-0 transition-opacity group-hover/score:opacity-100">
+                          <Tooltip content="Edit score">
+                            <IconButton
+                              size="1"
+                              variant="ghost"
+                              color="gray"
+                              aria-label="Edit score"
+                              onClick={() =>
+                                onEditScore && onEditScore(score, wod)
+                              }
+                            >
+                              <Pencil size={16} />
+                            </IconButton>
+                          </Tooltip>
+                          <Tooltip content="Delete score">
+                            <IconButton
+                              size="1"
+                              variant="ghost"
+                              color="red"
+                              aria-label="Delete score"
+                              onClick={() =>
+                                onDeleteScore && onDeleteScore(score, wod)
+                              }
+                            >
+                              <Trash size={16} />
+                            </IconButton>
+                          </Tooltip>
                         </div>
                       </Flex>
                     );
@@ -300,15 +344,26 @@ const createColumns = (
                 </div>
               )}
               {/* Log Score button always visible, on new line */}
-              <LogScorePopover
-                wod={wod}
-                onScoreLogged={onScoreLogged}
-                showText
-              />
+              {/* If editing this score, show LogScorePopover in edit mode */}
+              {editingScoreId && editingWod && editingWod.id === wod.id ? (
+                <LogScorePopover
+                  wod={editingWod}
+                  onScoreLogged={onScoreLogged}
+                  showText
+                  initialScore={scores?.find((s) => s.id === editingScoreId)}
+                  onClose={onCloseEdit}
+                />
+              ) : (
+                <LogScorePopover
+                  wod={wod}
+                  onScoreLogged={onScoreLogged}
+                  showText
+                />
+              )}
             </div>
           );
         },
-        size: 200,
+        size: 250,
       },
     ),
   ];
@@ -327,6 +382,47 @@ const WodTable: React.FC<WodTableProps> = ({
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
 
+  // State for editing and deleting
+  const [editingScoreId, setEditingScoreId] = useState<string | null>(null);
+  const [editingWod, setEditingWod] = useState<Wod | null>(null);
+  const [deletingScore, setDeletingScore] = useState<{
+    score: Score;
+    wod: Wod;
+  } | null>(null);
+
+  const utils = api.useUtils();
+  const deleteScoreMutation = api.score.deleteScore.useMutation({
+    onSuccess: async () => {
+      await utils.score.getAllByUser.invalidate();
+      if (onScoreLogged) onScoreLogged();
+    },
+  });
+
+  const handleEditScore = (score: Score, wod: Wod) => {
+    setEditingScoreId(score.id);
+    setEditingWod(wod);
+  };
+
+  const handleCloseEdit = () => {
+    setEditingScoreId(null);
+    setEditingWod(null);
+  };
+
+  const handleDeleteScore = (score: Score, wod: Wod) => {
+    setDeletingScore({ score, wod });
+  };
+
+  const confirmDeleteScore = async () => {
+    if (deletingScore) {
+      deleteScoreMutation.mutate({ id: deletingScore.score.id });
+      setDeletingScore(null);
+    }
+  };
+
+  const cancelDeleteScore = () => {
+    setDeletingScore(null);
+  };
+
   const columns = useMemo(
     () =>
       createColumns(
@@ -335,7 +431,12 @@ const WodTable: React.FC<WodTableProps> = ({
         sortDirection,
         searchTerm,
         scoresByWodId,
-        onScoreLogged, // <-- Pass to columns
+        onScoreLogged,
+        handleEditScore,
+        handleDeleteScore,
+        editingScoreId,
+        editingWod,
+        handleCloseEdit,
       ),
     [
       handleSort,
@@ -344,6 +445,8 @@ const WodTable: React.FC<WodTableProps> = ({
       searchTerm,
       scoresByWodId,
       onScoreLogged,
+      editingScoreId,
+      editingWod,
     ],
   );
 
@@ -468,6 +571,32 @@ const WodTable: React.FC<WodTableProps> = ({
           })
         )}
       </div>
+      {/* Delete confirmation dialog */}
+      {deletingScore && (
+        <Dialog.Root open={!!deletingScore} onOpenChange={cancelDeleteScore}>
+          <Dialog.Content>
+            <Dialog.Title>Delete Score</Dialog.Title>
+            <Dialog.Description>
+              Are you sure you want to delete this score? This action cannot be
+              undone.
+            </Dialog.Description>
+            <Flex gap="3" mt="4" justify="end">
+              <button className="btn btn-sm" onClick={cancelDeleteScore}>
+                Cancel
+              </button>
+              <button
+                className="btn btn-sm btn-danger"
+                onClick={confirmDeleteScore}
+                disabled={deleteScoreMutation.status === "pending"}
+              >
+                {deleteScoreMutation.status === "pending"
+                  ? "Deleting..."
+                  : "Delete"}
+              </button>
+            </Flex>
+          </Dialog.Content>
+        </Dialog.Root>
+      )}
     </div>
   );
 };

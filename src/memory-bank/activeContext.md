@@ -2,6 +2,7 @@
 
 ## Current Focus
 
+- **Score Edit/Delete & Validation (Apr 2025):** Users can now edit or delete any logged score directly from the WOD table. Edit and delete icons are shown for each score. The edit icon opens the log score popover in edit mode, pre-filled with the score's data, and updates the score on submit. The delete icon opens a confirmation dialog and deletes the score on confirm. Validation now prevents empty or invalid results from being logged for all score types.
 - **Log Score (Apr 2025):** Users can now log a score for any WOD directly from the main table via a minimal popover form. The scores list refreshes automatically after logging. Next: implement the always-visible log score button in the mobile list view.
   - The popover now allows direct input of minutes and seconds (e.g., "35min 24sec") for time-based WODs, matching the requested input format and improving clarity.
 - **CSV/SugarWOD Score Import (Apr 2025):** The dedicated import route (`/import`) and UI (`ScoreImportWizard`) are functional, including backend insertion via the `importScores` tRPC mutation.

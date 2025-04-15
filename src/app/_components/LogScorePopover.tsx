@@ -1,18 +1,20 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import * as Popover from "@radix-ui/react-popover";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { Button } from "@radix-ui/themes";
 import { Plus, Check } from "lucide-react";
 import { api } from "~/trpc/react";
-import type { Wod } from "~/types/wodTypes";
+import type { Wod, Score } from "~/types/wodTypes";
 
 interface LogScorePopoverProps {
   wod: Wod;
   onScoreLogged?: () => void;
   className?: string;
   showText?: boolean;
+  initialScore?: Score | null;
+  onClose?: () => void;
 }
 
 export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
@@ -20,7 +22,10 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   onScoreLogged,
   className,
   showText,
+  initialScore,
+  onClose,
 }) => {
+  const isEditMode = !!initialScore;
   const [open, setOpen] = useState(false);
   const [form, setForm] = useState({
     time_minutes: "",
@@ -36,25 +41,61 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  // Fill form with initialScore if editing
+  useEffect(() => {
+    if (isEditMode && initialScore) {
+      setForm({
+        time_minutes:
+          initialScore.time_seconds != null
+            ? Math.floor(initialScore.time_seconds / 60).toString()
+            : "",
+        time_seconds:
+          initialScore.time_seconds != null
+            ? (initialScore.time_seconds % 60).toString()
+            : "",
+        reps: initialScore.reps != null ? initialScore.reps.toString() : "",
+        load: initialScore.load != null ? initialScore.load.toString() : "",
+        rounds_completed:
+          initialScore.rounds_completed != null
+            ? initialScore.rounds_completed.toString()
+            : "",
+        partial_reps:
+          initialScore.partial_reps != null
+            ? initialScore.partial_reps.toString()
+            : "",
+        isRx: !!initialScore.isRx,
+        notes: initialScore.notes || "",
+        scoreDate: initialScore.scoreDate
+          ? new Date(initialScore.scoreDate).toISOString().slice(0, 10)
+          : new Date().toISOString().slice(0, 10),
+      });
+      setOpen(true);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [initialScore]);
+
   const logScoreMutation = api.score.logScore.useMutation({
     onSuccess: () => {
       setOpen(false);
-      setForm({
-        time_minutes: "",
-        time_seconds: "",
-        reps: "",
-        load: "",
-        rounds_completed: "",
-        partial_reps: "",
-        isRx: false,
-        notes: "",
-        scoreDate: new Date().toISOString().slice(0, 10),
-      });
+      resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();
     },
     onError: (err) => {
       setError(err.message || "Failed to log score.");
+    },
+  });
+
+  const updateScoreMutation = api.score.updateScore.useMutation({
+    onSuccess: () => {
+      setOpen(false);
+      resetForm();
+      setError(null);
+      if (onScoreLogged) onScoreLogged();
+      if (onClose) onClose();
+    },
+    onError: (err) => {
+      setError(err.message || "Failed to update score.");
     },
   });
 
@@ -95,10 +136,61 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
     }));
   };
 
+  const resetForm = () => {
+    setForm({
+      time_minutes: "",
+      time_seconds: "",
+      reps: "",
+      load: "",
+      rounds_completed: "",
+      partial_reps: "",
+      isRx: false,
+      notes: "",
+      scoreDate: new Date().toISOString().slice(0, 10),
+    });
+    setError(null);
+    if (onClose) onClose();
+  };
+
+  // Validation: prevent empty results
+  const validate = () => {
+    if (showAll || showTime) {
+      const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+      const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+      if (min === 0 && sec === 0) {
+        return "Please enter a time (minutes or seconds).";
+      }
+    }
+    if (showAll || showReps) {
+      if (!form.reps || parseInt(form.reps, 10) <= 0) {
+        return "Please enter a positive number of reps.";
+      }
+    }
+    if (showAll || showLoad) {
+      if (!form.load || parseInt(form.load, 10) <= 0) {
+        return "Please enter a positive load.";
+      }
+    }
+    if (showAll || showRounds) {
+      if (!form.rounds_completed || parseInt(form.rounds_completed, 10) < 0) {
+        return "Please enter rounds completed (0 or more).";
+      }
+    }
+    // partial_reps is optional
+    return null;
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setSubmitting(true);
     setError(null);
+
+    const validationError = validate();
+    if (validationError) {
+      setError(validationError);
+      setSubmitting(false);
+      return;
+    }
 
     try {
       const payload: any = {
@@ -131,13 +223,27 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
           ? parseInt(form.partial_reps, 10)
           : null;
 
-      await logScoreMutation.mutateAsync(payload);
+      if (isEditMode && initialScore) {
+        await updateScoreMutation.mutateAsync({
+          id: initialScore.id,
+          ...payload,
+        });
+      } else {
+        await logScoreMutation.mutateAsync(payload);
+      }
     } catch (err: any) {
-      setError(err.message || "Failed to log score.");
+      setError(err.message || "Failed to submit score.");
     } finally {
       setSubmitting(false);
     }
   };
+
+  // Open popover if editing, otherwise controlled by user
+  useEffect(() => {
+    if (isEditMode && initialScore) {
+      setOpen(true);
+    }
+  }, [isEditMode, initialScore]);
 
   return (
     <Popover.Root open={open} onOpenChange={setOpen}>
@@ -145,11 +251,15 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
         <button
           type="button"
           className={`flex items-center gap-1 rounded px-1 py-0.5 text-xs text-green-600 transition hover:bg-green-50/10 hover:underline focus:outline-none ${className ?? ""}`}
-          aria-label="Log Score"
+          aria-label={isEditMode ? "Edit Score" : "Log Score"}
           onClick={() => setOpen(true)}
         >
           <Plus size={14} className="text-green-600" />
-          {showText && <span className="font-medium">Log score</span>}
+          {showText && (
+            <span className="font-medium">
+              {isEditMode ? "Edit score" : "Log score"}
+            </span>
+          )}
         </button>
       </Popover.Trigger>
       <Popover.Portal>
@@ -159,7 +269,9 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
           className="z-50 w-64 rounded-lg border bg-white p-4 shadow-lg dark:bg-neutral-900"
         >
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-            <div className="mb-1 text-base font-semibold">Log Score</div>
+            <div className="mb-1 text-base font-semibold">
+              {isEditMode ? "Edit Score" : "Log Score"}
+            </div>
             {(showAll || showTime) && (
               <div className="flex gap-2">
                 <div className="flex-1">
@@ -338,15 +450,38 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
               />
             </div>
             {error && <div className="text-xs text-red-600">{error}</div>}
-            <Button
-              type="submit"
-              color="green"
-              disabled={submitting}
-              size="2"
-              className="w-full"
-            >
-              {submitting ? "Logging..." : "Log Score"}
-            </Button>
+            <div className="flex gap-2">
+              <Button
+                type="submit"
+                color="green"
+                disabled={submitting}
+                size="2"
+                className="w-full"
+              >
+                {submitting
+                  ? isEditMode
+                    ? "Updating..."
+                    : "Logging..."
+                  : isEditMode
+                    ? "Update Score"
+                    : "Log Score"}
+              </Button>
+              {isEditMode && (
+                <Button
+                  type="button"
+                  color="gray"
+                  disabled={submitting}
+                  size="2"
+                  className="w-full"
+                  onClick={() => {
+                    setOpen(false);
+                    resetForm();
+                  }}
+                >
+                  Cancel
+                </Button>
+              )}
+            </div>
           </form>
         </Popover.Content>
       </Popover.Portal>

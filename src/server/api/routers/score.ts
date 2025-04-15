@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, protectedProcedure } from "~/server/api/trpc";
 import { scores } from "~/server/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, and } from "drizzle-orm";
 import { TRPCError } from "@trpc/server";
 
 // Define the schema for a single score object in the import array
@@ -21,6 +21,19 @@ const scoreImportSchema = z.object({
 // Define the input schema for the importScores mutation
 const importScoresInputSchema = z.array(scoreImportSchema);
 
+const updateScoreSchema = z.object({
+  id: z.string().uuid(),
+  wodId: z.string().uuid().optional(),
+  scoreDate: z.date().optional(),
+  isRx: z.boolean().optional(),
+  notes: z.string().nullable().optional(),
+  time_seconds: z.number().int().nullable().optional(),
+  reps: z.number().int().nullable().optional(),
+  load: z.number().int().nullable().optional(),
+  rounds_completed: z.number().int().nullable().optional(),
+  partial_reps: z.number().int().nullable().optional(),
+});
+
 export const scoreRouter = createTRPCRouter({
   /**
    * Fetches all scores logged by the current user.
@@ -30,15 +43,6 @@ export const scoreRouter = createTRPCRouter({
     const userScores = await ctx.db.query.scores.findMany({
       where: eq(scores.userId, ctx.session.user.id),
       orderBy: (scores, { desc }) => [desc(scores.scoreDate)], // Order by date descending
-      // We fetch all score component columns by default
-      // Optionally join with WODs if needed later, but fetching WODs separately might be cleaner
-      // with: {
-      //   wod: {
-      //     columns: {
-      //       wodName: true, // Example: only fetch wodName
-      //     },
-      //   },
-      // Explicitly select columns to ensure is_rx is included and map to camelCase
       columns: {
         id: true,
         userId: true,
@@ -100,9 +104,6 @@ export const scoreRouter = createTRPCRouter({
         // Perform bulk insert
         const result = await ctx.db.insert(scores).values(scoresToInsert);
 
-        // Drizzle's SQLite driver might return limited info on bulk insert success.
-        // We'll assume success if no error is thrown.
-        // Check result properties if available and needed for more specific feedback.
         console.log(
           `Successfully inserted ${input.length} scores for user ${userId}`,
         );
@@ -110,7 +111,6 @@ export const scoreRouter = createTRPCRouter({
         return { success: true, count: input.length };
       } catch (error) {
         console.error("Failed to import scores:", error);
-        // Log the specific error for debugging
         if (error instanceof Error) {
           console.error("Error details:", error.message);
         }
@@ -175,10 +175,99 @@ export const scoreRouter = createTRPCRouter({
       }
     }),
 
-  // Placeholder for future procedures
-  // create: protectedProcedure
-  //   .input(z.object({ /* Define input schema based on separate columns */ }))
-  //   .mutation(async ({ ctx, input }) => {
-  //     // ... implementation to insert into scores table using separate columns
-  //   }),
+  /**
+   * Deletes a score by id for the current user.
+   */
+  deleteScore: protectedProcedure
+    .input(z.object({ id: z.string().uuid() }))
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      // Check that the score exists and belongs to the user
+      const [scoreToDelete] = await ctx.db
+        .select()
+        .from(scores)
+        .where(and(eq(scores.id, input.id), eq(scores.userId, userId)));
+
+      if (!scoreToDelete) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Score not found or does not belong to user.",
+        });
+      }
+
+      try {
+        await ctx.db.delete(scores).where(eq(scores.id, input.id));
+        return { success: true };
+      } catch (error) {
+        console.error("Failed to delete score:", error);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to delete score due to a database error.",
+          cause: error,
+        });
+      }
+    }),
+
+  /**
+   * Updates a score by id for the current user.
+   */
+  updateScore: protectedProcedure
+    .input(updateScoreSchema)
+    .mutation(async ({ ctx, input }) => {
+      const userId = ctx.session.user.id;
+      // Check that the score exists and belongs to the user
+      const [scoreToUpdate] = await ctx.db
+        .select()
+        .from(scores)
+        .where(and(eq(scores.id, input.id), eq(scores.userId, userId)));
+
+      if (!scoreToUpdate) {
+        throw new TRPCError({
+          code: "NOT_FOUND",
+          message: "Score not found or does not belong to user.",
+        });
+      }
+
+      // Prepare update object, only include fields that are defined
+      const updateData: Record<string, any> = {};
+      if (input.wodId !== undefined) updateData.wodId = input.wodId;
+      if (input.scoreDate !== undefined) updateData.scoreDate = input.scoreDate;
+      if (input.isRx !== undefined) updateData.is_rx = input.isRx;
+      if (input.notes !== undefined) updateData.notes = input.notes;
+      if (input.time_seconds !== undefined)
+        updateData.time_seconds = input.time_seconds;
+      if (input.reps !== undefined) updateData.reps = input.reps;
+      if (input.load !== undefined) updateData.load = input.load;
+      if (input.rounds_completed !== undefined)
+        updateData.rounds_completed = input.rounds_completed;
+      if (input.partial_reps !== undefined)
+        updateData.partial_reps = input.partial_reps;
+
+      try {
+        const [updatedScore] = await ctx.db
+          .update(scores)
+          .set(updateData)
+          .where(eq(scores.id, input.id))
+          .returning();
+
+        if (!updatedScore) {
+          throw new TRPCError({
+            code: "INTERNAL_SERVER_ERROR",
+            message: "Failed to update score.",
+          });
+        }
+
+        return {
+          ...updatedScore,
+          isRx: updatedScore.is_rx,
+        };
+      } catch (error) {
+        console.error("Failed to update score:", error);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to update score due to a database error.",
+          cause: error,
+        });
+      }
+    }),
 });

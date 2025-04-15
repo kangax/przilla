@@ -1,5 +1,25 @@
 # Recent Changes
 
+- **Edit/Delete Score & Validation Improvements (Apr 2025):**
+
+  - **Goal:** Allow users to edit or delete any logged score directly from the WOD table, and prevent empty/invalid results from being logged.
+  - **Implementation:**
+    - **Backend:**
+      - Added `deleteScore` and `updateScore` protected tRPC mutations to `scoreRouter` (`src/server/api/routers/score.ts`), allowing users to delete or update their own scores.
+    - **Frontend:**
+      - Updated `WodTable` (`src/app/_components/WodTable.tsx`):
+        - For each score, displays edit (pencil) and delete (trash) icons to the right.
+        - Edit icon opens `LogScorePopover` in edit mode, pre-filled with the score's data, and calls `updateScore` on submit.
+        - Delete icon opens a confirmation dialog and calls `deleteScore` on confirm, with UI refresh.
+      - Updated `LogScorePopover` (`src/app/_components/LogScorePopover.tsx`):
+        - Supports both log and edit modes, with correct button labeling and form pre-fill.
+        - Validation logic prevents submitting empty or invalid results for all score types (time, reps, load, etc.).
+        - Cancel button for edit mode.
+    - **UI/UX:**
+      - Edit/delete icons are accessible, have tooltips, and are styled minimally.
+      - All error and loading states are handled gracefully.
+  - **Outcome:** Users can now edit or delete any score directly from the table, and cannot log empty/invalid results. The implementation is modular, context-aware, and follows project UI/UX patterns.
+
 - **Time Input Update in LogScorePopover (Apr 2025):**
 
   - **Goal:** Allow users to input time in the popover UI as a combination of minutes and seconds (e.g., "35min 24sec"), not AM/PM or a single seconds field.

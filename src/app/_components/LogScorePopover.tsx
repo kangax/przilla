@@ -28,6 +28,7 @@ interface LogScorePopoverProps {
   showText?: boolean;
   initialScore?: Score | null;
   onClose?: () => void;
+  triggerLabel?: string; // Explicit label for trigger button
 }
 
 export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
@@ -37,6 +38,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   showText,
   initialScore,
   onClose,
+  triggerLabel,
 }) => {
   const isEditMode = !!initialScore;
   const [open, setOpen] = useState(false);
@@ -117,11 +119,16 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
   const isAmrap = tags.includes("amrap");
   const isLoad = tags.includes("load") || tags.includes("max load");
 
-  const showTime = isForTime;
-  const showReps = isAmrap;
-  const showLoad = isLoad;
-  const showRounds = isAmrap;
-  const showPartialReps = isAmrap;
+  // Improved field logic: only show relevant fields for each workout type
+  // If AMRAP, never show time fields, even if "for time" is also present
+  const isHybrid =
+    (isForTime && isAmrap) || (isForTime && isLoad) || (isAmrap && isLoad);
+  const showTime = isForTime && !isAmrap && !isLoad && !isHybrid;
+  const showReps = (isAmrap && !isLoad) || (isHybrid && isAmrap && !isLoad);
+  const showLoad = isLoad && !isAmrap && !isForTime && !isHybrid;
+  const showRounds = isAmrap && !isLoad;
+  const showPartialReps = isAmrap && !isLoad;
+  // Fallback: show all if hybrid/unknown
   const showAll =
     !showTime && !showReps && !showLoad && !showRounds && !showPartialReps;
 
@@ -273,22 +280,25 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
         <button
           type="button"
           className={`flex items-center gap-1 rounded px-1 py-0.5 text-xs text-green-600 transition hover:bg-green-50/10 hover:underline focus:outline-none ${className ?? ""}`}
-          aria-label={isEditMode ? "Edit Score" : "Log Score"}
+          aria-label={triggerLabel ?? (isEditMode ? "Edit Score" : "Log Score")}
           onClick={() => setOpen(true)}
         >
           <Plus size={14} className="text-green-600" />
           {showText && (
             <span className="font-medium">
-              {isEditMode ? "Edit score" : "Log score"}
+              {triggerLabel ?? (isEditMode ? "Edit score" : "Log score")}
             </span>
           )}
         </button>
       </Popover.Trigger>
       <Popover.Portal>
         <Popover.Content
-          align="end"
+          align="center"
+          side="bottom"
           sideOffset={8}
-          className="z-50 w-64 rounded-lg border bg-white p-4 shadow-lg dark:bg-neutral-900"
+          avoidCollisions={true}
+          collisionPadding={8}
+          className="z-50 max-h-[calc(100vh-32px)] w-64 overflow-auto rounded-lg border bg-white p-4 shadow-lg dark:bg-neutral-900"
         >
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <div className="mb-1 text-base font-semibold">
@@ -339,7 +349,98 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
                 </div>
               </div>
             )}
-            {(showAll || showReps) && (
+            {/* Compact: Rounds and Partial Reps on same line for AMRAPs */}
+            {(showAll || (showRounds && showPartialReps)) && (
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <label
+                    htmlFor="rounds_completed"
+                    className="mb-1 block text-xs font-medium"
+                  >
+                    Rounds
+                  </label>
+                  <input
+                    id="rounds_completed"
+                    name="rounds_completed"
+                    type="number"
+                    min={0}
+                    placeholder="Rounds"
+                    value={form.rounds_completed}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label
+                    htmlFor="partial_reps"
+                    className="mb-1 block text-xs font-medium"
+                  >
+                    Partial Reps
+                  </label>
+                  <input
+                    id="partial_reps"
+                    name="partial_reps"
+                    type="number"
+                    min={0}
+                    placeholder="Partial Reps"
+                    value={form.partial_reps}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+            )}
+            {/* Compact: Reps and Load on same line if both are shown */}
+            {(showAll || (showReps && showLoad)) && (
+              <div className="flex gap-2">
+                <div className="flex-1">
+                  <label
+                    htmlFor="reps"
+                    className="mb-1 block text-xs font-medium"
+                  >
+                    Reps
+                  </label>
+                  <input
+                    id="reps"
+                    name="reps"
+                    type="number"
+                    min={0}
+                    placeholder="Reps"
+                    value={form.reps}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    autoComplete="off"
+                  />
+                </div>
+                <div className="flex-1">
+                  <label
+                    htmlFor="load"
+                    className="mb-1 block text-xs font-medium"
+                  >
+                    Load
+                  </label>
+                  <input
+                    id="load"
+                    name="load"
+                    type="number"
+                    min={0}
+                    placeholder="Load"
+                    value={form.load}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                    autoComplete="off"
+                  />
+                </div>
+              </div>
+            )}
+            {/* Fallback: show reps or load individually if not paired */}
+            {showAll && !showRounds && !showLoad && (
               <div>
                 <label
                   htmlFor="reps"
@@ -361,7 +462,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
                 />
               </div>
             )}
-            {(showAll || showLoad) && (
+            {showAll && !showRounds && !showReps && (
               <div>
                 <label
                   htmlFor="load"
@@ -383,7 +484,8 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
                 />
               </div>
             )}
-            {(showAll || showRounds) && (
+            {/* If only rounds or only reps or only load are shown (non-hybrid) */}
+            {!showAll && showRounds && !showReps && (
               <div>
                 <label
                   htmlFor="rounds_completed"
@@ -405,7 +507,52 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
                 />
               </div>
             )}
-            {(showAll || showPartialReps) && (
+            {!showAll && showReps && !showRounds && (
+              <div>
+                <label
+                  htmlFor="reps"
+                  className="mb-1 block text-xs font-medium"
+                >
+                  Reps
+                </label>
+                <input
+                  id="reps"
+                  name="reps"
+                  type="number"
+                  min={0}
+                  placeholder="Reps"
+                  value={form.reps}
+                  onChange={handleChange}
+                  disabled={submitting}
+                  className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  autoComplete="off"
+                />
+              </div>
+            )}
+            {!showAll && showLoad && (
+              <div>
+                <label
+                  htmlFor="load"
+                  className="mb-1 block text-xs font-medium"
+                >
+                  Load
+                </label>
+                <input
+                  id="load"
+                  name="load"
+                  type="number"
+                  min={0}
+                  placeholder="Load"
+                  value={form.load}
+                  onChange={handleChange}
+                  disabled={submitting}
+                  className="w-full rounded border border-input bg-background px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-500"
+                  autoComplete="off"
+                />
+              </div>
+            )}
+            {/* Show Partial Reps only if not paired with Rounds */}
+            {((showAll && !showRounds) || (showPartialReps && !showRounds)) && (
               <div>
                 <label
                   htmlFor="partial_reps"
@@ -472,20 +619,20 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
               />
             </div>
             {error && <div className="text-xs text-red-600">{error}</div>}
-            <div className="flex gap-2">
+            <div className="flex min-w-0 gap-2">
               <Button
                 type="submit"
                 color="green"
                 disabled={submitting}
                 size="2"
-                className="w-full"
+                className="flex-1"
               >
                 {submitting
                   ? isEditMode
                     ? "Updating..."
                     : "Logging..."
                   : isEditMode
-                    ? "Update Score"
+                    ? "Update"
                     : "Log Score"}
               </Button>
               {isEditMode && (
@@ -494,7 +641,7 @@ export const LogScorePopover: React.FC<LogScorePopoverProps> = ({
                   color="gray"
                   disabled={submitting}
                   size="2"
-                  className="w-full"
+                  className="flex-1"
                   onClick={() => {
                     setOpen(false);
                     resetForm();

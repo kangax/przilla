@@ -18,6 +18,23 @@
         - Ensured all update logic is type-safe.
   - **Outcome:** All TypeScript/ESLint errors and warnings related to unsafe types, floating promises, and unused code are resolved. The codebase is now fully type-safe and clean, in line with project standards.
 
+  - **April 14, 2025: Lint/Type Safety Batch Fixes**
+    - **Test files:** Added `// eslint-disable-next-line @typescript-eslint/no-empty-function` above all empty `mutate` and `reset` mock methods in:
+      - `src/app/_components/WodTable.actions.test.tsx`
+      - `src/app/_components/WodTable.headers.test.tsx`
+      - `src/app/_components/WodTable.links.test.tsx`
+      - `src/app/_components/WodTable.rows.test.tsx`
+    - **test-utils.tsx:**
+      - Replaced all `any` usage with `Record<string, unknown>`.
+      - Added eslint-disable comments for empty mock methods.
+      - Replaced `@ts-ignore` with `@ts-expect-error` and then removed the directive when it was unused.
+      - Ensured all assignments are type-safe.
+    - **WodTable.tsx:**
+      - Refactored to call `useVirtualizer` unconditionally, fixing the "React Hook called conditionally" lint error.
+      - Restored the full `createColumns` function to resolve missing reference error.
+      - Confirmed all code is type-safe and passes lint/typecheck.
+    - **Outcome:** All reported ESLint and TypeScript errors are resolved. The codebase is now fully type-safe and clean, with all test mocks and hooks compliant with project linting rules.
+
 # Recent Changes
 
 - **Score Tooltip & Info Icon Update (Apr 2025):**

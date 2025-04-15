@@ -85,7 +85,6 @@ const createColumns = (
   };
 
   return [
-    // ... (all previous columns unchanged)
     columnHelper.accessor("wodName", {
       header: () => (
         <span onClick={() => handleSort("wodName")} className="cursor-pointer">
@@ -437,6 +436,15 @@ const WodTable: React.FC<WodTableProps> = ({
   const isTestEnv =
     typeof process !== "undefined" && process.env.NODE_ENV === "test";
 
+  // Always call useVirtualizer, but set count to 0 in test env
+  const rowVirtualizer = useVirtualizer({
+    count: isTestEnv ? 0 : isLoadingScores ? 0 : rows.length,
+    getScrollElement: () => parentRef.current,
+    estimateSize: () => 49,
+    overscan: 5,
+    measureElement: (element) => (element as HTMLElement).offsetHeight,
+  });
+
   let renderedRows: React.ReactNode;
   if (isTestEnv) {
     renderedRows = rows.map((row) => (
@@ -462,14 +470,6 @@ const WodTable: React.FC<WodTableProps> = ({
       </div>
     ));
   } else {
-    const rowVirtualizer = useVirtualizer({
-      count: isLoadingScores ? 0 : rows.length,
-      getScrollElement: () => parentRef.current,
-      estimateSize: () => 49,
-      overscan: 5,
-      measureElement: (element) => (element as HTMLElement).offsetHeight,
-    });
-
     const virtualRows = rowVirtualizer.getVirtualItems();
     renderedRows = virtualRows.map((virtualRow) => {
       const row = rows[virtualRow.index];

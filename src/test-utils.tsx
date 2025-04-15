@@ -6,7 +6,7 @@ import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { createContext } from "react";
 
 // Create a mock tRPC context and hooks
-const TRPCContext = createContext<any>({});
+const TRPCContext = createContext<Record<string, unknown>>({});
 
 export const MockTRPCProvider = ({
   children,
@@ -19,33 +19,41 @@ export const MockTRPCProvider = ({
     score: {
       deleteScore: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
       logScore: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
       updateScore: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
       importScores: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
@@ -74,13 +82,6 @@ export const MockTRPCProvider = ({
       {children}
     </TRPCContext.Provider>
   );
-};
-
-// Patch the global api object to use the mock in tests
-// @ts-ignore
-global.api = {
-  ...global.api,
-  ...MockTRPCProvider,
 };
 
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {

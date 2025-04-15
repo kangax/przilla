@@ -10,33 +10,41 @@ vi.mock("~/trpc/react", () => ({
     score: {
       deleteScore: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
       logScore: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
       updateScore: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },
       importScores: {
         useMutation: () => ({
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           mutate: () => {},
           isLoading: false,
           isSuccess: true,
+          // eslint-disable-next-line @typescript-eslint/no-empty-function
           reset: () => {},
         }),
       },

@@ -9,6 +9,7 @@ import {
   Badge,
   IconButton,
   Dialog,
+  Button,
 } from "@radix-ui/themes";
 import { Pencil, Trash } from "lucide-react";
 import {
@@ -583,18 +584,19 @@ const WodTable: React.FC<WodTableProps> = ({
               undone.
             </Dialog.Description>
             <Flex gap="3" mt="4" justify="end">
-              <button className="btn btn-sm" onClick={cancelDeleteScore}>
+              <Button variant="soft" color="gray" onClick={cancelDeleteScore}>
                 Cancel
-              </button>
-              <button
-                className="btn btn-sm btn-danger"
+              </Button>
+              <Button
+                variant="solid"
+                color="red"
                 onClick={confirmDeleteScore}
                 disabled={deleteScoreMutation.status === "pending"}
               >
                 {deleteScoreMutation.status === "pending"
                   ? "Deleting..."
                   : "Delete"}
-              </button>
+              </Button>
             </Flex>
           </Dialog.Content>
         </Dialog.Root>

@@ -1,5 +1,16 @@
 # Recent Changes
 
+- **Delete Confirmation Dialog Button Styling Fix (Apr 15, 2025):**
+
+  - **Goal:** Align the delete confirmation dialog buttons with the project's Radix UI Theme styling.
+  - **Implementation:**
+    - Updated `WodTable` (`src/app/(main)/components/WodTable.tsx`):
+      - Imported `Button` from `@radix-ui/themes`.
+      - Replaced standard HTML `<button>` elements with Radix `Button` components within the `Dialog.Content`.
+      - Applied `variant="soft" color="gray"` to the "Cancel" button.
+      - Applied `variant="solid" color="red"` to the "Delete" button.
+  - **Outcome:** The delete confirmation dialog buttons now use the consistent Radix UI styling, improving visual coherence.
+
 - **Log Score Popover Behavior Fix (Apr 15, 2025):**
 
   - **Goal:** Fix issues with `LogScorePopover` where state persisted between modes and the trigger button behavior was incorrect during edits.

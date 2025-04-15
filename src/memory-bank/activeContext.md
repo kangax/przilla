@@ -23,6 +23,7 @@
   - and also display in a tooltip how a value was derived (which workouts were used)
 - Tag pills are white in dark mode on mobile
 - Add sorting to mobile view
+- Implement always-visible log score button in mobile list view
 
 ### Maybe
 

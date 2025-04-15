@@ -320,21 +320,17 @@ ${getPerformanceLevelTooltip(wod)}`}
               {/* If editing this score, show LogScorePopover in edit mode */}
               {editingScoreId && editingWod && editingWod.id === wod.id ? (
                 <LogScorePopover
-                  key={`edit-${editingScoreId}`}
                   wod={editingWod}
                   onScoreLogged={onScoreLogged}
                   showText
                   initialScore={scores?.find((s) => s.id === editingScoreId)}
                   onClose={onCloseEdit}
-                  triggerLabel="Log score"
                 />
               ) : (
                 <LogScorePopover
-                  key={`log-${wod.id}`}
                   wod={wod}
                   onScoreLogged={onScoreLogged}
                   showText
-                  triggerLabel="Log score"
                 />
               )}
             </div>

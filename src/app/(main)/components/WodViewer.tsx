@@ -54,6 +54,7 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
     "date",
     "difficulty",
     "countLikes",
+    "results",
   ];
   return validSortKeys.includes(sortBy as SortByType);
 };

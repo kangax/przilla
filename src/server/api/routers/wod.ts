@@ -9,6 +9,12 @@ import { wods, scores } from "~/server/db/schema";
 import { type Wod, type Score, type Benchmarks } from "~/types/wodTypes";
 import { isWodDone } from "~/utils/wodUtils";
 
+// Define the structure for individual scores in the chart data
+type MonthlyScoreDetail = {
+  wodName: string;
+  level: number; // The calculated level (0-4) for this score
+};
+
 export const wodRouter = createTRPCRouter({
   /**
    * Fetches all WODs from the database, ordered alphabetically by name,
@@ -37,7 +43,8 @@ export const wodRouter = createTRPCRouter({
   }),
 
   /**
-   * Fetches aggregated chart data for WOD distribution by tags and categories
+   * Fetches aggregated chart data for WOD distribution by tags and categories,
+   * and monthly performance data including individual score breakdowns.
    */
   getChartData: protectedProcedure.query(async ({ ctx }) => {
     // Get all WODs
@@ -67,7 +74,7 @@ export const wodRouter = createTRPCRouter({
       {},
     );
 
-    // Process WODs to count tags and categories
+    // Process WODs to count tags and categories for completed WODs
     const tagCounts: Record<string, number> = {};
     const categoryCounts: Record<string, number> = {};
 
@@ -92,22 +99,24 @@ export const wodRouter = createTRPCRouter({
       }
     });
 
-    // Calculate monthly score data for timeline chart
+    // Calculate monthly score data for timeline chart, including score details
     const monthlyData: Record<
       string,
-      { count: number; totalLevelScore: number }
+      { count: number; totalLevelScore: number; scores: MonthlyScoreDetail[] } // Updated structure
     > = {};
 
     userScores.forEach((score) => {
       const monthKey = score.scoreDate.toISOString().slice(0, 7); // YYYY-MM format
       if (!monthlyData[monthKey]) {
-        monthlyData[monthKey] = { count: 0, totalLevelScore: 0 };
+        // Initialize with the new structure including the scores array
+        monthlyData[monthKey] = { count: 0, totalLevelScore: 0, scores: [] };
       }
       monthlyData[monthKey].count++;
 
       // Calculate performance level score based on benchmarks
       const wod = allWods.find((w) => w.id === score.wodId);
-      if (wod?.benchmarks) {
+      if (wod?.benchmarks && wod.wodName) {
+        // Ensure wod and wodName exist
         const benchmarksInput = wod.benchmarks || "{}";
         const benchmarks: Benchmarks =
           typeof benchmarksInput === "string"
@@ -115,38 +124,72 @@ export const wodRouter = createTRPCRouter({
             : benchmarksInput;
 
         // Get numeric score value (time in seconds, reps, etc.)
-        const scoreValue = score.time_seconds || score.reps || 0;
+        const scoreValue = score.time_seconds ?? score.reps ?? 0; // Use nullish coalescing
 
         // Calculate performance level (0-4 scale)
         let levelScore = 0;
         if (benchmarks.levels) {
-          if (scoreValue <= (benchmarks.levels.elite?.max || Infinity)) {
-            levelScore = 4; // Elite
-          } else if (
-            scoreValue <= (benchmarks.levels.advanced?.max || Infinity)
-          ) {
-            levelScore = 3; // Advanced
-          } else if (
-            scoreValue <= (benchmarks.levels.intermediate?.max || Infinity)
-          ) {
-            levelScore = 2; // Intermediate
-          } else {
-            levelScore = 1; // Beginner
+          // Handle time-based benchmarks (lower is better)
+          if (benchmarks.type === "time") {
+            if (scoreValue <= (benchmarks.levels.elite?.max ?? Infinity))
+              levelScore = 4;
+            else if (
+              scoreValue <= (benchmarks.levels.advanced?.max ?? Infinity)
+            )
+              levelScore = 3;
+            else if (
+              scoreValue <= (benchmarks.levels.intermediate?.max ?? Infinity)
+            )
+              levelScore = 2;
+            else if (scoreValue >= (benchmarks.levels.beginner?.min ?? 0))
+              levelScore = 1;
+            // Handle cases where score might be below beginner min (if defined) - treat as beginner
+            else if (
+              benchmarks.levels.beginner?.min &&
+              scoreValue < benchmarks.levels.beginner.min
+            )
+              levelScore = 1;
+          }
+          // Handle rep/load-based benchmarks (higher is better)
+          else {
+            if (scoreValue >= (benchmarks.levels.elite?.min ?? 0))
+              levelScore = 4;
+            else if (scoreValue >= (benchmarks.levels.advanced?.min ?? 0))
+              levelScore = 3;
+            else if (scoreValue >= (benchmarks.levels.intermediate?.min ?? 0))
+              levelScore = 2;
+            else if (
+              scoreValue <= (benchmarks.levels.beginner?.max ?? Infinity)
+            )
+              levelScore = 1;
+            // Handle cases where score might be above beginner max (if defined) - treat as beginner
+            else if (
+              benchmarks.levels.beginner?.max &&
+              scoreValue > benchmarks.levels.beginner.max
+            )
+              levelScore = 1;
           }
         }
 
-        // Bonus for Rx
-        if (score.is_rx) {
+        // Bonus for Rx - apply only if not already Elite
+        if (score.is_rx && levelScore < 4) {
           levelScore = Math.min(levelScore + 0.5, 4);
         }
+
         monthlyData[monthKey].totalLevelScore += levelScore;
+
+        // Add the score detail to the scores array for this month
+        monthlyData[monthKey].scores.push({
+          wodName: wod.wodName,
+          level: levelScore,
+        });
       }
     });
 
     return {
       tagCounts,
       categoryCounts,
-      monthlyData,
+      monthlyData, // Return the updated structure
     };
   }),
 });

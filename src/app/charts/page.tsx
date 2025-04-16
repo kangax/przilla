@@ -23,9 +23,16 @@ type FrequencyDataPoint = {
   month: string;
   count: number;
 };
+// Define the structure for individual scores in the chart data (matching backend)
+type MonthlyScoreDetail = {
+  wodName: string;
+  level: number; // The calculated level (0-4) for this score
+};
+// Update PerformanceDataPoint to include the scores array
 type PerformanceDataPoint = {
   month: string;
   averageLevel: number;
+  scores: MonthlyScoreDetail[]; // Add the scores array
 };
 
 export default async function ChartsPage() {
@@ -48,7 +55,7 @@ export default async function ChartsPage() {
   let tagChartData: ChartDataPoint[] = [];
   let categoryChartData: ChartDataPoint[] = [];
   let frequencyData: FrequencyDataPoint[] = [];
-  let performanceData: PerformanceDataPoint[] = [];
+  let performanceData: PerformanceDataPoint[] = []; // Type now includes scores
 
   if (session?.user) {
     // --- Logged In: Fetch real data ---
@@ -56,7 +63,7 @@ export default async function ChartsPage() {
       const chartData = await api.wod.getChartData();
       const categoryCounts = chartData.categoryCounts;
       const chartTagCounts = chartData.tagCounts;
-      const monthlyScores = chartData.monthlyData;
+      const monthlyScores = chartData.monthlyData; // Now includes scores array per month
 
       // Prepare real data for charts
       tagChartData = DESIRED_TAG_ORDER.map((tag) => ({
@@ -73,17 +80,21 @@ export default async function ChartsPage() {
         month,
         count: monthlyScores[month].count,
       }));
+      // Update performanceData mapping to include the scores array
       performanceData = sortedMonths.map((month) => ({
         month,
         averageLevel:
           monthlyScores[month].count > 0
             ? monthlyScores[month].totalLevelScore / monthlyScores[month].count
             : 0,
+        scores: monthlyScores[month].scores || [], // Include the scores array, default to empty if missing
       }));
     } catch (error) {
       console.error("Error loading protected chart data:", error);
       // Optionally set placeholder data even on error for logged-in users?
       // For now, arrays will remain empty if fetch fails
+      // Ensure performanceData is initialized with empty scores array in case of error
+      performanceData = [];
     }
   } else {
     // --- Logged Out: Generate placeholder data ---
@@ -93,7 +104,11 @@ export default async function ChartsPage() {
     );
     const placeholderTimeline = generatePlaceholderTimelineData();
     frequencyData = placeholderTimeline.frequencyData;
-    performanceData = placeholderTimeline.performanceData;
+    // Update placeholder performance data to include an empty scores array
+    performanceData = placeholderTimeline.performanceData.map((p) => ({
+      ...p,
+      scores: [],
+    }));
   }
 
   // Process movement data (uses public WOD data - remains unchanged)
@@ -290,7 +305,7 @@ export default async function ChartsPage() {
             <Box className="relative flex-1">
               <WodTimelineChart
                 frequencyData={frequencyData}
-                performanceData={performanceData}
+                performanceData={performanceData} // Pass updated performanceData
               />
               {!session?.user && <ChartLoginOverlay />}
             </Box>

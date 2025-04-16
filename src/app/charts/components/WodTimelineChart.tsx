@@ -1,7 +1,14 @@
 "use client";
 
 import { useState, useMemo } from "react"; // Import useMemo
-import { Box, Flex, SegmentedControl, Heading, Text } from "@radix-ui/themes";
+import {
+  Box,
+  Flex,
+  SegmentedControl,
+  Heading,
+  Text,
+  Separator,
+} from "@radix-ui/themes"; // Added Separator
 import {
   LineChart,
   Line,
@@ -17,6 +24,12 @@ import {
   type ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 
+// Define the structure for individual scores (matching page.tsx and backend)
+type MonthlyScoreDetail = {
+  wodName: string;
+  level: number; // The calculated level (0-4) for this score
+};
+
 // Define the structure for timeline data points
 type FrequencyDataPoint = {
   month: string; // YYYY-MM format
@@ -24,18 +37,20 @@ type FrequencyDataPoint = {
   rollingAverage?: number; // Add optional rolling average
 };
 
+// Update PerformanceDataPoint to include the scores array
 type PerformanceDataPoint = {
   month: string; // YYYY-MM format
   averageLevel: number; // 0-4 scale
   rollingAverage?: number; // Add optional rolling average
+  scores: MonthlyScoreDetail[]; // Add the scores array
 };
 
-// Union type for data points
+// Union type for data points, ensuring PerformanceDataPoint includes scores
 type DataPoint = FrequencyDataPoint | PerformanceDataPoint;
 
 interface WodTimelineChartProps {
   frequencyData: FrequencyDataPoint[];
-  performanceData: PerformanceDataPoint[];
+  performanceData: PerformanceDataPoint[]; // Type now includes scores
 }
 
 // Helper function to calculate rolling average
@@ -69,7 +84,13 @@ const calculateRollingAverage = (
     // Add check for windowSlice.length to prevent division by zero, though theoretically > 0
     const average = windowSlice.length > 0 ? sum / windowSlice.length : 0;
 
-    return { ...point, rollingAverage: average };
+    // Return the point including the rolling average and ensure scores are preserved if it's a PerformanceDataPoint
+    const resultPoint = { ...point, rollingAverage: average };
+    // If the original point was a PerformanceDataPoint, ensure 'scores' is carried over
+    if ("scores" in point) {
+      (resultPoint as PerformanceDataPoint).scores = point.scores;
+    }
+    return resultPoint;
   });
 };
 
@@ -104,7 +125,8 @@ const CustomTimelineTooltip = ({
 }: TooltipProps<ValueType, NameType>) => {
   // Check if the tooltip should be active and has valid data
   if (active && payload && payload.length > 0 && payload[0].payload) {
-    const dataPoint = payload[0].payload as DataPoint; // Base data point for the month
+    // Cast the payload to the specific PerformanceDataPoint type if applicable
+    const dataPoint = payload[0].payload as DataPoint;
     const rollingAverage = dataPoint.rollingAverage; // Rolling average is stored here
 
     // Determine which line's data we are hovering over (actual or average)
@@ -123,8 +145,9 @@ const CustomTimelineTooltip = ({
 
     let displayValue = "Invalid data";
     let rollingAvgDisplay = "";
+    let scoreBreakdown: MonthlyScoreDetail[] = []; // Initialize score breakdown
 
-    // Format the main value
+    // Format the main value and extract score breakdown if it's performance data
     if (
       name === "count" &&
       (typeof value === "number" || typeof value === "string")
@@ -133,10 +156,16 @@ const CustomTimelineTooltip = ({
       if (typeof rollingAverage === "number") {
         rollingAvgDisplay = ` (Avg: ${rollingAverage.toFixed(1)})`;
       }
-    } else if (name === "averageLevel" && typeof value === "number") {
+    } else if (
+      name === "averageLevel" &&
+      typeof value === "number" &&
+      "scores" in dataPoint // Check if it's a PerformanceDataPoint with scores
+    ) {
       const numericLevel = value.toFixed(2);
       const descriptiveLevel = getDescriptiveLevel(value);
       displayValue = `${descriptiveLevel} (${numericLevel})`;
+      scoreBreakdown = dataPoint.scores || []; // Get the scores array
+
       if (typeof rollingAverage === "number") {
         const avgNumericLevel = rollingAverage.toFixed(2);
         const avgDescriptiveLevel = getDescriptiveLevel(rollingAverage);
@@ -148,16 +177,18 @@ const CustomTimelineTooltip = ({
     }
 
     return (
-      <Box className="rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
+      <Box className="max-w-xs rounded bg-gray-700 p-2 text-xs text-white shadow-lg dark:bg-gray-800 dark:text-gray-200">
         <Text className="font-bold">{String(label)}</Text> {/* Month */}
         {name === "averageLevel" ? (
           <Flex direction="column" gap="1" mt="1">
+            {/* Level Info */}
             <Flex align="center" gap="1">
               <Text>Level:</Text>
               <Text className={getLevelColor(Number(value))}>
                 {displayValue}
               </Text>
             </Flex>
+            {/* Trend Info */}
             {rollingAvgDisplay && (
               <Flex align="center" gap="1">
                 <Text>Trend:</Text>
@@ -166,8 +197,33 @@ const CustomTimelineTooltip = ({
                 </Text>
               </Flex>
             )}
+            {/* Score Breakdown Section */}
+            {scoreBreakdown.length > 0 && (
+              <>
+                <Separator my="1" size="4" /> {/* Add a separator */}
+                <Text size="1" weight="bold" mb="1">
+                  Breakdown:
+                </Text>
+                <Flex direction="column" gap="0">
+                  {scoreBreakdown.map((score, index) => (
+                    <Flex key={index} justify="between" gap="2">
+                      <Text size="1" truncate>
+                        {score.wodName}
+                      </Text>
+                      <Text
+                        size="1"
+                        className={`${getLevelColor(score.level)} flex-shrink-0`}
+                      >
+                        ({getDescriptiveLevel(score.level)})
+                      </Text>
+                    </Flex>
+                  ))}
+                </Flex>
+              </>
+            )}
           </Flex>
         ) : (
+          // Display for Frequency view
           <Text>
             : {displayValue}
             {rollingAvgDisplay}
@@ -207,7 +263,12 @@ export default function WodTimelineChart({
     if (!baseData || baseData.length === 0) {
       return [];
     }
-    return calculateRollingAverage(baseData, key, ROLLING_WINDOW);
+    // Pass the correct type to calculateRollingAverage
+    return calculateRollingAverage(
+      baseData as DataPoint[],
+      key,
+      ROLLING_WINDOW,
+    );
   }, [view, frequencyData, performanceData]);
 
   const dataKey = view === "frequency" ? "count" : "averageLevel";

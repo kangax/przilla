@@ -1,5 +1,26 @@
 # Recent Changes
 
+- **Performance Chart Tooltip Enhancement (Apr 15, 2025):**
+
+  - **Goal:** Enhance the performance chart tooltip to show a breakdown of individual workouts and their levels that contributed to the calculated average level for a specific month.
+  - **Implementation:**
+    - Updated `api.wod.getChartData` tRPC procedure (`src/server/api/routers/wod.ts`):
+      - Modified the return structure for `monthlyData` to include a `scores` array for each month.
+      - This `scores` array contains objects with `wodName` and calculated `level` for each score logged in that month.
+    - Updated Charts Page (`src/app/charts/page.tsx`):
+      - Adjusted the `PerformanceDataPoint` type definition to include the `scores: MonthlyScoreDetail[]` array.
+      - Modified the data processing logic to extract the `scores` array from the API response and include it in the `performanceData` prop passed to the chart component.
+      - Updated placeholder data generation to include an empty `scores` array.
+    - Updated `WodTimelineChart.tsx` (`src/app/charts/components/WodTimelineChart.tsx`):
+      - Updated the local `PerformanceDataPoint` type definition to match the page component.
+      - Modified the `calculateRollingAverage` helper function to ensure the `scores` array is preserved when calculating averages.
+      - Enhanced the `CustomTimelineTooltip` component:
+        - Accesses the `scores` array from the data point payload.
+        - Renders a "Breakdown:" section below the "Level" and "Trend" information.
+        - Iterates through the `scores` array, displaying each `wodName` and its descriptive level (using `getDescriptiveLevel` and `getLevelColor` helpers).
+        - Added a `Separator` for visual clarity.
+  - **Outcome:** When hovering over a data point in the "Performance" view of the timeline chart, the tooltip now displays the average Level, the Trend (rolling average), and a detailed breakdown list of the workouts performed that month, along with the user's calculated level for each workout.
+
 - **Dialog Background Color Fix (Apr 15, 2025):**
 
   - **Goal:** Fix the background color of the `LogScoreDialog` which was not respecting the Radix UI Theme.

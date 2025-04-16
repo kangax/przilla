@@ -2,6 +2,10 @@
 
 ## Current Focus
 
+- **Performance Chart Tooltip Enhancement (Apr 15, 2025):** Updated the performance timeline chart (`WodTimelineChart.tsx`) tooltip. When hovering over a data point in the "Performance" view, the tooltip now displays a breakdown of the individual WODs and their calculated levels that contributed to the average level for that month. This involved:
+  - Modifying the `api.wod.getChartData` tRPC procedure (`src/server/api/routers/wod.ts`) to return detailed score information (WOD name, level) alongside aggregated monthly data.
+  - Updating the chart page (`src/app/charts/page.tsx`) to process and pass this detailed data to the chart component.
+  - Enhancing the `CustomTimelineTooltip` within `WodTimelineChart.tsx` to render the breakdown list below the existing Level and Trend information.
 - **Dialog Background Color Fix (Apr 15, 2025):** Removed explicit Tailwind background classes (`bg-white`, `dark:bg-neutral-900`) from `LogScoreDialog.tsx`'s `Dialog.Content`. This allows Radix UI Themes to correctly apply the theme-appropriate background color, resolving an issue where the dialog had an off-theme background. The delete confirmation dialog in `WodTable.tsx` still needs investigation as it doesn't use explicit overrides but shows an incorrect background.
 - **Log Score UI Refactor: Popover to Dialog (Apr 15, 2025):** Replaced the score logging/editing Popover (`LogScorePopover.tsx`) with a centered Modal Dialog (`LogScoreDialog.tsx`) using Radix UI Dialog components. This provides a more focused user experience. The parent component (`WodTable.tsx`) now manages the dialog state. The core form logic, validation, and state handling (including recent fixes for state reset) were preserved in the new dialog component. **Update:** Ensured the dialog renders within the Radix Theme context by adding an ID to `PageLayout.tsx` and using the `container` prop on `Dialog.Portal` in `LogScoreDialog.tsx`. **Update 2:** Replaced the Rx `Checkbox` with a Radix UI `Switch` component for a toggle-style input. **Update 3:** Rearranged the Date and Rx fields in the dialog to place Date (with label) on the left and Rx Switch on the right on the same line. **Update 4:** Reduced the width of the "Minutes" and "Seconds" input fields for a more compact layout.
 - **Log Score Popover Behavior Fix (Apr 15, 2025):** Resolved issues with the _previous_ `LogScorePopover`:
@@ -21,20 +25,27 @@
 
 ### Must have
 
-- Performance chart should show values relative to WOD difficulty
-  - and also display in a tooltip how a value was derived (which workouts were used)
+- Add "log score"/edit/delete buttons in mobile list view
+- Score logging should be one of time/load/reps/round+reps
+
+### Good to have
+
 - Tag pills are white in dark mode on mobile
 - Add sorting to mobile view
-- Implement always-visible log score button in mobile list view
+- Performance chart should show values relative to WOD difficulty
 
 ### Maybe
 
-- Wodwell
+- Import from Wodwell
   - write a script for scraping
   - bookmarklet so users can use? (this has been difficult)
+- Export your workouts as JSON/CSV
 
 ## Learnings & Insights
 
+- Passing detailed data structures (like the score breakdown) through multiple component layers (API -> Page -> Chart) requires careful type definition updates at each stage.
+- Recharts custom tooltips provide flexibility to display complex, structured information derived from the data payload. Using helper functions (like `getDescriptiveLevel`) within the tooltip enhances readability.
+- When calculating rolling averages or other derived data, ensure that the original data points (including newly added fields like `scores`) are correctly preserved and passed along in the transformed data structure.
 - When using Radix UI Themes, avoid applying explicit background color classes (like Tailwind's `bg-white` or `dark:bg-*`) to components like `Dialog.Content`, as this can override the theme's intended styling. Let the theme handle the background automatically.
 - Using a centered Dialog for score logging/editing provides a more focused interaction compared to a Popover attached to a trigger element.
 - Radix UI Portals need a specified `container` within the Theme provider to inherit theme styles correctly.

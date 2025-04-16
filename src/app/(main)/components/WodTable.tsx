@@ -18,6 +18,8 @@ import {
   createColumnHelper,
   flexRender,
   type ColumnDef,
+  type SortingFn, // Added SortingFn
+  type Row, // Added Row
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { Wod, Score, SortByType } from "~/types/wodTypes";
@@ -26,6 +28,7 @@ import {
   formatScore,
   formatShortDate,
   getPerformanceBadgeDetails,
+  getPerformanceLevel, // Added getPerformanceLevel
 } from "~/utils/wodUtils";
 import { LoadingIndicator } from "../../_components/LoadingIndicator";
 import { HighlightMatch } from "~/utils/uiUtils";
@@ -65,6 +68,17 @@ const getDifficultyColor = (difficulty: string | undefined | null): string => {
 
 const columnHelper = createColumnHelper<Wod>();
 
+// Numeric mapping for performance levels for sorting (can stay outside)
+const performanceLevelValues: Record<string, number> = {
+  elite: 4,
+  advanced: 3,
+  intermediate: 2,
+  beginner: 1,
+  rx: 0, // Rx but no specific level (e.g., no benchmarks)
+  scaled: -1,
+  noScore: -2, // WOD has no score logged
+};
+
 // Updated createColumns signature
 const createColumns = (
   handleSort: (column: SortByType) => void,
@@ -77,6 +91,37 @@ const createColumns = (
   openEditDialog?: (score: Score, wod: Wod) => void, // New handler prop
   handleDeleteScore?: (score: Score, wod: Wod) => void, // Renamed prop
 ): ColumnDef<Wod, unknown>[] => {
+  // --- Define sorting function INSIDE createColumns to access scoresByWodId ---
+  const sortByLatestScoreLevel: SortingFn<Wod> = (
+    rowA: Row<Wod>,
+    rowB: Row<Wod>,
+    columnId: string,
+  ) => {
+    const getLevelValue = (row: Row<Wod>): number => {
+      const wod = row.original;
+      // Directly use scoresByWodId from the outer scope (createColumns parameters)
+      const scores = scoresByWodId?.[wod.id] ?? [];
+      if (scores.length === 0) {
+        return performanceLevelValues.noScore;
+      }
+      // Assuming scores are sorted descending by date, latest is scores[0]
+      const latestScore = scores[0];
+      if (!latestScore.isRx) {
+        return performanceLevelValues.scaled;
+      }
+      const level = getPerformanceLevel(wod, latestScore);
+      return level
+        ? (performanceLevelValues[level] ?? performanceLevelValues.rx) // Use 'rx' if level exists but not in map
+        : performanceLevelValues.rx; // No specific level calculated, but was Rx
+    };
+
+    const levelA = getLevelValue(rowA);
+    const levelB = getLevelValue(rowB);
+
+    return levelA - levelB;
+  };
+  // --- End sorting function definition ---
+
   const getSortIndicator = (columnName: SortByType) => {
     if (sortBy === columnName) {
       return sortDirection === "asc" ? " ▲" : " ▼";
@@ -214,11 +259,20 @@ const createColumns = (
       size: 364,
     }),
     columnHelper.accessor(
-      (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
+      (row) => ({ wod: row, scores: scoresByWodId[row.id] }), // Accessor remains the same
       {
         id: "results",
-        header: "Your scores",
+        header: () => (
+          // Header becomes a function for click handler
+          <span
+            onClick={() => handleSort("results")} // Use handleSort with 'results'
+            className="cursor-pointer whitespace-nowrap"
+          >
+            Your scores{getSortIndicator("results")} {/* Add sort indicator */}
+          </span>
+        ),
         cell: (info) => {
+          // Cell rendering logic remains the same
           const { wod, scores } = info.getValue();
 
           return (
@@ -332,6 +386,8 @@ ${getPerformanceLevelTooltip(wod)}`}
           );
         },
         size: 250,
+        enableSorting: true, // Enable sorting for this column
+        sortingFn: sortByLatestScoreLevel, // Assign the custom sorting function
       },
     ),
   ];
@@ -427,7 +483,8 @@ const WodTable: React.FC<WodTableProps> = ({
     data: wods,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    manualSorting: true,
+    manualSorting: true, // Keep manual sorting as the main sort logic is outside TanStack Table
+    // No need for meta here, scoresByWodId is accessed via closure in sortingFn
   });
 
   const { rows } = table.getRowModel();
@@ -626,6 +683,7 @@ const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
     "date",
     "difficulty",
     "countLikes",
+    "results", // Add 'results' to valid keys
   ];
   return validSortKeys.includes(sortBy as SortByType);
 };

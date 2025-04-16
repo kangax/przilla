@@ -2,6 +2,13 @@
 
 ## Current Focus
 
+- **WOD Table Score Sorting (Apr 16, 2025):** Implemented sorting for the "Your Scores" column in the desktop `WodTable` component (`src/app/(main)/components/WodTable.tsx`). Sorting is based on the calculated performance level of the user's latest score for each WOD (Elite > Advanced > Intermediate > Beginner > Rx > Scaled > No Score).
+  - **Implementation:**
+    - Added `'results'` to the `SortByType` union in `src/types/wodTypes.ts`.
+    - Defined a numeric mapping for performance levels (`performanceLevelValues`) in `WodTable.tsx`.
+    - Created a custom TanStack Table `sortingFn` (`sortByLatestScoreLevel`) within the `createColumns` function to compare the numeric level of the latest score between rows, accessing `scoresByWodId` via closure.
+    - Updated the "Your Scores" column definition (`id: 'results'`) to enable sorting (`enableSorting: true`), assign the custom `sortingFn`, and make the header clickable for sorting.
+    - Updated the `isValidSortBy` helper function to include `'results'`.
 - **Performance Chart Adjusted Level (Apr 15, 2025):** Implemented an "adjusted level" calculation for the performance timeline chart (`WodTimelineChart.tsx`). The chart now displays the monthly average performance based on `adjustedLevel = scoreLevel * difficultyMultiplier`, providing a better representation of performance considering WOD difficulty.
   - **Backend (`wodRouter.getChartData`):** Modified to join scores with WODs, fetch difficulty, calculate adjusted level for each score using defined multipliers (Easy: 0.8, Medium: 1.0, Hard: 1.2, Very Hard: 1.5, Extremely Hard: 2.0), and return the average adjusted level per month along with detailed score breakdown including original level, difficulty, multiplier, and adjusted level.
   - **Frontend (`ChartsPage`, `WodTimelineChart`):** Updated type definitions and data processing to handle the new structure, including raw score values. The chart now plots the average adjusted level. The tooltip displays the average adjusted level, the adjusted trend, and a detailed breakdown for each score using the format: `Your score of **[Score Value]** on *[WOD Name]* is [Original Level (colored)] ([Level Num]). Adjusted for difficulty ([Difficulty]) it's [Adjusted Level Desc (colored)] ([Adjusted Level Num]).` (The adjustment part is hidden for "Medium" difficulty WODs). Helper functions (`getDescriptiveLevel`, `getLevelColor`, `formatScore`) and Y-axis formatting were updated/utilized.
@@ -46,6 +53,7 @@
 
 ## Learnings & Insights
 
+- Implementing custom sorting logic in TanStack Table (like sorting by latest score level) requires defining a custom `sortingFn`. This function needs access to the necessary data (e.g., `scoresByWodId`) which can be achieved by defining the function within a scope where the data is available (like inside `createColumns`) to leverage closures.
 - Calculating adjusted performance metrics (like `level * difficulty`) requires careful handling of data fetching (joining tables), type definitions across backend/frontend, and UI updates (tooltips, axis labels, helper functions) to accurately reflect the new calculation.
 - Passing detailed data structures (like the score breakdown) through multiple component layers (API -> Page -> Chart) requires careful type definition updates at each stage.
 - Recharts custom tooltips provide flexibility to display complex, structured information derived from the data payload. Using helper functions (like `getDescriptiveLevel`) within the tooltip enhances readability.

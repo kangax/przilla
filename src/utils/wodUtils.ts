@@ -353,6 +353,17 @@ export const sortWods = (
     return scores && scores.length > 0 ? scores[0].scoreDate : null;
   };
 
+  // Numeric mapping for performance levels for sorting
+  const performanceLevelValues: Record<string, number> = {
+    elite: 4,
+    advanced: 3,
+    intermediate: 2,
+    beginner: 1,
+    rx: 0, // Rx but no specific level (e.g., no benchmarks)
+    scaled: -1,
+    noScore: -2, // WOD has no score logged
+  };
+
   return [...wodsToSort].sort((a, b) => {
     const directionMultiplier = sortDirection === "asc" ? 1 : -1;
 
@@ -361,6 +372,33 @@ export const sortWods = (
       const compareResult = a.wodName.localeCompare(b.wodName);
       // No secondary sort needed if primary is name
       return compareResult * directionMultiplier;
+    } else if (sortBy === "results") {
+      // --- Sorting by latest score level ---
+      const getLevelValue = (wod: Wod): number => {
+        const scores = scoresByWodId?.[wod.id] ?? [];
+        if (scores.length === 0) {
+          return performanceLevelValues.noScore;
+        }
+        // Assuming scores are sorted descending by date, latest is scores[0]
+        const latestScore = scores[0];
+        if (!latestScore.isRx) {
+          return performanceLevelValues.scaled;
+        }
+        // Use getPerformanceLevel from this module
+        const level = getPerformanceLevel(wod, latestScore);
+        return level
+          ? (performanceLevelValues[level] ?? performanceLevelValues.rx)
+          : performanceLevelValues.rx;
+      };
+
+      const levelA = getLevelValue(a);
+      const levelB = getLevelValue(b);
+
+      if (levelA !== levelB) {
+        return (levelA - levelB) * directionMultiplier;
+      }
+      // Secondary sort by name
+      return a.wodName.localeCompare(b.wodName);
     } else if (sortBy === "date") {
       // --- NEW Date Sorting Logic ---
       if (sortBy === "date") {

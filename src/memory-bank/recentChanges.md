@@ -1,5 +1,22 @@
 # Recent Changes
 
+- **WOD Table Score Sorting (Apr 16, 2025):**
+
+  - **Goal:** Implement sorting for the "Your Scores" column in the desktop `WodTable` component (`src/app/(main)/components/WodTable.tsx`) based on the calculated performance level of the user's latest score for each WOD.
+  - **Implementation:**
+    - Updated `src/types/wodTypes.ts`:
+      - Added `'results'` to the `SortByType` union type.
+    - Updated `src/app/(main)/components/WodTable.tsx`:
+      - Defined a constant `performanceLevelValues` mapping levels (Elite, Advanced, Intermediate, Beginner, Rx, Scaled, No Score) to numeric values (4 down to -2) for sorting.
+      - Defined a custom TanStack Table `sortingFn` named `sortByLatestScoreLevel` _inside_ the `createColumns` function. This function accesses `scoresByWodId` via closure, finds the latest score for each row, determines its numeric level using `performanceLevelValues` and `getPerformanceLevel` (from `wodUtils`), and compares the levels.
+      - Modified the column definition for "Your Scores" (`id: 'results'`):
+        - Set `enableSorting: true`.
+        - Assigned `sortingFn: sortByLatestScoreLevel`.
+        - Made the `header` a clickable `<span>` that calls `handleSort('results')` and displays the sort indicator.
+      - Updated the `isValidSortBy` helper function to include `'results'` in its validation array.
+      - Removed the unnecessary passing of `scoresByWodId` via `meta` in `useReactTable` options, as the sorting function now uses closure.
+  - **Outcome:** The "Your Scores" column in the desktop WOD table is now sortable. Clicking the header toggles sorting based on the performance level of the latest score for each WOD (Elite > Advanced > Intermediate > Beginner > Rx > Scaled > No Score).
+
 - **Performance Chart Tooltip Copy Refinement (Apr 15, 2025):**
 
   - **Goal:** Refine the copy and formatting of the score breakdown within the performance chart tooltip for better clarity and emphasis.

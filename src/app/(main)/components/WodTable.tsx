@@ -10,6 +10,7 @@ import {
   IconButton,
   Dialog,
   Button,
+  Separator,
 } from "@radix-ui/themes";
 import { Pencil, Trash, Plus } from "lucide-react"; // Added Plus icon
 import {
@@ -211,7 +212,8 @@ const createColumns = (
                 <Text size="2" weight="bold" className="text-gray-100">
                   Difficulty Levels
                 </Text>
-                <Flex align="center" gap="2">
+                <Separator my="1" size="4" />
+                <Flex align="start" gap="2">
                   <Text color="green" weight="bold" style={{ minWidth: 100 }}>
                     Easy
                   </Text>
@@ -223,7 +225,7 @@ const createColumns = (
                     </Text>
                   </Text>
                 </Flex>
-                <Flex align="center" gap="2">
+                <Flex align="start" gap="2">
                   <Text color="yellow" weight="bold" style={{ minWidth: 100 }}>
                     Medium
                   </Text>
@@ -235,7 +237,7 @@ const createColumns = (
                     </Text>
                   </Text>
                 </Flex>
-                <Flex align="center" gap="2">
+                <Flex align="start" gap="2">
                   <Text color="orange" weight="bold" style={{ minWidth: 100 }}>
                     Hard
                   </Text>
@@ -247,7 +249,7 @@ const createColumns = (
                     </Text>
                   </Text>
                 </Flex>
-                <Flex align="center" gap="2">
+                <Flex align="start" gap="2">
                   <Text color="red" weight="bold" style={{ minWidth: 100 }}>
                     Very Hard
                   </Text>
@@ -259,7 +261,7 @@ const createColumns = (
                     </Text>
                   </Text>
                 </Flex>
-                <Flex align="center" gap="2">
+                <Flex align="start" gap="2">
                   <Text color="purple" weight="bold" style={{ minWidth: 100 }}>
                     Extremely Hard
                   </Text>

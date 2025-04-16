@@ -1,20 +1,21 @@
 "use client";
 
-import React, { useState, useEffect, useRef } from "react"; // Added useRef
+import React, { useState, useEffect } from "react";
 import * as Dialog from "@radix-ui/react-dialog";
+import * as RadioGroup from "@radix-ui/react-radio-group";
 import {
   Button,
   TextField,
   TextArea,
-  Switch, // Import Switch
+  Switch,
   Text,
   Flex,
   Box,
   IconButton,
 } from "@radix-ui/themes";
 import { X } from "lucide-react";
-import { api } from "../../../trpc/react"; // Corrected path
-import type { Wod, Score } from "../../../types/wodTypes"; // Corrected path
+import { api } from "../../../trpc/react";
+import type { Wod, Score } from "../../../types/wodTypes";
 
 // Define the payload type for logScore and updateScore mutations
 type ScorePayload = {
@@ -32,13 +33,11 @@ type ScorePayload = {
 interface LogScoreDialogProps {
   wod: Wod;
   onScoreLogged?: () => void;
-  initialScore?: Score | null; // Score to edit, null for logging new
+  initialScore?: Score | null;
   isOpen: boolean;
   onOpenChange: (open: boolean) => void;
-  // Trigger is now handled externally by the parent component
 }
 
-// Define initial state outside component for reuse
 const initialFormState = {
   time_minutes: "",
   time_seconds: "",
@@ -49,7 +48,15 @@ const initialFormState = {
   isRx: false,
   notes: "",
   scoreDate: new Date().toISOString().slice(0, 10),
+  finishedWithinTimecap: "yes", // "yes" or "no"
 };
+
+function formatTimecap(seconds: number | null | undefined): string {
+  if (!seconds || isNaN(seconds)) return "";
+  const min = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
 
 export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
   wod,
@@ -58,9 +65,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
   isOpen,
   onOpenChange,
 }) => {
-  // isEditMode is determined ONLY by the presence of initialScore prop
   const isEditMode = !!initialScore;
-  // Initialize state using the constant
   const [form, setForm] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -68,7 +73,6 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
     null,
   );
 
-  // Find the portal container element on mount
   useEffect(() => {
     const container = document.getElementById("page-layout-container");
     setPortalContainer(container);
@@ -101,19 +105,23 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
         scoreDate: initialScore.scoreDate
           ? new Date(initialScore.scoreDate).toISOString().slice(0, 10)
           : new Date().toISOString().slice(0, 10),
+        finishedWithinTimecap:
+          wod.timecap && initialScore.time_seconds != null
+            ? initialScore.time_seconds < wod.timecap
+              ? "yes"
+              : "no"
+            : "yes",
       });
     } else {
-      // Reset form if switching from edit to log mode while dialog is technically open
-      // or if opening in log mode initially
       resetForm();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [initialScore, isEditMode, isOpen]); // Depend on isOpen to reset when opened in log mode
+  }, [initialScore, isEditMode, isOpen, wod.timecap]);
 
   const logScoreMutation = api.score.logScore.useMutation({
     onSuccess: () => {
-      onOpenChange(false); // Close dialog on success
-      resetForm(); // Reset form on success
+      onOpenChange(false);
+      resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();
     },
@@ -124,11 +132,10 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
 
   const updateScoreMutation = api.score.updateScore.useMutation({
     onSuccess: () => {
-      onOpenChange(false); // Close dialog on success
-      resetForm(); // Reset form on success
+      onOpenChange(false);
+      resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();
-      // No need for onClose callback, parent controls open state
     },
     onError: (err) => {
       setError(err instanceof Error ? err.message : "Failed to update score.");
@@ -148,6 +155,13 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
   const showAll =
     !showTime && !showReps && !showLoad && !showRounds && !showPartialReps;
 
+  // --- Timecap logic ---
+  const hasTimecap = typeof wod.timecap === "number" && wod.timecap > 0;
+  const timecapFormatted = hasTimecap ? formatTimecap(wod.timecap) : "";
+
+  // For timecapped WODs, show radio group and adapt UI
+  const showTimecapRadio = hasTimecap && showTime;
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
@@ -165,43 +179,80 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
     }));
   };
 
-  // Resets form to initial state
+  const handleTimecapRadioChange = (value: string) => {
+    setForm((prev) => ({
+      ...prev,
+      finishedWithinTimecap: value,
+      // Reset time/reps/rounds fields when switching
+      time_minutes: value === "yes" ? prev.time_minutes : "",
+      time_seconds: value === "yes" ? prev.time_seconds : "",
+      reps: value === "no" ? prev.reps : "",
+      rounds_completed: value === "no" ? prev.rounds_completed : "",
+      partial_reps: value === "no" ? prev.partial_reps : "",
+    }));
+    setError(null);
+  };
+
   const resetForm = () => {
     setForm(initialFormState);
     setError(null);
   };
 
-  // Handle dialog open state changes (e.g., clicking outside, pressing Esc)
   const handleOpenChange = (newOpenState: boolean) => {
-    onOpenChange(newOpenState); // Notify parent
+    onOpenChange(newOpenState);
     if (!newOpenState) {
-      // If closing, always reset form
       resetForm();
     }
   };
 
-  // Validation: prevent empty results
+  // --- Validation ---
   const validate = () => {
-    if (showAll || showTime) {
-      const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
-      const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
-      if (min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds) {
-        return "Please enter a time (minutes or seconds).";
+    if (showTimecapRadio) {
+      if (form.finishedWithinTimecap === "yes") {
+        const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+        const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+        const total = min * 60 + sec;
+        if (!form.time_minutes && !form.time_seconds) {
+          return "Please enter a time (minutes or seconds).";
+        }
+        if (wod.timecap && total >= wod.timecap) {
+          return `Time must be less than the time cap (${timecapFormatted}). If you reached the cap, log your score as reps/rounds+reps instead.`;
+        }
+      } else if (form.finishedWithinTimecap === "no") {
+        if (
+          (!form.reps || parseInt(form.reps, 10) <= 0) &&
+          (!form.rounds_completed || parseInt(form.rounds_completed, 10) < 0)
+        ) {
+          return "Please enter reps or rounds completed.";
+        }
       }
-    }
-    if (showAll || showReps) {
-      if (!form.reps || parseInt(form.reps, 10) <= 0) {
-        return "Please enter a positive number of reps.";
+    } else {
+      if (showAll || showTime) {
+        const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+        const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+        if (
+          min === 0 &&
+          sec === 0 &&
+          !form.time_minutes &&
+          !form.time_seconds
+        ) {
+          return "Please enter a time (minutes or seconds).";
+        }
       }
-    }
-    if (showAll || showLoad) {
-      if (!form.load || parseInt(form.load, 10) <= 0) {
-        return "Please enter a positive load.";
+      if (showAll || showReps) {
+        if (!form.reps || parseInt(form.reps, 10) <= 0) {
+          return "Please enter a positive number of reps.";
+        }
       }
-    }
-    if (showAll || showRounds) {
-      if (!form.rounds_completed || parseInt(form.rounds_completed, 10) < 0) {
-        return "Please enter rounds completed (0 or more).";
+      if (showAll || showLoad) {
+        if (!form.load || parseInt(form.load, 10) <= 0) {
+          return "Please enter a positive load.";
+        }
+      }
+      if (showAll || showRounds) {
+        if (!form.rounds_completed || parseInt(form.rounds_completed, 10) < 0) {
+          return "Please enter rounds completed (0 or more).";
+        }
       }
     }
     return null;
@@ -214,28 +265,53 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
       isRx: form.isRx,
       notes: form.notes || null,
     };
-    if (showAll || showTime) {
-      const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
-      const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
-      const totalSeconds =
-        (!isNaN(min) ? min : 0) * 60 + (!isNaN(sec) ? sec : 0);
-      payload.time_seconds =
-        min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds
-          ? null
-          : totalSeconds;
+    if (showTimecapRadio) {
+      if (form.finishedWithinTimecap === "yes") {
+        const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+        const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+        const totalSeconds =
+          (!isNaN(min) ? min : 0) * 60 + (!isNaN(sec) ? sec : 0);
+        payload.time_seconds =
+          min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds
+            ? null
+            : totalSeconds;
+        payload.reps = null;
+        payload.rounds_completed = null;
+        payload.partial_reps = null;
+      } else if (form.finishedWithinTimecap === "no") {
+        payload.time_seconds = wod.timecap ?? null;
+        payload.reps = form.reps ? parseInt(form.reps, 10) : null;
+        payload.rounds_completed = form.rounds_completed
+          ? parseInt(form.rounds_completed, 10)
+          : null;
+        payload.partial_reps = form.partial_reps
+          ? parseInt(form.partial_reps, 10)
+          : null;
+      }
+    } else {
+      if (showAll || showTime) {
+        const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+        const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+        const totalSeconds =
+          (!isNaN(min) ? min : 0) * 60 + (!isNaN(sec) ? sec : 0);
+        payload.time_seconds =
+          min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds
+            ? null
+            : totalSeconds;
+      }
+      if (showAll || showReps)
+        payload.reps = form.reps ? parseInt(form.reps, 10) : null;
+      if (showAll || showLoad)
+        payload.load = form.load ? parseInt(form.load, 10) : null;
+      if (showAll || showRounds)
+        payload.rounds_completed = form.rounds_completed
+          ? parseInt(form.rounds_completed, 10)
+          : null;
+      if (showAll || showPartialReps)
+        payload.partial_reps = form.partial_reps
+          ? parseInt(form.partial_reps, 10)
+          : null;
     }
-    if (showAll || showReps)
-      payload.reps = form.reps ? parseInt(form.reps, 10) : null;
-    if (showAll || showLoad)
-      payload.load = form.load ? parseInt(form.load, 10) : null;
-    if (showAll || showRounds)
-      payload.rounds_completed = form.rounds_completed
-        ? parseInt(form.rounds_completed, 10)
-        : null;
-    if (showAll || showPartialReps)
-      payload.partial_reps = form.partial_reps
-        ? parseInt(form.partial_reps, 10)
-        : null;
     return payload;
   };
 
@@ -274,13 +350,8 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
   };
 
   return (
-    // Use handleOpenChange to manage closing behavior and reset form
     <Dialog.Root open={isOpen} onOpenChange={handleOpenChange}>
-      {/* Trigger is now handled externally by the parent component */}
-      {/* <Dialog.Trigger asChild> ... </Dialog.Trigger> */}
       <Dialog.Portal container={portalContainer}>
-        {" "}
-        {/* Use the container prop */}
         <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 z-40 bg-black/50" />
         <Dialog.Content className="data-[state=open]:animate-contentShow fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white p-6 shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
           <Dialog.Title asChild>
@@ -291,12 +362,106 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
 
           <form onSubmit={handleSubmit}>
             <Flex direction="column" gap="3">
-              {/* Input fields remain the same */}
-              {(showAll || showTime) && (
+              {/* Timecap-specific UI */}
+              {showTimecapRadio && (
+                <Box>
+                  <Text
+                    as="label"
+                    size="2"
+                    mb="2"
+                    weight="bold"
+                    className="block"
+                  >
+                    Finished within {timecapFormatted} timecap?
+                  </Text>
+                  <RadioGroup.Root
+                    value={form.finishedWithinTimecap}
+                    onValueChange={handleTimecapRadioChange}
+                    orientation="vertical"
+                    aria-label={`Finished within ${timecapFormatted} timecap?`}
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      gap: "0.75rem",
+                      marginTop: "0.5rem",
+                    }}
+                  >
+                    <Flex direction="column" align="start" gap="1">
+                      <Flex align="center" gap="2">
+                        <RadioGroup.Item
+                          value="yes"
+                          id="finishedWithinTimecap-yes"
+                          disabled={submitting}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: "50%",
+                            border: "2px solid #888",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <RadioGroup.Indicator
+                            style={{
+                              width: 12,
+                              height: 12,
+                              borderRadius: "50%",
+                              background: "#22c55e",
+                            }}
+                          />
+                        </RadioGroup.Item>
+                        <Text
+                          as="label"
+                          htmlFor="finishedWithinTimecap-yes"
+                          size="2"
+                        >
+                          Yes, finished within timecap (enter your time)
+                        </Text>
+                      </Flex>
+                    </Flex>
+                    <Flex direction="column" align="start" gap="1">
+                      <Flex align="center" gap="2">
+                        <RadioGroup.Item
+                          value="no"
+                          id="finishedWithinTimecap-no"
+                          disabled={submitting}
+                          style={{
+                            width: 20,
+                            height: 20,
+                            borderRadius: "50%",
+                            border: "2px solid #888",
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                          }}
+                        >
+                          <RadioGroup.Indicator
+                            style={{
+                              width: 12,
+                              height: 12,
+                              borderRadius: "50%",
+                              background: "#f59e42",
+                            }}
+                          />
+                        </RadioGroup.Item>
+                        <Text
+                          as="label"
+                          htmlFor="finishedWithinTimecap-no"
+                          size="2"
+                        >
+                          No, hit the timecap (enter reps or rounds+reps)
+                        </Text>
+                      </Flex>
+                    </Flex>
+                  </RadioGroup.Root>
+                </Box>
+              )}
+
+              {/* Show time input if finished within timecap, or if not a timecapped WOD */}
+              {((showTimecapRadio && form.finishedWithinTimecap === "yes") ||
+                (!showTimecapRadio && (showAll || showTime))) && (
                 <Flex gap="2" align="end">
-                  {" "}
-                  {/* Align items to end for label alignment */}
-                  {/* Apply fixed width to the Box */}
                   <Box style={{ width: "165px" }}>
                     <Text as="label" htmlFor="time_minutes" size="1" mb="1">
                       Minutes
@@ -311,11 +476,10 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       value={form.time_minutes}
                       onChange={handleChange}
                       disabled={submitting}
-                      size="3" // Updated size
+                      size="3"
                       autoComplete="off"
                     />
                   </Box>
-                  {/* Apply fixed width to the Box */}
                   <Box style={{ width: "165px" }}>
                     <Text as="label" htmlFor="time_seconds" size="1" mb="1">
                       Seconds
@@ -331,14 +495,16 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       value={form.time_seconds}
                       onChange={handleChange}
                       disabled={submitting}
-                      size="3" // Updated size
+                      size="3"
                       autoComplete="off"
                     />
                   </Box>
                 </Flex>
               )}
 
-              {(showAll || showReps) && (
+              {/* Show reps/rounds if hit the timecap, or for AMRAPs */}
+              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
+                (!showTimecapRadio && (showAll || showReps))) && (
                 <Box>
                   <Text as="label" htmlFor="reps" size="1" mb="1">
                     Reps
@@ -353,34 +519,14 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.reps}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="3" // Updated size
+                    size="3"
                     autoComplete="off"
                   />
                 </Box>
               )}
 
-              {(showAll || showLoad) && (
-                <Box>
-                  <Text as="label" htmlFor="load" size="1" mb="1">
-                    Load
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="load"
-                    name="load"
-                    type="number"
-                    min={0}
-                    placeholder="Load"
-                    value={form.load}
-                    onChange={handleChange}
-                    disabled={submitting}
-                    size="3" // Updated size
-                    autoComplete="off"
-                  />
-                </Box>
-              )}
-
-              {(showAll || showRounds) && (
+              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
+                (!showTimecapRadio && (showAll || showRounds))) && (
                 <Box>
                   <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
                     Rounds
@@ -395,13 +541,14 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.rounds_completed}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="3" // Updated size
+                    size="3"
                     autoComplete="off"
                   />
                 </Box>
               )}
 
-              {(showAll || showPartialReps) && (
+              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
+                (!showTimecapRadio && (showAll || showPartialReps))) && (
                 <Box>
                   <Text as="label" htmlFor="partial_reps" size="1" mb="1">
                     Partial Reps
@@ -416,18 +563,36 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.partial_reps}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="3" // Updated size
+                    size="3"
                     autoComplete="off"
                   />
                 </Box>
               )}
 
-              {/* Rearranged Date and Rx - Align center, remove justify */}
+              {!showTimecapRadio && (showAll || showLoad) && (
+                <Box>
+                  <Text as="label" htmlFor="load" size="1" mb="1">
+                    Load
+                  </Text>
+                  <TextField.Root
+                    variant="classic"
+                    id="load"
+                    name="load"
+                    type="number"
+                    min={0}
+                    placeholder="Load"
+                    value={form.load}
+                    onChange={handleChange}
+                    disabled={submitting}
+                    size="3"
+                    autoComplete="off"
+                  />
+                </Box>
+              )}
+
+              {/* Date and Rx Switch */}
               <Flex align="center" gap="3">
-                {/* Date Input with Label on the left */}
                 <Box style={{ flexBasis: "140px" }}>
-                  {" "}
-                  {/* Give date a basis width */}
                   <Text as="label" htmlFor="scoreDate" size="1" mb="1">
                     Date
                   </Text>
@@ -439,20 +604,17 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     value={form.scoreDate}
                     onChange={handleChange}
                     disabled={submitting}
-                    size="3" // Updated size
+                    size="3"
                     autoComplete="off"
                   />
                 </Box>
-
-                {/* Rx Switch with Label on the right */}
-                {/* Wrap Switch in a Box and add a visually hidden label */}
                 <Box>
                   <Text
                     as="label"
                     htmlFor={`isRx-${wod.id}`}
                     size="1"
                     mb="1"
-                    className="opacity-0" // Use opacity-0 to hide but retain space
+                    className="opacity-0"
                   >
                     Rx
                   </Text>
@@ -463,9 +625,9 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       onCheckedChange={handleIsRxChange}
                       disabled={submitting}
                       color="green"
-                      size="3" // Updated size
+                      size="3"
                     />
-                    <Text size="2">Rx</Text> {/* Keep visible Rx text */}
+                    <Text size="2">Rx</Text>
                   </Flex>
                 </Box>
               </Flex>
@@ -482,7 +644,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                   value={form.notes}
                   onChange={handleChange}
                   disabled={submitting}
-                  size="3" // Updated size
+                  size="3"
                   rows={4}
                   style={{ resize: "none" }}
                 />
@@ -501,7 +663,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     variant="soft"
                     color="gray"
                     disabled={submitting}
-                    size="3" // Updated size
+                    size="3"
                   >
                     Cancel
                   </Button>
@@ -510,7 +672,7 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                   type="submit"
                   color="green"
                   disabled={submitting}
-                  size="3" // Updated size
+                  size="3"
                 >
                   {submitting
                     ? isEditMode

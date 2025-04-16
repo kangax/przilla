@@ -59,6 +59,7 @@ export const wodRouter = createTRPCRouter({
       difficulty: wod.difficulty,
       difficultyExplanation: wod.difficultyExplanation,
       countLikes: wod.countLikes,
+      timecap: wod.timecap, // Add timecap field
       createdAt: wod.createdAt,
       updatedAt: wod.updatedAt,
     }));

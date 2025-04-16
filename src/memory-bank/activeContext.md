@@ -2,15 +2,20 @@
 
 ## Current Focus
 
-- **WOD Time Cap Field Added & Backfilled (Apr 16, 2025):** The `timecap` field (seconds, nullable) was added to the WODs table in the database schema. A migration was generated and applied. A script parsed and backfilled the field for 62 WODs using `public/data/wods_with_timecaps.json`. This enables robust score logging and future analytics based on timecap data.
+- **WOD Time Cap Field & Timecap-Aware Log/Edit Score UI (Apr 16, 2025):**
 
-  - **Next Steps:**
-    - Update score logging UI and logic to use the new `timecap` field for validation, display, and analytics.
-    - Update type definitions and API responses to include the new field.
-    - Consider further normalization or handling of ambiguous/multi-value timecaps if needed.
+  - The `timecap` field (seconds, nullable) was added to the WODs table in the database schema, backfilled for 62 WODs using `public/data/wods_with_timecaps.json`.
+  - **Log/Edit Score Dialog UI:** The score logging/editing dialog (`LogScoreDialog.tsx`) now fully supports timecapped WODs:
+    - For WODs with a timecap, users are prompted with a vertical Radix UI radio group: "Finished within [timecap] timecap?" with options for "Yes, finished within timecap (enter your time)" and "No, hit the timecap (enter reps or rounds+reps)".
+    - The form dynamically shows time or reps/rounds+reps input fields based on the user's selection.
+    - Validation ensures that if "Yes" is selected, the entered time must be less than the timecap; if "No" is selected, reps or rounds+reps are required.
+    - All UI uses Radix UI primitives for accessibility, theme consistency, and minimalism.
+  - **Type & API Propagation:** The `timecap` field is now included in the Wod type (`src/types/wodTypes.ts`), passed through the frontend (`WodViewer.tsx`), and returned by the backend API (`wodRouter.getAll`).
+  - **Rationale:** This enables robust, user-friendly score logging for timecapped WODs, prevents invalid entries, and sets the stage for future analytics.
   - **Learnings:**
     - Most WODs matched directly by name; a few may require manual review for naming mismatches or ambiguous timecap values.
     - Having a structured timecap field enables more accurate and user-friendly score logging and analytics.
+    - Using vertical radio groups improves clarity and accessibility for decision points in forms.
 
 - **WOD Table "Difficulty" Tooltip Redesign (Apr 16, 2025):** The "Difficulty" column header tooltip in the WOD table now uses a dark background, light text, and no border/shadow, matching the style of charting tooltips. The tooltip content is color-coded for each difficulty level, uses Radix UI Flex/Text for layout, and is fully accessible and theme-aware. This change improves clarity, visual consistency, and accessibility across the app.
   - **Implementation:**

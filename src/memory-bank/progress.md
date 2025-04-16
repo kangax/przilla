@@ -2,6 +2,7 @@
 
 ## What Works
 
+- **Timecap-Aware Log/Edit Score UI (Apr 16, 2025):** The log/edit score dialog now fully supports timecapped WODs. For WODs with a timecap, users are prompted with a vertical Radix UI radio group ("Finished within [timecap] timecap?"), and the form dynamically shows time or reps/rounds+reps input fields based on the user's selection. Validation and backend/frontend propagation are complete.
 - **WOD Time Cap Extraction & Structured Data (Apr 16, 2025):** All WODs with a time cap have been identified using regex-based search on `public/data/wods.json`. Created `public/data/wods_with_timecaps.json` with WOD name, matched time cap string, and description for each match. This enables review, parsing, and backfilling of a structured `timecap` (seconds) field in the main dataset, supporting robust score logging and future analytics.
 
 - **WOD Table "Difficulty" Tooltip Redesign (Apr 16, 2025):** The "Difficulty" column header tooltip now uses a dark background, light text, and no border/shadow, matching the style of charting tooltips. The tooltip is color-coded for each difficulty level, uses Radix UI Flex/Text for layout, and is fully accessible and theme-aware. This provides a visually consistent, highly readable, and accessible experience for users.

@@ -60,6 +60,10 @@ export type Wod = {
   difficulty?: string | null; // Updated to match DB schema (can be null)
   difficultyExplanation?: string | null; // Renamed from difficulty_explanation, match DB (can be null)
   countLikes?: number | null; // Renamed from count_likes, match DB (can be null)
+  /**
+   * Time cap for the workout, in seconds (nullable, from DB)
+   */
+  timecap?: number | null;
   createdAt: Date; // Added from DB schema (Drizzle returns Date)
   updatedAt?: Date | null; // Added from DB schema (Drizzle returns Date or null)
 };

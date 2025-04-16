@@ -1,5 +1,19 @@
 # Recent Changes
 
+- **Timecap-Aware Log/Edit Score UI & Vertical Radio Group (Apr 16, 2025):**
+
+  - **Goal:** Enable robust, user-friendly score logging for timecapped WODs, with clear UI and validation.
+  - **Implementation:**
+    - Updated `src/app/(main)/components/LogScoreDialog.tsx`:
+      - For WODs with a timecap, users are prompted with a vertical Radix UI radio group: "Finished within [timecap] timecap?" with options for "Yes, finished within timecap (enter your time)" and "No, hit the timecap (enter reps or rounds+reps)".
+      - The form dynamically shows time or reps/rounds+reps input fields based on the user's selection.
+      - Validation ensures that if "Yes" is selected, the entered time must be less than the timecap; if "No" is selected, reps or rounds+reps are required.
+      - All UI uses Radix UI primitives for accessibility, theme consistency, and minimalism.
+    - Updated `src/types/wodTypes.ts` to include `timecap?: number | null` in the Wod type.
+    - Updated `src/app/(main)/components/WodViewer.tsx` to pass the timecap field through to WOD objects.
+    - Updated `src/server/api/routers/wod.ts` to return the timecap field in the getAll API.
+  - **Outcome:** The log/edit score dialog now fully supports timecapped WODs with a clear, accessible, and minimal UI. Invalid entries are prevented, and the groundwork is laid for future analytics and features.
+
 - **WOD Time Cap Field Added & Backfilled (Apr 16, 2025):**
 
   - **Goal:** Add a structured `timecap` (seconds, nullable) field to the WODs table in the database and backfill it using real data.

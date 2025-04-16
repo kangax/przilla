@@ -107,6 +107,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
       difficulty: wod.difficulty,
       difficultyExplanation: wod.difficultyExplanation,
       countLikes: wod.countLikes,
+      /**
+       * Time cap for the workout, in seconds (nullable, from DB)
+       */
+      timecap: wod.timecap ?? null,
       createdAt:
         wod.createdAt instanceof Date
           ? wod.createdAt

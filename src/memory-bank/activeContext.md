@@ -2,6 +2,9 @@
 
 ## Current Focus
 
+- **Performance Chart Adjusted Level (Apr 15, 2025):** Implemented an "adjusted level" calculation for the performance timeline chart (`WodTimelineChart.tsx`). The chart now displays the monthly average performance based on `adjustedLevel = scoreLevel * difficultyMultiplier`, providing a better representation of performance considering WOD difficulty.
+  - **Backend (`wodRouter.getChartData`):** Modified to join scores with WODs, fetch difficulty, calculate adjusted level for each score using defined multipliers (Easy: 0.8, Medium: 1.0, Hard: 1.2, Very Hard: 1.5, Extremely Hard: 2.0), and return the average adjusted level per month along with detailed score breakdown including original level, difficulty, multiplier, and adjusted level.
+  - **Frontend (`ChartsPage`, `WodTimelineChart`):** Updated type definitions and data processing to handle the new structure. The chart now plots the average adjusted level. The tooltip displays the average adjusted level, the adjusted trend, and a detailed breakdown showing WOD Name, Original Level, Difficulty (with multiplier), and the final Adjusted Level for each score in that month. Helper functions (`getDescriptiveLevel`, `getLevelColor`) and Y-axis formatting were updated to accommodate potentially higher adjusted level values.
 - **Performance Chart Tooltip Enhancement (Apr 15, 2025):** Updated the performance timeline chart (`WodTimelineChart.tsx`) tooltip. When hovering over a data point in the "Performance" view, the tooltip now displays a breakdown of the individual WODs and their calculated levels that contributed to the average level for that month. This involved:
   - Modifying the `api.wod.getChartData` tRPC procedure (`src/server/api/routers/wod.ts`) to return detailed score information (WOD name, level) alongside aggregated monthly data.
   - Updating the chart page (`src/app/charts/page.tsx`) to process and pass this detailed data to the chart component.
@@ -30,12 +33,16 @@
 
 ### Good to have
 
-- Tag pills are white in dark mode on mobile
+- Make a separate table of movements
+  - more precise chart of movements
+  - can potentially use it for things like:
+    "show wods with running AND thruster"
 - Add sorting to mobile view
-- Performance chart should show values relative to WOD difficulty
+- ~~Performance chart should show values relative to WOD difficulty~~ (Done Apr 15, 2025)
 
 ### Maybe
 
+- Show difficulty adjusted to you? Does it really matter? Just do the WOD, lol.
 - Import from Wodwell
   - write a script for scraping
   - bookmarklet so users can use? (this has been difficult)
@@ -43,6 +50,7 @@
 
 ## Learnings & Insights
 
+- Calculating adjusted performance metrics (like `level * difficulty`) requires careful handling of data fetching (joining tables), type definitions across backend/frontend, and UI updates (tooltips, axis labels, helper functions) to accurately reflect the new calculation.
 - Passing detailed data structures (like the score breakdown) through multiple component layers (API -> Page -> Chart) requires careful type definition updates at each stage.
 - Recharts custom tooltips provide flexibility to display complex, structured information derived from the data payload. Using helper functions (like `getDescriptiveLevel`) within the tooltip enhances readability.
 - When calculating rolling averages or other derived data, ensure that the original data points (including newly added fields like `scores`) are correctly preserved and passed along in the transformed data structure.

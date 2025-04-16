@@ -24,15 +24,19 @@ type FrequencyDataPoint = {
   count: number;
 };
 // Define the structure for individual scores in the chart data (matching backend)
+// Updated to include difficulty and adjusted level details
 type MonthlyScoreDetail = {
   wodName: string;
-  level: number; // The calculated level (0-4) for this score
+  level: number; // The original calculated level (0-4) for this score
+  difficulty: string | null; // WOD difficulty string
+  difficultyMultiplier: number; // Corresponding multiplier
+  adjustedLevel: number; // level * difficultyMultiplier
 };
-// Update PerformanceDataPoint to include the scores array
+// Update PerformanceDataPoint to include the updated scores array
 type PerformanceDataPoint = {
   month: string;
-  averageLevel: number;
-  scores: MonthlyScoreDetail[]; // Add the scores array
+  averageLevel: number; // This will now represent the average *adjusted* level
+  scores: MonthlyScoreDetail[]; // Use the updated MonthlyScoreDetail type
 };
 
 export default async function ChartsPage() {
@@ -55,7 +59,7 @@ export default async function ChartsPage() {
   let tagChartData: ChartDataPoint[] = [];
   let categoryChartData: ChartDataPoint[] = [];
   let frequencyData: FrequencyDataPoint[] = [];
-  let performanceData: PerformanceDataPoint[] = []; // Type now includes scores
+  let performanceData: PerformanceDataPoint[] = []; // Type now includes updated scores
 
   if (session?.user) {
     // --- Logged In: Fetch real data ---
@@ -63,7 +67,7 @@ export default async function ChartsPage() {
       const chartData = await api.wod.getChartData();
       const categoryCounts = chartData.categoryCounts;
       const chartTagCounts = chartData.tagCounts;
-      const monthlyScores = chartData.monthlyData; // Now includes scores array per month
+      const monthlyScores = chartData.monthlyData; // Now includes adjusted scores array per month
 
       // Prepare real data for charts
       tagChartData = DESIRED_TAG_ORDER.map((tag) => ({
@@ -80,14 +84,16 @@ export default async function ChartsPage() {
         month,
         count: monthlyScores[month].count,
       }));
-      // Update performanceData mapping to include the scores array
+      // Update performanceData mapping to use totalAdjustedLevelScore and include the updated scores array
       performanceData = sortedMonths.map((month) => ({
         month,
+        // Calculate average *adjusted* level
         averageLevel:
           monthlyScores[month].count > 0
-            ? monthlyScores[month].totalLevelScore / monthlyScores[month].count
+            ? monthlyScores[month].totalAdjustedLevelScore /
+              monthlyScores[month].count
             : 0,
-        scores: monthlyScores[month].scores || [], // Include the scores array, default to empty if missing
+        scores: monthlyScores[month].scores || [], // Include the updated scores array
       }));
     } catch (error) {
       console.error("Error loading protected chart data:", error);
@@ -105,9 +111,10 @@ export default async function ChartsPage() {
     const placeholderTimeline = generatePlaceholderTimelineData();
     frequencyData = placeholderTimeline.frequencyData;
     // Update placeholder performance data to include an empty scores array
+    // (The structure of placeholder performance data doesn't need the detailed score info)
     performanceData = placeholderTimeline.performanceData.map((p) => ({
       ...p,
-      scores: [],
+      scores: [], // Placeholder scores remain empty
     }));
   }
 

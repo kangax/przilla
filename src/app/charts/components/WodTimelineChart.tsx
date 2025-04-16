@@ -25,9 +25,13 @@ import {
 } from "recharts/types/component/DefaultTooltipContent";
 
 // Define the structure for individual scores (matching page.tsx and backend)
+// Updated to include difficulty and adjusted level details
 type MonthlyScoreDetail = {
   wodName: string;
-  level: number; // The calculated level (0-4) for this score
+  level: number; // The original calculated level (0-4) for this score
+  difficulty: string | null; // WOD difficulty string
+  difficultyMultiplier: number; // Corresponding multiplier
+  adjustedLevel: number; // level * difficultyMultiplier
 };
 
 // Define the structure for timeline data points
@@ -37,12 +41,12 @@ type FrequencyDataPoint = {
   rollingAverage?: number; // Add optional rolling average
 };
 
-// Update PerformanceDataPoint to include the scores array
+// Update PerformanceDataPoint to include the updated scores array
 type PerformanceDataPoint = {
   month: string; // YYYY-MM format
-  averageLevel: number; // 0-4 scale
+  averageLevel: number; // This now represents the average *adjusted* level (0-4 scale, potentially higher with multipliers)
   rollingAverage?: number; // Add optional rolling average
-  scores: MonthlyScoreDetail[]; // Add the scores array
+  scores: MonthlyScoreDetail[]; // Use the updated MonthlyScoreDetail type
 };
 
 // Union type for data points, ensuring PerformanceDataPoint includes scores
@@ -50,7 +54,7 @@ type DataPoint = FrequencyDataPoint | PerformanceDataPoint;
 
 interface WodTimelineChartProps {
   frequencyData: FrequencyDataPoint[];
-  performanceData: PerformanceDataPoint[]; // Type now includes scores
+  performanceData: PerformanceDataPoint[]; // Type now includes updated scores
 }
 
 // Helper function to calculate rolling average
@@ -87,6 +91,7 @@ const calculateRollingAverage = (
     // Return the point including the rolling average and ensure scores are preserved if it's a PerformanceDataPoint
     const resultPoint = { ...point, rollingAverage: average };
     // If the original point was a PerformanceDataPoint, ensure 'scores' is carried over
+    // This check remains valid as 'scores' is the defining property
     if ("scores" in point) {
       (resultPoint as PerformanceDataPoint).scores = point.scores;
     }
@@ -94,7 +99,8 @@ const calculateRollingAverage = (
   });
 };
 
-// Helper function to get descriptive level from numerical average
+// Helper function to get descriptive level from numerical average (original or adjusted)
+// Note: Adjusted levels might exceed 4, so we need to handle that.
 const getDescriptiveLevel = (level: number): string => {
   if (level < 1.5) return "Beginner";
   if (level < 2) return "Beginner+";
@@ -102,19 +108,19 @@ const getDescriptiveLevel = (level: number): string => {
   if (level < 3) return "Intermediate+";
   if (level < 3.5) return "Advanced";
   if (level < 4) return "Advanced+";
-  if (level === 4) return "Elite";
+  if (level < 4.5) return "Elite"; // Adjusted levels can go higher
+  if (level >= 4.5) return "Elite+"; // Handle levels >= 4.5
   return "Unknown";
 };
 
+// Update color logic to handle potentially higher levels
 const getLevelColor = (level: number): string => {
-  if (level < 1.5) return "text-gray-500";
-  if (level < 2) return "text-gray-400";
-  if (level < 2.5) return "text-yellow-500";
-  if (level < 3) return "text-yellow-400";
-  if (level < 3.5) return "text-green-500";
-  if (level < 4) return "text-green-400";
-  if (level === 4) return "text-purple-500";
-  return "text-gray-500";
+  if (level < 1.5) return "text-gray-500"; // Beginner
+  if (level < 2.5) return "text-yellow-500"; // Intermediate range (incl. Beginner+)
+  if (level < 3.5) return "text-green-500"; // Advanced range (incl. Intermediate+)
+  if (level < 4.5) return "text-purple-500"; // Elite range (incl. Advanced+)
+  if (level >= 4.5) return "text-pink-500"; // Elite+ or higher
+  return "text-gray-500"; // Fallback
 };
 
 // Custom Tooltip for better display
@@ -145,7 +151,7 @@ const CustomTimelineTooltip = ({
 
     let displayValue = "Invalid data";
     let rollingAvgDisplay = "";
-    let scoreBreakdown: MonthlyScoreDetail[] = []; // Initialize score breakdown
+    let scoreBreakdown: MonthlyScoreDetail[] = []; // Initialize score breakdown with updated type
 
     // Format the main value and extract score breakdown if it's performance data
     if (
@@ -161,12 +167,14 @@ const CustomTimelineTooltip = ({
       typeof value === "number" &&
       "scores" in dataPoint // Check if it's a PerformanceDataPoint with scores
     ) {
+      // Value now represents the average *adjusted* level
       const numericLevel = value.toFixed(2);
       const descriptiveLevel = getDescriptiveLevel(value);
       displayValue = `${descriptiveLevel} (${numericLevel})`;
-      scoreBreakdown = dataPoint.scores || []; // Get the scores array
+      scoreBreakdown = dataPoint.scores || []; // Get the scores array (now with adjusted details)
 
       if (typeof rollingAverage === "number") {
+        // Rolling average also represents adjusted level
         const avgNumericLevel = rollingAverage.toFixed(2);
         const avgDescriptiveLevel = getDescriptiveLevel(rollingAverage);
         rollingAvgDisplay = ` (Avg: ${avgDescriptiveLevel} (${avgNumericLevel}))`;
@@ -181,40 +189,51 @@ const CustomTimelineTooltip = ({
         <Text className="font-bold">{String(label)}</Text> {/* Month */}
         {name === "averageLevel" ? (
           <Flex direction="column" gap="1" mt="1">
-            {/* Level Info */}
+            {/* Level Info (Now Adjusted Level) */}
             <Flex align="center" gap="1">
-              <Text>Level:</Text>
+              <Text>Adj. Level:</Text>
               <Text className={getLevelColor(Number(value))}>
                 {displayValue}
               </Text>
             </Flex>
-            {/* Trend Info */}
+            {/* Trend Info (Now Adjusted Trend) */}
             {rollingAvgDisplay && (
               <Flex align="center" gap="1">
-                <Text>Trend:</Text>
+                <Text>Adj. Trend:</Text>
                 <Text className={getLevelColor(Number(rollingAverage))}>
                   {rollingAvgDisplay.replace("(Avg: ", "").replace(")", "")}
                 </Text>
               </Flex>
             )}
-            {/* Score Breakdown Section */}
+            {/* Score Breakdown Section - Updated Format */}
             {scoreBreakdown.length > 0 && (
               <>
                 <Separator my="1" size="4" /> {/* Add a separator */}
                 <Text size="1" weight="bold" mb="1">
-                  Breakdown:
+                  Breakdown (Adjusted):
                 </Text>
                 <Flex direction="column" gap="0">
                   {scoreBreakdown.map((score, index) => (
-                    <Flex key={index} justify="between" gap="2">
-                      <Text size="1" truncate>
-                        {score.wodName}
+                    <Flex key={index} justify="between" gap="2" wrap="wrap">
+                      <Text size="1" className="flex-grow basis-1/2 truncate">
+                        {score.wodName}:
                       </Text>
                       <Text
                         size="1"
                         className={`${getLevelColor(score.level)} flex-shrink-0`}
                       >
-                        ({getDescriptiveLevel(score.level)})
+                        {getDescriptiveLevel(score.level)} (
+                        {score.level.toFixed(1)})
+                      </Text>
+                      <Text size="1" className="flex-shrink-0 text-gray-400">
+                        | {score.difficulty || "N/A"} x
+                        {score.difficultyMultiplier.toFixed(1)}
+                      </Text>
+                      <Text
+                        size="1"
+                        className={`${getLevelColor(score.adjustedLevel)} flex-shrink-0 font-semibold`}
+                      >
+                        | Adj: {score.adjustedLevel.toFixed(2)}
                       </Text>
                     </Flex>
                   ))}
@@ -243,16 +262,20 @@ export default function WodTimelineChart({
   const ROLLING_WINDOW = 12; // Define window size (Updated to 12 months)
 
   // Reverse mapping for Y-axis ticks in performance view
+  // Keep original levels for axis labels, but domain might need adjustment
   const levelTickNames: Record<number, string> = {
     1: "Beginner",
     2: "Intermediate",
     3: "Advanced",
     4: "Elite",
+    // Add more if adjusted levels consistently exceed 4
+    5: "Elite+",
   };
 
   // Formatter function for Y-axis ticks
   const yAxisTickFormatter = (tickValue: number): string => {
-    return levelTickNames[tickValue] ?? ""; // Return name or empty string
+    // Format tick to one decimal place for potentially adjusted levels
+    return levelTickNames[Math.round(tickValue)] ?? tickValue.toFixed(1);
   };
 
   // Memoize the calculation of rolling average
@@ -272,10 +295,11 @@ export default function WodTimelineChart({
   }, [view, frequencyData, performanceData]);
 
   const dataKey = view === "frequency" ? "count" : "averageLevel";
-  const chartTitle = view === "frequency" ? "WOD Frequency" : "WOD Performance";
-  const yAxisLabel = view === "frequency" ? "WODs / Month" : "Avg Level";
-  // Only set Y-axis domain for performance view
-  const yDomain = view === "performance" ? [0, 4] : undefined;
+  const chartTitle =
+    view === "frequency" ? "WOD Frequency" : "WOD Performance (Adjusted)"; // Update title
+  const yAxisLabel = view === "frequency" ? "WODs / Month" : "Avg Adj. Level"; // Update label
+  // Adjust Y-axis domain for performance view if needed, e.g., [0, 5] or dynamic
+  const yDomain = view === "performance" ? [0, 5] : undefined; // Example: extend to 5
 
   // Check if there's data to display (use the calculated data)
   if (!chartDataWithAverage || chartDataWithAverage.length === 0) {
@@ -341,6 +365,8 @@ export default function WodTimelineChart({
             tickFormatter={
               view === "performance" ? yAxisTickFormatter : undefined
             }
+            // Consider adding ticks explicitly if needed for adjusted scale
+            // ticks={view === 'performance' ? [0, 1, 2, 3, 4, 5] : undefined}
           />
           <Tooltip content={<CustomTimelineTooltip />} />
           <Line

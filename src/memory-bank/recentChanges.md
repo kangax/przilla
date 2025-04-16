@@ -1,5 +1,33 @@
 # Recent Changes
 
+- **Performance Chart Adjusted Level (Apr 15, 2025):**
+
+  - **Goal:** Implement an "adjusted level" calculation for the performance timeline chart, factoring in WOD difficulty (`adjustedLevel = scoreLevel * difficultyMultiplier`).
+  - **Implementation:**
+    - Defined difficulty multipliers: Easy: 0.8, Medium: 1.0, Hard: 1.2, Very Hard: 1.5, Extremely Hard: 2.0 (Default: 1.0).
+    - Updated `api.wod.getChartData` tRPC procedure (`src/server/api/routers/wod.ts`):
+      - Modified the query to join `scores` with `wods` to fetch `difficulty` and `benchmarks`.
+      - Calculated the original `levelScore` (0-4 scale) based on benchmarks and Rx status.
+      - Determined the `difficultyMultiplier` based on the WOD's difficulty string.
+      - Calculated the `adjustedLevel = levelScore * difficultyMultiplier`.
+      - Aggregated the `totalAdjustedLevelScore` per month.
+      - Updated the returned `scores` array within `monthlyData` to include `wodName`, `level` (original), `difficulty`, `difficultyMultiplier`, and `adjustedLevel`.
+    - Updated Charts Page (`src/app/charts/page.tsx`):
+      - Updated `MonthlyScoreDetail` and `PerformanceDataPoint` type definitions to include the new fields (`difficulty`, `difficultyMultiplier`, `adjustedLevel`).
+      - Modified the data processing logic to calculate `averageLevel` using `totalAdjustedLevelScore`.
+      - Passed the updated `performanceData` (with the new score details) to the chart component.
+    - Updated `WodTimelineChart.tsx` (`src/app/charts/components/WodTimelineChart.tsx`):
+      - Updated local type definitions (`MonthlyScoreDetail`, `PerformanceDataPoint`) to match the new structure.
+      - Updated helper functions (`getDescriptiveLevel`, `getLevelColor`) to handle potentially higher adjusted level values (e.g., adding "Elite+").
+      - Modified `CustomTimelineTooltip`:
+        - Displays the main level as "Adj. Level" using the average adjusted level.
+        - Displays the trend as "Adj. Trend" using the rolling average of adjusted levels.
+        - Updated the "Breakdown" section title to "Breakdown (Adjusted)".
+        - For each score, displays: WOD Name, Original Level (descriptive + numeric), Difficulty (string + multiplier), and Adjusted Level (numeric).
+      - Updated chart title and Y-axis label to reflect "Adjusted" level.
+      - Adjusted Y-axis domain (e.g., to `[0, 5]`) and tick formatting to accommodate adjusted levels.
+  - **Outcome:** The performance chart now displays performance based on an adjusted level that considers WOD difficulty. The tooltip provides a clear breakdown of how the adjusted level is calculated for each score contributing to the monthly average.
+
 - **Performance Chart Tooltip Enhancement (Apr 15, 2025):**
 
   - **Goal:** Enhance the performance chart tooltip to show a breakdown of individual workouts and their levels that contributed to the calculated average level for a specific month.

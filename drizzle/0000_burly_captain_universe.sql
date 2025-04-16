@@ -1,0 +1,1 @@
+ALTER TABLE `przilla_wod` ADD `timecap` integer;

@@ -202,14 +202,15 @@ const createColumns = (
     columnHelper.accessor("difficulty", {
       header: () => (
         <Tooltip
-          className="min-w-[510px] max-w-[510px] bg-slate-500 p-0.5"
+          className="min-w-[510px] max-w-[510px] rounded-sm border bg-white p-4 text-black shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
           content={
-            <div
-              className="rounded-sm bg-gray-800 p-4 text-gray-100 shadow-md"
-              style={{ boxShadow: "none", border: "none" }}
-            >
+            <div>
               <Flex direction="column" gap="2">
-                <Text size="2" weight="bold" className="text-gray-100">
+                <Text
+                  size="2"
+                  weight="bold"
+                  className="text-black dark:text-gray-100"
+                >
                   Difficulty Levels
                 </Text>
                 <Separator my="1" size="4" />
@@ -217,10 +218,10 @@ const createColumns = (
                   <Text color="green" weight="bold" style={{ minWidth: 100 }}>
                     Easy
                   </Text>
-                  <Text className="text-gray-100">
+                  <Text className="text-black dark:text-gray-100">
                     Bodyweight only, low volume, no complex skills
                     <br />
-                    <Text className="italic text-gray-100">
+                    <Text className="italic text-black dark:text-gray-100">
                       (e.g. &quot;500m row&quot;)
                     </Text>
                   </Text>
@@ -229,10 +230,10 @@ const createColumns = (
                   <Text color="yellow" weight="bold" style={{ minWidth: 100 }}>
                     Medium
                   </Text>
-                  <Text className="text-gray-100">
+                  <Text className="text-black dark:text-gray-100">
                     Moderate volume, light-moderate loads, basic skills
                     <br />
-                    <Text className="italic text-gray-100">
+                    <Text className="italic text-black dark:text-gray-100">
                       (e.g. &quot;Angie&quot;)
                     </Text>
                   </Text>
@@ -241,10 +242,10 @@ const createColumns = (
                   <Text color="orange" weight="bold" style={{ minWidth: 100 }}>
                     Hard
                   </Text>
-                  <Text className="text-gray-100">
+                  <Text className="text-black dark:text-gray-100">
                     High volume OR moderate skill/heavy load
                     <br />
-                    <Text className="italic text-gray-100">
+                    <Text className="italic text-black dark:text-gray-100">
                       (e.g. &quot;Isabel&quot;)
                     </Text>
                   </Text>
@@ -253,10 +254,10 @@ const createColumns = (
                   <Text color="red" weight="bold" style={{ minWidth: 100 }}>
                     Very Hard
                   </Text>
-                  <Text className="text-gray-100">
+                  <Text className="text-black dark:text-gray-100">
                     Heavy loads + high skill + high volume
                     <br />
-                    <Text className="italic text-gray-100">
+                    <Text className="italic text-black dark:text-gray-100">
                       (e.g. &quot;Eva&quot;)
                     </Text>
                   </Text>
@@ -265,11 +266,11 @@ const createColumns = (
                   <Text color="purple" weight="bold" style={{ minWidth: 100 }}>
                     Extremely Hard
                   </Text>
-                  <Text className="text-gray-100">
+                  <Text className="text-black dark:text-gray-100">
                     Maximal loads, multiple high-skill elements, or extreme
                     volume
                     <br />
-                    <Text className="italic text-gray-100">
+                    <Text className="italic text-black dark:text-gray-100">
                       (e.g. &quot;Awful Annie&quot;)
                     </Text>
                   </Text>

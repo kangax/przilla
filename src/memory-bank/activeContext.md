@@ -2,6 +2,7 @@
 
 ## Current Focus
 
+- **Dialog Background Color Fix (Apr 15, 2025):** Removed explicit Tailwind background classes (`bg-white`, `dark:bg-neutral-900`) from `LogScoreDialog.tsx`'s `Dialog.Content`. This allows Radix UI Themes to correctly apply the theme-appropriate background color, resolving an issue where the dialog had an off-theme background. The delete confirmation dialog in `WodTable.tsx` still needs investigation as it doesn't use explicit overrides but shows an incorrect background.
 - **Log Score UI Refactor: Popover to Dialog (Apr 15, 2025):** Replaced the score logging/editing Popover (`LogScorePopover.tsx`) with a centered Modal Dialog (`LogScoreDialog.tsx`) using Radix UI Dialog components. This provides a more focused user experience. The parent component (`WodTable.tsx`) now manages the dialog state. The core form logic, validation, and state handling (including recent fixes for state reset) were preserved in the new dialog component. **Update:** Ensured the dialog renders within the Radix Theme context by adding an ID to `PageLayout.tsx` and using the `container` prop on `Dialog.Portal` in `LogScoreDialog.tsx`. **Update 2:** Replaced the Rx `Checkbox` with a Radix UI `Switch` component for a toggle-style input. **Update 3:** Rearranged the Date and Rx fields in the dialog to place Date (with label) on the left and Rx Switch on the right on the same line. **Update 4:** Reduced the width of the "Minutes" and "Seconds" input fields for a more compact layout.
 - **Log Score Popover Behavior Fix (Apr 15, 2025):** Resolved issues with the _previous_ `LogScorePopover`:
   1.  Fixed a bug where the popover would retain data from a previous edit session when opened to log a new score. The form state is now correctly reset after successful submissions (both log and update) and when the cancel button is clicked or the popover is closed.
@@ -34,6 +35,7 @@
 
 ## Learnings & Insights
 
+- When using Radix UI Themes, avoid applying explicit background color classes (like Tailwind's `bg-white` or `dark:bg-*`) to components like `Dialog.Content`, as this can override the theme's intended styling. Let the theme handle the background automatically.
 - Using a centered Dialog for score logging/editing provides a more focused interaction compared to a Popover attached to a trigger element.
 - Radix UI Portals need a specified `container` within the Theme provider to inherit theme styles correctly.
 - Radix UI `Switch` provides a clear toggle alternative to `Checkbox`.

@@ -282,7 +282,8 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
         {" "}
         {/* Use the container prop */}
         <Dialog.Overlay className="data-[state=open]:animate-overlayShow fixed inset-0 z-40 bg-black/50" />
-        <Dialog.Content className="data-[state=open]:animate-contentShow fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg border bg-white p-6 shadow-lg dark:border-neutral-700 dark:bg-neutral-900">
+        {/* Removed explicit bg-white and dark:bg-neutral-900 to allow Radix Theme to control background */}
+        <Dialog.Content className="data-[state=open]:animate-contentShow fixed left-1/2 top-1/2 z-50 w-[90vw] max-w-sm -translate-x-1/2 -translate-y-1/2 rounded-lg border p-6 shadow-lg dark:border-neutral-700">
           <Dialog.Title asChild>
             <Text size="4" weight="bold" mb="4" className="block">
               {isEditMode ? "Edit Score" : "Log Score"} for {wod.wodName}

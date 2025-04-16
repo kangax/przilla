@@ -1,5 +1,13 @@
 # Recent Changes
 
+- **Dialog Background Color Fix (Apr 15, 2025):**
+
+  - **Goal:** Fix the background color of the `LogScoreDialog` which was not respecting the Radix UI Theme.
+  - **Implementation:**
+    - Updated `LogScoreDialog.tsx` (`src/app/(main)/components/LogScoreDialog.tsx`):
+      - Removed explicit Tailwind background classes (`bg-white`, `dark:bg-neutral-900`) from the `Dialog.Content` element.
+  - **Outcome:** The `LogScoreDialog` now correctly uses the background color provided by the Radix UI Theme system, resolving the inconsistency. The delete confirmation dialog in `WodTable.tsx` still needs investigation for a similar issue.
+
 - **Log Score UI Refactor: Popover to Dialog (Apr 15, 2025):**
 
   - **Goal:** Replace the score logging/editing Popover with a centered Modal Dialog for a more focused user experience, using Radix UI components, and ensure it inherits the Radix Theme context.

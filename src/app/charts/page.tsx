@@ -31,6 +31,13 @@ type MonthlyScoreDetail = {
   difficulty: string | null; // WOD difficulty string
   difficultyMultiplier: number; // Corresponding multiplier
   adjustedLevel: number; // level * difficultyMultiplier
+  // Raw score fields for formatting in tooltip
+  time_seconds: number | null;
+  reps: number | null;
+  load: number | null;
+  rounds_completed: number | null;
+  partial_reps: number | null;
+  is_rx: boolean | null;
 };
 // Update PerformanceDataPoint to include the updated scores array
 type PerformanceDataPoint = {

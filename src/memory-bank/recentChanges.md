@@ -1,5 +1,24 @@
 # Recent Changes
 
+- **Performance Chart Tooltip Copy Refinement (Apr 15, 2025):**
+
+  - **Goal:** Refine the copy and formatting of the score breakdown within the performance chart tooltip for better clarity and emphasis.
+  - **Implementation:**
+    - Updated `api.wod.getChartData` tRPC procedure (`src/server/api/routers/wod.ts`):
+      - Modified the query to select raw score fields (`time_seconds`, `reps`, `load`, `rounds_completed`, `partial_reps`, `is_rx`).
+      - Updated the `MonthlyScoreDetail` type definition to include these raw score fields.
+      - Ensured raw score fields are passed in the `scores` array within `monthlyData`.
+    - Updated Frontend Types (`src/app/charts/page.tsx`, `src/app/charts/components/WodTimelineChart.tsx`):
+      - Updated the `MonthlyScoreDetail` type definitions to include the new raw score fields.
+    - Updated `CustomTimelineTooltip` in `WodTimelineChart.tsx` (`src/app/charts/components/WodTimelineChart.tsx`):
+      - Imported `formatScore` utility and `Score` type.
+      - Replaced the previous multi-line breakdown with a single `Text` component per score.
+      - Used `formatScore` to display the raw score value (e.g., "14:15", "353 reps").
+      - Included the numeric original level alongside the descriptive level (e.g., "Beginner (1.2)").
+      - Applied highlighting using `<span>` and Tailwind classes: bold score value, italic WOD name, color-coded original and adjusted levels based on `getLevelColor`.
+      - Implemented conditional rendering: the "Adjusted for difficulty..." text is now omitted if `score.difficulty` is "Medium".
+  - **Outcome:** The performance chart tooltip breakdown now displays each score in the format `Your score of **[Score Value]** on *[WOD Name]* is [Original Level (colored)] ([Level Num]). Adjusted for difficulty ([Difficulty]) it's [Adjusted Level Desc (colored)] ([Adjusted Level Num]).` (with the adjustment part hidden for "Medium" difficulty WODs), improving readability and highlighting key information.
+
 - **Performance Chart Adjusted Level (Apr 15, 2025):**
 
   - **Goal:** Implement an "adjusted level" calculation for the performance timeline chart, factoring in WOD difficulty (`adjustedLevel = scoreLevel * difficultyMultiplier`).

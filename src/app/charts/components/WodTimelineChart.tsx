@@ -23,6 +23,8 @@ import {
   type NameType,
   type ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
+import { formatScore } from "~/utils/wodUtils"; // Import formatScore
+import { type Score } from "~/types/wodTypes"; // Import Score type
 
 // Define the structure for individual scores (matching page.tsx and backend)
 // Updated to include difficulty and adjusted level details
@@ -32,6 +34,13 @@ type MonthlyScoreDetail = {
   difficulty: string | null; // WOD difficulty string
   difficultyMultiplier: number; // Corresponding multiplier
   adjustedLevel: number; // level * difficultyMultiplier
+  // Raw score fields for formatting in tooltip
+  time_seconds: number | null;
+  reps: number | null;
+  load: number | null;
+  rounds_completed: number | null;
+  partial_reps: number | null;
+  is_rx: boolean | null;
 };
 
 // Define the structure for timeline data points
@@ -210,33 +219,61 @@ const CustomTimelineTooltip = ({
               <>
                 <Separator my="1" size="4" /> {/* Add a separator */}
                 <Text size="1" weight="bold" mb="1">
-                  Breakdown (Adjusted):
+                  Breakdown: {/* Changed title slightly */}
                 </Text>
                 <Flex direction="column" gap="0">
-                  {scoreBreakdown.map((score, index) => (
-                    <Flex key={index} justify="between" gap="2" wrap="wrap">
-                      <Text size="1" className="flex-grow basis-1/2 truncate">
-                        {score.wodName}:
+                  {scoreBreakdown.map((score, index) => {
+                    // Construct a minimal Score object for formatScore
+                    const scoreObject: Score = {
+                      id: "", // Not needed for formatting
+                      userId: "", // Not needed for formatting
+                      wodId: "", // Not needed for formatting
+                      time_seconds: score.time_seconds,
+                      reps: score.reps,
+                      load: score.load,
+                      rounds_completed: score.rounds_completed,
+                      partial_reps: score.partial_reps,
+                      isRx: score.is_rx,
+                      scoreDate: new Date(), // Not needed for formatting
+                      notes: null, // Not needed for formatting
+                      createdAt: new Date(), // Not needed for formatting
+                      updatedAt: null, // Not needed for formatting
+                    };
+                    const formattedScoreValue = formatScore(scoreObject);
+                    const originalDescriptiveLevel = getDescriptiveLevel(
+                      score.level,
+                    );
+                    const adjustedDescriptiveLevel = getDescriptiveLevel(
+                      score.adjustedLevel,
+                    );
+
+                    return (
+                      <Text key={index} size="1" className="my-0.5">
+                        Your score of{" "}
+                        <span className="font-semibold">
+                          {formattedScoreValue}
+                        </span>{" "}
+                        on <span className="italic">{score.wodName}</span> is{" "}
+                        <span className={getLevelColor(score.level)}>
+                          {originalDescriptiveLevel} ({score.level.toFixed(1)})
+                        </span>
+                        {/* Conditionally render adjustment text */}
+                        {score.difficulty !== "Medium" && (
+                          <>
+                            . Adjusted for difficulty (
+                            {score.difficulty || "N/A"}) it&apos;s{" "}
+                            <span
+                              className={getLevelColor(score.adjustedLevel)}
+                            >
+                              {adjustedDescriptiveLevel} (
+                              {score.adjustedLevel.toFixed(1)})
+                            </span>
+                          </>
+                        )}
+                        .
                       </Text>
-                      <Text
-                        size="1"
-                        className={`${getLevelColor(score.level)} flex-shrink-0`}
-                      >
-                        {getDescriptiveLevel(score.level)} (
-                        {score.level.toFixed(1)})
-                      </Text>
-                      <Text size="1" className="flex-shrink-0 text-gray-400">
-                        | {score.difficulty || "N/A"} x
-                        {score.difficultyMultiplier.toFixed(1)}
-                      </Text>
-                      <Text
-                        size="1"
-                        className={`${getLevelColor(score.adjustedLevel)} flex-shrink-0 font-semibold`}
-                      >
-                        | Adj: {score.adjustedLevel.toFixed(2)}
-                      </Text>
-                    </Flex>
-                  ))}
+                    );
+                  })}
                 </Flex>
               </>
             )}

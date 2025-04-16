@@ -20,12 +20,20 @@ const difficultyMultipliers: Record<string, number> = {
 const DEFAULT_MULTIPLIER = 1.0; // Fallback multiplier
 
 // Define the structure for individual scores in the chart data
+// Updated to include raw score fields
 type MonthlyScoreDetail = {
   wodName: string;
   level: number; // The original calculated level (0-4) for this score
   difficulty: string | null; // WOD difficulty string
   difficultyMultiplier: number; // Corresponding multiplier
   adjustedLevel: number; // level * difficultyMultiplier
+  // Raw score fields for formatting in tooltip
+  time_seconds: number | null;
+  reps: number | null;
+  load: number | null;
+  rounds_completed: number | null;
+  partial_reps: number | null;
+  is_rx: boolean | null;
 };
 
 export const wodRouter = createTRPCRouter({
@@ -65,13 +73,27 @@ export const wodRouter = createTRPCRouter({
     const allWods = await ctx.db.select().from(wods).orderBy(asc(wods.wodName));
 
     // Get user's scores JOINED with WOD data (name, difficulty, benchmarks)
+    // Updated to select raw score fields
     const userScoresWithWodData = await ctx.db
       .select({
-        score: scores, // Select all score fields
+        // Select all score fields needed
+        scoreId: scores.id,
+        userId: scores.userId,
+        wodId: scores.wodId,
+        time_seconds: scores.time_seconds,
+        reps: scores.reps,
+        load: scores.load,
+        rounds_completed: scores.rounds_completed,
+        partial_reps: scores.partial_reps,
+        is_rx: scores.is_rx,
+        scoreDate: scores.scoreDate,
+        notes: scores.notes,
+        createdAt: scores.createdAt,
+        updatedAt: scores.updatedAt,
+        // Select joined WOD fields
         wodName: wods.wodName,
         difficulty: wods.difficulty,
         benchmarks: wods.benchmarks,
-        wodId: wods.id, // Select wodId for grouping below
       })
       .from(scores)
       .leftJoin(wods, eq(scores.wodId, wods.id)) // Join scores with wods
@@ -80,21 +102,29 @@ export const wodRouter = createTRPCRouter({
     // Organize scores by WOD ID for isWodDone check
     const scoresByWodId = userScoresWithWodData.reduce<Record<string, Score[]>>(
       (acc, data) => {
-        const score = data.score; // Extract the score object
+        // Construct the Score object from selected fields
+        const score: Score = {
+          id: data.scoreId,
+          userId: data.userId,
+          wodId: data.wodId,
+          time_seconds: data.time_seconds,
+          reps: data.reps,
+          load: data.load,
+          rounds_completed: data.rounds_completed,
+          partial_reps: data.partial_reps,
+          isRx: data.is_rx, // Map is_rx to isRx
+          scoreDate: data.scoreDate,
+          notes: data.notes,
+          createdAt: data.createdAt,
+          updatedAt: data.updatedAt,
+        };
         const wodId = data.wodId; // Use wodId from the joined data
-        if (!wodId) return acc; // Skip if wodId is null (shouldn't happen with leftJoin on scores)
+        if (!wodId) return acc; // Skip if wodId is null
 
         if (!acc[wodId]) {
           acc[wodId] = [];
         }
-        // Map score fields for Score type compatibility
-        acc[wodId].push({
-          ...score,
-          isRx: score.is_rx,
-          scoreDate: score.scoreDate,
-          createdAt: score.createdAt,
-          updatedAt: score.updatedAt,
-        });
+        acc[wodId].push(score);
         return acc;
       },
       {},
@@ -137,7 +167,7 @@ export const wodRouter = createTRPCRouter({
     > = {};
 
     userScoresWithWodData.forEach((data) => {
-      const score = data.score; // Extract score object
+      // Extract score fields directly from data
       const wodName = data.wodName;
       const difficulty = data.difficulty;
       const benchmarksInput = data.benchmarks; // Use benchmarks from joined data
@@ -145,12 +175,12 @@ export const wodRouter = createTRPCRouter({
       // Skip if essential data is missing
       if (!wodName || !benchmarksInput) {
         console.warn(
-          `Skipping score ID ${score.id} due to missing WOD name or benchmarks.`,
+          `Skipping score ID ${data.scoreId} due to missing WOD name or benchmarks.`,
         );
         return;
       }
 
-      const monthKey = score.scoreDate.toISOString().slice(0, 7); // YYYY-MM format
+      const monthKey = data.scoreDate.toISOString().slice(0, 7); // YYYY-MM format
       if (!monthlyData[monthKey]) {
         // Initialize with the new structure including the scores array
         monthlyData[monthKey] = {
@@ -168,7 +198,7 @@ export const wodRouter = createTRPCRouter({
           : benchmarksInput;
 
       // Get numeric score value (time in seconds, reps, etc.)
-      const scoreValue = score.time_seconds ?? score.reps ?? 0; // Use nullish coalescing
+      const scoreValue = data.time_seconds ?? data.reps ?? 0; // Use nullish coalescing
 
       // Calculate original performance level (0-4 scale)
       let levelScore = 0;
@@ -219,7 +249,7 @@ export const wodRouter = createTRPCRouter({
       }
 
       // Bonus for Rx - apply only if not already Elite
-      if (score.is_rx && levelScore < 4) {
+      if (data.is_rx && levelScore < 4) {
         levelScore = Math.min(levelScore + 0.5, 4);
       }
 
@@ -232,12 +262,20 @@ export const wodRouter = createTRPCRouter({
       monthlyData[monthKey].totalAdjustedLevelScore += adjustedLevel;
 
       // Add the detailed score info to the scores array for this month
+      // Include raw score fields
       monthlyData[monthKey].scores.push({
         wodName: wodName,
         level: levelScore, // Original level
         difficulty: difficulty, // Difficulty string
         difficultyMultiplier: difficultyMultiplier, // Multiplier used
         adjustedLevel: adjustedLevel, // Calculated adjusted level
+        // Add raw score fields
+        time_seconds: data.time_seconds,
+        reps: data.reps,
+        load: data.load,
+        rounds_completed: data.rounds_completed,
+        partial_reps: data.partial_reps,
+        is_rx: data.is_rx,
       });
     });
 

@@ -2,6 +2,16 @@
 
 ## Current Focus
 
+- **WOD Time Cap Field Added & Backfilled (Apr 16, 2025):** The `timecap` field (seconds, nullable) was added to the WODs table in the database schema. A migration was generated and applied. A script parsed and backfilled the field for 62 WODs using `public/data/wods_with_timecaps.json`. This enables robust score logging and future analytics based on timecap data.
+
+  - **Next Steps:**
+    - Update score logging UI and logic to use the new `timecap` field for validation, display, and analytics.
+    - Update type definitions and API responses to include the new field.
+    - Consider further normalization or handling of ambiguous/multi-value timecaps if needed.
+  - **Learnings:**
+    - Most WODs matched directly by name; a few may require manual review for naming mismatches or ambiguous timecap values.
+    - Having a structured timecap field enables more accurate and user-friendly score logging and analytics.
+
 - **WOD Table "Difficulty" Tooltip Redesign (Apr 16, 2025):** The "Difficulty" column header tooltip in the WOD table now uses a dark background, light text, and no border/shadow, matching the style of charting tooltips. The tooltip content is color-coded for each difficulty level, uses Radix UI Flex/Text for layout, and is fully accessible and theme-aware. This change improves clarity, visual consistency, and accessibility across the app.
   - **Implementation:**
     - Added `'results'` to the `SortByType` union in `src/types/wodTypes.ts`.

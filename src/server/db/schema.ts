@@ -25,6 +25,7 @@ export const wods = createTable(
     tags: text("tags").$type<string[] | null>(), // Storing JSON array as text
     difficulty: text("difficulty"), // e.g., "Easy", "Medium", "Hard", "Very Hard", "Extremely Hard"
     difficultyExplanation: text("difficulty_explanation"),
+    timecap: int("timecap"), // Nullable, seconds
     countLikes: int("count_likes").default(0),
     createdAt: int("created_at", { mode: "timestamp" })
       .default(sql`(unixepoch())`)

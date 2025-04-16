@@ -68,6 +68,7 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   date: "desc",
   difficulty: "asc",
   countLikes: "desc",
+  results: "desc",
 };
 
 export default function WodViewer({ initialWods }: WodViewerProps) {

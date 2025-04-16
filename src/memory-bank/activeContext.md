@@ -2,7 +2,7 @@
 
 ## Current Focus
 
-- **WOD Table Score Sorting (Apr 16, 2025):** Implemented sorting for the "Your Scores" column in the desktop `WodTable` component (`src/app/(main)/components/WodTable.tsx`). Sorting is based on the calculated performance level of the user's latest score for each WOD (Elite > Advanced > Intermediate > Beginner > Rx > Scaled > No Score).
+- **WOD Table "Difficulty" Tooltip Redesign (Apr 16, 2025):** The "Difficulty" column header tooltip in the WOD table now uses a dark background, light text, and no border/shadow, matching the style of charting tooltips. The tooltip content is color-coded for each difficulty level, uses Radix UI Flex/Text for layout, and is fully accessible and theme-aware. This change improves clarity, visual consistency, and accessibility across the app.
   - **Implementation:**
     - Added `'results'` to the `SortByType` union in `src/types/wodTypes.ts`.
     - Defined a numeric mapping for performance levels (`performanceLevelValues`) in `WodTable.tsx`.
@@ -53,6 +53,9 @@
 
 ## Learnings & Insights
 
+- When customizing tooltips for accessibility and theme consistency, always check for default UI library styles (e.g., Radix UI Tooltip.Content may add a border or box-shadow). Explicitly override these with `boxShadow: "none"` and `border: "none"` if a clean, borderless look is desired.
+- Using a dark background and light text for tooltips (with Tailwind `bg-gray-800` and `text-gray-100`) provides a less jarring, more visually consistent experience, especially when matching charting tooltips or other dark UI elements.
+- Radix UI Flex/Text components allow for precise layout and alignment, and setting a fixed minWidth on left-aligned labels ensures clean, readable columns in multi-line tooltips.
 - Implementing custom sorting logic in TanStack Table (like sorting by latest score level) requires defining a custom `sortingFn`. This function needs access to the necessary data (e.g., `scoresByWodId`) which can be achieved by defining the function within a scope where the data is available (like inside `createColumns`) to leverage closures.
 - Calculating adjusted performance metrics (like `level * difficulty`) requires careful handling of data fetching (joining tables), type definitions across backend/frontend, and UI updates (tooltips, axis labels, helper functions) to accurately reflect the new calculation.
 - Passing detailed data structures (like the score breakdown) through multiple component layers (API -> Page -> Chart) requires careful type definition updates at each stage.

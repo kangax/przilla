@@ -235,6 +235,7 @@
   - **Outcome:** Users can now enter their time in the requested format when logging scores for "For Time" WODs.
 
 - **Log Score Functionality for WODs (Apr 2025):**
+
   - **Goal:** Allow users to log a score for any WOD directly from the main table, with a minimal, context-aware form and automatic UI refresh.
   - **Implementation:**
     - **Backend:**
@@ -256,5 +257,16 @@
       - Popover form is minimal, responsive, and uses Tailwind + Radix UI.
       - All error and loading states are handled gracefully.
   - **Outcome:** Users can now log a score for any WOD directly from the table, with the scores list updating automatically. The implementation is modular, context-aware, and follows project UI/UX patterns.
+
+- **WOD Table "Difficulty" Tooltip Redesign (Apr 16, 2025):**
+
+  - **Goal:** Improve the clarity, accessibility, and visual consistency of the "Difficulty" column header tooltip in the WOD table.
+  - **Implementation:**
+    - Updated the tooltip to use a dark background (`bg-gray-800`), light text (`text-gray-100`), and rounded corners, matching the style of charting tooltips.
+    - Used Radix UI's Flex and Text components for layout, with a fixed minWidth for left-aligned labels and high-contrast main text.
+    - Removed the default Radix UI Tooltip.Content border and box-shadow to eliminate the jarring white outline, using `boxShadow: "none"` and `border: "none"` on the tooltip container.
+    - Tooltip content is color-coded for each difficulty level (Easy, Medium, Hard, Very Hard, Extremely Hard) and provides concise, multi-line explanations.
+    - Tooltip is fully accessible, theme-aware, and visually consistent in both light and dark modes.
+  - **Outcome:** The "Difficulty" tooltip is now visually consistent with other dark tooltips in the app, highly readable, and accessible, with no distracting border or shadow.
 
 ...

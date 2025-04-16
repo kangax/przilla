@@ -200,12 +200,91 @@ const createColumns = (
     ),
     columnHelper.accessor("difficulty", {
       header: () => (
-        <span
-          onClick={() => handleSort("difficulty")}
-          className="cursor-pointer whitespace-nowrap"
+        <Tooltip
+          className="min-w-[510px] max-w-[510px] bg-slate-500 p-0.5"
+          content={
+            <div
+              className="rounded-sm bg-gray-800 p-4 text-gray-100 shadow-md"
+              style={{ boxShadow: "none", border: "none" }}
+            >
+              <Flex direction="column" gap="2">
+                <Text size="2" weight="bold" className="text-gray-100">
+                  Difficulty Levels
+                </Text>
+                <Flex align="center" gap="2">
+                  <Text color="green" weight="bold" style={{ minWidth: 100 }}>
+                    Easy
+                  </Text>
+                  <Text className="text-gray-100">
+                    Bodyweight only, low volume, no complex skills
+                    <br />
+                    <Text className="italic text-gray-100">
+                      (e.g. &quot;500m row&quot;)
+                    </Text>
+                  </Text>
+                </Flex>
+                <Flex align="center" gap="2">
+                  <Text color="yellow" weight="bold" style={{ minWidth: 100 }}>
+                    Medium
+                  </Text>
+                  <Text className="text-gray-100">
+                    Moderate volume, light-moderate loads, basic skills
+                    <br />
+                    <Text className="italic text-gray-100">
+                      (e.g. &quot;Angie&quot;)
+                    </Text>
+                  </Text>
+                </Flex>
+                <Flex align="center" gap="2">
+                  <Text color="orange" weight="bold" style={{ minWidth: 100 }}>
+                    Hard
+                  </Text>
+                  <Text className="text-gray-100">
+                    High volume OR moderate skill/heavy load
+                    <br />
+                    <Text className="italic text-gray-100">
+                      (e.g. &quot;Isabel&quot;)
+                    </Text>
+                  </Text>
+                </Flex>
+                <Flex align="center" gap="2">
+                  <Text color="red" weight="bold" style={{ minWidth: 100 }}>
+                    Very Hard
+                  </Text>
+                  <Text className="text-gray-100">
+                    Heavy loads + high skill + high volume
+                    <br />
+                    <Text className="italic text-gray-100">
+                      (e.g. &quot;Eva&quot;)
+                    </Text>
+                  </Text>
+                </Flex>
+                <Flex align="center" gap="2">
+                  <Text color="purple" weight="bold" style={{ minWidth: 100 }}>
+                    Extremely Hard
+                  </Text>
+                  <Text className="text-gray-100">
+                    Maximal loads, multiple high-skill elements, or extreme
+                    volume
+                    <br />
+                    <Text className="italic text-gray-100">
+                      (e.g. &quot;Awful Annie&quot;)
+                    </Text>
+                  </Text>
+                </Flex>
+              </Flex>
+            </div>
+          }
         >
-          Difficulty{getSortIndicator("difficulty")}
-        </span>
+          <span
+            onClick={() => handleSort("difficulty")}
+            className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
+            tabIndex={0}
+            aria-label="Difficulty (show info)"
+          >
+            Difficulty{getSortIndicator("difficulty")}
+          </span>
+        </Tooltip>
       ),
       cell: (info) => {
         const row = info.row.original;

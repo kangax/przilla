@@ -1,5 +1,19 @@
 # Recent Changes
 
+- **Log/Edit Score Dialog: Correct Timecap Radio Default in Edit Mode (Apr 17, 2025):**
+
+  - **Goal:** Ensure the "Finished within timecap?" radio group in `LogScoreDialog.tsx` correctly defaults to "Yes" or "No" based on the score being edited when opening the dialog in edit mode for a timecapped WOD.
+  - **Implementation:**
+    - Updated `src/app/(main)/components/LogScoreDialog.tsx`:
+      - Modified the `useEffect` hook that handles `initialScore`.
+      - Added logic to check if the `wod` has a `timecap`.
+      - If it does, set the `finishedWithinTimecap` state to `'yes'` if `initialScore.time_seconds` is not null, and `'no'` otherwise.
+    - Created `src/app/(main)/components/LogScoreDialog.test.tsx`:
+      - Added Vitest/React Testing Library tests to verify the radio group defaults correctly in edit mode for both time-based and reps/rounds-based scores on timecapped WODs.
+      - Added a test to ensure the radio group does not appear for non-timecapped WODs.
+      - Included necessary mocks for tRPC and Radix UI Theme/Portal.
+  - **Outcome:** When editing a score for a timecapped WOD, the dialog now correctly pre-selects the timecap completion status based on the existing score data, improving the user experience. The new tests ensure this behavior is maintained.
+
 - **Log/Edit Score Dialog: Horizontal Reps/Rounds Layout (Apr 17, 2025):**
 
   - **Goal:** Improve the layout density of the score logging/editing form (`LogScoreDialog.tsx`) by placing the Reps, Rounds, and Partial Reps input fields on a single horizontal line when applicable.

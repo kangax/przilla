@@ -105,12 +105,13 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
         scoreDate: initialScore.scoreDate
           ? new Date(initialScore.scoreDate).toISOString().slice(0, 10)
           : new Date().toISOString().slice(0, 10),
+        // Set initial radio state based on score type for timecapped WODs
         finishedWithinTimecap:
-          wod.timecap && initialScore.time_seconds != null
-            ? initialScore.time_seconds < wod.timecap
-              ? "yes"
-              : "no"
-            : "yes",
+          wod.timecap != null // Check if WOD has a timecap
+            ? initialScore.time_seconds != null // Check if the score being edited is time-based
+              ? "yes" // If time-based, default to 'yes'
+              : "no" // If reps/rounds-based, default to 'no'
+            : "yes", // Default for non-timecapped WODs (radio won't show anyway)
       });
     } else {
       resetForm();

@@ -2,6 +2,13 @@
 
 ## Current Focus
 
+- **Log/Edit Score Dialog: Correct Timecap Radio Default in Edit Mode (Apr 17, 2025):**
+
+  - The "Finished within timecap?" radio group in `LogScoreDialog.tsx` now correctly defaults to "Yes" or "No" based on the score being edited when opening the dialog in edit mode for a timecapped WOD.
+  - The logic checks if the WOD has a `timecap` and sets the radio state to `'yes'` if the score is time-based, `'no'` if reps/rounds-based.
+  - New tests in `LogScoreDialog.test.tsx` verify this behavior for both time-based and reps/rounds-based scores, and ensure the radio group is not shown for non-timecapped WODs.
+  - This improves the edit experience and prevents user confusion or incorrect form state when editing existing scores.
+
 - **Log/Edit Score Dialog: Horizontal Reps/Rounds Layout (Apr 17, 2025):** Refined the layout of the score logging/editing form (`LogScoreDialog.tsx`). When applicable (e.g., user hit timecap, AMRAP WOD), the input fields for Reps, Rounds, and Partial Reps are now displayed horizontally on a single line using a `Flex` container (`direction="row"`). This improves layout density and visual organization.
 - **WOD Time Cap Field & Timecap-Aware Log/Edit Score UI (Apr 16, 2025):**
 

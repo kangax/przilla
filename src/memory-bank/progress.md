@@ -2,6 +2,7 @@
 
 ## What Works
 
+- **Log/Edit Score Dialog: Horizontal Reps/Rounds Layout (Apr 17, 2025):** The layout of the score logging/editing form (`LogScoreDialog.tsx`) has been improved. When applicable (e.g., user hit timecap, AMRAP WOD), the input fields for Reps, Rounds, and Partial Reps are now displayed horizontally on a single line using a `Flex` container, enhancing layout density and visual organization.
 - **Timecap-Aware Log/Edit Score UI (Apr 16, 2025):** The log/edit score dialog now fully supports timecapped WODs. For WODs with a timecap, users are prompted with a vertical Radix UI radio group ("Finished within [timecap] timecap?"), and the form dynamically shows time or reps/rounds+reps input fields based on the user's selection. Validation and backend/frontend propagation are complete.
 - **WOD Time Cap Extraction & Structured Data (Apr 16, 2025):** All WODs with a time cap have been identified using regex-based search on `public/data/wods.json`. Created `public/data/wods_with_timecaps.json` with WOD name, matched time cap string, and description for each match. This enables review, parsing, and backfilling of a structured `timecap` (seconds) field in the main dataset, supporting robust score logging and future analytics.
 

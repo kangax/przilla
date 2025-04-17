@@ -2,6 +2,7 @@
 
 ## Current Focus
 
+- **Log/Edit Score Dialog: Horizontal Reps/Rounds Layout (Apr 17, 2025):** Refined the layout of the score logging/editing form (`LogScoreDialog.tsx`). When applicable (e.g., user hit timecap, AMRAP WOD), the input fields for Reps, Rounds, and Partial Reps are now displayed horizontally on a single line using a `Flex` container (`direction="row"`). This improves layout density and visual organization.
 - **WOD Time Cap Field & Timecap-Aware Log/Edit Score UI (Apr 16, 2025):**
 
   - The `timecap` field (seconds, nullable) was added to the WODs table in the database schema, backfilled for 62 WODs using `public/data/wods_with_timecaps.json`.
@@ -68,6 +69,7 @@
 
 ## Learnings & Insights
 
+- Using horizontal `Flex` containers (`direction="row"`) with appropriate `gap` and `align` properties is effective for creating compact, single-line layouts for related form inputs (e.g., Reps/Rounds/Partial Reps). Adding `flexGrow: 1` to the inner elements helps distribute space evenly.
 - When customizing tooltips for accessibility and theme consistency, always check for default UI library styles (e.g., Radix UI Tooltip.Content may add a border or box-shadow). Explicitly override these with `boxShadow: "none"` and `border: "none"` if a clean, borderless look is desired.
 - Using a dark background and light text for tooltips (with Tailwind `bg-gray-800` and `text-gray-100`) provides a less jarring, more visually consistent experience, especially when matching charting tooltips or other dark UI elements.
 - Radix UI Flex/Text components allow for precise layout and alignment, and setting a fixed minWidth on left-aligned labels ensures clean, readable columns in multi-line tooltips.

@@ -1,5 +1,15 @@
 # Recent Changes
 
+- **Log/Edit Score Dialog: Horizontal Reps/Rounds Layout (Apr 17, 2025):**
+
+  - **Goal:** Improve the layout density of the score logging/editing form (`LogScoreDialog.tsx`) by placing the Reps, Rounds, and Partial Reps input fields on a single horizontal line when applicable.
+  - **Implementation:**
+    - Updated `src/app/(main)/components/LogScoreDialog.tsx`:
+      - Wrapped the conditional `Box` components for Reps, Rounds, and Partial Reps inputs within a parent `Flex` component (`direction="row"`, `gap="2"`, `align="end"`).
+      - This parent `Flex` is only rendered when these fields are relevant (e.g., user hit timecap, or WOD type is AMRAP/ShowAll).
+      - Added `style={{ flexGrow: 1 }}` to the inner `Box` components for each input field to ensure they distribute space evenly.
+  - **Outcome:** The Reps, Rounds, and Partial Reps input fields now appear horizontally when needed, creating a more compact and visually organized form layout.
+
 - **Timecap-Aware Log/Edit Score UI & Vertical Radio Group (Apr 16, 2025):**
 
   - **Goal:** Enable robust, user-friendly score logging for timecapped WODs, with clear UI and validation.

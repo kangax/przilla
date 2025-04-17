@@ -502,75 +502,87 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                 </Flex>
               )}
 
-              {/* Show reps/rounds if hit the timecap, or for AMRAPs */}
+              {/* Show reps/rounds if hit the timecap, or for AMRAPs/ShowAll */}
               {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
                 (!showTimecapRadio && (showAll || showReps))) && (
-                <Box>
-                  <Text as="label" htmlFor="reps" size="1" mb="1">
-                    Reps
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="reps"
-                    name="reps"
-                    type="number"
-                    min={0}
-                    placeholder="Reps"
-                    value={form.reps}
-                    onChange={handleChange}
-                    disabled={submitting}
-                    size="3"
-                    autoComplete="off"
-                  />
-                </Box>
+                <Flex direction="row" gap="2" align="end">
+                  {/* Reps Input */}
+                  {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
+                    (!showTimecapRadio && (showAll || showReps))) && (
+                    <Box style={{ flexGrow: 1 }}>
+                      <Text as="label" htmlFor="reps" size="1" mb="1">
+                        Reps
+                      </Text>
+                      <TextField.Root
+                        variant="classic"
+                        id="reps"
+                        name="reps"
+                        type="number"
+                        min={0}
+                        placeholder="Reps"
+                        value={form.reps}
+                        onChange={handleChange}
+                        disabled={submitting}
+                        size="3"
+                        autoComplete="off"
+                      />
+                    </Box>
+                  )}
+                  {/* Rounds Input */}
+                  {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
+                    (!showTimecapRadio && (showAll || showRounds))) && (
+                    <Box style={{ flexGrow: 1 }}>
+                      <Text
+                        as="label"
+                        htmlFor="rounds_completed"
+                        size="1"
+                        mb="1"
+                      >
+                        Rounds
+                      </Text>
+                      <TextField.Root
+                        variant="classic"
+                        id="rounds_completed"
+                        name="rounds_completed"
+                        type="number"
+                        min={0}
+                        placeholder="Rounds"
+                        value={form.rounds_completed}
+                        onChange={handleChange}
+                        disabled={submitting}
+                        size="3"
+                        autoComplete="off"
+                      />
+                    </Box>
+                  )}
+                  {/* Partial Reps Input */}
+                  {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
+                    (!showTimecapRadio && (showAll || showPartialReps))) && (
+                    <Box style={{ flexGrow: 1 }}>
+                      <Text as="label" htmlFor="partial_reps" size="1" mb="1">
+                        Partial Reps
+                      </Text>
+                      <TextField.Root
+                        variant="classic"
+                        id="partial_reps"
+                        name="partial_reps"
+                        type="number"
+                        min={0}
+                        placeholder="Partial Reps"
+                        value={form.partial_reps}
+                        onChange={handleChange}
+                        disabled={submitting}
+                        size="3"
+                        autoComplete="off"
+                      />
+                    </Box>
+                  )}
+                </Flex>
               )}
 
-              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
-                (!showTimecapRadio && (showAll || showRounds))) && (
-                <Box>
-                  <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
-                    Rounds
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="rounds_completed"
-                    name="rounds_completed"
-                    type="number"
-                    min={0}
-                    placeholder="Rounds"
-                    value={form.rounds_completed}
-                    onChange={handleChange}
-                    disabled={submitting}
-                    size="3"
-                    autoComplete="off"
-                  />
-                </Box>
-              )}
-
-              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
-                (!showTimecapRadio && (showAll || showPartialReps))) && (
-                <Box>
-                  <Text as="label" htmlFor="partial_reps" size="1" mb="1">
-                    Partial Reps
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="partial_reps"
-                    name="partial_reps"
-                    type="number"
-                    min={0}
-                    placeholder="Partial Reps"
-                    value={form.partial_reps}
-                    onChange={handleChange}
-                    disabled={submitting}
-                    size="3"
-                    autoComplete="off"
-                  />
-                </Box>
-              )}
-
+              {/* Load Input (only shown if not timecapped and WOD type is Load/ShowAll) */}
               {!showTimecapRadio && (showAll || showLoad) && (
-                <Box>
+                <Box style={{ flexGrow: 1 }}>
                   <Text as="label" htmlFor="load" size="1" mb="1">
                     Load
                   </Text>

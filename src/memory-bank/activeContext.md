@@ -2,6 +2,13 @@
 
 ## Current Focus
 
+- **Added 23 New Benchmark WODs to JSON and Database (Apr 18, 2025):**
+
+  - 23 new skill/benchmark WODs (e.g., Handstand Push-Ups: Max Reps, L-Sit Hold: Max Time, Pull-up (Weighted): 1RM, etc.) were added to `public/data/wods.json` and inserted into the Turso production database using a dedicated script.
+  - The script (`scripts/add_new_wods_to_db.ts`) uses `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` from `.env` for production DB access, and leverages `onConflictDoNothing` to avoid duplicates.
+  - All new WODs are now present in both the static JSON and the production DB, with all fields mapped and formatted to the schema.
+  - This expands the system's benchmark/skill coverage and provides a repeatable pattern for future batch additions.
+
 - **Log/Edit Score Dialog: Correct Timecap Radio Default in Edit Mode (Apr 17, 2025):**
 
   - The "Finished within timecap?" radio group in `LogScoreDialog.tsx` now correctly defaults to "Yes" or "No" based on the score being edited when opening the dialog in edit mode for a timecapped WOD.

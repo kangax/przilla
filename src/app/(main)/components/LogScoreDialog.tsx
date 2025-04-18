@@ -529,6 +529,11 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       />
                     </Box>
                   )}
+                  <Box style={{ flexGrow: 1, marginBottom: "10px" }}>
+                    <Text as="label" htmlFor="reps" size="1" mb="1">
+                      OR
+                    </Text>
+                  </Box>
                   {/* Rounds Input */}
                   {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
                     (!showTimecapRadio && (showAll || showRounds))) && (

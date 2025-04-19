@@ -2,8 +2,9 @@
 
 import React, { useRef, useMemo, useState } from "react";
 import Link from "next/link";
+import * as TooltipPrimitive from "@radix-ui/react-tooltip"; // Import primitive
 import {
-  Tooltip,
+  Tooltip as ThemeTooltip, // Alias the theme Tooltip
   Text,
   Flex,
   Badge,
@@ -201,9 +202,21 @@ const createColumns = (
     ),
     columnHelper.accessor("difficulty", {
       header: () => (
-        <Tooltip
-          className="min-w-[510px] max-w-[510px] rounded-sm border bg-white p-4 text-black shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
-          content={
+        <TooltipPrimitive.Root>
+          <TooltipPrimitive.Trigger asChild>
+            <span
+              onClick={() => handleSort("difficulty")}
+              className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
+              tabIndex={0}
+              aria-label="Difficulty (show info)"
+            >
+              Difficulty{getSortIndicator("difficulty")}
+            </span>
+          </TooltipPrimitive.Trigger>
+          <TooltipPrimitive.Content
+            className="min-w-[510px] max-w-[510px] rounded-sm border bg-white p-4 text-black shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+            sideOffset={5} // Maintain offset if needed, default is 5
+          >
             <div>
               <Flex direction="column" gap="2">
                 <Text
@@ -215,85 +228,116 @@ const createColumns = (
                 </Text>
                 <Separator my="1" size="4" />
                 <Flex align="start" gap="2">
-                  <Text color="green" weight="bold" style={{ minWidth: 100 }}>
+                  <Text
+                    size="1"
+                    color="green"
+                    weight="bold"
+                    style={{ minWidth: 100 }}
+                  >
                     Easy
                   </Text>
-                  <Text className="text-black dark:text-gray-100">
+                  <Text size="1" className="text-black dark:text-gray-100">
                     Bodyweight only, low volume, no complex skills
                     <br />
-                    <Text className="italic text-black dark:text-gray-100">
+                    <Text
+                      size="1"
+                      className="italic text-black dark:text-gray-100"
+                    >
                       (e.g. &quot;500m row&quot;)
                     </Text>
                   </Text>
                 </Flex>
                 <Flex align="start" gap="2">
-                  <Text color="yellow" weight="bold" style={{ minWidth: 100 }}>
+                  <Text
+                    size="1"
+                    color="yellow"
+                    weight="bold"
+                    style={{ minWidth: 100 }}
+                  >
                     Medium
                   </Text>
-                  <Text className="text-black dark:text-gray-100">
+                  <Text size="1" className="text-black dark:text-gray-100">
                     Moderate volume, light-moderate loads, basic skills
                     <br />
-                    <Text className="italic text-black dark:text-gray-100">
+                    <Text
+                      size="1"
+                      className="italic text-black dark:text-gray-100"
+                    >
                       (e.g. &quot;Angie&quot;)
                     </Text>
                   </Text>
                 </Flex>
                 <Flex align="start" gap="2">
-                  <Text color="orange" weight="bold" style={{ minWidth: 100 }}>
+                  <Text
+                    size="1"
+                    color="orange"
+                    weight="bold"
+                    style={{ minWidth: 100 }}
+                  >
                     Hard
                   </Text>
-                  <Text className="text-black dark:text-gray-100">
+                  <Text size="1" className="text-black dark:text-gray-100">
                     High volume OR moderate skill/heavy load
                     <br />
-                    <Text className="italic text-black dark:text-gray-100">
+                    <Text
+                      size="1"
+                      className="italic text-black dark:text-gray-100"
+                    >
                       (e.g. &quot;Isabel&quot;)
                     </Text>
                   </Text>
                 </Flex>
                 <Flex align="start" gap="2">
-                  <Text color="red" weight="bold" style={{ minWidth: 100 }}>
+                  <Text
+                    size="1"
+                    color="red"
+                    weight="bold"
+                    style={{ minWidth: 100 }}
+                  >
                     Very Hard
                   </Text>
-                  <Text className="text-black dark:text-gray-100">
+                  <Text size="1" className="text-black dark:text-gray-100">
                     Heavy loads + high skill + high volume
                     <br />
-                    <Text className="italic text-black dark:text-gray-100">
+                    <Text
+                      size="1"
+                      className="italic text-black dark:text-gray-100"
+                    >
                       (e.g. &quot;Eva&quot;)
                     </Text>
                   </Text>
                 </Flex>
                 <Flex align="start" gap="2">
-                  <Text color="purple" weight="bold" style={{ minWidth: 100 }}>
+                  <Text
+                    size="1"
+                    color="purple"
+                    weight="bold"
+                    style={{ minWidth: 100 }}
+                  >
                     Extremely Hard
                   </Text>
-                  <Text className="text-black dark:text-gray-100">
+                  <Text size="1" className="text-black dark:text-gray-100">
                     Maximal loads, multiple high-skill elements, or extreme
                     volume
                     <br />
-                    <Text className="italic text-black dark:text-gray-100">
+                    <Text
+                      size="1"
+                      className="italic text-black dark:text-gray-100"
+                    >
                       (e.g. &quot;Awful Annie&quot;)
                     </Text>
                   </Text>
                 </Flex>
               </Flex>
             </div>
-          }
-        >
-          <span
-            onClick={() => handleSort("difficulty")}
-            className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
-            tabIndex={0}
-            aria-label="Difficulty (show info)"
-          >
-            Difficulty{getSortIndicator("difficulty")}
-          </span>
-        </Tooltip>
+          </TooltipPrimitive.Content>
+        </TooltipPrimitive.Root>
       ),
       cell: (info) => {
         const row = info.row.original;
         if (!row.difficulty) return <Text>-</Text>;
         return (
-          <Tooltip
+          <ThemeTooltip
             content={
               <span style={{ whiteSpace: "pre-wrap" }}>
                 {safeString(row.difficultyExplanation)}
@@ -305,14 +349,14 @@ const createColumns = (
             >
               {row.difficulty}
             </Text>
-          </Tooltip>
+          </ThemeTooltip>
         );
       },
       size: 100,
     }),
     columnHelper.accessor("countLikes", {
       header: () => (
-        <Tooltip content="Number of likes on wodwell.com">
+        <ThemeTooltip content="Number of likes on wodwell.com">
           <span
             onClick={() => handleSort("countLikes")}
             className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
@@ -321,7 +365,7 @@ const createColumns = (
           >
             Likes{getSortIndicator("countLikes")}
           </span>
-        </Tooltip>
+        </ThemeTooltip>
       ),
       cell: (info) => {
         const row = info.row.original;
@@ -387,7 +431,7 @@ ${getPerformanceLevelTooltip(wod)}`}
                     );
 
                     const scoreBadge = (
-                      <Tooltip content={tooltipContent}>
+                      <ThemeTooltip content={tooltipContent}>
                         <Badge
                           color={
                             color as
@@ -406,7 +450,7 @@ ${getPerformanceLevelTooltip(wod)}`}
                         >
                           {formattedScore}
                         </Badge>
-                      </Tooltip>
+                      </ThemeTooltip>
                     );
 
                     return (
@@ -420,7 +464,7 @@ ${getPerformanceLevelTooltip(wod)}`}
                         <div>{scoreBadge}</div>
                         {/* Edit and Delete Icons: only visible on hover */}
                         <div className="ml-1 flex space-x-1 opacity-0 transition-opacity group-hover/score:opacity-100">
-                          <Tooltip content="Edit score">
+                          <ThemeTooltip content="Edit score">
                             <IconButton
                               size="1"
                               variant="ghost"
@@ -433,8 +477,8 @@ ${getPerformanceLevelTooltip(wod)}`}
                             >
                               <Pencil size={16} />
                             </IconButton>
-                          </Tooltip>
-                          <Tooltip content="Delete score">
+                          </ThemeTooltip>
+                          <ThemeTooltip content="Delete score">
                             <IconButton
                               size="1"
                               variant="ghost"
@@ -448,7 +492,7 @@ ${getPerformanceLevelTooltip(wod)}`}
                             >
                               <Trash size={16} />
                             </IconButton>
-                          </Tooltip>
+                          </ThemeTooltip>
                         </div>
                       </Flex>
                     );

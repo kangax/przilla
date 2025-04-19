@@ -15551,7 +15551,7 @@
     "wodName": "Olympic Weightlifting Total",
     "description": "Sum of the Best of Each Lift\nSnatch 1-1-1 reps\nClean-and-Jerk 1-1-1 reps",
     "benchmarks": {
-      "type": "reps",
+      "type": "load",
       "levels": {
         "elite": {
           "min": 2.5,

@@ -143,18 +143,17 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
     },
   });
 
-  const tags = (wod.tags || []).map((t) => t.toLowerCase());
-  const isForTime = tags.includes("for time");
-  const isAmrap = tags.includes("amrap");
-  const isLoad = tags.includes("load") || tags.includes("max load");
+  // Use benchmarks.type to determine which fields to show
+  const scoreType = wod.benchmarks?.type;
 
-  const showTime = isForTime;
-  const showReps = isAmrap;
-  const showLoad = isLoad;
-  const showRounds = isAmrap;
-  const showPartialReps = isAmrap;
-  const showAll =
-    !showTime && !showReps && !showLoad && !showRounds && !showPartialReps;
+  const showTime = scoreType === "time";
+  const showReps = scoreType === "reps";
+  const showLoad = scoreType === "load";
+  const showRounds = scoreType === "rounds";
+  const showAll = !showTime && !showReps && !showLoad && !showRounds;
+  // If showAll is true, fallback to showing all fields (should not happen if schema is correct)
+  // Partial reps only shown for "rounds" type (if needed, extend as appropriate)
+  const showPartialReps = scoreType === "rounds";
 
   // --- Timecap logic ---
   const hasTimecap = typeof wod.timecap === "number" && wod.timecap > 0;
@@ -529,11 +528,6 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                       />
                     </Box>
                   )}
-                  <Box style={{ flexGrow: 1, marginBottom: "10px" }}>
-                    <Text as="label" htmlFor="reps" size="1" mb="1">
-                      OR
-                    </Text>
-                  </Box>
                   {/* Rounds Input */}
                   {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
                     (!showTimecapRadio && (showAll || showRounds))) && (
@@ -606,6 +600,48 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
                     autoComplete="off"
                   />
                 </Box>
+              )}
+
+              {/* Rounds + Partial Reps Input (for benchmarks.type='rounds') */}
+              {!showTimecapRadio && showRounds && (
+                <Flex direction="row" gap="2" align="end">
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
+                      Rounds
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="rounds_completed"
+                      name="rounds_completed"
+                      type="number"
+                      min={0}
+                      placeholder="Rounds"
+                      value={form.rounds_completed}
+                      onChange={handleChange}
+                      disabled={submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="partial_reps" size="1" mb="1">
+                      Partial Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="partial_reps"
+                      name="partial_reps"
+                      type="number"
+                      min={0}
+                      placeholder="Partial Reps"
+                      value={form.partial_reps}
+                      onChange={handleChange}
+                      disabled={submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                </Flex>
               )}
 
               {/* Date and Rx Switch */}

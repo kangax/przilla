@@ -312,12 +312,16 @@ const createColumns = (
     }),
     columnHelper.accessor("countLikes", {
       header: () => (
-        <span
-          onClick={() => handleSort("countLikes")}
-          className="cursor-pointer whitespace-nowrap"
-        >
-          Likes{getSortIndicator("countLikes")}
-        </span>
+        <Tooltip content="Number of likes on wodwell.com">
+          <span
+            onClick={() => handleSort("countLikes")}
+            className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
+            tabIndex={0} // Add tabIndex for accessibility
+            aria-label="Likes (show info)" // Add aria-label for accessibility
+          >
+            Likes{getSortIndicator("countLikes")}
+          </span>
+        </Tooltip>
       ),
       cell: (info) => {
         const row = info.row.original;

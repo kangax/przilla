@@ -28860,5 +28860,583 @@
     "wodUrl": null,
     "results": [],
     "count_likes": 0
+  },
+  {
+    "wodName": "Run 100m",
+    "wodUrl": "",
+    "description": "For Time\n100 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 12
+        },
+        "advanced": {
+          "min": 13,
+          "max": 15
+        },
+        "intermediate": {
+          "min": 16,
+          "max": 20
+        },
+        "beginner": {
+          "min": 21,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A classic sprint test of running speed and power.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Run 200m",
+    "wodUrl": "",
+    "description": "For Time\n200 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 25
+        },
+        "advanced": {
+          "min": 26,
+          "max": 32
+        },
+        "intermediate": {
+          "min": 33,
+          "max": 40
+        },
+        "beginner": {
+          "min": 41,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short sprint testing running speed and acceleration.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Run 400m",
+
+    "wodUrl": "",
+    "description": "For Time\n400 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 55
+        },
+        "advanced": {
+          "min": 56,
+          "max": 70
+        },
+        "intermediate": {
+          "min": 71,
+          "max": 90
+        },
+        "beginner": {
+          "min": 91,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A standard track sprint testing speed endurance.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Run 800m",
+    "wodUrl": "",
+    "description": "For Time\n800 meter Run",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 120
+        },
+        "advanced": {
+          "min": 121,
+          "max": 150
+        },
+        "intermediate": {
+          "min": 151,
+          "max": 180
+        },
+        "beginner": {
+          "min": 181,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A middle-distance run testing aerobic and anaerobic capacity.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Row 100m",
+    "wodUrl": "",
+    "description": "For Time\n100 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 14
+        },
+        "advanced": {
+          "min": 15,
+          "max": 18
+        },
+        "intermediate": {
+          "min": 19,
+          "max": 23
+        },
+        "beginner": {
+          "min": 24,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short rowing sprint testing power and acceleration.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Row 150m",
+    "wodUrl": "",
+    "description": "For Time\n150 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 22
+        },
+        "advanced": {
+          "min": 23,
+          "max": 27
+        },
+        "intermediate": {
+          "min": 28,
+          "max": 33
+        },
+        "beginner": {
+          "min": 34,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short rowing test of speed and power.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Row 200m",
+    "wodUrl": "",
+    "description": "For Time\n200 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 28
+        },
+        "advanced": {
+          "min": 29,
+          "max": 34
+        },
+        "intermediate": {
+          "min": 35,
+          "max": 42
+        },
+        "beginner": {
+          "min": 43,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short rowing sprint testing speed and power.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Row 250m",
+    "wodUrl": "",
+    "description": "For Time\n250 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 35
+        },
+        "advanced": {
+          "min": 36,
+          "max": 42
+        },
+        "intermediate": {
+          "min": 43,
+          "max": 50
+        },
+        "beginner": {
+          "min": 51,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short rowing test of speed and power.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Row 750m",
+    "wodUrl": "",
+    "description": "For Time\n750 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 120
+        },
+        "advanced": {
+          "min": 121,
+          "max": 140
+        },
+        "intermediate": {
+          "min": 141,
+          "max": 170
+        },
+        "beginner": {
+          "min": 171,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A mid-distance rowing test of aerobic and anaerobic capacity.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Row 1500m",
+    "wodUrl": "",
+    "description": "For Time\n1500 meter Row",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 270
+        },
+        "advanced": {
+          "min": 271,
+          "max": 320
+        },
+        "intermediate": {
+          "min": 321,
+          "max": 400
+        },
+        "beginner": {
+          "min": 401,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A mid-distance rowing test of aerobic endurance.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 100m",
+    "wodUrl": "",
+    "description": "For Time\n100 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 15
+        },
+        "advanced": {
+          "min": 16,
+          "max": 20
+        },
+        "intermediate": {
+          "min": 21,
+          "max": 25
+        },
+        "beginner": {
+          "min": 26,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short SkiErg sprint testing power and acceleration.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 250m",
+    "wodUrl": "",
+    "description": "For Time\n250 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 40
+        },
+        "advanced": {
+          "min": 41,
+          "max": 50
+        },
+        "intermediate": {
+          "min": 51,
+          "max": 60
+        },
+        "beginner": {
+          "min": 61,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Easy",
+    "difficulty_explanation": "A short SkiErg test of speed and power.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 500m",
+    "wodUrl": "",
+    "description": "For Time\n500 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 90
+        },
+        "advanced": {
+          "min": 91,
+          "max": 110
+        },
+        "intermediate": {
+          "min": 111,
+          "max": 130
+        },
+        "beginner": {
+          "min": 131,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A standard SkiErg sprint testing speed endurance.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 750m",
+
+    "wodUrl": "",
+    "description": "For Time\n750 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 140
+        },
+        "advanced": {
+          "min": 141,
+          "max": 170
+        },
+        "intermediate": {
+          "min": 171,
+          "max": 210
+        },
+        "beginner": {
+          "min": 211,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A mid-distance SkiErg test of aerobic and anaerobic capacity.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 1000m",
+    "wodUrl": "",
+    "description": "For Time\n1000 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 200
+        },
+        "advanced": {
+          "min": 201,
+          "max": 240
+        },
+        "intermediate": {
+          "min": 241,
+          "max": 300
+        },
+        "beginner": {
+          "min": 301,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficulty_explanation": "A standard SkiErg distance testing aerobic endurance.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 2000m",
+    "wodUrl": "",
+    "description": "For Time\n2000 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 500
+        },
+        "intermediate": {
+          "min": 501,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 2k SkiErg test of aerobic endurance and pacing.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 5000m",
+    "wodUrl": "",
+    "description": "For Time\n5000 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 1100
+        },
+        "advanced": {
+          "min": 1101,
+          "max": 1320
+        },
+        "intermediate": {
+          "min": 1321,
+          "max": 1800
+        },
+        "beginner": {
+          "min": 1801,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 5k SkiErg test of long-distance aerobic endurance.",
+    "count_likes": 0
+  },
+  {
+    "wodName": "Ski 10000m",
+    "wodUrl": "",
+    "description": "For Time\n10000 meter SkiErg",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3000
+        },
+        "intermediate": {
+          "min": 3001,
+          "max": 3600
+        },
+        "beginner": {
+          "min": 3601,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Benchmark",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A 10k SkiErg test of long-distance aerobic endurance.",
+    "count_likes": 0
   }
 ]

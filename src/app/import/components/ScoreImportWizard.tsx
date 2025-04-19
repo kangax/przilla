@@ -49,13 +49,11 @@ export function ScoreImportWizard() {
   useEffect(() => {
     if (allWods) {
       const map = new Map<string, Wod>();
-      // Filter out any potential entries without an ID (shouldn't happen based on schema/query)
-      // and assert the type to satisfy TS if needed, though filtering is safer.
+      // Store keys as-is for strict, case-sensitive matching
       allWods
-        .filter((wod) => !!wod?.id) // Filter for existence of wod and wod.id, remove type predicate
+        .filter((wod) => !!wod?.id)
         .forEach((wod) => {
-          // Assume wod structure matches Wod after filtering, cast explicitly via unknown
-          map.set(wod.wodName, wod as unknown as Wod); // Cast via unknown to bypass strict overlap check
+          map.set(wod.wodName, wod as unknown as Wod);
         });
       setWodsMap(map);
     }
@@ -98,20 +96,32 @@ export function ScoreImportWizard() {
 
               const csvRow: CsvRow = rawRow; // Now we know it's a CsvRow
 
-              // Case-insensitive matching
-              const normalizedTitle = csvRow.title.toLowerCase().trim();
-              const matchedWod =
-                Array.from(wodsMap.entries()).find(
-                  ([wodName]) =>
-                    wodName.toLowerCase().trim() === normalizedTitle,
-                )?.[1] || null;
+              // Strict, case-sensitive SugarWod-specific alias mapping
+              const sugarwodAliases: Record<string, string> = {
+                // Example: "1 mile Run": "Run 1600m"
+                "1 mile Run": "Run 1600m",
+                "2 mile Run": "Run 3200m",
+                "5k Run": "Run 5000m",
+                "10k Run": "Run 10000m",
+                // Add more as needed
+              };
+
+              const importedTitle = csvRow.title;
+              // If the imported title is a known alias, use the canonical name for matching
+              const canonicalName = sugarwodAliases[importedTitle];
+              let matchedWod: Wod | null = null;
+              if (canonicalName) {
+                matchedWod = wodsMap.get(canonicalName) || null;
+              } else {
+                matchedWod = wodsMap.get(importedTitle) || null;
+              }
 
               console.log("Match result:", matchedWod);
               if (!matchedWod) {
                 console.log(
                   "Similar WODs:",
                   Array.from(wodsMap.keys()).filter((name) =>
-                    name.toLowerCase().includes(normalizedTitle),
+                    name.includes(importedTitle),
                   ),
                 );
               }

@@ -194,28 +194,27 @@ export function WodListMobile({
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label="View on Wodwell"
-                      className="mr-1 flex h-5 w-5 items-center justify-center rounded-full bg-black text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
+                      className="mr-1 flex h-7 w-7 items-center justify-center rounded-full bg-black text-xs font-bold text-white focus:outline-none focus:ring-2 focus:ring-blue-500"
                       onClick={(e) => e.stopPropagation()}
                       tabIndex={0}
                     >
                       {/* SVG "w" icon for crispness and accessibility */}
                       <svg
-                        width="16"
-                        height="16"
+                        width="20"
+                        height="20"
                         viewBox="0 0 16 16"
                         fill="none"
                         xmlns="http://www.w3.org/2000/svg"
                         aria-hidden="true"
                         focusable="false"
                       >
-                        <circle cx="8" cy="8" r="8" fill="black" />
                         <text
                           x="8"
                           y="11.5"
                           textAnchor="middle"
                           fontFamily="Geist, Arial, sans-serif"
                           fontWeight="bold"
-                          fontSize="10"
+                          fontSize="14"
                           fill="white"
                           aria-hidden="true"
                         >
@@ -263,13 +262,13 @@ export function WodListMobile({
                     <button
                       type="button"
                       aria-label="Log Score"
-                      className="absolute right-0 top-0 flex items-center gap-1 rounded-full bg-green-500 px-3 py-1 text-sm font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
+                      className="absolute right-0 top-0 flex items-center gap-1 rounded-full bg-green-500 px-4 py-2 text-xl font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
                       onClick={(e) => {
                         e.stopPropagation();
                         handleLogScore(wod.id);
                       }}
                     >
-                      <Plus size={16} />
+                      <Plus size={24} />
                       <span>Log score</span>
                     </button>
                   </div>
@@ -321,32 +320,32 @@ export function WodListMobile({
                                   <button
                                     type="button"
                                     aria-label="Edit score"
-                                    className="rounded-full p-1 hover:bg-blue-100 dark:hover:bg-blue-900"
+                                    className="rounded-full p-3 hover:bg-blue-100 dark:hover:bg-blue-900"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       handleEditScore(wod.id, score);
                                     }}
                                   >
                                     <Pencil
-                                      size={16}
+                                      size={30}
                                       className="text-blue-500"
                                     />
                                   </button>
                                   <button
                                     type="button"
                                     aria-label="Delete score"
-                                    className="rounded-full p-1 hover:bg-red-100 dark:hover:bg-red-900"
+                                    className="rounded-full p-3 hover:bg-red-100 dark:hover:bg-red-900"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       handleDeleteScore(wod, score);
                                     }}
                                   >
-                                    <Trash size={16} className="text-red-500" />
+                                    <Trash size={30} className="text-red-500" />
                                   </button>
                                 </div>
                               </div>
                               {score.notes && (
-                                <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
+                                <p className="mt-1 w-2/3 text-xs text-slate-500 dark:text-slate-400">
                                   {score.notes}
                                 </p>
                               )}

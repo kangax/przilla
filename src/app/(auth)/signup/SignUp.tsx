@@ -4,9 +4,9 @@ import Link from "next/link";
 import { type SVGProps, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "~/lib/auth-client";
-import { signinGithub, signinGoogle } from "~/lib/social-login";
+import { signinGoogle } from "~/lib/social-login"; // Removed signinGithub
 import { Button, Flex, Grid, Text, TextField } from "@radix-ui/themes";
-import { GitHubLogoIcon } from "@radix-ui/react-icons";
+// Removed GitHubLogoIcon import
 
 // Reusing GoogleIcon from login.tsx (consider moving to a shared utils file)
 function GoogleIcon(props: SVGProps<SVGSVGElement>) {
@@ -58,17 +58,14 @@ export default function SignUp() {
     );
   };
 
-  const handleSocialSignIn = async (provider: "github" | "google") => {
+  // Simplified handleSocialSignIn for Google only
+  const handleSocialSignIn = async () => {
     setLoading(true);
     try {
-      if (provider === "github") {
-        await signinGithub();
-      } else {
-        await signinGoogle();
-      }
+      await signinGoogle();
     } catch (error) {
-      console.error(`Social sign-in error (${provider}):`, error);
-      alert(`Failed to sign in with ${provider}.`);
+      console.error(`Social sign-in error (google):`, error);
+      alert(`Failed to sign up with Google.`); // Updated message
       setLoading(false);
     }
   };
@@ -132,26 +129,19 @@ export default function SignUp() {
           <div className="flex-grow border-t border-gray-600"></div>
         </Flex>
 
-        <Grid columns="2" gap="3">
+        {/* Changed Grid to Flex for single button */}
+        <Flex justify="center">
           <Button
             size="3"
             variant="outline"
             color="gray"
-            onClick={() => handleSocialSignIn("github")}
+            onClick={handleSocialSignIn} // Updated onClick handler
             loading={loading}
+            className="w-full" // Make button full width
           >
-            <GitHubLogoIcon width="16" height="16" /> GitHub
+            <GoogleIcon /> Sign up with Google
           </Button>
-          <Button
-            size="3"
-            variant="outline"
-            color="gray"
-            onClick={() => handleSocialSignIn("google")}
-            loading={loading}
-          >
-            <GoogleIcon /> Google
-          </Button>
-        </Grid>
+        </Flex>
 
         <Text size="2" align="center" color="gray">
           Already have an account?{" "}

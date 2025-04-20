@@ -1,5 +1,17 @@
 # Recent Changes
 
+- **Removed GitHub Authentication (Apr 20, 2025):**
+
+  - **Goal:** Simplify authentication options by removing the GitHub social login provider.
+  - **Implementation:**
+    - Removed the GitHub provider configuration from `src/server/auth.ts`.
+    - Removed the "Sign in with GitHub" button and associated logic (`signinGithub` import, `handleSocialSignIn` logic) from `src/app/(auth)/login/Login.tsx`. Adjusted layout to center the remaining Google button.
+    - Removed the "Sign up with GitHub" button and associated logic from `src/app/(auth)/signup/SignUp.tsx`. Adjusted layout to center the remaining Google button.
+    - Removed `GITHUB_CLIENT_ID` and `GITHUB_CLIENT_SECRET` variables from `.env.example`.
+    - Verified no database schema changes were needed.
+    - Verified no test updates were needed (no existing tests targeted GitHub auth).
+  - **Outcome:** GitHub is no longer offered as an authentication method. The login and signup pages now only show options for email/password and Google sign-in.
+
 - **SugarWOD Import Page Layout Update (Apr 20, 2025):**
 
   - **Goal:** Improve the layout of the SugarWOD import page for better readability on larger screens.

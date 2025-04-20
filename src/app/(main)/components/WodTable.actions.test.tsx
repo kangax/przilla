@@ -1,5 +1,7 @@
 import { describe, it, expect, vi } from "vitest";
-import { render, screen, within, fireEvent } from "../../../test-utils";
+import { render, screen, within, fireEvent } from "@testing-library/react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
 import "@testing-library/jest-dom";
 import WodTable from "./WodTable";
 
@@ -125,39 +127,47 @@ const findRenderedRowByContent = (content: string) => {
 };
 
 describe("WodTable Actions", () => {
+  const queryClient = new QueryClient();
+
   it("should display the 'Scaled' badge for non-Rx scores", () => {
     render(
-      <WodTable
-        wods={[mockWodWithScore]}
-        sortBy="wodName"
-        sortDirection="asc"
-        handleSort={vi.fn()}
-        tableHeight={500}
-        searchTerm=""
-        scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
-      />,
+      <TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <WodTable
+            wods={[mockWodWithScore]}
+            sortBy="wodName"
+            sortDirection="asc"
+            handleSort={vi.fn()}
+            tableHeight={500}
+            searchTerm=""
+            scoresByWodId={mockScoresByWodId}
+            isLoadingScores={false}
+          />
+        </QueryClientProvider>
+      </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD Bravo");
-    // Look for the "Scaled" badge in the row
     expect(within(row).getByText(/Scaled/i)).toBeInTheDocument();
   });
 
   it("should show edit and delete icons for each score", () => {
     render(
-      <WodTable
-        wods={[mockWodWithScore]}
-        sortBy="wodName"
-        sortDirection="asc"
-        handleSort={vi.fn()}
-        tableHeight={500}
-        searchTerm=""
-        scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
-      />,
+      <TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <WodTable
+            wods={[mockWodWithScore]}
+            sortBy="wodName"
+            sortDirection="asc"
+            handleSort={vi.fn()}
+            tableHeight={500}
+            searchTerm=""
+            scoresByWodId={mockScoresByWodId}
+            isLoadingScores={false}
+          />
+        </QueryClientProvider>
+      </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD Bravo");
-    // Check for edit (pencil) and delete (trash) icons by label or role
     expect(within(row).getByLabelText(/edit score/i)).toBeInTheDocument();
     expect(within(row).getByLabelText(/delete score/i)).toBeInTheDocument();
   });
@@ -169,19 +179,22 @@ describe("WodTable Actions", () => {
       wodName: "WOD NoScore",
     };
     render(
-      <WodTable
-        wods={[mockWodNoScore]}
-        sortBy="wodName"
-        sortDirection="asc"
-        handleSort={vi.fn()}
-        tableHeight={500}
-        searchTerm=""
-        scoresByWodId={{}}
-        isLoadingScores={false}
-      />,
+      <TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <WodTable
+            wods={[mockWodNoScore]}
+            sortBy="wodName"
+            sortDirection="asc"
+            handleSort={vi.fn()}
+            tableHeight={500}
+            searchTerm=""
+            scoresByWodId={{}}
+            isLoadingScores={false}
+          />
+        </QueryClientProvider>
+      </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD NoScore");
-    // Look for the log score button (plus icon) by label
     expect(within(row).getByLabelText(/log score/i)).toBeInTheDocument();
   });
 
@@ -192,22 +205,25 @@ describe("WodTable Actions", () => {
       wodName: "WOD NoScorePopover",
     };
     render(
-      <WodTable
-        wods={[mockWodNoScore]}
-        sortBy="wodName"
-        sortDirection="asc"
-        handleSort={vi.fn()}
-        tableHeight={500}
-        searchTerm=""
-        scoresByWodId={{}}
-        isLoadingScores={false}
-      />,
+      <TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <WodTable
+            wods={[mockWodNoScore]}
+            sortBy="wodName"
+            sortDirection="asc"
+            handleSort={vi.fn()}
+            tableHeight={500}
+            searchTerm=""
+            scoresByWodId={{}}
+            isLoadingScores={false}
+          />
+        </QueryClientProvider>
+      </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD NoScorePopover");
     const logScoreButton = within(row).getByLabelText(/log score/i);
     fireEvent.click(logScoreButton);
 
-    // The popover should now be visible. Look for a field or button unique to the popover.
     expect(screen.getByRole("dialog")).toBeInTheDocument();
   });
 
@@ -218,33 +234,33 @@ describe("WodTable Actions", () => {
       wodName: "WOD NoScoreValidation",
     };
     render(
-      <WodTable
-        wods={[mockWodNoScore]}
-        sortBy="wodName"
-        sortDirection="asc"
-        handleSort={vi.fn()}
-        tableHeight={500}
-        searchTerm=""
-        scoresByWodId={{}}
-        isLoadingScores={false}
-      />,
+      <TooltipProvider>
+        <QueryClientProvider client={queryClient}>
+          <WodTable
+            wods={[mockWodNoScore]}
+            sortBy="wodName"
+            sortDirection="asc"
+            handleSort={vi.fn()}
+            tableHeight={500}
+            searchTerm=""
+            scoresByWodId={{}}
+            isLoadingScores={false}
+          />
+        </QueryClientProvider>
+      </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD NoScoreValidation");
     const logScoreButton = within(row).getByLabelText(/log score/i);
     fireEvent.click(logScoreButton);
 
-    // The popover should now be visible
     expect(screen.getByRole("dialog")).toBeInTheDocument();
 
-    // Try submitting with no input (should trigger validation error)
-    // Find the submit button inside the dialog (type="submit")
     const dialog = screen.getByRole("dialog");
     const submitButton = within(dialog).getByRole("button", {
       name: /log score|save/i,
     });
     fireEvent.click(submitButton);
 
-    // Look for a validation error message (adjust regex as needed to match actual error text)
     expect(
       screen.getByText(/required|enter|invalid|please/i),
     ).toBeInTheDocument();

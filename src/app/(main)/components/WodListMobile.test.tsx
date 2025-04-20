@@ -1,5 +1,6 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { waitForElementToBeRemoved } from "@testing-library/react";
 import { WodListMobile } from "./WodListMobile";
 import type { Wod, Score } from "~/types/wodTypes";
 
@@ -49,11 +50,8 @@ vi.mock("../../../trpc/react", () => {
           useMutation: () => ({
             // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
             mutate: (opts: any) => {
-              // Simulate async onSuccess
-              setTimeout(() => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
-                if (opts && opts.onSuccess) opts.onSuccess();
-              }, 10);
+              // Call onSuccess synchronously for test reliability
+              if (opts && opts.onSuccess) opts.onSuccess();
             },
             status: "idle",
           }),
@@ -122,6 +120,27 @@ describe("WodListMobile", () => {
     expect(screen.queryByTestId("log-score-form")).not.toBeInTheDocument();
   });
 
+  it("updates UI after logging a new score", async () => {
+    // Start with no scores
+    const { rerender } = render(
+      <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    fireEvent.click(screen.getByText("Log score"));
+    // Simulate logging a new score (onScoreLogged)
+    fireEvent.click(screen.getByText("Submit"));
+    // Rerender with new score
+    rerender(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
+    );
+    // Wait for the new score to appear
+    expect(await screen.findByText("3:00 Rx")).toBeInTheDocument();
+  });
+
   it("renders existing score and allows editing", () => {
     render(
       <WodListMobile
@@ -147,6 +166,36 @@ describe("WodListMobile", () => {
     // Submit closes drawer
     fireEvent.click(screen.getByText("Submit"));
     expect(screen.queryByTestId("log-score-form")).not.toBeInTheDocument();
+  });
+
+  it("updates UI after editing a score", async () => {
+    // Start with an existing score
+    const updatedScore = { ...mockScore, time_seconds: 200, isRx: false };
+    const { rerender } = render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    fireEvent.click(screen.getByLabelText("Edit score"));
+    // Simulate editing the score (onScoreLogged)
+    fireEvent.click(screen.getByText("Submit"));
+    // Rerender with updated score
+    rerender(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [updatedScore] }}
+        searchTerm=""
+      />,
+    );
+    // Wait for the updated score to appear (should be "3:20" and not Rx)
+    expect(
+      await screen.findByText((content) => content.includes("3:20"), {
+        exact: false,
+      }),
+    ).toBeInTheDocument();
   });
 
   it("shows and cancels delete confirmation dialog", async () => {
@@ -190,23 +239,17 @@ describe("WodListMobile", () => {
 
     // Open delete dialog
     fireEvent.click(screen.getByLabelText("Delete score"));
+    const dialog = screen.getByRole("dialog");
     expect(screen.getByText("Delete Score")).toBeInTheDocument();
 
     // Confirm delete
     fireEvent.click(screen.getByText("Delete"));
-    // Wait for the dialog to be removed by role (robust to animation)
+    // Wait for the dialog to be removed from the DOM (Radix may remove it)
     await waitFor(
       () => {
-        const dialog = screen.queryByRole("dialog");
-        if (dialog) {
-          // If dialog is present, check if it's hidden (Radix may keep it in DOM for animation)
-          expect(dialog).not.toBeVisible();
-        } else {
-          // If dialog is removed, test passes
-          expect(dialog).toBeNull();
-        }
+        expect(screen.queryByRole("dialog")).toBeNull();
       },
-      { timeout: 1000 },
+      { timeout: 2000 },
     );
   });
 

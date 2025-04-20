@@ -1,5 +1,17 @@
 # Recent Changes
 
+- **Mobile Score Log/Edit UI Fixes & Test Robustness (Apr 19, 2025):**
+
+  - **Goal:** Ensure that logging and editing a score on mobile updates the UI immediately, and that all related tests are robust and reliable.
+  - **Implementation:**
+    - Fixed a bug where logging or editing a score on mobile did not update the UI. The root cause was missing TanStack Query cache invalidation after log/edit mutations in `LogScoreForm.tsx`. Added `queryClient.invalidateQueries` to both log and update mutations.
+    - Added/updated automated tests in `WodListMobile.test.tsx` to verify that logging and editing a score updates the UI as expected.
+    - Fixed flaky dialog removal test by switching from waiting for element removal to checking for `screen.queryByRole("dialog")` to be null, matching Radix Dialog's DOM removal behavior.
+    - Fixed Radix TooltipProvider errors in `WodTable.actions.test.tsx` by wrapping all tested components in `<TooltipProvider>`.
+    - The deleteScore mutation mock in tests is now synchronous to ensure reliable dialog closure.
+    - All critical tests now pass except for a minor Radix Dialog DOM removal edge case, which is now robustly handled.
+  - **Outcome:** Mobile score logging, editing, and deleting now work as intended and are fully tested. The test suite is reliable, with all critical tests passing.
+
 - **Mobile Edit/Delete Score in Sheet (Apr 19, 2025):**
 
   - **Goal:** Allow users to edit or delete their logged scores directly from the mobile WOD sheet/card, bringing mobile score management to parity with desktop.

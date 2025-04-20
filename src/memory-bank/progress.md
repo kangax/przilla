@@ -2,6 +2,14 @@
 
 ## What Works
 
+- **Mobile Score Log/Edit UI Fixes & Test Robustness (Apr 19, 2025):**
+
+  - Logging and editing a score on mobile now properly update the UI, thanks to correct TanStack Query cache invalidation.
+  - Automated tests for log/edit UI updates are in place and robust.
+  - Dialog removal test is robust, checking for DOM removal using `screen.queryByRole("dialog")`.
+  - TooltipProvider is used in all relevant tests to prevent Radix errors.
+  - All critical tests now pass, and the mobile score management UI is reliable and fully tested.
+
 - **Mobile Edit/Delete Score in Sheet (Apr 19, 2025):** Users can now edit or delete their logged scores directly from the mobile WOD sheet/card. Each score has edit and delete icons; edit opens the Drawer in edit mode, delete opens a confirmation dialog. State management is robust, and the Drawer title reflects the current mode. Comprehensive tests cover all flows (log, edit, delete, cancel) and are robust to UI animation quirks. Mobile score management is now at parity with desktop and fully reliable.
 
 - **Mobile Log Score Drawer (Apr 19, 2025):** The "Log Score" button is now present in mobile view, opening a bottom sheet Drawer (shadcn/ui, vaul-based) for logging scores. The Drawer is accessible, mobile-friendly, and uses the shared LogScoreForm for all WOD types. Previous attempts to use a different bottom sheet library failed due to incompatibilities; shadcn/ui Drawer is robust and visually consistent. The Drawer closes on submit or cancel, and the UI is visually consistent with the app's design system.

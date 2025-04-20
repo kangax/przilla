@@ -12,6 +12,7 @@ import {
   Box,
 } from "@radix-ui/themes";
 import { api } from "../../../trpc/react";
+import { useQueryClient } from "@tanstack/react-query";
 import type { Wod, Score } from "../../../types/wodTypes";
 
 type ScorePayload = {
@@ -59,6 +60,7 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
   initialScore,
   onCancel,
 }) => {
+  const queryClient = useQueryClient();
   const isEditMode = !!initialScore;
   const [form, setForm] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
@@ -103,8 +105,10 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [initialScore, isEditMode, wod.timecap]);
 
+  // Invalidate user scores query after log or update to ensure UI updates
   const logScoreMutation = api.score.logScore.useMutation({
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["score", "getAllByUser"] });
       resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();
@@ -117,6 +121,7 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
 
   const updateScoreMutation = api.score.updateScore.useMutation({
     onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["score", "getAllByUser"] });
       resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();

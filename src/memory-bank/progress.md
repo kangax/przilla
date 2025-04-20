@@ -2,6 +2,8 @@
 
 ## What Works
 
+- **Mobile Log Score Drawer (Apr 19, 2025):** The "Log Score" button is now present in mobile view, opening a bottom sheet Drawer (shadcn/ui, vaul-based) for logging scores. The Drawer is accessible, mobile-friendly, and uses the shared LogScoreForm for all WOD types. Previous attempts to use a different bottom sheet library failed due to incompatibilities; shadcn/ui Drawer is robust and visually consistent. The Drawer closes on submit or cancel, and the UI is visually consistent with the app's design system.
+
 - **23 New Benchmark WODs Added to JSON and Database (Apr 18, 2025):** 23 new skill/benchmark WODs (e.g., Handstand Push-Ups: Max Reps, L-Sit Hold: Max Time, Pull-up (Weighted): 1RM, etc.) were added to `public/data/wods.json` and inserted into the Turso production database using a dedicated script. The script (`scripts/add_new_wods_to_db.ts`) uses `TURSO_DATABASE_URL` and `TURSO_AUTH_TOKEN` from `.env` for production DB access, and leverages `onConflictDoNothing` to avoid duplicates. All new WODs are now present in both the static JSON and the production DB, with all fields mapped and formatted to the schema. This expands the system's benchmark/skill coverage and provides a repeatable pattern for future batch additions.
 
 - **Log/Edit Score Dialog: Horizontal Reps/Rounds Layout (Apr 17, 2025):** The layout of the score logging/editing form (`LogScoreDialog.tsx`) has been improved. When applicable (e.g., user hit timecap, AMRAP WOD), the input fields for Reps, Rounds, and Partial Reps are now displayed horizontally on a single line using a `Flex` container, enhancing layout density and visual organization.

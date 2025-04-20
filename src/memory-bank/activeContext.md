@@ -2,6 +2,14 @@
 
 ## Current Focus
 
+- **Mobile Log Score Drawer (Apr 19, 2025):**
+
+  - The "Log Score" button is now present in mobile view, opening a bottom sheet Drawer (using shadcn/ui, vaul-based) for logging scores.
+  - The Drawer is accessible, mobile-friendly, and uses the shared LogScoreForm for all WOD types.
+  - The Drawer displays a contextual title ("Log Score for [WOD Name]") and closes on submit or cancel.
+  - Previous attempts to use a previous bottom sheet library failed due to deep incompatibilities with React 18/Next.js; shadcn/ui Drawer is robust and visually consistent.
+  - The implementation is now robust, accessible, and consistent with the app's design system.
+
 - **Added 23 New Benchmark WODs to JSON and Database (Apr 18, 2025):**
 
   - 23 new skill/benchmark WODs (e.g., Handstand Push-Ups: Max Reps, L-Sit Hold: Max Time, Pull-up (Weighted): 1RM, etc.) were added to `public/data/wods.json` and inserted into the Turso production database using a dedicated script.

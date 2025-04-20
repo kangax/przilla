@@ -1,5 +1,12 @@
 # Recent Changes
 
+- **Mobile Log Score Drawer (Apr 19, 2025):**
+
+  - **Goal:** Enable mobile users to log scores via a native-feeling, accessible bottom sheet.
+  - **Investigation:** Multiple attempts to use a previous bottom sheet library failed due to deep incompatibilities with React 18/Next.js and peer dependency issues. Dynamic and static imports, as well as minimal usage, all resulted in runtime errors.
+  - **Implementation:** Switched to shadcn/ui's Drawer (vaul-based), generating the component and integrating it into the mobile WOD list. The Drawer is controlled via state, displays a contextual title, and renders the shared LogScoreForm for the selected WOD.
+  - **Outcome:** The "Log Score" button in mobile view now opens a robust, accessible Drawer for logging scores. The Drawer closes on submit or cancel, and the UI is visually consistent with the app's design system. All previous issues with third-party bottom sheet libraries are resolved.
+
 - **Added 23 New Benchmark WODs to JSON and Database (Apr 18, 2025):**
 
   - **Goal:** Expand the set of benchmark/skill-based WODs tracked in the system.

@@ -1,5 +1,18 @@
 # Recent Changes
 
+- **Mobile Edit/Delete Score in Sheet (Apr 19, 2025):**
+
+  - **Goal:** Allow users to edit or delete their logged scores directly from the mobile WOD sheet/card, bringing mobile score management to parity with desktop.
+  - **Implementation:**
+    - Each score in the mobile card now has edit (pencil) and delete (trash) icons.
+    - Tapping edit opens the Drawer with LogScoreForm in edit mode, pre-filled with the score's data.
+    - Tapping delete opens a confirmation dialog; confirming deletes the score and refreshes the list.
+    - The Drawer title reflects edit mode ("Edit Score for [WOD Name]") or log mode.
+    - State management ensures editing and deleting are mutually exclusive, and state resets on close.
+    - Comprehensive tests cover logging, editing, deleting, and canceling, and are robust to UI animation quirks (Radix Dialog).
+    - Test suite updated to expand cards before interacting, and to check for dialog removal or invisibility.
+  - **Outcome:** Mobile users can now seamlessly edit or delete their scores, with a robust, accessible, and fully tested UI. The experience is now consistent across mobile and desktop.
+
 - **Mobile Log Score Drawer (Apr 19, 2025):**
 
   - **Goal:** Enable mobile users to log scores via a native-feeling, accessible bottom sheet.

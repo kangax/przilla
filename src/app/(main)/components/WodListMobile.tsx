@@ -1,5 +1,5 @@
 import React, { useState, useMemo } from "react";
-import { ChevronDown, ChevronUp, Plus } from "lucide-react";
+import { ChevronDown, ChevronUp, Plus, Pencil, Trash } from "lucide-react";
 import type { Wod, Score } from "~/types/wodTypes";
 import {
   formatScore,
@@ -13,6 +13,8 @@ import {
   DrawerContent,
   DrawerTitle,
 } from "../../../components/ui/drawer";
+import { Dialog, Button, Flex, Text } from "@radix-ui/themes";
+import { api } from "../../../trpc/react";
 
 type ScoresByWodId = Record<string, Score[]>;
 
@@ -84,6 +86,22 @@ export function WodListMobile({
 }: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
   const [logSheetWodId, setLogSheetWodId] = useState<string | null>(null);
+  const [editingScore, setEditingScore] = useState<Score | null>(null);
+  const [deletingScore, setDeletingScore] = useState<{
+    score: Score;
+    wod: Wod;
+  } | null>(null);
+
+  const utils = api.useUtils();
+  const deleteScoreMutation = api.score.deleteScore.useMutation({
+    onSuccess: async () => {
+      await utils.score.getAllByUser.invalidate();
+      setDeletingScore(null);
+    },
+    onError: () => {
+      setDeletingScore(null);
+    },
+  });
 
   const toggleExpand = (wodId: string) => {
     setExpandedWodId(expandedWodId === wodId ? null : wodId);
@@ -99,6 +117,41 @@ export function WodListMobile({
   // Find the WOD object for the currently open sheet
   const currentSheetWod =
     logSheetWodId != null ? wods.find((w) => w.id === logSheetWodId) : null;
+
+  // Handler for opening log (new) score
+  const handleLogScore = (wodId: string) => {
+    setLogSheetWodId(wodId);
+    setEditingScore(null);
+  };
+
+  // Handler for opening edit score
+  const handleEditScore = (wodId: string, score: Score) => {
+    setLogSheetWodId(wodId);
+    setEditingScore(score);
+  };
+
+  // Handler for closing drawer (after log/edit/cancel)
+  const handleDrawerClose = () => {
+    setLogSheetWodId(null);
+    setEditingScore(null);
+  };
+
+  // Handler for delete
+  const handleDeleteScore = (wod: Wod, score: Score) => {
+    setDeletingScore({ wod, score });
+  };
+
+  // Confirm delete
+  const confirmDeleteScore = async () => {
+    if (deletingScore) {
+      deleteScoreMutation.mutate({ id: deletingScore.score.id });
+    }
+  };
+
+  // Cancel delete
+  const cancelDeleteScore = () => {
+    setDeletingScore(null);
+  };
 
   return (
     <>
@@ -211,7 +264,7 @@ export function WodListMobile({
                       className="absolute right-0 top-0 flex items-center gap-1 rounded-full bg-green-500 px-3 py-1 text-sm font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
                       onClick={(e) => {
                         e.stopPropagation();
-                        setLogSheetWodId(wod.id);
+                        handleLogScore(wod.id);
                       }}
                     >
                       <Plus size={16} />
@@ -261,6 +314,34 @@ export function WodListMobile({
                                     },
                                   )}
                                 </span>
+                                {/* Edit/Delete Icons */}
+                                <div className="ml-2 flex items-center gap-1">
+                                  <button
+                                    type="button"
+                                    aria-label="Edit score"
+                                    className="rounded-full p-1 hover:bg-blue-100 dark:hover:bg-blue-900"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleEditScore(wod.id, score);
+                                    }}
+                                  >
+                                    <Pencil
+                                      size={16}
+                                      className="text-blue-500"
+                                    />
+                                  </button>
+                                  <button
+                                    type="button"
+                                    aria-label="Delete score"
+                                    className="rounded-full p-1 hover:bg-red-100 dark:hover:bg-red-900"
+                                    onClick={(e) => {
+                                      e.stopPropagation();
+                                      handleDeleteScore(wod, score);
+                                    }}
+                                  >
+                                    <Trash size={16} className="text-red-500" />
+                                  </button>
+                                </div>
                               </div>
                               {score.notes && (
                                 <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
@@ -284,10 +365,12 @@ export function WodListMobile({
           );
         })}
       </div>
-      {/* Bottom Sheet for Log Score */}
+      {/* Bottom Sheet for Log/Edit Score */}
       <Drawer
         open={!!currentSheetWod}
-        onOpenChange={(open) => setLogSheetWodId(open ? logSheetWodId : null)}
+        onOpenChange={(open) => {
+          if (!open) handleDrawerClose();
+        }}
       >
         <DrawerContent
           container={
@@ -298,20 +381,48 @@ export function WodListMobile({
         >
           <DrawerTitle className="flex items-center justify-between p-4">
             {currentSheetWod
-              ? `Log Score for ${currentSheetWod.wodName}`
+              ? editingScore
+                ? `Edit Score for ${currentSheetWod.wodName}`
+                : `Log Score for ${currentSheetWod.wodName}`
               : "Log Score"}
           </DrawerTitle>
           <div className="px-4 pb-6 pt-2">
             {currentSheetWod && (
               <LogScoreForm
                 wod={currentSheetWod}
-                onScoreLogged={() => setLogSheetWodId(null)}
-                onCancel={() => setLogSheetWodId(null)}
+                initialScore={editingScore}
+                onScoreLogged={handleDrawerClose}
+                onCancel={handleDrawerClose}
               />
             )}
           </div>
         </DrawerContent>
       </Drawer>
+      {/* Delete Confirmation Dialog */}
+      <Dialog.Root open={!!deletingScore} onOpenChange={cancelDeleteScore}>
+        <Dialog.Content>
+          <Dialog.Title>Delete Score</Dialog.Title>
+          <Dialog.Description>
+            Are you sure you want to delete this score? This action cannot be
+            undone.
+          </Dialog.Description>
+          <Flex gap="3" mt="4" justify="end">
+            <Button variant="soft" color="gray" onClick={cancelDeleteScore}>
+              Cancel
+            </Button>
+            <Button
+              variant="solid"
+              color="red"
+              onClick={confirmDeleteScore}
+              disabled={deleteScoreMutation.status === "pending"}
+            >
+              {deleteScoreMutation.status === "pending"
+                ? "Deleting..."
+                : "Delete"}
+            </Button>
+          </Flex>
+        </Dialog.Content>
+      </Dialog.Root>
     </>
   );
 }

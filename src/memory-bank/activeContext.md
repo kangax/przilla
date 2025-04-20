@@ -2,6 +2,17 @@
 
 ## Current Focus
 
+- **Mobile Edit/Delete Score in Sheet (Apr 19, 2025):**
+
+  - Users can now edit or delete their logged scores directly from the mobile WOD sheet/card.
+  - Each score in the mobile card has edit (pencil) and delete (trash) icons.
+  - Tapping edit opens the Drawer with LogScoreForm in edit mode, pre-filled with the score's data.
+  - Tapping delete opens a confirmation dialog; confirming deletes the score and refreshes the list.
+  - The Drawer title reflects edit mode ("Edit Score for [WOD Name]") or log mode.
+  - All state management is robust: editing and deleting are mutually exclusive, and state resets on close.
+  - Comprehensive tests cover logging, editing, deleting, and canceling, and are robust to UI animation quirks.
+  - This brings mobile score management to parity with desktop and ensures a seamless, reliable user experience.
+
 - **Mobile Log Score Drawer (Apr 19, 2025):**
 
   - The "Log Score" button is now present in mobile view, opening a bottom sheet Drawer (using shadcn/ui, vaul-based) for logging scores.
@@ -69,8 +80,8 @@
 
 ### Must have
 
-- Add "log score"/edit/delete buttons in mobile list view
-- Score logging should be one of time/load/reps/round+reps
+- ~~Add "log score"/edit/delete buttons in mobile list view~~ (Done Apr 19, 2025)
+- ~~Score logging should be one of time/load/reps/round+reps~~ (Done)
 
 ### Good to have
 
@@ -91,6 +102,8 @@
 
 ## Learnings & Insights
 
+- Robust state management is essential for mobile sheet UIs: editing and deleting must be mutually exclusive, and state must reset on close to avoid stale UI.
+- Testing mobile flows requires expanding cards before interacting with inner elements, and tests must be robust to UI animation and DOM retention quirks (e.g., Radix Dialog).
 - Using horizontal `Flex` containers (`direction="row"`) with appropriate `gap` and `align` properties is effective for creating compact, single-line layouts for related form inputs (e.g., Reps/Rounds/Partial Reps). Adding `flexGrow: 1` to the inner elements helps distribute space evenly.
 - When customizing tooltips for accessibility and theme consistency, always check for default UI library styles (e.g., Radix UI Tooltip.Content may add a border or box-shadow). Explicitly override these with `boxShadow: "none"` and `border: "none"` if a clean, borderless look is desired.
 - Using a dark background and light text for tooltips (with Tailwind `bg-gray-800` and `text-gray-100`) provides a less jarring, more visually consistent experience, especially when matching charting tooltips or other dark UI elements.

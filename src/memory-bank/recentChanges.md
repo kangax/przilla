@@ -1,5 +1,13 @@
 # Recent Changes
 
+- **Mobile Log/Edit Score UI: Immediate UI Update Fix (Apr 19, 2025):**
+
+  - **Problem:** Logging or editing a score on mobile did not always update the UI immediately, even though cache invalidation was present.
+  - **Root Cause:** `WodListMobile` received `scoresByWodId` as a prop from its parent (`WodViewer`), but there was no mechanism to notify the parent to refetch scores after a log/edit. Query invalidation alone was not sufficient due to the prop-drilling pattern.
+  - **Solution:** Added an `onScoreLogged` prop to `WodListMobile`, passed from `WodViewer`, and wired through to `LogScoreForm`. After a successful log/edit, `onScoreLogged` triggers the parent to invalidate and refetch the scores query, ensuring the UI updates immediately. This matches the working desktop flow.
+  - **Tests:** All tests in `WodListMobile.test.tsx` now pass, including those for logging, editing, and deleting scores, and for UI updates after these actions.
+  - **Outcome:** The mobile log/edit/delete score UI now updates immediately and reliably, matching the desktop experience. The test suite confirms the fix is robust.
+
 - **Mobile Score Log/Edit UI Fixes & Test Robustness (Apr 19, 2025):**
 
   - **Goal:** Ensure that logging and editing a score on mobile updates the UI immediately, and that all related tests are robust and reliable.

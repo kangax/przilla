@@ -108,7 +108,9 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
   // Invalidate user scores query after log or update to ensure UI updates
   const logScoreMutation = api.score.logScore.useMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["score", "getAllByUser"] });
+      void queryClient.invalidateQueries({
+        queryKey: ["score", "getAllByUser"],
+      });
       resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();
@@ -121,7 +123,9 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
 
   const updateScoreMutation = api.score.updateScore.useMutation({
     onSuccess: () => {
-      queryClient.invalidateQueries({ queryKey: ["score", "getAllByUser"] });
+      void queryClient.invalidateQueries({
+        queryKey: ["score", "getAllByUser"],
+      });
       resetForm();
       setError(null);
       if (onScoreLogged) onScoreLogged();

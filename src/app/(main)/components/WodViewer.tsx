@@ -575,6 +575,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
           wods={sortedWods}
           scoresByWodId={scoresByWodId}
           searchTerm={searchTerm}
+          onScoreLogged={handleScoreLogged}
         />
       ) : (
         <WodTable

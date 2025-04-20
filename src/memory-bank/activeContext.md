@@ -2,6 +2,14 @@
 
 ## Current Focus
 
+- **Mobile Log/Edit Score UI: Immediate UI Update Fix (Apr 19, 2025):**
+
+  - Fixed a long-standing issue where logging or editing a score on mobile did not always update the UI immediately, despite cache invalidation.
+  - Root cause: `WodListMobile` received `scoresByWodId` as a prop from its parent (`WodViewer`), but there was no mechanism to notify the parent to refetch scores after a log/edit. Query invalidation alone was not sufficient due to the prop-drilling pattern.
+  - Solution: Added an `onScoreLogged` prop to `WodListMobile`, passed from `WodViewer`, and wired through to `LogScoreForm`. After a successful log/edit, `onScoreLogged` triggers the parent to invalidate and refetch the scores query, ensuring the UI updates immediately. This matches the working desktop flow.
+  - All tests in `WodListMobile.test.tsx` now pass, including those for logging, editing, and deleting scores, and for UI updates after these actions.
+  - The mobile log/edit/delete score UI now updates immediately and reliably, matching the desktop experience.
+
 - **Mobile Score Log/Edit UI Fixes & Test Robustness (Apr 19, 2025):**
 
   - Fixed a bug where logging or editing a score on mobile did not update the UI, by adding TanStack Query cache invalidation in `LogScoreForm.tsx`.
@@ -112,6 +120,8 @@
 
 ## Learnings & Insights
 
+- When using prop-drilling for server state (e.g., scores), query invalidation alone is not enough to guarantee UI updates. The parent component must be explicitly notified to refetch data after mutations.
+- Adding an `onScoreLogged` callback, passed from the parent and triggered after log/edit, ensures the parent can refetch and update the UI immediately. This pattern matches the desktop flow and is robust to future changes.
 - Robust state management is essential for mobile sheet UIs: editing and deleting must be mutually exclusive, and state must reset on close to avoid stale UI.
 - Testing mobile flows requires expanding cards before interacting with inner elements, and tests must be robust to UI animation and DOM retention quirks (e.g., Radix Dialog).
 - Using horizontal `Flex` containers (`direction="row"`) with appropriate `gap` and `align` properties is effective for creating compact, single-line layouts for related form inputs (e.g., Reps/Rounds/Partial Reps). Adding `flexGrow: 1` to the inner elements helps distribute space evenly.

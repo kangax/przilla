@@ -22,6 +22,7 @@ type WodListMobileProps = {
   wods: Wod[];
   scoresByWodId: ScoresByWodId;
   searchTerm: string;
+  onScoreLogged?: () => void;
 };
 
 const difficultyStyles: Record<
@@ -83,6 +84,7 @@ export function WodListMobile({
   wods,
   scoresByWodId,
   searchTerm,
+  onScoreLogged,
 }: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
   const [logSheetWodId, setLogSheetWodId] = useState<string | null>(null);
@@ -391,7 +393,10 @@ export function WodListMobile({
               <LogScoreForm
                 wod={currentSheetWod}
                 initialScore={editingScore}
-                onScoreLogged={handleDrawerClose}
+                onScoreLogged={() => {
+                  if (onScoreLogged) onScoreLogged();
+                  handleDrawerClose();
+                }}
                 onCancel={handleDrawerClose}
               />
             )}

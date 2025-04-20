@@ -1,6 +1,5 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "@testing-library/react";
-import { waitForElementToBeRemoved } from "@testing-library/react";
 import { WodListMobile } from "./WodListMobile";
 import type { Wod, Score } from "~/types/wodTypes";
 
@@ -47,11 +46,10 @@ vi.mock("../../../trpc/react", () => {
       }),
       score: {
         deleteScore: {
-          useMutation: () => ({
-            // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
-            mutate: (opts: any) => {
-              // Call onSuccess synchronously for test reliability
-              if (opts && opts.onSuccess) opts.onSuccess();
+          useMutation: (options: { onSuccess?: () => void } = {}) => ({
+            // The real mutation API expects options.onSuccess in the mutation options, not mutate param
+            mutate: () => {
+              if (typeof options.onSuccess === "function") options.onSuccess();
             },
             status: "idle",
           }),
@@ -239,7 +237,6 @@ describe("WodListMobile", () => {
 
     // Open delete dialog
     fireEvent.click(screen.getByLabelText("Delete score"));
-    const dialog = screen.getByRole("dialog");
     expect(screen.getByText("Delete Score")).toBeInTheDocument();
 
     // Confirm delete

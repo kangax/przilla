@@ -98,6 +98,9 @@ const mockScore: Score = {
   updatedAt: now,
 };
 
+const longNote = "This is a very long note. ".repeat(20);
+const specialNote = "Great job! 💪🔥 <b>Bold</b> & *markdown*";
+
 describe("WodListMobile", () => {
   it("renders WOD and allows logging a new score", () => {
     render(<WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />);
@@ -268,5 +271,136 @@ describe("WodListMobile", () => {
     // Cancel closes drawer
     fireEvent.click(screen.getByText("Cancel"));
     expect(screen.queryByTestId("log-score-form")).not.toBeInTheDocument();
+  });
+
+  // --- NEW TESTS FOR SEARCH HIGHLIGHTING & AUTO-EXPAND ---
+
+  it("highlights search term in WOD name, tags, and description, and auto-expands card", () => {
+    const wodWithTag = { ...mockWod, tags: ["For Time", "Chipper"] };
+    render(
+      <WodListMobile
+        wods={[wodWithTag]}
+        scoresByWodId={{}}
+        searchTerm="fran"
+      />,
+    );
+    // Card should be auto-expanded (description visible)
+    expect(screen.getByText(/Thrusters and Pull-ups/)).toBeInTheDocument();
+
+    // WOD name should be highlighted
+    const highlightedName = screen.getByText("Fran", { selector: "mark" });
+    expect(highlightedName).toBeInTheDocument();
+
+    // Tag should be highlighted if matches
+    render(
+      <WodListMobile
+        wods={[wodWithTag]}
+        scoresByWodId={{}}
+        searchTerm="chipper"
+      />,
+    );
+    const highlightedTag = screen.getByText("Chipper", { selector: "mark" });
+    expect(highlightedTag).toBeInTheDocument();
+
+    // Description should be highlighted if matches
+    render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{}}
+        searchTerm="thrusters"
+      />,
+    );
+    const highlightedDesc = screen.getByText(/Thrusters/i, {
+      selector: "mark",
+    });
+    expect(highlightedDesc).toBeInTheDocument();
+  });
+
+  // --- NEW TESTS FOR SCORE NOTES DISPLAY ---
+
+  it("renders score notes", () => {
+    render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: "Felt great" }] }}
+        searchTerm=""
+      />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    expect(screen.getByText("Felt great")).toBeInTheDocument();
+  });
+
+  it("renders long score notes", () => {
+    render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: longNote }] }}
+        searchTerm=""
+      />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    // Use a partial match to avoid issues with truncation or formatting
+    expect(
+      screen.getByText(/This is a very long note\./, { exact: false }),
+    ).toBeInTheDocument();
+  });
+
+  it("renders score notes with special characters", () => {
+    render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: specialNote }] }}
+        searchTerm=""
+      />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    expect(screen.getByText(specialNote)).toBeInTheDocument();
+  });
+
+  it("handles absence of score notes (null)", () => {
+    render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: null }] }}
+        searchTerm=""
+      />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    // Should not render an empty <p> for notes
+    expect(
+      screen.queryByText((content, element) => {
+        return element?.tagName === "P" && content === "";
+      }),
+    ).not.toBeInTheDocument();
+  });
+
+  it("handles absence of score notes (empty string)", () => {
+    render(
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: "" }] }}
+        searchTerm=""
+      />,
+    );
+    fireEvent.click(screen.getByText("Fran"));
+    expect(
+      screen.queryByText((content, element) => {
+        return element?.tagName === "P" && content === "";
+      }),
+    ).not.toBeInTheDocument();
+  });
+
+  // --- BASIC RESPONSIVE LAYOUT TEST (MOBILE ELEMENTS) ---
+
+  it("renders mobile-specific elements (Drawer, card layout)", () => {
+    render(<WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />);
+    // Card layout should be present
+    expect(screen.getByText("Fran")).toBeInTheDocument();
+    // Drawer should not be open initially
+    expect(screen.queryByTestId("log-score-form")).not.toBeInTheDocument();
+    // Open log score drawer
+    fireEvent.click(screen.getByText("Fran"));
+    fireEvent.click(screen.getByText("Log score"));
+    expect(screen.getByTestId("log-score-form")).toBeInTheDocument();
   });
 });

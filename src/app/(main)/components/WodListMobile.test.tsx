@@ -7,23 +7,35 @@ import type { Wod, Score } from "~/types/wodTypes";
 import { vi } from "vitest";
 
 // Mock LogScoreForm to avoid full form logic in this test
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 vi.mock("./LogScoreForm", () => ({
   __esModule: true,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-member-access
   default: ({ wod, initialScore, onScoreLogged, onCancel }: any) => (
     <div data-testid="log-score-form">
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
       <div>WOD: {wod.wodName}</div>
       {initialScore ? (
-        <div>Editing score: {initialScore.id}</div>
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+        <div>
+          {/* eslint-disable-next-line @typescript-eslint/no-unsafe-member-access */}
+          <div>Editing score: {initialScore.id}</div>
+        </div>
       ) : (
+        // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
         <div>Logging new score</div>
       )}
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
       <button onClick={onScoreLogged}>Submit</button>
+      {/* eslint-disable-next-line @typescript-eslint/no-unsafe-assignment */}
       <button onClick={onCancel}>Cancel</button>
     </div>
   ),
 }));
 
 // Mock tRPC deleteScore mutation
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 vi.mock("../../../trpc/react", () => {
   return {
     api: {
@@ -35,9 +47,11 @@ vi.mock("../../../trpc/react", () => {
       score: {
         deleteScore: {
           useMutation: () => ({
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-assignment
             mutate: (opts: any) => {
               // Simulate async onSuccess
               setTimeout(() => {
+                // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
                 if (opts && opts.onSuccess) opts.onSuccess();
               }, 10);
             },

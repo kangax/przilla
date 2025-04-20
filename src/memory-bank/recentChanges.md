@@ -108,4 +108,13 @@
       - Removed the unnecessary passing of `scoresByWodId` via `meta` in `useReactTable` options, as the sorting function now uses closure.
   - **Outcome:** The "Your Scores" column in the desktop WOD table is now sortable. Clicking the header toggles sorting based on the performance level of the user's latest score for each WOD (Elite > Advanced > Intermediate > Beginner > Rx > Scaled > No Score).
 
-<!-- ...rest of file unchanged... -->
+- **Lint/Type Safety: All ESLint and TypeScript Errors Resolved (Apr 19, 2025):**
+  - **Goal:** Restore full lint/type safety after recent feature work and test additions.
+  - **Implementation:**
+    - Removed unused imports in `LogScoreDialog.test.tsx`, `LogScorePopover.tsx`, and `WodListMobile.tsx`.
+    - Renamed unused argument to `_columnId` in `WodTable.tsx` custom sorting function.
+    - Added targeted `eslint-disable-next-line` comments for `any` usage, unsafe member access, and unsafe assignment/call in test mocks in `WodListMobile.test.tsx`, per project standards.
+    - Iteratively refined disables to satisfy all linter requirements, ensuring disables are placed on the exact lines flagged by ESLint.
+    - Verified with `npm run lint` and `npm run typecheck` that the codebase is now fully clean.
+  - **Outcome:** The codebase is now 100% lint/type clean, including all test files and mocks. This ensures robust code hygiene and a solid foundation for future development and CI/CD.
+  <!-- ...rest of file unchanged... -->

@@ -12,7 +12,7 @@ import {
   Box,
   IconButton,
 } from "@radix-ui/themes";
-import { Plus, Check } from "lucide-react";
+import { Plus } from "lucide-react";
 import { api } from "~/trpc/react";
 import type { Wod, Score } from "~/types/wodTypes";
 

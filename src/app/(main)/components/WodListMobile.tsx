@@ -13,7 +13,7 @@ import {
   DrawerContent,
   DrawerTitle,
 } from "../../../components/ui/drawer";
-import { Dialog, Button, Flex, Text } from "@radix-ui/themes";
+import { Dialog, Button, Flex } from "@radix-ui/themes";
 import { api } from "../../../trpc/react";
 
 type ScoresByWodId = Record<string, Score[]>;

@@ -97,7 +97,7 @@ const createColumns = (
   const sortByLatestScoreLevel: SortingFn<Wod> = (
     rowA: Row<Wod>,
     rowB: Row<Wod>,
-    columnId: string,
+    _columnId: string,
   ) => {
     const getLevelValue = (row: Row<Wod>): number => {
       const wod = row.original;

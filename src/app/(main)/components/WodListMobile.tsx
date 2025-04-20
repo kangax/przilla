@@ -258,19 +258,6 @@ export function WodListMobile({
                         highlight={searchTerm}
                       />
                     </p>
-                    {/* Log Score Button - absolutely positioned in description area */}
-                    <button
-                      type="button"
-                      aria-label="Log Score"
-                      className="absolute right-0 top-0 flex items-center gap-1 rounded-full bg-green-500 px-4 py-2 text-xl font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleLogScore(wod.id);
-                      }}
-                    >
-                      <Plus size={24} />
-                      <span>Log score</span>
-                    </button>
                   </div>
 
                   {/* Separator */}
@@ -320,32 +307,32 @@ export function WodListMobile({
                                   <button
                                     type="button"
                                     aria-label="Edit score"
-                                    className="rounded-full p-3 hover:bg-blue-100 dark:hover:bg-blue-900"
+                                    className="rounded-full p-1 hover:bg-blue-100 dark:hover:bg-blue-900"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       handleEditScore(wod.id, score);
                                     }}
                                   >
                                     <Pencil
-                                      size={30}
+                                      size={24}
                                       className="text-blue-500"
                                     />
                                   </button>
                                   <button
                                     type="button"
                                     aria-label="Delete score"
-                                    className="rounded-full p-3 hover:bg-red-100 dark:hover:bg-red-900"
+                                    className="rounded-full p-1 hover:bg-red-100 dark:hover:bg-red-900"
                                     onClick={(e) => {
                                       e.stopPropagation();
                                       handleDeleteScore(wod, score);
                                     }}
                                   >
-                                    <Trash size={30} className="text-red-500" />
+                                    <Trash size={24} className="text-red-500" />
                                   </button>
                                 </div>
                               </div>
                               {score.notes && (
-                                <p className="mt-1 w-2/3 text-xs text-slate-500 dark:text-slate-400">
+                                <p className="mt-1 w-3/4 text-xs text-slate-500 dark:text-slate-400">
                                   {score.notes}
                                 </p>
                               )}
@@ -355,11 +342,19 @@ export function WodListMobile({
                       </ul>
                     </div>
                   )}
-                  {wodScores.length === 0 && (
-                    <p className="text-sm text-slate-500 dark:text-slate-400">
-                      No scores recorded yet.
-                    </p>
-                  )}
+                  {/* Log Score Button - absolutely positioned in description area */}
+                  <button
+                    type="button"
+                    aria-label="Log Score"
+                    className="text-md my-4 flex items-center gap-1 rounded-full bg-green-500 px-3 py-1 font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      handleLogScore(wod.id);
+                    }}
+                  >
+                    <Plus size={20} />
+                    <span>Log score</span>
+                  </button>
                 </div>
               )}
             </div>

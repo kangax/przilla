@@ -100,13 +100,15 @@
 
 ### Must have
 
+- Add remaining Games/Regionals/etc. workouts from SugarWOD
+- Add sorting to mobile view
+
 ### Good to have
 
 - Make a separate table of movements
   - more precise chart of movements
   - can potentially use it for things like:
     "show wods with running AND thruster"
-- Add sorting to mobile view
 
 ### Maybe
 

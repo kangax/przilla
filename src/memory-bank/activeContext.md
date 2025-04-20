@@ -2,6 +2,8 @@
 
 ## Current Focus
 
+- **SugarWOD Import Instructions Added (Apr 20, 2025):** Added a clear instructional section with text and a screenshot to the `/import` page (`ScoreImportWizard.tsx`) guiding users on how to export their CSV data from SugarWOD. This improves the usability of the import feature.
+
 - **Mobile Log/Edit Score UI: Immediate UI Update Fix (Apr 19, 2025):**
 
   - Fixed a long-standing issue where logging or editing a score on mobile did not always update the UI immediately, despite cache invalidation.
@@ -98,9 +100,6 @@
 
 ### Must have
 
-- ~~Add "log score"/edit/delete buttons in mobile list view~~ (Done Apr 19, 2025)
-- ~~Score logging should be one of time/load/reps/round+reps~~ (Done)
-
 ### Good to have
 
 - Make a separate table of movements
@@ -108,7 +107,6 @@
   - can potentially use it for things like:
     "show wods with running AND thruster"
 - Add sorting to mobile view
-- ~~Performance chart should show values relative to WOD difficulty~~ (Done Apr 15, 2025)
 
 ### Maybe
 
@@ -145,6 +143,33 @@
 - Tooltip formatting should always be clear, multi-line, and context-rich, especially for performance/benchmark data.
 - Ensuring shared components like dialog forms correctly reset their state between different modes (e.g., log vs. edit) is crucial for predictable UI behavior. Resetting state after successful actions or cancellation is a reliable pattern.
 - Trigger elements for actions like "Log Score" should maintain consistent appearance and behavior, independent of other states (like editing) managed within the same component instance. Separate trigger logic (e.g., dedicated onClick handlers) can achieve this.
+
+## Planned Test Coverage Improvements
+
+The following high-priority areas have been identified for new or improved unit/integration test coverage (non-E2E):
+
+1. **Authentication Flows**
+
+   - Unit/integration tests for login, signup, password reset, and social login logic.
+   - Tests for auth-protected route guards and session expiration handling.
+
+2. **CSV/SugarWOD Import Flow**
+
+   - Tests for file parsing, WOD matching, error handling, and backend mutation logic.
+   - Tests for UI state transitions (upload, review, confirm, error).
+
+3. **Wodwell Icon Link**
+
+   - Tests for presence/absence, correct URL, accessibility (aria-label), and keyboard navigation.
+
+4. **SSR/Initial Data Hydration**
+
+   - Tests for correct hydration of server-fetched data, fallback logic, and consistency between server/client.
+
+5. **WOD Table (Desktop) Display Features**
+   - Tests for search highlighting, notes display, and sorting logic in the desktop table.
+
+These areas are the next focus for improving test coverage and reliability, and will be addressed in order.
 
 ## Recent Changes
 

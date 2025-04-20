@@ -1,5 +1,29 @@
 # Recent Changes
 
+- **SugarWOD Import Page Layout Update (Apr 20, 2025):**
+
+  - **Goal:** Improve the layout of the SugarWOD import page for better readability on larger screens.
+  - **Implementation:**
+    - Modified `src/app/import/components/ScoreImportWizard.tsx`.
+    - Wrapped the newly added instructions section and the main content area (upload zone, review table, etc.) in a Radix UI `Flex` container.
+    - Configured the `Flex` container to display children in a row (`direction="row"`) with a gap on medium screens and larger (`md:` breakpoint).
+    - For smaller screens, the `Flex` container defaults to stacking children vertically (`direction="column"`).
+    - Assigned appropriate widths/flex properties to the instruction column (`md:w-1/3 md:flex-shrink-0`) and the main content column (`flex-grow`) for the side-by-side layout.
+  - **Outcome:** The import page now uses a responsive two-column layout on desktop/tablet screens (instructions on the left, main content on the right), while maintaining a single-column layout on mobile.
+
+- **SugarWOD Import Instructions Added (Apr 20, 2025):**
+
+  - **Goal:** Guide users on how to export their workout data from SugarWOD for import into this application.
+  - **Implementation:**
+    - Added a new instructional section to the top of the `ScoreImportWizard` component (`src/app/import/components/ScoreImportWizard.tsx`).
+    - This section includes:
+      - A clear heading ("How to Export Your Scores from SugarWOD").
+      - Step-by-step instructions (go to profile, click 'Export Workouts', wait for email, upload CSV).
+      - A direct link to the SugarWOD profile page.
+      - An embedded screenshot (`public/images/sugarwod_export.png`) displayed using the Next.js `<Image>` component, showing the location of the 'Export Workouts' button.
+    - Used Radix UI Themes components (`Card`, `Heading`, `Text`, `Link`, `Box`) and Tailwind CSS for styling consistent with the rest of the application.
+  - **Outcome:** The score import page now provides clear guidance, including visual aid, to help users obtain their SugarWOD CSV file, improving the usability of the import feature.
+
 - **Mobile Log/Edit Score UI: Immediate UI Update Fix (Apr 19, 2025):**
 
   - **Problem:** Logging or editing a score on mobile did not always update the UI immediately, even though cache invalidation was present.

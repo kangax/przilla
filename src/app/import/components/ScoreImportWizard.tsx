@@ -6,6 +6,8 @@ import { api } from "~/trpc/react";
 import { CsvUploadZone } from "./CsvUploadZone";
 import { LoadingIndicator } from "../../_components/LoadingIndicator"; // Updated path and name
 import { ScoreReviewTable } from "./ScoreReviewTable";
+import { Box, Card, Text, Link, Heading, Flex } from "@radix-ui/themes"; // Import Radix components + Heading + Flex
+import Image from "next/image"; // Import Next Image
 import { ImportConfirmation } from "./ImportConfirmation";
 // Import types
 import type { CsvRow, ProcessedRow } from "./types";
@@ -368,69 +370,128 @@ export function ScoreImportWizard() {
   }
 
   return (
-    <div className="rounded-lg border p-4 shadow-md">
-      <h2 className="mb-4 text-xl font-semibold">
+    <div className="space-y-6 rounded-lg border p-4 shadow-md">
+      <Heading as="h2" size="6" mb="4" className="text-center">
         Import Scores from SugarWOD
-      </h2>
-      {/* Display processing error prominently */}
-      {processingError &&
-        step !== "processing" && ( // Don't show parsing error during submission loading
-          <div className="mb-4 rounded border border-red-300 bg-red-50 p-3 text-red-700">
-            Error: {processingError}
-          </div>
-        )}
+      </Heading>
 
-      {step === "upload" && (
-        <CsvUploadZone onFileAccepted={handleFileAccepted} />
-      )}
+      <Flex direction={{ initial: "column", md: "row" }} gap="6">
+        {/* Instructions Section (Left Column) */}
+        <Box className="w-full md:w-1/2 md:flex-shrink-0">
+          <Card variant="surface">
+            <Box p="3">
+              <Text as="p" size="2" color="gray" mb="4">
+                Follow these steps to get your workout data CSV file from
+                SugarWOD:
+              </Text>
+              <ol className="mb-4 ml-5 list-decimal space-y-2 text-sm">
+                <li>
+                  <Text size="2">
+                    Go to your{" "}
+                    <Link
+                      href="https://app.sugarwod.com/athletes/me#profile"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      SugarWOD profile page
+                    </Link>
+                  </Text>
+                </li>
+                <li>
+                  <Text size="2">
+                    Click on the <strong>Export Workouts</strong> button (as
+                    shown below).
+                  </Text>
+                </li>
+                <li>
+                  <Text size="2">
+                    Wait for SugarWOD to send CSV file with all your workouts.
+                  </Text>
+                </li>
+                <li>
+                  <Text size="2">
+                    Upload that CSV file here (on the right).
+                  </Text>
+                </li>
+              </ol>
+              <Box className="relative mt-4 h-auto w-full max-w-xl overflow-hidden rounded border">
+                <Image
+                  src="/images/sugarwod_export_3.png"
+                  alt="Screenshot showing the 'Export Workouts' button in SugarWOD profile settings"
+                  width={600} // Adjust width as needed
+                  height={300} // Adjust height based on image aspect ratio or desired display
+                  style={{ objectFit: "contain" }} // Ensure image scales nicely
+                  priority // Prioritize loading this image as it's important context
+                />
+              </Box>
+            </Box>
+          </Card>
+        </Box>
 
-      {/* Show processing for both file parsing and submission */}
-      {step === "processing" && (
-        <LoadingIndicator // Updated component name
-          message={
-            importScoresMutation.isPending // Use isPending instead of isLoading
-              ? "Submitting scores..."
-              : "Processing CSV and matching WODs..."
-          }
-        />
-      )}
+        {/* Main Content Area (Right Column) */}
+        <Box className="flex-grow">
+          {/* Display processing error prominently */}
+          {processingError &&
+            step !== "processing" && ( // Don't show parsing error during submission loading
+              <div className="mb-4 rounded border border-red-300 bg-red-50 p-3 text-red-700">
+                Error: {processingError}
+              </div>
+            )}
 
-      {step === "review" && (
-        <ScoreReviewTable
-          rows={processedRows.filter((row) => row.matchedWod)} // Filter for matched WODs only
-          onComplete={handleReviewComplete} // Pass the handler to proceed
-        />
-      )}
+          {/* Conditional Rendering based on step */}
+          {step === "upload" && (
+            <CsvUploadZone onFileAccepted={handleFileAccepted} />
+          )}
 
-      {step === "confirm" && (
-        <ImportConfirmation
-          rows={processedRows}
-          selectedIds={selectedRows}
-          onConfirm={handleConfirm}
-          onBack={() => setStep("review")} // Allow going back
-          // Disable confirm button while submitting
-          // isSubmitting={importScoresMutation.isPending} // Pass loading state if needed by component
-        />
-      )}
+          {/* Show processing for both file parsing and submission */}
+          {step === "processing" && (
+            <LoadingIndicator // Updated component name
+              message={
+                importScoresMutation.isPending // Use isPending instead of isLoading
+                  ? "Submitting scores..."
+                  : "Processing CSV and matching WODs..."
+              }
+            />
+          )}
 
-      {step === "complete" && (
-        <div className="rounded-lg border border-green-300 bg-green-50 p-6 text-center shadow-md dark:border-green-700 dark:bg-gray-800">
-          <h3 className="mb-4 text-lg font-medium text-green-700 dark:text-green-400">
-            Import Complete!
-          </h3>
-          <p className="mb-6 text-gray-700 dark:text-gray-300">
-            Successfully imported{" "}
-            <span className="font-semibold">{importSuccessCount}</span>{" "}
-            score(s).
-          </p>
-          <button
-            onClick={handleReset}
-            className="rounded bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
-          >
-            Import Another File
-          </button>
-        </div>
-      )}
+          {step === "review" && (
+            <ScoreReviewTable
+              rows={processedRows.filter((row) => row.matchedWod)} // Filter for matched WODs only
+              onComplete={handleReviewComplete} // Pass the handler to proceed
+            />
+          )}
+
+          {step === "confirm" && (
+            <ImportConfirmation
+              rows={processedRows}
+              selectedIds={selectedRows}
+              onConfirm={handleConfirm}
+              onBack={() => setStep("review")} // Allow going back
+              // Disable confirm button while submitting
+              // isSubmitting={importScoresMutation.isPending} // Pass loading state if needed by component
+            />
+          )}
+
+          {step === "complete" && (
+            <div className="rounded-lg border border-green-300 bg-green-50 p-6 text-center shadow-md dark:border-green-700 dark:bg-gray-800">
+              <h3 className="mb-4 text-lg font-medium text-green-700 dark:text-green-400">
+                Import Complete!
+              </h3>
+              <p className="mb-6 text-gray-700 dark:text-gray-300">
+                Successfully imported{" "}
+                <span className="font-semibold">{importSuccessCount}</span>{" "}
+                score(s).
+              </p>
+              <button
+                onClick={handleReset}
+                className="rounded bg-blue-600 px-6 py-2 text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-600"
+              >
+                Import Another File
+              </button>
+            </div>
+          )}
+        </Box>
+      </Flex>
     </div>
   );
 }

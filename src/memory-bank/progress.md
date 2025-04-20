@@ -2,6 +2,8 @@
 
 ## What Works
 
+- **SugarWOD Import Instructions (Apr 20, 2025):** The import page (`/import`) now includes a clear instructional section within the `ScoreImportWizard` component. This section provides step-by-step guidance (go to profile, click 'Export Workouts', wait for email, upload CSV), a direct link to the SugarWOD profile page, and an embedded screenshot (`public/images/sugarwod_export.png`) showing the 'Export Workouts' button location. This improves the usability of the score import feature.
+
 - **Mobile Log/Edit Score UI: Immediate UI Update (Apr 19, 2025):**
 
   - Logging, editing, and deleting a score on mobile now update the UI immediately and reliably, matching the desktop experience.

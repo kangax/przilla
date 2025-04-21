@@ -377,56 +377,60 @@ export function ScoreImportWizard() {
 
       <Flex direction={{ initial: "column", md: "row" }} gap="6">
         {/* Instructions Section (Left Column) */}
-        <Box className="w-full md:w-1/2 md:flex-shrink-0">
-          <Card variant="surface">
-            <Box p="3">
-              <Text as="p" size="2" color="gray" mb="4">
-                Follow these steps to get your workout data CSV file from
-                SugarWOD:
-              </Text>
-              <ol className="mb-4 ml-5 list-decimal space-y-2 text-sm">
-                <li>
-                  <Text size="2">
-                    Go to your{" "}
-                    <Link
-                      href="https://app.sugarwod.com/athletes/me#profile"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      SugarWOD profile page
-                    </Link>
-                  </Text>
-                </li>
-                <li>
-                  <Text size="2">
-                    Click on the <strong>Export Workouts</strong> button (as
-                    shown below).
-                  </Text>
-                </li>
-                <li>
-                  <Text size="2">
-                    Wait for SugarWOD to send CSV file with all your workouts.
-                  </Text>
-                </li>
-                <li>
-                  <Text size="2">
-                    Upload that CSV file here (on the right).
-                  </Text>
-                </li>
-              </ol>
-              <Box className="relative mt-4 h-auto w-full max-w-xl overflow-hidden rounded border">
-                <Image
-                  src="/images/sugarwod_export_3.png"
-                  alt="Screenshot showing the 'Export Workouts' button in SugarWOD profile settings"
-                  width={600} // Adjust width as needed
-                  height={300} // Adjust height based on image aspect ratio or desired display
-                  style={{ objectFit: "contain" }} // Ensure image scales nicely
-                  priority // Prioritize loading this image as it's important context
-                />
+
+        {/* Conditional Rendering based on step */}
+        {step === "upload" && (
+          <Box className="w-full md:w-1/2 md:flex-shrink-0">
+            <Card variant="surface">
+              <Box p="3">
+                <Text as="p" size="2" color="gray" mb="4">
+                  Follow these steps to get your workout data CSV file from
+                  SugarWOD:
+                </Text>
+                <ol className="mb-4 ml-5 list-decimal space-y-2 text-sm">
+                  <li>
+                    <Text size="2">
+                      Go to your{" "}
+                      <Link
+                        href="https://app.sugarwod.com/athletes/me#profile"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
+                        SugarWOD profile page
+                      </Link>
+                    </Text>
+                  </li>
+                  <li>
+                    <Text size="2">
+                      Click on the <strong>Export Workouts</strong> button (as
+                      shown below).
+                    </Text>
+                  </li>
+                  <li>
+                    <Text size="2">
+                      Wait for SugarWOD to send CSV file with all your workouts.
+                    </Text>
+                  </li>
+                  <li>
+                    <Text size="2">
+                      Upload that CSV file here (on the right).
+                    </Text>
+                  </li>
+                </ol>
+                <Box className="relative mt-4 h-auto w-full max-w-xl overflow-hidden rounded border">
+                  <Image
+                    src="/images/sugarwod_export_3.png"
+                    alt="Screenshot showing the 'Export Workouts' button in SugarWOD profile settings"
+                    width={600} // Adjust width as needed
+                    height={300} // Adjust height based on image aspect ratio or desired display
+                    style={{ objectFit: "contain" }} // Ensure image scales nicely
+                    priority // Prioritize loading this image as it's important context
+                  />
+                </Box>
               </Box>
-            </Box>
-          </Card>
-        </Box>
+            </Card>
+          </Box>
+        )}
 
         {/* Main Content Area (Right Column) */}
         <Box className="flex-grow">

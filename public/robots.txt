@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /login
+Allow: /signup
+Allow: /import
+Allow: /charts
+Disallow: /api/
+Disallow: /trpc/
+
+Sitemap: https://www.przilla.app/sitemap.xml

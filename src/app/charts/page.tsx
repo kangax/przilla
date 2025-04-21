@@ -1,3 +1,4 @@
+import { type Metadata } from "next";
 import { Box, Container, Flex } from "@radix-ui/themes";
 import { getSession } from "~/server/auth"; // Import getSession instead of auth
 import { api } from "~/trpc/server";
@@ -13,6 +14,12 @@ import {
   generatePlaceholderDistributionData,
   generatePlaceholderTimelineData,
 } from "~/utils/placeholderData"; // Import placeholder functions
+
+export const metadata: Metadata = {
+  title: "Visualize Your Performance", // Uses template: "Visualize Your Performance | PRzilla"
+  description:
+    "Analyze your WOD performance over time with PRzilla's charts. Track progress, see workout distributions, and identify trends. Login required.",
+};
 
 // Define types for chart data points locally or import if shared
 type ChartDataPoint = {

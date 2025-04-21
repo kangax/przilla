@@ -444,6 +444,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
 
   return (
     <Box>
+      {/* Main Page Heading for SEO */}
+      <h1 className="mb-2 mt-4 text-2xl font-bold tracking-tight text-foreground">
+        Track Your WOD Scores & Progress
+      </h1>
       {/* Filter Bar */}
       <div
         ref={filterBarRef}

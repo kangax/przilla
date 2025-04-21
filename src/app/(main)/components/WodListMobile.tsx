@@ -1,6 +1,15 @@
-import React, { useState, useMemo } from "react";
-import { ChevronDown, ChevronUp, Plus, Pencil, Trash } from "lucide-react";
-import type { Wod, Score } from "~/types/wodTypes";
+import React, { useState, useMemo, useCallback } from "react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Plus,
+  Pencil,
+  Trash,
+  ListFilter,
+  ArrowUp,
+  ArrowDown,
+} from "lucide-react";
+import type { Wod, Score, SortByType } from "~/types/wodTypes";
 import {
   formatScore,
   parseTags,
@@ -23,6 +32,9 @@ type WodListMobileProps = {
   scoresByWodId: ScoresByWodId;
   searchTerm: string;
   onScoreLogged?: () => void;
+  sortBy: SortByType;
+  sortDirection: "asc" | "desc";
+  handleSort: (column: SortByType) => void;
 };
 
 const difficultyStyles: Record<
@@ -85,6 +97,9 @@ export function WodListMobile({
   scoresByWodId,
   searchTerm,
   onScoreLogged,
+  sortBy,
+  sortDirection,
+  handleSort,
 }: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
   const [logSheetWodId, setLogSheetWodId] = useState<string | null>(null);

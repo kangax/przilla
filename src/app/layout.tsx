@@ -24,13 +24,13 @@ export const metadata: Metadata = {
     url: "https://www.przilla.app",
     siteName: "PRzilla",
     type: "website",
-    // images: [ // Optional: Add image URL later
-    //   {
-    //     url: 'https://www.przilla.app/og-image.png', // Must be absolute URL
-    //     width: 800,
-    //     height: 600,
-    //   },
-    // ],
+    images: [
+      {
+        url: "https://www.przilla.app/og.png",
+        width: 800,
+        height: 600,
+      },
+    ],
     locale: "en_US",
   },
   twitter: {

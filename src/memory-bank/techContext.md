@@ -5,7 +5,7 @@ Never truncate files for brevity, you must always output full file contents.
 
 ## Technologies Used
 
-- **Language:** TypeScript
+- **Language:** TypeScript. We have @typescript-eslint/no-explicit-any enabled so DO NOT use `any` unless absolutely necessary.
 - **Framework:** Next.js (v15)
 - **UI Framework/Libraries:** React (v18), Radix UI Themes, Radix UI Select, Radix UI Icons, Lucide Icons
 - **Styling:** Tailwind CSS, PostCSS

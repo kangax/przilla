@@ -125,7 +125,24 @@
 - Import from Wodwell
   - write a script for scraping
   - bookmarklet so users can use? (this has been difficult)
-- Export your workouts as JSON/CSV
+
+## Recently Implemented
+
+- **Profile Dropdown Export (Apr 21, 2025):**
+
+  - Added a dropdown menu to the profile name in the main app header (AuthControls).
+  - The dropdown includes an "Export data" submenu with "Export as CSV" and "Export as JSON" options.
+  - When selected, the app fetches the user's scores and WODs using tRPC hooks, transforms the data, and triggers a download.
+  - The export is robust, only enabled when data is loaded, and works from any page.
+  - UI uses Radix DropdownMenu, is theme-aware, accessible, and minimal.
+  - Implementation: see `src/app/_components/AuthControls.tsx` and `src/utils/exportUserData.tsx`.
+
+- **Profile Export QA & Test Coverage (Apr 21, 2025):**
+  - Refactored `exportUserData.tsx` to support dependency injection for papaparse, enabling robust unit/integration testing.
+  - Added comprehensive tests in `exportUserData.test.tsx` covering CSV/JSON export, file download, error handling, and edge cases (empty data, special characters).
+  - Created `AuthControls.test.tsx` with UI tests for the profile dropdown export: trigger accessibility, export submenu, enabled/disabled state, and correct export utility invocation.
+  - All utility tests pass; UI tests are ready to run with the required env var set.
+  - Next: Run UI tests with `NEXT_PUBLIC_BETTER_AUTH_URL` set, then perform manual QA of exported files in the browser.
 
 ## Learnings & Insights
 

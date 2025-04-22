@@ -174,6 +174,7 @@
   - **Outcome:** The "Your Scores" column in the desktop WOD table is now sortable. Clicking the header toggles sorting based on the performance level of the user's latest score for each WOD (Elite > Advanced > Intermediate > Beginner > Rx > Scaled > No Score).
 
 - **Lint/Type Safety: All ESLint and TypeScript Errors Resolved (Apr 19, 2025):**
+
   - **Goal:** Restore full lint/type safety after recent feature work and test additions.
   - **Implementation:**
     - Removed unused imports in `LogScoreDialog.test.tsx`, `LogScorePopover.tsx`, and `WodListMobile.tsx`.
@@ -182,4 +183,26 @@
     - Iteratively refined disables to satisfy all linter requirements, ensuring disables are placed on the exact lines flagged by ESLint.
     - Verified with `npm run lint` and `npm run typecheck` that the codebase is now fully clean.
   - **Outcome:** The codebase is now 100% lint/type clean, including all test files and mocks. This ensures robust code hygiene and a solid foundation for future development and CI/CD.
-  <!-- ...rest of file unchanged... -->
+  - **Profile Dropdown Export (Apr 21, 2025):**
+
+  - **Goal:** Allow users to export their workout data (scores and WODs) as CSV or JSON directly from the main app header.
+  - **Implementation:**
+    - Updated `src/app/_components/AuthControls.tsx` to wrap the profile name in a Radix DropdownMenu.
+    - Added an "Export data" submenu with "Export as CSV" and "Export as JSON" options.
+    - When selected, the app fetches the user's scores and WODs using tRPC hooks (`api.score.getAllByUser.useQuery`, `api.wod.getAll.useQuery`), transforms the data, and triggers a file download.
+    - The export options are only enabled when data is loaded and valid; otherwise, they are disabled and visually indicated as such.
+    - The export utility (`src/utils/exportUserData.tsx`) handles data transformation and file download, using papaparse for CSV and JSON.stringify for JSON.
+    - The UI is minimal, theme-aware, and accessible, using Radix UI and Tailwind.
+    - Robust error handling: alerts the user if data is not loaded or available.
+  - **Outcome:** Users can now easily export their workout data in CSV or JSON format from any page, with a robust, accessible, and minimal UI. The feature is fully integrated and documented.
+
+- **Profile Export QA & Test Coverage (Apr 21, 2025):**
+  - **Goal:** Ensure the new profile export feature is robust, reliable, and fully covered by automated tests.
+  - **Implementation:**
+    - Refactored `src/utils/exportUserData.tsx` to support dependency injection for papaparse, enabling robust unit/integration testing.
+    - Added comprehensive tests in `src/utils/exportUserData.test.tsx` covering CSV/JSON export, file download, error handling, and edge cases (empty data, special characters).
+    - Created `src/app/_components/AuthControls.test.tsx` with UI tests for the profile dropdown export: trigger accessibility, export submenu, enabled/disabled state, and correct export utility invocation.
+    - All utility tests pass; UI tests are ready to run with the required env var set.
+  - **Outcome:** The export utility is now fully tested and robust. UI tests are in place to ensure accessibility and correct behavior. Next: run UI tests with `NEXT_PUBLIC_BETTER_AUTH_URL` set, then perform manual QA of exported files in the browser.
+
+<!-- ...rest of file unchanged... -->

@@ -41,6 +41,15 @@
 - **Score Edit/Delete & Validation (Apr 2025):** Users can now edit or delete any logged score directly from the WOD table. Edit and delete icons are shown for each score. The edit icon opens the log score dialog in edit mode, pre-filled with the score's data, and updates the score on submit. The delete icon opens a confirmation dialog and deletes the score on confirm. Validation now prevents empty or invalid results from being logged for all score types.
 - **Log Score (Apr 2025):** Users can log a score for any WOD directly from the main table via a minimal dialog form (`LogScoreDialog.tsx`) featuring a `Switch` for Rx input, an improved Date/Rx layout, and narrower time inputs. The form adapts to WOD type, and the scores list refreshes automatically after logging. (Next: implement always-visible log score button in mobile list view.)
 - **CSV/SugarWOD Score Import:** The full import flow is functional. Users can upload a CSV file via the dedicated `/import` route, review matched scores in `ScoreReviewTable`, confirm selections in `ImportConfirmation`, and the `ScoreImportWizard` component handles the process, submitting selected scores to the backend via the `api.score.importScores` tRPC mutation for insertion into the database. Includes client-side parsing, WOD matching (case-insensitive), validation, and UI feedback for loading/success/error states.
+
+- **Profile Dropdown Export (Apr 21, 2025):** Users can now export their workout data (scores and WODs) as CSV or JSON directly from the profile dropdown in the main app header. The export options are only enabled when data is loaded, and the UI is minimal, theme-aware, and accessible. Implementation: `src/app/_components/AuthControls.tsx`, `src/utils/exportUserData.tsx`.
+
+- **Profile Export QA & Test Coverage (Apr 21, 2025):**
+  - Refactored `exportUserData.tsx` for testability (papaparse injection).
+  - Added comprehensive utility tests (CSV/JSON, file download, error handling, edge cases).
+  - Created UI tests for the export dropdown (accessibility, enabled/disabled state, correct invocation).
+  - Utility tests pass; UI tests are implemented and ready to run with the required env var.
+  - Next: Run UI tests with `NEXT_PUBLIC_BETTER_AUTH_URL` set, then perform manual QA of exported files in the browser.
 - **Authentication Migration:** Successfully migrated from NextAuth.js to Better Auth, including database schema updates, API routes, client/server integration, and new login/signup/password reset pages.
 - **Wodwell icon link in mobile view:** A circular Wodwell icon (white "w" on black) now appears to the left of the likes count in each mobile WOD card header if `wod.wodUrl` exists. The icon links to the WOD's Wodwell.com page, opens in a new tab, is accessible, and does not interfere with card expand/collapse.
 - **Scaled badge display:** All non-Rx (scaled) scores now show a "Scaled" badge in grey, both in table and mobile views, ensuring accurate and consistent level display.

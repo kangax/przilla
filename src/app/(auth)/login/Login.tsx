@@ -5,14 +5,7 @@ import { type SVGProps, useState } from "react";
 import { useRouter } from "next/navigation";
 import { signinGoogle } from "~/lib/social-login"; // Removed signinGithub
 import { authClient } from "~/lib/auth-client";
-import {
-  Button,
-  Checkbox,
-  Flex,
-  Grid,
-  Text,
-  TextField,
-} from "@radix-ui/themes";
+import { Button, Checkbox, Flex, Text, TextField } from "@radix-ui/themes";
 
 // Basic Google Icon SVG (replace with Radix/Lucide if available)
 function GoogleIcon(props: SVGProps<SVGSVGElement>) {

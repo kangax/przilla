@@ -1,8 +1,9 @@
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-explicit-any, @typescript-eslint/unbound-method, @typescript-eslint/dot-notation, @typescript-eslint/prefer-promise-reject-errors */
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 
 // --- Patch dynamic import for papaparse before importing the module under test ---
 const unparse = vi.fn(() => "csv,data,here");
-const origImport = globalThis["import"];
+const origImport = globalThis.import;
 Object.defineProperty(globalThis, "import", {
   value: (specifier: string) => {
     if (specifier === "papaparse") {

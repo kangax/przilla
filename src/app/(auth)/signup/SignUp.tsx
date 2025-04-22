@@ -5,7 +5,7 @@ import { type SVGProps, useState } from "react";
 import { useRouter } from "next/navigation";
 import { authClient } from "~/lib/auth-client";
 import { signinGoogle } from "~/lib/social-login"; // Removed signinGithub
-import { Button, Flex, Grid, Text, TextField } from "@radix-ui/themes";
+import { Button, Flex, Text, TextField } from "@radix-ui/themes";
 // Removed GitHubLogoIcon import
 
 // Reusing GoogleIcon from login.tsx (consider moving to a shared utils file)

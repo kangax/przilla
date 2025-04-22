@@ -1,5 +1,5 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import * as trpcReact from "~/trpc/react";
 import * as exportUtil from "~/utils/exportUserData";
@@ -31,6 +31,7 @@ const mockWods = [
 ];
 
 beforeEach(() => {
+  /* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument -- test: mock tRPC hook return */
   vi.spyOn(trpcReact.api.score.getAllByUser, "useQuery").mockReturnValue({
     data: mockScores,
     isLoading: false,
@@ -43,6 +44,7 @@ beforeEach(() => {
     isError: false,
     refetch: vi.fn(),
   } as any);
+  /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument */
   vi.spyOn(exportUtil, "exportUserData").mockResolvedValue(undefined);
 });
 
@@ -106,12 +108,14 @@ describe("AuthControls Dropdown Export", () => {
   });
 
   it("disables export options when data is loading", async () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- test: mock tRPC hook return
     (trpcReact.api.score.getAllByUser.useQuery as any).mockReturnValueOnce({
       data: undefined,
       isLoading: true,
       isError: false,
       refetch: vi.fn(),
     });
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- test: mock tRPC hook return
     (trpcReact.api.wod.getAll.useQuery as any).mockReturnValueOnce({
       data: undefined,
       isLoading: true,

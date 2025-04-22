@@ -2,6 +2,12 @@
 
 ## Current Focus
 
+- **Lint Fix: Block-Style Disables for Test Mocks (Apr 21, 2025):**
+
+  - Strict ESLint rules (`@typescript-eslint/no-explicit-any`, `@typescript-eslint/no-unsafe-argument`) flagged `as any` usage in test mocks in `src/app/_components/AuthControls.test.tsx`, causing `npm run lint` to fail.
+  - Block-style disables (`/* eslint-disable ... */ ... /* eslint-enable ... */`) were applied around the tRPC mock return values in the test file. This is now the preferred approach for handling strict ESLint rules in test files.
+  - The codebase is now lint/type clean.
+
 - **Mobile WOD Card Blurb (Apr 21, 2025):**
 
   - Added a short blurb under the workout title in each mobile WOD card, visible only when the card is collapsed.

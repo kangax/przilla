@@ -8,10 +8,14 @@ import { type ScoreFromQuery, type WodFromQuery } from "~/types/wodTypes";
  * Optionally accepts a papaparse instance for testability.
  */
 async function toCSV(
-  data: any[],
-  papaparse?: { unparse: (data: any[], opts: any) => string },
+  data: Record<string, unknown>[],
+  papaparse?: {
+    unparse: (data: Record<string, unknown>[], opts: unknown) => string;
+  },
 ): Promise<string> {
-  let Papa: { unparse: (data: any[], opts: any) => string };
+  let Papa: {
+    unparse: (data: Record<string, unknown>[], opts: unknown) => string;
+  };
   if (papaparse) {
     Papa = papaparse;
   } else {
@@ -44,7 +48,9 @@ export async function exportUserData(
   format: "csv" | "json",
   scores: ScoreFromQuery[],
   wods: WodFromQuery[],
-  papaparse?: { unparse: (data: any[], opts: any) => string },
+  papaparse?: {
+    unparse: (data: Record<string, unknown>[], opts: unknown) => string;
+  },
 ) {
   if (!scores || !wods) {
     alert(

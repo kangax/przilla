@@ -657,9 +657,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
           scoresByWodId={scoresByWodId}
           searchTerm={searchTerm}
           onScoreLogged={handleScoreLogged}
-          sortBy={sortBy}
-          sortDirection={sortDirection}
-          handleSort={handleSort}
         />
       ) : (
         <WodTable

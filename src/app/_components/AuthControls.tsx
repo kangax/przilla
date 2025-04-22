@@ -7,6 +7,7 @@ import { ChevronRight, Download } from "lucide-react";
 import { useSession, signOut } from "~/lib/auth-client";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";
+import type { ScoreFromQuery, WodFromQuery } from "~/types/wodTypes";
 
 export default function AuthControls() {
   const { data: session, isPending } = useSession();
@@ -42,7 +43,11 @@ export default function AuthControls() {
       }
       // Cast to expected types (safe after runtime check)
       const { exportUserData } = await import("~/utils/exportUserData");
-      await exportUserData(format, scores as any[], wods as any[]);
+      await exportUserData(
+        format,
+        scores as ScoreFromQuery[],
+        wods as WodFromQuery[],
+      );
     },
     [scores, wods],
   );

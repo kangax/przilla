@@ -2,6 +2,14 @@
 
 ## Current Focus
 
+- **Mobile WOD Card Blurb (Apr 21, 2025):**
+
+  - Added a short blurb under the workout title in each mobile WOD card, visible only when the card is collapsed.
+  - The blurb uses the `difficultyExplanation` field if available, otherwise falls back to the first sentence or up to 100 characters of the workout description.
+  - This provides users with a quick overview of what a workout is about, improving scan-ability and user experience on mobile.
+  - The blurb is styled subtly and does not appear when the card is expanded (where the full description is shown).
+  - Implementation: Added a helper function and conditional rendering in `src/app/(main)/components/WodListMobile.tsx`.
+
 - **SugarWOD Import Instructions Added (Apr 20, 2025):** Added a clear instructional section with text and a screenshot to the `/import` page (`ScoreImportWizard.tsx`) guiding users on how to export their CSV data from SugarWOD. This improves the usability of the import feature.
 
 - **Mobile Log/Edit Score UI: Immediate UI Update Fix (Apr 19, 2025):**
@@ -102,6 +110,7 @@
 
 - Add remaining Games/Regionals/etc. workouts from SugarWOD
 - Add sorting to mobile view
+- Search doesn't show "x" on mobile
 
 ### Good to have
 

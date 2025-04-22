@@ -92,6 +92,25 @@ const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
   return false;
 };
 
+function getWodBlurb(wod: Wod): string | null {
+  if (
+    wod.difficultyExplanation &&
+    wod.difficultyExplanation.trim().length > 0
+  ) {
+    return wod.difficultyExplanation;
+  }
+  if (wod.description && wod.description.trim().length > 0) {
+    // Use first sentence or up to 100 chars
+    const desc = wod.description.trim();
+    const firstSentence = desc.split(/(?<=[.!?])\s/)[0];
+    if (firstSentence.length >= 20 && firstSentence.length <= 100) {
+      return firstSentence;
+    }
+    return desc.slice(0, 100) + (desc.length > 100 ? "..." : "");
+  }
+  return null;
+}
+
 export function WodListMobile({
   wods,
   scoresByWodId,
@@ -248,6 +267,16 @@ export function WodListMobile({
                   )}
                 </div>
               </div>
+              {/* Blurb Section (collapsed only) */}
+              {!isExpanded &&
+                (() => {
+                  const blurb = getWodBlurb(wod);
+                  return blurb ? (
+                    <div className="mt-1 text-sm text-slate-600 dark:text-slate-400">
+                      {blurb}
+                    </div>
+                  ) : null;
+                })()}
 
               {/* Tags Section (Always Visible) - Use parsed tags */}
               <div className="mt-2 flex flex-wrap items-center gap-2">

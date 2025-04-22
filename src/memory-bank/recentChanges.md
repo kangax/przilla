@@ -1,5 +1,14 @@
 # Recent Changes
 
+- **Mobile WOD Card Blurb (Apr 21, 2025):**
+
+  - **Goal:** Provide users with a quick overview of each workout in the mobile WOD list.
+  - **Implementation:**
+    - Added a short blurb under the workout title in each mobile WOD card, visible only when the card is collapsed.
+    - The blurb uses the `difficultyExplanation` field if available, otherwise falls back to the first sentence or up to 100 characters of the workout description.
+    - Implemented via a helper function and conditional rendering in `src/app/(main)/components/WodListMobile.tsx`.
+  - **Outcome:** Users can now quickly scan what a workout is about without expanding each card. The blurb is styled subtly and does not appear when the card is expanded (where the full description is shown).
+
 - **Removed GitHub Authentication (Apr 20, 2025):**
 
   - **Goal:** Simplify authentication options by removing the GitHub social login provider.

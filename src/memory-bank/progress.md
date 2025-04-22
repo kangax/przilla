@@ -2,6 +2,8 @@
 
 ## What Works
 
+- **Mobile WOD Card Blurb (Apr 21, 2025):** Each mobile WOD card now displays a short blurb under the workout title when collapsed, using the `difficultyExplanation` field if available, or a short description otherwise. This gives users a quick overview of each workout at a glance.
+
 - **SugarWOD Import Instructions (Apr 20, 2025):** The import page (`/import`) now includes a clear instructional section within the `ScoreImportWizard` component. This section provides step-by-step guidance (go to profile, click 'Export Workouts', wait for email, upload CSV), a direct link to the SugarWOD profile page, and an embedded screenshot (`public/images/sugarwod_export.png`) showing the 'Export Workouts' button location. This improves the usability of the score import feature.
 
 - **Mobile Log/Edit Score UI: Immediate UI Update (Apr 19, 2025):**

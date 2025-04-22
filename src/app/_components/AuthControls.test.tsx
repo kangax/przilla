@@ -60,25 +60,20 @@ describe("AuthControls Dropdown Export", () => {
     expect(trigger).toBeInTheDocument();
   });
 
-  it("opens dropdown and shows export submenu", async () => {
+  it("opens dropdown and shows Export as CSV as a top-level item", async () => {
     render(<AuthControls />);
     const trigger = screen.getByRole("button", { name: /profile/i });
     await userEvent.click(trigger);
-    // Look for "Export data" submenu
-    expect(screen.getByText(/export data/i)).toBeInTheDocument();
-    // Look for CSV and JSON options
+    // Look for "Export as CSV" as a top-level item
     expect(screen.getByText(/export as csv/i)).toBeInTheDocument();
-    expect(screen.getByText(/export as json/i)).toBeInTheDocument();
   });
 
-  it("enables export options when data is loaded", async () => {
+  it("enables export option when data is loaded", async () => {
     render(<AuthControls />);
     const trigger = screen.getByRole("button", { name: /profile/i });
     await userEvent.click(trigger);
     const csvOption = screen.getByText(/export as csv/i);
-    const jsonOption = screen.getByText(/export as json/i);
     expect(csvOption).not.toHaveAttribute("aria-disabled", "true");
-    expect(jsonOption).not.toHaveAttribute("aria-disabled", "true");
   });
 
   it("calls export utility with correct args when export is clicked", async () => {
@@ -89,25 +84,13 @@ describe("AuthControls Dropdown Export", () => {
     await userEvent.click(csvOption);
     await waitFor(() => {
       expect(exportUtil.exportUserData).toHaveBeenCalledWith(
-        "csv",
         mockScores,
         mockWods,
-        undefined,
-      );
-    });
-    const jsonOption = screen.getByText(/export as json/i);
-    await userEvent.click(jsonOption);
-    await waitFor(() => {
-      expect(exportUtil.exportUserData).toHaveBeenCalledWith(
-        "json",
-        mockScores,
-        mockWods,
-        undefined,
       );
     });
   });
 
-  it("disables export options when data is loading", async () => {
+  it("disables export option when data is loading", async () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- test: mock tRPC hook return
     (trpcReact.api.score.getAllByUser.useQuery as any).mockReturnValueOnce({
       data: undefined,
@@ -126,8 +109,6 @@ describe("AuthControls Dropdown Export", () => {
     const trigger = screen.getByRole("button", { name: /profile/i });
     await userEvent.click(trigger);
     const csvOption = screen.getByText(/export as csv/i);
-    const jsonOption = screen.getByText(/export as json/i);
     expect(csvOption).toHaveAttribute("aria-disabled", "true");
-    expect(jsonOption).toHaveAttribute("aria-disabled", "true");
   });
 });

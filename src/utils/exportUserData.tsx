@@ -39,13 +39,11 @@ function downloadFile(data: string, filename: string, mime: string) {
   }, 100);
 }
 
-// Main export function
 /**
- * Exports user data as CSV or JSON.
+ * Exports user data as CSV.
  * Optionally accepts a papaparse instance for testability.
  */
 export async function exportUserData(
-  format: "csv" | "json",
   scores: ScoreFromQuery[],
   wods: WodFromQuery[],
   papaparse?: {
@@ -91,11 +89,6 @@ export async function exportUserData(
   });
 
   const dateStr = new Date().toISOString().slice(0, 10).replace(/-/g, "");
-  if (format === "csv") {
-    const csv = await toCSV(exportRows, papaparse);
-    downloadFile(csv, `przilla-scores-${dateStr}.csv`, "text/csv");
-  } else {
-    const json = JSON.stringify(exportRows, null, 2);
-    downloadFile(json, `przilla-scores-${dateStr}.json`, "application/json");
-  }
+  const csv = await toCSV(exportRows, papaparse);
+  downloadFile(csv, `przilla-scores-${dateStr}.csv`, "text/csv");
 }

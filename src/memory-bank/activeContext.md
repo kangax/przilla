@@ -2,6 +2,13 @@
 
 ## Current Focus
 
+- **Import Page Radix UI Tabs (Apr 21, 2025):**
+
+  - Replaced custom tab implementation in the import page with Radix UI Tabs from `@radix-ui/themes`.
+  - Moved metadata to a separate file (`src/app/import/metadata.ts`) to support the client component.
+  - The import page now uses `Tabs.Root`, `Tabs.List`, `Tabs.Trigger`, and `Tabs.Content` components for a more accessible and consistent tab interface.
+  - This improves accessibility, maintains theme consistency, and simplifies the code.
+
 - **Lint Fix: Block-Style Disables for Test Mocks (Apr 21, 2025):**
 
   - Strict ESLint rules (`@typescript-eslint/no-explicit-any`, `@typescript-eslint/no-unsafe-argument`) flagged `as any` usage in test mocks in `src/app/_components/AuthControls.test.tsx`, causing `npm run lint` to fail.

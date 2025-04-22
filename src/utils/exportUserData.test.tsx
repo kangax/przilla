@@ -93,26 +93,17 @@ const mockWods = [
 
 describe("exportUserData", () => {
   it("alerts if scores or wods are missing", async () => {
-    await exportUserData("csv", null as any, mockWods as any);
+    await exportUserData(null as any, mockWods as any);
     expect(window.alert).toHaveBeenCalledWith(
       "No data found to export. Please ensure your scores and workouts are loaded.",
     );
-    await exportUserData("csv", mockScores as any, null as any);
+    await exportUserData(mockScores as any, null as any);
     expect(window.alert).toHaveBeenCalled();
-  });
-
-  it("exports JSON with correct data and triggers download", async () => {
-    const downloadSpy = vi.spyOn(document.body, "appendChild");
-    await exportUserData("json", mockScores as any, mockWods as any);
-    expect(downloadSpy).toHaveBeenCalled();
-    const lastCall = (document.createElement as any).mock.results[0].value;
-    expect(lastCall.download).toMatch(/przilla-scores-\d+\.json/);
-    expect(URL.createObjectURL).toHaveBeenCalled();
   });
 
   it("exports CSV with correct data and triggers download", async () => {
     const downloadSpy = vi.spyOn(document.body, "appendChild");
-    await exportUserData("csv", mockScores as any, mockWods as any, {
+    await exportUserData(mockScores as any, mockWods as any, {
       unparse,
     });
     expect(unparse).toHaveBeenCalled();
@@ -123,9 +114,9 @@ describe("exportUserData", () => {
   });
 
   it("handles empty arrays gracefully", async () => {
-    await exportUserData("json", [], []);
+    await exportUserData([], []);
     expect(document.body.appendChild).toHaveBeenCalled();
-    await exportUserData("csv", [], [], { unparse });
+    await exportUserData([], [], { unparse });
     expect(document.body.appendChild).toHaveBeenCalled();
   });
 
@@ -153,9 +144,7 @@ describe("exportUserData", () => {
         description: "",
       },
     ];
-    await exportUserData("csv", scores as any, wods as any, { unparse });
+    await exportUserData(scores as any, wods as any, { unparse });
     expect(unparse).toHaveBeenCalled();
-    await exportUserData("json", scores as any, wods as any);
-    expect(document.body.appendChild).toHaveBeenCalled();
   });
 });

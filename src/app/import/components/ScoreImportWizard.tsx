@@ -16,7 +16,11 @@ import type { Wod } from "~/types/wodTypes"; // Import base types (Removed unuse
 
 type ImportStep = "upload" | "processing" | "review" | "confirm" | "complete";
 
-export function ScoreImportWizard() {
+type ScoreImportWizardProps = {
+  importType: "przilla" | "sugarwod";
+};
+
+export function ScoreImportWizard({ importType }: ScoreImportWizardProps) {
   const [step, setStep] = useState<ImportStep>("upload");
   const [file, setFile] = useState<File | null>(null);
   const [processedRows, setProcessedRows] = useState<ProcessedRow[]>([]);
@@ -65,100 +69,46 @@ export function ScoreImportWizard() {
   const parseAndProcessFile = useCallback(
     (fileToProcess: File) => {
       setProcessingError(null);
-      Papa.parse<CsvRow>(fileToProcess, {
-        header: true,
-        skipEmptyLines: true,
-        complete: (results) => {
-          if (results.errors.length > 0) {
-            console.error("CSV Parsing errors:", results.errors);
-            setProcessingError(
-              `Error parsing CSV: ${results.errors[0]?.message || "Unknown error"}`,
-            );
-            setStep("upload"); // Go back to upload on error
-            return;
-          }
 
-          // Check wodsMap directly as it's derived from allWods
-          if (wodsMap.size === 0) {
-            console.error("WOD data not loaded yet for matching.");
-            setProcessingError(
-              "WOD data not available for matching. Please try again.",
-            );
-            setStep("upload");
-            return;
-          }
-
-          const processedData: ProcessedRow[] = results.data
-            .map((rawRow, index) => {
-              // Basic validation using type guard
-              if (!isCsvRow(rawRow)) {
-                console.warn(`Skipping invalid row ${index + 1}:`, rawRow);
-                return null; // Skip rows that don't match the expected structure
-              }
-
-              const csvRow: CsvRow = rawRow; // Now we know it's a CsvRow
-
-              // Strict, case-sensitive SugarWod-specific alias mapping
-              const sugarwodAliases: Record<string, string> = {
-                // Example: "1 mile Run": "Run 1600m"
-                "1 mile Run": "Run 1600m",
-                "2 mile Run": "Run 3200m",
-                "5k Run": "Run 5000m",
-                "10k Run": "Run 10000m",
-                // Add more as needed
-              };
-
-              const importedTitle = csvRow.title;
-              // If the imported title is a known alias, use the canonical name for matching
-              const canonicalName = sugarwodAliases[importedTitle];
-              let matchedWod: Wod | null = null;
-              if (canonicalName) {
-                matchedWod = wodsMap.get(canonicalName) || null;
-              } else {
-                matchedWod = wodsMap.get(importedTitle) || null;
-              }
-
-              console.log("Match result:", matchedWod);
-              if (!matchedWod) {
-                console.log(
-                  "Similar WODs:",
-                  Array.from(wodsMap.keys()).filter((name) =>
-                    name.includes(importedTitle),
-                  ),
-                );
-              }
-
-              // Basic validation example (add more as needed)
-              const validationErrors: string[] = [];
-              let scoreDate: Date | null = null;
-              try {
-                // Attempt to parse date (assuming MM/DD/YYYY)
-                const parts = csvRow.date.split("/");
-                if (parts.length === 3 && parts[0] && parts[1] && parts[2]) {
-                  // Note: Month is 0-indexed in JS Date constructor
-                  scoreDate = new Date(
-                    parseInt(parts[2]),
-                    parseInt(parts[0]) - 1,
-                    parseInt(parts[1]),
-                  );
-                  if (isNaN(scoreDate.getTime())) {
+      if (importType === "przilla") {
+        // PRzilla CSV format: expects headers as exported from PRzilla
+        Papa.parse(fileToProcess, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            if (results.errors.length > 0) {
+              setProcessingError(
+                `Error parsing CSV: ${results.errors[0]?.message || "Unknown error"}`,
+              );
+              setStep("upload");
+              return;
+            }
+            if (wodsMap.size === 0) {
+              setProcessingError(
+                "WOD data not available for matching. Please try again.",
+              );
+              setStep("upload");
+              return;
+            }
+            // PRzilla export headers: "WOD Name", "Date", "Score (time)", "Score (reps)", "Score (rounds)", "Score (partial reps)", "Score (load)", "Rx", "Notes"
+            const processedData: ProcessedRow[] = (results.data as any[])
+              .map((row, index) => {
+                const wodName = row["WOD Name"]?.trim?.() || "";
+                const matchedWod = wodsMap.get(wodName) || null;
+                const validationErrors: string[] = [];
+                let scoreDate: Date | null = null;
+                if (row["Date"]) {
+                  // Accept YYYY-MM-DD or ISO
+                  const d = new Date(row["Date"]);
+                  if (!isNaN(d.getTime())) {
+                    scoreDate = d;
+                  } else {
                     validationErrors.push("Invalid date format");
-                    scoreDate = null; // Reset if invalid
                   }
                 } else {
-                  validationErrors.push("Invalid date format");
+                  validationErrors.push("Missing date");
                 }
-              } catch {
-                // Removed unused variable binding '_e'
-                // Prefix unused variable
-                validationErrors.push("Error parsing date");
-              }
-
-              // Create proposed score object
-              let proposedScore: ProcessedRow["proposedScore"] = null;
-              if (matchedWod && scoreDate) {
-                // Only create score if WOD matched and date is valid
-                // Helper to safely parse float/int, returning null on failure
+                // Parse numeric fields
                 const safeParseFloat = (val: string) => {
                   const num = parseFloat(val);
                   return isNaN(num) ? null : num;
@@ -167,89 +117,216 @@ export function ScoreImportWizard() {
                   const num = parseInt(val, 10);
                   return isNaN(num) ? null : num;
                 };
+                const time_seconds = row["Score (time)"]
+                  ? safeParseFloat(row["Score (time)"])
+                  : null;
+                const reps = row["Score (reps)"]
+                  ? safeParseInt(row["Score (reps)"])
+                  : null;
+                const rounds_completed = row["Score (rounds)"]
+                  ? safeParseInt(row["Score (rounds)"])
+                  : null;
+                const partial_reps = row["Score (partial reps)"]
+                  ? safeParseInt(row["Score (partial reps)"])
+                  : null;
+                const load = row["Score (load)"]
+                  ? safeParseInt(row["Score (load)"])
+                  : null;
+                const isRx = row["Rx"]?.toLowerCase?.() === "yes";
+                const notes = row["Notes"] || null;
 
-                const scoreTypeLower =
-                  csvRow.score_type?.toLowerCase() || "time"; // "" means it's time based
-                const rawScore = csvRow.best_result_raw || "";
-                const isRounds = scoreTypeLower.includes("rounds");
-                const roundsParts = isRounds ? rawScore.split("+") : [];
-
-                proposedScore = {
-                  wodId: matchedWod.id,
-                  time_seconds: scoreTypeLower.includes("time")
-                    ? safeParseFloat(rawScore)
-                    : null,
-                  reps: scoreTypeLower.includes("reps")
-                    ? safeParseInt(rawScore)
-                    : null,
-                  load: scoreTypeLower.includes("load")
-                    ? safeParseInt(rawScore)
-                    : null,
-                  rounds_completed: isRounds
-                    ? safeParseInt(roundsParts[0] ?? "")
-                    : null,
-                  partial_reps:
-                    isRounds && roundsParts.length > 1
-                      ? safeParseInt(roundsParts[1] ?? "")
-                      : null,
-                  isRx: csvRow.rx_or_scaled?.toUpperCase() === "RX",
-                  scoreDate: scoreDate, // Keep as Date object internally
-                  notes: csvRow.notes || null,
-                };
-                // Further score validation could happen here
-                if (
-                  proposedScore.time_seconds === null &&
-                  proposedScore.reps === null &&
-                  proposedScore.load === null &&
-                  proposedScore.rounds_completed === null
-                ) {
-                  validationErrors.push(
-                    "No valid score value found based on score_type",
-                  );
-                  proposedScore = null; // Invalidate score if no value parsed
+                let proposedScore: ProcessedRow["proposedScore"] = null;
+                if (matchedWod && scoreDate) {
+                  if (
+                    time_seconds === null &&
+                    reps === null &&
+                    load === null &&
+                    rounds_completed === null
+                  ) {
+                    validationErrors.push("No valid score value found");
+                  } else {
+                    proposedScore = {
+                      wodId: matchedWod.id,
+                      scoreDate,
+                      isRx,
+                      notes,
+                      time_seconds,
+                      reps,
+                      load,
+                      rounds_completed,
+                      partial_reps,
+                    };
+                  }
                 }
-              } else if (!matchedWod) {
-                // Don't add error if we decided to skip unmatched WODs silently
-                // validationErrors.push("WOD not found");
-              } else if (!scoreDate) {
-                // Date error already added
-              }
+                return {
+                  id: `row-${index}`,
+                  csvRow: row,
+                  matchedWod,
+                  validation: {
+                    isValid: validationErrors.length === 0 && !!matchedWod,
+                    errors: validationErrors,
+                  },
+                  proposedScore:
+                    matchedWod && proposedScore ? proposedScore : null,
+                  selected:
+                    !!matchedWod &&
+                    validationErrors.length === 0 &&
+                    !!proposedScore,
+                };
+              })
+              .filter((row: any) => row !== null);
 
-              return {
-                id: `row-${index}`, // Simple unique ID for the session
-                csvRow,
-                matchedWod,
-                validation: {
-                  // Valid if no errors AND it's either matched or we don't care about matching (depends on final logic)
-                  isValid: validationErrors.length === 0 && !!matchedWod, // Only valid if matched for now
-                  errors: validationErrors,
-                },
-                proposedScore: matchedWod ? proposedScore : null, // Only propose score if WOD matched
-                // Pre-select valid, matched rows
-                selected:
-                  !!matchedWod &&
-                  validationErrors.length === 0 &&
-                  !!proposedScore,
-              };
-            })
-            .filter((row): row is ProcessedRow => row !== null); // Filter out skipped rows
-
-          setProcessedRows(processedData);
-          // Update initial selection state based on pre-selected rows
-          setSelectedRows(
-            new Set(processedData.filter((r) => r.selected).map((r) => r.id)),
-          );
-          setStep("review");
-        },
-        error: (error: Error) => {
-          console.error("CSV Parsing failed:", error);
-          setProcessingError(`Failed to parse CSV: ${error.message}`);
-          setStep("upload");
-        },
-      });
+            setProcessedRows(processedData);
+            setSelectedRows(
+              new Set(processedData.filter((r) => r.selected).map((r) => r.id)),
+            );
+            setStep("review");
+          },
+          error: (error: Error) => {
+            setProcessingError(`Failed to parse CSV: ${error.message}`);
+            setStep("upload");
+          },
+        });
+      } else {
+        // SugarWOD import (existing logic)
+        Papa.parse<CsvRow>(fileToProcess, {
+          header: true,
+          skipEmptyLines: true,
+          complete: (results) => {
+            if (results.errors.length > 0) {
+              setProcessingError(
+                `Error parsing CSV: ${results.errors[0]?.message || "Unknown error"}`,
+              );
+              setStep("upload");
+              return;
+            }
+            if (wodsMap.size === 0) {
+              setProcessingError(
+                "WOD data not available for matching. Please try again.",
+              );
+              setStep("upload");
+              return;
+            }
+            const processedData: ProcessedRow[] = results.data
+              .map((rawRow, index) => {
+                if (!isCsvRow(rawRow)) {
+                  return null;
+                }
+                const csvRow: CsvRow = rawRow;
+                const sugarwodAliases: Record<string, string> = {
+                  "1 mile Run": "Run 1600m",
+                  "2 mile Run": "Run 3200m",
+                  "5k Run": "Run 5000m",
+                  "10k Run": "Run 10000m",
+                };
+                const importedTitle = csvRow.title;
+                const canonicalName = sugarwodAliases[importedTitle];
+                let matchedWod: Wod | null = null;
+                if (canonicalName) {
+                  matchedWod = wodsMap.get(canonicalName) || null;
+                } else {
+                  matchedWod = wodsMap.get(importedTitle) || null;
+                }
+                const validationErrors: string[] = [];
+                let scoreDate: Date | null = null;
+                try {
+                  const parts = csvRow.date.split("/");
+                  if (parts.length === 3 && parts[0] && parts[1] && parts[2]) {
+                    scoreDate = new Date(
+                      parseInt(parts[2]),
+                      parseInt(parts[0]) - 1,
+                      parseInt(parts[1]),
+                    );
+                    if (isNaN(scoreDate.getTime())) {
+                      validationErrors.push("Invalid date format");
+                      scoreDate = null;
+                    }
+                  } else {
+                    validationErrors.push("Invalid date format");
+                  }
+                } catch {
+                  validationErrors.push("Error parsing date");
+                }
+                let proposedScore: ProcessedRow["proposedScore"] = null;
+                if (matchedWod && scoreDate) {
+                  const safeParseFloat = (val: string) => {
+                    const num = parseFloat(val);
+                    return isNaN(num) ? null : num;
+                  };
+                  const safeParseInt = (val: string) => {
+                    const num = parseInt(val, 10);
+                    return isNaN(num) ? null : num;
+                  };
+                  const scoreTypeLower =
+                    csvRow.score_type?.toLowerCase() || "time";
+                  const rawScore = csvRow.best_result_raw || "";
+                  const isRounds = scoreTypeLower.includes("rounds");
+                  const roundsParts = isRounds ? rawScore.split("+") : [];
+                  proposedScore = {
+                    wodId: matchedWod.id,
+                    time_seconds: scoreTypeLower.includes("time")
+                      ? safeParseFloat(rawScore)
+                      : null,
+                    reps: scoreTypeLower.includes("reps")
+                      ? safeParseInt(rawScore)
+                      : null,
+                    load: scoreTypeLower.includes("load")
+                      ? safeParseInt(rawScore)
+                      : null,
+                    rounds_completed: isRounds
+                      ? safeParseInt(roundsParts[0] ?? "")
+                      : null,
+                    partial_reps:
+                      isRounds && roundsParts.length > 1
+                        ? safeParseInt(roundsParts[1] ?? "")
+                        : null,
+                    isRx: csvRow.rx_or_scaled?.toUpperCase() === "RX",
+                    scoreDate: scoreDate,
+                    notes: csvRow.notes || null,
+                  };
+                  if (
+                    proposedScore.time_seconds === null &&
+                    proposedScore.reps === null &&
+                    proposedScore.load === null &&
+                    proposedScore.rounds_completed === null
+                  ) {
+                    validationErrors.push(
+                      "No valid score value found based on score_type",
+                    );
+                    proposedScore = null;
+                  }
+                }
+                return {
+                  id: `row-${index}`,
+                  csvRow,
+                  matchedWod,
+                  validation: {
+                    isValid: validationErrors.length === 0 && !!matchedWod,
+                    errors: validationErrors,
+                  },
+                  proposedScore: matchedWod ? proposedScore : null,
+                  selected:
+                    !!matchedWod &&
+                    validationErrors.length === 0 &&
+                    !!proposedScore,
+                };
+              })
+              .filter((row): row is ProcessedRow => row !== null);
+            setProcessedRows(processedData);
+            setSelectedRows(
+              new Set(processedData.filter((r) => r.selected).map((r) => r.id)),
+            );
+            setStep("review");
+          },
+          error: (error: Error) => {
+            setProcessingError(`Failed to parse CSV: ${error.message}`);
+            setStep("upload");
+          },
+        });
+      }
     },
-    [wodsMap],
-  ); // Add dependencies for useCallback
+    [wodsMap, importType],
+  );
 
   const handleFileAccepted = (acceptedFile: File) => {
     setFile(acceptedFile);
@@ -372,61 +449,90 @@ export function ScoreImportWizard() {
   return (
     <div className="space-y-6 rounded-lg border p-4 shadow-md">
       <Heading as="h2" size="6" mb="4" className="text-center">
-        Import Scores from SugarWOD
+        {importType === "przilla"
+          ? "Import Scores from PRzilla"
+          : "Import Scores from SugarWOD"}
       </Heading>
 
       <Flex direction={{ initial: "column", md: "row" }} gap="6">
         {/* Instructions Section (Left Column) */}
-
-        {/* Conditional Rendering based on step */}
         {step === "upload" && (
           <Box className="w-full md:w-1/2 md:flex-shrink-0">
             <Card variant="surface">
               <Box p="3">
-                <Text as="p" size="2" color="gray" mb="4">
-                  Follow these steps to get your workout data CSV file from
-                  SugarWOD:
-                </Text>
-                <ol className="mb-4 ml-5 list-decimal space-y-2 text-sm">
-                  <li>
-                    <Text size="2">
-                      Go to your{" "}
-                      <Link
-                        href="https://app.sugarwod.com/athletes/me#profile"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        SugarWOD profile page
-                      </Link>
+                {importType === "przilla" ? (
+                  <>
+                    <Text as="p" size="2" color="gray" mb="4">
+                      To import your scores from PRzilla:
                     </Text>
-                  </li>
-                  <li>
-                    <Text size="2">
-                      Click on the <strong>Export Workouts</strong> button (as
-                      shown below).
+                    <ol className="mb-4 ml-5 list-decimal space-y-2 text-sm">
+                      <li>
+                        <Text size="2">
+                          Go to your profile dropdown and select{" "}
+                          <strong>Export as CSV</strong>.
+                        </Text>
+                      </li>
+                      <li>
+                        <Text size="2">
+                          Download the CSV file to your computer.
+                        </Text>
+                      </li>
+                      <li>
+                        <Text size="2">
+                          Upload that CSV file here (on the right).
+                        </Text>
+                      </li>
+                    </ol>
+                  </>
+                ) : (
+                  <>
+                    <Text as="p" size="2" color="gray" mb="4">
+                      Follow these steps to get your workout data CSV file from
+                      SugarWOD:
                     </Text>
-                  </li>
-                  <li>
-                    <Text size="2">
-                      Wait for SugarWOD to send CSV file with all your workouts.
-                    </Text>
-                  </li>
-                  <li>
-                    <Text size="2">
-                      Upload that CSV file here (on the right).
-                    </Text>
-                  </li>
-                </ol>
-                <Box className="relative mt-4 h-auto w-full max-w-xl overflow-hidden rounded border">
-                  <Image
-                    src="/images/sugarwod_export_3.png"
-                    alt="Screenshot showing the 'Export Workouts' button in SugarWOD profile settings"
-                    width={600} // Adjust width as needed
-                    height={300} // Adjust height based on image aspect ratio or desired display
-                    style={{ objectFit: "contain" }} // Ensure image scales nicely
-                    priority // Prioritize loading this image as it's important context
-                  />
-                </Box>
+                    <ol className="mb-4 ml-5 list-decimal space-y-2 text-sm">
+                      <li>
+                        <Text size="2">
+                          Go to your{" "}
+                          <Link
+                            href="https://app.sugarwod.com/athletes/me#profile"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            SugarWOD profile page
+                          </Link>
+                        </Text>
+                      </li>
+                      <li>
+                        <Text size="2">
+                          Click on the <strong>Export Workouts</strong> button
+                          (as shown below).
+                        </Text>
+                      </li>
+                      <li>
+                        <Text size="2">
+                          Wait for SugarWOD to send CSV file with all your
+                          workouts.
+                        </Text>
+                      </li>
+                      <li>
+                        <Text size="2">
+                          Upload that CSV file here (on the right).
+                        </Text>
+                      </li>
+                    </ol>
+                    <Box className="relative mt-4 h-auto w-full max-w-xl overflow-hidden rounded border">
+                      <Image
+                        src="/images/sugarwod_export_3.png"
+                        alt="Screenshot showing the 'Export Workouts' button in SugarWOD profile settings"
+                        width={600}
+                        height={300}
+                        style={{ objectFit: "contain" }}
+                        priority
+                      />
+                    </Box>
+                  </>
+                )}
               </Box>
             </Card>
           </Box>
@@ -444,7 +550,10 @@ export function ScoreImportWizard() {
 
           {/* Conditional Rendering based on step */}
           {step === "upload" && (
-            <CsvUploadZone onFileAccepted={handleFileAccepted} />
+            <CsvUploadZone
+              onFileAccepted={handleFileAccepted}
+              acceptedTypes={["text/csv"]}
+            />
           )}
 
           {/* Show processing for both file parsing and submission */}

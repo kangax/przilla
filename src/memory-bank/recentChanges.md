@@ -1,5 +1,16 @@
 # Recent Changes
 
+- **Import Page Radix UI Tabs (Apr 21, 2025):**
+
+  - **Goal:** Replace the custom tab implementation in the import page with Radix UI Tabs for better accessibility and consistency with the rest of the application.
+  - **Implementation:**
+    - Imported the `Tabs` component from `@radix-ui/themes`.
+    - Replaced custom button-based tabs with `Tabs.Root`, `Tabs.List`, `Tabs.Trigger`, and `Tabs.Content` components.
+    - Moved metadata to a separate file (`src/app/import/metadata.ts`) to support the client component requirement.
+    - Removed the custom state management for tabs, leveraging Radix UI's built-in state handling.
+    - Added appropriate spacing with `className="mb-4"` on the `Tabs.List` component.
+  - **Outcome:** The import page now has a more accessible, theme-consistent tab interface that matches the design patterns used elsewhere in the application (e.g., in the MovementFrequencyChart component).
+
 - **Lint Fix: Block-Style Disables for Test Mocks (Apr 21, 2025):**
 
   - **Problem:** Strict ESLint rules (`@typescript-eslint/no-explicit-any`, `@typescript-eslint/no-unsafe-argument`) flagged `as any` usage in test mocks in `src/app/_components/AuthControls.test.tsx`, causing `npm run lint` to fail.

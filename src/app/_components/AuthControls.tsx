@@ -30,27 +30,20 @@ export default function AuthControls() {
     !!scoresError ||
     !!wodsError;
 
-  const handleExport = useCallback(
-    async (format: "csv" | "json") => {
-      if (
-        !Array.isArray(scores) ||
-        !Array.isArray(wods) ||
-        scores.length === 0 ||
-        wods.length === 0
-      ) {
-        alert("Data is still loading or unavailable.");
-        return;
-      }
-      // Cast to expected types (safe after runtime check)
-      const { exportUserData } = await import("~/utils/exportUserData");
-      await exportUserData(
-        format,
-        scores as ScoreFromQuery[],
-        wods as WodFromQuery[],
-      );
-    },
-    [scores, wods],
-  );
+  const handleExport = useCallback(async () => {
+    if (
+      !Array.isArray(scores) ||
+      !Array.isArray(wods) ||
+      scores.length === 0 ||
+      wods.length === 0
+    ) {
+      alert("Data is still loading or unavailable.");
+      return;
+    }
+    // Cast to expected types (safe after runtime check)
+    const { exportUserData } = await import("~/utils/exportUserData");
+    await exportUserData(scores as ScoreFromQuery[], wods as WodFromQuery[]);
+  }, [scores, wods]);
 
   if (isPending) {
     return <Text size="2">Loading...</Text>;
@@ -82,39 +75,16 @@ export default function AuthControls() {
                 Profile
               </DropdownMenu.Label>
               <DropdownMenu.Separator className="my-1 h-px bg-slate-200 dark:bg-slate-700" />
-              <DropdownMenu.Sub>
-                <DropdownMenu.SubTrigger className="flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-800 outline-none transition-colors hover:bg-slate-100 dark:text-slate-100 dark:hover:bg-slate-700">
-                  <Download className="mr-2 h-4 w-4" />
-                  Export data
-                  <ChevronRight className="ml-auto h-4 w-4 opacity-60" />
-                </DropdownMenu.SubTrigger>
-                <DropdownMenu.Portal>
-                  <DropdownMenu.SubContent
-                    className="z-50 min-w-[160px] rounded-md border border-slate-200 bg-white p-1 shadow-md dark:border-slate-700 dark:bg-slate-800"
-                    sideOffset={2}
-                    alignOffset={-5}
-                  >
-                    <DropdownMenu.Item
-                      className={`flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-800 outline-none transition-colors hover:bg-blue-100 dark:text-slate-100 dark:hover:bg-blue-900 ${
-                        isExportDisabled ? "pointer-events-none opacity-50" : ""
-                      }`}
-                      onSelect={() => handleExport("csv")}
-                      disabled={isExportDisabled}
-                    >
-                      Export as CSV
-                    </DropdownMenu.Item>
-                    <DropdownMenu.Item
-                      className={`flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-800 outline-none transition-colors hover:bg-blue-100 dark:text-slate-100 dark:hover:bg-blue-900 ${
-                        isExportDisabled ? "pointer-events-none opacity-50" : ""
-                      }`}
-                      onSelect={() => handleExport("json")}
-                      disabled={isExportDisabled}
-                    >
-                      Export as JSON
-                    </DropdownMenu.Item>
-                  </DropdownMenu.SubContent>
-                </DropdownMenu.Portal>
-              </DropdownMenu.Sub>
+              <DropdownMenu.Item
+                className={`flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-800 outline-none transition-colors hover:bg-blue-100 dark:text-slate-100 dark:hover:bg-blue-900 ${
+                  isExportDisabled ? "pointer-events-none opacity-50" : ""
+                }`}
+                onSelect={handleExport}
+                disabled={isExportDisabled}
+              >
+                <Download className="mr-2 h-4 w-4" />
+                Export as CSV
+              </DropdownMenu.Item>
               <DropdownMenu.Separator className="my-1 h-px bg-slate-200 dark:bg-slate-700" />
               <DropdownMenu.Item
                 className="flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-800 outline-none transition-colors hover:bg-red-100 dark:text-slate-100 dark:hover:bg-red-900"

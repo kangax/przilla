@@ -8,7 +8,7 @@ export interface UseFileUploadProps {
   setStep: (step: ImportStep) => void;
   setProcessingError: (error: string | null) => void;
   isLoadingWods: boolean;
-  wodsError: Error | null | unknown;
+  wodsError: unknown; // Simplified type to satisfy linter
 }
 
 export interface UseFileUploadReturn {

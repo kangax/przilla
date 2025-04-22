@@ -42,7 +42,7 @@ export function useScoreSubmission({
   });
 
   const handleReviewComplete = useCallback(
-    (selectedIds: Set<string>) => {
+    (_selectedIds: Set<string>) => {
       setStep("confirm");
     },
     [setStep],
@@ -57,7 +57,7 @@ export function useScoreSubmission({
       .filter((row) => selectedRows.has(row.id) && row.proposedScore)
       .map((row) => {
         // We know proposedScore exists due to the filter
-        const score = row.proposedScore!;
+        const score = row.proposedScore;
         // Ensure scoreDate is a Date object as expected by the backend schema
         if (!(score.scoreDate instanceof Date)) {
           console.error("Invalid scoreDate type before submission:", score);

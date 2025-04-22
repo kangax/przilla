@@ -31,7 +31,7 @@ export interface UseImportFlowReturn {
 }
 
 export function useImportFlow({
-  importType,
+  importType: _importType, // Renamed to satisfy lint rule for unused vars
 }: UseImportFlowProps): UseImportFlowReturn {
   const [step, setStep] = useState<ImportStep>("upload");
   const [file, setFile] = useState<File | null>(null);

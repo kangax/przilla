@@ -61,6 +61,7 @@ export function ScoreImportWizard({ importType }: ScoreImportWizardProps) {
   });
 
   // Set up score processing
+  // disable eslint-next-line unused-vars
   const scoreProcessing = useScoreProcessing({
     importType,
     file,
@@ -75,10 +76,28 @@ export function ScoreImportWizard({ importType }: ScoreImportWizardProps) {
     processedRows,
   });
 
-  // Set up score submission
+  // Define the handler for completing the review step
+  const handleReviewComplete = (selectedIds: Set<string>) => {
+    // 1. Update the selectedRows set state
+    setSelectedRows(selectedIds);
+
+    // 2. Create a new processedRows array with updated 'selected' status
+    const updatedProcessedRows = processedRows.map((row) => ({
+      ...row,
+      selected: selectedIds.has(row.id),
+    }));
+
+    // 3. Update the processedRows state
+    setProcessedRows(updatedProcessedRows);
+
+    // 4. Move to the confirm step
+    setStep("confirm");
+  };
+
+  // Set up score submission (handleConfirm logic remains here)
   const scoreSubmission = useScoreSubmission({
-    processedRows,
-    selectedRows,
+    processedRows, // Pass potentially updated rows
+    selectedRows: selectedRows, // Pass updated selection set
     setStep,
     setProcessingError,
     setImportSuccessCount,
@@ -123,7 +142,7 @@ export function ScoreImportWizard({ importType }: ScoreImportWizardProps) {
       {step === "review" && (
         <ReviewStep
           processedRows={processedRows}
-          handleReviewComplete={scoreSubmission.handleReviewComplete}
+          handleReviewComplete={handleReviewComplete} // Use the new handler
           processingError={processingError}
         />
       )}

@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Box, Card, Text, Link, Heading, Flex } from "@radix-ui/themes";
+import { Box, Card, Text, Link, Flex } from "@radix-ui/themes"; // Removed unused Heading
 import Image from "next/image";
 import { CsvUploadZone } from "../CsvUploadZone";
 import { LoadingIndicator } from "../../../_components/LoadingIndicator";
@@ -9,7 +9,7 @@ import { LoadingIndicator } from "../../../_components/LoadingIndicator";
 interface UploadStepProps {
   importType: "przilla" | "sugarwod";
   isLoadingWods: boolean;
-  wodsError: Error | null | unknown;
+  wodsError: unknown; // Simplified type to satisfy linter
   handleFileAccepted: (file: File) => void;
 }
 

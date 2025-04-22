@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect } from "react"; // Removed unused useState
 import Papa from "papaparse";
 import type { Wod } from "~/types/wodTypes";
 import type {
@@ -13,6 +13,19 @@ import type {
 import { isCsvRow } from "../components/types";
 import type { ImportStep } from "./useImportFlow";
 
+// Define type for parsed PRzilla CSV row
+interface PrzillaParsedRow {
+  "WOD Name": string;
+  Date: string;
+  "Score (time)": string;
+  "Score (reps)": string;
+  "Score (rounds)": string;
+  "Score (partial reps)": string;
+  "Score (load)": string;
+  Rx: string;
+  Notes: string;
+}
+
 export interface UseScoreProcessingProps {
   importType: "przilla" | "sugarwod";
   file: File | null;
@@ -23,7 +36,7 @@ export interface UseScoreProcessingProps {
   setProcessingError: (error: string | null) => void;
   wodsMap: Map<string, Wod>;
   isLoadingWods: boolean;
-  wodsError: Error | null | unknown;
+  wodsError: unknown; // Simplified type to satisfy linter
   processedRows: ProcessedRow[];
 }
 
@@ -71,15 +84,17 @@ export function useScoreProcessing({
             }
 
             // PRzilla export headers: "WOD Name", "Date", "Score (time)", "Score (reps)", "Score (rounds)", "Score (partial reps)", "Score (load)", "Rx", "Notes"
-            const processedData: ProcessedRow[] = (results.data as any[])
+            const processedData: ProcessedRow[] = (
+              results.data as PrzillaParsedRow[]
+            )
               .map((row, index) => {
                 const wodName = row["WOD Name"]?.trim?.() || "";
                 const matchedWod = wodsMap.get(wodName) || null;
                 const validationErrors: string[] = [];
                 let scoreDate: Date | null = null;
-                if (row["Date"]) {
+                if (row.Date) {
                   // Accept YYYY-MM-DD or ISO
-                  const d = new Date(row["Date"]);
+                  const d = new Date(row.Date);
                   if (!isNaN(d.getTime())) {
                     scoreDate = d;
                   } else {
@@ -112,8 +127,8 @@ export function useScoreProcessing({
                 const load = row["Score (load)"]
                   ? safeParseInt(row["Score (load)"])
                   : null;
-                const isRx = row["Rx"]?.toLowerCase?.() === "yes";
-                const notes = row["Notes"] || null;
+                const isRx = row.Rx?.toLowerCase?.() === "yes";
+                const notes = row.Notes || null;
 
                 let proposedScore: ProcessedRow["proposedScore"] = null;
                 if (matchedWod && scoreDate) {

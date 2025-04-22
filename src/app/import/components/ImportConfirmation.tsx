@@ -24,10 +24,12 @@ export function ImportConfirmation({
   // const selectedMatchedCount = matchedRows.filter((r: ProcessedRow) => // Commented out as unused
   //   selectedIds.has(r.id),
   // ).length;
-  // Calculate skipped based on total rows vs matched rows
+  // Calculate skipped based on total rows vs matched rows (unmatched WODs)
   const skippedCount = totalRows - matchedCount;
-  // Calculate unselected based on total selected vs total rows
-  const unselectedCount = totalRows - selectedCount;
+  // Calculate rows explicitly deselected by the user (must be matched and valid)
+  const userDeselectedCount = matchedRows.filter(
+    (row) => row.validation.isValid && !selectedIds.has(row.id),
+  ).length;
 
   return (
     <div className="rounded-lg border bg-white p-6 shadow-md dark:border-gray-700 dark:bg-gray-800">
@@ -61,9 +63,9 @@ export function ImportConfirmation({
           <span className="font-semibold">{selectedMatchedCount}</span>
          </p> */}
         <p>
-          Rows deselected/skipped by user:{" "}
+          Rows deselected by user:{" "}
           <span className="font-semibold text-orange-600 dark:text-orange-400">
-            {unselectedCount}
+            {userDeselectedCount}
           </span>
         </p>
       </div>

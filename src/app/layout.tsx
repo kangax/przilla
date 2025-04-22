@@ -2,6 +2,7 @@ import "~/styles/globals.css";
 import "@radix-ui/themes/styles.css";
 import { Theme } from "@radix-ui/themes";
 import { ThemeProvider } from "next-themes";
+import { Analytics } from "@vercel/analytics/react";
 
 import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
@@ -61,6 +62,7 @@ export default function RootLayout({
             <TRPCReactProvider>{children}</TRPCReactProvider>
           </Theme>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

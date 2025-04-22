@@ -1,5 +1,4 @@
 "use client";
-import { type Metadata } from "next";
 import { ScoreImportWizard } from "./components/ScoreImportWizard";
 import PageLayout from "~/app/_components/PageLayout";
 import { Tabs } from "@radix-ui/themes";

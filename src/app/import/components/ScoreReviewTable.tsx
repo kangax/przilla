@@ -1,6 +1,6 @@
-"use client"; // Add this directive
+"use client";
 
-import React, { useState, useMemo } from "react"; // Removed useEffect
+import React, { useState, useMemo } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -9,17 +9,15 @@ import {
   createColumnHelper,
   type SortingState,
   type ColumnDef,
-  type CellContext, // Import CellContext for explicit typing
+  type CellContext,
 } from "@tanstack/react-table";
-import { Table } from "@radix-ui/themes"; // Import Radix Table components
-import type { ProcessedRow } from "./types";
-import { formatScore } from "~/utils/wodUtils"; // Assuming formatScore handles Score object
-import type { Score } from "~/types/wodTypes"; // Import Score type for casting
+import { Table } from "@radix-ui/themes";
+import type { ProcessedRow, CsvRow, PrzillaCsvRow } from "./types";
+import { formatScore } from "~/utils/wodUtils";
+import type { Score } from "~/types/wodTypes";
 
 interface ScoreReviewTableProps {
   rows: ProcessedRow[];
-  // onSelectionChange prop removed as it's no longer needed
-  // onEdit?: (id: string, field: keyof Score, value: unknown) => void; // Add later if needed
   onComplete: (selectedIds: Set<string>) => void;
 }
 
@@ -35,12 +33,29 @@ type IsRxCellContext = CellContext<ProcessedRow, boolean | null | undefined>;
 // Helper type for notes cell context
 type NotesCellContext = CellContext<ProcessedRow, string | null | undefined>;
 
-export function ScoreReviewTable({
-  rows,
-  // onSelectionChange removed from destructuring
-  // onEdit,
-  onComplete,
-}: ScoreReviewTableProps) {
+// Helper function to safely get date from either CsvRow or PrzillaCsvRow
+const getDateFromCsvRow = (row: CsvRow | PrzillaCsvRow): string => {
+  if ("date" in row) {
+    return row.date;
+  } else if ("Date" in row) {
+    return row.Date;
+  }
+  return "";
+};
+
+// Helper function to safely get notes from either CsvRow or PrzillaCsvRow
+const getNotesFromCsvRow = (
+  row: CsvRow | PrzillaCsvRow,
+): string | null | undefined => {
+  if ("notes" in row) {
+    return row.notes;
+  } else if ("Notes" in row) {
+    return row.Notes;
+  }
+  return null;
+};
+
+export function ScoreReviewTable({ rows, onComplete }: ScoreReviewTableProps) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [rowSelection, setRowSelection] = useState<Record<string, boolean>>(
     () => {
@@ -53,9 +68,7 @@ export function ScoreReviewTable({
     },
   );
 
-  // Removed the problematic useEffect hook
-
-  const columns = useMemo<ColumnDef<ProcessedRow>[]>( // Removed 'any' from ColumnDef generic
+  const columns = useMemo<ColumnDef<ProcessedRow>[]>(
     () => [
       columnHelper.display({
         id: "select",
@@ -64,7 +77,6 @@ export function ScoreReviewTable({
             type="checkbox"
             {...{
               checked: table.getIsAllRowsSelected(),
-              // Pass undefined instead of false for indeterminate
               indeterminate: table.getIsSomeRowsSelected() ? true : undefined,
               onChange: table.getToggleAllRowsSelectedHandler(),
             }}
@@ -76,25 +88,22 @@ export function ScoreReviewTable({
             {...{
               checked: row.getIsSelected(),
               disabled: !row.getCanSelect(),
-              // Pass undefined instead of false for indeterminate
               indeterminate: row.getIsSomeSelected() ? true : undefined,
               onChange: row.getToggleSelectedHandler(),
             }}
           />
         ),
       }),
-      columnHelper.accessor((row) => row.csvRow.date, {
+      columnHelper.accessor((row) => getDateFromCsvRow(row.csvRow), {
         id: "date",
         header: "Date",
-        cell: (info) => info.getValue(), // String return is safe
+        cell: (info) => info.getValue(),
         enableSorting: true,
       }),
       columnHelper.accessor((row) => row.matchedWod?.wodName, {
         id: "wodName",
         header: "WOD Name",
-        cell: (
-          info,
-        ): React.ReactNode => // Ensure return type is valid JSX/primitive
+        cell: (info): React.ReactNode =>
           info.getValue() ?? (
             <span className="italic text-orange-500">No Match</span>
           ),
@@ -103,12 +112,8 @@ export function ScoreReviewTable({
       columnHelper.accessor((row) => row.proposedScore, {
         id: "score",
         header: "Score",
-        // Safely handle proposedScore type for formatScore
         cell: (info: ProposedScoreCellContext): React.ReactNode => {
-          // Add explicit type and return type
           const scoreData = info.getValue();
-          // formatScore expects Score, but proposedScore omits some fields.
-          // Casting assuming formatScore only needs the core value fields.
           return scoreData ? formatScore(scoreData as Score) : "-";
         },
         enableSorting: false,
@@ -117,21 +122,19 @@ export function ScoreReviewTable({
         id: "rx",
         header: "RX",
         cell: (info: IsRxCellContext): React.ReactNode =>
-          info.getValue() ? "Rx" : "Scaled", // Add explicit type and return type
+          info.getValue() ? "Rx" : "Scaled",
         enableSorting: true,
       }),
-      columnHelper.accessor((row) => row.csvRow.notes, {
+      columnHelper.accessor((row) => getNotesFromCsvRow(row.csvRow), {
         id: "notes",
         header: "Notes",
-        cell: (
-          info: NotesCellContext,
-        ): React.ReactNode => ( // Add explicit type and return type
+        cell: (info: NotesCellContext): React.ReactNode => (
           <span>{info.getValue() || "-"}</span>
         ),
         enableSorting: false,
       }),
     ],
-    [], // Empty dependency array is correct here
+    [],
   );
 
   const table = useReactTable({
@@ -142,13 +145,13 @@ export function ScoreReviewTable({
       rowSelection,
     },
     enableRowSelection: (row) =>
-      !!row.original.matchedWod && row.original.validation.isValid, // Only allow selecting valid, matched rows
+      !!row.original.matchedWod && row.original.validation.isValid,
     onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getRowId: (row) => row.id,
-    debugTable: false, // Disable debug logging for production/general use
+    debugTable: false,
   });
 
   // Calculate selected count for the button
@@ -161,19 +164,17 @@ export function ScoreReviewTable({
         import.
       </h3>
 
-      {/* Use Radix Table Components */}
       <Table.Root variant="surface" size="1">
-        {/* Use Radix Table Root */}
         <Table.Header>
           {table.getHeaderGroups().map((headerGroup) => (
             <Table.Row key={headerGroup.id}>
               {headerGroup.headers.map((header) => (
-                <Table.ColumnHeaderCell // Use Radix Header Cell
+                <Table.ColumnHeaderCell
                   key={header.id}
                   colSpan={header.colSpan}
                   style={{
                     cursor: header.column.getCanSort() ? "pointer" : "default",
-                    width: header.getSize(), // Apply size if needed
+                    width: header.getSize(),
                   }}
                   onClick={header.column.getToggleSortingHandler()}
                 >
@@ -189,32 +190,27 @@ export function ScoreReviewTable({
                   }[header.column.getIsSorted() as string] ?? null}
                 </Table.ColumnHeaderCell>
               ))}
-            </Table.Row> // Missing closing tag was here
+            </Table.Row>
           ))}
         </Table.Header>
         <Table.Body>
-          {/* Dark background and divider */}
           {table.getRowModel().rows.length === 0 ? (
             <Table.Row>
               <Table.Cell colSpan={columns.length} align="center">
-                {/* Use Radix Cell */}
                 No data parsed or all rows are invalid/unmatched.
               </Table.Cell>
             </Table.Row>
           ) : (
             table.getRowModel().rows.map((row) => (
-              <Table.Row // Use Radix Row
+              <Table.Row
                 key={row.id}
-                // Apply subtle background for invalid/skipped rows using Radix colors if needed
-                // className={`${!row.original.validation.isValid || !row.original.matchedWod ? "opacity-70" : ""}`} // Removed opacity for invalid as they are filtered out
-                className={`${!row.getCanSelect() ? "opacity-50" : ""}`} // Dim rows that cannot be selected (already handled by parent filter, but belt-and-suspenders)
+                className={`${!row.getCanSelect() ? "opacity-50" : ""}`}
               >
                 {row.getVisibleCells().map((cell) => (
                   <Table.Cell
                     key={cell.id}
                     style={{ width: cell.column.getSize() }}
                   >
-                    {/* Use Radix Cell */}
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </Table.Cell>
                 ))}

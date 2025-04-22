@@ -58,7 +58,7 @@ describe("ScoreImportWizard", () => {
   });
 
   it("renders and shows the upload UI by default", () => {
-    render(<ScoreImportWizard />);
+    render(<ScoreImportWizard importType="sugarwod" />);
     expect(
       screen.getByText(/Import Scores from SugarWOD/i),
     ).toBeInTheDocument();
@@ -68,7 +68,7 @@ describe("ScoreImportWizard", () => {
   it("shows loading indicator when WODs are loading", () => {
     mockWodsData = undefined;
     mockWodsLoading = true;
-    render(<ScoreImportWizard />);
+    render(<ScoreImportWizard importType="sugarwod" />);
     expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
   });
 
@@ -76,7 +76,7 @@ describe("ScoreImportWizard", () => {
     mockWodsData = undefined;
     mockWodsLoading = false;
     mockWodsError = { message: "Failed to fetch WODs" };
-    render(<ScoreImportWizard />);
+    render(<ScoreImportWizard importType="sugarwod" />);
     expect(
       screen.getByText(/Error loading WOD data: Failed to fetch WODs/i),
     ).toBeInTheDocument();

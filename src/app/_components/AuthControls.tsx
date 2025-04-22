@@ -3,7 +3,7 @@
 import { Button, Flex, Text } from "@radix-ui/themes";
 import Link from "next/link";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { ChevronRight, Download } from "lucide-react";
+import { Download } from "lucide-react";
 import { useSession, signOut } from "~/lib/auth-client";
 import { useCallback } from "react";
 import { api } from "~/trpc/react";

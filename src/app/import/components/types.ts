@@ -1,6 +1,6 @@
 import type { Score, Wod } from "~/types/wodTypes";
 
-// Structure matching the input CSV columns
+// Structure matching the SugarWOD CSV columns
 export interface CsvRow {
   date: string; // mm/dd/yyyy
   title: string;
@@ -16,25 +16,56 @@ export interface CsvRow {
   // Add any other columns present in the CSV if needed
 }
 
-// Structure for holding processed data after parsing and matching
-export interface ProcessedRow {
-  id: string; // Unique ID for the row (e.g., generated during processing)
+// Structure matching the PRzilla CSV columns
+export interface PrzillaCsvRow {
+  "WOD Name": string;
+  Date: string; // YYYY-MM-DD or ISO format
+  "Score (time)"?: string;
+  "Score (reps)"?: string;
+  "Score (rounds)"?: string;
+  "Score (partial reps)"?: string;
+  "Score (load)"?: string;
+  Rx?: string; // "yes" or "no"
+  Notes?: string;
+}
+
+// Define separate interfaces for SugarWOD and PRzilla processed rows
+export interface SugarWodProcessedRow {
+  id: string;
   csvRow: CsvRow;
-  matchedWod: Wod | null; // Matched WOD object or null if no match
+  matchedWod: Wod | null;
   validation: {
     isValid: boolean;
-    errors: string[]; // List of validation errors (e.g., invalid date, missing required field)
+    errors: string[];
   };
-  // The score object ready to be potentially inserted, derived from csvRow
-  // Omitting id and userId as they are set during insertion
   proposedScore:
     | (Omit<
         Score,
-        "id" | "userId" | "createdAt" | "updatedAt" | "scoreDate" // Omit original scoreDate (string)
+        "id" | "userId" | "createdAt" | "updatedAt" | "scoreDate"
       > & { scoreDate: Date })
-    | null; // Add scoreDate back as Date
-  selected: boolean; // Whether the user has selected this row for import
+    | null;
+  selected: boolean;
 }
+
+export interface PrzillaProcessedRow {
+  id: string;
+  csvRow: PrzillaCsvRow;
+  matchedWod: Wod | null;
+  validation: {
+    isValid: boolean;
+    errors: string[];
+  };
+  proposedScore:
+    | (Omit<
+        Score,
+        "id" | "userId" | "createdAt" | "updatedAt" | "scoreDate"
+      > & { scoreDate: Date })
+    | null;
+  selected: boolean;
+}
+
+// Union type for both formats
+export type ProcessedRow = SugarWodProcessedRow | PrzillaProcessedRow;
 
 // Type guard to check if an object is a valid CsvRow
 // Use unknown instead of any for better type safety
@@ -57,5 +88,23 @@ export function isCsvRow(obj: unknown): obj is CsvRow {
     typeof record.rx_or_scaled === "string" &&
     !!record.rx_or_scaled
     // Add checks for other required fields if any
+  );
+}
+
+// Type guard to check if an object is a valid PrzillaCsvRow
+export function isPrzillaCsvRow(obj: unknown): obj is PrzillaCsvRow {
+  // Check if obj is a non-null object first
+  if (typeof obj !== "object" || obj === null) {
+    return false;
+  }
+  // Cast to Record<string, unknown> for safe property access
+  const record = obj as Record<string, unknown>;
+  // Check for presence and type of required fields
+  return (
+    typeof record["WOD Name"] === "string" &&
+    !!record["WOD Name"] &&
+    typeof record.Date === "string" &&
+    !!record.Date
+    // Other fields are optional
   );
 }

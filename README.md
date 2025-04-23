@@ -10,12 +10,22 @@ PRzilla is a personal fitness tracker designed for CrossFit-style workouts (WODs
 - **Performance Visualization:**
   - **Distribution by Tag:** See how your workouts are distributed across different types (AMRAP, For Time, EMOM, etc.) using a radar chart.
   - **Workout Frequency Over Time:** Track how often you perform workouts with a line chart.
-  - **Performance Over Time:** Visualize your improvement trends (coming soon!).
+  - **Performance Over Time:** Visualize your improvement trends.
 - **Workout Filtering:** Easily filter your workout list by Category (e.g., Girl, Hero, Benchmark), Tags (e.g., Couplet, Chipper), and Completion Status (All, Done, Todo).
-- **Multiple Views:** View your workouts in a sortable Table or a chronological Timeline.
 - **Progress Timeline:** See your history for a specific workout, including score progression and Rx/Scaled status.
 - **Benchmark & Level Tracking:** Compare your results against defined benchmarks (Elite, Advanced, Intermediate, Beginner) where available.
-- **Authentication:** Securely manage your workout data (powered by NextAuth.js).
+- **Authentication:** Securely manage your workout data (powered by Better Auth). Supports email/password and Google sign-in.
+
+- **Import/Export:** Import your scores from SugarWOD CSV (with step-by-step instructions and screenshot). Export your data as CSV or JSON from the profile dropdown menu.
+
+- **WOD Card Blurb:** Each mobile WOD card shows a quick blurb for easy scanning.
+
+- **Wodwell Icon Link:** Mobile WOD cards include a Wodwell icon link to the workout's Wodwell.com page.
+
+- **Timecap Support:** WODs can have a timecap, and the score logging UI adapts for timecapped workouts.
+
+- **Performance Chart:** Visualize your performance over time, including difficulty-adjusted levels and sortable score columns.
+
 - **Data Scraping:** Includes scripts to potentially scrape WOD data from external sources (see `scripts/scrape-wods.js`).
 
 ## Tech Stack
@@ -23,12 +33,14 @@ PRzilla is a personal fitness tracker designed for CrossFit-style workouts (WODs
 - **Framework:** [Next.js](https://nextjs.org/) (App Router)
 - **Language:** [TypeScript](https://www.typescriptlang.org/)
 - **Styling:** [Tailwind CSS](https://tailwindcss.com/)
-- **UI Components:** [Radix UI Themes](https://www.radix-ui.com/themes) & [Primitives](https://www.radix-ui.com/primitives)
+- **UI Components:** [Radix UI Themes](https://www.radix-ui.com/themes) & [Primitives](https://www.radix-ui.com/primitives), [shadcn/ui](https://ui.shadcn.com/), [vaul](https://vaul.dev/) (Drawer)
+- **Table:** [TanStack Table](https://tanstack.com/table/latest)
 - **Charting:** [Recharts](https://recharts.org/)
 - **API:** [tRPC](https://trpc.io/)
 - **ORM:** [Drizzle ORM](https://orm.drizzle.team/)
-- **Database:** (Specify your database, e.g., Turso/libSQL, PostgreSQL)
-- **Authentication:** [NextAuth.js](https://next-auth.js.org/)
+- **Database:** SQLite (default) or configure your own database by setting `DATABASE_URL` in `.env`
+- **Authentication:** [Better Auth](https://github.com/nextauthjs/better-auth)
+
 - **Icons:** [Lucide React](https://lucide.dev/)
 - **Linting/Formatting:** ESLint, Prettier
 - **Testing:** Vitest, React Testing Library
@@ -66,8 +78,11 @@ Follow these steps to get a local copy up and running.
       cp .env.example .env
       ```
     - Fill in the required variables in the `.env` file. This typically includes:
-      - Database connection URL (`DATABASE_URL`, `DATABASE_AUTH_TOKEN` if using Turso)
-      - NextAuth secret and provider credentials (`AUTH_SECRET`, `AUTH_GITHUB_ID`, `AUTH_GITHUB_SECRET`, etc.)
+      - `BETTER_AUTH_SECRET` (generate a secure secret)
+      - `NEXT_PUBLIC_BETTER_AUTH_URL` (usually your app URL)
+      - `DATABASE_URL` (e.g., `file:./db.sqlite` for SQLite)
+      - Optional social provider credentials (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`)
+      - Note: This project uses Better Auth instead of NextAuth.js for authentication. GitHub sign-in is no longer supported.
 
 4.  **Set up the database:**
 
@@ -78,11 +93,11 @@ Follow these steps to get a local copy up and running.
     - _(Alternatively, if using migrations: `npm run db:migrate`)_
 
 5.  **(Optional) Scrape WOD Data:**
-    - If you need to populate the database with initial WOD data from the scraper:
+    - To populate the database with initial WOD data from the scraper:
       ```bash
       npm run scrape-wods
       ```
-    - _(Note: Review `scripts/scrape-wods.js` for its specific requirements or data sources.)_
+    - _(Note: The scraper will prompt you to confirm descriptions for each WOD.)_
 
 ### Running Locally
 
@@ -100,6 +115,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser to see the a
 - `build`: Creates a production build of the application.
 - `start`: Starts the production server (requires `build` first).
 - `lint`: Lints the codebase using Next.js ESLint configuration.
+- `lint:fix`: Fixes linting errors automatically.
 - `format:check`: Checks code formatting using Prettier.
 - `format:write`: Formats code using Prettier.
 - `test`: Runs tests using Vitest.

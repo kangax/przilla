@@ -1,5 +1,12 @@
-import React, { useState, useMemo } from "react";
-import { ChevronDown, ChevronUp, Plus, Pencil, Trash } from "lucide-react";
+import React, { useState, useMemo, useEffect } from "react";
+import {
+  ChevronDown,
+  ChevronUp,
+  Plus,
+  Pencil,
+  Trash,
+  Share2,
+} from "lucide-react";
 import type { Wod, Score } from "~/types/wodTypes";
 import {
   formatScore,
@@ -23,6 +30,7 @@ type WodListMobileProps = {
   scoresByWodId: ScoresByWodId;
   searchTerm: string;
   onScoreLogged?: () => void;
+  expandedWodIdFromUrl?: string | null;
 };
 
 const difficultyStyles: Record<
@@ -104,8 +112,27 @@ export function WodListMobile({
   scoresByWodId,
   searchTerm,
   onScoreLogged,
+  expandedWodIdFromUrl,
 }: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
+
+  // Initialize expandedWodId from URL param if provided
+  useEffect(() => {
+    // Debug: log when effect runs and what values are
+    // eslint-disable-next-line no-console
+    console.log("expandedWodIdFromUrl effect", {
+      expandedWodIdFromUrl,
+      expandedWodId,
+      wods,
+    });
+    if (
+      expandedWodIdFromUrl &&
+      expandedWodIdFromUrl !== expandedWodId &&
+      wods.some((w) => w.id === expandedWodIdFromUrl)
+    ) {
+      setExpandedWodId(expandedWodIdFromUrl);
+    }
+  }, [expandedWodIdFromUrl, expandedWodId, wods]);
   const [logSheetWodId, setLogSheetWodId] = useState<string | null>(null);
   const [editingScore, setEditingScore] = useState<Score | null>(null);
   const [deletingScore, setDeletingScore] = useState<{
@@ -371,19 +398,53 @@ export function WodListMobile({
                       </ul>
                     </div>
                   )}
-                  {/* Log Score Button - absolutely positioned in description area */}
-                  <button
-                    type="button"
-                    aria-label="Log Score"
-                    className="text-md my-4 flex items-center gap-1 rounded-full bg-green-500 px-3 py-1 font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleLogScore(wod.id);
-                    }}
-                  >
-                    <Plus size={20} />
-                    <span>Log score</span>
-                  </button>
+                  <div className="flex">
+                    {/* Log Score Button - absolutely positioned in description area */}
+                    <button
+                      type="button"
+                      aria-label="Log Score"
+                      className="text-md my-4 flex items-center gap-1 rounded-full bg-green-500 px-3 py-1 font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleLogScore(wod.id);
+                      }}
+                    >
+                      <Plus size={20} />
+                      <span>Log score</span>
+                    </button>
+                    {/* Share Button */}
+                    <button
+                      type="button"
+                      aria-label="Share WOD"
+                      className="text-md my-4 ml-4 flex items-center gap-1 rounded-full bg-blue-500 px-3 py-1 font-semibold text-white shadow-md transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-blue-700"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        const url = new URL(window.location.href);
+                        url.searchParams.set("expandedWodId", wod.id);
+                        const shareUrl = url.toString();
+
+                        if (navigator.share) {
+                          navigator
+                            .share({
+                              title: `Check out this WOD: ${wod.wodName}`,
+                              url: shareUrl,
+                            })
+                            .catch(() => {
+                              // Ignore errors from user canceling share
+                            });
+                        } else {
+                          void navigator.clipboard
+                            .writeText(shareUrl)
+                            .then(() => {
+                              alert("Link copied to clipboard!");
+                            });
+                        }
+                      }}
+                    >
+                      <Share2 size={20} />
+                      <span>Share</span>
+                    </button>
+                  </div>
                 </div>
               )}
             </div>

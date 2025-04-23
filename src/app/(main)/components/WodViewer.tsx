@@ -24,6 +24,39 @@ import { ChevronDown, ListFilter, ArrowUp, ArrowDown } from "lucide-react";
 import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
 import { useMediaQuery } from "~/utils/useMediaQuery";
+
+/**
+ * Client-only wrapper for WodListMobile to ensure searchParams is read after hydration.
+ * (Avoids duplicate import of useState/useEffect)
+ */
+function WodListMobileWrapper(
+  props: Omit<
+    React.ComponentProps<typeof WodListMobile>,
+    "expandedWodIdFromUrl"
+  >,
+) {
+  const [expandedWodIdFromUrl, setExpandedWodIdFromUrl] = useState<
+    string | null
+  >(null);
+
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const params = new URLSearchParams(window.location.search);
+      // eslint-disable-next-line no-console
+      console.log(
+        "WodListMobileWrapper window.location.search",
+        window.location.search,
+        "expandedWodId:",
+        params.get("expandedWodId"),
+      );
+      setExpandedWodIdFromUrl(params.get("expandedWodId"));
+    }
+  }, [typeof window !== "undefined" && window.location.search]);
+
+  return (
+    <WodListMobile {...props} expandedWodIdFromUrl={expandedWodIdFromUrl} />
+  );
+}
 import {
   type Wod,
   type Score,
@@ -253,8 +286,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   }, [filterBarRef]);
 
   useEffect(() => {
-    const urlParams: Record<string, string> = {};
+    // Start with all current params, so we preserve unknown ones (like expandedWodId)
+    const params = new URLSearchParams(searchParams.toString());
 
+    // Overwrite with known filter/sort params
     const validCategoryForUrl =
       selectedCategories.length > 0 &&
       categoryOrder.includes(selectedCategories[0])
@@ -262,38 +297,44 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         : null;
 
     if (validCategoryForUrl) {
-      urlParams.category = validCategoryForUrl;
+      params.set("category", validCategoryForUrl);
+    } else {
+      params.delete("category");
     }
 
     const validTagsForUrl = selectedTags.filter((tag) =>
       tagOrder.includes(tag),
     );
     if (validTagsForUrl.length > 0) {
-      urlParams.tags = selectedTags.join(",");
+      params.set("tags", selectedTags.join(","));
+    } else {
+      params.delete("tags");
     }
 
     if (completionFilter !== DEFAULT_COMPLETION_FILTER) {
-      urlParams.completion = completionFilter;
+      params.set("completion", completionFilter);
+    } else {
+      params.delete("completion");
     }
 
     if (sortBy !== "date") {
-      urlParams.sortBy = sortBy;
+      params.set("sortBy", sortBy);
+    } else {
+      params.delete("sortBy");
     }
 
     const defaultSortDir = DEFAULT_SORT_DIRECTIONS[sortBy];
     if (sortDirection !== defaultSortDir) {
-      urlParams.sortDir = sortDirection;
+      params.set("sortDir", sortDirection);
+    } else {
+      params.delete("sortDir");
     }
 
     if (searchTerm) {
-      urlParams.search = searchTerm;
+      params.set("search", searchTerm);
+    } else {
+      params.delete("search");
     }
-
-    const sortedKeys = Object.keys(urlParams).sort();
-    const params = new URLSearchParams();
-    sortedKeys.forEach((key) => {
-      params.set(key, urlParams[key]);
-    });
 
     const currentSearch = searchParams.toString();
     const newSearch = params.toString();
@@ -652,7 +693,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
 
       {/* Conditionally render card list or table */}
       {isMobile ? (
-        <WodListMobile
+        <WodListMobileWrapper
           wods={sortedWods}
           scoresByWodId={scoresByWodId}
           searchTerm={searchTerm}

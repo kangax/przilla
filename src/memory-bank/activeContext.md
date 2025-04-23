@@ -2,6 +2,15 @@
 
 ## Current Focus
 
+- **AuthControls.test.tsx Mock Fix (Apr 22, 2025):**
+
+  - Fixed a test failure in `src/app/_components/AuthControls.test.tsx` where the mock for env.js was exporting a default object instead of a named export called `env`.
+  - Updated the mock in the test file and in several other mock files (`vitest.setup.ts`, `src/app/_components/__mocks__/env.js`, `src/__mocks__/env.js`) to use the correct named export structure.
+  - Added missing `NEXT_PUBLIC_BETTER_AUTH_URL` to the mocks, which is required by `auth-client.ts`.
+  - Added proper mocks for the trpc/react and auth-client modules to ensure all required functions were available during testing.
+  - Fixed the test selectors to use `getByText("Test User")` instead of `getByRole("button", { name: /profile/i })` since the component renders a span with type="button", not a proper button element.
+  - All tests in `AuthControls.test.tsx` now pass successfully, ensuring the profile dropdown export feature is fully tested.
+
 - **Import Page Radix UI Tabs (Apr 21, 2025):**
 
   - Replaced custom tab implementation in the import page with Radix UI Tabs from `@radix-ui/themes`.

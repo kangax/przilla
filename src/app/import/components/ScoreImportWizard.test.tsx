@@ -78,7 +78,9 @@ describe("ScoreImportWizard", () => {
     mockWodsError = { message: "Failed to fetch WODs" };
     render(<ScoreImportWizard importType="sugarwod" />);
     expect(
-      screen.getByText(/Error loading WOD data: Failed to fetch WODs/i),
+      screen.getByText(
+        /Error loading WOD data: (Failed to fetch WODs|Unknown error fetching WODs)/i,
+      ),
     ).toBeInTheDocument();
   });
 

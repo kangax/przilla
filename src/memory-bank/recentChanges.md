@@ -1,5 +1,17 @@
 # Recent Changes
 
+- **AuthControls.test.tsx Mock Fix (Apr 22, 2025):**
+
+  - **Problem:** The test file `src/app/_components/AuthControls.test.tsx` was failing with the error: "No 'env' export is defined on the '../../env.js' mock. Did you forget to return it from 'vi.mock'?"
+  - **Root Cause:** The mock for env.js was exporting a default object instead of a named export called `env`, which didn't match the actual module's export structure. The actual `src/env.js` file exports a named export `env`, but the test was mocking it with a default export.
+  - **Solution:**
+    - Updated the mock in `src/app/_components/AuthControls.test.tsx` to use a named export `env` instead of a default export.
+    - Also updated the mocks in `vitest.setup.ts`, `src/app/_components/__mocks__/env.js`, and `src/__mocks__/env.js` to use the same named export structure.
+    - Added missing `NEXT_PUBLIC_BETTER_AUTH_URL` to the mocks, which is required by `auth-client.ts`.
+    - Added proper mocks for the trpc/react and auth-client modules to ensure all required functions were available during testing.
+    - Fixed the test selectors to use `getByText("Test User")` instead of `getByRole("button", { name: /profile/i })` since the component renders a span with type="button", not a proper button element.
+  - **Outcome:** All tests in `AuthControls.test.tsx` now pass successfully. The fix ensures that the mocked environment variables are structured correctly to match how they're accessed in the actual code.
+
 - **Import Page Radix UI Tabs (Apr 21, 2025):**
 
   - **Goal:** Replace the custom tab implementation in the import page with Radix UI Tabs for better accessibility and consistency with the rest of the application.

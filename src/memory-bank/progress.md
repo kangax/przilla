@@ -2,6 +2,8 @@
 
 ## What Works
 
+- **AuthControls.test.tsx Mock Fix (Apr 22, 2025):** Fixed a test failure in the AuthControls component tests by updating the mock for env.js to use a named export called `env` instead of a default export. Also updated several other mock files to use the same structure, added missing environment variables, and fixed test selectors. All tests in `AuthControls.test.tsx` now pass successfully, ensuring the profile dropdown export feature is fully tested.
+
 - **Import Page Radix UI Tabs (Apr 21, 2025):** The import page now uses Radix UI Tabs instead of custom tab implementation. This provides better accessibility, theme consistency, and simpler code. The tabs switch between SugarWOD and PRzilla import options, with each tab content rendering the appropriate import wizard wrapper.
 
 - **Lint Fix: Block-Style Disables for Test Mocks (Apr 21, 2025):**

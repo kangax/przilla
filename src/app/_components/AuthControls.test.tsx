@@ -5,6 +5,36 @@ import * as trpcReact from "~/trpc/react";
 import * as exportUtil from "~/utils/exportUserData";
 import AuthControls from "./AuthControls";
 
+// Mock trpc/react module
+vi.mock("~/trpc/react");
+
+// Mock auth-client module
+vi.mock("~/lib/auth-client", () => ({
+  useSession: () => ({
+    data: {
+      user: {
+        name: "Test User",
+        email: "test@example.com",
+      },
+    },
+    isPending: false,
+  }),
+  signOut: vi.fn(),
+}));
+
+// Mock src/env.js module to stub environment variables during tests
+vi.mock("../../env.js", () => ({
+  env: {
+    BETTER_AUTH_SECRET: "test-secret",
+    BETTER_AUTH_URL: "http://localhost",
+    NEXT_PUBLIC_BETTER_AUTH_URL: "http://localhost",
+    GITHUB_CLIENT_ID: "test-github-client-id",
+    GITHUB_CLIENT_SECRET: "test-github-client-secret",
+    GOOGLE_CLIENT_ID: "test-google-client-id",
+    GOOGLE_CLIENT_SECRET: "test-google-client-secret",
+  },
+}));
+
 // Mock tRPC hooks and export utility
 const mockScores = [
   {
@@ -55,14 +85,14 @@ afterEach(() => {
 describe("AuthControls Dropdown Export", () => {
   it("renders profile name as dropdown trigger", () => {
     render(<AuthControls />);
-    // The profile name is rendered as a button or similar
-    const trigger = screen.getByRole("button", { name: /profile/i });
+    // The profile name is rendered as a span with tabIndex and aria attributes
+    const trigger = screen.getByText("Test User");
     expect(trigger).toBeInTheDocument();
   });
 
   it("opens dropdown and shows Export as CSV as a top-level item", async () => {
     render(<AuthControls />);
-    const trigger = screen.getByRole("button", { name: /profile/i });
+    const trigger = screen.getByText("Test User");
     await userEvent.click(trigger);
     // Look for "Export as CSV" as a top-level item
     expect(screen.getByText(/export as csv/i)).toBeInTheDocument();
@@ -70,7 +100,7 @@ describe("AuthControls Dropdown Export", () => {
 
   it("enables export option when data is loaded", async () => {
     render(<AuthControls />);
-    const trigger = screen.getByRole("button", { name: /profile/i });
+    const trigger = screen.getByText("Test User");
     await userEvent.click(trigger);
     const csvOption = screen.getByText(/export as csv/i);
     expect(csvOption).not.toHaveAttribute("aria-disabled", "true");
@@ -78,7 +108,7 @@ describe("AuthControls Dropdown Export", () => {
 
   it("calls export utility with correct args when export is clicked", async () => {
     render(<AuthControls />);
-    const trigger = screen.getByRole("button", { name: /profile/i });
+    const trigger = screen.getByText("Test User");
     await userEvent.click(trigger);
     const csvOption = screen.getByText(/export as csv/i);
     await userEvent.click(csvOption);
@@ -106,7 +136,7 @@ describe("AuthControls Dropdown Export", () => {
       refetch: vi.fn(),
     });
     render(<AuthControls />);
-    const trigger = screen.getByRole("button", { name: /profile/i });
+    const trigger = screen.getByText("Test User");
     await userEvent.click(trigger);
     const csvOption = screen.getByText(/export as csv/i);
     expect(csvOption).toHaveAttribute("aria-disabled", "true");

@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "https://www.przilla.app/og.png",
+        url: "https://www.przilla.app/images/og.png",
         width: 800,
         height: 600,
       },

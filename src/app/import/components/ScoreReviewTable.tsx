@@ -68,74 +68,170 @@ export function ScoreReviewTable({ rows, onComplete }: ScoreReviewTableProps) {
     },
   );
 
-  const columns = useMemo<ColumnDef<ProcessedRow>[]>(
-    () => [
-      columnHelper.display({
-        id: "select",
-        header: ({ table }) => (
-          <input
-            type="checkbox"
-            {...{
-              checked: table.getIsAllRowsSelected(),
-              indeterminate: table.getIsSomeRowsSelected() ? true : undefined,
-              onChange: table.getToggleAllRowsSelectedHandler(),
-            }}
-          />
+  // Determine if rendering unmatched entries (no matchedWod)
+  const isUnmatchedTable = rows.length > 0 && !rows[0].matchedWod;
+
+  const columns = useMemo<ColumnDef<ProcessedRow>[]>(() => {
+    if (isUnmatchedTable) {
+      // Columns for unmatched entries table
+      return [
+        columnHelper.display({
+          id: "select",
+          header: () => <></>, // No selection header
+          cell: () => <input type="checkbox" disabled />, // Disabled checkboxes
+        }),
+        columnHelper.accessor((row) => getDateFromCsvRow(row.csvRow), {
+          id: "date",
+          header: "Date",
+          cell: (info) => info.getValue(),
+          enableSorting: true,
+        }),
+        columnHelper.accessor(
+          (row) => ("title" in row.csvRow ? row.csvRow.title : "No Title"),
+          {
+            id: "title",
+            header: "Title",
+            cell: (info) => (
+              <span className="italic text-orange-500">{info.getValue()}</span>
+            ),
+            enableSorting: false,
+          },
         ),
-        cell: ({ row }) => (
-          <input
-            type="checkbox"
-            {...{
-              checked: row.getIsSelected(),
-              disabled: !row.getCanSelect(),
-              indeterminate: row.getIsSomeSelected() ? true : undefined,
-              onChange: row.getToggleSelectedHandler(),
-            }}
-          />
+        columnHelper.accessor(
+          (row) => ("description" in row.csvRow ? row.csvRow.description : "-"),
+          {
+            id: "description",
+            header: "Description",
+            cell: (info) => <span>{info.getValue()}</span>,
+            enableSorting: false,
+          },
         ),
-      }),
-      columnHelper.accessor((row) => getDateFromCsvRow(row.csvRow), {
-        id: "date",
-        header: "Date",
-        cell: (info) => info.getValue(),
-        enableSorting: true,
-      }),
-      columnHelper.accessor((row) => row.matchedWod?.wodName, {
-        id: "wodName",
-        header: "WOD Name",
-        cell: (info): React.ReactNode =>
-          info.getValue() ?? (
-            <span className="italic text-orange-500">No Match</span>
+        columnHelper.accessor(
+          (row) =>
+            "best_result_display" in row.csvRow
+              ? row.csvRow.best_result_display
+              : "-",
+          {
+            id: "bestResultDisplay",
+            header: "Best Result",
+            cell: (info) => <span>{info.getValue()}</span>,
+            enableSorting: false,
+          },
+        ),
+        columnHelper.accessor(
+          (row) => {
+            // Use rx_or_scaled field from csvRow if present, fallback to proposedScore.isRx
+            if ("rx_or_scaled" in row.csvRow) {
+              return row.csvRow.rx_or_scaled.toLowerCase() === "rx"
+                ? "Rx"
+                : "Scaled";
+            }
+            return row.proposedScore?.isRx ? "Rx" : "Scaled";
+          },
+          {
+            id: "rx",
+            header: "RX",
+            cell: (info: IsRxCellContext): React.ReactNode => info.getValue(),
+            enableSorting: true,
+          },
+        ),
+        columnHelper.accessor((row) => getNotesFromCsvRow(row.csvRow), {
+          id: "notes",
+          header: "Notes",
+          cell: (info: NotesCellContext): React.ReactNode => (
+            <span>{info.getValue() || "-"}</span>
           ),
-        enableSorting: true,
-      }),
-      columnHelper.accessor((row) => row.proposedScore, {
-        id: "score",
-        header: "Score",
-        cell: (info: ProposedScoreCellContext): React.ReactNode => {
-          const scoreData = info.getValue();
-          return scoreData ? formatScore(scoreData as Score) : "-";
-        },
-        enableSorting: false,
-      }),
-      columnHelper.accessor((row) => row.proposedScore?.isRx, {
-        id: "rx",
-        header: "RX",
-        cell: (info: IsRxCellContext): React.ReactNode =>
-          info.getValue() ? "Rx" : "Scaled",
-        enableSorting: true,
-      }),
-      columnHelper.accessor((row) => getNotesFromCsvRow(row.csvRow), {
-        id: "notes",
-        header: "Notes",
-        cell: (info: NotesCellContext): React.ReactNode => (
-          <span>{info.getValue() || "-"}</span>
-        ),
-        enableSorting: false,
-      }),
-    ],
-    [],
-  );
+          enableSorting: false,
+        }),
+      ];
+    } else {
+      // Columns for matched entries table
+      return [
+        columnHelper.display({
+          id: "select",
+          size: 40,
+          header: ({ table }) =>
+            rows.some((row) => row.matchedWod) ? (
+              <input
+                type="checkbox"
+                {...{
+                  checked: table.getIsAllRowsSelected(),
+                  indeterminate: table.getIsSomeRowsSelected()
+                    ? true
+                    : undefined,
+                  onChange: table.getToggleAllRowsSelectedHandler(),
+                }}
+              />
+            ) : (
+              <></>
+            ),
+          cell: ({ row }) =>
+            row.original.matchedWod ? (
+              <input
+                type="checkbox"
+                {...{
+                  checked: row.getIsSelected(),
+                  disabled: !row.getCanSelect(),
+                  indeterminate: row.getIsSomeSelected() ? true : undefined,
+                  onChange: row.getToggleSelectedHandler(),
+                }}
+              />
+            ) : (
+              <input type="checkbox" disabled />
+            ),
+        }),
+        columnHelper.accessor((row) => getDateFromCsvRow(row.csvRow), {
+          id: "date",
+          header: "Date",
+          cell: (info) => info.getValue(),
+          enableSorting: true,
+        }),
+        columnHelper.accessor((row) => row.matchedWod?.wodName, {
+          id: "wodName",
+          header: "WOD Name",
+          cell: (info): React.ReactNode => {
+            if (info.row.original.matchedWod) {
+              return info.getValue();
+            } else {
+              // Show title from CSV for unmatched entries
+              return (
+                <span className="italic text-orange-500">
+                  {"title" in info.row.original.csvRow
+                    ? info.row.original.csvRow.title
+                    : "No Title"}
+                </span>
+              );
+            }
+          },
+          enableSorting: true,
+        }),
+        columnHelper.accessor((row) => row.proposedScore, {
+          id: "score",
+          header: "Score",
+          cell: (info: ProposedScoreCellContext): React.ReactNode => {
+            const scoreData = info.getValue();
+            return scoreData ? formatScore(scoreData as Score) : "-";
+          },
+          enableSorting: false,
+        }),
+        columnHelper.accessor((row) => row.proposedScore?.isRx, {
+          id: "rx",
+          header: "RX",
+          cell: (info: IsRxCellContext): React.ReactNode =>
+            info.getValue() ? "Rx" : "Scaled",
+          enableSorting: true,
+        }),
+        columnHelper.accessor((row) => getNotesFromCsvRow(row.csvRow), {
+          id: "notes",
+          header: "Notes",
+          cell: (info: NotesCellContext): React.ReactNode => (
+            <span>{info.getValue() || "-"}</span>
+          ),
+          enableSorting: false,
+        }),
+      ];
+    }
+  }, [rows]);
 
   const table = useReactTable({
     data: rows,
@@ -220,21 +316,23 @@ export function ScoreReviewTable({ rows, onComplete }: ScoreReviewTableProps) {
         </Table.Body>
       </Table.Root>
 
-      <div className="mt-6 flex justify-end">
-        <button
-          onClick={() =>
-            onComplete(
-              new Set(
-                Object.keys(rowSelection).filter((id) => rowSelection[id]),
-              ),
-            )
-          }
-          className="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700 disabled:opacity-50"
-          disabled={selectedCount === 0}
-        >
-          Proceed to Confirmation ({selectedCount} selected)
-        </button>
-      </div>
+      {rows.some((row) => row.matchedWod) && (
+        <div className="mt-6 flex justify-end">
+          <button
+            onClick={() =>
+              onComplete(
+                new Set(
+                  Object.keys(rowSelection).filter((id) => rowSelection[id]),
+                ),
+              )
+            }
+            className="rounded bg-green-600 px-6 py-2 text-white hover:bg-green-700 disabled:opacity-50"
+            disabled={selectedCount === 0}
+          >
+            Proceed to Confirmation ({selectedCount} selected)
+          </button>
+        </div>
+      )}
     </div>
   );
 }

@@ -2,7 +2,7 @@
 
 PRzilla is a personal fitness tracker designed for CrossFit-style workouts (WODs). It helps you log your results, track your progress over time, and visualize your performance across different workout types and benchmarks.
 
-![PRzilla Screenshot](https://raw.githubusercontent.com/your-username/your-repo/main/path/to/screenshot.png)
+![PRzilla Screenshot](https://www.przilla.app/images/og.png)
 _(Suggestion: Replace the above URL with a direct link to the screenshot image once available)_
 
 ## Features

@@ -30,6 +30,16 @@
   - The blurb uses the `difficultyExplanation` field if available, otherwise falls back to the first sentence or up to 100 characters of the workout description.
   - This provides users with a quick overview of what a workout is about, improving scan-ability and user experience on mobile.
   - The blurb is styled subtly and does not appear when the card is expanded (where the full description is shown).
+
+- **WodListMobile Sharing Fix (Apr 22, 2025):**
+
+  - Fixed two issues with WodListMobile sharing:
+    1. The card now scrolls into view on page load when a WOD id is provided in the URL.
+    2. Users can expand and collapse any card after initial load without being locked to the URL-provided WOD id.
+  - Implementation details:
+    - Added refs to each card and used `scrollIntoView` to scroll the expanded card into view.
+    - Modified the effect that sets the expanded card from the URL param to only run once on mount.
+  - This improves user experience when sharing links to specific WODs and interacting with the mobile WOD list.
   - Implementation: Added a helper function and conditional rendering in `src/app/(main)/components/WodListMobile.tsx`.
 
 - **SugarWOD Import Instructions Added (Apr 20, 2025):** Added a clear instructional section with text and a screenshot to the `/import` page (`ScoreImportWizard.tsx`) guiding users on how to export their CSV data from SugarWOD. This improves the usability of the import feature.

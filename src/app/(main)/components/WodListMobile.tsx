@@ -115,24 +115,31 @@ export function WodListMobile({
   expandedWodIdFromUrl,
 }: WodListMobileProps) {
   const [expandedWodId, setExpandedWodId] = useState<string | null>(null);
+  const didInitExpandedWodId = React.useRef(false);
+  const cardRefs = React.useRef<Record<string, HTMLDivElement | null>>({});
 
-  // Initialize expandedWodId from URL param if provided
+  // Initialize expandedWodId from URL param if provided, only once
   useEffect(() => {
-    // Debug: log when effect runs and what values are
-    // eslint-disable-next-line no-console
-    console.log("expandedWodIdFromUrl effect", {
-      expandedWodIdFromUrl,
-      expandedWodId,
-      wods,
-    });
     if (
+      !didInitExpandedWodId.current &&
       expandedWodIdFromUrl &&
-      expandedWodIdFromUrl !== expandedWodId &&
       wods.some((w) => w.id === expandedWodIdFromUrl)
     ) {
       setExpandedWodId(expandedWodIdFromUrl);
+      didInitExpandedWodId.current = true;
     }
-  }, [expandedWodIdFromUrl, expandedWodId, wods]);
+  }, [expandedWodIdFromUrl, wods]);
+
+  // Scroll expanded card into view when expandedWodId changes
+  useEffect(() => {
+    if (expandedWodId && cardRefs.current[expandedWodId]) {
+      cardRefs.current[expandedWodId]?.scrollIntoView({
+        behavior: "smooth",
+        block: "center",
+      });
+    }
+  }, [expandedWodId]);
+
   const [logSheetWodId, setLogSheetWodId] = useState<string | null>(null);
   const [editingScore, setEditingScore] = useState<Score | null>(null);
   const [deletingScore, setDeletingScore] = useState<{
@@ -223,6 +230,9 @@ export function WodListMobile({
           return (
             <div
               key={wod.id}
+              ref={(el) => {
+                cardRefs.current[wod.id] = el;
+              }}
               className="flex flex-col rounded-xl border border-slate-300 bg-slate-100 px-4 py-3 shadow-lg ring-1 ring-slate-100 transition-colors dark:border-slate-700 dark:bg-[#23293a] dark:shadow-md dark:ring-0"
             >
               {/* Header Section */}

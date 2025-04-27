@@ -66,13 +66,13 @@ beforeEach(() => {
     data: mockScores,
     isLoading: false,
     isError: false,
-    refetch: vi.fn(),
+    refetch: vi.fn().mockResolvedValue({ data: mockScores }),
   } as any);
   vi.spyOn(trpcReact.api.wod.getAll, "useQuery").mockReturnValue({
     data: mockWods,
     isLoading: false,
     isError: false,
-    refetch: vi.fn(),
+    refetch: vi.fn().mockResolvedValue({ data: mockWods }),
   } as any);
   /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-argument */
   vi.spyOn(exportUtil, "exportUserData").mockResolvedValue(undefined);
@@ -124,21 +124,23 @@ describe("AuthControls Dropdown Export", () => {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- test: mock tRPC hook return
     (trpcReact.api.score.getAllByUser.useQuery as any).mockReturnValueOnce({
       data: undefined,
-      isLoading: true,
+      isLoading: false,
+      isFetching: true,
       isError: false,
       refetch: vi.fn(),
     });
     // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access -- test: mock tRPC hook return
     (trpcReact.api.wod.getAll.useQuery as any).mockReturnValueOnce({
       data: undefined,
-      isLoading: true,
+      isLoading: false,
+      isFetching: true,
       isError: false,
       refetch: vi.fn(),
     });
     render(<AuthControls />);
     const trigger = screen.getByText("Test User");
     await userEvent.click(trigger);
-    const csvOption = screen.getByText(/export as csv/i);
+    const csvOption = screen.getByText(/exporting/i);
     expect(csvOption).toHaveAttribute("aria-disabled", "true");
   });
 });

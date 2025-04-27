@@ -5,45 +5,48 @@ import Link from "next/link";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Download } from "lucide-react";
 import { useSession, signOut } from "~/lib/auth-client";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { api } from "~/trpc/react";
 import type { ScoreFromQuery, WodFromQuery } from "~/types/wodTypes";
 
 export default function AuthControls() {
   const { data: session, isPending } = useSession();
-  const {
-    data: scores,
-    isLoading: isScoresLoading,
-    error: scoresError,
-  } = api.score.getAllByUser.useQuery(undefined, { enabled: !!session });
-  const {
-    data: wods,
-    isLoading: isWodsLoading,
-    error: wodsError,
-  } = api.wod.getAll.useQuery();
+  const [isExporting, setIsExporting] = useState(false);
 
-  const isExportDisabled =
-    isScoresLoading ||
-    isWodsLoading ||
-    !Array.isArray(scores) ||
-    !Array.isArray(wods) ||
-    !!scoresError ||
-    !!wodsError;
+  // Set up queries with enabled: false so they don't fetch on mount
+  const { refetch: refetchScores, isFetching: isScoresFetching } =
+    api.score.getAllByUser.useQuery(undefined, { enabled: false });
+  const { refetch: refetchWods, isFetching: isWodsFetching } =
+    api.wod.getAll.useQuery(undefined, { enabled: false });
 
   const handleExport = useCallback(async () => {
-    if (
-      !Array.isArray(scores) ||
-      !Array.isArray(wods) ||
-      scores.length === 0 ||
-      wods.length === 0
-    ) {
-      alert("Data is still loading or unavailable.");
-      return;
+    setIsExporting(true);
+    try {
+      // Imperatively fetch scores and wods only when exporting
+      const [scoresResult, wodsResult] = await Promise.all([
+        refetchScores(),
+        refetchWods(),
+      ]);
+      const scores = scoresResult.data;
+      const wods = wodsResult.data;
+      if (
+        !Array.isArray(scores) ||
+        !Array.isArray(wods) ||
+        scores.length === 0 ||
+        wods.length === 0
+      ) {
+        alert("Data is still loading or unavailable.");
+        setIsExporting(false);
+        return;
+      }
+      const { exportUserData } = await import("~/utils/exportUserData");
+      await exportUserData(scores as ScoreFromQuery[], wods as WodFromQuery[]);
+    } catch (err) {
+      alert("Failed to export data. Please try again.");
+    } finally {
+      setIsExporting(false);
     }
-    // Cast to expected types (safe after runtime check)
-    const { exportUserData } = await import("~/utils/exportUserData");
-    await exportUserData(scores as ScoreFromQuery[], wods as WodFromQuery[]);
-  }, [scores, wods]);
+  }, [refetchScores, refetchWods]);
 
   if (isPending) {
     return <Text size="2">Loading...</Text>;
@@ -77,13 +80,20 @@ export default function AuthControls() {
               <DropdownMenu.Separator className="my-1 h-px bg-slate-200 dark:bg-slate-700" />
               <DropdownMenu.Item
                 className={`flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-slate-800 outline-none transition-colors hover:bg-blue-100 dark:text-slate-100 dark:hover:bg-blue-900 ${
-                  isExportDisabled ? "pointer-events-none opacity-50" : ""
+                  isExporting || isScoresFetching || isWodsFetching
+                    ? "pointer-events-none opacity-50"
+                    : ""
                 }`}
                 onSelect={handleExport}
-                disabled={isExportDisabled}
+                disabled={isExporting || isScoresFetching || isWodsFetching}
+                aria-disabled={
+                  isExporting || isScoresFetching || isWodsFetching
+                }
               >
                 <Download className="mr-2 h-4 w-4" />
-                Export as CSV
+                {isExporting || isScoresFetching || isWodsFetching
+                  ? "Exporting..."
+                  : "Export as CSV"}
               </DropdownMenu.Item>
               <DropdownMenu.Separator className="my-1 h-px bg-slate-200 dark:bg-slate-700" />
               <DropdownMenu.Item
@@ -106,12 +116,5 @@ export default function AuthControls() {
         Login / Sign Up
       </Button>
     </Link>
-    // Example social login buttons (can be added here or on login page)
-    /*
-    <Flex gap="2">
-      <Button size="1" variant="soft" onClick={signinGithub}>GitHub</Button>
-      <Button size="1" variant="soft" onClick={signinGoogle}>Google</Button>
-    </Flex>
-    */
   );
 }

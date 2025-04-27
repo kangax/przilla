@@ -6,6 +6,11 @@ import type { Wod, Score } from "~/types/wodTypes";
 // Use Vitest mocking API
 import { vi } from "vitest";
 
+// Mock scrollIntoView globally for all tests in this file
+beforeAll(() => {
+  window.HTMLElement.prototype.scrollIntoView = vi.fn();
+});
+
 // Mock LogScoreForm to avoid full form logic in this test
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 vi.mock("./LogScoreForm", () => ({

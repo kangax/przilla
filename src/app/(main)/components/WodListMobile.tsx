@@ -22,6 +22,7 @@ import {
 } from "../../../components/ui/drawer";
 import { Dialog, Button, Flex } from "@radix-ui/themes";
 import { api } from "../../../trpc/react";
+import { useToast } from "~/components/ToastProvider";
 
 type ScoresByWodId = Record<string, Score[]>;
 
@@ -148,13 +149,20 @@ export function WodListMobile({
   } | null>(null);
 
   const utils = api.useUtils();
+  const { showToast } = useToast();
   const deleteScoreMutation = api.score.deleteScore.useMutation({
     onSuccess: async () => {
       await utils.score.getAllByUser.invalidate();
       setDeletingScore(null);
+
+      // Show success toast
+      showToast("success", "Score deleted");
     },
     onError: () => {
       setDeletingScore(null);
+
+      // Show error toast
+      showToast("error", "Failed to delete score");
     },
   });
 

@@ -9,6 +9,7 @@ import { GeistSans } from "geist/font/sans";
 import { type Metadata } from "next";
 
 import { TRPCReactProvider } from "~/trpc/react";
+import { ToastProvider } from "~/components/ToastProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.przilla.app"), // Set base URL for resolving paths
@@ -60,7 +61,9 @@ export default function RootLayout({
         {/* Removed SessionProvider wrapper */}
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Theme accentColor="blue" grayColor="slate">
-            <TRPCReactProvider>{children}</TRPCReactProvider>
+            <ToastProvider>
+              <TRPCReactProvider>{children}</TRPCReactProvider>
+            </ToastProvider>
           </Theme>
         </ThemeProvider>
         <Analytics />

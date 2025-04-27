@@ -36,6 +36,7 @@ import { LoadingIndicator } from "../../_components/LoadingIndicator";
 import { HighlightMatch } from "~/utils/uiUtils";
 import { LogScoreDialog } from "./LogScoreDialog"; // Import the new Dialog component
 import { api } from "~/trpc/react";
+import { useToast } from "~/components/ToastProvider";
 
 interface WodTableProps {
   wods: Wod[];
@@ -553,10 +554,18 @@ const WodTable: React.FC<WodTableProps> = ({
   } | null>(null);
 
   const utils = api.useUtils();
+  const { showToast } = useToast();
   const deleteScoreMutation = api.score.deleteScore.useMutation({
     onSuccess: async () => {
       await utils.score.getAllByUser.invalidate();
       if (onScoreLogged) onScoreLogged(); // Refresh scores after delete
+
+      // Show success toast
+      showToast("success", "Score deleted");
+    },
+    onError: () => {
+      // Show error toast
+      showToast("error", "Failed to delete score");
     },
   });
 

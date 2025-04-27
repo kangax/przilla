@@ -3,6 +3,14 @@
 ## Current Focus
 
 - **Critical Rule: Never summarize or omit code in any file. Always provide the complete, unabridged content for all code and documentation. Summarization, ellipsis, or "omitted for brevity" is strictly forbidden.**
+- **Toast Notifications for Score Actions (Apr 27, 2025):**
+  - Implemented toast notifications to provide feedback when users add, update, or delete scores.
+  - Created a `ToastProvider` component in `src/components/ToastProvider.tsx` that provides a context for managing toast state.
+  - Added the `ToastProvider` to the application layout in `src/app/layout.tsx`.
+  - Added CSS animations in `src/styles/globals.css` for smooth toast entry and exit.
+  - Integrated toast notifications in `LogScoreForm.tsx`, `WodTable.tsx`, and `WodListMobile.tsx` to show appropriate messages when scores are added, updated, or deleted.
+  - Toasts automatically disappear after 3 seconds and use different colors for success (green) and error (red).
+  - Users now receive clear, non-intrusive feedback when they perform actions on scores, improving the overall user experience.
 - **AuthControls.test.tsx Mock Fix (Apr 22, 2025):**
 
   - Fixed a test failure in `src/app/_components/AuthControls.test.tsx` where the mock for env.js was exporting a default object instead of a named export called `env`.

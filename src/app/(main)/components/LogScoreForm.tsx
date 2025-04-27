@@ -18,6 +18,7 @@ import type { Wod, Score } from "../../../types/wodTypes"; // Added BenchmarkLev
 import {
   getPerformanceLevelTooltip, // Import the modified function
 } from "../../../utils/wodUtils"; // Import helpers
+import { useToast } from "../../../components/ToastProvider";
 
 type ScorePayload = {
   wodId: string;
@@ -65,6 +66,7 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
   onCancel,
 }) => {
   const queryClient = useQueryClient();
+  const { showToast } = useToast();
   const isEditMode = !!initialScore;
   const [form, setForm] = useState(initialFormState);
   const [submitting, setSubmitting] = useState(false);
@@ -119,9 +121,15 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
       setError(null);
       if (onScoreLogged) onScoreLogged();
       onCancel();
+
+      // Show success toast
+      showToast("success", "Score added");
     },
     onError: (err) => {
       setError(err instanceof Error ? err.message : "Failed to log score.");
+
+      // Show error toast
+      showToast("error", "Failed to add score");
     },
   });
 
@@ -134,9 +142,15 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
       setError(null);
       if (onScoreLogged) onScoreLogged();
       onCancel();
+
+      // Show success toast
+      showToast("success", "Score updated");
     },
     onError: (err) => {
       setError(err instanceof Error ? err.message : "Failed to update score.");
+
+      // Show error toast
+      showToast("error", "Failed to update score");
     },
   });
 

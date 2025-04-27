@@ -2,6 +2,8 @@
 
 ## What Works
 
+- **Toast Notifications for Score Actions (Apr 27, 2025):** The application now shows toast notifications when users add, update, or delete scores. Created a `ToastProvider` component using Radix UI Toast, added it to the application layout, and integrated it with the score management components. Toasts show appropriate messages ("Score added", "Score updated", "Score deleted"), are color-coded (green for success, red for error), and automatically disappear after 3 seconds. CSS animations in globals.css provide smooth entry and exit transitions. This provides users with clear, non-intrusive feedback when they perform actions on scores.
+
 - **Critical Rule Enforced (Apr 26, 2025):** After a code loss incident in `WodViewer.test.tsx` (where code was omitted and replaced with comments/ellipsis), a strict rule is now enforced: Never summarize or omit code or documentation in any file. All files must always be complete and explicit. Summarization, ellipsis, or "omitted for brevity" is strictly forbidden. This rule is now documented in the memory bank and system patterns.
 - **AuthControls.test.tsx Mock Fix (Apr 22, 2025):** Fixed a test failure in the AuthControls component tests by updating the mock for env.js to use a named export called `env` instead of a default export. Also updated several other mock files to use the same structure, added missing environment variables, and fixed test selectors. All tests in `AuthControls.test.tsx` now pass successfully, ensuring the profile dropdown export feature is fully tested.
 

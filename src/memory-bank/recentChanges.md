@@ -1,5 +1,19 @@
 # Combined Recent Changes
 
+## April 27, 2025
+
+- **Toast Notifications for Score Actions:**
+  - **Goal:** Implement toast notifications to provide feedback when users add, update, or delete scores.
+  - **Implementation:**
+    - Installed `@radix-ui/react-toast` package for toast notifications.
+    - Created a `ToastProvider` component in `src/components/ToastProvider.tsx` that provides a context for managing toast state.
+    - Added the `ToastProvider` to the application layout in `src/app/layout.tsx`.
+    - Added CSS animations in `src/styles/globals.css` for smooth toast entry and exit.
+    - Integrated toast notifications in `LogScoreForm.tsx`, `WodTable.tsx`, and `WodListMobile.tsx` to show appropriate messages when scores are added, updated, or deleted.
+    - Ensured toasts automatically disappear after 3 seconds.
+    - Used different colors for success (green) and error (red) toasts.
+  - **Outcome:** Users now receive clear, non-intrusive feedback when they perform actions on scores, improving the overall user experience and providing confirmation that their actions were successful.
+
 ## April 26, 2025
 
 - **Critical Code Loss Incident: Test File Summarization/Omission**

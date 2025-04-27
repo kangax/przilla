@@ -10,10 +10,14 @@ import {
   Text,
   Flex,
   Box,
+  Separator,
 } from "@radix-ui/themes";
 import { api } from "../../../trpc/react";
 import { useQueryClient } from "@tanstack/react-query";
-import type { Wod, Score } from "../../../types/wodTypes";
+import type { Wod, Score } from "../../../types/wodTypes"; // Added BenchmarkLevel
+import {
+  getPerformanceLevelTooltip, // Import the modified function
+} from "../../../utils/wodUtils"; // Import helpers
 
 type ScorePayload = {
   wodId: string;
@@ -252,9 +256,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
           min === 0 && sec === 0 && !form.time_minutes && !form.time_seconds
             ? null
             : totalSeconds;
-        payload.reps = null;
-        payload.rounds_completed = null;
-        payload.partial_reps = null;
       } else if (form.finishedWithinTimecap === "no") {
         payload.time_seconds = wod.timecap ?? null;
         payload.reps = form.reps ? parseInt(form.reps, 10) : null;
@@ -329,7 +330,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
   return (
     <form onSubmit={handleSubmit}>
       <Flex direction="column" gap="3">
-        {/* Timecap-specific UI */}
         {showTimecapRadio && (
           <Box>
             <Text as="label" size="2" mb="2" weight="bold" className="block">
@@ -410,7 +410,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             </RadioGroup.Root>
           </Box>
         )}
-
         {/* Show time input if finished within timecap, or if not a timecapped WOD */}
         {((showTimecapRadio && form.finishedWithinTimecap === "yes") ||
           (!showTimecapRadio && (showAll || showTime))) && (
@@ -454,7 +453,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             </Box>
           </Flex>
         )}
-
         {/* Show reps/rounds if hit the timecap, or for AMRAPs/ShowAll */}
         {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
           (!showTimecapRadio && (showAll || showReps))) && (
@@ -527,7 +525,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             )}
           </Flex>
         )}
-
         {/* Load Input (only shown if not timecapped and WOD type is Load/ShowAll) */}
         {!showTimecapRadio && (showAll || showLoad) && (
           <Box style={{ flexGrow: 1 }}>
@@ -549,7 +546,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             />
           </Box>
         )}
-
         {/* Rounds + Partial Reps Input (for benchmarks.type='rounds') */}
         {!showTimecapRadio && showRounds && (
           <Flex direction="row" gap="2" align="end">
@@ -591,7 +587,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             </Box>
           </Flex>
         )}
-
         {/* Date and Rx Switch */}
         <Flex align="center" gap="3">
           <Box style={{ flexBasis: "140px" }}>
@@ -633,7 +628,6 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             </Flex>
           </Box>
         </Flex>
-
         <Box>
           <Text as="label" htmlFor="notes" size="1" mb="1">
             Notes
@@ -647,17 +641,35 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             onChange={handleChange}
             disabled={submitting}
             size="3"
-            rows={4}
+            rows={2} // Reduced height
             style={{ resize: "none" }}
           />
         </Box>
-
+        {/* Performance Levels Section */}
+        {wod.benchmarks?.levels && wod.benchmarks?.type && (
+          <Box
+            mt="3" // Added margin top to separate from notes
+            className="rounded-md border border-dotted border-gray-200 bg-gray-50 p-3 dark:border-neutral-700 dark:bg-neutral-800" // Card-like styling with dotted border and background
+          >
+            <Flex direction="column" gap="1">
+              {getPerformanceLevelTooltip(wod).map((levelDetail) => (
+                <Flex key={levelDetail.levelName} justify="between" gap="2">
+                  <Text size="2" className={levelDetail.colorClass}>
+                    {levelDetail.levelName}:
+                  </Text>
+                  <Text size="2" weight="medium">
+                    {levelDetail.formattedRange}
+                  </Text>
+                </Flex>
+              ))}
+            </Flex>
+          </Box>
+        )}
         {error && (
-          <Text size="1" color="red">
+          <Text size="1" color="red" mt="3">
             {error}
           </Text>
         )}
-
         <Flex direction="row" gap="3" justify="end" mt="4">
           <Button
             type="button"

@@ -424,7 +424,12 @@ Notes: ${score.notes ? safeString(score.notes) : "-"}
 
 Your level: ${displayLevel}
 
-${getPerformanceLevelTooltip(wod)}`}
+Performance Levels:
+${getPerformanceLevelTooltip(wod)
+  .map(
+    (levelDetail) => `${levelDetail.levelName}: ${levelDetail.formattedRange}`,
+  )
+  .join("\n")}`}
                       </span>
                     );
 

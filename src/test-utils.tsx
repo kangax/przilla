@@ -1,6 +1,7 @@
 import React, { type ReactElement } from "react";
 import { render, type RenderOptions } from "@testing-library/react";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { ToastProvider } from "~/components/ToastProvider";
 
 // Mock tRPC context/provider
 import { createContext } from "react";
@@ -87,7 +88,9 @@ export const MockTRPCProvider = ({
 const AllTheProviders = ({ children }: { children: React.ReactNode }) => {
   return (
     <MockTRPCProvider>
-      <TooltipProvider>{children}</TooltipProvider>
+      <ToastProvider>
+        <TooltipProvider>{children}</TooltipProvider>
+      </ToastProvider>
     </MockTRPCProvider>
   );
 };

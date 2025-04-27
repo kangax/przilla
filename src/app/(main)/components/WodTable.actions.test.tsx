@@ -1,53 +1,87 @@
-import { describe, it, expect, vi } from "vitest";
-import { render, screen, within, fireEvent } from "@testing-library/react";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import {
+  render,
+  screen,
+  within,
+  fireEvent,
+  waitFor,
+} from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
+import { ToastProvider } from "~/components/ToastProvider";
 import "@testing-library/jest-dom";
 import WodTable from "./WodTable";
 
-// Mock tRPC api at the module level (correct import path)
+// Create a mock for showToast function
+const mockShowToast = vi.fn();
+
+// Mock the useToast hook
+vi.mock("~/components/ToastProvider", () => ({
+  ToastProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  useToast: () => ({
+    showToast: mockShowToast,
+  }),
+}));
+
+// Mock tRPC API
+let mockDeleteScoreSuccess = vi.fn();
+let mockDeleteScoreError = vi.fn();
+
+/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
 vi.mock("~/trpc/react", () => ({
   api: {
-    useUtils: () => ({}),
+    useUtils: () => ({
+      score: {
+        getAllByUser: { invalidate: vi.fn() },
+      },
+    }),
     score: {
       deleteScore: {
-        useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
+        useMutation: (
+          options: {
+            onSuccess?: () => void;
+            onError?: (error: Error) => void;
+          } = {},
+        ) => ({
+          mutate: (params: unknown) => {
+            if (mockDeleteScoreSuccess) {
+              mockDeleteScoreSuccess(params);
+              options.onSuccess?.();
+            } else if (mockDeleteScoreError) {
+              mockDeleteScoreError(params);
+              options.onError?.(new Error("API Error"));
+            }
+          },
           isLoading: false,
-          isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
+          status: "idle",
+          reset: vi.fn(),
         }),
       },
+      /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
       logScore: {
         useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
+          mutate: vi.fn(),
           isLoading: false,
           isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
+          reset: vi.fn(),
         }),
       },
       updateScore: {
         useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
+          mutate: vi.fn(),
           isLoading: false,
           isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
+          reset: vi.fn(),
         }),
       },
       importScores: {
         useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
+          mutate: vi.fn(),
           isLoading: false,
           isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
+          reset: vi.fn(),
         }),
       },
       getAllByUser: {
@@ -129,21 +163,31 @@ const findRenderedRowByContent = (content: string) => {
 describe("WodTable Actions", () => {
   const queryClient = new QueryClient();
 
+  beforeEach(() => {
+    // Reset mocks
+    vi.clearAllMocks();
+    mockShowToast.mockClear();
+    mockDeleteScoreSuccess = vi.fn();
+    mockDeleteScoreError = vi.fn();
+  });
+
   it("should display the 'Scaled' badge for non-Rx scores", () => {
     render(
       <TooltipProvider>
-        <QueryClientProvider client={queryClient}>
-          <WodTable
-            wods={[mockWodWithScore]}
-            sortBy="wodName"
-            sortDirection="asc"
-            handleSort={vi.fn()}
-            tableHeight={500}
-            searchTerm=""
-            scoresByWodId={mockScoresByWodId}
-            isLoadingScores={false}
-          />
-        </QueryClientProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodWithScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={mockScoresByWodId}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
       </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD Bravo");
@@ -153,18 +197,20 @@ describe("WodTable Actions", () => {
   it("should show edit and delete icons for each score", () => {
     render(
       <TooltipProvider>
-        <QueryClientProvider client={queryClient}>
-          <WodTable
-            wods={[mockWodWithScore]}
-            sortBy="wodName"
-            sortDirection="asc"
-            handleSort={vi.fn()}
-            tableHeight={500}
-            searchTerm=""
-            scoresByWodId={mockScoresByWodId}
-            isLoadingScores={false}
-          />
-        </QueryClientProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodWithScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={mockScoresByWodId}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
       </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD Bravo");
@@ -180,18 +226,20 @@ describe("WodTable Actions", () => {
     };
     render(
       <TooltipProvider>
-        <QueryClientProvider client={queryClient}>
-          <WodTable
-            wods={[mockWodNoScore]}
-            sortBy="wodName"
-            sortDirection="asc"
-            handleSort={vi.fn()}
-            tableHeight={500}
-            searchTerm=""
-            scoresByWodId={{}}
-            isLoadingScores={false}
-          />
-        </QueryClientProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodNoScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={{}}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
       </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD NoScore");
@@ -206,18 +254,20 @@ describe("WodTable Actions", () => {
     };
     render(
       <TooltipProvider>
-        <QueryClientProvider client={queryClient}>
-          <WodTable
-            wods={[mockWodNoScore]}
-            sortBy="wodName"
-            sortDirection="asc"
-            handleSort={vi.fn()}
-            tableHeight={500}
-            searchTerm=""
-            scoresByWodId={{}}
-            isLoadingScores={false}
-          />
-        </QueryClientProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodNoScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={{}}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
       </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD NoScorePopover");
@@ -235,18 +285,20 @@ describe("WodTable Actions", () => {
     };
     render(
       <TooltipProvider>
-        <QueryClientProvider client={queryClient}>
-          <WodTable
-            wods={[mockWodNoScore]}
-            sortBy="wodName"
-            sortDirection="asc"
-            handleSort={vi.fn()}
-            tableHeight={500}
-            searchTerm=""
-            scoresByWodId={{}}
-            isLoadingScores={false}
-          />
-        </QueryClientProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodNoScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={{}}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
       </TooltipProvider>,
     );
     const row = findRenderedRowByContent("WOD NoScoreValidation");
@@ -264,5 +316,88 @@ describe("WodTable Actions", () => {
     expect(
       screen.getByText(/required|enter|invalid|please/i),
     ).toBeInTheDocument();
+  });
+
+  it("should show success toast when deleting a score", async () => {
+    // Set up the mock to succeed
+    mockDeleteScoreSuccess = vi.fn();
+    mockDeleteScoreError = null;
+
+    render(
+      <TooltipProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodWithScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={mockScoresByWodId}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
+      </TooltipProvider>,
+    );
+
+    // Find the row and click the delete button
+    const row = findRenderedRowByContent("WOD Bravo");
+    const deleteButton = within(row).getByLabelText(/delete score/i);
+    fireEvent.click(deleteButton);
+
+    // Confirm deletion in the dialog
+    const confirmButton = screen.getByRole("button", { name: /delete/i });
+    fireEvent.click(confirmButton);
+
+    // Wait for the mutation to complete
+    await waitFor(() => {
+      // Verify showToast was called with success message
+      expect(mockShowToast).toHaveBeenCalledWith("success", "Score deleted");
+    });
+  });
+
+  it("should show error toast when deleting a score fails", async () => {
+    // Set up the mock to fail
+    mockDeleteScoreSuccess = null;
+    mockDeleteScoreError = vi.fn();
+
+    render(
+      <TooltipProvider>
+        <ToastProvider>
+          <QueryClientProvider client={queryClient}>
+            <WodTable
+              wods={[mockWodWithScore]}
+              sortBy="wodName"
+              sortDirection="asc"
+              handleSort={vi.fn()}
+              tableHeight={500}
+              searchTerm=""
+              scoresByWodId={mockScoresByWodId}
+              isLoadingScores={false}
+            />
+          </QueryClientProvider>
+        </ToastProvider>
+      </TooltipProvider>,
+    );
+
+    // Find the row and click the delete button
+    const row = findRenderedRowByContent("WOD Bravo");
+    const deleteButton = within(row).getByLabelText(/delete score/i);
+    fireEvent.click(deleteButton);
+
+    // Confirm deletion in the dialog
+    const confirmButton = screen.getByRole("button", { name: /delete/i });
+    fireEvent.click(confirmButton);
+
+    // Wait for the mutation to complete
+    await waitFor(() => {
+      // Verify showToast was called with error message
+      expect(mockShowToast).toHaveBeenCalledWith(
+        "error",
+        "Failed to delete score",
+      );
+    });
   });
 });

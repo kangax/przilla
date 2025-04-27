@@ -5,6 +5,25 @@ import { Theme } from "@radix-ui/themes";
 import { LogScoreDialog } from "./LogScoreDialog";
 import type { Wod, Score } from "../../../types/wodTypes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { TooltipProvider } from "@radix-ui/react-tooltip";
+
+// Create a mock for showToast function
+const mockShowToast = vi.fn();
+
+// Mock the useToast hook
+vi.mock("~/components/ToastProvider", () => ({
+  ToastProvider: ({ children }: { children: React.ReactNode }) => (
+    <>{children}</>
+  ),
+  useToast: () => ({
+    showToast: mockShowToast,
+  }),
+}));
+
+// Define ToastProvider for use in tests
+const ToastProvider = ({ children }: { children: React.ReactNode }) => (
+  <>{children}</>
+);
 
 // Mock the tRPC API client
 vi.mock("../../../trpc/react", () => ({
@@ -207,13 +226,17 @@ const renderComponent = (
   render(
     <QueryClientProvider client={queryClient}>
       <Theme>
-        <LogScoreDialog
-          wod={wod}
-          initialScore={initialScore}
-          isOpen={isOpen}
-          onOpenChange={onOpenChange}
-          onScoreLogged={onScoreLogged}
-        />
+        <TooltipProvider>
+          <ToastProvider>
+            <LogScoreDialog
+              wod={wod}
+              initialScore={initialScore}
+              isOpen={isOpen}
+              onOpenChange={onOpenChange}
+              onScoreLogged={onScoreLogged}
+            />
+          </ToastProvider>
+        </TooltipProvider>
       </Theme>
     </QueryClientProvider>,
   );

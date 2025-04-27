@@ -998,10 +998,9 @@ describe("WodViewer Helper Functions", () => {
 
 // --- Component Tests ---
 import React from "react";
-import { render, screen, fireEvent, within } from "@testing-library/react";
+import { render, screen, fireEvent, within } from "~/test-utils";
 import WodViewer from "./WodViewer";
 import { Theme } from "@radix-ui/themes";
-import { TooltipProvider } from "@radix-ui/react-tooltip";
 
 // Mock useMediaQuery to always return true (mobile)
 vi.mock("~/utils/useMediaQuery", () => ({
@@ -1083,11 +1082,9 @@ describe("WodViewer Mobile Sorting UI", () => {
 
   it("renders the sort button and segmented control on the same line", () => {
     render(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     expect(screen.queryByTestId("segmented-all")).not.toBeNull();
     expect(screen.queryByTestId("segmented-done")).not.toBeNull();
@@ -1105,11 +1102,9 @@ describe("WodViewer Mobile Sorting UI", () => {
     });
 
     render(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
 
     expect(screen.queryByTestId("segmented-all")).toBeNull();
@@ -1128,11 +1123,9 @@ describe("WodViewer Mobile Sorting UI", () => {
   it("always shows sort button regardless of auth state", () => {
     // Test with logged in user (default)
     const { rerender } = render(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     expect(screen.getByLabelText(/Sort WODs/i)).toBeInTheDocument();
     expect(screen.queryByTestId("segmented-all")).not.toBeNull();
@@ -1148,11 +1141,9 @@ describe("WodViewer Mobile Sorting UI", () => {
     });
 
     rerender(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     expect(screen.getByLabelText(/Sort WODs/i)).toBeInTheDocument();
     expect(screen.queryByTestId("segmented-all")).toBeNull();
@@ -1163,11 +1154,9 @@ describe("WodViewer Mobile Sorting UI", () => {
   it("shows SegmentedControl only when logged in", () => {
     // Logged in user (default)
     const { rerender } = render(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     expect(screen.queryByTestId("segmented-all")).not.toBeNull();
     expect(screen.queryByTestId("segmented-done")).not.toBeNull();
@@ -1182,11 +1171,9 @@ describe("WodViewer Mobile Sorting UI", () => {
     });
 
     rerender(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     expect(screen.queryByTestId("segmented-all")).toBeNull();
     expect(screen.queryByTestId("segmented-done")).toBeNull();
@@ -1195,11 +1182,9 @@ describe("WodViewer Mobile Sorting UI", () => {
 
   it("opens the sort dropdown and allows changing sort field and direction", async () => {
     render(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     const sortButton = screen.getByLabelText(/Sort WODs/i);
     fireEvent.keyDown(sortButton, { key: "Enter" });
@@ -1241,11 +1226,9 @@ describe("WodViewer Mobile Sorting UI", () => {
 
   it("allows keyboard navigation of the sort dropdown for accessibility", async () => {
     render(
-      <TooltipProvider>
-        <Theme>
-          <WodViewer initialWods={mockWods} />
-        </Theme>
-      </TooltipProvider>,
+      <Theme>
+        <WodViewer initialWods={mockWods} />
+      </Theme>,
     );
     const sortButton = screen.getByLabelText(/Sort WODs/i);
     sortButton.focus();

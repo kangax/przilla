@@ -164,7 +164,10 @@ describe("LogScoreForm Toast Notifications", () => {
     /* eslint-disable @typescript-eslint/no-unsafe-call */
     await waitFor(() => {
       // Verify showToast was called with success message
-      expect(mockShowToast).toHaveBeenCalledWith("success", "Score added");
+      expect(mockShowToast).toHaveBeenCalledWith(
+        "success",
+        'Score added. Find it in your "Done" tab.',
+      );
     });
     /* eslint-enable @typescript-eslint/no-unsafe-call */
   });

@@ -122,7 +122,7 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
       onCancel();
 
       // Show success toast
-      showToast("success", "Score added");
+      showToast("success", 'Score added. Find it in your "Done" tab.');
     },
     onError: (err) => {
       setError(err instanceof Error ? err.message : "Failed to log score.");

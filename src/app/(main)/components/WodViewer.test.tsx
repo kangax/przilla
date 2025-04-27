@@ -1,4 +1,5 @@
-import { describe, it, expect, vi } from "vitest";
+import { describe, it, expect, vi, beforeEach } from "vitest";
+import type { Mock } from "vitest";
 import "@testing-library/jest-dom";
 import {
   getPerformanceLevelColor,
@@ -11,6 +12,12 @@ import {
   sortWods,
 } from "~/utils/wodUtils"; // Import helpers from utils
 import type { Wod, Score } from "~/types/wodTypes"; // Import types
+
+// --- Explicitly mock useSession ---
+vi.mock("~/lib/auth-client", () => ({
+  useSession: vi.fn(),
+}));
+import { useSession } from "~/lib/auth-client";
 
 // --- Mock tRPC ---
 vi.mock("~/trpc/react", () => ({
@@ -87,14 +94,6 @@ vi.mock("next/navigation", () => ({
   usePathname: vi.fn(() => "/"),
 }));
 
-// --- Mock next-auth/react ---
-vi.mock("next-auth/react", () => ({
-  useSession: vi.fn(() => ({
-    data: null,
-    status: "unauthenticated",
-  })),
-}));
-
 // --- Mock WodTable component ---
 vi.mock("./WodTable", () => ({
   default: vi.fn(({ wods, sortBy, sortDirection, searchTerm }) => {
@@ -136,7 +135,6 @@ describe("WodViewer Helper Functions", () => {
       expect(getPerformanceLevelColor(null)).toBe(
         "text-foreground/70 dark:text-foreground/60",
       );
-      // Use a type assertion to a specific string type instead of 'any'
       expect(getPerformanceLevelColor("unknown" as string)).toBe(
         "text-foreground/70 dark:text-foreground/60",
       );
@@ -169,10 +167,27 @@ describe("WodViewer Helper Functions", () => {
         },
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
-      expect(tooltip).toContain("Elite: 0:00 - 3:00");
-      expect(tooltip).toContain("Advanced: 3:00 - 4:00");
-      expect(tooltip).toContain("Intermediate: 4:00 - 5:00");
-      expect(tooltip).toContain("Beginner: 5:00 - ∞");
+      expect(Array.isArray(tooltip)).toBe(true);
+      expect(tooltip).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            levelName: "Elite",
+            formattedRange: "0:00 - 3:00",
+          }),
+          expect.objectContaining({
+            levelName: "Advanced",
+            formattedRange: "3:00 - 4:00",
+          }),
+          expect.objectContaining({
+            levelName: "Intermediate",
+            formattedRange: "4:00 - 5:00",
+          }),
+          expect.objectContaining({
+            levelName: "Beginner",
+            formattedRange: "5:00 - ∞",
+          }),
+        ]),
+      );
     });
 
     it("should return correct multi-line tooltip for rounds benchmarks", () => {
@@ -192,10 +207,27 @@ describe("WodViewer Helper Functions", () => {
         },
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
-      expect(tooltip).toContain("Elite: > 20");
-      expect(tooltip).toContain("Advanced: 15 - 20");
-      expect(tooltip).toContain("Intermediate: 10 - 15");
-      expect(tooltip).toContain("Beginner: 0 - 10");
+      expect(Array.isArray(tooltip)).toBe(true);
+      expect(tooltip).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            levelName: "Elite",
+            formattedRange: "> 20",
+          }),
+          expect.objectContaining({
+            levelName: "Advanced",
+            formattedRange: "15 - 20",
+          }),
+          expect.objectContaining({
+            levelName: "Intermediate",
+            formattedRange: "10 - 15",
+          }),
+          expect.objectContaining({
+            levelName: "Beginner",
+            formattedRange: "0 - 10",
+          }),
+        ]),
+      );
     });
 
     it("should return correct multi-line tooltip for load benchmarks", () => {
@@ -215,10 +247,27 @@ describe("WodViewer Helper Functions", () => {
         },
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
-      expect(tooltip).toContain("Elite: > 300 lbs");
-      expect(tooltip).toContain("Advanced: 250 - 300 lbs");
-      expect(tooltip).toContain("Intermediate: 200 - 250 lbs");
-      expect(tooltip).toContain("Beginner: 0 - 200 lbs");
+      expect(Array.isArray(tooltip)).toBe(true);
+      expect(tooltip).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            levelName: "Elite",
+            formattedRange: "> 300 lbs",
+          }),
+          expect.objectContaining({
+            levelName: "Advanced",
+            formattedRange: "250 - 300 lbs",
+          }),
+          expect.objectContaining({
+            levelName: "Intermediate",
+            formattedRange: "200 - 250 lbs",
+          }),
+          expect.objectContaining({
+            levelName: "Beginner",
+            formattedRange: "0 - 200 lbs",
+          }),
+        ]),
+      );
     });
 
     it("should return correct multi-line tooltip for reps benchmarks", () => {
@@ -238,18 +287,32 @@ describe("WodViewer Helper Functions", () => {
         },
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
-      expect(tooltip).toContain("Elite: > 100");
-      expect(tooltip).toContain("Advanced: 75 - 100");
-      expect(tooltip).toContain("Intermediate: 50 - 75");
-      expect(tooltip).toContain("Beginner: 0 - 50");
+      expect(Array.isArray(tooltip)).toBe(true);
+      expect(tooltip).toEqual(
+        expect.arrayContaining([
+          expect.objectContaining({
+            levelName: "Elite",
+            formattedRange: "> 100",
+          }),
+          expect.objectContaining({
+            levelName: "Advanced",
+            formattedRange: "75 - 100",
+          }),
+          expect.objectContaining({
+            levelName: "Intermediate",
+            formattedRange: "50 - 75",
+          }),
+          expect.objectContaining({
+            levelName: "Beginner",
+            formattedRange: "0 - 50",
+          }),
+        ]),
+      );
     });
 
-    it("should return default message if no benchmarks", () => {
-      // Create a null Wod with a more specific type assertion
+    it("should return empty array if no benchmarks", () => {
       const mockWod = null as unknown as Omit<Wod, "benchmarks">;
-      expect(getPerformanceLevelTooltip(mockWod as Wod)).toBe(
-        "No benchmark data available.",
-      );
+      expect(getPerformanceLevelTooltip(mockWod as Wod)).toEqual([]);
     });
   });
 
@@ -945,14 +1008,6 @@ vi.mock("~/utils/useMediaQuery", () => ({
   useMediaQuery: () => true,
 }));
 
-// Provide a minimal mock for useSession to simulate a logged-in user
-vi.mock("~/lib/auth-client", () => ({
-  useSession: () => ({
-    data: { user: { id: "user1", name: "Test User" } },
-    isPending: false,
-  }),
-}));
-
 describe("WodViewer Mobile Sorting UI", () => {
   const mockWods = [
     {
@@ -996,6 +1051,36 @@ describe("WodViewer Mobile Sorting UI", () => {
     },
   ];
 
+  beforeEach(() => {
+    // Default: logged in user
+    (useSession as Mock).mockReturnValue({
+      data: {
+        user: {
+          id: "user1",
+          name: "Test User",
+          email: "test@example.com",
+          emailVerified: false,
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          image: undefined,
+        },
+        session: {
+          id: "session1",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          expiresAt: new Date(),
+          userId: "user1",
+          userAgent: "test-agent",
+          ipAddress: "127.0.0.1",
+          token: "test-token",
+        },
+      },
+      isPending: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+  });
+
   it("renders the sort button and segmented control on the same line", () => {
     render(
       <TooltipProvider>
@@ -1004,13 +1089,108 @@ describe("WodViewer Mobile Sorting UI", () => {
         </Theme>
       </TooltipProvider>,
     );
-    // Segmented control and category select should both have "All (3)", so check that at least one exists
-    expect(screen.getAllByText(/All\s*\(\d+\)/).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Done\s*\(\d+\)/).length).toBeGreaterThan(0);
-    expect(screen.getAllByText(/Todo\s*\(\d+\)/).length).toBeGreaterThan(0);
-    // Sort button (ListFilter icon) should be present
+    expect(screen.queryByTestId("segmented-all")).not.toBeNull();
+    expect(screen.queryByTestId("segmented-done")).not.toBeNull();
+    expect(screen.queryByTestId("segmented-todo")).not.toBeNull();
     const sortButton = screen.getByLabelText(/Sort WODs/i);
     expect(sortButton).toBeInTheDocument();
+  });
+
+  it("does not show 'Your Score' sort option when logged out", async () => {
+    (useSession as Mock).mockReturnValue({
+      data: null,
+      isPending: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    render(
+      <TooltipProvider>
+        <Theme>
+          <WodViewer initialWods={mockWods} />
+        </Theme>
+      </TooltipProvider>,
+    );
+
+    expect(screen.queryByTestId("segmented-all")).toBeNull();
+    expect(screen.queryByTestId("segmented-done")).toBeNull();
+    expect(screen.queryByTestId("segmented-todo")).toBeNull();
+
+    const sortButton = screen.getByLabelText(/Sort WODs/i);
+    fireEvent.keyDown(sortButton, { key: "Enter" });
+
+    const menu = await screen.findByRole("menu");
+    expect(menu).toBeInTheDocument();
+
+    expect(within(menu).queryByTestId("sort-menuitem-results")).toBeNull();
+  });
+
+  it("always shows sort button regardless of auth state", () => {
+    // Test with logged in user (default)
+    const { rerender } = render(
+      <TooltipProvider>
+        <Theme>
+          <WodViewer initialWods={mockWods} />
+        </Theme>
+      </TooltipProvider>,
+    );
+    expect(screen.getByLabelText(/Sort WODs/i)).toBeInTheDocument();
+    expect(screen.queryByTestId("segmented-all")).not.toBeNull();
+    expect(screen.queryByTestId("segmented-done")).not.toBeNull();
+    expect(screen.queryByTestId("segmented-todo")).not.toBeNull();
+
+    // Test with logged out user
+    (useSession as Mock).mockReturnValue({
+      data: null,
+      isPending: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    rerender(
+      <TooltipProvider>
+        <Theme>
+          <WodViewer initialWods={mockWods} />
+        </Theme>
+      </TooltipProvider>,
+    );
+    expect(screen.getByLabelText(/Sort WODs/i)).toBeInTheDocument();
+    expect(screen.queryByTestId("segmented-all")).toBeNull();
+    expect(screen.queryByTestId("segmented-done")).toBeNull();
+    expect(screen.queryByTestId("segmented-todo")).toBeNull();
+  });
+
+  it("shows SegmentedControl only when logged in", () => {
+    // Logged in user (default)
+    const { rerender } = render(
+      <TooltipProvider>
+        <Theme>
+          <WodViewer initialWods={mockWods} />
+        </Theme>
+      </TooltipProvider>,
+    );
+    expect(screen.queryByTestId("segmented-all")).not.toBeNull();
+    expect(screen.queryByTestId("segmented-done")).not.toBeNull();
+    expect(screen.queryByTestId("segmented-todo")).not.toBeNull();
+
+    // Logged out user
+    (useSession as Mock).mockReturnValue({
+      data: null,
+      isPending: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    rerender(
+      <TooltipProvider>
+        <Theme>
+          <WodViewer initialWods={mockWods} />
+        </Theme>
+      </TooltipProvider>,
+    );
+    expect(screen.queryByTestId("segmented-all")).toBeNull();
+    expect(screen.queryByTestId("segmented-done")).toBeNull();
+    expect(screen.queryByTestId("segmented-todo")).toBeNull();
   });
 
   it("opens the sort dropdown and allows changing sort field and direction", async () => {
@@ -1022,46 +1202,38 @@ describe("WodViewer Mobile Sorting UI", () => {
       </TooltipProvider>,
     );
     const sortButton = screen.getByLabelText(/Sort WODs/i);
-    // Use keyDown Enter instead of click for potentially more reliable menu opening in tests
     fireEvent.keyDown(sortButton, { key: "Enter" });
 
-    // Dropdown menu should appear and contain sort options
     const menu = await screen.findByRole("menu");
     expect(menu).toBeInTheDocument();
-    expect(within(menu).getByText("Name")).toBeInTheDocument();
-    expect(within(menu).getByText("Date Added")).toBeInTheDocument();
-    expect(within(menu).getByText("Difficulty")).toBeInTheDocument();
-    expect(within(menu).getByText("Likes")).toBeInTheDocument();
-    expect(within(menu).getByText("Your Score")).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-wodName"),
+    ).toBeInTheDocument();
+    expect(within(menu).getByTestId("sort-menuitem-date")).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-difficulty"),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-countLikes"),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-results"),
+    ).toBeInTheDocument();
 
-    // Click "Name" within the menu to sort by name
-    fireEvent.click(within(menu).getByText("Name"));
+    fireEvent.click(within(menu).getByTestId("sort-menuitem-wodName"));
 
-    // Re-open menu to check if sort was applied
     fireEvent.keyDown(sortButton, { key: "Enter" });
     const menuAgain = await screen.findByRole("menu");
-
-    // Find the Name menu item
     const nameMenuItem = within(menuAgain)
-      .getByText("Name")
+      .getByTestId("sort-menuitem-wodName")
       .closest('[role="menuitem"]');
     expect(nameMenuItem).not.toBeNull();
+    expect(
+      within(menuAgain).getByTestId("sort-menuitem-wodName"),
+    ).toBeInTheDocument();
 
-    // Instead of looking for specific SVG elements or data attributes,
-    // we'll verify that clicking the sort option had an effect by checking
-    // if the sort state was updated. We can do this by checking if the
-    // Name menu item has some visual indication that it's selected.
-    // This could be a class, attribute, or child element that indicates selection.
+    fireEvent.click(within(menuAgain).getByTestId("sort-menuitem-wodName"));
 
-    // Since we can't rely on specific implementation details like SVG presence or data attributes,
-    // let's just verify that the component doesn't crash when we interact with it
-    // and that the menu items are present as expected.
-    expect(within(menuAgain).getByText("Name")).toBeInTheDocument();
-
-    // We can also verify that clicking again works
-    fireEvent.click(within(menuAgain).getByText("Name"));
-
-    // And we can open the menu again to verify the component is still working
     fireEvent.keyDown(sortButton, { key: "Enter" });
     const menuOneMoreTime = await screen.findByRole("menu");
     expect(menuOneMoreTime).toBeInTheDocument();
@@ -1075,37 +1247,39 @@ describe("WodViewer Mobile Sorting UI", () => {
         </Theme>
       </TooltipProvider>,
     );
-    // Focus the sort button and open dropdown with keyboard
     const sortButton = screen.getByLabelText(/Sort WODs/i);
     sortButton.focus();
     expect(sortButton).toHaveFocus();
     fireEvent.keyDown(sortButton, { key: "Enter" });
 
-    // Dropdown menu should appear and contain sort options
     const menu = await screen.findByRole("menu");
     expect(menu).toBeInTheDocument();
-    expect(within(menu).getByText("Name")).toBeInTheDocument();
-    expect(within(menu).getByText("Date Added")).toBeInTheDocument();
-    expect(within(menu).getByText("Difficulty")).toBeInTheDocument();
-    expect(within(menu).getByText("Likes")).toBeInTheDocument();
-    expect(within(menu).getByText("Your Score")).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-wodName"),
+    ).toBeInTheDocument();
+    expect(within(menu).getByTestId("sort-menuitem-date")).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-difficulty"),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-countLikes"),
+    ).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-results"),
+    ).toBeInTheDocument();
 
-    // Arrow down to next item
     fireEvent.keyDown(document.activeElement || sortButton, {
       key: "ArrowDown",
     });
-    // Should be able to arrow through options
-    expect(within(menu).getByText("Name")).toBeInTheDocument();
+    expect(
+      within(menu).getByTestId("sort-menuitem-wodName"),
+    ).toBeInTheDocument();
 
-    // Arrow down to "Date Added"
     fireEvent.keyDown(document.activeElement || sortButton, {
       key: "ArrowDown",
     });
-    expect(within(menu).getByText("Date Added")).toBeInTheDocument();
+    expect(within(menu).getByTestId("sort-menuitem-date")).toBeInTheDocument();
 
-    // Press Enter to select "Date Added"
     fireEvent.keyDown(document.activeElement || sortButton, { key: "Enter" });
-
-    // (Do not assert focus return due to jsdom/portal limitations)
   });
 });

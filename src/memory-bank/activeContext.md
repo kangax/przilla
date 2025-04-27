@@ -2,6 +2,7 @@
 
 ## Current Focus
 
+- **Critical Rule: Never summarize or omit code in any file. Always provide the complete, unabridged content for all code and documentation. Summarization, ellipsis, or "omitted for brevity" is strictly forbidden.**
 - **AuthControls.test.tsx Mock Fix (Apr 22, 2025):**
 
   - Fixed a test failure in `src/app/_components/AuthControls.test.tsx` where the mock for env.js was exporting a default object instead of a named export called `env`.
@@ -178,6 +179,7 @@
 
 ## Learnings & Insights
 
+- **Never summarize or omit code or documentation. All files must always be complete and explicit. Any omission, summarization, or use of ellipsis/comments to indicate missing content is a critical error and must be avoided.**
 - When using prop-drilling for server state (e.g., scores), query invalidation alone is not enough to guarantee UI updates. The parent component must be explicitly notified to refetch data after mutations.
 - Adding an `onScoreLogged` callback, passed from the parent and triggered after log/edit, ensures the parent can refetch and update the UI immediately. This pattern matches the desktop flow and is robust to future changes.
 - Robust state management is essential for mobile sheet UIs: editing and deleting must be mutually exclusive, and state must reset on close to avoid stale UI.

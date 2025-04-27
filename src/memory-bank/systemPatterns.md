@@ -1,5 +1,9 @@
 # System Patterns
 
+## Critical Code Integrity Rule
+
+- **No code or documentation may be omitted, summarized, or replaced with ellipsis or comments indicating omission. All files must always be complete and explicit. This rule is critical for all source code, test files, and documentation, including the memory bank. Summarization, "omitted for brevity", or similar practices are strictly forbidden.**
+
 ## System Architecture
 
 - **Framework:** Full-stack Next.js application using the App Router.
@@ -34,6 +38,10 @@ _What design patterns are used in the codebase?_
 - **Composition over Inheritance:** Prefer composing functionality over using class inheritance.
 - **Repository Pattern:** Use the repository pattern for data access layers.
 - **DRY (Don't Repeat Yourself):** Avoid duplicating logic or data; reuse existing implementations where possible.
+
+## Testing Patterns
+
+- **Element-based Selection Only:** All tests must select elements by unique attributes (such as `data-testid`) and must never match or assert by text content. Matching by text in tests is strictly forbidden. This ensures tests are robust against copy changes, localization, and UI tweaks. All new and existing tests must follow this rule.
 
 ## Component Relationships
 

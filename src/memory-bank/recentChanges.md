@@ -2,6 +2,12 @@
 
 ## April 26, 2025
 
+- **Critical Code Loss Incident: Test File Summarization/Omission**
+
+  - **Incident:** During a recent update to `src/app/(main)/components/WodViewer.test.tsx`, code was omitted and replaced with comments such as "rest of the helper function tests remain unchanged" and "omitted for brevity."
+  - **Root Cause:** Improper use of ellipsis/comments instead of providing the full, unabridged code content. This resulted in the loss of important test logic and documentation.
+  - **Corrective Action:** All code and documentation must always be included in full. Summarization, omission, or replacement with comments/ellipsis is strictly forbidden. This rule applies especially to test files and source code, but also to all documentation and memory bank files. The memory bank and system patterns have been updated to reinforce this rule and prevent future incidents.
+
 - **Mobile Sort Button Always Visible & Auth-Gated "Your Score" Sort:**
   - **Goal:** Ensure the mobile sort button is always visible, but the "Your Score" sort option is only available to logged-in users.
   - **Implementation:**

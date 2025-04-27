@@ -607,21 +607,27 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
                 }
                 className="flex-1"
               >
-                <SegmentedControl.Item value="all">
+                <SegmentedControl.Item value="all" data-testid="segmented-all">
                   <Tooltip content="Show All Workouts">
                     <span className="text-base">
                       All ({dynamicTotalWodCount})
                     </span>
                   </Tooltip>
                 </SegmentedControl.Item>
-                <SegmentedControl.Item value="done">
+                <SegmentedControl.Item
+                  value="done"
+                  data-testid="segmented-done"
+                >
                   <Tooltip content="Show Done Workouts">
                     <span className="text-base">
                       Done ({dynamicDoneWodsCount})
                     </span>
                   </Tooltip>
                 </SegmentedControl.Item>
-                <SegmentedControl.Item value="notDone">
+                <SegmentedControl.Item
+                  value="notDone"
+                  data-testid="segmented-todo"
+                >
                   <Tooltip content="Show Not Done Workouts">
                     <span className="text-base">
                       Todo ({dynamicNotDoneWodsCount})
@@ -663,6 +669,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
                 ).map((item) => (
                   <DropdownMenu.Item
                     key={item.key}
+                    data-testid={`sort-menuitem-${item.key}`}
                     className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-popover-foreground outline-none transition-colors hover:bg-accent focus:bg-accent data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                     onSelect={() => handleSort(item.key as SortByType)}
                   >
@@ -690,17 +697,17 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
             }
             className="ml-auto"
           >
-            <SegmentedControl.Item value="all">
+            <SegmentedControl.Item value="all" data-testid="segmented-all">
               <Tooltip content="Show All Workouts">
                 <span>All ({dynamicTotalWodCount})</span>
               </Tooltip>
             </SegmentedControl.Item>
-            <SegmentedControl.Item value="done">
+            <SegmentedControl.Item value="done" data-testid="segmented-done">
               <Tooltip content="Show Done Workouts">
                 <span>Done ({dynamicDoneWodsCount})</span>
               </Tooltip>
             </SegmentedControl.Item>
-            <SegmentedControl.Item value="notDone">
+            <SegmentedControl.Item value="notDone" data-testid="segmented-todo">
               <Tooltip content="Show Not Done Workouts">
                 <span>Todo ({dynamicNotDoneWodsCount})</span>
               </Tooltip>

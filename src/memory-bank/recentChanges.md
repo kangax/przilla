@@ -1,5 +1,16 @@
 # Combined Recent Changes
 
+## April 26, 2025
+
+- **Mobile Sort Button Always Visible & Auth-Gated "Your Score" Sort:**
+  - **Goal:** Ensure the mobile sort button is always visible, but the "Your Score" sort option is only available to logged-in users.
+  - **Implementation:**
+    - Refactored the mobile filter bar in `WodViewer.tsx` so the sort DropdownMenu is always rendered, regardless of authentication state.
+    - The list of sort options is now dynamic: "Your Score" is only included if the user is logged in; all other options ("Name", "Date Added", "Difficulty", "Likes") are always available.
+    - Added a guard: if a logged-out user tries to select "Your Score" (e.g., via URL), the sort is automatically reset to "date".
+    - The SegmentedControl for completionFilter remains visible only to logged-in users.
+  - **Outcome:** The mobile sort button is always accessible, the UI is robust to URL manipulation, and the experience is consistent and intuitive for all users. This closes the "Add sorting to mobile view" next step.
+
 ## April 22, 2025
 
 - **AuthControls.test.tsx Mock Fix:**

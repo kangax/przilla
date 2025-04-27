@@ -1,6 +1,6 @@
 # Tech Context
 
-If `replace_in_file` fails one, immediately start using `write_to_file` from now on.
+If `replace_in_file` fails once, immediately start using `write_to_file` from now on.
 Never truncate files for brevity, you must always output full file contents.
 
 ## Technologies Used

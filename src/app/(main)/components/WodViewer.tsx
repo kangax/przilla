@@ -257,6 +257,13 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return isValidSortBy(urlSortBy) ? urlSortBy : "date";
   });
 
+  // If not logged in and sortBy is "results", reset to "date"
+  useEffect(() => {
+    if (!isLoggedIn && sortBy === "results") {
+      setSortBy("date");
+    }
+  }, [isLoggedIn, sortBy]);
+
   const [sortDirection, setSortDirection] = useState<"asc" | "desc">(() => {
     const urlSortDir = searchParams.get("sortDir");
     if (isValidSortDirection(urlSortDir)) {
@@ -588,9 +595,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         </div>
 
         {/* SegmentedControl and Sort Button: On mobile, show in a row; on desktop, just SegmentedControl */}
-        {isLoggedIn &&
-          (isMobile ? (
-            <div className="mt-2 flex w-full flex-row items-center gap-2">
+        {isMobile ? (
+          <div className="mt-2 flex w-full flex-row items-center gap-2">
+            {/* SegmentedControl for completionFilter: only show if logged in */}
+            {isLoggedIn && (
               <SegmentedControl.Root
                 size="2"
                 value={completionFilter}
@@ -621,74 +629,84 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
                   </Tooltip>
                 </SegmentedControl.Item>
               </SegmentedControl.Root>
-              <DropdownMenu.Root>
-                <DropdownMenu.Trigger>
-                  <IconButton variant="ghost" aria-label="Sort WODs">
-                    <ListFilter size={20} />
-                  </IconButton>
-                </DropdownMenu.Trigger>
-                <DropdownMenu.Content
-                  className="z-50 min-w-[180px] rounded-md border border-border bg-popover p-1 shadow-md"
-                  sideOffset={5}
-                  align="end"
-                >
-                  <DropdownMenu.Label className="px-2 py-1.5 text-sm font-semibold text-popover-foreground">
-                    Sort By
-                  </DropdownMenu.Label>
-                  <DropdownMenu.Separator className="my-1 h-px bg-border" />
-                  {[
-                    { key: "wodName", label: "Name" },
-                    { key: "date", label: "Date Added" },
-                    { key: "difficulty", label: "Difficulty" },
-                    { key: "countLikes", label: "Likes" },
-                    { key: "results", label: "Your Score" },
-                  ].map((item) => (
-                    <DropdownMenu.Item
-                      key={item.key}
-                      className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-popover-foreground outline-none transition-colors hover:bg-accent focus:bg-accent data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                      onSelect={() => handleSort(item.key as SortByType)}
-                    >
-                      <span className="flex-grow">{item.label}</span>
-                      {sortBy === item.key && (
-                        <>
-                          {sortDirection === "asc" ? (
-                            <ArrowUp className="ml-auto h-4 w-4" />
-                          ) : (
-                            <ArrowDown className="ml-auto h-4 w-4" />
-                          )}
-                        </>
-                      )}
-                    </DropdownMenu.Item>
-                  ))}
-                </DropdownMenu.Content>
-              </DropdownMenu.Root>
-            </div>
-          ) : (
-            <SegmentedControl.Root
-              size="1"
-              value={completionFilter}
-              onValueChange={(value) =>
-                setCompletionFilter(value as "all" | "done" | "notDone")
-              }
-              className="ml-auto"
-            >
-              <SegmentedControl.Item value="all">
-                <Tooltip content="Show All Workouts">
-                  <span>All ({dynamicTotalWodCount})</span>
-                </Tooltip>
-              </SegmentedControl.Item>
-              <SegmentedControl.Item value="done">
-                <Tooltip content="Show Done Workouts">
-                  <span>Done ({dynamicDoneWodsCount})</span>
-                </Tooltip>
-              </SegmentedControl.Item>
-              <SegmentedControl.Item value="notDone">
-                <Tooltip content="Show Not Done Workouts">
-                  <span>Todo ({dynamicNotDoneWodsCount})</span>
-                </Tooltip>
-              </SegmentedControl.Item>
-            </SegmentedControl.Root>
-          ))}
+            )}
+            {/* Sort DropdownMenu: always visible */}
+            <DropdownMenu.Root>
+              <DropdownMenu.Trigger>
+                <IconButton variant="ghost" aria-label="Sort WODs">
+                  <ListFilter size={20} />
+                </IconButton>
+              </DropdownMenu.Trigger>
+              <DropdownMenu.Content
+                className="z-50 min-w-[180px] rounded-md border border-border bg-popover p-1 shadow-md"
+                sideOffset={5}
+                align="end"
+              >
+                <DropdownMenu.Label className="px-2 py-1.5 text-sm font-semibold text-popover-foreground">
+                  Sort By
+                </DropdownMenu.Label>
+                <DropdownMenu.Separator className="my-1 h-px bg-border" />
+                {(isLoggedIn
+                  ? [
+                      { key: "wodName", label: "Name" },
+                      { key: "date", label: "Date Added" },
+                      { key: "difficulty", label: "Difficulty" },
+                      { key: "countLikes", label: "Likes" },
+                      { key: "results", label: "Your Score" },
+                    ]
+                  : [
+                      { key: "wodName", label: "Name" },
+                      { key: "date", label: "Date Added" },
+                      { key: "difficulty", label: "Difficulty" },
+                      { key: "countLikes", label: "Likes" },
+                    ]
+                ).map((item) => (
+                  <DropdownMenu.Item
+                    key={item.key}
+                    className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-popover-foreground outline-none transition-colors hover:bg-accent focus:bg-accent data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                    onSelect={() => handleSort(item.key as SortByType)}
+                  >
+                    <span className="flex-grow">{item.label}</span>
+                    {sortBy === item.key && (
+                      <>
+                        {sortDirection === "asc" ? (
+                          <ArrowUp className="ml-auto h-4 w-4" />
+                        ) : (
+                          <ArrowDown className="ml-auto h-4 w-4" />
+                        )}
+                      </>
+                    )}
+                  </DropdownMenu.Item>
+                ))}
+              </DropdownMenu.Content>
+            </DropdownMenu.Root>
+          </div>
+        ) : (
+          <SegmentedControl.Root
+            size="1"
+            value={completionFilter}
+            onValueChange={(value) =>
+              setCompletionFilter(value as "all" | "done" | "notDone")
+            }
+            className="ml-auto"
+          >
+            <SegmentedControl.Item value="all">
+              <Tooltip content="Show All Workouts">
+                <span>All ({dynamicTotalWodCount})</span>
+              </Tooltip>
+            </SegmentedControl.Item>
+            <SegmentedControl.Item value="done">
+              <Tooltip content="Show Done Workouts">
+                <span>Done ({dynamicDoneWodsCount})</span>
+              </Tooltip>
+            </SegmentedControl.Item>
+            <SegmentedControl.Item value="notDone">
+              <Tooltip content="Show Not Done Workouts">
+                <span>Todo ({dynamicNotDoneWodsCount})</span>
+              </Tooltip>
+            </SegmentedControl.Item>
+          </SegmentedControl.Root>
+        )}
       </div>
 
       {/* Conditionally render card list or table */}

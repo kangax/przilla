@@ -1,5 +1,38 @@
 # Tech Context
 
+## Scripting and Data Migration Best Practices
+
+- **TypeScript for Scripts:** All new scripts should be written in TypeScript (`.ts`). Run scripts using `npx tsx path/to/script.ts`. Avoid `.cjs` for new scripts; legacy scripts may remain in `.cjs` for compatibility, but all new work should be `.ts`.
+- **ESM Compatibility:** Scripts use ESM (`"type": "module"` in package.json). For `__dirname`/`__filename`, use:
+  ```ts
+  import { fileURLToPath } from "url";
+  const __filename = fileURLToPath(import.meta.url);
+  const __dirname = path.dirname(__filename);
+  ```
+- **Drizzle ORM with libSQL:** For SQLite/Turso, use `drizzle-orm/libsql` and `@libsql/client`:
+  ```ts
+  import { drizzle } from "drizzle-orm/libsql";
+  import { createClient } from "@libsql/client";
+  const client = createClient({ url: process.env.DATABASE_URL });
+  const db = drizzle(client);
+  ```
+  Do **not** use `drizzle-orm/sqlite` or `better-sqlite3` for new scripts.
+- **Environment Variables:** Use `import "dotenv/config";` at the top of scripts to automatically load environment variables from `.env`. This ensures scripts work seamlessly in both local and production environments.
+- **Idempotent, Robust Scripts:** Data migration and population scripts must:
+  - Be idempotent (safe to rerun).
+  - Log all actions and outcomes.
+  - Check for existing records before inserting (e.g., use `.where()` and `and()` for composite keys).
+  - Handle missing or mismatched data gracefully, logging any issues for review.
+- **Production vs. Local/Dev Database:** Always use the `DATABASE_URL` environment variable to control which database scripts target. For production, run scripts with `DATABASE_URL=... npx tsx ...` or update `.env` temporarily. Never hardcode database URLs in scripts.
+- **Migration Workflow:** Always run Drizzle migrations (`drizzle-kit push`) against the target database before running any population or data-modifying scripts. Confirm schema changes are present in production before attempting to write new data.
+- **Logging and Error Handling:** Scripts should log:
+  - Number of records inserted/updated.
+  - Any records not found or skipped.
+  - Summary of actions at the end.
+  - Use `try/catch` or `.catch()` on main functions to log and exit on error.
+
+---
+
 If `replace_in_file` fails once, immediately start using `write_to_file` from now on.
 Never truncate files for brevity, you must always output full file contents.
 

@@ -1,5 +1,19 @@
 # Combined Recent Changes
 
+## April 28, 2025
+
+- **WOD Movements Table and Data Population:**
+  - **Goal:** Normalize all WOD movements in the database for analytics, filtering, and UI features.
+  - **Implementation:**
+    - Added `movements` and `wod_movements` tables to the schema (Drizzle ORM).
+    - Ran migration and populated these tables in the local/dev database using a robust script (`scripts/populate_movements_to_db.ts`).
+    - The script extracts all unique movements from canonical WOD data (`public/data/wods_with_movements.json`) and creates associations for each WOD.
+    - Local run: 387 unique movements, 3021 associations, 8 WODs missing in DB (to review).
+    - The script is robust, idempotent, and logs all actions.
+    - **Production DB is not yet migrated.**
+    - **Next step:** Run `drizzle-kit push` with the production `DATABASE_URL` to create the new tables, then run the population script with the same prod URL.
+  - **Outcome:** Local database is fully populated with normalized movements and associations. Production migration and data population are pending.
+
 ## April 27, 2025
 
 - **Test Fixes for ToastProvider and WodViewer:**

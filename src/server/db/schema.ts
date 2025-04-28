@@ -183,3 +183,50 @@ export const scoresRelations = relations(scores, ({ one }) => ({
   user: one(user, { fields: [scores.userId], references: [user.id] }), // Score belongs to one user (references updated 'user' table)
   wod: one(wods, { fields: [scores.wodId], references: [wods.id] }), // Score belongs to one WOD
 }));
+
+// --- Movements Table ---
+export const movements = createTable(
+  "movement",
+  {
+    id: text("id")
+      .primaryKey()
+      .$defaultFn(() => crypto.randomUUID()),
+    name: text("name").notNull().unique(),
+  },
+  (movement) => ({
+    nameIndex: index("movement_name_idx").on(movement.name),
+  }),
+);
+
+// --- WOD-Movements Join Table ---
+export const wodMovements = createTable(
+  "wod_movement",
+  {
+    wodId: text("wod_id")
+      .notNull()
+      .references(() => wods.id, { onDelete: "cascade" }),
+    movementId: text("movement_id")
+      .notNull()
+      .references(() => movements.id, { onDelete: "cascade" }),
+  },
+  (wodMovement) => ({
+    pk: index("wod_movement_pk").on(wodMovement.wodId, wodMovement.movementId),
+    wodIdIdx: index("wod_movement_wod_id_idx").on(wodMovement.wodId),
+    movementIdIdx: index("wod_movement_movement_id_idx").on(
+      wodMovement.movementId,
+    ),
+  }),
+);
+
+// --- Relations for Movements and WOD-Movements ---
+export const movementsRelations = relations(movements, ({ many }) => ({
+  wodMovements: many(wodMovements),
+}));
+
+export const wodMovementsRelations = relations(wodMovements, ({ one }) => ({
+  wod: one(wods, { fields: [wodMovements.wodId], references: [wods.id] }),
+  movement: one(movements, {
+    fields: [wodMovements.movementId],
+    references: [movements.id],
+  }),
+}));

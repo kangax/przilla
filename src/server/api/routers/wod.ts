@@ -8,6 +8,7 @@ import {
 import { wods, scores } from "~/server/db/schema";
 import { type Wod, type Score, type Benchmarks } from "~/types/wodTypes";
 import { isWodDone } from "~/utils/wodUtils";
+import { normalizeMovementName } from "~/utils/movementMapping";
 
 // Define difficulty multipliers
 const difficultyMultipliers: Record<string, number> = {
@@ -280,10 +281,59 @@ export const wodRouter = createTRPCRouter({
       });
     });
 
+    // --- BEGIN: Your WOD's Movement Frequency Aggregation ---
+
+    // 1. Get unique WOD IDs the user has logged scores for
+    const userWodIds = new Set<string>();
+    userScoresWithWodData.forEach((data) => {
+      if (data.wodId) userWodIds.add(data.wodId);
+    });
+
+    // 2. Filter allWods to just those WODs
+    const loggedWods = allWods.filter((wod) => userWodIds.has(wod.id));
+
+    // 3. Aggregate movement frequency for these WODs
+    //    Structure: { [movementName]: { count: number, wodNames: string[] } }
+    const yourMovementCounts: Record<
+      string,
+      { count: number; wodNames: string[] }
+    > = {};
+
+    loggedWods.forEach((wod) => {
+      // Defensive: skip if no description
+      if (!wod.description || typeof wod.description !== "string") return;
+
+      // Split description into possible movement tokens
+      // Use commas, newlines, semicolons, and slashes as delimiters
+      const tokens = wod.description
+        .split(/[\n,;/]+/)
+        .map((t) => t.trim())
+        .filter((t) => t.length > 0);
+
+      // Track unique normalized movements per WOD
+      const uniqueMovements = new Set<string>();
+
+      tokens.forEach((token) => {
+        const normalized = normalizeMovementName(token);
+        if (normalized) uniqueMovements.add(normalized);
+      });
+
+      uniqueMovements.forEach((movement) => {
+        if (!yourMovementCounts[movement]) {
+          yourMovementCounts[movement] = { count: 0, wodNames: [] };
+        }
+        yourMovementCounts[movement].count += 1;
+        yourMovementCounts[movement].wodNames.push(wod.wodName);
+      });
+    });
+
+    // --- END: Your WOD's Movement Frequency Aggregation ---
+
     return {
       tagCounts,
       categoryCounts,
       monthlyData, // Return the updated structure with adjusted levels
+      yourMovementCounts,
     };
   }),
 });

@@ -75,7 +75,14 @@ export default async function ChartsPage() {
   let frequencyData: FrequencyDataPoint[] = [];
   let performanceData: PerformanceDataPoint[] = []; // Type now includes updated scores
 
-  if (session?.user) {
+  const isLoggedIn = !!session?.user;
+  let yourTopMovementsData: {
+    name: string;
+    value: number;
+    wodNames: string[];
+  }[] = [];
+
+  if (isLoggedIn) {
     // --- Logged In: Fetch real data ---
     try {
       const chartData = await api.wod.getChartData();
@@ -109,12 +116,25 @@ export default async function ChartsPage() {
             : 0,
         scores: monthlyScores[month].scores || [], // Include the updated scores array
       }));
+
+      // --- Process yourMovementCounts for "Your WOD's" tab ---
+      if (chartData.yourMovementCounts) {
+        yourTopMovementsData = Object.entries(chartData.yourMovementCounts)
+          .map(([name, data]) => ({
+            name,
+            value: data.count,
+            wodNames: Array.from(new Set(data.wodNames)),
+          }))
+          .sort((a, b) => b.value - a.value)
+          .slice(0, 20);
+      }
     } catch (error) {
       console.error("Error loading protected chart data:", error);
       // Optionally set placeholder data even on error for logged-in users?
       // For now, arrays will remain empty if fetch fails
       // Ensure performanceData is initialized with empty scores array in case of error
       performanceData = [];
+      yourTopMovementsData = [];
     }
   } else {
     // --- Logged Out: Generate placeholder data ---
@@ -340,7 +360,11 @@ export default async function ChartsPage() {
             </Box>
           </Flex>
           {/* Movement frequency chart remains unchanged */}
-          <MovementFrequencyChart data={topMovementsData} />
+          <MovementFrequencyChart
+            data={topMovementsData}
+            isLoggedIn={isLoggedIn}
+            yourData={yourTopMovementsData}
+          />
         </Flex>
       </Container>
     </Box>

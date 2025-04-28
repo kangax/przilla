@@ -2,6 +2,16 @@
 
 ## Current Focus
 
+### WOD Movements Database Population (Apr 28, 2025)
+
+- Added `movements` and `wod_movements` tables to the schema (Drizzle ORM).
+- Ran migration and populated these tables in the local/dev database using a robust script (`scripts/populate_movements_to_db.ts`).
+- The script extracts all unique movements from canonical WOD data and creates associations for each WOD.
+- Local run: 387 unique movements, 3021 associations, 8 WODs missing in DB (to review).
+- **Production DB is not yet migrated.**
+- **Next step:** Run `drizzle-kit push` with the production `DATABASE_URL` to create the new tables, then run the population script with the same prod URL.
+- All work follows memory bank rules: no summarization, only real data, robust and idempotent scripts.
+
 - **Critical Rule: Never summarize or omit code in any file. Always provide the complete, unabridged content for all code and documentation. Summarization, ellipsis, or "omitted for brevity" is strictly forbidden.**
 - **Test Fixes for ToastProvider and WodViewer (Apr 27, 2025):**
   - Fixed failing tests in ToastProvider.test.tsx and WodViewer.test.tsx related to toast notifications.
@@ -153,6 +163,13 @@
 - **Authentication Migration:** Completed migration from NextAuth.js to Better Auth.
 
 ## Next Steps
+
+1. [PROD] Run Drizzle migration to create `movements` and `wod_movements` tables in production:
+   - `DATABASE_URL=libsql://przilla-prod-kangax.aws-us-west-2.turso.io npx drizzle-kit push`
+2. [PROD] Run the population script with the production database:
+   - `DATABASE_URL=libsql://przilla-prod-kangax.aws-us-west-2.turso.io npx tsx scripts/populate_movements_to_db.ts`
+3. Review any WODs missing in DB after population and resolve as needed.
+4. Integrate movement-based queries and analytics in the app UI.
 
 ### Must have
 

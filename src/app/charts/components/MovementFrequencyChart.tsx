@@ -25,6 +25,8 @@ interface MovementData {
 
 interface MovementFrequencyChartProps {
   data: Record<string, MovementData[]>; // Keyed by category name
+  isLoggedIn: boolean;
+  yourData?: MovementData[];
 }
 
 // Custom Tooltip Content Renderer
@@ -89,20 +91,40 @@ const CATEGORY_TAB_ORDER = [
 
 export default function MovementFrequencyChart({
   data,
+  isLoggedIn,
+  yourData,
 }: MovementFrequencyChartProps) {
   const { resolvedTheme } = useTheme();
   const axisAndTextColor = resolvedTheme === "dark" ? "#cbd5e1" : "#4b5563"; // slate-300 : gray-600
 
-  // Filter categories that actually have data and respect the desired order
-  const availableCategories = CATEGORY_TAB_ORDER.filter(
-    (cat) => data[cat] && data[cat].length > 0,
-  );
+  // Build tabs: "Your WOD's" first if logged in and yourData exists, then categories with data
+  const tabsToShow: { value: string; label: string }[] = [];
+  if (isLoggedIn && yourData && yourData.length > 0) {
+    tabsToShow.push({ value: "yourWods", label: "Your WOD's" });
+  }
+  CATEGORY_TAB_ORDER.forEach((cat) => {
+    if (data[cat] && data[cat].length > 0) {
+      tabsToShow.push({ value: cat, label: cat });
+    }
+  });
 
-  const [selectedCategory, setSelectedCategory] = useState<string>(
-    availableCategories[0] || "", // Default to the first available category
-  );
+  // Determine default tab
+  const defaultTab =
+    isLoggedIn && yourData && yourData.length > 0
+      ? "yourWods"
+      : tabsToShow.length > 0
+        ? tabsToShow[0].value
+        : "";
 
-  const chartData = data[selectedCategory] || [];
+  const [selectedTab, setSelectedTab] = useState<string>(defaultTab);
+
+  // Chart data for the selected tab
+  let chartData: MovementData[] = [];
+  if (selectedTab === "yourWods" && isLoggedIn) {
+    chartData = yourData || [];
+  } else if (data[selectedTab]) {
+    chartData = data[selectedTab];
+  }
 
   const FrequencyHeading = (
     <Heading as="h3" size="4" mb="3">
@@ -110,7 +132,7 @@ export default function MovementFrequencyChart({
     </Heading>
   );
 
-  if (availableCategories.length === 0) {
+  if (tabsToShow.length === 0) {
     return (
       <Card size="3">
         {FrequencyHeading}
@@ -123,36 +145,86 @@ export default function MovementFrequencyChart({
     <Card size="3">
       {FrequencyHeading}
       <Tabs.Root
-        value={selectedCategory}
-        onValueChange={setSelectedCategory}
-        defaultValue={availableCategories[0]}
+        value={selectedTab}
+        onValueChange={setSelectedTab}
+        defaultValue={defaultTab}
       >
         <Tabs.List size="1">
-          {availableCategories.map((category) => (
-            <Tabs.Trigger key={category} value={category}>
-              {category}
+          {tabsToShow.map((tab) => (
+            <Tabs.Trigger key={tab.value} value={tab.value}>
+              {tab.label}
             </Tabs.Trigger>
           ))}
         </Tabs.List>
 
         <Box pt="4">
-          {availableCategories.map((category) => (
-            <Tabs.Content key={category} value={category}>
-              {chartData.length > 0 ? (
+          {tabsToShow.map((tab) => (
+            <Tabs.Content key={tab.value} value={tab.value}>
+              {tab.value === "yourWods" ? (
+                isLoggedIn ? (
+                  yourData && yourData.length > 0 ? (
+                    <ResponsiveContainer width="100%" height={600}>
+                      <BarChart
+                        data={yourData}
+                        layout="vertical"
+                        margin={{ top: 5, right: 30, left: -10, bottom: 5 }}
+                      >
+                        <CartesianGrid
+                          strokeDasharray="3 3"
+                          strokeOpacity={0.3}
+                        />
+                        <XAxis type="number" stroke={axisAndTextColor}>
+                          <Label
+                            value="Frequency (Number of Workouts)"
+                            position="insideBottom"
+                            offset={-5}
+                            fill={axisAndTextColor}
+                            fontSize={12}
+                          />
+                        </XAxis>
+                        <YAxis
+                          type="category"
+                          dataKey="name"
+                          width={150}
+                          stroke={axisAndTextColor}
+                          fontSize={12}
+                          interval={0}
+                        />
+                        <Tooltip
+                          content={<CustomTooltip />}
+                          cursor={{ fill: "transparent" }}
+                        />
+                        <Bar
+                          dataKey="value"
+                          fill="var(--accent-9)"
+                          radius={[0, 4, 4, 0]}
+                        >
+                          <LabelList
+                            dataKey="value"
+                            position="right"
+                            fill={axisAndTextColor}
+                            fontSize={12}
+                          />
+                        </Bar>
+                      </BarChart>
+                    </ResponsiveContainer>
+                  ) : (
+                    <Text>Log scores to see your movement frequency!</Text>
+                  )
+                ) : null
+              ) : data[tab.value] && data[tab.value].length > 0 ? (
                 <ResponsiveContainer width="100%" height={600}>
-                  {/* Increased height */}
                   <BarChart
-                    data={chartData}
+                    data={data[tab.value]}
                     layout="vertical"
                     margin={{ top: 5, right: 30, left: -10, bottom: 5 }}
                   >
                     <CartesianGrid strokeDasharray="3 3" strokeOpacity={0.3} />
                     <XAxis type="number" stroke={axisAndTextColor}>
-                      {/* Add X-axis label */}
                       <Label
                         value="Frequency (Number of Workouts)"
                         position="insideBottom"
-                        offset={-5} // Adjust offset as needed
+                        offset={-5}
                         fill={axisAndTextColor}
                         fontSize={12}
                       />
@@ -160,18 +232,17 @@ export default function MovementFrequencyChart({
                     <YAxis
                       type="category"
                       dataKey="name"
-                      width={150} // Increased width for longer movement names
+                      width={150}
                       stroke={axisAndTextColor}
                       fontSize={12}
-                      interval={0} // Show all labels
+                      interval={0}
                     />
-                    {/* Use the custom tooltip component */}
                     <Tooltip
                       content={<CustomTooltip />}
                       cursor={{ fill: "transparent" }}
                     />
                     <Bar
-                      dataKey="value" // Still use value for bar length
+                      dataKey="value"
                       fill="var(--accent-9)"
                       radius={[0, 4, 4, 0]}
                     >
@@ -185,7 +256,7 @@ export default function MovementFrequencyChart({
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
-                <Text>No data for {category}.</Text>
+                <Text>No data for {tab.label}.</Text>
               )}
             </Tabs.Content>
           ))}

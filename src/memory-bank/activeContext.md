@@ -173,8 +173,9 @@
 
 ### Must have
 
+- Importing scores from SugarWOD should show which ones already exist (and if we they differ)
 - Add remaining Games/Regionals/etc. workouts from SugarWOD
-- Add sorting to mobile view
+- export should be named przilla_scores_EMAIL_YYYY_MM_DD
 - Search doesn't show "x" on mobile
 
 ### Good to have

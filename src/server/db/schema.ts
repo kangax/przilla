@@ -17,7 +17,7 @@ export const wods = createTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
-    wodUrl: text("wod_url").unique(),
+    wodUrl: text("wod_url"),
     wodName: text("wod_name").notNull().unique(),
     description: text("description"),
     benchmarks: text("benchmarks").$type<Benchmarks | null>(), // Use imported Benchmarks type

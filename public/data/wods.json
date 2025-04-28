@@ -17846,7 +17846,7 @@
     "difficulty": "Hard",
     "difficulty_explanation": "A 6-minute window to establish a 1-rep max clean-and-jerk immediately after a 9-minute AMRAP. Tests maximal strength under fatigue.",
     "count_likes": 81,
-    "movements": ["1RM Clean-and-Jerk"]
+    "movements": ["Clean-and-Jerk"]
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-15-2/",
@@ -18416,7 +18416,7 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Establish a 1-rep max clean in the time remaining after completing 18.2. Tests maximal strength under fatigue.",
     "count_likes": 80,
-    "movements": ["1RM Clean"]
+    "movements": ["Clean"]
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-18-3/",
@@ -19263,7 +19263,7 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Open WOD (For Load). Establish 1RM thruster after 23.2A. Tests maximal strength under fatigue.",
     "count_likes": 12,
-    "movements": ["1RM Thruster"]
+    "movements": ["Thruster"]
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-3/",
@@ -24576,13 +24576,7 @@
     "difficulty": "Hard",
     "difficulty_explanation": "Hero WOD (Partner AMRAP + Load). 30 min AMRAP: DUs, pull-ups, push-ups, sprint (alt rounds), then 5 min 1RM partner DL. Tests partner conditioning/max strength.",
     "count_likes": 56,
-    "movements": [
-      "1RM Partner Deadlift",
-      "Double-Under",
-      "Pull-Up",
-      "Push-Up",
-      "Sprint"
-    ]
+    "movements": ["Deadlift", "Double-Under", "Pull-Up", "Push-Up", "Sprint"]
   },
   {
     "wodUrl": "https://wodwell.com/wod/scott-neumann/",

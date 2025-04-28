@@ -41,7 +41,7 @@ export default function AuthControls() {
       }
       const { exportUserData } = await import("~/utils/exportUserData");
       await exportUserData(scores as ScoreFromQuery[], wods as WodFromQuery[]);
-    } catch (err) {
+    } catch {
       alert("Failed to export data. Please try again.");
     } finally {
       setIsExporting(false);

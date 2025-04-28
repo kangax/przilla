@@ -39,6 +39,9 @@ function WodListMobileWrapper(
     string | null
   >(null);
 
+  const locationSearch =
+    typeof window !== "undefined" ? window.location.search : "";
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
@@ -51,7 +54,7 @@ function WodListMobileWrapper(
       );
       setExpandedWodIdFromUrl(params.get("expandedWodId"));
     }
-  }, [typeof window !== "undefined" && window.location.search]);
+  }, [locationSearch]);
 
   return (
     <WodListMobile {...props} expandedWodIdFromUrl={expandedWodIdFromUrl} />
@@ -729,7 +732,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
           handleSort={handleSort}
           searchTerm={searchTerm}
           scoresByWodId={scoresByWodId}
-          isLoadingScores={showScoreLoading}
+          _isLoadingScores={showScoreLoading} // Renamed prop
           onScoreLogged={handleScoreLogged}
         />
       )}

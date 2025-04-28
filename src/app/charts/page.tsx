@@ -7,7 +7,6 @@ import WodTimelineChart from "./components/WodTimelineChart";
 import MovementFrequencyChart from "./components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
 import ChartLoginOverlay from "./components/ChartLoginOverlay"; // Import the overlay
-import { normalizeMovementName } from "~/utils/movementMapping";
 import { type Wod } from "~/types/wodTypes";
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
 import {
@@ -61,8 +60,7 @@ export default async function ChartsPage() {
     string,
     Record<string, { count: number; wodNames: string[] }>
   > = {};
-  let allMovementCounts: Record<string, { count: number; wodNames: string[] }> =
-    {};
+  // Removed unused allMovementCounts variable
 
   // Public data - always fetched
   try {
@@ -124,9 +122,7 @@ export default async function ChartsPage() {
       if (chartData.movementCountsByCategory) {
         movementCountsByCategory = chartData.movementCountsByCategory;
       }
-      if (chartData.allMovementCounts) {
-        allMovementCounts = chartData.allMovementCounts;
-      }
+      // Removed assignment to unused allMovementCounts variable
       // --- Process yourMovementCounts for "Your WOD's" tab ---
       if (chartData.yourMovementCounts) {
         yourTopMovementsData = Object.entries(chartData.yourMovementCounts)

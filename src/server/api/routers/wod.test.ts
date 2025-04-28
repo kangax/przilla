@@ -1,9 +1,8 @@
 import { describe, it, expect, beforeEach, vi } from "vitest";
 vi.mock("~/server/db/index", () => ({ db: {} }));
 vi.mock("~/server/auth", () => ({ auth: {} }));
-import { createTRPCRouter } from "~/server/api/trpc";
 import { wodRouter } from "./wod";
-import { normalizeMovementName } from "~/utils/movementMapping";
+import { type Benchmarks } from "~/types/wodTypes";
 
 // Mock DB and context utilities
 type MockWod = {
@@ -12,7 +11,7 @@ type MockWod = {
   description: string;
   category?: string;
   tags?: string | string[];
-  benchmarks?: any;
+  benchmarks?: Benchmarks;
   difficulty?: string;
 };
 
@@ -45,7 +44,7 @@ function makeCtx({
     headers: new Headers(),
     db: {
       select: () => ({
-        from: (table: any) => ({
+        from: (table: unknown) => ({
           orderBy: () => {
             if (table === "wods" || table === undefined) {
               // Return all WODs
@@ -132,21 +131,22 @@ describe("wodRouter.getChartData - yourMovementCounts", () => {
   it("returns correct yourMovementCounts for user with logged WODs", async () => {
     const ctx = makeCtx({ wods, scores, userId });
     // Patch the router to use our mock context
-    const result = await wodRouter.createCaller(ctx as any).getChartData();
+    // @ts-expect-error: test context does not match real router context type
+    const result = await wodRouter.createCaller(ctx as unknown).getChartData();
 
     expect(result.yourMovementCounts).toBeDefined();
     // Should include normalized movements from all logged WODs
-    expect(result.yourMovementCounts["Thruster"]).toBeDefined();
+    expect(result.yourMovementCounts.Thruster).toBeDefined();
     expect(result.yourMovementCounts["Pull-Up"]).toBeDefined();
     expect(result.yourMovementCounts["Ground To Overhead"]).toBeDefined();
     expect(result.yourMovementCounts["Bar Facing Burpee"]).toBeDefined();
-    expect(result.yourMovementCounts["Deadlift"]).toBeDefined();
+    expect(result.yourMovementCounts.Deadlift).toBeDefined();
     expect(result.yourMovementCounts["Hang Power Clean"]).toBeDefined();
     expect(result.yourMovementCounts["Push Jerk"]).toBeDefined();
 
     // Check counts and WOD names
-    expect(result.yourMovementCounts["Thruster"].count).toBe(1);
-    expect(result.yourMovementCounts["Thruster"].wodNames).toContain("Fran");
+    expect(result.yourMovementCounts.Thruster.count).toBe(1);
+    expect(result.yourMovementCounts.Thruster.wodNames).toContain("Fran");
     expect(result.yourMovementCounts["Pull-Up"].count).toBe(1);
     expect(result.yourMovementCounts["Pull-Up"].wodNames).toContain("Fran");
     expect(result.yourMovementCounts["Ground To Overhead"].count).toBe(1);
@@ -157,8 +157,8 @@ describe("wodRouter.getChartData - yourMovementCounts", () => {
     expect(result.yourMovementCounts["Bar Facing Burpee"].wodNames).toContain(
       "Open 20.1",
     );
-    expect(result.yourMovementCounts["Deadlift"].count).toBe(1);
-    expect(result.yourMovementCounts["Deadlift"].wodNames).toContain("DT");
+    expect(result.yourMovementCounts.Deadlift.count).toBe(1);
+    expect(result.yourMovementCounts.Deadlift.wodNames).toContain("DT");
     expect(result.yourMovementCounts["Hang Power Clean"].count).toBe(1);
     expect(result.yourMovementCounts["Hang Power Clean"].wodNames).toContain(
       "DT",
@@ -169,7 +169,8 @@ describe("wodRouter.getChartData - yourMovementCounts", () => {
 
   it("returns empty yourMovementCounts for user with no logged WODs", async () => {
     const ctx = makeCtx({ wods, scores: [], userId });
-    const result = await wodRouter.createCaller(ctx as any).getChartData();
+    // @ts-expect-error: test context does not match real router context type
+    const result = await wodRouter.createCaller(ctx as unknown).getChartData();
     expect(result.yourMovementCounts).toEqual({});
   });
 
@@ -189,7 +190,8 @@ describe("wodRouter.getChartData - yourMovementCounts", () => {
       ],
       userId,
     });
-    const result = await wodRouter.createCaller(ctx as any).getChartData();
+    // @ts-expect-error: test context does not match real router context type
+    const result = await wodRouter.createCaller(ctx as unknown).getChartData();
     expect(result.yourMovementCounts).toEqual({});
   });
 
@@ -215,8 +217,10 @@ describe("wodRouter.getChartData - yourMovementCounts", () => {
       ],
       userId,
     });
-    const result = await wodRouter.createCaller(ctx as any).getChartData();
-    expect(result.yourMovementCounts["Thruster"].count).toBe(1);
+    // @ts-expect-error: test context does not match real router context type
+    const result = await wodRouter.createCaller(ctx as unknown).getChartData();
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    expect(result.yourMovementCounts.Thruster.count).toBe(1);
     expect(result.yourMovementCounts["Pull-Up"].count).toBe(1);
   });
 
@@ -242,8 +246,10 @@ describe("wodRouter.getChartData - yourMovementCounts", () => {
       ],
       userId,
     });
-    const result = await wodRouter.createCaller(ctx as any).getChartData();
-    expect(result.yourMovementCounts["Thruster"]).toBeDefined();
+    // @ts-expect-error: test context does not match real router context type
+    const result = await wodRouter.createCaller(ctx as unknown).getChartData();
+    // eslint-disable-next-line @typescript-eslint/dot-notation
+    expect(result.yourMovementCounts.Thruster).toBeDefined();
     expect(result.yourMovementCounts["Pull-Up"]).toBeDefined();
     expect(result.yourMovementCounts["Dumbbell Snatch"]).toBeDefined();
   });

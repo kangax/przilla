@@ -7,8 +7,8 @@ import {
 } from "~/server/api/trpc";
 import { wods, scores } from "~/server/db/schema";
 import { type Wod, type Score, type Benchmarks } from "~/types/wodTypes";
+// import { normalizeMovementName } from "~/utils/movementMapping";
 import { isWodDone } from "~/utils/wodUtils";
-import { normalizeMovementName } from "~/utils/movementMapping";
 
 // Define difficulty multipliers
 const difficultyMultipliers: Record<string, number> = {

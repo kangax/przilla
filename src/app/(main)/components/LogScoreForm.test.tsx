@@ -9,7 +9,6 @@ import type { Wod, Score } from "~/types/wodTypes";
 const mockShowToast = vi.fn();
 
 // Import ToastProvider for mocking
-import { ToastProvider as ActualToastProvider } from "~/components/ToastProvider";
 
 // Mock the useToast hook
 vi.mock("~/components/ToastProvider", () => ({

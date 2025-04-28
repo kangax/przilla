@@ -32,7 +32,6 @@ import {
   getPerformanceBadgeDetails,
   getPerformanceLevel, // Added getPerformanceLevel
 } from "~/utils/wodUtils";
-import { LoadingIndicator } from "../../_components/LoadingIndicator";
 import { HighlightMatch } from "~/utils/uiUtils";
 import { LogScoreDialog } from "./LogScoreDialog"; // Import the new Dialog component
 import { api } from "~/trpc/react";
@@ -46,7 +45,7 @@ interface WodTableProps {
   handleSort: (column: SortByType) => void;
   searchTerm: string;
   scoresByWodId: Record<string, Score[]>;
-  isLoadingScores: boolean;
+  _isLoadingScores: boolean; // Prefixed as unused for now
   onScoreLogged?: () => void;
 }
 
@@ -535,7 +534,7 @@ const WodTable: React.FC<WodTableProps> = ({
   handleSort,
   searchTerm,
   scoresByWodId,
-  isLoadingScores,
+  _isLoadingScores, // Prefixed as unused for now
   onScoreLogged,
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);

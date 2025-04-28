@@ -61,8 +61,7 @@ export function ScoreImportWizard({ importType }: ScoreImportWizardProps) {
   });
 
   // Set up score processing
-  // disable eslint-next-line unused-vars
-  const scoreProcessing = useScoreProcessing({
+  useScoreProcessing({
     importType,
     file,
     step,

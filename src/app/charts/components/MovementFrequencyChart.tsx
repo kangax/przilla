@@ -119,12 +119,7 @@ export default function MovementFrequencyChart({
   const [selectedTab, setSelectedTab] = useState<string>(defaultTab);
 
   // Chart data for the selected tab
-  let chartData: MovementData[] = [];
-  if (selectedTab === "yourWods" && isLoggedIn) {
-    chartData = yourData || [];
-  } else if (data[selectedTab]) {
-    chartData = data[selectedTab];
-  }
+  // Removed unused chartData variable
 
   const FrequencyHeading = (
     <Heading as="h3" size="4" mb="3">

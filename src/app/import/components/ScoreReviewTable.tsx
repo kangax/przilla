@@ -231,7 +231,7 @@ export function ScoreReviewTable({ rows, onComplete }: ScoreReviewTableProps) {
         }),
       ];
     }
-  }, [rows]);
+  }, [rows, isUnmatchedTable]);
 
   const table = useReactTable({
     data: rows,

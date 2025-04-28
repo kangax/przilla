@@ -27,6 +27,24 @@ export type Benchmarks = {
   };
 };
 
+// Zod schema for Benchmarks
+import { z } from "zod";
+
+export const BenchmarkLevelSchema = z.object({
+  min: z.number().nullable(),
+  max: z.number().nullable(),
+});
+
+export const BenchmarksSchema = z.object({
+  type: z.enum(["time", "rounds", "reps", "load"]),
+  levels: z.object({
+    elite: BenchmarkLevelSchema,
+    advanced: BenchmarkLevelSchema,
+    intermediate: BenchmarkLevelSchema,
+    beginner: BenchmarkLevelSchema,
+  }),
+});
+
 // Define allowed tags and categories as types for better safety
 export type WodTag =
   | "Chipper"
@@ -129,64 +147,3 @@ export type SortByType =
   | "difficulty"
   | "countLikes"
   | "results"; // Added 'results' for sorting by latest score level
-
-/**
- * Type guard for Benchmarks.
- * This implementation avoids all use of `any` and only uses safe property access.
- */
-export function isBenchmarks(obj: unknown): obj is Benchmarks {
-  if (typeof obj !== "object" || obj === null) {
-    return false;
-  }
-
-  // Check "type"
-  if (
-    !("type" in obj) ||
-    typeof (obj as { type?: unknown }).type !== "string" ||
-    !["time", "rounds", "reps", "load"].includes((obj as { type: string }).type)
-  ) {
-    return false;
-  }
-
-  // Check "levels"
-  if (
-    !("levels" in obj) ||
-    typeof (obj as { levels?: unknown }).levels !== "object" ||
-    (obj as { levels?: unknown }).levels === null
-  ) {
-    return false;
-  }
-
-  const levels = (obj as { levels: unknown }).levels;
-  const requiredLevels = [
-    "elite",
-    "advanced",
-    "intermediate",
-    "beginner",
-  ] as const;
-
-  for (const key of requiredLevels) {
-    if (!Object.prototype.hasOwnProperty.call(levels, key)) {
-      return false;
-    }
-    const lvl = (levels as Record<string, unknown>)[key];
-    if (
-      typeof lvl !== "object" ||
-      lvl === null ||
-      !("min" in lvl) ||
-      !("max" in lvl)
-    ) {
-      return false;
-    }
-    const min = (lvl as { min: unknown }).min;
-    const max = (lvl as { max: unknown }).max;
-    if (
-      !(typeof min === "number" || min === null) ||
-      !(typeof max === "number" || max === null)
-    ) {
-      return false;
-    }
-  }
-
-  return true;
-}

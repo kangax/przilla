@@ -80,6 +80,13 @@ Never truncate files for brevity, you must always output full file contents.
 
 ## Tool Usage Patterns
 
+### Zod Usage Patterns
+
+- **Runtime Validation:** Use Zod schemas for all runtime validation and parsing of complex types, especially when handling unknown or parsed data (e.g., from JSON, API responses, or user input).
+- **Pattern:** Prefer `ZodSchema.safeParse(value)` over hand-written type guards. If validation succeeds, use `result.data` (cast to the appropriate type if needed); otherwise, handle as invalid.
+- **Example:** See `BenchmarksSchema` in `src/types/wodTypes.ts` and its usage in `src/app/(main)/page.tsx` for validating parsed JSON. This replaces the need for a custom `isBenchmarks` type guard.
+- **Benefits:** This approach ensures type safety, maintainability, and linter compliance, and should be the default for all future runtime type validation.
+
 - **Linting:** ESLint with Next.js config and TypeScript/Drizzle plugins (`npm run lint`, `npm run lint:fix`).
 - **Formatting:** Prettier with Tailwind CSS plugin (`npm run format:check`, `npm run format:write`).
 - **Type Checking:** TypeScript (`npm run typecheck` or `npm run check`).

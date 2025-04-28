@@ -4,6 +4,7 @@ import { useState } from "react";
 import { Box, Container, Flex, Heading, IconButton } from "@radix-ui/themes";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { Menu } from "lucide-react"; // Import Menu icon
+import Link from "next/link";
 import ThemeToggle from "~/app/_components/ThemeToggle";
 import PageNavigation from "~/app/_components/PageNavigation";
 import AuthControls from "~/app/_components/AuthControls";
@@ -48,7 +49,9 @@ export default function Header() {
 
           {/* Logo */}
           <Heading size="5" className="flex-shrink-0 text-foreground">
-            PRzilla
+            <Link href="/">PRzilla</Link>{" "}
+            <span className="mx-2 font-thin text-slate-600">|</span> Track your
+            WOD&apos;s
           </Heading>
 
           {/* Conditionally render Desktop Navigation or nothing */}

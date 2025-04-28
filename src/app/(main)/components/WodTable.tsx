@@ -637,7 +637,7 @@ const WodTable: React.FC<WodTableProps> = ({
 
   // Always call useVirtualizer, but set count to 0 in test env
   const rowVirtualizer = useVirtualizer({
-    count: isTestEnv ? 0 : isLoadingScores ? 0 : rows.length,
+    count: isTestEnv ? 0 : rows.length,
     getScrollElement: () => parentRef.current,
     estimateSize: () => 49,
     overscan: 5,
@@ -743,7 +743,7 @@ const WodTable: React.FC<WodTableProps> = ({
         ))}
       </div>
 
-      {/* Body Container - Handles Loading/No Results/Rows */}
+      {/* Body Container - Handles No Results/Rows */}
       <div
         style={{
           height: `${rowVirtualizer.getTotalSize()}px`, // Use virtualizer total size
@@ -751,16 +751,7 @@ const WodTable: React.FC<WodTableProps> = ({
           position: "relative",
         }}
       >
-        {isLoadingScores ? (
-          <Flex
-            align="center"
-            justify="center"
-            className="absolute inset-0"
-            style={{ height: `${bodyHeight}px` }}
-          >
-            <LoadingIndicator message="Loading scores..." />
-          </Flex>
-        ) : rows.length === 0 ? (
+        {rows.length === 0 ? (
           <Flex
             align="center"
             justify="center"

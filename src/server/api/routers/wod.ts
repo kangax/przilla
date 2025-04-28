@@ -1,4 +1,4 @@
-import { asc, eq } from "drizzle-orm"; // Removed unused sql import
+import { asc, eq, inArray } from "drizzle-orm"; // Removed unused sql import
 
 import {
   createTRPCRouter,
@@ -281,59 +281,80 @@ export const wodRouter = createTRPCRouter({
       });
     });
 
-    // --- BEGIN: Your WOD's Movement Frequency Aggregation ---
+    // --- BEGIN: Movement Frequency Aggregation Using Normalized Tables ---
 
-    // 1. Get unique WOD IDs the user has logged scores for
-    const userWodIds = new Set<string>();
-    userScoresWithWodData.forEach((data) => {
-      if (data.wodId) userWodIds.add(data.wodId);
-    });
+    // Import the required tables
+    const { wodMovements, movements } = await import("~/server/db/schema");
 
-    // 2. Filter allWods to just those WODs
-    const loggedWods = allWods.filter((wod) => userWodIds.has(wod.id));
+    // Helper: Get all movements for a set of WOD IDs
+    async function getMovementsForWods(
+      wodIds: string[],
+    ): Promise<Record<string, { count: number; wodNames: string[] }>> {
+      if (wodIds.length === 0) return {};
+      // Get all (wodId, movementName) pairs for these WODs
+      const rows = await ctx.db
+        .select({
+          wodId: wodMovements.wodId,
+          movementName: movements.name,
+          wodName: wods.wodName,
+        })
+        .from(wodMovements)
+        .leftJoin(movements, eq(wodMovements.movementId, movements.id))
+        .leftJoin(wods, eq(wodMovements.wodId, wods.id))
+        .where(inArray(wodMovements.wodId, wodIds));
 
-    // 3. Aggregate movement frequency for these WODs
-    //    Structure: { [movementName]: { count: number, wodNames: string[] } }
-    const yourMovementCounts: Record<
-      string,
-      { count: number; wodNames: string[] }
-    > = {};
-
-    loggedWods.forEach((wod) => {
-      // Defensive: skip if no description
-      if (!wod.description || typeof wod.description !== "string") return;
-
-      // Split description into possible movement tokens
-      // Use commas, newlines, semicolons, and slashes as delimiters
-      const tokens = wod.description
-        .split(/[\n,;/]+/)
-        .map((t) => t.trim())
-        .filter((t) => t.length > 0);
-
-      // Track unique normalized movements per WOD
-      const uniqueMovements = new Set<string>();
-
-      tokens.forEach((token) => {
-        const normalized = normalizeMovementName(token);
-        if (normalized) uniqueMovements.add(normalized);
-      });
-
-      uniqueMovements.forEach((movement) => {
-        if (!yourMovementCounts[movement]) {
-          yourMovementCounts[movement] = { count: 0, wodNames: [] };
+      // Aggregate
+      const movementCounts: Record<
+        string,
+        { count: number; wodNames: string[] }
+      > = {};
+      for (const row of rows) {
+        if (!row.movementName || !row.wodName) continue;
+        if (!movementCounts[row.movementName]) {
+          movementCounts[row.movementName] = { count: 0, wodNames: [] };
         }
-        yourMovementCounts[movement].count += 1;
-        yourMovementCounts[movement].wodNames.push(wod.wodName);
-      });
-    });
+        movementCounts[row.movementName].count += 1;
+        movementCounts[row.movementName].wodNames.push(row.wodName);
+      }
+      return movementCounts;
+    }
 
-    // --- END: Your WOD's Movement Frequency Aggregation ---
+    // 1. Your Movement Frequency (WODs the user has logged)
+    const userWodIds = Array.from(
+      new Set(userScoresWithWodData.map((data) => data.wodId).filter(Boolean)),
+    );
+    const yourMovementCounts = await getMovementsForWods(userWodIds);
+
+    // 2. All Movement Frequency (all WODs)
+    const allWodIds = allWods.map((wod) => wod.id);
+    const allMovementCounts = await getMovementsForWods(allWodIds);
+
+    // 3. Movement Frequency By Category
+    //    Structure: { [category]: { [movementName]: { count, wodNames } } }
+    const movementCountsByCategory: Record<
+      string,
+      Record<string, { count: number; wodNames: string[] }>
+    > = {};
+    // Group WOD IDs by category
+    const wodsByCategory: Record<string, string[]> = {};
+    allWods.forEach((wod) => {
+      if (!wod.category) return;
+      if (!wodsByCategory[wod.category]) wodsByCategory[wod.category] = [];
+      wodsByCategory[wod.category].push(wod.id);
+    });
+    for (const [category, wodIds] of Object.entries(wodsByCategory)) {
+      movementCountsByCategory[category] = await getMovementsForWods(wodIds);
+    }
+
+    // --- END: Movement Frequency Aggregation Using Normalized Tables ---
 
     return {
       tagCounts,
       categoryCounts,
       monthlyData, // Return the updated structure with adjusted levels
       yourMovementCounts,
+      allMovementCounts,
+      movementCountsByCategory,
     };
   }),
 });

@@ -2,6 +2,39 @@
 
 ## Current Focus
 
+### Refactor: Use Only Normalized Movements from DB in Charts (Planned, Apr 28, 2025)
+
+**Goal:**  
+Eliminate all regex and string-based movement parsing from both backend and frontend. Always use the normalized movement data from the database for every movement-related aggregation or display in the charts UI.
+
+**Implementation Plan:**
+
+1. **Backend:**
+
+   - Refactor all movement aggregation logic in the tRPC router (`wodRouter.getChartData` and any related procedures) to:
+     - Join `wods` → `wod_movements` → `movements` for all relevant queries (not just user-specific, but also for "all WODs", "by category", etc.).
+     - Aggregate movement frequency, groupings, and lists using only the normalized tables.
+     - Remove all regex, string splitting, and normalization code for movements.
+   - Ensure all movement data returned to the frontend is sourced from the normalized tables.
+
+2. **Frontend:**
+
+   - Remove all movement parsing, regex, and normalization logic from `src/app/charts/page.tsx` and related chart components.
+   - Update data fetching and transformation to use only the backend-provided, normalized movement data.
+   - Ensure all chart visualizations (user-specific, all WODs, by category, etc.) use the new data structure.
+
+3. **Testing/Validation:**
+
+   - (Deferred for now, per instruction.)
+
+4. **Documentation:**
+   - (Deferred for now.)
+
+**Result:**
+
+- All movement data in the UI will be accurate, deduplicated, and robust, with a single source of truth in the database.
+- The codebase will be simpler and easier to maintain, with no more brittle parsing logic.
+
 ### WOD Movements Database Population (Apr 28, 2025)
 
 - Added `movements` and `wod_movements` tables to the schema (Drizzle ORM).

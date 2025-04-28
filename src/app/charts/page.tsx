@@ -56,10 +56,13 @@ type PerformanceDataPoint = {
 export default async function ChartsPage() {
   const session = await getSession(); // Use getSession()
   let wodsData: Wod[] = [];
-  const movementDataByCategory: Record<
+  // Movement frequency data from backend
+  let movementCountsByCategory: Record<
     string,
     Record<string, { count: number; wodNames: string[] }>
   > = {};
+  let allMovementCounts: Record<string, { count: number; wodNames: string[] }> =
+    {};
 
   // Public data - always fetched
   try {
@@ -117,6 +120,13 @@ export default async function ChartsPage() {
         scores: monthlyScores[month].scores || [], // Include the updated scores array
       }));
 
+      // --- Movement frequency data from backend ---
+      if (chartData.movementCountsByCategory) {
+        movementCountsByCategory = chartData.movementCountsByCategory;
+      }
+      if (chartData.allMovementCounts) {
+        allMovementCounts = chartData.allMovementCounts;
+      }
       // --- Process yourMovementCounts for "Your WOD's" tab ---
       if (chartData.yourMovementCounts) {
         yourTopMovementsData = Object.entries(chartData.yourMovementCounts)
@@ -152,183 +162,17 @@ export default async function ChartsPage() {
     }));
   }
 
-  // Process movement data (uses public WOD data - remains unchanged)
-  const commonWords = new Set([
-    "for",
-    "time",
-    "reps",
-    "rounds",
-    "of",
-    "min",
-    "rest",
-    "between",
-    "then",
-    "amrap",
-    "emom",
-    "in",
-    "minutes",
-    "seconds",
-    "with",
-    "meter",
-    "meters",
-    "lb",
-    "kg",
-    "pood",
-    "bodyweight",
-    "alternating",
-    "legs",
-    "unbroken",
-    "max",
-    "needed",
-    "set",
-    "score",
-    "is",
-    "load",
-    "the",
-    "a",
-    "and",
-    "or",
-    "each",
-    "total",
-    "cap",
-    "as",
-    "many",
-    "possible",
-    "on",
-    "every",
-    "minute",
-    "from",
-    "if",
-    "completed",
-    "before",
-    "rounds for time",
-    "reps for time",
-    "rep for time",
-    "for time",
-    "amrap in",
-    "emom in",
-    "time cap",
-    "with a",
-    "minute rest",
-    "rest between rounds",
-    "alternating legs",
-    "over the bar",
-    "bar facing",
-    "dumbbell",
-    "kettlebell",
-    "barbell",
-    "assault bike",
-    "echo bike",
-    "cals",
-    "calories",
-    "men",
-    "women",
-    "men use",
-    "women use",
-    "amanda",
-    "doubles and oly",
-    "ringer",
-    "if you complete",
-    "complete",
-    "perform",
-    "then rest",
-    "rest",
-    "each round",
-    "round",
-    "part",
-  ]);
-
-  const introductoryWords = new Set([
-    "if",
-    "for",
-    "then",
-    "rest",
-    "each",
-    "complete",
-    "perform",
-    "round",
-    "rounds",
-  ]);
-
-  wodsData.forEach((wod) => {
-    if (wod.category && wod.description && wod.wodName) {
-      if (!movementDataByCategory[wod.category]) {
-        movementDataByCategory[wod.category] = {};
-      }
-
-      const lines = wod.description.split("\n");
-      lines.forEach((line) => {
-        const movementRegex = /([A-Z][a-zA-Z\s-]+)/g;
-        let match: RegExpExecArray | null;
-        const rawPhrases: string[] = [];
-        while ((match = movementRegex.exec(line)) !== null) {
-          if (match && typeof match[1] === "string") {
-            const phrase = match[1]
-              .replace(/\s+\(.*?\)/g, "")
-              .replace(
-                /(\d+(\.\d+)?\/?\d*(\.\d+)?)\s*(lb|kg|pood|in|meter|meters)/gi,
-                "",
-              )
-              .replace(/[:\-.,]$/, "")
-              .trim();
-
-            const phraseLower = phrase.toLowerCase();
-            const wordsInPhrase = phraseLower.split(/\s+/);
-            const allCommon = wordsInPhrase.every(
-              (word) => commonWords.has(word) || word.length <= 1,
-            );
-            const startsWithIntroductory =
-              wordsInPhrase.length > 0 &&
-              introductoryWords.has(wordsInPhrase[0]);
-
-            if (
-              phrase.length > 2 &&
-              !commonWords.has(phraseLower) &&
-              !allCommon &&
-              !startsWithIntroductory
-            ) {
-              if (!wordsInPhrase.every((word) => commonWords.has(word))) {
-                rawPhrases.push(phrase);
-              }
-            }
-          }
-        }
-
-        const movementsInThisWod = new Set<string>();
-        rawPhrases.forEach((rawPhrase) => {
-          const normalized = normalizeMovementName(rawPhrase);
-          if (normalized) {
-            movementsInThisWod.add(normalized);
-          }
-        });
-
-        movementsInThisWod.forEach((normalizedMovement) => {
-          if (!movementDataByCategory[wod.category][normalizedMovement]) {
-            movementDataByCategory[wod.category][normalizedMovement] = {
-              count: 0,
-              wodNames: [],
-            };
-          }
-          movementDataByCategory[wod.category][normalizedMovement].count++;
-          movementDataByCategory[wod.category][
-            normalizedMovement
-          ].wodNames.push(wod.wodName);
-        });
-      });
-    }
-  });
-
-  // Prepare movement chart data (remains unchanged)
+  // Prepare movement chart data from backend
   const topMovementsData: Record<
     string,
     { name: string; value: number; wodNames: string[] }[]
   > = {};
-  Object.keys(movementDataByCategory).forEach((category) => {
-    const movements = movementDataByCategory[category];
+  Object.keys(movementCountsByCategory).forEach((category) => {
+    const movements = movementCountsByCategory[category];
     topMovementsData[category] = Object.entries(movements)
       .map(([name, data]) => ({
         name,
-        value: Array.from(new Set(data.wodNames)).length,
+        value: data.count,
         wodNames: Array.from(new Set(data.wodNames)),
       }))
       .sort((a, b) => b.value - a.value)

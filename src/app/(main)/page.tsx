@@ -7,7 +7,7 @@ import PageLayout from "~/app/_components/PageLayout";
 import { api } from "~/trpc/server"; // Import server tRPC client
 import ReactQueryProvider from "~/app/_components/ReactQueryProvider";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { type Wod, type Benchmarks } from "~/types/wodTypes";
+import { type Wod, isBenchmarks } from "~/types/wodTypes";
 
 export const metadata: Metadata = {
   title: "Track Your WOD Scores & Visualize Fitness Progress", // Uses template from layout
@@ -34,13 +34,15 @@ export default async function Home(): Promise<JSX.Element> {
       typeof wod.benchmarks === "string"
         ? (() => {
             try {
-              const parsed = JSON.parse(wod.benchmarks) as unknown;
-              return parsed || {};
+              const parsed: unknown = JSON.parse(wod.benchmarks);
+              return isBenchmarks(parsed) ? parsed : null;
             } catch {
-              return {};
+              return null;
             }
           })()
-        : wod.benchmarks || {},
+        : isBenchmarks(wod.benchmarks)
+          ? wod.benchmarks
+          : null,
   }));
 
   // Hydrate React Query cache

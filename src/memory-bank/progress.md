@@ -4,6 +4,13 @@
 
 ### What Works
 
+- **CSV Import Flow: Zod Validation and Type Safety (Apr 28, 2025):**
+
+  - All hand-written type guards and property checks for CSV import were removed and replaced with Zod schemas and `.safeParse`-based type narrowing.
+  - All usages in the import flow (`useScoreProcessing.ts`, `ScoreReviewTable.tsx`, `ReviewStep.tsx`) now use Zod for runtime validation and type inference.
+  - All import-related and UI tests pass, confirming the migration is robust and correct.
+  - The import flow is now fully type-safe, maintainable, and aligned with project validation patterns.
+
 - **WOD Movements Table and Data Population (Local/Dev):**
   - Schema for `movements` and `wod_movements` tables added and migrated in dev.
   - Population script (`scripts/populate_movements_to_db.ts`) is robust, idempotent, and tested.

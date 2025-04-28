@@ -67,44 +67,32 @@ export interface PrzillaProcessedRow {
 // Union type for both formats
 export type ProcessedRow = SugarWodProcessedRow | PrzillaProcessedRow;
 
-// Type guard to check if an object is a valid CsvRow
-// Use unknown instead of any for better type safety
-export function isCsvRow(obj: unknown): obj is CsvRow {
-  // Check if obj is a non-null object first
-  if (typeof obj !== "object" || obj === null) {
-    return false;
-  }
-  // Cast to Record<string, unknown> for safe property access
-  const record = obj as Record<string, unknown>;
-  // Check for presence and type of required fields
-  return (
-    typeof record.date === "string" &&
-    !!record.date &&
-    typeof record.title === "string" &&
-    !!record.title &&
-    typeof record.description === "string" && // Allow empty description
-    typeof record.best_result_raw === "string" && // Allow empty raw result
-    typeof record.best_result_display === "string" && // Allow empty display result
-    typeof record.rx_or_scaled === "string" &&
-    !!record.rx_or_scaled
-    // Add checks for other required fields if any
-  );
-}
+import { z } from "zod";
 
-// Type guard to check if an object is a valid PrzillaCsvRow
-export function isPrzillaCsvRow(obj: unknown): obj is PrzillaCsvRow {
-  // Check if obj is a non-null object first
-  if (typeof obj !== "object" || obj === null) {
-    return false;
-  }
-  // Cast to Record<string, unknown> for safe property access
-  const record = obj as Record<string, unknown>;
-  // Check for presence and type of required fields
-  return (
-    typeof record["WOD Name"] === "string" &&
-    !!record["WOD Name"] &&
-    typeof record.Date === "string" &&
-    !!record.Date
-    // Other fields are optional
-  );
-}
+// Zod schema for SugarWOD CSV row
+export const CsvRowSchema = z.object({
+  date: z.string().min(1),
+  title: z.string().min(1),
+  description: z.string(),
+  best_result_raw: z.string(),
+  best_result_display: z.string(),
+  score_type: z.string(),
+  barbell_lift: z.string().optional(),
+  set_details: z.string().optional(),
+  notes: z.string().optional(),
+  rx_or_scaled: z.string().min(1),
+  pr: z.string().optional(),
+});
+
+// Zod schema for PRzilla CSV row
+export const PrzillaCsvRowSchema = z.object({
+  "WOD Name": z.string().min(1),
+  Date: z.string().min(1),
+  "Score (time)": z.string().optional(),
+  "Score (reps)": z.string().optional(),
+  "Score (rounds)": z.string().optional(),
+  "Score (partial reps)": z.string().optional(),
+  "Score (load)": z.string().optional(),
+  Rx: z.string().optional(),
+  Notes: z.string().optional(),
+});

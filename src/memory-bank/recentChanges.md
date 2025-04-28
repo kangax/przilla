@@ -2,6 +2,17 @@
 
 ## April 28, 2025
 
+- **CSV Import Flow: Zod Migration for Type Guards and Validation**
+
+  - **Goal:** Replace all hand-written type guards and ad-hoc property checks for CSV import with robust, type-safe Zod schemas and validation.
+  - **Implementation:**
+    - Removed all custom type guards (`isCsvRow`, `isPrzillaCsvRow`) from the codebase.
+    - Added Zod schemas for `CsvRow` and `PrzillaCsvRow` in `src/app/import/components/types.ts`.
+    - Replaced all usages of the old type guards and all property checks (e.g., `"date" in row`, `"Date" in row`) in the import flow (`useScoreProcessing.ts`, `ScoreReviewTable.tsx`, `ReviewStep.tsx`) with Zod-based type narrowing using `.safeParse`.
+    - Updated all relevant logic to use Zod schemas for runtime validation and type inference.
+    - Ensured all import-related and UI tests pass after migration, confirming correctness and robustness.
+  - **Outcome:** The import flow is now fully Zod-validated, type-safe, and maintainable. This aligns with project patterns, improves runtime safety, and eliminates duplication between TypeScript types and runtime validation logic.
+
 - **WOD Movements Table and Data Population:**
   - **Goal:** Normalize all WOD movements in the database for analytics, filtering, and UI features.
   - **Implementation:**

@@ -33,12 +33,14 @@ type IsRxCellContext = CellContext<ProcessedRow, boolean | null | undefined>;
 // Helper type for notes cell context
 type NotesCellContext = CellContext<ProcessedRow, string | null | undefined>;
 
+import { CsvRowSchema, PrzillaCsvRowSchema } from "../components/types";
+
 // Helper function to safely get date from either CsvRow or PrzillaCsvRow
 const getDateFromCsvRow = (row: CsvRow | PrzillaCsvRow): string => {
-  if ("date" in row) {
-    return row.date;
-  } else if ("Date" in row) {
-    return row.Date;
+  if (CsvRowSchema.safeParse(row).success) {
+    return (row as CsvRow).date;
+  } else if (PrzillaCsvRowSchema.safeParse(row).success) {
+    return (row as PrzillaCsvRow).Date;
   }
   return "";
 };

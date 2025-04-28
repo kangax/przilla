@@ -227,6 +227,15 @@ Eliminate all regex and string-based movement parsing from both backend and fron
 
 ## Recently Implemented
 
+- **CSV Import Flow: Zod Migration for Type Guards and Validation (Apr 28, 2025):**
+
+  - All hand-written type guards for CSV import (`isCsvRow`, `isPrzillaCsvRow`) were removed and replaced with Zod schemas (`CsvRowSchema`, `PrzillaCsvRowSchema`).
+  - All property checks for distinguishing row types (e.g., `"date" in row`, `"Date" in row`) in the import flow were replaced with Zod-based type narrowing using `.safeParse`.
+  - All usages in `useScoreProcessing.ts`, `ScoreReviewTable.tsx`, and `ReviewStep.tsx` were updated to use Zod schemas for runtime validation and type inference.
+  - The migration ensures robust, maintainable, and type-safe runtime validation for all imported CSV data.
+  - The test suite was run after migration; all import-related and UI tests passed, confirming correctness and robustness.
+  - Rationale: This aligns with project patterns (see techContext.md), improves runtime safety, and eliminates duplication between TypeScript types and runtime validation logic.
+
 - **Profile Dropdown Export (Apr 21, 2025):**
 
   - Added a dropdown menu to the profile name in the main app header (AuthControls).
@@ -244,6 +253,14 @@ Eliminate all regex and string-based movement parsing from both backend and fron
   - Next: Run UI tests with `NEXT_PUBLIC_BETTER_AUTH_URL` set, then perform manual QA of exported files in the browser.
 
 ## Learnings & Insights
+
+- **CSV Import Validation Pattern:**
+
+  - Zod schemas are now the single source of truth for runtime validation of imported CSV data.
+  - All type guards and ad-hoc property checks for distinguishing row types have been replaced with Zod-based type narrowing.
+  - This pattern ensures that runtime validation and TypeScript type inference are always in sync, reducing bugs and maintenance overhead.
+  - When adding new import formats or updating CSV structures, always define/extend the Zod schema and use `.safeParse` for all runtime checks.
+  - This approach is now the standard for all future runtime validation in the project.
 
 - **Never summarize or omit code or documentation. All files must always be complete and explicit. Any omission, summarization, or use of ellipsis/comments to indicate missing content is a critical error and must be avoided.**
 - When using prop-drilling for server state (e.g., scores), query invalidation alone is not enough to guarantee UI updates. The parent component must be explicitly notified to refetch data after mutations.

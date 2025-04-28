@@ -10,7 +10,7 @@ import type {
   PrzillaProcessedRow,
   PrzillaCsvRow,
 } from "../components/types";
-import { isCsvRow } from "../components/types";
+import { CsvRowSchema } from "../components/types";
 import type { ImportStep } from "./useImportFlow";
 
 // Define type for parsed PRzilla CSV row
@@ -206,7 +206,7 @@ export function useScoreProcessing({
 
             const processedData: ProcessedRow[] = results.data
               .map((rawRow, index) => {
-                if (!isCsvRow(rawRow)) {
+                if (!CsvRowSchema.safeParse(rawRow).success) {
                   return null;
                 }
                 const csvRow: CsvRow = rawRow;

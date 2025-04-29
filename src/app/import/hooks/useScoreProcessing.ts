@@ -12,6 +12,7 @@ import type {
 } from "../components/types";
 import { CsvRowSchema } from "../components/types";
 import type { ImportStep } from "./useImportFlow";
+import { sugarwodAliases } from "../aliases";
 
 // Define type for parsed PRzilla CSV row
 interface PrzillaParsedRow {
@@ -210,12 +211,6 @@ export function useScoreProcessing({
                   return null;
                 }
                 const csvRow: CsvRow = rawRow;
-                const sugarwodAliases: Record<string, string> = {
-                  "1 mile Run": "Run 1600m",
-                  "2 mile Run": "Run 3200m",
-                  "5k Run": "Run 5000m",
-                  "10k Run": "Run 10000m",
-                };
                 const importedTitle = csvRow.title;
                 const canonicalName = sugarwodAliases[importedTitle];
                 let matchedWod: Wod | null = null;

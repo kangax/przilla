@@ -29630,44 +29630,6 @@
     ]
   },
   {
-    "wodUrl": "https://wodwell.com/wod/complex-fran/",
-    "wodName": "Complex Fran",
-    "description": "For Time\n7 Bar Muscle-Ups\n7 Chest-to-Bar Pull-Ups\n7 Chin-Over-Bar Pull-Ups\n21 Thrusters (95/65 lb)\n5 Bar Muscle-Ups\n5 Chest-to-Bar Pull-Ups\n5 Chin-Over-Bar Pull-Ups\n15 Thrusters (95/65 lb)\n3 Bar Muscle-Ups\n3 Chest-to-Bar Pull-Ups\n3 Chin-Over-Bar Pull-Ups\n9 Thrusters (95/65 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 300
-        },
-        "advanced": {
-          "min": 301,
-          "max": 480
-        },
-        "intermediate": {
-          "min": 481,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": 900
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time", "Couplet"],
-    "difficulty": "Very Hard",
-    "difficulty_explanation": "Combines high-skill gymnastics progressions with barbell cycling in a descending sprint.",
-    "count_likes": 24,
-    "movements": [
-      "Bar Muscle-Up",
-      "Chest-to-Bar Pull-Up",
-      "Chin-Over-Bar Pull-Up",
-      "Thruster"
-    ]
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/the-standard/",
     "wodName": "The Standard",
     "description": "For Time\n30 Clean-and-Jerks (135/95 lb)\n30 Muscle-Ups\n30 Snatches (135/95 lb)\n\nTime Cap: 12 minutes",
@@ -31968,5 +31930,362 @@
     "difficulty_explanation": "A 10k SkiErg test of long-distance aerobic endurance.",
     "count_likes": 0,
     "movements": ["SkiErg"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-17-1/",
+    "wodName": "AGOQ 17.1",
+    "description": "For Time\n100 Dumbbell Snatches (50/35 lb)\n80 calorie Row\n60 Burpees\n40 Muscle-Ups\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 900 },
+        "advanced": { "min": 901, "max": 1200 },
+        "intermediate": { "min": 1201, "max": 1500 },
+        "beginner": { "min": 1501, "max": 1800 }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A high-volume chipper with advanced gymnastics and a tight time cap. Demands grip endurance, aerobic capacity, and muscle-up proficiency.",
+    "count_likes": 16,
+    "movements": ["Dumbbell Snatch", "Row", "Burpee", "Muscle-Up"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-17-2/",
+    "wodName": "AGOQ 17.2",
+    "description": "AMRAP in 20 minutes\n0:00-4:00:\n25 Toes-to-Bars\n50 Double Unders\n15 Squat Cleans (135/85 lb)\n\nIf completed before 4:00, then until 8:00:\n25 Toes-to-Bars\n50 Double Unders\n13 Squat Cleans (185/115 lb)\n\nIf completed before 8:00, then until 12:00:\n25 Toes-to-Bars\n50 Double Unders\n11 Squat Cleans (225/145 lb)\n\nIf completed before 12:00, then until 16:00:\n25 Toes-to-Bars\n50 Double Unders\n9 Squat Cleans (275/175 lb)\n\nIf completed before 16:00, then until 20:00:\n25 Toes-to-Bars\n50 Double Unders\n7 Squat Cleans (315/205 lb)",
+    "benchmarks": {
+      "type": "amrap",
+      "levels": {
+        "elite": { "min": 300, "max": null },
+        "advanced": { "min": 200, "max": 299 },
+        "intermediate": { "min": 100, "max": 199 },
+        "beginner": { "min": null, "max": 99 }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["AMRAP"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A progressively heavier and more technical AMRAP with high skill and grip demands. Requires both speed and strength endurance.",
+    "count_likes": 9,
+    "movements": ["Toes-to-Bar", "Double-Under", "Squat Clean"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-17-3/",
+    "wodName": "AGOQ 17.3",
+    "description": "21-15-9 Reps for Time\nShoulder-to-Overheads (135/95 lb)\nChest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 240 },
+        "advanced": { "min": 241, "max": 360 },
+        "intermediate": { "min": 361, "max": 480 },
+        "beginner": { "min": 481, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A classic couplet with moderate weight and high-rep gymnastics. Tests upper body stamina and cycling efficiency.",
+    "count_likes": 20,
+    "movements": ["Shoulder-to-Overhead", "Chest-to-Bar Pull-Up"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-17-4/",
+    "wodName": "AGOQ 17.4",
+    "description": "2 Rounds for Time\n10 Deadlifts (315/225 lb)\n20 Deficit Handstand Push-Ups (4.5/3 in)\n30 Front Squats (95/65 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 480 },
+        "intermediate": { "min": 481, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy deadlifts, deficit HSPU, and high-rep front squats in a short format. Demands strength, skill, and stamina.",
+    "count_likes": 16,
+    "movements": ["Deadlift", "Deficit Handstand Push-Up", "Front Squat"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-18-1/",
+    "wodName": "AGOQ 18.1",
+    "description": "For Time\n4 Thrusters (135/95 lb)\n1 Rope Climb (15 ft)\n8 Thrusters (135/95 lb)\n2 Rope Climbs (15 ft)\n12 Thrusters (135/95 lb)\n3 Rope Climbs (15 ft)\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 240 },
+        "advanced": { "min": 241, "max": 360 },
+        "intermediate": { "min": 361, "max": 480 },
+        "beginner": { "min": 481, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A short, high-intensity chipper with heavy thrusters and rope climbs. Tests grip, pulling strength, and speed under fatigue.",
+    "count_likes": 13,
+    "movements": ["Thruster", "Rope Climb"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-18-2/",
+    "wodName": "AGOQ 18.2",
+    "description": "4 Rounds for Time\n25 Chest-to-Bar Pull-Ups\n5 Cleans (245/170 lb)\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 480 },
+        "intermediate": { "min": 481, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "Heavy cleans and high-rep chest-to-bar pull-ups in a short time cap. Demands strength, skill, and stamina.",
+    "count_likes": 7,
+    "movements": ["Chest-to-Bar Pull-Up", "Clean"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-18-3/",
+    "wodName": "AGOQ 18.3",
+    "description": "AMRAP in 20 minutes\n50 Wall Ball Shots (20/14 lb)\n100 Double-Unders\n50 ft Handstand Walk\n100 Double-Unders\n50 calorie Row\n100 Double-Unders\n50 ft Handstand Walk\n100 Double-Unders",
+    "benchmarks": {
+      "type": "amrap",
+      "levels": {
+        "elite": { "min": 400, "max": null },
+        "advanced": { "min": 300, "max": 399 },
+        "intermediate": { "min": 200, "max": 299 },
+        "beginner": { "min": null, "max": 199 }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A long AMRAP with high skill, volume, and variety. Tests endurance, coordination, and gymnastics capacity.",
+    "count_likes": 4,
+    "movements": ["Wall Ball Shot", "Double-Under", "Handstand Walk", "Row"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-18-4/",
+    "wodName": "AGOQ 18.4",
+    "description": "AMRAP in 5 minutes\n9 Handstand Push-Ups\n6 Burpees\n3 Snatches (165/115 lb)",
+    "benchmarks": {
+      "type": "amrap",
+      "levels": {
+        "elite": { "min": 100, "max": null },
+        "advanced": { "min": 75, "max": 99 },
+        "intermediate": { "min": 50, "max": 74 },
+        "beginner": { "min": null, "max": 49 }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["AMRAP", "Triplet"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A short, fast AMRAP with gymnastics and moderate weight. Tests speed, skill, and transition efficiency.",
+    "count_likes": 9,
+    "movements": ["Handstand Push-Up", "Burpee", "Snatch"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-19-1/",
+    "wodName": "AGOQ 19.1",
+    "description": "3 Rounds for Time\n15 Deadlifts (225/155 lb)\n35 Overhead Squats (75/55 lb)\n90 Double-Unders\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 600 },
+        "intermediate": { "min": 601, "max": 720 },
+        "beginner": { "min": 721, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A high-rep chipper with moderate weights and a tight time cap. Tests barbell cycling, overhead mobility, and jump rope stamina.",
+    "count_likes": 9,
+    "movements": ["Deadlift", "Overhead Squat", "Double-Under"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-19-2/",
+    "wodName": "AGOQ 19.2",
+    "description": "For Time\n80 Bar-Facing Burpees\n4000 meter Row\n\nTime Cap: 30 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 1200 },
+        "advanced": { "min": 1201, "max": 1500 },
+        "intermediate": { "min": 1501, "max": 1800 },
+        "beginner": { "min": 1801, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A long, grueling test of aerobic capacity and grit. High volume burpees and rowing challenge endurance and pacing.",
+    "count_likes": 13,
+    "movements": ["Bar-Facing Burpee", "Row"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-19-3/",
+    "wodName": "AGOQ 19.3",
+    "description": "For Time\n5 Rounds of:\n4 Muscle-Ups\n13 Shoulder-to-Overheads (135/95 lb)\n\nThen, 5 Rounds of:\n4 Muscle-Ups\n7 Shoulder-to-Overheads (185/125 lb)\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 600 },
+        "advanced": { "min": 601, "max": 720 },
+        "intermediate": { "min": 721, "max": 900 },
+        "beginner": { "min": 901, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A two-part chipper with increasing weight and high-skill gymnastics. Demands strength, stamina, and muscle-up proficiency.",
+    "count_likes": 4,
+    "movements": ["Muscle-Up", "Shoulder-to-Overhead"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-19-4/",
+    "wodName": "AGOQ 19.4",
+    "description": "AMRAP in 8 minutes\n45 Thrusters (95/65 lb)\n45 Toes-to-Bars\n45 Cleans (95/65 lb)\n45 Chest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "amrap",
+      "levels": {
+        "elite": { "min": 180, "max": null },
+        "advanced": { "min": 120, "max": 179 },
+        "intermediate": { "min": 60, "max": 119 },
+        "beginner": { "min": null, "max": 59 }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["AMRAP", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A high-volume AMRAP with barbell cycling and gymnastics. Tests grip, stamina, and movement transitions.",
+    "count_likes": 8,
+    "movements": ["Thruster", "Toes-to-Bar", "Clean", "Chest-to-Bar Pull-Up"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-19-5/",
+    "wodName": "AGOQ 19.5",
+    "description": "For Time\n30 Snatches (135/95 lb)\n30 Strict Handstand Push-Ups\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 240 },
+        "advanced": { "min": 241, "max": 360 },
+        "intermediate": { "min": 361, "max": 480 },
+        "beginner": { "min": 481, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A sprint couplet with heavy snatches and strict HSPU. Demands speed, strength, and advanced gymnastics skill.",
+    "count_likes": 5,
+    "movements": ["Snatch", "Strict Handstand Push-Up"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-21-1/",
+    "wodName": "AGOQ 21.1",
+    "description": "5 Rounds for Time\n15 Handstand Push-Ups\n15 Dumbbell Shoulder-to-Overheads (2x50/35 lb)\n15 calorie Row\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 600 },
+        "advanced": { "min": 601, "max": 900 },
+        "intermediate": { "min": 901, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A five-round chipper with moderate weights and gymnastics. Tests pressing stamina, rowing, and movement transitions.",
+    "count_likes": 3,
+    "movements": ["Handstand Push-Up", "Dumbbell Shoulder-to-Overhead", "Row"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-21-2/",
+    "wodName": "AGOQ 21.2",
+    "description": "For Time\n60 GHD Sit-Ups\n6 Rope Climbs (15 ft)\n60 Alternating Pistols\n\n50 GHD Sit-Ups\n5 Rope Climbs (15 ft)\n50 Alternating Pistols\n\n40 GHD Sit-Ups\n4 Rope Climbs (15 ft)\n40 Alternating Pistols\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 900 },
+        "advanced": { "min": 901, "max": 1200 },
+        "intermediate": { "min": 1201, "max": 1500 },
+        "beginner": { "min": 1501, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficulty_explanation": "A descending chipper with high-skill gymnastics and single-leg squats. Tests core, grip, and stamina.",
+    "count_likes": 2,
+    "movements": ["GHD Sit-Up", "Rope Climb", "Pistol Squat"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-21-3/",
+    "wodName": "AGOQ 21.3",
+    "description": "For Time\n75 Cleans (135/95 lb)\n300 Double-Unders\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 600 },
+        "advanced": { "min": 601, "max": 900 },
+        "intermediate": { "min": 901, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A chipper with high-rep cleans and double-unders. Tests barbell cycling, grip, and jump rope stamina.",
+    "count_likes": 1,
+    "movements": ["Clean", "Double-Under"]
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-21-5/",
+    "wodName": "AGOQ 21.5",
+    "description": "12-9-6 Reps for Time\nOverhead Squats (165/115 lb)\nBurpee Box Jump Overs (30 in)\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 480 },
+        "intermediate": { "min": 481, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "results": [],
+    "category": "AGOQ",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficulty_explanation": "A sprint couplet with heavy overhead squats and high box jumps. Demands speed, strength, and explosive power.",
+    "count_likes": 0,
+    "movements": ["Overhead Squat", "Burpee Box Jump Over"]
   }
 ]

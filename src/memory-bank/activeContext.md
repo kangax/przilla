@@ -197,9 +197,9 @@ Eliminate all regex and string-based movement parsing from both backend and fron
 
 ## Next Steps
 
-1. [PROD] Run Drizzle migration to create `movements` and `wod_movements` tables in production:
+1. [DONE][PROD] Run Drizzle migration to create `movements` and `wod_movements` tables in production:
    - `DATABASE_URL=libsql://przilla-prod-kangax.aws-us-west-2.turso.io npx drizzle-kit push`
-2. [PROD] Run the population script with the production database:
+2. [DONE][PROD] Run the population script with the production database:
    - `DATABASE_URL=libsql://przilla-prod-kangax.aws-us-west-2.turso.io npx tsx scripts/populate_movements_to_db.ts`
 3. Review any WODs missing in DB after population and resolve as needed.
 4. Integrate movement-based queries and analytics in the app UI.
@@ -210,13 +210,6 @@ Eliminate all regex and string-based movement parsing from both backend and fron
 - Add remaining Games/Regionals/etc. workouts from SugarWOD
 - export should be named przilla_scores_EMAIL_YYYY_MM_DD
 - Search doesn't show "x" on mobile
-
-### Good to have
-
-- Make a separate table of movements
-  - more precise chart of movements
-  - can potentially use it for things like:
-    "show wods with running AND thruster"
 
 ### Maybe
 

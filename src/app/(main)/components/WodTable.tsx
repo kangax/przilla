@@ -378,10 +378,34 @@ const createColumns = (
       cell: (info) => {
         const row = info.row.original;
         if (!row.description) return null;
+        const movements = row.movements ?? [];
+        const hasMovements = movements.length > 0;
+        const tooltipContent = hasMovements ? (
+          <div style={{ maxWidth: 320 }}>
+            <span className="mb-1 block text-sm font-semibold">Movements:</span>
+            <ul className="list-disc pl-5 text-xs">
+              {movements.map((m) => (
+                <li key={m}>{m}</li>
+              ))}
+            </ul>
+          </div>
+        ) : (
+          <span className="text-xs text-gray-400">No movements listed</span>
+        );
         return (
-          <span className="whitespace-pre-wrap break-words">
-            <HighlightMatch text={row.description} highlight={searchTerm} />
-          </span>
+          <TooltipPrimitive.Root>
+            <TooltipPrimitive.Trigger asChild>
+              <span className="cursor-help whitespace-pre-wrap break-words">
+                <HighlightMatch text={row.description} highlight={searchTerm} />
+              </span>
+            </TooltipPrimitive.Trigger>
+            <TooltipPrimitive.Content
+              className="max-w-[340px] rounded-sm border bg-white p-3 text-black shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
+              sideOffset={6}
+            >
+              {tooltipContent}
+            </TooltipPrimitive.Content>
+          </TooltipPrimitive.Root>
         );
       },
       size: 364,

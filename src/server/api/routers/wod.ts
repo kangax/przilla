@@ -43,12 +43,40 @@ export const wodRouter = createTRPCRouter({
    * and maps database fields (snake_case) to frontend type fields (camelCase).
    */
   getAll: publicProcedure.query(async ({ ctx }) => {
+    // Import movement tables dynamically to avoid circular deps
+    const { wodMovements, movements } = await import("~/server/db/schema");
+
+    // 1. Fetch all WODs
     const allWodsData = await ctx.db
       .select()
       .from(wods)
       .orderBy(asc(wods.wodName));
 
-    // Mapping remains the same
+    // 2. Fetch all movements for all WODs
+    const allWodIds = allWodsData.map((wod) => wod.id);
+    let movementsByWod: Record<string, string[]> = {};
+    if (allWodIds.length > 0) {
+      const movementRows = await ctx.db
+        .select({
+          wodId: wodMovements.wodId,
+          movementName: movements.name,
+        })
+        .from(wodMovements)
+        .leftJoin(movements, eq(wodMovements.movementId, movements.id))
+        .where(inArray(wodMovements.wodId, allWodIds));
+      // Aggregate by WOD ID
+      movementsByWod = movementRows.reduce<Record<string, string[]>>(
+        (acc, row) => {
+          if (!row.wodId || !row.movementName) return acc;
+          if (!acc[row.wodId]) acc[row.wodId] = [];
+          acc[row.wodId].push(row.movementName);
+          return acc;
+        },
+        {},
+      );
+    }
+
+    // 3. Map WODs and attach movements
     return allWodsData.map((wod) => ({
       id: wod.id,
       wodUrl: wod.wodUrl,
@@ -63,6 +91,7 @@ export const wodRouter = createTRPCRouter({
       timecap: wod.timecap, // Add timecap field
       createdAt: wod.createdAt,
       updatedAt: wod.updatedAt,
+      movements: movementsByWod[wod.id] ?? [],
     }));
   }),
 

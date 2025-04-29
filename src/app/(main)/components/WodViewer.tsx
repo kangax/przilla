@@ -151,6 +151,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
       difficultyExplanation: wod.difficultyExplanation,
       countLikes: wod.countLikes,
       /**
+       * List of normalized movement names for this WOD (from DB, can be empty)
+       */
+      movements: wod.movements ?? [],
+      /**
        * Time cap for the workout, in seconds (nullable, from DB)
        */
       timecap: wod.timecap ?? null,

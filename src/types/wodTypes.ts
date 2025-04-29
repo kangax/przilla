@@ -79,6 +79,10 @@ export type Wod = {
   difficultyExplanation?: string | null; // Renamed from difficulty_explanation, match DB (can be null)
   countLikes?: number | null; // Renamed from count_likes, match DB (can be null)
   /**
+   * List of normalized movement names for this WOD (from DB, can be empty)
+   */
+  movements?: string[];
+  /**
    * Time cap for the workout, in seconds (nullable, from DB)
    */
   timecap?: number | null;
@@ -95,6 +99,7 @@ export type WodFromQuery = Omit<
   updatedAt?: string | Date | null; // Could be string or Date depending on serialization
   tags?: string | string[] | null; // Could be stringified JSON or array
   benchmarks?: string | Benchmarks | null; // Could be stringified JSON or object
+  movements?: string[]; // Always array from DB, can be empty
 };
 
 // Final client-side Score type (after parsing/transformation)

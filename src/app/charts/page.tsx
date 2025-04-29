@@ -7,7 +7,7 @@ import WodTimelineChart from "./components/WodTimelineChart";
 import MovementFrequencyChart from "./components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
 import ChartLoginOverlay from "./components/ChartLoginOverlay"; // Import the overlay
-import { type Wod } from "~/types/wodTypes";
+import { type Wod, type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
 import {
   generatePlaceholderDistributionData,
@@ -54,7 +54,7 @@ type PerformanceDataPoint = {
 
 export default async function ChartsPage() {
   const session = await getSession(); // Use getSession()
-  let wodsData: Wod[] = [];
+  let wodsData: WodFromQuery[] = []; // Use WodFromQuery for raw data
   // Movement frequency data from backend
   let movementCountsByCategory: Record<
     string,
@@ -64,7 +64,7 @@ export default async function ChartsPage() {
 
   // Public data - always fetched
   try {
-    wodsData = await api.wod.getAll();
+    wodsData = (await api.wod.getAll()) as WodFromQuery[]; // Add type assertion
     console.log("Loaded WODs data for charts:", wodsData.length);
   } catch (error) {
     console.error("Error loading WODs data:", error);

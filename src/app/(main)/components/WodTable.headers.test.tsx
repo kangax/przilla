@@ -86,7 +86,7 @@ describe("WodTable Headers", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={{}}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     expect(
@@ -125,7 +125,7 @@ describe("WodTable Headers", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={{}}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     expect(
@@ -141,7 +141,7 @@ describe("WodTable Headers", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={{}}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     expect(
@@ -157,7 +157,7 @@ describe("WodTable Headers", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={{}}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     expect(
@@ -175,7 +175,7 @@ describe("WodTable Headers", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={{}}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     screen.getByText(/Workout/).click();

@@ -75,7 +75,7 @@ const mockWodWithUrl = {
   wodUrl: "test.com/wod2",
   wodName: "WOD Bravo",
   description: "Desc Bravo",
-  category: "Girl",
+  category: "Girl" as const, // Use const assertion
   tags: ["For Time"],
   benchmarks: {
     type: "time" as const,
@@ -98,7 +98,7 @@ const mockWodWithoutUrl = {
   wodUrl: null,
   wodName: "WOD Charlie",
   description: "Desc Charlie",
-  category: "Hero",
+  category: "Hero" as const, // Use const assertion
   tags: ["Chipper"],
   benchmarks: {
     type: "rounds" as const,
@@ -176,7 +176,7 @@ describe("WodTable External Link Icon", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row = findRenderedRowByContent("WOD Bravo");
@@ -196,7 +196,7 @@ describe("WodTable External Link Icon", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row = findRenderedRowByContent("WOD Charlie");

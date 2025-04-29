@@ -61,6 +61,7 @@ export type WodCategory =
   | "Games"
   | "Open"
   | "Quarterfinals" // Added Quarterfinals based on page.tsx
+  | "AGOQ" // Added AGOQ category
   | "Benchmark"
   | "Skill" // Added Skill based on page.tsx
   | "Other";
@@ -73,7 +74,7 @@ export type Wod = {
   description?: string | null; // Updated to match DB schema (can be null)
   benchmarks?: Benchmarks | null; // Updated to match DB schema (can be null)
   // results: WodResult[]; // Removed - results are fetched separately
-  category?: string | null; // Simplified type to match DB 'text' column, resolving lint error
+  category?: WodCategory | null; // Use specific category type
   tags?: string[] | null; // Simplified type to match DB 'text' column (JSON array), resolving lint error
   difficulty?: string | null; // Updated to match DB schema (can be null)
   difficultyExplanation?: string | null; // Renamed from difficulty_explanation, match DB (can be null)

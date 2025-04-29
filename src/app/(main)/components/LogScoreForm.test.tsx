@@ -98,7 +98,7 @@ const mockWod: Wod = {
   difficultyExplanation: "Medium difficulty",
   countLikes: 0,
   wodUrl: null,
-  category: "Test",
+  category: "Benchmark", // Use a valid WodCategory
   createdAt: new Date(),
   updatedAt: new Date(),
 };

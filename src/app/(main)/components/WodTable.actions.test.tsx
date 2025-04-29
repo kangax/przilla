@@ -112,7 +112,7 @@ const mockWodWithScore = {
   wodUrl: "test.com/wod2",
   wodName: "WOD Bravo",
   description: "Desc Bravo",
-  category: "Girl",
+  category: "Girl" as const, // Explicitly use a valid WodCategory literal
   tags: ["For Time"],
   benchmarks: {
     type: "time" as const,
@@ -184,7 +184,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={mockScoresByWodId}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>
@@ -207,7 +207,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={mockScoresByWodId}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>
@@ -236,7 +236,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={{}}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>
@@ -264,7 +264,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={{}}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>
@@ -295,7 +295,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={{}}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>
@@ -335,7 +335,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={mockScoresByWodId}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>
@@ -375,7 +375,7 @@ describe("WodTable Actions", () => {
               tableHeight={500}
               searchTerm=""
               scoresByWodId={mockScoresByWodId}
-              isLoadingScores={false}
+              _isLoadingScores={false} // Renamed prop
             />
           </QueryClientProvider>
         </ToastProvider>

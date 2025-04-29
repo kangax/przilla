@@ -7,8 +7,9 @@ import PageLayout from "~/app/_components/PageLayout";
 import { api } from "~/trpc/server"; // Import server tRPC client
 import ReactQueryProvider from "~/app/_components/ReactQueryProvider";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { type Wod, type Benchmarks } from "~/types/wodTypes";
+import { type Wod, type Benchmarks, type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
 import { BenchmarksSchema } from "~/types/wodTypes";
+import { parseTags } from "~/utils/wodUtils"; // Import parseTags
 
 export const metadata: Metadata = {
   title: "Track Your WOD Scores & Visualize Fitness Progress", // Uses template from layout
@@ -18,11 +19,12 @@ export const metadata: Metadata = {
 };
 
 export default async function Home(): Promise<JSX.Element> {
-  // Fetch WODs server-side - explicitly typed
-  const initialWodsRaw: Wod[] = await api.wod.getAll();
-  // Ensure all date fields are strings for tRPC initialData compatibility
+  // Fetch WODs server-side - use WodFromQuery for raw data
+  const initialWodsRaw = (await api.wod.getAll()) as WodFromQuery[]; // Add type assertion
+  // Ensure all date fields are Dates, benchmarks and tags are parsed
   const initialWods: Wod[] = initialWodsRaw.map((wod) => ({
     ...wod,
+    tags: parseTags(wod.tags), // Parse tags
     createdAt:
       typeof wod.createdAt === "string"
         ? new Date(wod.createdAt)

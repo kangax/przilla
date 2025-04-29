@@ -1012,7 +1012,7 @@ describe("WodViewer Mobile Sorting UI", () => {
     {
       id: "1",
       wodName: "Cindy",
-      category: "Girl",
+      category: "Girl" as const, // Use const assertion
       difficulty: "Medium",
       countLikes: 100,
       createdAt: new Date(),
@@ -1025,7 +1025,7 @@ describe("WodViewer Mobile Sorting UI", () => {
     {
       id: "2",
       wodName: "Fran",
-      category: "Girl",
+      category: "Girl" as const, // Use const assertion
       difficulty: "Hard",
       countLikes: 200,
       createdAt: new Date(),
@@ -1038,7 +1038,7 @@ describe("WodViewer Mobile Sorting UI", () => {
     {
       id: "3",
       wodName: "Annie",
-      category: "Girl",
+      category: "Girl" as const, // Use const assertion
       difficulty: "Easy",
       countLikes: 50,
       createdAt: new Date(),

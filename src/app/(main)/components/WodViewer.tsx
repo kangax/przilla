@@ -67,6 +67,7 @@ import {
   type WodFromQuery,
   type ScoreFromQuery,
   type Benchmarks,
+  type WodCategory, // Import WodCategory
 } from "~/types/wodTypes";
 import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
 
@@ -306,7 +307,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     // Overwrite with known filter/sort params
     const validCategoryForUrl =
       selectedCategories.length > 0 &&
-      categoryOrder.includes(selectedCategories[0])
+      categoryOrder.includes(selectedCategories[0] as WodCategory) // Cast to WodCategory
         ? selectedCategories[0]
         : null;
 
@@ -387,7 +388,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
 
   const validSelectedCategories = useMemo(() => {
     return selectedCategories.length > 0 &&
-      categoryOrder.includes(selectedCategories[0])
+      categoryOrder.includes(selectedCategories[0] as WodCategory) // Cast to WodCategory
       ? selectedCategories
       : [];
   }, [selectedCategories, categoryOrder]);

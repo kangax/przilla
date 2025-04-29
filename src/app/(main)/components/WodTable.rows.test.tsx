@@ -76,7 +76,7 @@ const mockWod1_NoResults = {
   wodUrl: "test.com/wod1",
   wodName: "WOD Alpha",
   description: "Desc Alpha",
-  category: "Benchmark",
+  category: "Benchmark" as const, // Use const assertion
   tags: ["AMRAP"],
   difficulty: "Medium",
   difficultyExplanation: "Standard benchmark AMRAP.",
@@ -90,7 +90,7 @@ const mockWod2_OneResultRx = {
   wodUrl: "test.com/wod2",
   wodName: "WOD Bravo",
   description: "Desc Bravo",
-  category: "Girl",
+  category: "Girl" as const, // Use const assertion
   tags: ["For Time"],
   benchmarks: {
     type: "time" as const,
@@ -113,7 +113,7 @@ const mockWod3_OneResultScaled = {
   wodUrl: null,
   wodName: "WOD Charlie",
   description: "Desc Charlie",
-  category: "Hero",
+  category: "Hero" as const, // Use const assertion
   tags: ["Chipper"],
   benchmarks: {
     type: "rounds" as const,
@@ -136,7 +136,7 @@ const mockWod4_MultiResult = {
   wodUrl: "test.com/wod4",
   wodName: "WOD Delta",
   description: "Desc Delta",
-  category: "Open",
+  category: "Open" as const, // Use const assertion
   tags: ["Couplet"],
   benchmarks: {
     type: "time" as const,
@@ -275,7 +275,7 @@ describe("WodTable Rows", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row = findRenderedRowByContent("WOD Alpha");
@@ -299,7 +299,7 @@ describe("WodTable Rows", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row = findRenderedRowByContent("WOD Bravo");
@@ -322,7 +322,7 @@ describe("WodTable Rows", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row = findRenderedRowByContent("WOD Charlie");
@@ -342,7 +342,7 @@ describe("WodTable Rows", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row1 = findRenderedRowByContent("WOD Delta");
@@ -364,7 +364,7 @@ describe("WodTable Rows", () => {
         tableHeight={500}
         searchTerm=""
         scoresByWodId={mockScoresByWodId}
-        isLoadingScores={false}
+        _isLoadingScores={false} // Renamed prop
       />,
     );
     const row = findRenderedRowByContent("WOD Echo");

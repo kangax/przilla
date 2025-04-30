@@ -9349,7 +9349,7 @@
   },
   {
     "wodUrl": "https://wodwell.com/wod/g-i-jane/",
-    "wodName": "GI Jane",
+    "wodName": "G.I. Jane",
     "description": "100 Burpee Pull-ups For Time (6 inch target)",
     "benchmarks": {
       "type": "time",
@@ -23256,7 +23256,7 @@
   },
   {
     "wodUrl": "https://wodwell.com/wod/rene/",
-    "wodName": "René",
+    "wodName": "Rene",
     "description": "7 Rounds for Time\n400 meter Run\n21 Walking Lunges\n15 Pull-Ups\n9 Burpees\n\nWear a Weight Vest (20/14 lb)",
     "benchmarks": {
       "type": "time",
@@ -27004,7 +27004,7 @@
   },
   {
     "wodUrl": "https://wodwell.com/wod/ghost/",
-    "wodName": "The Ghost",
+    "wodName": "Ghost",
     "description": "6 Rounds for Total Reps in 23 minutes\n1 minute of Rowing (for calories)\n1 minute of Burpees\n1 minute of Double-Unders\n1 minute Rest",
     "benchmarks": {
       "type": "reps",
@@ -32244,7 +32244,7 @@
     "difficulty": "Very Hard",
     "difficulty_explanation": "A descending chipper with high-skill gymnastics and single-leg squats. Tests core, grip, and stamina.",
     "count_likes": 2,
-    "movements": ["GHD Sit-Up", "Rope Climb", "Pistol Squat"]
+    "movements": ["GHD Sit-Up", "Rope Climb", "Pistol"]
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-21-3/",

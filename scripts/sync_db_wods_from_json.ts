@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
-import { eq, and } from "drizzle-orm";
+import { eq, and, InferSelectModel } from "drizzle-orm"; // Import InferSelectModel
 import { distance } from "fastest-levenshtein";
 import inquirer from "inquirer";
 import yargs from "yargs";
@@ -31,6 +31,10 @@ function normalizeString(str: string): string {
   return str.trim().toLowerCase();
 }
 
+// Define update type based on schema
+type WodSchema = typeof wods;
+type WodUpdateValues = Partial<InferSelectModel<WodSchema>>;
+
 // --- Main Logic ---
 async function main() {
   // --- Argument Parsing ---
@@ -41,12 +45,26 @@ async function main() {
       description: "Run script without making database changes",
       default: false,
     })
+    .option("update-category", {
+      alias: "u",
+      type: "string",
+      description:
+        "Specify a category to update existing WODs (difficulty_explanation, count_likes)",
+      default: undefined, // No default category to update
+    })
     .help()
     .alias("help", "h").argv;
 
   const dryRun = argv["dry-run"];
+  const categoryToUpdateRaw = argv["update-category"];
+  const categoryToUpdate = categoryToUpdateRaw
+    ? normalizeString(categoryToUpdateRaw)
+    : undefined;
 
   console.log(`Starting WOD import script... ${dryRun ? "[DRY RUN]" : ""}`);
+  if (categoryToUpdate) {
+    console.log(`Targeting category for updates: "${categoryToUpdate}"`);
+  }
 
   // 1. Initialize DB Connection
   const dbUrl = process.env.DATABASE_URL;
@@ -72,14 +90,16 @@ async function main() {
     process.exit(1);
   }
 
-  console.log("Fetching existing WOD names from database...");
-  let existingWodNamesSet: Set<string>;
+  console.log("Fetching existing WOD names and IDs from database...");
+  let existingWodsMap: Map<string, string>; // Map<wodName, wodId>
   try {
-    const existingWods = await db.select({ wodName: wods.wodName }).from(wods);
-    existingWodNamesSet = new Set(existingWods.map((w) => w.wodName));
-    console.log(`✅ Found ${existingWodNamesSet.size} existing WOD names.`);
+    const existingWodsData = await db
+      .select({ wodName: wods.wodName, id: wods.id })
+      .from(wods);
+    existingWodsMap = new Map(existingWodsData.map((w) => [w.wodName, w.id]));
+    console.log(`✅ Found ${existingWodsMap.size} existing WODs.`);
   } catch (error) {
-    console.error("❌ Error fetching existing WOD names:", error);
+    console.error("❌ Error fetching existing WODs:", error);
     process.exit(1);
   }
 
@@ -102,12 +122,14 @@ async function main() {
   console.log("\n--- Processing WODs ---");
   let processedWods = 0;
   let insertedWods = 0;
+  let updatedWods = 0; // Added counter for updates
   let skippedWods = 0;
   let newMovementsCreated = 0;
   let movementsMatched = 0;
   let associationsCreated = 0;
   let errorsEncountered = 0;
   const wodsToInsertNames: string[] = []; // For dry run summary
+  const wodsToUpdateNames: string[] = []; // For dry run summary
   const movementsToCreateNames: string[] = []; // For dry run summary
 
   for (const wodJson of wodsFromJson) {
@@ -116,17 +138,68 @@ async function main() {
       `\n[${processedWods}/${wodsFromJson.length}] Processing WOD: "${wodJson.wodName}"`,
     );
 
-    let newWodId: string | null = null;
+    let newWodId: string | null = null; // Will hold ID if inserted
+    const existingWodId = existingWodsMap.get(wodJson.wodName);
+    const currentWodCategoryNormalized = wodJson.category
+      ? normalizeString(wodJson.category)
+      : undefined;
 
-    // --- WOD Insertion ---
-    if (existingWodNamesSet.has(wodJson.wodName)) {
-      console.log(`   -> WOD already exists. Skipping.`);
-      skippedWods++;
-      continue; // Skip to next WOD in JSON
+    // --- WOD Update/Skip Logic ---
+    if (existingWodId) {
+      // WOD exists in DB
+      // Check if we should update this category
+      if (
+        categoryToUpdate &&
+        currentWodCategoryNormalized === categoryToUpdate
+      ) {
+        console.log(
+          `   -> WOD exists (ID: ${existingWodId}). Category matches "${categoryToUpdate}". Processing update...`,
+        );
+        // Explicitly type the update object
+        const valuesToUpdate: WodUpdateValues = {
+          // Read snake_case from JSON (casting to any), set camelCase for DB schema
+          difficultyExplanation:
+            (wodJson as any).difficulty_explanation ?? null,
+          countLikes: (wodJson as any).count_likes ?? 0,
+        };
+
+        if (!dryRun) {
+          try {
+            await db
+              .update(wods)
+              .set(valuesToUpdate)
+              .where(eq(wods.id, existingWodId));
+            updatedWods++; // Increment update counter
+            console.log(
+              `      ✅ Successfully updated WOD ID: ${existingWodId}`,
+            );
+          } catch (error) {
+            console.error(
+              `      ❌ Error updating WOD ID ${existingWodId}:`,
+              error,
+            );
+            errorsEncountered++;
+          }
+        } else {
+          updatedWods++; // Count as 'would be updated'
+          wodsToUpdateNames.push(wodJson.wodName); // Add to list for summary
+          console.log(
+            `      [DRY RUN] Would update WOD: "${wodJson.wodName}" (ID: ${existingWodId}) with new explanation/likes.`,
+          );
+        }
+        continue; // Skip insertion logic after update attempt
+      } else {
+        // WOD exists, but category doesn't match or no update category specified
+        console.log(
+          `   -> WOD already exists (ID: ${existingWodId}). Skipping.`,
+        );
+        skippedWods++;
+        continue; // Skip insertion logic
+      }
     } else {
+      // --- WOD Insertion Logic (WOD does not exist in DB) ---
       console.log(`   -> WOD not found in DB. Processing insertion...`);
-      // Prepare values regardless of dry run
-      const benchmarksString =
+      const benchmarksString = // Prepare values regardless of dry run
         wodJson.benchmarks && typeof wodJson.benchmarks === "object"
           ? JSON.stringify(wodJson.benchmarks) // Keep stringify for benchmarks as it's just text() in schema
           : null;
@@ -141,10 +214,10 @@ async function main() {
         category: wodJson.category ?? null,
         tags: wodJson.tags ?? null, // Pass array or null directly
         difficulty: wodJson.difficulty ?? null,
-        // Map JSON snake_case property to DB snake_case column
-        difficulty_explanation: wodJson.difficultyExplanation ?? null,
-        // Map JSON snake_case property to DB snake_case column
-        count_likes: wodJson.countLikes ?? 0,
+        // Map JSON snake_case property (casting to any) to DB camelCase column
+        difficultyExplanation: (wodJson as any).difficulty_explanation ?? null,
+        // Map JSON snake_case property (casting to any) to DB camelCase column
+        countLikes: (wodJson as any).count_likes ?? 0,
         timecap: wodJson.timecap ?? null,
       };
 
@@ -472,12 +545,20 @@ async function main() {
   console.log(
     `WODs ${dryRun ? "Would be Inserted:" : "Inserted:"}  ${insertedWods}`,
   );
-  // Print WOD names if dry run
   if (dryRun && wodsToInsertNames.length > 0) {
+    // Print WOD names if dry run
     console.log("    WODs to Insert:");
     wodsToInsertNames.forEach((name) => console.log(`      - ${name}`));
   }
-  console.log(`WODs Skipped:       ${skippedWods}`);
+  console.log(
+    `WODs ${dryRun ? "Would be Updated:" : "Updated:"}   ${updatedWods}`,
+  );
+  if (dryRun && wodsToUpdateNames.length > 0) {
+    // Print WOD names if dry run
+    console.log("    WODs to Update:");
+    wodsToUpdateNames.forEach((name) => console.log(`      - ${name}`));
+  }
+  console.log(`WODs Skipped:       ${skippedWods}`); // Skipped = Existed but not updated
   console.log(
     `New Movements ${dryRun ? "Would be Added:" : "Added:"} ${newMovementsCreated}`,
   );

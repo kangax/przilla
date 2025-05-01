@@ -80,10 +80,9 @@ function mapWodJsonToDb(wod: any) {
     category: wod.category,
     tags: tagsString,
     difficulty: wod.difficulty,
-    difficultyExplanation:
-      wod.difficultyExplanation || wod.difficulty_explanation || null,
+    difficultyExplanation: wod.difficultyExplanation ?? null, // Updated
     timecap: wod.timecap ?? null,
-    countLikes: wod.countLikes ?? wod.count_likes ?? 0,
+    countLikes: wod.countLikes ?? 0, // Updated
   };
 }
 

@@ -1,31 +1,6 @@
 import fs from "fs/promises";
 import path from "path";
 
-// Define the structure for the target WOD object
-// Based on src/types/wodTypes.ts and progress.md examples
-/*
-interface Wod {
-  wodUrl: string | null;
-  wodName: string;
-  description: string;
-  benchmarks: {
-    type: 'time' | 'reps' | 'load' | null;
-    levels: {
-      elite: { min: number | null; max: number | null };
-      advanced: { min: number | null; max: number | null };
-      intermediate: { min: number | null; max: number | null };
-      beginner: { min: number | null; max: number | null };
-    } | null;
-  } | null;
-  results: any[]; // Assuming results are added later
-  category: string;
-  tags: string[];
-  difficulty: 'Easy' | 'Medium' | 'Hard' | 'Very Hard' | null;
-  difficulty_explanation: string | null;
-  count_likes: number | null;
-}
-*/
-
 const ALLOWED_TAGS = [
   "Chipper",
   "Couplet",
@@ -192,8 +167,8 @@ async function addQuarterfinalsWods() {
       category: "Quarterfinals", // Explicitly set category
       tags: tags,
       difficulty: difficulty,
-      difficulty_explanation: difficultyExplanation,
-      count_likes: sourceWod.count_likes ?? null, // Use source likes, default to null
+      difficultyExplanation: difficultyExplanation, // Updated
+      countLikes: sourceWod.countLikes ?? null, // Updated (assuming source might also be updated later)
     };
     newWods.push(transformedWod);
   }

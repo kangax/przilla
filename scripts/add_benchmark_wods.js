@@ -30,7 +30,7 @@ const newBenchmarkWods = [
       "Tests upper body pressing strength and endurance, requiring significant shoulder stability and control.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Handstand Push-ups (Free Standing): Max Reps",
@@ -52,7 +52,7 @@ const newBenchmarkWods = [
       "Requires exceptional balance, control, and strength, significantly harder than wall-assisted HSPU.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Handstand Push-ups (Strict): Max Reps",
@@ -74,7 +74,7 @@ const newBenchmarkWods = [
       "Pure test of vertical pressing strength and shoulder stability without momentum.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Handstand Walk: Max Distance",
@@ -96,7 +96,7 @@ const newBenchmarkWods = [
       "Tests balance, shoulder stability, and coordination while inverted.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "L-Sit Hold: Max Time",
@@ -118,7 +118,7 @@ const newBenchmarkWods = [
       "Tests core strength, hip flexor endurance, and triceps strength.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Muscle-Ups: Max Reps",
@@ -140,7 +140,7 @@ const newBenchmarkWods = [
       "High-skill gymnastics movement combining a pull-up and a dip, requiring significant strength and coordination.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Pull-up (Weighted): 1RM",
@@ -162,7 +162,7 @@ const newBenchmarkWods = [
       "Direct test of maximal pulling strength relative to bodyweight.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Pull-ups (Chest-to-Bar): Max Reps",
@@ -183,7 +183,7 @@ const newBenchmarkWods = [
       "Requires greater range of motion and pulling strength than standard pull-ups.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Pull-ups (Kipping): Max Reps",
@@ -204,7 +204,7 @@ const newBenchmarkWods = [
       "Tests pulling endurance and efficiency using a kip.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Pull-ups (Strict): Max Reps",
@@ -224,7 +224,7 @@ const newBenchmarkWods = [
     difficultyExplanation: "Fundamental test of upper body pulling strength.",
     wodUrl: null,
     results: [],
-    count_likes: 0,
+    countLikes: 0, // Updated
   },
   {
     wodName: "Push-Ups: Max Reps",

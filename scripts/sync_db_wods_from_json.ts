@@ -48,8 +48,7 @@ async function main() {
     .option("update-category", {
       alias: "u",
       type: "string",
-      description:
-        "Specify a category to update existing WODs (difficulty_explanation, count_likes)",
+      description: "Specify a category to update existing WODs",
       default: undefined, // No default category to update
     })
     .help()
@@ -157,10 +156,9 @@ async function main() {
         );
         // Explicitly type the update object
         const valuesToUpdate: WodUpdateValues = {
-          // Read snake_case from JSON (casting to any), set camelCase for DB schema
-          difficultyExplanation:
-            (wodJson as any).difficulty_explanation ?? null,
-          countLikes: (wodJson as any).count_likes ?? 0,
+          // Read JSON property, set camelCase for DB schema
+          difficultyExplanation: (wodJson as any).difficultyExplanation ?? null, // Updated
+          countLikes: (wodJson as any).countLikes ?? 0, // Updated
         };
 
         if (!dryRun) {
@@ -214,10 +212,10 @@ async function main() {
         category: wodJson.category ?? null,
         tags: wodJson.tags ?? null, // Pass array or null directly
         difficulty: wodJson.difficulty ?? null,
-        // Map JSON snake_case property (casting to any) to DB camelCase column
-        difficultyExplanation: (wodJson as any).difficulty_explanation ?? null,
-        // Map JSON snake_case property (casting to any) to DB camelCase column
-        countLikes: (wodJson as any).count_likes ?? 0,
+        // Map JSON property to DB camelCase column
+        difficultyExplanation: (wodJson as any).difficultyExplanation ?? null, // Updated
+        // Map JSON property to DB camelCase column
+        countLikes: (wodJson as any).countLikes ?? 0, // Updated
         timecap: wodJson.timecap ?? null,
       };
 

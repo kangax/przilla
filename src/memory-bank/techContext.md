@@ -186,7 +186,7 @@ Never truncate files for brevity, you must always output full file contents.
     "category": "Benchmark",
     "tags": ["For Time", "Chipper"],
     "difficulty": "Hard",
-    "difficulty_explanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity.",
-    "count_likes": 51
+    "difficultyExplanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity.",
+    "countLikes": 51
   },
 ```

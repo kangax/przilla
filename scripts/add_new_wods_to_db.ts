@@ -49,10 +49,9 @@ function mapWodJsonToDb(wod: any) {
     category: wod.category,
     tags: wod.tags ? JSON.stringify(wod.tags) : null,
     difficulty: wod.difficulty,
-    difficultyExplanation:
-      wod.difficultyExplanation || wod.difficulty_explanation || null,
+    difficultyExplanation: wod.difficultyExplanation ?? null, // Updated
     timecap: null,
-    countLikes: wod.countLikes ?? wod.count_likes ?? 0,
+    countLikes: wod.countLikes ?? 0, // Updated
   };
 }
 

@@ -30,10 +30,13 @@ import {
   formatScore,
   formatShortDate,
   getPerformanceBadgeDetails,
-  getPerformanceLevel, // Added getPerformanceLevel
+  getPerformanceLevel,
 } from "~/utils/wodUtils";
 import { HighlightMatch } from "~/utils/uiUtils";
-import { LogScoreDialog } from "./LogScoreDialog"; // Import the new Dialog component
+import { LogScoreDialog } from "./LogScoreDialog";
+import { ScoresCell } from "./WodTableCells/ScoresCell";
+import { DeleteScoreDialog } from "./DeleteScoreDialog";
+import { safeString, getDifficultyColor, isValidSortBy } from "./wodTableUtils";
 import { api } from "~/trpc/react";
 import { useToast } from "~/components/ToastProvider";
 
@@ -48,25 +51,6 @@ interface WodTableProps {
   _isLoadingScores: boolean; // Prefixed as unused for now
   onScoreLogged?: () => void;
 }
-
-const safeString = (value: string | undefined | null): string => value || "";
-
-const getDifficultyColor = (difficulty: string | undefined | null): string => {
-  switch (difficulty?.toLowerCase()) {
-    case "easy":
-      return "text-green-500";
-    case "medium":
-      return "text-yellow-500";
-    case "hard":
-      return "text-orange-500";
-    case "very hard":
-      return "text-red-500";
-    case "extremely hard":
-      return "text-purple-500";
-    default:
-      return "text-foreground";
-  }
-};
 
 const columnHelper = createColumnHelper<Wod>();
 
@@ -411,140 +395,32 @@ const createColumns = (
       size: 364,
     }),
     columnHelper.accessor(
-      (row) => ({ wod: row, scores: scoresByWodId[row.id] }), // Accessor remains the same
+      (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
       {
         id: "results",
         header: () => (
-          // Header becomes a function for click handler
           <span
-            onClick={() => handleSort("results")} // Use handleSort with 'results'
+            onClick={() => handleSort("results")}
             className="cursor-pointer whitespace-nowrap"
           >
-            Your scores{getSortIndicator("results")} {/* Add sort indicator */}
+            Your scores{getSortIndicator("results")}
           </span>
         ),
         cell: (info) => {
-          // Cell rendering logic remains the same
           const { wod, scores } = info.getValue();
-
           return (
-            <div className="flex min-h-[36px] flex-col items-start gap-2">
-              {/* Scores list (if any) */}
-              {scores && scores.length > 0 && (
-                <Flex direction="column" gap="2" align="start" className="my-2">
-                  {scores.map((score) => {
-                    const { displayLevel, color } = getPerformanceBadgeDetails(
-                      wod,
-                      score,
-                    );
-                    const suffix = score.isRx ? "Rx" : "Scaled";
-                    const formattedScore = formatScore(score, suffix);
-                    const formattedDate = formatShortDate(score.scoreDate);
-
-                    const tooltipContent = (
-                      <span style={{ whiteSpace: "pre-wrap" }}>
-                        {`Logged: ${formattedDate}
-Notes: ${score.notes ? safeString(score.notes) : "-"}
-
-Your level: ${displayLevel}
-
-Performance Levels:
-${getPerformanceLevelTooltip(wod)
-  .map(
-    (levelDetail) => `${levelDetail.levelName}: ${levelDetail.formattedRange}`,
-  )
-  .join("\n")}`}
-                      </span>
-                    );
-
-                    const scoreBadge = (
-                      <ThemeTooltip content={tooltipContent}>
-                        <Badge
-                          color={
-                            color as
-                              | "red"
-                              | "blue"
-                              | "green"
-                              | "yellow"
-                              | "purple"
-                              | "gray"
-                              | "indigo"
-                          }
-                          variant="soft"
-                          radius="full"
-                          size="2"
-                          className="cursor-help"
-                        >
-                          {formattedScore}
-                        </Badge>
-                      </ThemeTooltip>
-                    );
-
-                    return (
-                      <Flex
-                        key={score.id}
-                        align="center"
-                        gap="1"
-                        wrap="nowrap"
-                        className="group/score relative"
-                      >
-                        <div>{scoreBadge}</div>
-                        {/* Edit and Delete Icons: only visible on hover */}
-                        <div className="ml-1 flex space-x-1 opacity-0 transition-opacity group-hover/score:opacity-100">
-                          <ThemeTooltip content="Edit score">
-                            <IconButton
-                              size="1"
-                              variant="ghost"
-                              color="gray"
-                              aria-label="Edit score"
-                              onClick={
-                                () =>
-                                  openEditDialog && openEditDialog(score, wod) // Use new handler
-                              }
-                            >
-                              <Pencil size={16} />
-                            </IconButton>
-                          </ThemeTooltip>
-                          <ThemeTooltip content="Delete score">
-                            <IconButton
-                              size="1"
-                              variant="ghost"
-                              color="red"
-                              aria-label="Delete score"
-                              onClick={
-                                () =>
-                                  handleDeleteScore &&
-                                  handleDeleteScore(score, wod) // Use new handler
-                              }
-                            >
-                              <Trash size={16} />
-                            </IconButton>
-                          </ThemeTooltip>
-                        </div>
-                      </Flex>
-                    );
-                  })}
-                </Flex>
-              )}
-              {/* Log Score button always visible */}
-              <Button
-                type="button"
-                aria-label="Log Score"
-                onClick={() => openLogDialog && openLogDialog(wod)} // Use new handler
-                variant="ghost"
-                color="green"
-                size="1"
-                className="flex items-center gap-1"
-              >
-                <Plus size={14} />
-                <span className="font-medium">Log score</span>
-              </Button>
-            </div>
+            <ScoresCell
+              wod={wod}
+              scores={scores}
+              openLogDialog={openLogDialog}
+              openEditDialog={openEditDialog}
+              handleDeleteScore={handleDeleteScore}
+            />
           );
         },
         size: 250,
-        enableSorting: true, // Enable sorting for this column
-        sortingFn: sortByLatestScoreLevel, // Assign the custom sorting function
+        enableSorting: true,
+        sortingFn: sortByLatestScoreLevel,
       },
     ),
   ];
@@ -581,13 +457,10 @@ const WodTable: React.FC<WodTableProps> = ({
   const deleteScoreMutation = api.score.deleteScore.useMutation({
     onSuccess: async () => {
       await utils.score.getAllByUser.invalidate();
-      if (onScoreLogged) onScoreLogged(); // Refresh scores after delete
-
-      // Show success toast
+      if (onScoreLogged) onScoreLogged();
       showToast("success", "Score deleted");
     },
     onError: () => {
-      // Show error toast
       showToast("error", "Failed to delete score");
     },
   });
@@ -804,44 +677,18 @@ const WodTable: React.FC<WodTableProps> = ({
 
       {/* Delete confirmation dialog */}
       {deletingScore && (
-        <Dialog.Root open={!!deletingScore} onOpenChange={cancelDeleteScore}>
-          <Dialog.Content>
-            <Dialog.Title>Delete Score</Dialog.Title>
-            <Dialog.Description>
-              Are you sure you want to delete this score? This action cannot be
-              undone.
-            </Dialog.Description>
-            <Flex gap="3" mt="4" justify="end">
-              <Button variant="soft" color="gray" onClick={cancelDeleteScore}>
-                Cancel
-              </Button>
-              <Button
-                variant="solid"
-                color="red"
-                onClick={confirmDeleteScore}
-                disabled={deleteScoreMutation.status === "pending"}
-              >
-                {deleteScoreMutation.status === "pending"
-                  ? "Deleting..."
-                  : "Delete"}
-              </Button>
-            </Flex>
-          </Dialog.Content>
-        </Dialog.Root>
+        <DeleteScoreDialog
+          open={!!deletingScore}
+          onOpenChange={cancelDeleteScore}
+          onConfirm={confirmDeleteScore}
+          onCancel={cancelDeleteScore}
+          isDeleting={deleteScoreMutation.status === "pending"}
+          score={deletingScore.score}
+          wod={deletingScore.wod}
+        />
       )}
     </div>
   );
-};
-
-const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
-  const validSortKeys: SortByType[] = [
-    "wodName",
-    "date",
-    "difficulty",
-    "countLikes",
-    "results", // Add 'results' to valid keys
-  ];
-  return validSortKeys.includes(sortBy as SortByType);
 };
 
 const MemoizedWodTable = React.memo(WodTable);

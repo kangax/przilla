@@ -64,9 +64,8 @@ import {
   type Wod,
   type SortByType,
   type ScoreFromQuery,
-  type Benchmarks,
   type WodCategory, // Import WodCategory
-  BenchmarksSchema,
+  WodSchema, // Import the new WodSchema
 } from "~/types/wodTypes";
 
 // --- URL State Management ---
@@ -85,101 +84,8 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 };
 
 export default function WodViewer({ initialWods }: WodViewerProps) {
-  // Runtime assertion: filter out any objects missing required fields
-  const safeInitialWods: Wod[] = Array.isArray(initialWods)
-    ? initialWods
-        .filter((w) => typeof w.id === "string" && w.id.length > 0)
-        .map((w) => ({
-          id: w.id ?? "",
-          wodName: w.wodName ?? "",
-          wodUrl: w.wodUrl ?? null,
-          description: w.description ?? null,
-          benchmarks: (() => {
-            if (!w.benchmarks) return null;
-            const parsed = BenchmarksSchema.safeParse(w.benchmarks);
-            // Ensure 'type' is present and valid *after* successful parsing
-            if (
-              parsed.success &&
-              typeof parsed.data.type === "string" && // Check type exists and is string
-              ["time", "rounds", "reps", "load"].includes(parsed.data.type) && // Check type is valid enum
-              parsed.data.levels && // Check levels exist
-              typeof parsed.data.levels === "object" && // Check levels is object
-              ["elite", "advanced", "intermediate", "beginner"].every((lvl) => {
-                const levelData =
-                  parsed.data.levels[lvl as keyof typeof parsed.data.levels];
-                return (
-                  typeof levelData === "object" &&
-                  levelData !== null &&
-                  typeof levelData.min === "number" &&
-                  typeof levelData.max === "number"
-                );
-              })
-            ) {
-              // Now we are sure it matches the Benchmarks type
-              return parsed.data as Benchmarks; // Explicit cast after checks
-            }
-            // If parse failed OR type/levels validation failed, return null
-            return null;
-          })(),
-          category:
-            typeof w.category === "string" &&
-            [
-              "Girl",
-              "Hero",
-              "Games",
-              "Open",
-              "Quarterfinals",
-              "AGOQ",
-              "Benchmark",
-              "Skill",
-              "Other",
-            ].includes(w.category)
-              ? w.category
-              : null,
-          tags: Array.isArray(w.tags)
-            ? w.tags
-            : typeof w.tags === "string"
-              ? [w.tags]
-              : [],
-          difficulty: w.difficulty ?? null,
-          difficultyExplanation: w.difficultyExplanation ?? null,
-          countLikes:
-            typeof w.countLikes === "number"
-              ? w.countLikes
-              : w.countLikes === null || typeof w.countLikes === "undefined"
-                ? null
-                : Number(w.countLikes),
-          movements: Array.isArray(w.movements)
-            ? w.movements
-            : typeof w.movements === "string"
-              ? [w.movements]
-              : [],
-          timecap:
-            typeof w.timecap === "number"
-              ? w.timecap
-              : w.timecap === null || typeof w.timecap === "undefined"
-                ? null
-                : Number(w.timecap),
-          createdAt:
-            typeof w.createdAt === "string"
-              ? new Date(w.createdAt)
-              : w.createdAt instanceof Date
-                ? w.createdAt
-                : new Date(),
-          updatedAt:
-            typeof w.updatedAt === "string"
-              ? new Date(w.updatedAt)
-              : w.updatedAt instanceof Date
-                ? w.updatedAt
-                : null,
-        }))
-    : [];
-  if (safeInitialWods.length !== (initialWods?.length ?? 0)) {
-    // eslint-disable-next-line no-console
-    console.warn(
-      "[WodViewer] Some initialWods are missing required fields and were filtered out.",
-    );
-  }
+  // initialWods prop is now guaranteed to be Wod[] by page.tsx server-side validation
+  const validatedInitialWods: Wod[] = initialWods;
 
   const { data: session, isPending: isSessionLoading } = useSession();
   const isLoggedIn = !!session?.user;
@@ -189,11 +95,12 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   const utils = api.useUtils();
 
   const {
-    data: wodsData,
+    data: wodsDataFromHook, // Rename to avoid conflict
     isLoading: isLoadingWods,
     error: errorWods,
   } = api.wod.getAll.useQuery(undefined, {
     staleTime: 5 * 60 * 1000,
+    // Remove initialData to avoid type conflicts
   });
 
   const {
@@ -227,73 +134,24 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     DEFAULT_COMPLETION_FILTER,
   );
 
-  // Normalize wodsData to Wod[] if present
-  const safeWodsData: Wod[] | undefined = Array.isArray(wodsData)
-    ? wodsData
-        .filter((w) => typeof w.id === "string" && w.id.length > 0)
-        .map((w) => ({
-          id: w.id,
-          wodName: w.wodName ?? "",
-          wodUrl: w.wodUrl ?? null,
-          description: w.description ?? null,
-          benchmarks: (() => {
-            if (!w.benchmarks) return null;
-            const parsed = BenchmarksSchema.safeParse(w.benchmarks);
-            // Ensure 'type' is present and valid *after* successful parsing
-            if (
-              parsed.success &&
-              typeof parsed.data.type === "string" && // Check type exists and is string
-              ["time", "rounds", "reps", "load"].includes(parsed.data.type) && // Check type is valid enum
-              parsed.data.levels && // Check levels exist
-              typeof parsed.data.levels === "object" && // Check levels is object
-              ["elite", "advanced", "intermediate", "beginner"].every((lvl) => {
-                const levelData =
-                  parsed.data.levels[lvl as keyof typeof parsed.data.levels];
-                return (
-                  typeof levelData === "object" &&
-                  levelData !== null &&
-                  typeof levelData.min === "number" &&
-                  typeof levelData.max === "number"
-                );
-              })
-            ) {
-              // Now we are sure it matches the Benchmarks type
-              return parsed.data as Benchmarks; // Explicit cast after checks
-            }
-            // If parse failed OR type/levels validation failed, return null
-            return null;
-          })(),
-          category:
-            typeof w.category === "string" &&
-            [
-              "Girl",
-              "Hero",
-              "Games",
-              "Open",
-              "Quarterfinals",
-              "AGOQ",
-              "Benchmark",
-              "Skill",
-              "Other",
-            ].includes(w.category)
-              ? (w.category as WodCategory) // Re-added 'as WodCategory'
-              : null,
-          tags: w.tags ?? [],
-          difficulty: w.difficulty ?? null,
-          difficultyExplanation: w.difficultyExplanation ?? null,
-          countLikes: w.countLikes ?? 0,
-          movements: w.movements ?? [],
-          timecap: w.timecap ?? null,
-          createdAt:
-            typeof w.createdAt === "string"
-              ? new Date(w.createdAt)
-              : (w.createdAt ?? new Date()),
-          updatedAt:
-            typeof w.updatedAt === "string"
-              ? new Date(w.updatedAt)
-              : (w.updatedAt ?? null),
-        }))
-    : undefined;
+  // Validate wodsData from the hook using Zod schema
+  const wodsDataParseResult = WodSchema.array().safeParse(wodsDataFromHook);
+  let validatedWodsData: Wod[] | undefined = undefined; // Keep undefined if parsing fails or data is initially undefined
+  if (wodsDataParseResult.success) {
+    validatedWodsData = wodsDataParseResult.data as Wod[]; // Assert type after successful parse
+  } else if (wodsDataFromHook !== undefined) {
+    // Only log error if data was actually present but failed parsing
+    // eslint-disable-next-line no-console
+    console.error(
+      "[WodViewer] Failed to parse wodsData from hook:",
+      wodsDataParseResult.error,
+    );
+    // Keep validatedWodsData as undefined or default to []? Let's use undefined for now.
+  }
+
+  // Determine the primary source of truth for WODs to pass down - NO LONGER NEEDED
+  // Prioritize validated data from hook, fall back to validated initial data
+  // const currentWods: Wod[] = validatedWodsData ?? validatedInitialWods;
 
   // Use custom data transformation hook
   const {
@@ -308,10 +166,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     dynamicNotDoneWodsCount,
     sortedWods,
   } = useWodViewerData(
-    safeWodsData,
-    safeInitialWods,
-    (scoresData ?? []) as ScoreFromQuery[],
-    selectedCategories,
+    validatedWodsData, // Arg 1: Data from hook (Wod[] | undefined)
+    validatedInitialWods, // Arg 2: Initial data (Wod[])
+    (scoresData ?? []) as ScoreFromQuery[], // Arg 3
+    selectedCategories, // Arg 4
     selectedTags,
     completionFilter,
     sortBy,
@@ -386,8 +244,15 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   }, [utils.score.getAllByUser]);
 
   const showScoreLoading = isLoggedIn && (isLoadingScores || isSessionLoading);
-  const showWodLoading = isLoadingWods && !wodsData && !initialWods;
-  if (showWodLoading) {
+  // Adjust loading condition: true if hook is loading AND we don't have validated data from the hook yet.
+  // We might still show initial data while loading fresh data.
+  const showWodLoadingSpinner = isLoadingWods && !validatedWodsData;
+
+  // Determine the data to display (prioritize hook data, fallback to initial)
+  const displayWods = validatedWodsData ?? validatedInitialWods;
+
+  if (showWodLoadingSpinner && displayWods.length === 0) {
+    // Only show full loading state if hook is loading AND we have no initial data to show
     return (
       <Flex align="center" justify="center" className="h-[300px] w-full">
         Loading WOD data...
@@ -402,8 +267,19 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return <Box>Error loading scores: {errorScores.message}</Box>;
   }
 
+  if (displayWods.length === 0 && !isLoadingWods) {
+    // If not loading and we have no valid data (neither initial nor from hook)
+    return <Box>No valid WOD data available.</Box>;
+  }
+
+  // Note: The `wods` variable returned by useWodViewerData should now reflect displayWods
+  // We might not need the separate `displayWods` variable here if the hook handles the fallback correctly.
+  // Let's check the hook's logic again: `return wodsData ?? initialWods ?? [];` - yes, it handles it.
+  // So we can rely on the `wods` returned from useWodViewerData for the final check.
+
   if (!wods || wods.length === 0) {
-    return <Box>No WOD data available.</Box>;
+    // Final check based on data processed by useWodViewerData
+    return <Box>No WODs match the current filters.</Box>; // More specific message
   }
 
   return (

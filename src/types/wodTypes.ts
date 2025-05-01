@@ -46,6 +46,48 @@ export const BenchmarksSchema = z.object({
 });
 
 // Define allowed tags and categories as types for better safety
+export const WodCategorySchema = z.enum([
+  "Girl",
+  "Hero",
+  "Games",
+  "Open",
+  "Quarterfinals",
+  "AGOQ",
+  "Benchmark",
+  "Skill",
+  "Other",
+]);
+
+// Zod schema for the final client-side Wod type
+export const WodSchema = z.object({
+  id: z.string(),
+  wodUrl: z.string().url().nullable(),
+  wodName: z.string(),
+  description: z.string().nullable().optional(), // Optional because it might be missing entirely
+  benchmarks: BenchmarksSchema.nullable().optional(), // Optional because it might be missing entirely
+  category: WodCategorySchema.nullable().optional(), // Optional because it might be missing entirely
+  tags: z.array(z.string()).nullable().default([]), // Default to empty array if null/undefined
+  difficulty: z.string().nullable().optional(), // Optional because it might be missing entirely
+  difficultyExplanation: z.string().nullable().optional(), // Optional because it might be missing entirely
+  countLikes: z.number().nullable().optional(), // Optional because it might be missing entirely
+  movements: z.array(z.string()).default([]), // Default to empty array if undefined
+  timecap: z.number().nullable().optional(), // Optional because it might be missing entirely
+  createdAt: z.preprocess((arg) => {
+    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+    return new Date(); // Default or throw error? Let's default for now.
+  }, z.date()),
+  updatedAt: z
+    .preprocess((arg) => {
+      if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+      // If null or undefined, return null
+      if (arg === null || typeof arg === "undefined") return null;
+      // Handle potential invalid date strings gracefully
+      const date = new Date(arg as any); // Use 'as any' carefully or add more checks
+      return isNaN(date.getTime()) ? null : date;
+    }, z.date())
+    .nullable(),
+});
+
 export type WodTag =
   | "Chipper"
   | "Couplet"

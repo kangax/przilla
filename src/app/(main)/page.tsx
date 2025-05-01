@@ -7,9 +7,8 @@ import PageLayout from "~/app/_components/PageLayout";
 import { api } from "~/trpc/server"; // Import server tRPC client
 import ReactQueryProvider from "~/app/_components/ReactQueryProvider";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { type Wod, type Benchmarks, type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
-import { BenchmarksSchema } from "~/types/wodTypes";
-import { parseTags } from "~/utils/wodUtils"; // Import parseTags
+import { type Wod, type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
+import { WodSchema } from "~/types/wodTypes"; // Import the full WodSchema
 
 export const metadata: Metadata = {
   title: "Track Your WOD Scores & Visualize Fitness Progress", // Uses template from layout
@@ -19,41 +18,26 @@ export const metadata: Metadata = {
 };
 
 export default async function Home(): Promise<JSX.Element> {
-  // Fetch WODs server-side - use WodFromQuery for raw data
-  const initialWodsRaw = (await api.wod.getAll()) as WodFromQuery[]; // Add type assertion
-  // Ensure all date fields are Dates, benchmarks and tags are parsed
-  const initialWods: Wod[] = initialWodsRaw.map((wod) => ({
-    ...wod,
-    tags: parseTags(wod.tags), // Parse tags
-    createdAt:
-      typeof wod.createdAt === "string"
-        ? new Date(wod.createdAt)
-        : (wod.createdAt ?? new Date()),
-    updatedAt:
-      typeof wod.updatedAt === "string"
-        ? new Date(wod.updatedAt)
-        : (wod.updatedAt ?? null),
-    benchmarks:
-      typeof wod.benchmarks === "string"
-        ? (() => {
-            try {
-              const parsed: unknown = JSON.parse(wod.benchmarks);
-              const result = BenchmarksSchema.safeParse(parsed);
-              return result.success ? (result.data as Benchmarks) : null;
-            } catch {
-              return null;
-            }
-          })()
-        : (() => {
-            const result = BenchmarksSchema.safeParse(wod.benchmarks);
-            return result.success ? (result.data as Benchmarks) : null;
-          })(),
-  }));
+  // Fetch WODs server-side
+  const initialWodsRaw = await api.wod.getAll();
+
+  // Validate and transform raw data using the full WodSchema
+  const parseResult = WodSchema.array().safeParse(initialWodsRaw);
+  let initialWods: Wod[] = [];
+  if (parseResult.success) {
+    initialWods = parseResult.data as Wod[]; // Explicitly assert type
+  } else {
+    // Log error if parsing fails server-side
+    console.error("Server-side WOD parsing failed:", parseResult.error);
+    // Decide how to handle failure - pass empty array? Throw error?
+    // Passing empty array for now to prevent client crash.
+  }
 
   // Hydrate React Query cache
   const queryClient = new QueryClient();
   // The query key must match the one used in the client
-  await queryClient.setQueryData(["wod.getAll"], initialWods);
+  // Use the RAW data for hydration to match what the client query will fetch
+  await queryClient.setQueryData(["wod.getAll"], initialWodsRaw);
   const dehydratedState = dehydrate(queryClient);
 
   return (

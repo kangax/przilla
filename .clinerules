@@ -125,7 +125,6 @@ PB --> TC[techContext.md]
 3. `activeContext.md`
 
    - Current work focus
-   - Next steps
    - Active decisions and considerations
    - Important patterns and preferences
    - Learnings and project insights
@@ -133,8 +132,7 @@ PB --> TC[techContext.md]
 
 4. `recentChanges.md`
 
-   - Full, detailed changelog of all recent and historical changes
-   - Previously part of activeContext.md
+   - Full, detailed changelog of _recent_ changes
 
 5. `systemPatterns.md`
 

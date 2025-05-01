@@ -1,6 +1,17 @@
 # Combined Recent Changes
 
-## April 28, 2025
+## April 30, 2025
+
+- **WodViewer Refactor: Extracted Filter/Sort/Search State to Custom Hook**
+
+  - **Goal:** Reduce the size and complexity of `WodViewer.tsx` by extracting all filter, sort, search, and URL sync logic into a dedicated custom hook, improving maintainability and separation of concerns.
+  - **Implementation:**
+    - Created a new custom hook `useWodViewerFilters` in `src/app/(main)/components/hooks/useWodViewerFilters.ts`.
+    - Moved all state and URL synchronization logic for selected categories, tags, completion filter, sort, sort direction, and search term from `WodViewer.tsx` into the new hook.
+    - Updated `WodViewer.tsx` to use the hook, removing the corresponding state and effect logic from the component.
+    - Updated all references in `WodViewer.tsx` to use the values and setters returned by the hook.
+    - Ensured all derived values (e.g., validSelectedCategories, validSelectedTags) are now provided by the hook.
+  - **Outcome:** `WodViewer.tsx` is now significantly smaller and easier to read, with all filter/sort/search state and URL sync logic encapsulated in a reusable, testable hook. This sets the stage for further modularization and refactoring of the component.
 
 - **CSV Import Flow: Zod Migration for Type Guards and Validation**
 

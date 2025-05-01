@@ -24,6 +24,7 @@ import { ChevronDown, ListFilter, ArrowUp, ArrowDown } from "lucide-react";
 import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
 import { useMediaQuery } from "~/utils/useMediaQuery";
+import { useWodViewerFilters } from "./hooks/useWodViewerFilters";
 
 /**
  * Client-only wrapper for WodListMobile to ensure searchParams is read after hydration.
@@ -78,35 +79,6 @@ interface WodViewerProps {
 }
 
 const DEFAULT_COMPLETION_FILTER = "all";
-const ALLOWED_COMPLETION_STATUSES: ReadonlyArray<"all" | "done" | "notDone"> = [
-  "all",
-  "done",
-  "notDone",
-];
-
-const isValidCompletionStatus = (
-  status: string | null,
-): status is "all" | "done" | "notDone" => {
-  return ALLOWED_COMPLETION_STATUSES.includes(
-    status as "all" | "done" | "notDone",
-  );
-};
-
-const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
-  const validSortKeys: SortByType[] = [
-    "wodName",
-    "date",
-    "difficulty",
-    "countLikes",
-    "results",
-  ];
-  return validSortKeys.includes(sortBy as SortByType);
-};
-
-const isValidSortDirection = (dir: string | null): dir is "asc" | "desc" => {
-  return dir === "asc" || dir === "desc";
-};
-
 const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   wodName: "asc",
   date: "desc",
@@ -241,48 +213,29 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return Array.from(tags).sort();
   }, [wods]);
 
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-    const urlCategory = searchParams.get("category");
-    return urlCategory ? [urlCategory] : [];
-  });
-
-  const [selectedTags, setSelectedTags] = useState<string[]>(() => {
-    const urlTags = searchParams.get("tags");
-    return urlTags ? urlTags.split(",") : [];
-  });
-
-  const [completionFilter, setCompletionFilter] = useState<
-    "all" | "done" | "notDone"
-  >(() => {
-    const urlCompletion = searchParams.get("completion");
-    return isValidCompletionStatus(urlCompletion)
-      ? urlCompletion
-      : DEFAULT_COMPLETION_FILTER;
-  });
-
-  const [sortBy, setSortBy] = useState<SortByType>(() => {
-    const urlSortBy = searchParams.get("sortBy");
-    return isValidSortBy(urlSortBy) ? urlSortBy : "date";
-  });
-
-  // If not logged in and sortBy is "results", reset to "date"
-  useEffect(() => {
-    if (!isLoggedIn && sortBy === "results") {
-      setSortBy("date");
-    }
-  }, [isLoggedIn, sortBy]);
-
-  const [sortDirection, setSortDirection] = useState<"asc" | "desc">(() => {
-    const urlSortDir = searchParams.get("sortDir");
-    if (isValidSortDirection(urlSortDir)) {
-      return urlSortDir;
-    }
-    return DEFAULT_SORT_DIRECTIONS[sortBy];
-  });
-
-  const [searchTerm, setSearchTerm] = useState<string>(() => {
-    return searchParams.get("search") ?? "";
-  });
+  // Use custom filter/sort/search hook
+  const {
+    selectedCategories,
+    setSelectedCategories,
+    selectedTags,
+    setSelectedTags,
+    completionFilter,
+    setCompletionFilter,
+    sortBy,
+    setSortBy,
+    sortDirection,
+    setSortDirection,
+    searchTerm,
+    setSearchTerm,
+    validSelectedCategories,
+    validSelectedTags,
+  } = useWodViewerFilters(
+    categoryOrder,
+    tagOrder,
+    isLoggedIn,
+    DEFAULT_SORT_DIRECTIONS,
+    DEFAULT_COMPLETION_FILTER,
+  );
 
   useLayoutEffect(() => {
     const calculateHeight = () => {
@@ -300,78 +253,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return () => window.removeEventListener("resize", calculateHeight);
   }, [filterBarRef]);
 
-  useEffect(() => {
-    // Start with all current params, so we preserve unknown ones (like expandedWodId)
-    const params = new URLSearchParams(searchParams.toString());
-
-    // Overwrite with known filter/sort params
-    const validCategoryForUrl =
-      selectedCategories.length > 0 &&
-      categoryOrder.includes(selectedCategories[0] as WodCategory) // Cast to WodCategory
-        ? selectedCategories[0]
-        : null;
-
-    if (validCategoryForUrl) {
-      params.set("category", validCategoryForUrl);
-    } else {
-      params.delete("category");
-    }
-
-    const validTagsForUrl = selectedTags.filter((tag) =>
-      tagOrder.includes(tag),
-    );
-    if (validTagsForUrl.length > 0) {
-      params.set("tags", selectedTags.join(","));
-    } else {
-      params.delete("tags");
-    }
-
-    if (completionFilter !== DEFAULT_COMPLETION_FILTER) {
-      params.set("completion", completionFilter);
-    } else {
-      params.delete("completion");
-    }
-
-    if (sortBy !== "date") {
-      params.set("sortBy", sortBy);
-    } else {
-      params.delete("sortBy");
-    }
-
-    const defaultSortDir = DEFAULT_SORT_DIRECTIONS[sortBy];
-    if (sortDirection !== defaultSortDir) {
-      params.set("sortDir", sortDirection);
-    } else {
-      params.delete("sortDir");
-    }
-
-    if (searchTerm) {
-      params.set("search", searchTerm);
-    } else {
-      params.delete("search");
-    }
-
-    const currentSearch = searchParams.toString();
-    const newSearch = params.toString();
-
-    if (newSearch !== currentSearch) {
-      router.replace(`${pathname}?${newSearch}`, { scroll: false });
-    }
-  }, [
-    selectedCategories,
-    categoryOrder,
-    selectedTags,
-    tagOrder,
-    completionFilter,
-    sortBy,
-    sortDirection,
-    searchTerm,
-    pathname,
-    router,
-    searchParams,
-    isLoggedIn,
-  ]);
-
   const categoryCounts = useMemo(() => {
     return wods.reduce(
       (acc, wod) => {
@@ -385,17 +266,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   }, [wods]);
 
   const originalTotalWodCount = useMemo(() => wods.length, [wods]);
-
-  const validSelectedCategories = useMemo(() => {
-    return selectedCategories.length > 0 &&
-      categoryOrder.includes(selectedCategories[0] as WodCategory) // Cast to WodCategory
-      ? selectedCategories
-      : [];
-  }, [selectedCategories, categoryOrder]);
-
-  const validSelectedTags = useMemo(() => {
-    return selectedTags.filter((tag) => tagOrder.includes(tag));
-  }, [selectedTags, tagOrder]);
 
   const searchedWods = useMemo(() => {
     if (!searchTerm) return wods;
@@ -463,14 +333,17 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         setSortDirection(DEFAULT_SORT_DIRECTIONS[column]);
       }
     },
-    [sortBy],
+    [sortBy, setSortBy, setSortDirection],
   );
 
-  const toggleTag = useCallback((tag: string) => {
-    setSelectedTags((prev) =>
-      prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
-    );
-  }, []);
+  const toggleTag = useCallback(
+    (tag: string) => {
+      setSelectedTags((prev) =>
+        prev.includes(tag) ? prev.filter((t) => t !== tag) : [...prev, tag],
+      );
+    },
+    [setSelectedTags],
+  );
 
   // Invalidate scores after logging
   const handleScoreLogged = useCallback(() => {

@@ -2,6 +2,12 @@
 
 ## Current Focus
 
+### WodViewer Refactor: Filter/Sort/Search State Extraction (Apr 30, 2025)
+
+- **Goal:** Reduce the size and complexity of `WodViewer.tsx` by extracting all filter, sort, search, and URL sync logic into a dedicated custom hook, improving maintainability and separation of concerns.
+- **Status:** ✅ First step complete. All filter/sort/search state and URL sync logic has been moved to `useWodViewerFilters` in `src/app/(main)/components/hooks/useWodViewerFilters.ts`.
+- **Next Steps:** Continue modularizing `WodViewer.tsx` by extracting data transformation logic into a custom hook, and the filter/search/sort bar into a presentational component.
+
 ### Refactor: Use Only Normalized Movements from DB in Charts (Planned, Apr 28, 2025)
 
 **Goal:**  
@@ -203,6 +209,9 @@ Eliminate all regex and string-based movement parsing from both backend and fron
    - `DATABASE_URL=libsql://przilla-prod-kangax.aws-us-west-2.turso.io npx tsx scripts/populate_movements_to_db.ts`
 3. Review any WODs missing in DB after population and resolve as needed.
 4. Integrate movement-based queries and analytics in the app UI.
+5. **[NEW STANDARD] All scripts and code that process WOD JSON data (e.g., from `public/data/wods.json`) must use the canonical TypeScript type and Zod schema from `src/types/wodJsonTypes.ts` for validation and type safety.**
+   - When creating or updating scripts (for DB population, analytics, import/export, etc.), always import and use the shared type/schema for parsing and validation.
+   - This prevents field drift, enforces consistency, and ensures robust, maintainable data processing.
 
 ### Must have
 
@@ -310,5 +319,7 @@ The following high-priority areas have been identified for new or improved unit/
 These areas are the next focus for improving test coverage and reliability, and will be addressed in order.
 
 ## Recent Changes
+
+- **Apr 30, 2025:** Extracted all filter, sort, search, and URL sync logic from `WodViewer.tsx` into a new custom hook `useWodViewerFilters` (`src/app/(main)/components/hooks/useWodViewerFilters.ts`). Updated `WodViewer.tsx` to use the hook, significantly reducing its size and improving maintainability. Next: continue modularizing data transformation and UI.
 
 See [recentChanges.md](./recentChanges.md) for the full, detailed changelog.

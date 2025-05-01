@@ -10,6 +10,7 @@ interface DeleteScoreDialogProps {
   isDeleting: boolean;
   score: Score;
   wod: Wod;
+  // 'score' is intentionally unused to satisfy the interface contract and may be used in the future.
 }
 
 export const DeleteScoreDialog: React.FC<DeleteScoreDialogProps> = ({
@@ -18,6 +19,7 @@ export const DeleteScoreDialog: React.FC<DeleteScoreDialogProps> = ({
   onConfirm,
   onCancel,
   isDeleting,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   score,
   wod,
 }) => (

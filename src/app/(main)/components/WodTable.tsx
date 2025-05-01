@@ -8,12 +8,8 @@ import {
   Text,
   Flex,
   Badge,
-  IconButton,
-  Dialog,
-  Button,
   Separator,
 } from "@radix-ui/themes";
-import { Pencil, Trash, Plus } from "lucide-react"; // Added Plus icon
 import {
   useReactTable,
   getCoreRowModel,
@@ -25,13 +21,7 @@ import {
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
 import type { Wod, Score, SortByType } from "~/types/wodTypes";
-import {
-  getPerformanceLevelTooltip,
-  formatScore,
-  formatShortDate,
-  getPerformanceBadgeDetails,
-  getPerformanceLevel,
-} from "~/utils/wodUtils";
+import { getPerformanceLevel } from "~/utils/wodUtils";
 import { HighlightMatch } from "~/utils/uiUtils";
 import { LogScoreDialog } from "./LogScoreDialog";
 import { ScoresCell } from "./WodTableCells/ScoresCell";

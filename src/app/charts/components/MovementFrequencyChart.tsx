@@ -131,7 +131,9 @@ export default function MovementFrequencyChart({
     return (
       <Card size="3">
         {FrequencyHeading}
-        <Text>No movement frequency data available to display.</Text>
+        <Text data-testid="no-data-message-global">
+          No movement frequency data available to display.
+        </Text>
       </Card>
     );
   }
@@ -158,7 +160,11 @@ export default function MovementFrequencyChart({
               {tab.value === "yourWods" ? (
                 isLoggedIn ? (
                   yourData && yourData.length > 0 ? (
-                    <ResponsiveContainer width="100%" height={600}>
+                    <ResponsiveContainer
+                      width="100%"
+                      height={600}
+                      data-testid="movement-frequency-chart-yourWods"
+                    >
                       <BarChart
                         data={yourData}
                         layout="vertical"
@@ -208,7 +214,11 @@ export default function MovementFrequencyChart({
                   )
                 ) : null
               ) : data[tab.value] && data[tab.value].length > 0 ? (
-                <ResponsiveContainer width="100%" height={600}>
+                <ResponsiveContainer
+                  width="100%"
+                  height={600}
+                  data-testid={`movement-frequency-chart-${tab.value}`}
+                >
                   <BarChart
                     data={data[tab.value]}
                     layout="vertical"
@@ -251,7 +261,9 @@ export default function MovementFrequencyChart({
                   </BarChart>
                 </ResponsiveContainer>
               ) : (
-                <Text>No data for {tab.label}.</Text>
+                <Text data-testid={`no-data-message-${tab.value}`}>
+                  No data for {tab.label}.
+                </Text>
               )}
             </Tabs.Content>
           ))}

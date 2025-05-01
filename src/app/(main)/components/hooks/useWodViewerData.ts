@@ -1,0 +1,208 @@
+import { useMemo } from "react";
+import {
+  type ScoreFromQuery,
+  type Wod,
+  type Score,
+  type SortByType,
+  type WodCategory,
+} from "~/types/wodTypes";
+import { sortWods, isWodDone } from "~/utils/wodUtils";
+
+/**
+ * Custom hook to handle all WOD data transformation, filtering, searching, sorting, and count calculations.
+ */
+export function useWodViewerData(
+  wodsData: Wod[] | undefined,
+  initialWods: Wod[] | undefined,
+  scoresData: ScoreFromQuery[] | undefined,
+  selectedCategories: string[],
+  selectedTags: string[],
+  completionFilter: "all" | "done" | "notDone",
+  sortBy: SortByType,
+  sortDirection: "asc" | "desc",
+  searchTerm: string,
+) {
+  // Map and memoize WODs
+  const wods = useMemo(() => {
+    // Data is already parsed as Wod[]
+    return wodsData ?? initialWods ?? [];
+  }, [wodsData, initialWods]);
+
+  // Map and memoize scores
+  const scoresByWodId = useMemo(() => {
+    if (!scoresData) return {};
+    const processedScores = scoresData.map(
+      (score): Score => ({
+        id: score.id ?? "",
+        userId: score.userId ?? "",
+        wodId: score.wodId ?? "",
+        time_seconds:
+          typeof score.time_seconds === "number" ? score.time_seconds : null,
+        reps: typeof score.reps === "number" ? score.reps : null,
+        load: typeof score.load === "number" ? score.load : null,
+        rounds_completed:
+          typeof score.rounds_completed === "number"
+            ? score.rounds_completed
+            : null,
+        partial_reps:
+          typeof score.partial_reps === "number" ? score.partial_reps : null,
+        isRx: typeof score.isRx === "boolean" ? score.isRx : false,
+        notes:
+          typeof score.notes === "string"
+            ? score.notes
+            : score.notes === null
+              ? null
+              : "",
+        scoreDate:
+          typeof score.scoreDate === "string"
+            ? new Date(score.scoreDate)
+            : score.scoreDate instanceof Date
+              ? score.scoreDate
+              : new Date(),
+        createdAt:
+          typeof score.createdAt === "string"
+            ? new Date(score.createdAt)
+            : score.createdAt instanceof Date
+              ? score.createdAt
+              : new Date(),
+        updatedAt:
+          typeof score.updatedAt === "string"
+            ? new Date(score.updatedAt)
+            : score.updatedAt instanceof Date
+              ? score.updatedAt
+              : null,
+      }),
+    );
+
+    return (processedScores ?? []).reduce(
+      (acc, score) => {
+        if (!acc[score.wodId]) {
+          acc[score.wodId] = [];
+        }
+        acc[score.wodId].push(score);
+        acc[score.wodId].sort(
+          (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
+        );
+        return acc;
+      },
+      {} as Record<string, Score[]>,
+    );
+  }, [scoresData]);
+
+  // Category and tag order
+  const categoryOrder = useMemo(() => {
+    if (!wods) return [];
+    const categories = new Set(wods.map((wod) => wod.category).filter(Boolean));
+    return Array.from(categories).sort();
+  }, [wods]);
+
+  const tagOrder = useMemo(() => {
+    if (!wods) return [];
+    const tags = new Set(wods.flatMap((wod) => wod.tags).filter(Boolean));
+    return Array.from(tags).sort();
+  }, [wods]);
+
+  // Category counts
+  const categoryCounts = useMemo(() => {
+    return wods.reduce(
+      (acc, wod) => {
+        if (wod.category) {
+          acc[wod.category] = (acc[wod.category] || 0) + 1;
+        }
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+  }, [wods]);
+
+  const originalTotalWodCount = useMemo(() => wods.length, [wods]);
+
+  // Search/filter logic
+  const searchedWods = useMemo(() => {
+    if (!searchTerm) return wods;
+    const lowerCaseSearchTerm = searchTerm.toLowerCase();
+    return wods.filter(
+      (wod) =>
+        wod.wodName?.toLowerCase().includes(lowerCaseSearchTerm) ||
+        wod.description?.toLowerCase().includes(lowerCaseSearchTerm) ||
+        wod.category?.toLowerCase().includes(lowerCaseSearchTerm) ||
+        wod.tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchTerm)),
+    );
+  }, [wods, searchTerm]);
+
+  const validSelectedCategories = useMemo(() => {
+    return selectedCategories.length > 0 &&
+      categoryOrder.includes(selectedCategories[0] as WodCategory)
+      ? selectedCategories
+      : [];
+  }, [selectedCategories, categoryOrder]);
+
+  const validSelectedTags = useMemo(() => {
+    return selectedTags.filter((tag) => tagOrder.includes(tag));
+  }, [selectedTags, tagOrder]);
+
+  const categoryTagFilteredWods = useMemo(() => {
+    return searchedWods.filter((wod) => {
+      const categoryMatch =
+        validSelectedCategories.length === 0 ||
+        (wod.category && validSelectedCategories.includes(wod.category));
+      const tagMatch =
+        validSelectedTags.length === 0 ||
+        wod.tags.some((tag) => validSelectedTags.includes(tag));
+      return categoryMatch && tagMatch;
+    });
+  }, [searchedWods, validSelectedCategories, validSelectedTags]);
+
+  // Completion filter
+  const finalFilteredWods = useMemo(() => {
+    if (completionFilter === "done") {
+      return categoryTagFilteredWods.filter((wod) =>
+        isWodDone(wod, scoresByWodId[wod.id]),
+      );
+    } else if (completionFilter === "notDone") {
+      return categoryTagFilteredWods.filter(
+        (wod) => !isWodDone(wod, scoresByWodId[wod.id]),
+      );
+    }
+    return categoryTagFilteredWods;
+  }, [categoryTagFilteredWods, completionFilter, scoresByWodId]);
+
+  // Counts
+  const {
+    dynamicTotalWodCount,
+    dynamicDoneWodsCount,
+    dynamicNotDoneWodsCount,
+  } = useMemo(() => {
+    const total = categoryTagFilteredWods.length;
+    const done = categoryTagFilteredWods.filter((wod) =>
+      isWodDone(wod, scoresByWodId[wod.id]),
+    ).length;
+    return {
+      dynamicTotalWodCount: total,
+      dynamicDoneWodsCount: done,
+      dynamicNotDoneWodsCount: total - done,
+    };
+  }, [categoryTagFilteredWods, scoresByWodId]);
+
+  // Sorting
+  const sortedWods = useMemo(() => {
+    return sortWods(finalFilteredWods, sortBy, sortDirection, scoresByWodId);
+  }, [finalFilteredWods, sortBy, sortDirection, scoresByWodId]);
+
+  return {
+    wods,
+    scoresByWodId,
+    categoryOrder,
+    tagOrder,
+    categoryCounts,
+    originalTotalWodCount,
+    validSelectedCategories,
+    validSelectedTags,
+    dynamicTotalWodCount,
+    dynamicDoneWodsCount,
+    dynamicNotDoneWodsCount,
+    sortedWods,
+    searchedWods,
+    finalFilteredWods,
+  };
+}

@@ -16,6 +16,9 @@ export const mockWods: Wod[] = [
     description: "AMRAP in 20 minutes",
     difficultyExplanation: "Classic benchmark AMRAP.",
     tags: ["AMRAP"],
+    benchmarks: null,
+    movements: [],
+    timecap: null,
   },
   {
     id: "2",
@@ -29,6 +32,9 @@ export const mockWods: Wod[] = [
     description: "21-15-9 reps",
     difficultyExplanation: "Classic benchmark couplet.",
     tags: ["For Time"],
+    benchmarks: null,
+    movements: [],
+    timecap: null,
   },
   {
     id: "3",
@@ -42,6 +48,9 @@ export const mockWods: Wod[] = [
     description: "50-40-30-20-10 reps",
     difficultyExplanation: "Classic benchmark couplet.",
     tags: ["For Time"],
+    benchmarks: null,
+    movements: [],
+    timecap: null,
   },
 ];
 

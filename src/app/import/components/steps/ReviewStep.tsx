@@ -2,8 +2,8 @@
 
 import React from "react";
 import { ScoreReviewTable } from "../ScoreReviewTable";
-import type { ProcessedRow } from "../types";
-import { CsvRowSchema, PrzillaCsvRowSchema } from "../types";
+import type { ProcessedRow, CsvRow, PrzillaCsvRow } from "../types";
+import { CsvRowSchema } from "../types";
 
 interface ReviewStepProps {
   processedRows: ProcessedRow[];
@@ -24,13 +24,13 @@ export function ReviewStep({
     .sort((a, b) => {
       const dateA = new Date(
         CsvRowSchema.safeParse(a.csvRow).success
-          ? (a.csvRow as import("../../components/types").CsvRow).date
-          : (a.csvRow as import("../../components/types").PrzillaCsvRow).Date,
+          ? (a.csvRow as CsvRow).date
+          : (a.csvRow as PrzillaCsvRow).Date,
       ).getTime();
       const dateB = new Date(
         CsvRowSchema.safeParse(b.csvRow).success
-          ? (b.csvRow as import("../../components/types").CsvRow).date
-          : (b.csvRow as import("../../components/types").PrzillaCsvRow).Date,
+          ? (b.csvRow as CsvRow).date
+          : (b.csvRow as PrzillaCsvRow).Date,
       ).getTime();
       return dateB - dateA;
     });
@@ -41,13 +41,13 @@ export function ReviewStep({
     .sort((a, b) => {
       const dateA = new Date(
         CsvRowSchema.safeParse(a.csvRow).success
-          ? (a.csvRow as import("../../components/types").CsvRow).date
-          : (a.csvRow as import("../../components/types").PrzillaCsvRow).Date,
+          ? (a.csvRow as CsvRow).date
+          : (a.csvRow as PrzillaCsvRow).Date,
       ).getTime();
       const dateB = new Date(
         CsvRowSchema.safeParse(b.csvRow).success
-          ? (b.csvRow as import("../../components/types").CsvRow).date
-          : (b.csvRow as import("../../components/types").PrzillaCsvRow).Date,
+          ? (b.csvRow as CsvRow).date
+          : (b.csvRow as PrzillaCsvRow).Date,
       ).getTime();
       return dateB - dateA;
     });

@@ -1,5 +1,4 @@
 import { describe, it, expect, vi, beforeEach } from "vitest";
-import type { Mock } from "vitest";
 import "@testing-library/jest-dom";
 import {
   mockWods,
@@ -11,9 +10,9 @@ import {
 vi.mock("~/lib/auth-client", () => ({
   useSession: vi.fn(),
 }));
-import { useSession } from "~/lib/auth-client";
 
 // --- Mock tRPC ---
+import type { ScoreFromQuery } from "~/types/wodTypes";
 vi.mock("~/trpc/react", () => ({
   api: {
     wod: {
@@ -38,11 +37,18 @@ vi.mock("~/trpc/react", () => ({
     },
     score: {
       getAllByUser: {
-        useQuery: vi.fn(() => ({
-          data: [],
-          isLoading: false,
-          error: null,
-        })),
+        useQuery: vi.fn(
+          () =>
+            ({
+              data: [] as ScoreFromQuery[],
+              isLoading: false,
+              error: null,
+            }) as {
+              data: ScoreFromQuery[];
+              isLoading: boolean;
+              error: null;
+            },
+        ),
       },
       deleteScore: {
         useMutation: vi.fn(() => ({

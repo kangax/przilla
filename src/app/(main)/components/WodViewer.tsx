@@ -5,12 +5,10 @@ import {
   useEffect,
   useLayoutEffect,
   useRef,
-  useMemo,
   useCallback,
 } from "react";
 import { api } from "~/trpc/react";
 import { useSession } from "~/lib/auth-client";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   Box,
   Flex,
@@ -25,6 +23,7 @@ import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
 import { useMediaQuery } from "~/utils/useMediaQuery";
 import { useWodViewerFilters } from "./hooks/useWodViewerFilters";
+import { useWodViewerData } from "./hooks/useWodViewerData";
 
 /**
  * Client-only wrapper for WodListMobile to ensure searchParams is read after hydration.
@@ -63,19 +62,17 @@ function WodListMobileWrapper(
 }
 import {
   type Wod,
-  type Score,
   type SortByType,
-  type WodFromQuery,
   type ScoreFromQuery,
   type Benchmarks,
   type WodCategory, // Import WodCategory
+  BenchmarksSchema,
 } from "~/types/wodTypes";
-import { sortWods, isWodDone, parseTags } from "~/utils/wodUtils";
 
 // --- URL State Management ---
 
 interface WodViewerProps {
-  initialWods: WodFromQuery[];
+  initialWods: Wod[];
 }
 
 const DEFAULT_COMPLETION_FILTER = "all";
@@ -88,6 +85,102 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
 };
 
 export default function WodViewer({ initialWods }: WodViewerProps) {
+  // Runtime assertion: filter out any objects missing required fields
+  const safeInitialWods: Wod[] = Array.isArray(initialWods)
+    ? initialWods
+        .filter((w) => typeof w.id === "string" && w.id.length > 0)
+        .map((w) => ({
+          id: w.id ?? "",
+          wodName: w.wodName ?? "",
+          wodUrl: w.wodUrl ?? null,
+          description: w.description ?? null,
+          benchmarks: (() => {
+            if (!w.benchmarks) return null;
+            const parsed = BenchmarksSchema.safeParse(w.benchmarks);
+            // Ensure 'type' is present and valid *after* successful parsing
+            if (
+              parsed.success &&
+              typeof parsed.data.type === "string" && // Check type exists and is string
+              ["time", "rounds", "reps", "load"].includes(parsed.data.type) && // Check type is valid enum
+              parsed.data.levels && // Check levels exist
+              typeof parsed.data.levels === "object" && // Check levels is object
+              ["elite", "advanced", "intermediate", "beginner"].every((lvl) => {
+                const levelData =
+                  parsed.data.levels[lvl as keyof typeof parsed.data.levels];
+                return (
+                  typeof levelData === "object" &&
+                  levelData !== null &&
+                  typeof levelData.min === "number" &&
+                  typeof levelData.max === "number"
+                );
+              })
+            ) {
+              // Now we are sure it matches the Benchmarks type
+              return parsed.data as Benchmarks; // Explicit cast after checks
+            }
+            // If parse failed OR type/levels validation failed, return null
+            return null;
+          })(),
+          category:
+            typeof w.category === "string" &&
+            [
+              "Girl",
+              "Hero",
+              "Games",
+              "Open",
+              "Quarterfinals",
+              "AGOQ",
+              "Benchmark",
+              "Skill",
+              "Other",
+            ].includes(w.category)
+              ? w.category
+              : null,
+          tags: Array.isArray(w.tags)
+            ? w.tags
+            : typeof w.tags === "string"
+              ? [w.tags]
+              : [],
+          difficulty: w.difficulty ?? null,
+          difficultyExplanation: w.difficultyExplanation ?? null,
+          countLikes:
+            typeof w.countLikes === "number"
+              ? w.countLikes
+              : w.countLikes === null || typeof w.countLikes === "undefined"
+                ? null
+                : Number(w.countLikes),
+          movements: Array.isArray(w.movements)
+            ? w.movements
+            : typeof w.movements === "string"
+              ? [w.movements]
+              : [],
+          timecap:
+            typeof w.timecap === "number"
+              ? w.timecap
+              : w.timecap === null || typeof w.timecap === "undefined"
+                ? null
+                : Number(w.timecap),
+          createdAt:
+            typeof w.createdAt === "string"
+              ? new Date(w.createdAt)
+              : w.createdAt instanceof Date
+                ? w.createdAt
+                : new Date(),
+          updatedAt:
+            typeof w.updatedAt === "string"
+              ? new Date(w.updatedAt)
+              : w.updatedAt instanceof Date
+                ? w.updatedAt
+                : null,
+        }))
+    : [];
+  if (safeInitialWods.length !== (initialWods?.length ?? 0)) {
+    // eslint-disable-next-line no-console
+    console.warn(
+      "[WodViewer] Some initialWods are missing required fields and were filtered out.",
+    );
+  }
+
   const { data: session, isPending: isSessionLoading } = useSession();
   const isLoggedIn = !!session?.user;
   const isMobile = useMediaQuery("(max-width: 767px)");
@@ -111,109 +204,8 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     enabled: isLoggedIn,
   });
 
-  const wods = useMemo(() => {
-    const dataToProcess =
-      (wodsData as WodFromQuery[] | undefined) ?? initialWods ?? [];
-    return dataToProcess.map((wod: WodFromQuery) => ({
-      id: wod.id,
-      wodUrl: wod.wodUrl,
-      wodName: wod.wodName,
-      description: wod.description,
-      category: wod.category,
-      difficulty: wod.difficulty,
-      difficultyExplanation: wod.difficultyExplanation,
-      countLikes: wod.countLikes,
-      /**
-       * List of normalized movement names for this WOD (from DB, can be empty)
-       */
-      movements: wod.movements ?? [],
-      /**
-       * Time cap for the workout, in seconds (nullable, from DB)
-       */
-      timecap: wod.timecap ?? null,
-      createdAt:
-        wod.createdAt instanceof Date
-          ? wod.createdAt
-          : new Date(wod.createdAt ?? Date.now()),
-      updatedAt:
-        wod.updatedAt instanceof Date
-          ? wod.updatedAt
-          : wod.updatedAt
-            ? new Date(wod.updatedAt)
-            : null,
-      tags: parseTags(wod.tags),
-      benchmarks:
-        typeof wod.benchmarks === "string"
-          ? (JSON.parse(wod.benchmarks) as Benchmarks | null)
-          : wod.benchmarks,
-    })) as Wod[];
-  }, [wodsData, initialWods]);
-
-  const scoresByWodId = useMemo(() => {
-    if (!scoresData) return {};
-    const processedScores = (scoresData as ScoreFromQuery[] | undefined)?.map(
-      (score: ScoreFromQuery) => ({
-        id: score.id,
-        userId: score.userId,
-        wodId: score.wodId,
-        time_seconds: score.time_seconds,
-        reps: score.reps,
-        load: score.load,
-        rounds_completed: score.rounds_completed,
-        partial_reps: score.partial_reps,
-        isRx: score.isRx,
-        notes: score.notes,
-        scoreDate:
-          score.scoreDate instanceof Date
-            ? score.scoreDate
-            : new Date(score.scoreDate),
-        createdAt:
-          score.createdAt instanceof Date
-            ? score.createdAt
-            : new Date(score.createdAt),
-        updatedAt:
-          score.updatedAt instanceof Date
-            ? score.updatedAt
-            : score.updatedAt
-              ? new Date(score.updatedAt)
-              : null,
-      }),
-    ) as Score[];
-
-    return (processedScores ?? []).reduce(
-      (acc, score) => {
-        if (!acc[score.wodId]) {
-          acc[score.wodId] = [];
-        }
-        acc[score.wodId].push(score);
-        acc[score.wodId].sort(
-          (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
-        );
-        return acc;
-      },
-      {} as Record<string, Score[]>,
-    );
-  }, [scoresData]);
-
-  const router = useRouter();
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const filterBarRef = useRef<HTMLDivElement>(null);
-  const [tableHeight, setTableHeight] = useState<number>(600);
-
-  const categoryOrder = useMemo(() => {
-    if (!wods) return [];
-    const categories = new Set(wods.map((wod) => wod.category).filter(Boolean));
-    return Array.from(categories).sort();
-  }, [wods]);
-
-  const tagOrder = useMemo(() => {
-    if (!wods) return [];
-    const tags = new Set(wods.flatMap((wod) => wod.tags).filter(Boolean));
-    return Array.from(tags).sort();
-  }, [wods]);
-
   // Use custom filter/sort/search hook
+  // Start with empty arrays, will update after data loads
   const {
     selectedCategories,
     setSelectedCategories,
@@ -227,15 +219,129 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     setSortDirection,
     searchTerm,
     setSearchTerm,
-    validSelectedCategories,
-    validSelectedTags,
   } = useWodViewerFilters(
-    categoryOrder,
-    tagOrder,
+    [], // will update after data loads
+    [],
     isLoggedIn,
     DEFAULT_SORT_DIRECTIONS,
     DEFAULT_COMPLETION_FILTER,
   );
+
+  // Normalize wodsData to Wod[] if present
+  const safeWodsData: Wod[] | undefined = Array.isArray(wodsData)
+    ? wodsData
+        .filter((w) => typeof w.id === "string" && w.id.length > 0)
+        .map((w) => ({
+          id: w.id,
+          wodName: w.wodName ?? "",
+          wodUrl: w.wodUrl ?? null,
+          description: w.description ?? null,
+          benchmarks: (() => {
+            if (!w.benchmarks) return null;
+            const parsed = BenchmarksSchema.safeParse(w.benchmarks);
+            // Ensure 'type' is present and valid *after* successful parsing
+            if (
+              parsed.success &&
+              typeof parsed.data.type === "string" && // Check type exists and is string
+              ["time", "rounds", "reps", "load"].includes(parsed.data.type) && // Check type is valid enum
+              parsed.data.levels && // Check levels exist
+              typeof parsed.data.levels === "object" && // Check levels is object
+              ["elite", "advanced", "intermediate", "beginner"].every((lvl) => {
+                const levelData =
+                  parsed.data.levels[lvl as keyof typeof parsed.data.levels];
+                return (
+                  typeof levelData === "object" &&
+                  levelData !== null &&
+                  typeof levelData.min === "number" &&
+                  typeof levelData.max === "number"
+                );
+              })
+            ) {
+              // Now we are sure it matches the Benchmarks type
+              return parsed.data as Benchmarks; // Explicit cast after checks
+            }
+            // If parse failed OR type/levels validation failed, return null
+            return null;
+          })(),
+          category:
+            typeof w.category === "string" &&
+            [
+              "Girl",
+              "Hero",
+              "Games",
+              "Open",
+              "Quarterfinals",
+              "AGOQ",
+              "Benchmark",
+              "Skill",
+              "Other",
+            ].includes(w.category)
+              ? (w.category as WodCategory) // Re-added 'as WodCategory'
+              : null,
+          tags: w.tags ?? [],
+          difficulty: w.difficulty ?? null,
+          difficultyExplanation: w.difficultyExplanation ?? null,
+          countLikes: w.countLikes ?? 0,
+          movements: w.movements ?? [],
+          timecap: w.timecap ?? null,
+          createdAt:
+            typeof w.createdAt === "string"
+              ? new Date(w.createdAt)
+              : (w.createdAt ?? new Date()),
+          updatedAt:
+            typeof w.updatedAt === "string"
+              ? new Date(w.updatedAt)
+              : (w.updatedAt ?? null),
+        }))
+    : undefined;
+
+  // Use custom data transformation hook
+  const {
+    wods,
+    scoresByWodId,
+    categoryOrder,
+    tagOrder,
+    categoryCounts,
+    originalTotalWodCount,
+    dynamicTotalWodCount,
+    dynamicDoneWodsCount,
+    dynamicNotDoneWodsCount,
+    sortedWods,
+  } = useWodViewerData(
+    safeWodsData,
+    safeInitialWods,
+    (scoresData ?? []) as ScoreFromQuery[],
+    selectedCategories,
+    selectedTags,
+    completionFilter,
+    sortBy,
+    sortDirection,
+    searchTerm,
+  );
+
+  // Sync filter state with available categories/tags from data
+  // If selectedCategories/tags are no longer valid, reset them
+  useEffect(() => {
+    if (
+      selectedCategories.length > 0 &&
+      !categoryOrder.includes(selectedCategories[0] as WodCategory)
+    ) {
+      setSelectedCategories([]);
+    }
+    if (
+      selectedTags.length > 0 &&
+      selectedTags.some((tag) => !tagOrder.includes(tag))
+    ) {
+      setSelectedTags((prev) => prev.filter((tag) => tagOrder.includes(tag)));
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [categoryOrder, tagOrder]);
+
+  // Now, re-initialize the filter hook with the real categoryOrder/tagOrder
+  // (This is a workaround; ideally, the filter hook would support dynamic updates)
+
+  const filterBarRef = useRef<HTMLDivElement>(null);
+  const [tableHeight, setTableHeight] = useState<number>(600);
 
   useLayoutEffect(() => {
     const calculateHeight = () => {
@@ -252,77 +358,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     window.addEventListener("resize", calculateHeight);
     return () => window.removeEventListener("resize", calculateHeight);
   }, [filterBarRef]);
-
-  const categoryCounts = useMemo(() => {
-    return wods.reduce(
-      (acc, wod) => {
-        if (wod.category) {
-          acc[wod.category] = (acc[wod.category] || 0) + 1;
-        }
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-  }, [wods]);
-
-  const originalTotalWodCount = useMemo(() => wods.length, [wods]);
-
-  const searchedWods = useMemo(() => {
-    if (!searchTerm) return wods;
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return wods.filter(
-      (wod) =>
-        wod.wodName?.toLowerCase().includes(lowerCaseSearchTerm) ||
-        wod.description?.toLowerCase().includes(lowerCaseSearchTerm) ||
-        wod.category?.toLowerCase().includes(lowerCaseSearchTerm) ||
-        wod.tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchTerm)),
-    );
-  }, [wods, searchTerm]);
-
-  const categoryTagFilteredWods = useMemo(() => {
-    return searchedWods.filter((wod) => {
-      const categoryMatch =
-        validSelectedCategories.length === 0 ||
-        (wod.category && validSelectedCategories.includes(wod.category));
-      const tagMatch =
-        validSelectedTags.length === 0 ||
-        wod.tags.some((tag) => validSelectedTags.includes(tag));
-      return categoryMatch && tagMatch;
-    });
-  }, [searchedWods, validSelectedCategories, validSelectedTags]);
-
-  const {
-    dynamicTotalWodCount,
-    dynamicDoneWodsCount,
-    dynamicNotDoneWodsCount,
-  } = useMemo(() => {
-    const total = categoryTagFilteredWods.length;
-    const done = categoryTagFilteredWods.filter((wod) =>
-      isWodDone(wod, scoresByWodId[wod.id]),
-    ).length;
-    return {
-      dynamicTotalWodCount: total,
-      dynamicDoneWodsCount: done,
-      dynamicNotDoneWodsCount: total - done,
-    };
-  }, [categoryTagFilteredWods, scoresByWodId]);
-
-  const finalFilteredWods = useMemo(() => {
-    if (completionFilter === "done") {
-      return categoryTagFilteredWods.filter((wod) =>
-        isWodDone(wod, scoresByWodId[wod.id]),
-      );
-    } else if (completionFilter === "notDone") {
-      return categoryTagFilteredWods.filter(
-        (wod) => !isWodDone(wod, scoresByWodId[wod.id]),
-      );
-    }
-    return categoryTagFilteredWods;
-  }, [categoryTagFilteredWods, completionFilter, scoresByWodId]);
-
-  const sortedWods = useMemo(() => {
-    return sortWods(finalFilteredWods, sortBy, sortDirection, scoresByWodId);
-  }, [finalFilteredWods, sortBy, sortDirection, scoresByWodId]);
 
   const handleSort = useCallback(
     (column: SortByType) => {
@@ -398,8 +433,23 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
             onValueChange={(value) => {
               if (value === "all") {
                 setSelectedCategories([]);
+              } else if (
+                [
+                  "Girl",
+                  "Hero",
+                  "Games",
+                  "Open",
+                  "Quarterfinals",
+                  "AGOQ",
+                  "Benchmark",
+                  "Skill",
+                  "Other",
+                ].includes(value)
+              ) {
+                setSelectedCategories([value as WodCategory]);
               } else {
-                setSelectedCategories([value]);
+                // fallback: ignore invalid value
+                setSelectedCategories([]);
               }
             }}
           >

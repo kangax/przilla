@@ -7,7 +7,7 @@ import WodTimelineChart from "./components/WodTimelineChart";
 import MovementFrequencyChart from "./components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
 import ChartLoginOverlay from "./components/ChartLoginOverlay"; // Import the overlay
-import { type Wod, type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
+import { type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
 import {
   generatePlaceholderDistributionData,

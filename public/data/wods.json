@@ -213,13 +213,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["EMOM"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 329,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2022-10-27"
-    },
     "difficulty": "Medium",
     "movements": [
       "Push-Up",
@@ -242,13 +235,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 109,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2022-07-13"
-    },
     "difficulty": "Hard",
     "movements": [
       "Run",
@@ -395,13 +381,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 219,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2015-07-28"
-    },
     "difficulty": "Very Hard",
     "movements": ["Thruster", "Rope Climb", "Box Jump", "Sandbag Run"],
     "countLikes": 111,
@@ -729,13 +708,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 24,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2018-01-07"
-    },
     "difficulty": "Hard",
     "movements": ["Overhead Squat", "Handstand Push-Up", "GHD Sit-Up"],
     "countLikes": 52,
@@ -846,13 +818,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 9,
-      "posted_date": "2017-03-07"
-    },
     "difficulty": "Hard",
     "movements": ["Deadlift", "Burpee", "Box Jump"],
     "countLikes": 118,
@@ -1238,13 +1203,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 19,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2019-12-17"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Box Step-Up",
@@ -2830,13 +2788,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 21,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-11-02"
-    },
     "difficulty": "Hard",
     "movements": [
       "Double-Under",
@@ -2914,13 +2865,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 24,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2015-12-23"
-    },
     "difficulty": "Very Hard",
     "movements": ["Double-Under", "Squat Clean", "Hand Release Push-Up"],
     "countLikes": 95,
@@ -3765,13 +3709,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 19,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Rope Climb", "Back Squat", "Handstand Push-Up", "Row"],
     "countLikes": 20,
@@ -3871,13 +3808,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 26,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2023-05-24"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Hang Power Clean",
@@ -3916,13 +3846,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 21,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2021-01-16"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Air Squat", "Sit-Up", "Push-Up", "Jumping Jack"],
     "countLikes": 27,
@@ -4522,13 +4445,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 21,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2020-05-29"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Single-Arm Dumbbell Push Jerk", "Row", "Run"],
     "countLikes": 13,
@@ -4821,13 +4737,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-08-27"
-    },
     "difficulty": "Hard",
     "movements": [
       "Stairs",
@@ -4850,13 +4759,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["EMOM"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 25,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2021-02-08"
-    },
     "difficulty": "Medium",
     "movements": [
       "Renegade Row",
@@ -5486,13 +5388,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 15,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2020-08-17"
-    },
     "difficulty": "Hard",
     "movements": [
       "Weighted Run",
@@ -5531,13 +5426,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 19,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2019-09-10"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee", "Kettlebell Swing", "Row", "Thruster"],
     "countLikes": 37,
@@ -5587,13 +5475,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 25,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2018-01-08"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Rope Climb"],
     "countLikes": 28,
@@ -5627,13 +5508,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 20,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-12-20"
-    },
     "difficulty": "Medium",
     "movements": ["Run", "Kettlebell Swing", "Wall Ball Shot"],
     "countLikes": 51,
@@ -5840,13 +5714,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 29,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2017-02-28"
-    },
     "difficulty": "Very Hard",
     "movements": ["Run", "Power Clean", "Push-Up", "Front Squat", "Pull-Up"],
     "countLikes": 60,
@@ -5913,13 +5780,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 15,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-02-13"
-    },
     "difficulty": "Hard",
     "movements": [
       "Run",
@@ -6172,13 +6032,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 30,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2017-05-04"
-    },
     "difficulty": "Medium",
     "movements": ["Wall Ball Shot", "Med Ball Push-Up", "Ball Slam"],
     "countLikes": 53,
@@ -6577,13 +6430,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 18,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2020-06-02"
-    },
     "difficulty": "Medium",
     "movements": [
       "Air Squat",
@@ -6858,13 +6704,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 20,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Run", "Deadlift", "Push Jerk"],
     "countLikes": 20,
@@ -6921,13 +6760,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 12,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2022-03-06"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Bar Muscle-Up",
@@ -7243,13 +7075,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 15,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-08-24"
-    },
     "difficulty": "Hard",
     "movements": ["Muscle-Up", "Shuttle Sprint", "Burpee Box Jump Over"],
     "countLikes": 7,
@@ -7382,13 +7207,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 15,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2022-11-26"
-    },
     "difficulty": "Easy",
     "movements": ["Jumping Jack", "Sumo Squat", "Sit-Up"],
     "countLikes": 9,
@@ -7476,13 +7294,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 27,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2021-08-23"
-    },
     "difficulty": "Medium",
     "movements": ["Plank Hold", "Kettlebell Swing", "Air Squat", "Burpee"],
     "countLikes": 15,
@@ -7570,13 +7381,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 36,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2018-01-24"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Push-Up", "Kettlebell Swing", "Box Jump"],
     "countLikes": 139,
@@ -7610,13 +7414,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 7,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2022-01-24"
-    },
     "difficulty": "Hard",
     "movements": ["Deadlift", "Box Jump", "Burpee"],
     "countLikes": 8,
@@ -7650,13 +7447,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 129,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2017-09-12"
-    },
     "difficulty": "Hard",
     "movements": ["Double-Under", "Pull-Up", "Air Squat", "Sprint"],
     "countLikes": 154,
@@ -7690,13 +7480,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 43,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2022-03-12"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee",
@@ -7739,13 +7522,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 63,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Medium",
     "movements": ["Dumbbell Split Clean", "Pull-Up"],
     "countLikes": 97,
@@ -7812,13 +7588,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-03-14"
-    },
     "difficulty": "Hard",
     "movements": ["Push-Up", "Kettlebell Swing", "Toe-to-Bar", "Rope Climb"],
     "countLikes": 24,
@@ -7868,13 +7637,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2018-02-20"
-    },
     "difficulty": "Hard",
     "movements": ["Deadlift", "Pull-Up", "Kettlebell Snatch"],
     "countLikes": 56,
@@ -7908,13 +7670,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 54,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Handstand Push-Up", "Box Jump", "Rope Climb"],
     "countLikes": 44,
@@ -8069,13 +7824,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 27,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-12-02"
-    },
     "difficulty": "Hard",
     "movements": ["Shuttle Sprint", "Dumbbell Cluster"],
     "countLikes": 66,
@@ -8133,13 +7881,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 32,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2020-09-18"
-    },
     "difficulty": "Medium",
     "movements": [
       "Dumbbell Front Squat + Curl + Strict Press Complex",
@@ -8317,13 +8058,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 87,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2015-03-03"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Bench Press",
@@ -8396,13 +8130,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 26,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["L-Pull-Up", "Toe-to-Bar", "Burpee", "Run"],
     "countLikes": 66,
@@ -8436,13 +8163,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-08-31"
-    },
     "difficulty": "Hard",
     "movements": [
       "Shoulder-to-Overhead",
@@ -8839,13 +8559,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 20,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2021-09-15"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Deadlift", "Burpee"],
     "countLikes": 10,
@@ -9025,13 +8738,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 86,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2024-05-27"
-    },
     "difficulty": "Hard",
     "movements": ["Box Step-Up", "Burpee-Over-Backpack", "Air Squat"],
     "countLikes": 2,
@@ -9153,13 +8859,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 212,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2024-03-27"
-    },
     "difficulty": "Hard",
     "movements": [
       "Run",
@@ -9200,13 +8899,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 36,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Ring Handstand Push-Up", "L-Pull-Up"],
     "countLikes": 17,
@@ -9240,13 +8932,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 27,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Front Squat", "Ring Push-Up"],
     "countLikes": 65,
@@ -9280,13 +8965,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 113,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2015-03-16"
-    },
     "difficulty": "Very Hard",
     "movements": ["Kettlebell Swing", "Push-Up", "Pull-Up", "Box Jump", "Run"],
     "countLikes": 170,
@@ -9364,13 +9042,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 37,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2022-04-06"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Burpee Pull-Up", "Box Jump", "Walking Lunge"],
     "countLikes": 7,
@@ -9437,13 +9108,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 130,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Clean-and-Jerk", "Run", "Rope Climb", "Burpee"],
     "countLikes": 107,
@@ -9460,13 +9124,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 514,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2024-05-27"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Deadlift",
@@ -9603,13 +9260,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 55,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2020-04-20"
-    },
     "difficulty": "Hard",
     "movements": [
       "Tire Flip",
@@ -9693,13 +9343,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 147,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Easy",
     "movements": ["Run"],
     "countLikes": 114,
@@ -9773,13 +9416,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 86,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2018-07-02"
-    },
     "difficulty": "Hard",
     "movements": ["Weighted Run", "Push-Up", "Sit-Up"],
     "countLikes": 153,
@@ -9989,13 +9625,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 54,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2015-06-07"
-    },
     "difficulty": "Hard",
     "movements": ["Clean", "Sprint", "Kettlebell Snatch"],
     "countLikes": 44,
@@ -10029,13 +9658,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 34,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Row", "Push-Up", "Run", "Pull-Up"],
     "countLikes": 66,
@@ -10069,13 +9691,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 200,
-      "likes": 0,
-      "comments": 15,
-      "posted_date": "2014-12-08"
-    },
     "difficulty": "Hard",
     "movements": ["Power Clean", "Front Squat", "Jerk", "Pull-Up"],
     "countLikes": 244,
@@ -10109,13 +9724,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 41,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2024-03-27"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Run",
@@ -10234,13 +9842,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 102,
-      "likes": 0,
-      "comments": 19,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Kettlebell Swing", "Burpee", "GHD Sit-Up"],
     "countLikes": 160,
@@ -10307,13 +9908,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2015-12-29"
-    },
     "difficulty": "Hard",
     "movements": ["Chest-to-Bar Pull-Up", "Power Clean", "Air Squat", "Run"],
     "countLikes": 41,
@@ -10330,13 +9924,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 10,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2018-06-16"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Rope Climb",
@@ -10376,13 +9963,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 54,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2018-02-19"
-    },
     "difficulty": "Hard",
     "movements": ["Double-Under", "Push-Up", "Power Clean"],
     "countLikes": 88,
@@ -10416,13 +9996,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 4,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-11-01"
-    },
     "difficulty": "Hard",
     "movements": ["Medicine Ball Run", "Front Squat", "Pull-Up", "Back Squat"],
     "countLikes": 17,
@@ -10619,13 +10192,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 93,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Dumbbell Squat Clean", "Burpee"],
     "countLikes": 216,
@@ -10736,13 +10302,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 102,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2016-05-30"
-    },
     "difficulty": "Very Hard",
     "movements": ["Row", "Thruster", "Pull-Up", "Wall Ball Shot"],
     "countLikes": 85,
@@ -10776,13 +10335,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 50,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Thruster", "Pull-Up", "Sprint"],
     "countLikes": 104,
@@ -10843,13 +10395,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 7,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2017-11-06"
-    },
     "difficulty": "Hard",
     "movements": ["Partner Run", "Double-Under", "Burpee", "Rope Climb"],
     "countLikes": 16,
@@ -10883,13 +10428,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 11,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2016-11-27"
-    },
     "difficulty": "Very Hard",
     "movements": ["Run", "Wall Ball Shot", "Muscle-Up", "Power Clean"],
     "countLikes": 18,
@@ -11034,13 +10572,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 24,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Air Squat", "Muscle-Up"],
     "countLikes": 34,
@@ -11057,13 +10588,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 31,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2015-10-10"
-    },
     "difficulty": "Very Hard",
     "movements": ["Bar Muscle-Up", "Clean-and-Jerk", "Buddy Carry"],
     "countLikes": 12,
@@ -11097,13 +10621,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 629,
-      "likes": 0,
-      "comments": 29,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Power Clean", "Strict Pull-Up", "Run"],
     "countLikes": 499,
@@ -11137,13 +10654,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 19,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2023-02-20"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Assault Bike",
@@ -11401,13 +10911,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 31,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2022-05-03"
-    },
     "difficulty": "Medium",
     "movements": ["Air Bike", "Toe-to-Bar", "Burpee", "Wall Ball Shot"],
     "countLikes": 5,
@@ -11638,13 +11141,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 70,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Squat Clean", "Parallette Handstand Push-Up"],
     "countLikes": 61,
@@ -11678,13 +11174,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 340,
-      "likes": 0,
-      "comments": 41,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Push Press", "Kettlebell Swing", "Box Jump"],
     "countLikes": 668,
@@ -11718,13 +11207,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 22,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2020-06-23"
-    },
     "difficulty": "Medium",
     "movements": [
       "Run",
@@ -11851,13 +11333,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 145,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Run",
@@ -11896,13 +11371,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 11,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-01-16"
-    },
     "difficulty": "Hard",
     "movements": [
       "Deadlift",
@@ -11942,13 +11410,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 21,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2016-12-28"
-    },
     "difficulty": "Very Hard",
     "movements": ["Muscle-Up"],
     "countLikes": 12,
@@ -11982,13 +11443,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 110,
-      "likes": 0,
-      "comments": 13,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Pull-Up", "Push-Up"],
     "countLikes": 160,
@@ -12022,13 +11476,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 151,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Muscle-Up"],
     "countLikes": 64,
@@ -12062,13 +11509,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 53,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2016-12-28"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Toe-to-Bar", "Burpee"],
     "countLikes": 153,
@@ -12102,13 +11542,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 22,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2015-06-29"
-    },
     "difficulty": "Hard",
     "movements": ["Overhead Squat", "Legless Rope Climb", "Bench Press"],
     "countLikes": 27,
@@ -12142,13 +11575,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 194,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2015-10-01"
-    },
     "difficulty": "Hard",
     "movements": ["Pull-Up", "Kettlebell Swing", "Box Jump"],
     "countLikes": 180,
@@ -12182,13 +11608,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 124,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-12-10"
-    },
     "difficulty": "Medium",
     "movements": ["Overhead Squat", "Back Squat", "Run"],
     "countLikes": 156,
@@ -12222,13 +11641,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 401,
-      "likes": 0,
-      "comments": 31,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Run", "Row"],
     "countLikes": 272,
@@ -12262,13 +11674,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 50,
-      "likes": 0,
-      "comments": 17,
-      "posted_date": "2017-03-21"
-    },
     "difficulty": "Hard",
     "movements": ["Deadlift", "Pull-Up", "Push-Up"],
     "countLikes": 129,
@@ -12335,13 +11740,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 18,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Muscle-Up", "Squat Clean"],
     "countLikes": 35,
@@ -12408,13 +11806,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-03-21"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Back Squat",
@@ -12461,13 +11852,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 224,
-      "likes": 0,
-      "comments": 11,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["GHD Sit-Up", "Squat Clean"],
     "countLikes": 124,
@@ -12501,13 +11885,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 205,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Medium",
     "movements": ["Overhead Squat", "Pull-Up"],
     "countLikes": 132,
@@ -12541,13 +11918,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 40,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Dumbbell Squat Snatch", "L-Sit Pull-Up"],
     "countLikes": 86,
@@ -12581,13 +11951,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 186,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2018-06-16"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee", "Front Squat", "Power Clean", "Run"],
     "countLikes": 104,
@@ -12702,13 +12065,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 103,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2015-10-01"
-    },
     "difficulty": "Very Hard",
     "movements": ["Back Squat", "Bench Press", "Strict Pull-Up"],
     "countLikes": 197,
@@ -12742,13 +12098,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 29,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2021-09-11"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "AbMat Sit-Up",
@@ -12914,13 +12263,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 18,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2017-03-28"
-    },
     "difficulty": "Hard",
     "movements": [
       "Deadlift",
@@ -12959,13 +12301,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2020-09-30"
-    },
     "difficulty": "Medium",
     "movements": [
       "Alternating Lunge",
@@ -13008,13 +12343,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 87,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-12-09"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee", "Push-Up", "Sit-Up", "Sprint"],
     "countLikes": 78,
@@ -13071,13 +12399,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 33,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2017-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Bar Muscle-Up",
@@ -13116,13 +12437,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2015-05-31"
-    },
     "difficulty": "Hard",
     "movements": ["Deadlift", "Hanging Hip Touch", "Running Farmer Carry"],
     "countLikes": 29,
@@ -13156,13 +12470,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 9,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2021-10-25"
-    },
     "difficulty": "Hard",
     "movements": [
       "Air Squat",
@@ -13201,13 +12508,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 12,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2021-10-18"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee", "Crunch", "Dip", "Pull-Up", "Run"],
     "countLikes": 8,
@@ -13353,13 +12653,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 190,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Box Jump", "Burpee", "Squat Clean"],
     "countLikes": 150,
@@ -13393,13 +12686,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 47,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2015-09-20"
-    },
     "difficulty": "Hard",
     "movements": ["Back Squat", "Jerk"],
     "countLikes": 95,
@@ -13510,13 +12796,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 43,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2020-11-10"
-    },
     "difficulty": "Hard",
     "movements": ["Bar-Facing Burpee", "Front Squat", "Sandbag Carry"],
     "countLikes": 56,
@@ -13533,13 +12812,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 312,
-      "likes": 0,
-      "comments": 11,
-      "posted_date": "2021-02-12"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee Over Rower", "Power Clean", "Row"],
     "countLikes": 89,
@@ -13573,13 +12845,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": [
       "Medicine Ball Clean",
@@ -13617,13 +12882,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Deadlift",
@@ -13664,13 +12922,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 37,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2020-05-20"
-    },
     "difficulty": "Hard",
     "movements": [
       "Air Squat",
@@ -13711,13 +12962,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 68,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2017-03-21"
-    },
     "difficulty": "Very Hard",
     "movements": ["Front Squat", "Plate Run", "Rope Climb", "Toes-to-Bar"],
     "countLikes": 19,
@@ -13861,13 +13105,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 25,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-07-23"
-    },
     "difficulty": "Hard",
     "movements": ["Box Jump", "Handstand Push-Up", "Pull-Up", "Run"],
     "countLikes": 54,
@@ -13934,13 +13171,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 1722,
-      "likes": 0,
-      "comments": 151,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Push-Up", "Run", "Walking Lunge"],
     "countLikes": 2042,
@@ -13974,13 +13204,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 33,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2020-08-09"
-    },
     "difficulty": "Medium",
     "movements": ["Kettlebell Swing", "Push-Up", "Run", "Skull Crusher"],
     "countLikes": 45,
@@ -14014,13 +13237,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2020-08-11"
-    },
     "difficulty": "Hard",
     "movements": [
       "Box Step-Up",
@@ -14059,13 +13275,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 24,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Muscle-Up", "Run"],
     "countLikes": 34,
@@ -14205,13 +13414,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 26,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-10-08"
-    },
     "difficulty": "Hard",
     "movements": [
       "Deadlift",
@@ -14330,13 +13532,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 91,
-      "likes": 0,
-      "comments": 28,
-      "posted_date": "2019-12-23"
-    },
     "difficulty": "Medium",
     "movements": ["Hand Release Push-Up", "Sit-Up", "Walking Lunge"],
     "countLikes": 253,
@@ -14370,13 +13565,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 44,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2020-07-19"
-    },
     "difficulty": "Medium",
     "movements": ["Air Squat", "Burpee", "Plank Hold", "Pull-Up", "Push-Up"],
     "countLikes": 62,
@@ -14482,13 +13670,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 33,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2016-12-28"
-    },
     "difficulty": "Hard",
     "movements": [
       "Kettlebell Swing",
@@ -14527,13 +13708,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 256,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2019-02-01"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Dip",
@@ -14575,13 +13749,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 1105,
-      "likes": 0,
-      "comments": 52,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Back Squat", "Run"],
     "countLikes": 369,
@@ -14598,13 +13765,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2016-12-18"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Push-Up", "Rope Climb", "Run"],
     "countLikes": 29,
@@ -14638,13 +13798,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 127,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2021-09-14"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Bar-Over Burpee",
@@ -14686,13 +13839,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 13,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2019-09-18"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Double-Under", "Hang Clean", "Run", "Thruster"],
     "countLikes": 31,
@@ -14726,13 +13872,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 50,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2015-07-05"
-    },
     "difficulty": "Hard",
     "movements": ["Handstand Push-Up", "Pull-Up", "Thruster"],
     "countLikes": 75,
@@ -14965,13 +14104,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 47,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2024-03-23"
-    },
     "difficulty": "Medium",
     "movements": [
       "Bear Crawl Pushing Wall Ball",
@@ -15010,13 +14142,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 32,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2015-11-22"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Hang Power Clean", "Push Press", "Run"],
     "countLikes": 88,
@@ -15050,13 +14175,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 29,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2016-03-15"
-    },
     "difficulty": "Hard",
     "movements": [
       "Burpee",
@@ -15096,13 +14214,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 162,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2020-08-27"
-    },
     "difficulty": "Very Hard",
     "movements": ["Bar-Facing Burpee", "Bike", "Cluster"],
     "countLikes": 15,
@@ -15136,13 +14247,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-01-05"
-    },
     "difficulty": "Medium",
     "movements": ["Push-Up", "Squat Snatch"],
     "countLikes": 94,
@@ -15176,13 +14280,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 104,
-      "likes": 0,
-      "comments": 31,
-      "posted_date": "2016-04-12"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Push-Up", "Run", "Sit-Up"],
     "countLikes": 513,
@@ -15243,13 +14340,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 278,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2024-03-27"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee",
@@ -15290,13 +14380,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 20,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee Pull-Up", "Muscle-Up", "Pull-Up", "Run"],
     "countLikes": 27,
@@ -15374,13 +14457,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 20,
-      "likes": 0,
-      "comments": 15,
-      "posted_date": "2017-09-17"
-    },
     "difficulty": "Medium",
     "movements": ["Box Jump", "Hand Release Push-Up", "Thruster"],
     "countLikes": 73,
@@ -15414,13 +14490,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 22,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Lower from Inverted Hang",
@@ -15537,13 +14606,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 154,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Medium",
     "movements": ["Back Extension", "Run", "Sit-Up"],
     "countLikes": 81,
@@ -15610,13 +14672,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 13,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-03-07"
-    },
     "difficulty": "Hard",
     "movements": ["GHD Sit-Up", "Muscle-Up", "Thruster"],
     "countLikes": 23,
@@ -15798,13 +14853,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 87,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2016-07-20"
-    },
     "difficulty": "Very Hard",
     "movements": ["Box Step-Up", "Clean", "Snatch"],
     "countLikes": 66,
@@ -15838,13 +14886,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 30,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Hang Split Snatch", "Rope Climb"],
     "countLikes": 14,
@@ -15861,13 +14902,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 29,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Handstand Push-Up", "Rope Climb", "Run"],
     "countLikes": 9,
@@ -15901,13 +14935,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 456,
-      "likes": 0,
-      "comments": 34,
-      "posted_date": "2014-12-08"
-    },
     "difficulty": "Hard",
     "movements": ["Box Jump", "Kettlebell Swing", "Wall Ball Shot"],
     "countLikes": 348,
@@ -15941,13 +14968,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 10,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2020-09-15"
-    },
     "difficulty": "Hard",
     "movements": ["Clean", "Deadlift", "Shoulder-to-Overhead", "Single-Under"],
     "countLikes": 39,
@@ -16014,13 +15034,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 66,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "GHD Sit-Up", "Run"],
     "countLikes": 84,
@@ -16316,13 +15329,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 83,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2014-10-30"
-    },
     "difficulty": "Very Hard",
     "movements": ["Back Squat", "Row"],
     "countLikes": 146,
@@ -16356,13 +15362,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 43,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2022-02-08"
-    },
     "difficulty": "Medium",
     "movements": ["Air Squat", "Alternating Lunge", "Burpee", "Plank Hold"],
     "countLikes": 29,
@@ -16396,13 +15395,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 80,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": [
       "Dumbbell Hang Squat Clean",
@@ -16439,13 +15431,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 37,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2016-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Farmer Carry", "Power Snatch", "Weighted Pull-Up"],
     "countLikes": 50,
@@ -16523,13 +15508,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 34,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2017-03-21"
-    },
     "difficulty": "Medium",
     "movements": ["Back Squat", "Push Press", "Run", "Squat Clean"],
     "countLikes": 112,
@@ -16563,13 +15541,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 46,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2024-05-27"
-    },
     "difficulty": "Medium",
     "movements": [
       "Barbell Back-Rack Step-Up",
@@ -16592,13 +15563,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 31,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2015-10-01"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Overhead Squat", "Power Clean", "Run"],
     "countLikes": 43,
@@ -16632,13 +15596,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 75,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2014-12-08"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Box Jump",
@@ -16681,13 +15638,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 7,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2021-05-27"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Assault Bike",
@@ -16727,13 +15677,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 54,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2024-05-27"
-    },
     "difficulty": "Medium",
     "movements": ["Jog", "Single-Arm Dumbbell Thruster", "Strict Pull-Up"],
     "countLikes": 1,
@@ -16767,13 +15710,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 6,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2022-01-20"
-    },
     "difficulty": "Medium",
     "movements": [
       "Alternating Jumping Lunge",
@@ -16812,13 +15748,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2020-05-22"
-    },
     "difficulty": "Medium",
     "movements": [
       "Double-Under",
@@ -16925,13 +15854,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 15,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2022-08-30"
-    },
     "difficulty": "Hard",
     "movements": [
       "Burpee",
@@ -19658,13 +18580,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 49,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2018-04-23"
-    },
     "difficulty": "Hard",
     "movements": ["Back Squat", "Deadlift", "Shoulder Press"],
     "countLikes": 40,
@@ -19731,13 +18646,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 18,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-11-02"
-    },
     "difficulty": "Hard",
     "movements": ["Squat Clean Thruster"],
     "countLikes": 53,
@@ -19771,13 +18679,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 11,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-11-06"
-    },
     "difficulty": "Very Hard",
     "movements": ["Deficit Handstand Push-Up", "Run"],
     "countLikes": 35,
@@ -21325,13 +20226,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 51,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-05-29"
-    },
     "difficulty": "Very Hard",
     "movements": ["Front-Rack Lunge", "Pull-Up", "Push-Up"],
     "countLikes": 48,
@@ -21365,13 +20259,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 39,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2015-01-26"
-    },
     "difficulty": "Hard",
     "movements": ["Clean-and-Jerk", "Deadlift", "Run", "Strict Pull-Up"],
     "countLikes": 75,
@@ -21405,13 +20292,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 54,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2020-04-25"
-    },
     "difficulty": "Medium",
     "movements": ["Air Squat", "Burpee", "Push-Up", "Run"],
     "countLikes": 143,
@@ -21445,13 +20325,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 17,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2017-03-21"
-    },
     "difficulty": "Hard",
     "movements": [
       "Back Squat",
@@ -21540,13 +20413,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 39,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": [
       "Deadlift",
@@ -21570,13 +20436,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 27,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2022-04-13"
-    },
     "difficulty": "Hard",
     "movements": [
       "Bar-Over Burpee",
@@ -21659,13 +20518,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 172,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2015-09-01"
-    },
     "difficulty": "Hard",
     "movements": [
       "Bear Crawl",
@@ -21705,13 +20557,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 52,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2024-05-27"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee Bar Muscle-Up",
@@ -21751,13 +20596,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 72,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2015-07-03"
-    },
     "difficulty": "Very Hard",
     "movements": ["Back Squat", "Deadlift", "Sprint"],
     "countLikes": 111,
@@ -22840,13 +21678,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 73,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2024-03-23"
-    },
     "difficulty": "Medium",
     "movements": ["Ball Slam", "Box Jump", "Push Press", "Shuttle Run"],
     "countLikes": 2,
@@ -22880,13 +21711,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 77,
-      "likes": 0,
-      "comments": 22,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Medium",
     "movements": ["Bar-Facing Burpee", "Box Jump", "Thruster"],
     "countLikes": 195,
@@ -22920,13 +21744,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 53,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee", "Deadlift", "Rope Climb", "Run"],
     "countLikes": 28,
@@ -23004,13 +21821,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 130,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee Pull-Up", "Deadlift", "Kettlebell Swing", "Run"],
     "countLikes": 162,
@@ -23044,13 +21854,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2020-10-01"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Air Squat",
@@ -23127,13 +21930,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 16,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2019-03-02"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee", "Kettlebell Swing", "Row", "Thruster"],
     "countLikes": 62,
@@ -23319,13 +22115,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 220,
-      "likes": 0,
-      "comments": 15,
-      "posted_date": "2015-08-17"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee", "Lunge", "Pull-Up", "Run"],
     "countLikes": 364,
@@ -23359,13 +22148,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2017-07-04"
-    },
     "difficulty": "Hard",
     "movements": ["Pull-Up", "Sprint", "Squat Clean", "Squat Snatch"],
     "countLikes": 26,
@@ -23399,13 +22181,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 39,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Medium",
     "movements": ["Dumbbell Deadlift", "Pull-Up", "Push Press"],
     "countLikes": 77,
@@ -23516,13 +22291,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 71,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Push-Up", "Rope Climb", "Run"],
     "countLikes": 36,
@@ -23572,13 +22340,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2015-01-26"
-    },
     "difficulty": "Very Hard",
     "movements": ["Freestanding Handstand Push-Up", "L-Sit Rope Climb"],
     "countLikes": 7,
@@ -23612,13 +22373,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 14,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-08-13"
-    },
     "difficulty": "Medium",
     "movements": [
       "Ball Slam",
@@ -23661,13 +22415,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 56,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2019-01-08"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee Over Bar",
@@ -23692,13 +22439,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 60,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-10-27"
-    },
     "difficulty": "Medium",
     "movements": ["Air Squat", "Push-Up", "Swim"],
     "countLikes": 59,
@@ -23732,13 +22472,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 52,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Bench Press", "Push Press", "Run", "Thruster"],
     "countLikes": 117,
@@ -23805,13 +22538,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2021-07-10"
-    },
     "difficulty": "Hard",
     "movements": [
       "Burpee Box Jump-Over",
@@ -23961,13 +22687,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 103,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Box Jump", "Deadlift", "Pull-Up"],
     "countLikes": 194,
@@ -24121,13 +22840,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 29,
-      "likes": 0,
-      "comments": 6,
-      "posted_date": "2017-07-26"
-    },
     "difficulty": "Hard",
     "movements": ["Bar-Over Burpee", "Deadlift", "Pull-Up"],
     "countLikes": 75,
@@ -24161,13 +22873,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 14,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2018-07-07"
-    },
     "difficulty": "Hard",
     "movements": [
       "Bear Crawl",
@@ -24388,13 +23093,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 42,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Dumbbell Hang Squat Clean",
@@ -24416,13 +23114,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 22,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": [
       "Burpee",
@@ -24501,13 +23192,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 40,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2020-08-04"
-    },
     "difficulty": "Hard",
     "movements": [
       "Burpee",
@@ -24609,13 +23293,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 42,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2015-10-28"
-    },
     "difficulty": "Hard",
     "movements": ["Deadlift", "Double-Under", "Pull-Up", "Push-Up", "Sprint"],
     "countLikes": 56,
@@ -24649,13 +23326,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 58,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2020-12-13"
-    },
     "difficulty": "Medium",
     "movements": [
       "Goblet Squat",
@@ -24694,13 +23364,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 19,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2016-04-15"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee", "Deadlift", "Farmer Carry", "Strict Chin-Up"],
     "countLikes": 51,
@@ -24734,13 +23397,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 55,
-      "likes": 0,
-      "comments": 9,
-      "posted_date": "2017-06-18"
-    },
     "difficulty": "Hard",
     "movements": ["Bar-Over Burpee", "Deadlift", "Wall Ball Shot"],
     "countLikes": 65,
@@ -24774,13 +23430,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 32,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Medium",
     "movements": ["Chest-to-Bar Pull-Up", "Front Squat"],
     "countLikes": 92,
@@ -24847,13 +23496,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 37,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2015-06-09"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee",
@@ -24935,13 +23577,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 58,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Hand Release Push-Up", "Run", "Strict Pull-Up"],
     "countLikes": 122,
@@ -24975,13 +23610,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-09-08"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Ruck High Pull",
@@ -25021,13 +23649,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 61,
-      "likes": 0,
-      "comments": 11,
-      "posted_date": "2014-11-06"
-    },
     "difficulty": "Medium",
     "movements": ["Deadlift", "Sprint"],
     "countLikes": 181,
@@ -25061,13 +23682,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 65,
-      "likes": 0,
-      "comments": 28,
-      "posted_date": "2015-02-12"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Push-Up", "Run"],
     "countLikes": 229,
@@ -25101,13 +23715,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 9,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2020-07-10"
-    },
     "difficulty": "Hard",
     "movements": ["Box Step-Up", "Burpee", "Run"],
     "countLikes": 21,
@@ -25141,13 +23748,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 103,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee Box Jump", "Squat Clean"],
     "countLikes": 104,
@@ -25245,13 +23845,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 36,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2016-02-09"
-    },
     "difficulty": "Hard",
     "movements": ["Burpee", "Rope Climb", "Run"],
     "countLikes": 42,
@@ -25285,13 +23878,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 24,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2023-02-02"
-    },
     "difficulty": "Medium",
     "movements": [
       "Air Squat",
@@ -25334,13 +23920,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 140,
-      "likes": 0,
-      "comments": 16,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Box Jump", "Burpee", "Row", "Run"],
     "countLikes": 159,
@@ -25374,13 +23953,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 18,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2017-03-14"
-    },
     "difficulty": "Hard",
     "movements": ["GHD Sit-Up", "Muscle-Up", "Squat Clean"],
     "countLikes": 37,
@@ -25414,13 +23986,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 22,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee Pull-Up", "Run"],
     "countLikes": 38,
@@ -25520,13 +24085,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 72,
-      "likes": 0,
-      "comments": 18,
-      "posted_date": "2022-10-22"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Burpee", "Lunge", "Push-Up", "Run"],
     "countLikes": 18,
@@ -25631,13 +24189,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 31,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2014-12-17"
-    },
     "difficulty": "Very Hard",
     "movements": ["Chest-to-Bar Pull-Up", "Run", "Thruster"],
     "countLikes": 22,
@@ -25776,13 +24327,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 38,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": [
       "Back Extension",
@@ -25932,13 +24476,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 34,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Run", "Thruster", "Walking Lunge", "Weighted Pull-Up"],
     "countLikes": 30,
@@ -26021,13 +24558,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 14,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2020-07-19"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Back Squat",
@@ -26069,13 +24599,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 10,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2018-10-02"
-    },
     "difficulty": "Hard",
     "movements": [
       "Bench Press",
@@ -26116,13 +24639,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 60,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2018-02-03"
-    },
     "difficulty": "Hard",
     "movements": ["Kettlebell Swing", "Sprint", "Squat Clean Thruster"],
     "countLikes": 49,
@@ -26156,13 +24672,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 112,
-      "likes": 0,
-      "comments": 9,
-      "posted_date": "2015-12-14"
-    },
     "difficulty": "Hard",
     "movements": ["Front Squat", "Power Clean", "Pull-Up"],
     "countLikes": 135,
@@ -26422,13 +24931,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 595,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2015-09-01"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee Muscle-Up", "Run"],
     "countLikes": 37,
@@ -26501,13 +25003,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 51,
-      "likes": 0,
-      "comments": 10,
-      "posted_date": "2016-02-28"
-    },
     "difficulty": "Very Hard",
     "movements": ["Bear Crawl", "Push-Up", "Run"],
     "countLikes": 162,
@@ -26994,13 +25489,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 257,
-      "likes": 0,
-      "comments": 12,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Box Jump",
@@ -27219,13 +25707,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 25,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2019-05-02"
-    },
     "difficulty": "Very Hard",
     "movements": ["Barbell Carry", "Clean-and-Jerk", "Sled Pull", "Sled Push"],
     "countLikes": 15,
@@ -27259,13 +25740,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 94,
-      "likes": 0,
-      "comments": 30,
-      "posted_date": "2021-09-19"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "American Kettlebell Swing",
@@ -27380,13 +25854,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 49,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2017-12-26"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee Chest-to-Bar Pull-Up",
@@ -27424,13 +25891,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 593,
-      "likes": 0,
-      "comments": 33,
-      "posted_date": "2021-05-10"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Pull-Up", "Push-Up", "Run"],
     "countLikes": 155,
@@ -27549,13 +26009,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 11,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2020-09-22"
-    },
     "difficulty": "Medium",
     "movements": [
       "Kettlebell Swing",
@@ -27595,13 +26048,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Back Squat", "Barbell Farmer Carry", "Rope Climb"],
     "countLikes": 27,
@@ -27635,13 +26081,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 40,
-      "likes": 0,
-      "comments": 11,
-      "posted_date": "2019-12-15"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Push-Up", "Run", "Sit-Up"],
     "countLikes": 134,
@@ -27708,13 +26147,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 14,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2016-12-28"
-    },
     "difficulty": "Hard",
     "movements": [
       "Chest-to-Bar Pull-Up",
@@ -27852,13 +26284,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 8,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2021-11-11"
-    },
     "difficulty": "Very Hard",
     "movements": ["Bar Muscle-Up", "Clean-and-Jerk", "Double-Under", "Row"],
     "countLikes": 1,
@@ -27892,13 +26317,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 59,
-      "likes": 0,
-      "comments": 9,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Box Jump", "Kettlebell Swing", "Strict Pull-Up"],
     "countLikes": 146,
@@ -27932,13 +26350,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 20,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Muscle-Up", "Thruster", "Toes-to-Bar"],
     "countLikes": 39,
@@ -27972,13 +26383,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 139,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Rope Climb", "Thruster"],
     "countLikes": 47,
@@ -28118,13 +26522,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 73,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2024-03-27"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee", "Kettlebell Swing", "Run", "Wall Ball Shot"],
     "countLikes": 2,
@@ -28158,13 +26555,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 35,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2022-12-22"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Dumbbell Devil Press",
@@ -28219,13 +26609,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Dumbbell Squat Clean", "Swim"],
     "countLikes": 28,
@@ -28259,13 +26642,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 90,
-      "likes": 0,
-      "comments": 50,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Dumbbell Burpee Deadlift", "Run"],
     "countLikes": 171,
@@ -28365,13 +26741,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 45,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Muscle-Up", "Sumo Deadlift High-Pull"],
     "countLikes": 24,
@@ -28471,13 +26840,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 31,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2017-11-11"
-    },
     "difficulty": "Hard",
     "movements": ["Power Clean", "Power Snatch", "Pull-Up", "Run"],
     "countLikes": 39,
@@ -28494,13 +26856,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 65,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2022-05-03"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burpee",
@@ -28542,13 +26897,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 34,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2018-11-11"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Run",
@@ -28624,13 +26972,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 32,
-      "likes": 0,
-      "comments": 3,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Back Squat", "Burpee Pull-Up", "Overhead Plate Run"],
     "countLikes": 38,
@@ -28664,13 +27005,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 73,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "GHD Sit-Up", "Muscle-Up"],
     "countLikes": 24,
@@ -28704,13 +27038,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 76,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Chest-to-Bar Pull-Up",
@@ -28749,13 +27076,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 27,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2017-04-15"
-    },
     "difficulty": "Very Hard",
     "movements": ["Burpee Box Jump", "Clean", "Plate Run", "Strict Pull-Up"],
     "countLikes": 50,
@@ -28789,13 +27109,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 34,
-      "likes": 0,
-      "comments": 1,
-      "posted_date": "2024-03-27"
-    },
     "difficulty": "Hard",
     "movements": [
       "Box Jump",
@@ -28834,13 +27147,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 98,
-      "likes": 0,
-      "comments": 8,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Farmer Carry", "Row", "Waiter Walk"],
     "countLikes": 58,
@@ -28874,13 +27180,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 12,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2021-10-07"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Burden Carry",
@@ -28920,13 +27219,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 108,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Overhead Walking Lunge", "Rope Climb", "Run", "Toes-to-Bar"],
     "countLikes": 59,
@@ -29010,13 +27302,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 265,
-      "likes": 0,
-      "comments": 18,
-      "posted_date": "2019-05-28"
-    },
     "difficulty": "Very Hard",
     "movements": ["Air Squat", "Alternating Dumbbell Lunge", "Devil Press"],
     "countLikes": 269,
@@ -29050,13 +27335,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Chest-to-Bar Pull-Up",
@@ -29095,13 +27373,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 39,
-      "likes": 0,
-      "comments": 5,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Hard",
     "movements": ["Air Squat", "Ring Dip"],
     "countLikes": 82,
@@ -29168,13 +27439,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 309,
-      "likes": 0,
-      "comments": 41,
-      "posted_date": "2014-12-08"
-    },
     "difficulty": "Medium",
     "movements": ["Box Jump", "Kettlebell Swing", "Power Clean"],
     "countLikes": 372,
@@ -29208,13 +27472,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 4,
-      "posted_date": "2016-03-29"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Front Squat",
@@ -29255,13 +27512,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 23,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2016-03-07"
-    },
     "difficulty": "Very Hard",
     "movements": ["Front Squat", "Plate Run", "Rope Climb"],
     "countLikes": 19,
@@ -29295,13 +27545,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 4,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2022-01-13"
-    },
     "difficulty": "Hard",
     "movements": [
       "Air Squat",
@@ -29342,13 +27585,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 226,
-      "likes": 0,
-      "comments": 2,
-      "posted_date": "2017-02-20"
-    },
     "difficulty": "Hard",
     "movements": ["Muscle-Up", "Pull-Up", "Run"],
     "countLikes": 33,
@@ -29382,13 +27618,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 39,
-      "likes": 0,
-      "comments": 7,
-      "posted_date": "2016-02-21"
-    },
     "difficulty": "Hard",
     "movements": ["Back Squat", "Burpee Pull-Up", "Run"],
     "countLikes": 69,
@@ -29422,13 +27651,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["For Time"],
-    "_source_data": {
-      "type": "CrossFit Hero WOD",
-      "popularity": 414,
-      "likes": 0,
-      "comments": 33,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": [
       "Back Squat",
@@ -29470,13 +27692,6 @@
     "results": [],
     "category": "Hero",
     "tags": ["AMRAP"],
-    "_source_data": {
-      "type": "Hero WOD",
-      "popularity": 28,
-      "likes": 0,
-      "comments": 0,
-      "posted_date": "2014-09-05"
-    },
     "difficulty": "Very Hard",
     "movements": ["Chest-to-Bar Pull-Up", "Deadlift", "Handstand Push-Up"],
     "countLikes": 75,

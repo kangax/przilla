@@ -43,7 +43,12 @@ _What design patterns are used in the codebase?_
 
 - **Element-based Selection Only:** All tests must select elements by unique attributes (such as `data-testid`) and must never match or assert by text content. Matching by text in tests is strictly forbidden. This ensures tests are robust against copy changes, localization, and UI tweaks. All new and existing tests must follow this rule.
 
-## Component Relationships
+## Canonical WOD JSON Typing & Validation
+
+- **All scripts, utilities, or application code that read or manipulate WOD data from `public/data/wods.json` (or any similar WOD JSON source) must use the canonical TypeScript type and Zod schema defined in `src/types/wodJsonTypes.ts`.**
+- This ensures field names (e.g., `countLikes`, `difficultyExplanation`) remain consistent and prevents silent errors from field mismatches.
+- Any new script or data processing logic must import and validate WOD objects using this shared type/schema.
+- This rule is as critical as the "no summarization/omission" rule and must be followed for all future work.
 
 - **Server -> Client Data Flow:** Server Components (like `src/app/page.tsx`) can fetch data using the server tRPC client (`~/trpc/server`) and pass it as props to Client Components (`src/app/_components/WodViewer.tsx`).
 - **Client Data Fetching:** Client Components use tRPC hooks (via `~/trpc/react`) to fetch data from the backend (e.g., user scores in `WodViewer`).

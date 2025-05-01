@@ -10,7 +10,7 @@ import inquirer from "inquirer";
 import yargs from "yargs";
 import { hideBin } from "yargs/helpers";
 import { wods, movements, wodMovements } from "../src/server/db/schema";
-import type { Wod } from "../src/types/wodTypes"; // Use existing type
+import { WodJsonSchema, WodJson } from "../src/types/wodJsonTypes";
 
 // --- Constants ---
 const __filename = fileURLToPath(import.meta.url);
@@ -79,11 +79,33 @@ async function main() {
 
   // 2. Load Data
   console.log(`Loading WODs from ${WODS_JSON_PATH}...`);
-  let wodsFromJson: Wod[] = [];
+  let wodsFromJson: WodJson[] = [];
   try {
     const fileContent = fs.readFileSync(WODS_JSON_PATH, "utf8");
-    wodsFromJson = JSON.parse(fileContent);
-    console.log(`✅ Loaded ${wodsFromJson.length} WODs from JSON.`);
+    const rawWods: unknown[] = JSON.parse(fileContent);
+
+    // Validate and collect only schema-compliant WODs
+    let invalidCount = 0;
+    for (const wod of rawWods) {
+      const parsed = WodJsonSchema.safeParse(wod);
+      if (parsed.success) {
+        wodsFromJson.push(parsed.data);
+      } else {
+        invalidCount++;
+        console.error(
+          "Invalid WOD JSON object:",
+          parsed.error.format(),
+          "\nObject:",
+          wod,
+        );
+      }
+    }
+    if (invalidCount > 0) {
+      console.warn(
+        `⚠️ Skipped ${invalidCount} invalid WOD(s) from wods.json due to schema mismatch.`,
+      );
+    }
+    console.log(`✅ Loaded ${wodsFromJson.length} valid WODs from JSON.`);
   } catch (error) {
     console.error(`❌ Error reading or parsing ${WODS_JSON_PATH}:`, error);
     process.exit(1);

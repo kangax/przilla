@@ -40,7 +40,9 @@ const NEW_BENCHMARK_WOD_NAMES = [
   "Handstand Push-Ups: 2 min max reps",
 ];
 
-function mapWodJsonToDb(wod: any) {
+import { WodJsonSchema, WodJson } from "../src/types/wodJsonTypes";
+
+function mapWodJsonToDb(wod: WodJson) {
   return {
     wodUrl: wod.wodUrl === "" ? null : wod.wodUrl,
     wodName: wod.wodName,
@@ -49,9 +51,9 @@ function mapWodJsonToDb(wod: any) {
     category: wod.category,
     tags: wod.tags ? JSON.stringify(wod.tags) : null,
     difficulty: wod.difficulty,
-    difficultyExplanation: wod.difficultyExplanation ?? null, // Updated
+    difficultyExplanation: wod.difficultyExplanation ?? null,
     timecap: null,
-    countLikes: wod.countLikes ?? 0, // Updated
+    countLikes: wod.countLikes ?? 0,
   };
 }
 
@@ -73,10 +75,33 @@ async function main() {
 
   // Read and parse wods.json
   const jsonData = await fs.readFile(WODS_JSON_PATH, "utf-8");
-  const allWods = JSON.parse(jsonData);
+  const rawWods: unknown[] = JSON.parse(jsonData);
+
+  // Validate and collect only schema-compliant WODs
+  const allWods: WodJson[] = [];
+  let invalidCount = 0;
+  for (const wod of rawWods) {
+    const parsed = WodJsonSchema.safeParse(wod);
+    if (parsed.success) {
+      allWods.push(parsed.data);
+    } else {
+      invalidCount++;
+      console.error(
+        "Invalid WOD JSON object:",
+        parsed.error.format(),
+        "\nObject:",
+        wod,
+      );
+    }
+  }
+  if (invalidCount > 0) {
+    console.warn(
+      `⚠️ Skipped ${invalidCount} invalid WOD(s) from wods.json due to schema mismatch.`,
+    );
+  }
 
   // Filter for the new benchmark WODs
-  const newWods = allWods.filter((wod: any) =>
+  const newWods: WodJson[] = allWods.filter((wod) =>
     NEW_BENCHMARK_WOD_NAMES.includes(wod.wodName),
   );
 

@@ -209,10 +209,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1440 },
-        "advanced": { "min": 1441, "max": 1560 },
-        "intermediate": { "min": 1561, "max": 1740 },
-        "beginner": { "min": 1741, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1440
+        },
+        "advanced": {
+          "min": 1441,
+          "max": 1560
+        },
+        "intermediate": {
+          "min": 1561,
+          "max": 1740
+        },
+        "beginner": {
+          "min": 1741,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -236,10 +248,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 125, "max": null },
-        "advanced": { "min": 100, "max": 124 },
-        "intermediate": { "min": 75, "max": 99 },
-        "beginner": { "min": null, "max": 74 }
+        "elite": {
+          "min": 125,
+          "max": null
+        },
+        "advanced": {
+          "min": 100,
+          "max": 124
+        },
+        "intermediate": {
+          "min": 75,
+          "max": 99
+        },
+        "beginner": {
+          "min": null,
+          "max": 74
+        }
       }
     },
     "results": [],
@@ -374,7 +398,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "movements": ["Muscle-Up"],
     "countLikes": 18,
@@ -387,10 +411,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 250, "max": null },
-        "advanced": { "min": 200, "max": 249 },
-        "intermediate": { "min": 150, "max": 199 },
-        "beginner": { "min": null, "max": 149 }
+        "elite": {
+          "min": 250,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 249
+        },
+        "intermediate": {
+          "min": 150,
+          "max": 199
+        },
+        "beginner": {
+          "min": null,
+          "max": 149
+        }
       }
     },
     "results": [],
@@ -1269,7 +1305,7 @@
     "wodName": "Artie",
     "description": "AMRAP in 20 minutes\n5 Pull-Ups\n10 Push-Ups\n15 Squats\n5 Pull-Ups\n10 Thrusters (95/65 lb)",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 10,
@@ -2714,7 +2750,7 @@
     "wodName": "Barraza",
     "description": "AMRAP in 18 minutes\n200 meter Run\n9 Deadlift (275/185 lb)\n6 Burpee Bar Muscle-Ups",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 7,
@@ -2890,7 +2926,7 @@
     "wodName": "Beana",
     "description": "AMRAP in 42 minutes\n35 calorie Air Bike\n29 Air Squats\n17 Push-Ups\n9 Burpees\n7 Sit-Ups\n3 Pull-Ups",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 7,
@@ -3259,7 +3295,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["Tabata"],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "movements": ["Wall Ball Shot", "Toes-to-Bar", "Row", "Power Clean"],
     "countLikes": 48,
@@ -3480,7 +3516,7 @@
     "wodName": "BNCP",
     "description": "AMRAP in 20 minutes\n1,990 meter Bike Erg\n4 Front Rack Lunges (135/95 lb)\n5 Thrusters (135/95 lb)",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 3,
@@ -4124,7 +4160,7 @@
     "wodName": "Buriak",
     "description": "AMRAP in 20 minutes of:\n5 Squat Cleans (155/135 lb)\n10 Burpees Over the Bar\n15 Pull-Ups\n200 meter Run",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 7,
@@ -4770,10 +4806,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 8, "max": null },
-        "advanced": { "min": 6, "max": 7 },
-        "intermediate": { "min": 4, "max": 5 },
-        "beginner": { "min": null, "max": 3 }
+        "elite": {
+          "min": 8,
+          "max": null
+        },
+        "advanced": {
+          "min": 6,
+          "max": 7
+        },
+        "intermediate": {
+          "min": 4,
+          "max": 5
+        },
+        "beginner": {
+          "min": null,
+          "max": 3
+        }
       }
     },
     "results": [],
@@ -5491,10 +5539,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1100 },
-        "advanced": { "min": 1101, "max": 1300 },
-        "intermediate": { "min": 1301, "max": 1500 },
-        "beginner": { "min": 1501, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1100
+        },
+        "advanced": {
+          "min": 1101,
+          "max": 1300
+        },
+        "intermediate": {
+          "min": 1301,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -5543,7 +5603,7 @@
     "wodName": "Dallas 5",
     "description": "Five 5-minute AMRAPs in 29 minutes\nAMRAP from 0:00-5:00:\nBurpees\n\nAMRAP from 6:00-11:00:\n7 Deadlifts (155/105 lb)\n7 Box Jumps (24/20 in)\n\nAMRAP from 12:00-17:00:\nTurkish Get-Ups (40/30 lb Dumbbell)\n\nAMRAP from 18:00-23:00:\n7 Snatches (75/55 lb)\n7 Push-Ups\n\nAMRAP from 24:00-29:00:\nRow (calories)\n\nRest 1 minute between each AMRAP station",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 500,
@@ -5683,7 +5743,7 @@
     "wodName": "Danny",
     "description": "AMRAP in 20 minutes\n30 Box Jumps (24/20 in)\n20 Push Presses (115/75 lb)\n30 Pull-Ups",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 7,
@@ -6133,7 +6193,7 @@
     "wodName": "DG",
     "description": "AMRAP in 10 minutes\n8 Toes-to-Bars\n8 Dumbbell Thrusters (35/25 lb)\n12 Dumbbell Walking Lunges (35/25 lb)",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 10,
@@ -6310,7 +6370,8 @@
       "Double-Under"
     ],
     "countLikes": 869,
-    "difficultyExplanation": "A 10-movement chipper with 30 reps each. Tests broad fitness across various light-weight and bodyweight movements."
+    "difficultyExplanation": "A 10-movement chipper with 30 reps each. Tests broad fitness across various light-weight and bodyweight movements.",
+    "timecap": 1800
   },
   {
     "wodUrl": "https://wodwell.com/wod/dizzy-diane/",
@@ -6451,10 +6512,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 3600 },
-        "advanced": { "min": 3601, "max": 4200 },
-        "intermediate": { "min": 4201, "max": 4800 },
-        "beginner": { "min": 4801, "max": null }
+        "elite": {
+          "min": null,
+          "max": 3600
+        },
+        "advanced": {
+          "min": 3601,
+          "max": 4200
+        },
+        "intermediate": {
+          "min": 4201,
+          "max": 4800
+        },
+        "beginner": {
+          "min": 4801,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -6469,7 +6542,8 @@
       "Plank Hold"
     ],
     "countLikes": 57,
-    "difficultyExplanation": "Hero WOD. High volume bodyweight movements (13 rounds of squats, push-ups, crunches, dips) with a cumulative plank hold cash-out. Tests muscular endurance and core strength. Time cap (22 min) adds intensity."
+    "difficultyExplanation": "Hero WOD. High volume bodyweight movements (13 rounds of squats, push-ups, crunches, dips) with a cumulative plank hold cash-out. Tests muscular endurance and core strength. Time cap (22 min) adds intensity.",
+    "timecap": 1320
   },
   {
     "wodUrl": "https://wodwell.com/wod/donkey-kong/",
@@ -6730,10 +6804,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1200 },
-        "advanced": { "min": 1201, "max": 1500 },
-        "intermediate": { "min": 1501, "max": 1800 },
-        "beginner": { "min": 1801, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1500
+        },
+        "intermediate": {
+          "min": 1501,
+          "max": 1800
+        },
+        "beginner": {
+          "min": 1801,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -6782,7 +6868,8 @@
       "Handstand Push-Up"
     ],
     "countLikes": 75,
-    "difficultyExplanation": "A symmetrical chipper workout with heavy barbell movements and gymnastics against a tight time cap."
+    "difficultyExplanation": "A symmetrical chipper workout with heavy barbell movements and gymnastics against a tight time cap.",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/drk/",
@@ -6791,10 +6878,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 600 },
-        "advanced": { "min": 601, "max": 900 },
-        "intermediate": { "min": 901, "max": 1200 },
-        "beginner": { "min": 1201, "max": null }
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -7673,10 +7772,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 300, "max": null },
-        "advanced": { "min": 200, "max": 299 },
-        "intermediate": { "min": 100, "max": 199 },
-        "beginner": { "min": null, "max": 99 }
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 299
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 199
+        },
+        "beginner": {
+          "min": null,
+          "max": 99
+        }
       }
     },
     "results": [],
@@ -7922,10 +8033,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 2400 },
-        "advanced": { "min": 2401, "max": 3000 },
-        "intermediate": { "min": 3001, "max": 3600 },
-        "beginner": { "min": 3601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3000
+        },
+        "intermediate": {
+          "min": 3001,
+          "max": 3600
+        },
+        "beginner": {
+          "min": 3601,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -9098,39 +9221,6 @@
     "difficultyExplanation": "Hero WOD. 4 rounds: run, burpee pull-ups, box jumps, lunges, all w/ vest. Tests endurance under load."
   },
   {
-    "wodUrl": "https://wodwell.com/wod/g-i-jane/",
-    "wodName": "G.I. Jane",
-    "description": "100 Burpee Pull-ups For Time (6 inch target)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": 0,
-          "max": 600
-        },
-        "advanced": {
-          "min": 600,
-          "max": 900
-        },
-        "intermediate": {
-          "min": 900,
-          "max": 1200
-        },
-        "beginner": {
-          "min": 1200,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Benchmark",
-    "tags": ["For Time", "Monostructural"],
-    "difficulty": "Hard",
-    "movements": ["Burpee Pull-up"],
-    "countLikes": 220,
-    "difficultyExplanation": "Benchmark. 100 Burpee Pull-ups for time. Tests endurance, stamina, and mental toughness with a single, demanding movement."
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/glen/",
     "wodName": "Glen",
     "description": "For Time\n30 Clean-and-Jerks (135/95 lb)\n1 mile Run\n10 Rope Climbs (15 ft)\n1 mile Run\n100 Burpees",
@@ -9170,10 +9260,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1800 },
-        "advanced": { "min": 1801, "max": 2400 },
-        "intermediate": { "min": 2401, "max": 3000 },
-        "beginner": { "min": 3001, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -9248,7 +9350,7 @@
       }
     ],
     "category": "Girl",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "movements": ["Clean-and-Jerk"],
     "countLikes": 1019,
@@ -9830,7 +9932,7 @@
       }
     ],
     "category": "Skill",
-    "tags": ["Max Effort"],
+    "tags": ["For Time"],
     "difficulty": "Easy",
     "movements": ["Handstand Hold"],
     "countLikes": 3,
@@ -9975,10 +10077,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 300, "max": null },
-        "advanced": { "min": 200, "max": 299 },
-        "intermediate": { "min": 100, "max": 199 },
-        "beginner": { "min": null, "max": 99 }
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 299
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 199
+        },
+        "beginner": {
+          "min": null,
+          "max": 99
+        }
       }
     },
     "results": [],
@@ -10451,10 +10565,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 2400 },
-        "advanced": { "min": 2401, "max": 3000 },
-        "intermediate": { "min": 3001, "max": 3600 },
-        "beginner": { "min": 3601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 2400
+        },
+        "advanced": {
+          "min": 2401,
+          "max": 3000
+        },
+        "intermediate": {
+          "min": 3001,
+          "max": 3600
+        },
+        "beginner": {
+          "min": 3601,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -10649,10 +10775,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 300, "max": null },
-        "advanced": { "min": 200, "max": 299 },
-        "intermediate": { "min": 100, "max": 199 },
-        "beginner": { "min": null, "max": 99 }
+        "elite": {
+          "min": 300,
+          "max": null
+        },
+        "advanced": {
+          "min": 200,
+          "max": 299
+        },
+        "intermediate": {
+          "min": 100,
+          "max": 199
+        },
+        "beginner": {
+          "min": null,
+          "max": 99
+        }
       }
     },
     "results": [],
@@ -10871,7 +11009,8 @@
       "Hang Squat Clean"
     ],
     "countLikes": 7,
-    "difficultyExplanation": "Complete a 21-15-9 triplet (Thrusters, Burpees, Sit-ups) for time, then use remaining time in 18 min window to find a max clean complex."
+    "difficultyExplanation": "Complete a 21-15-9 triplet (Thrusters, Burpees, Sit-ups) for time, then use remaining time in 18 min window to find a max clean complex.",
+    "timecap": 1080
   },
   {
     "wodUrl": "https://wodwell.com/wod/ignite-21/",
@@ -10912,7 +11051,8 @@
       "Row"
     ],
     "countLikes": 7,
-    "difficultyExplanation": "A chipper workout with burpee buy-in and row cash-out, featuring DUs, sit-ups, wall balls, lunges, and power cleans."
+    "difficultyExplanation": "A chipper workout with burpee buy-in and row cash-out, featuring DUs, sit-ups, wall balls, lunges, and power cleans.",
+    "timecap": 1020
   },
   {
     "wodUrl": "https://wodwell.com/wod/incredible-hulk/",
@@ -11144,7 +11284,7 @@
       }
     ],
     "category": "Girl",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Hard",
     "movements": ["Snatch"],
     "countLikes": 461,
@@ -11556,23 +11696,23 @@
     "wodName": "Jay",
     "description": "AMRAP in 20 minutes\n22 Air Squats\n12 Toes-to-Bars\n9 Burpees\n\nWear a weight vest (20/14 lb)",
     "benchmarks": {
-      "type": "reps",
+      "type": "rounds",
       "levels": {
         "elite": {
-          "min": 250,
+          "min": 10,
           "max": null
         },
         "advanced": {
-          "min": 200,
-          "max": 250
+          "min": 8,
+          "max": 10
         },
         "intermediate": {
-          "min": 150,
-          "max": 200
+          "min": 6,
+          "max": 8
         },
         "beginner": {
           "min": 0,
-          "max": 150
+          "max": 6
         }
       }
     },
@@ -12255,7 +12395,7 @@
       }
     ],
     "category": "Girl",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "movements": ["Wall Ball Shot"],
     "countLikes": 442,
@@ -12465,10 +12605,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 400, "max": null },
-        "advanced": { "min": 350, "max": 399 },
-        "intermediate": { "min": 300, "max": 349 },
-        "beginner": { "min": null, "max": 299 }
+        "elite": {
+          "min": 400,
+          "max": null
+        },
+        "advanced": {
+          "min": 350,
+          "max": 399
+        },
+        "intermediate": {
+          "min": 300,
+          "max": 349
+        },
+        "beginner": {
+          "min": null,
+          "max": 299
+        }
       }
     },
     "results": [],
@@ -12883,10 +13035,22 @@
     "benchmarks": {
       "type": "rounds",
       "levels": {
-        "elite": { "min": 20, "max": null },
-        "advanced": { "min": 16, "max": 19 },
-        "intermediate": { "min": 12, "max": 15 },
-        "beginner": { "min": null, "max": 11 }
+        "elite": {
+          "min": 20,
+          "max": null
+        },
+        "advanced": {
+          "min": 16,
+          "max": 19
+        },
+        "intermediate": {
+          "min": 12,
+          "max": 15
+        },
+        "beginner": {
+          "min": null,
+          "max": 11
+        }
       }
     },
     "results": [],
@@ -13841,10 +14005,22 @@
     "benchmarks": {
       "type": "rounds",
       "levels": {
-        "elite": { "min": 6, "max": null },
-        "advanced": { "min": 4, "max": 5 },
-        "intermediate": { "min": 2, "max": 3 },
-        "beginner": { "min": null, "max": 1 }
+        "elite": {
+          "min": 6,
+          "max": null
+        },
+        "advanced": {
+          "min": 4,
+          "max": 5
+        },
+        "intermediate": {
+          "min": 2,
+          "max": 3
+        },
+        "beginner": {
+          "min": null,
+          "max": 1
+        }
       }
     },
     "results": [],
@@ -14421,10 +14597,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1319 },
-        "advanced": { "min": 1320, "max": 1679 },
-        "intermediate": { "min": 1680, "max": 2159 },
-        "beginner": { "min": 2160, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1319
+        },
+        "advanced": {
+          "min": 1320,
+          "max": 1679
+        },
+        "intermediate": {
+          "min": 1680,
+          "max": 2159
+        },
+        "beginner": {
+          "min": 2160,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -14988,10 +15176,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1199 },
-        "advanced": { "min": 1200, "max": 1439 },
-        "intermediate": { "min": 1440, "max": 1679 },
-        "beginner": { "min": 1680, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1199
+        },
+        "advanced": {
+          "min": 1200,
+          "max": 1439
+        },
+        "intermediate": {
+          "min": 1440,
+          "max": 1679
+        },
+        "beginner": {
+          "min": 1680,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -15654,10 +15854,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 400, "max": null },
-        "advanced": { "min": 320, "max": 399 },
-        "intermediate": { "min": 220, "max": 319 },
-        "beginner": { "min": null, "max": 219 }
+        "elite": {
+          "min": 400,
+          "max": null
+        },
+        "advanced": {
+          "min": 320,
+          "max": 399
+        },
+        "intermediate": {
+          "min": 220,
+          "max": 319
+        },
+        "beginner": {
+          "min": null,
+          "max": 219
+        }
       }
     },
     "results": [],
@@ -16329,7 +16541,7 @@
       }
     ],
     "category": "Open",
-    "tags": ["AMRAP", "For Time", "Monostructural"],
+    "tags": ["AMRAP", "For Time"],
     "difficulty": "Easy",
     "movements": ["Burpee"],
     "countLikes": 280,
@@ -17239,7 +17451,8 @@
     "difficulty": "Hard",
     "movements": ["Burpee Box Jump-Over", "Dumbbell Snatch"],
     "countLikes": 289,
-    "difficultyExplanation": "A long chipper-style workout with ascending dumbbell snatches and constant burpee box jump overs. Tests endurance and pacing under fatigue."
+    "difficultyExplanation": "A long chipper-style workout with ascending dumbbell snatches and constant burpee box jump overs. Tests endurance and pacing under fatigue.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-17-2/",
@@ -17376,7 +17589,8 @@
     "difficulty": "Hard",
     "movements": ["Double-Under", "Thruster"],
     "countLikes": 221,
-    "difficultyExplanation": "A high-volume couplet of thrusters and double-unders for 10 rounds. Tests cardiovascular endurance, pacing, and skill proficiency under fatigue."
+    "difficultyExplanation": "A high-volume couplet of thrusters and double-unders for 10 rounds. Tests cardiovascular endurance, pacing, and skill proficiency under fatigue.",
+    "timecap": 2400
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-18-1/",
@@ -17514,7 +17728,8 @@
       "Ring Muscle-Up"
     ],
     "countLikes": 27,
-    "difficultyExplanation": "A complex, high-skill workout involving double-unders, overhead squats, and both ring and bar muscle-ups. Tests skill proficiency, strength, and endurance."
+    "difficultyExplanation": "A complex, high-skill workout involving double-unders, overhead squats, and both ring and bar muscle-ups. Tests skill proficiency, strength, and endurance.",
+    "timecap": 840
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-18-4/",
@@ -17547,7 +17762,8 @@
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Handstand Push-Up", "Handstand Walk"],
     "countLikes": 15,
-    "difficultyExplanation": "A two-part workout combining deadlifts with high-skill gymnastics (HSPU and Handstand Walk) against a tight time cap. Tests strength, skill, and intensity."
+    "difficultyExplanation": "A two-part workout combining deadlifts with high-skill gymnastics (HSPU and Handstand Walk) against a tight time cap. Tests strength, skill, and intensity.",
+    "timecap": 540
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-18-5/",
@@ -17646,7 +17862,8 @@
     "difficulty": "Very Hard",
     "movements": ["Double-Under", "Squat Clean", "Toes-to-Bar"],
     "countLikes": 27,
-    "difficultyExplanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight: T2B, DUs, heavy squat cleans (up to 315lb). Extremely demanding strength/skill/conditioning threshold test."
+    "difficultyExplanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight: T2B, DUs, heavy squat cleans (up to 315lb). Extremely demanding strength/skill/conditioning threshold test.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-3/",
@@ -17684,7 +17901,8 @@
       "Strict Handstand Push-Up"
     ],
     "countLikes": 17,
-    "difficultyExplanation": "Open WOD (Chipper). DB OH lunges, DB box step-ups, strict HSPU, handstand walk. Very demanding gymnastics skill/strength/endurance."
+    "difficultyExplanation": "Open WOD (Chipper). DB OH lunges, DB box step-ups, strict HSPU, handstand walk. Very demanding gymnastics skill/strength/endurance.",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-19-4/",
@@ -17728,7 +17946,8 @@
     "difficulty": "Hard",
     "movements": ["Bar-Facing Burpee", "Bar Muscle-Up", "Snatch"],
     "countLikes": 34,
-    "difficultyExplanation": "Open WOD (2 Parts). Part 1 (3 rounds): light snatches (95lb), burpees. Part 2 (3 rounds): bar MU, burpees. Tests light lifting/conditioning then gymnastics/conditioning."
+    "difficultyExplanation": "Open WOD (2 Parts). Part 1 (3 rounds): light snatches (95lb), burpees. Part 2 (3 rounds): bar MU, burpees. Tests light lifting/conditioning then gymnastics/conditioning.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-1/",
@@ -17761,7 +17980,8 @@
     "difficulty": "Medium",
     "movements": ["Bar-Facing Burpee", "Ground-to-Overhead"],
     "countLikes": 203,
-    "difficultyExplanation": "Open WOD (Couplet). 10 rounds: light GTOH (95lb), bar facing burpees. Tests conditioning/pacing."
+    "difficultyExplanation": "Open WOD (Couplet). 10 rounds: light GTOH (95lb), bar facing burpees. Tests conditioning/pacing.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-2/",
@@ -17827,7 +18047,8 @@
     "difficulty": "Very Hard",
     "movements": ["Deadlift", "Handstand Push-Up", "Handstand Walk"],
     "countLikes": 21,
-    "difficultyExplanation": "Open WOD (Chipper Ladder). 21-15-9 DL (225lb)/HSPU, then 21-15-9 DL (315lb)/HSW. Extremely demanding strength/skill combination."
+    "difficultyExplanation": "Open WOD (Chipper Ladder). 21-15-9 DL (225lb)/HSPU, then 21-15-9 DL (315lb)/HSW. Extremely demanding strength/skill combination.",
+    "timecap": 540
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-4/",
@@ -17860,7 +18081,8 @@
     "difficulty": "Very Hard",
     "movements": ["Box Jump", "Clean-and-Jerk", "Pistol"],
     "countLikes": 74,
-    "difficultyExplanation": "Open WOD (Chipper). Ascending weight/skill: box jumps, C&J (up to 315lb), pistols. Extremely demanding strength/skill progression."
+    "difficultyExplanation": "Open WOD (Chipper). Ascending weight/skill: box jumps, C&J (up to 315lb), pistols. Extremely demanding strength/skill progression.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-20-5/",
@@ -17893,7 +18115,8 @@
     "difficulty": "Very Hard",
     "movements": ["Ring Muscle-Up", "Row", "Wall Ball Shot"],
     "countLikes": 14,
-    "difficultyExplanation": "Open WOD (Triplet). For time (partitioned): ring MU, row, wall balls. High volume skill/conditioning test."
+    "difficultyExplanation": "Open WOD (Triplet). For time (partitioned): ring MU, row, wall balls. High volume skill/conditioning test.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-1/",
@@ -17937,7 +18160,8 @@
     "difficulty": "Hard",
     "movements": ["Double-Under", "Wall Walk"],
     "countLikes": 51,
-    "difficultyExplanation": "Open WOD (Ladder). Ascending reps: wall walks, DUs. Tests gymnastics endurance/skill."
+    "difficultyExplanation": "Open WOD (Ladder). Ascending reps: wall walks, DUs. Tests gymnastics endurance/skill.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-2/",
@@ -17981,7 +18205,8 @@
     "difficulty": "Hard",
     "movements": ["Burpee Box Jump-Over", "Dumbbell Snatch"],
     "countLikes": 76,
-    "difficultyExplanation": "Open WOD (Ladder Couplet). Ascending DB snatches (50lb), constant burpee box jump overs. Tests high-volume conditioning/unilateral strength."
+    "difficultyExplanation": "Open WOD (Ladder Couplet). Ascending DB snatches (50lb), constant burpee box jump overs. Tests high-volume conditioning/unilateral strength.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
@@ -18041,7 +18266,8 @@
       "Toes-to-Bar"
     ],
     "countLikes": 80,
-    "difficultyExplanation": "Open WOD (Chipper). 3 sections w/ rest: FS/T2B, FS/C2B, FS/Bar MU (all moderate weight). Very demanding gymnastics progression/endurance."
+    "difficultyExplanation": "Open WOD (Chipper). 3 sections w/ rest: FS/T2B, FS/C2B, FS/Bar MU (all moderate weight). Very demanding gymnastics progression/endurance.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-21-3-21-4/",
@@ -18151,7 +18377,8 @@
     "difficulty": "Hard",
     "movements": ["Bar-Facing Burpee", "Deadlift"],
     "countLikes": 144,
-    "difficultyExplanation": "Open WOD (Ladder Couplet). 10 min cap: Ascending/descending DL (225lb), bar facing burpees. Tests strength endurance/conditioning sprint."
+    "difficultyExplanation": "Open WOD (Ladder Couplet). 10 min cap: Ascending/descending DL (225lb), bar facing burpees. Tests strength endurance/conditioning sprint.",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-22-3/",
@@ -18190,7 +18417,8 @@
       "Thruster"
     ],
     "countLikes": 44,
-    "difficultyExplanation": "Open WOD (Chipper). Pull-ups/DUs/Thrusters (95lb), then C2B/DUs/Thrusters (115lb), then Bar MU/DUs/Thrusters (135lb). Demanding gymnastics/weight progression."
+    "difficultyExplanation": "Open WOD (Chipper). Pull-ups/DUs/Thrusters (95lb), then C2B/DUs/Thrusters (115lb), then Bar MU/DUs/Thrusters (135lb). Demanding gymnastics/weight progression.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-1/",
@@ -18234,7 +18462,8 @@
     "difficulty": "Hard",
     "movements": ["Clean", "Muscle-Up", "Row", "Toes-to-Bar", "Wall Ball Shot"],
     "countLikes": 22,
-    "difficultyExplanation": "Open WOD (Chipper). 14 min cap: row, T2B, wall balls, moderate cleans (145lb), muscle-ups. Tests well-roundedness/skill/conditioning."
+    "difficultyExplanation": "Open WOD (Chipper). 14 min cap: row, T2B, wall balls, moderate cleans (145lb), muscle-ups. Tests well-roundedness/skill/conditioning.",
+    "timecap": 840
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-23-2/",
@@ -18318,7 +18547,7 @@
       }
     ],
     "category": "Open",
-    "tags": ["For Load", "Weightlifting"],
+    "tags": ["For Load"],
     "difficulty": "Hard",
     "movements": ["Thruster"],
     "countLikes": 12,
@@ -18404,7 +18633,8 @@
     "difficulty": "Hard",
     "movements": ["Dumbbell Snatch", "Lateral Burpee Over Dumbbell"],
     "countLikes": 36,
-    "difficultyExplanation": "Open WOD (Triplet). Descending reps: DB snatches (alternating arms, 50lb), lateral burpees over DB. Tests unilateral strength/conditioning sprint."
+    "difficultyExplanation": "Open WOD (Triplet). Descending reps: DB snatches (alternating arms, 50lb), lateral burpees over DB. Tests unilateral strength/conditioning sprint.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-2/",
@@ -18492,7 +18722,8 @@
     "difficulty": "Very Hard",
     "movements": ["Bar Muscle-Up", "Chest-to-Bar Pull-Up", "Thruster"],
     "countLikes": 12,
-    "difficultyExplanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets."
+    "difficultyExplanation": "Open WOD (2 Parts w/ Rest). Part 1 (5 rounds): moderate thrusters (95lb), C2B. Part 2 (5 rounds): heavy thrusters (135lb), bar MU. Very demanding gymnastics/strength endurance couplets.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-25-1/",
@@ -18590,7 +18821,8 @@
       "Thruster"
     ],
     "countLikes": 4,
-    "difficultyExplanation": "A challenging triplet combining ascending gymnastics skills (Pull-up, C2B, BMU) with double-unders and increasing thruster weight. Tests skill, strength, and conditioning."
+    "difficultyExplanation": "A challenging triplet combining ascending gymnastics skills (Pull-up, C2B, BMU) with double-unders and increasing thruster weight. Tests skill, strength, and conditioning.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-25-3/",
@@ -18634,7 +18866,8 @@
     "difficulty": "Hard",
     "movements": ["Clean", "Deadlift", "Row", "Snatch", "Wall Walk"],
     "countLikes": 4,
-    "difficultyExplanation": "A chipper-style workout featuring wall walks, rowing, and a barbell complex (DL, Clean, Snatch). Tests endurance, strength, and gymnastics stamina."
+    "difficultyExplanation": "A chipper-style workout featuring wall walks, rowing, and a barbell complex (DL, Clean, Snatch). Tests endurance, strength, and gymnastics stamina.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/optimus-prime/",
@@ -18676,10 +18909,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 10, "max": null },
-        "advanced": { "min": 7, "max": 9 },
-        "intermediate": { "min": 4, "max": 6 },
-        "beginner": { "min": null, "max": 3 }
+        "elite": {
+          "min": 10,
+          "max": null
+        },
+        "advanced": {
+          "min": 7,
+          "max": 9
+        },
+        "intermediate": {
+          "min": 4,
+          "max": 6
+        },
+        "beginner": {
+          "min": null,
+          "max": 3
+        }
       }
     },
     "results": [],
@@ -19928,7 +20173,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["Tabata"],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "movements": [
       "Clean",
@@ -20537,10 +20782,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1800 },
-        "advanced": { "min": 1801, "max": 2400 },
-        "intermediate": { "min": 2401, "max": 3000 },
-        "beginner": { "min": 3001, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -20813,7 +21070,8 @@
     "difficulty": "Very Hard",
     "movements": ["Bar Muscle-Up", "Power Snatch"],
     "countLikes": 12,
-    "difficultyExplanation": "A descending rep couplet combining heavy power snatches with bar muscle-ups. Tests power, strength, and high-skill gymnastics."
+    "difficultyExplanation": "A descending rep couplet combining heavy power snatches with bar muscle-ups. Tests power, strength, and high-skill gymnastics.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/probatio/",
@@ -21025,7 +21283,8 @@
     "difficulty": "Hard",
     "movements": ["Kettlebell Swing", "Pull-Up", "Run"],
     "countLikes": 51,
-    "difficultyExplanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity."
+    "difficultyExplanation": "A descending pyramid chipper version of 'Helen', increasing the volume significantly. Tests running, kettlebell endurance, and pull-up capacity.",
+    "timecap": 1320
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-21-1/",
@@ -21063,8 +21322,9 @@
       "Kipping Handstand Push-Up",
       "Dumbbell Shoulder-to-Overhead"
     ],
-    "countLikes": "8",
-    "difficultyExplanation": "Strict HSPU, heavy dumbbells, and double-unders in a fast-paced 10-minute cap"
+    "countLikes": 8,
+    "difficultyExplanation": "Strict HSPU, heavy dumbbells, and double-unders in a fast-paced 10-minute cap",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-21-2/",
@@ -21096,8 +21356,9 @@
     "tags": ["For Time"],
     "difficulty": "Very Hard",
     "movements": ["Pistol", "GHD Sit-Up", "Rope Climb"],
-    "countLikes": "6",
-    "difficultyExplanation": "High volume GHDs, rope climbs, and pistols in descending chipper"
+    "countLikes": 6,
+    "difficultyExplanation": "High volume GHDs, rope climbs, and pistols in descending chipper",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-21-3/",
@@ -21129,8 +21390,9 @@
     "tags": ["For Time"],
     "difficulty": "Very Hard",
     "movements": ["Row", "Wall Ball Shot"],
-    "countLikes": "14",
-    "difficultyExplanation": "Heavy deadlifts with high-skill gymnastics"
+    "countLikes": 14,
+    "difficultyExplanation": "Heavy deadlifts with high-skill gymnastics",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-21-4/",
@@ -21166,8 +21428,9 @@
     "tags": ["For Time"],
     "difficulty": "Medium",
     "movements": ["Front Squat"],
-    "countLikes": "1",
-    "difficultyExplanation": "Pure strength test - 4RM front squat"
+    "countLikes": 1,
+    "difficultyExplanation": "Pure strength test - 4RM front squat",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-21-5/",
@@ -21199,8 +21462,9 @@
     "tags": ["For Time"],
     "difficulty": "Hard",
     "movements": ["Burpee Box Jump-Over", "Snatch"],
-    "countLikes": "10",
-    "difficultyExplanation": "Sprint format with heavy snatches"
+    "countLikes": 10,
+    "difficultyExplanation": "Sprint format with heavy snatches",
+    "timecap": 420
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-22-1/",
@@ -21239,8 +21503,9 @@
       "Overhead Walking Lunge",
       "Strict Handstand Push-Up"
     ],
-    "countLikes": "6",
-    "difficultyExplanation": "Heavy dumbbell lunges with progressive HSPU variations"
+    "countLikes": 6,
+    "difficultyExplanation": "Heavy dumbbell lunges with progressive HSPU variations",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-22-2/",
@@ -21272,8 +21537,9 @@
     "tags": ["For Time"],
     "difficulty": "Hard",
     "movements": ["GHD Sit-Up", "Muscle-Up", "Pistol"],
-    "countLikes": "3",
-    "difficultyExplanation": "High skill movements with GHD sit-ups"
+    "countLikes": 3,
+    "difficultyExplanation": "High skill movements with GHD sit-ups",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-22-3/",
@@ -21305,8 +21571,9 @@
     "tags": ["For Time"],
     "difficulty": "Very Hard",
     "movements": ["Rope Climb", "Shuttle Run", "Wall Ball Shot"],
-    "countLikes": "6",
-    "difficultyExplanation": "Pyramid format with extreme endurance test"
+    "countLikes": 6,
+    "difficultyExplanation": "Pyramid format with extreme endurance test",
+    "timecap": 1500
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-22-5/",
@@ -21338,8 +21605,9 @@
     "tags": ["For Time"],
     "difficulty": "Hard",
     "movements": ["Burpee Box Jump-Over", "Row", "Snatch"],
-    "countLikes": "2",
-    "difficultyExplanation": "Sprint format with heavy snatches"
+    "countLikes": 2,
+    "difficultyExplanation": "Sprint format with heavy snatches",
+    "timecap": 420
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-23-1/",
@@ -21376,83 +21644,9 @@
       "Handstand Walk",
       "Muscle-Up"
     ],
-    "countLikes": "0",
-    "difficultyExplanation": "Progressive loading front squats with gymnastics"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/230317/",
-    "wodName": "Quarterfinals 23.1",
-    "description": "For Time\n9 Front Squats (225/155 lb)\n9x25 foot Handstand Walk\n15 Front Squats (185/125 lb)\n15 Muscle-Ups\n21 Front Squats (135/95 lb)\n21 Chest-to-Wall Handstand Push-Ups\n\nTime Cap: 15 minutes",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": 600,
-          "max": 720
-        },
-        "advanced": {
-          "min": 721,
-          "max": 840
-        },
-        "intermediate": {
-          "min": 841,
-          "max": 900
-        },
-        "beginner": {
-          "min": 0,
-          "max": 900
-        }
-      }
-    },
-    "results": [],
-    "category": "Quarterfinals",
-    "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "movements": [
-      "Chest-to-Wall Handstand Push-Up",
-      "Front Squat",
-      "Handstand Walk",
-      "Muscle-Up"
-    ],
-    "countLikes": "0",
-    "difficultyExplanation": "Progressive loading front squats with gymnastics"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/230318/",
-    "wodName": "Quarterfinals 23.2",
-    "description": "AMRAP in 12 minutes\n8 Single-Arm Dumbbell Snatches (70/50 lb)\n8 Single-Arm Overhead Walking Lunges (70/50 lb)\n8 Single-Arm Dumbbell Snatches (70/50 lb)\n8 Single-Arm Overhead Walking Lunges (70/50 lb)\n40 Crossovers",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 5,
-          "max": null
-        },
-        "advanced": {
-          "min": 4,
-          "max": 5
-        },
-        "intermediate": {
-          "min": 3,
-          "max": 4
-        },
-        "beginner": {
-          "min": 2,
-          "max": 3
-        }
-      }
-    },
-    "results": [],
-    "category": "Quarterfinals",
-    "tags": ["AMRAP"],
-    "difficulty": "Very Hard",
-    "movements": [
-      "Crossover",
-      "Single-Arm Dumbbell Snatch",
-      "Single-Arm Overhead Walking Lunge"
-    ],
-    "countLikes": "0",
-    "difficultyExplanation": "Unilateral loading with heavy dumbbells"
+    "countLikes": 0,
+    "difficultyExplanation": "Progressive loading front squats with gymnastics",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-23-2/",
@@ -21488,7 +21682,7 @@
       "Single-Arm Dumbbell Snatch",
       "Single-Arm Overhead Walking Lunge"
     ],
-    "countLikes": "5",
+    "countLikes": 5,
     "difficultyExplanation": "Unilateral loading with heavy dumbbells"
   },
   {
@@ -21521,41 +21715,9 @@
     "tags": ["For Time"],
     "difficulty": "Extremely Hard",
     "movements": ["Burpee Box Jump-Over", "Clean-and-Jerk"],
-    "countLikes": "1",
-    "difficultyExplanation": "Very heavy clean & jerks with high box jumps"
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/230319/",
-    "wodName": "Quarterfinals 23.4",
-    "description": "AMRAP in 20 minutes\n1,000 meter Row\n50 GHD Sit-Ups\n500 meter Row\n25 V-Ups",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 3,
-          "max": null
-        },
-        "advanced": {
-          "min": 2,
-          "max": 3
-        },
-        "intermediate": {
-          "min": 1,
-          "max": 2
-        },
-        "beginner": {
-          "min": 0,
-          "max": 1
-        }
-      }
-    },
-    "results": [],
-    "category": "Quarterfinals",
-    "tags": ["AMRAP"],
-    "difficulty": "Hard",
-    "movements": ["GHD Sit-Up", "Row", "V-Up"],
-    "countLikes": "1",
-    "difficultyExplanation": "Long endurance test with rowing and core work"
+    "countLikes": 1,
+    "difficultyExplanation": "Very heavy clean & jerks with high box jumps",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-23-4/",
@@ -21587,7 +21749,7 @@
     "tags": ["AMRAP"],
     "difficulty": "Hard",
     "movements": ["GHD Sit-Up", "Row", "V-Up"],
-    "countLikes": "1",
+    "countLikes": 1,
     "difficultyExplanation": "Long endurance test with rowing and core work"
   },
   {
@@ -21620,8 +21782,9 @@
     "tags": ["For Time"],
     "difficulty": "Very Hard",
     "movements": ["Bar Muscle-Up", "Chest-to-Bar Pull-Up", "Deadlift"],
-    "countLikes": "4",
-    "difficultyExplanation": "Heavy deadlifts with high-skill gymnastics"
+    "countLikes": 4,
+    "difficultyExplanation": "Heavy deadlifts with high-skill gymnastics",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-24-1/",
@@ -21653,7 +21816,7 @@
     "tags": ["For Time"],
     "difficulty": "Hard",
     "movements": ["Dumbbell Box Step-Up", "Row", "Snatch"],
-    "countLikes": "1",
+    "countLikes": 1,
     "difficultyExplanation": "Interval format tests power output"
   },
   {
@@ -21686,8 +21849,9 @@
     "tags": ["For Time"],
     "difficulty": "Very Hard",
     "movements": ["Lateral Burpee Box Jump-Over", "Wall Ball Shot"],
-    "countLikes": "2",
-    "difficultyExplanation": "High volume wall balls and lateral burpees"
+    "countLikes": 2,
+    "difficultyExplanation": "High volume wall balls and lateral burpees",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-24-3/",
@@ -21742,7 +21906,8 @@
       "Toes-to-Bar"
     ],
     "countLikes": 1,
-    "difficultyExplanation": "Strength endurance test"
+    "difficultyExplanation": "Strength endurance test",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/quarterfinals-24-4/",
@@ -21750,15 +21915,32 @@
     "description": "AMRAP in 10 minutes:\n\n10 Clean and Jerks (135/85 lb)\n1 minute Rest\n\n10 Clean and Jerks (185/125 lb)\n1 minute Rest\n\n10 Clean and Jerks (225/155 lb)\n1 minute Rest\n\nThen, in remaining time:\nMax reps Clean and Jerks (245/165 lb)",
     "benchmarks": {
       "type": "reps",
-      "levels": null
+      "levels": {
+        "elite": {
+          "min": 40,
+          "max": null
+        },
+        "advanced": {
+          "min": 30,
+          "max": 40
+        },
+        "intermediate": {
+          "min": 20,
+          "max": 30
+        },
+        "beginner": {
+          "min": 0,
+          "max": 20
+        }
+      }
     },
     "results": [],
     "category": "Quarterfinals",
     "tags": ["AMRAP"],
-    "difficulty": null,
+    "difficulty": "Very Hard",
     "movements": ["Clean-and-Jerk"],
-    "countLikes": "2",
-    "difficultyExplanation": null
+    "countLikes": 2,
+    "difficultyExplanation": "Heavy clean & jerks with rest intervals"
   },
   {
     "wodUrl": "https://wodwell.com/wod/rachel/",
@@ -21897,7 +22079,7 @@
       }
     ],
     "category": "Hero",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "movements": ["Power Snatch"],
     "countLikes": 378,
@@ -22113,7 +22295,8 @@
       "Strict Muscle-Up"
     ],
     "countLikes": 11,
-    "difficultyExplanation": "Ten rounds combining high-skill strict gymnastics (MU, HSPU) with heavy kettlebell snatches against a time cap. A significant test of strict strength and skill."
+    "difficultyExplanation": "Ten rounds combining high-skill strict gymnastics (MU, HSPU) with heavy kettlebell snatches against a time cap. A significant test of strict strength and skill.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/regionals-rehab/",
@@ -22196,39 +22379,6 @@
     "movements": ["Burpee", "Lunge", "Pull-Up", "Run"],
     "countLikes": 364,
     "difficultyExplanation": "Hero WOD. 7 rounds: run, lunges, pull-ups, burpees. Tests high-volume bodyweight endurance/conditioning. (Note: This is the version without a vest)."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/rene/",
-    "wodName": "Rene",
-    "description": "7 Rounds for Time\n400 meter Run\n21 Walking Lunges\n15 Pull-Ups\n9 Burpees\n\nWear a Weight Vest (20/14 lb)",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": 0,
-          "max": 1800
-        },
-        "advanced": {
-          "min": 1800,
-          "max": 2400
-        },
-        "intermediate": {
-          "min": 2400,
-          "max": 3000
-        },
-        "beginner": {
-          "min": 3000,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Hero",
-    "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "movements": ["Burpee", "Lunge", "Pull-Up", "Run"],
-    "countLikes": 364,
-    "difficultyExplanation": "Hero WOD. Same as above but w/ vest (20/14lb). Extreme endurance challenge under load."
   },
   {
     "wodUrl": "https://wodwell.com/wod/rich/",
@@ -22446,10 +22596,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 10, "max": null },
-        "advanced": { "min": 7, "max": 9 },
-        "intermediate": { "min": 4, "max": 6 },
-        "beginner": { "min": null, "max": 3 }
+        "elite": {
+          "min": 10,
+          "max": null
+        },
+        "advanced": {
+          "min": 7,
+          "max": 9
+        },
+        "intermediate": {
+          "min": 4,
+          "max": 6
+        },
+        "beginner": {
+          "min": null,
+          "max": 3
+        }
       }
     },
     "results": [],
@@ -22550,10 +22712,22 @@
     "benchmarks": {
       "type": "rounds",
       "levels": {
-        "elite": { "min": 20, "max": null },
-        "advanced": { "min": 15, "max": 19 },
-        "intermediate": { "min": 10, "max": 14 },
-        "beginner": { "min": null, "max": 9 }
+        "elite": {
+          "min": 20,
+          "max": null
+        },
+        "advanced": {
+          "min": 15,
+          "max": 19
+        },
+        "intermediate": {
+          "min": 10,
+          "max": 14
+        },
+        "beginner": {
+          "min": null,
+          "max": 9
+        }
       }
     },
     "results": [],
@@ -22707,7 +22881,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Easy",
     "movements": ["Row"],
     "countLikes": 0,
@@ -22860,7 +23034,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": ["For Time", "Monostructural"],
+    "tags": ["For Time"],
     "difficulty": "Easy",
     "movements": ["Run"],
     "countLikes": 0,
@@ -23150,7 +23324,8 @@
       "Wall Ball Shot"
     ],
     "countLikes": 0,
-    "difficultyExplanation": "A challenging chipper with high-skill gymnastics, burpee pull-ups, wall balls, and heavy clean-and-jerks against a tight time cap."
+    "difficultyExplanation": "A challenging chipper with high-skill gymnastics, burpee pull-ups, wall balls, and heavy clean-and-jerks against a tight time cap.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/san-fran-crippler/",
@@ -23230,10 +23405,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 400, "max": null },
-        "advanced": { "min": 300, "max": 399 },
-        "intermediate": { "min": 200, "max": 299 },
-        "beginner": { "min": null, "max": 199 }
+        "elite": {
+          "min": 400,
+          "max": null
+        },
+        "advanced": {
+          "min": 300,
+          "max": 399
+        },
+        "intermediate": {
+          "min": 200,
+          "max": 299
+        },
+        "beginner": {
+          "min": null,
+          "max": 199
+        }
       }
     },
     "results": [],
@@ -23414,10 +23601,22 @@
     "benchmarks": {
       "type": "rounds",
       "levels": {
-        "elite": { "min": 20, "max": null },
-        "advanced": { "min": 15, "max": 19 },
-        "intermediate": { "min": 10, "max": 14 },
-        "beginner": { "min": null, "max": 9 }
+        "elite": {
+          "min": 20,
+          "max": null
+        },
+        "advanced": {
+          "min": 15,
+          "max": 19
+        },
+        "intermediate": {
+          "min": 10,
+          "max": 14
+        },
+        "beginner": {
+          "min": null,
+          "max": 9
+        }
       }
     },
     "results": [],
@@ -24684,10 +24883,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 400, "max": null },
-        "advanced": { "min": 300, "max": 399 },
-        "intermediate": { "min": 200, "max": 299 },
-        "beginner": { "min": null, "max": 199 }
+        "elite": {
+          "min": 400,
+          "max": null
+        },
+        "advanced": {
+          "min": 300,
+          "max": 399
+        },
+        "intermediate": {
+          "min": 200,
+          "max": 299
+        },
+        "beginner": {
+          "min": null,
+          "max": 199
+        }
       }
     },
     "results": [],
@@ -24839,7 +25050,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["Tabata"],
+    "tags": ["AMRAP"],
     "difficulty": "Medium",
     "movements": ["Deadlift", "Front Squat", "Hang Power Clean", "Push Press"],
     "countLikes": 183,
@@ -24872,7 +25083,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["Tabata"],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "movements": [
       "Box Jump",
@@ -24922,7 +25133,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": ["Tabata"],
+    "tags": ["AMRAP"],
     "difficulty": "Medium",
     "movements": ["Pull-Up", "Push-Up", "Sit-Up", "Squat"],
     "countLikes": 246,
@@ -24966,7 +25177,7 @@
       }
     ],
     "category": "Benchmark",
-    "tags": ["Tabata"],
+    "tags": ["AMRAP"],
     "difficulty": "Medium",
     "movements": ["Pull-Up", "Push-Up", "Row", "Sit-Up", "Squat"],
     "countLikes": 301,
@@ -25032,7 +25243,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["For Time", "Tabata"],
+    "tags": ["For Time"],
     "difficulty": "Medium",
     "movements": ["Air Squat", "Pull-Up", "Push-Up", "Sit-Up"],
     "countLikes": 52,
@@ -25170,7 +25381,7 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": ["Tabata", "AMRAP"],
+    "tags": ["AMRAP"],
     "difficulty": "Hard",
     "movements": ["Air Squat", "Muscle-Up"],
     "countLikes": 6,
@@ -25674,50 +25885,6 @@
     "difficultyExplanation": "A descending rep couplet of overhead squats and pull-ups. Tests shoulder stability, leg endurance, and pulling capacity."
   },
   {
-    "wodUrl": "https://wodwell.com/wod/ghost/",
-    "wodName": "Ghost",
-    "description": "6 Rounds for Total Reps in 23 minutes\n1 minute of Rowing (for calories)\n1 minute of Burpees\n1 minute of Double-Unders\n1 minute Rest",
-    "benchmarks": {
-      "type": "reps",
-      "levels": {
-        "elite": {
-          "min": 300,
-          "max": null
-        },
-        "advanced": {
-          "min": 240,
-          "max": 299
-        },
-        "intermediate": {
-          "min": 180,
-          "max": 239
-        },
-        "beginner": {
-          "min": 1,
-          "max": 179
-        }
-      }
-    },
-    "results": [
-      {
-        "date": "5 Oct'23",
-        "rxStatus": "Rx",
-        "notes": "Rowing + burpees = you're a mashed potato. Good luck with those dubs.",
-        "score_time_seconds": null,
-        "score_reps": 496,
-        "score_load": null,
-        "score_rounds_completed": null,
-        "score_partial_reps": null
-      }
-    ],
-    "category": "Benchmark",
-    "tags": ["AMRAP"],
-    "difficulty": "Medium",
-    "movements": ["Burpee", "Double-Under", "Row"],
-    "countLikes": 282,
-    "difficultyExplanation": "Six rounds of 1-minute max effort intervals (Row, Burpee, DU) separated by rest. Score is total reps/calories."
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/the-hateful-eight/",
     "wodName": "The Hateful Eight",
     "description": "8 Rounds for Time\n8 Push-Ups\n8 GHD Sit-Ups\n8 Air Squats\n8 Pull-Ups\n8 Deadlifts (95/65 lb)\n8 Hang Power Cleans (95/65 lb)\n8 Shoulder-to-Overheads (95/65 lb)\n8 calorie Row",
@@ -25838,10 +26005,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1800 },
-        "advanced": { "min": 1801, "max": 2400 },
-        "intermediate": { "min": 2401, "max": 3000 },
-        "beginner": { "min": 3001, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1800
+        },
+        "advanced": {
+          "min": 1801,
+          "max": 2400
+        },
+        "intermediate": {
+          "min": 2401,
+          "max": 3000
+        },
+        "beginner": {
+          "min": 3001,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -26745,10 +26924,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1200 },
-        "advanced": { "min": 1201, "max": 1800 },
-        "intermediate": { "min": 1801, "max": 2400 },
-        "beginner": { "min": 2401, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1200
+        },
+        "advanced": {
+          "min": 1201,
+          "max": 1800
+        },
+        "intermediate": {
+          "min": 1801,
+          "max": 2400
+        },
+        "beginner": {
+          "min": 2401,
+          "max": null
+        }
       }
     },
     "results": [],
@@ -26997,10 +27188,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 400, "max": null },
-        "advanced": { "min": 300, "max": 399 },
-        "intermediate": { "min": 200, "max": 299 },
-        "beginner": { "min": null, "max": 199 }
+        "elite": {
+          "min": 400,
+          "max": null
+        },
+        "advanced": {
+          "min": 300,
+          "max": 399
+        },
+        "intermediate": {
+          "min": 200,
+          "max": 299
+        },
+        "beginner": {
+          "min": null,
+          "max": 199
+        }
       }
     },
     "results": [],
@@ -27884,7 +28087,8 @@
       "Row"
     ],
     "countLikes": 26,
-    "difficultyExplanation": "High volume chipper with advanced gymnastics, pistols, and heavy dumbbell push presses."
+    "difficultyExplanation": "High volume chipper with advanced gymnastics, pistols, and heavy dumbbell push presses.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/amanda-45/",
@@ -27917,7 +28121,8 @@
     "difficulty": "Very Hard",
     "movements": ["Muscle-Up", "Squat Snatch"],
     "countLikes": 37,
-    "difficultyExplanation": "High-skill muscle-ups combined with heavy squat snatches."
+    "difficultyExplanation": "High-skill muscle-ups combined with heavy squat snatches.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/run-swim-run/",
@@ -27950,40 +28155,8 @@
     "difficulty": "Hard",
     "movements": ["Run", "Swim"],
     "countLikes": 22,
-    "difficultyExplanation": "Long endurance event with running and swimming."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/170804/",
-    "wodName": "Amanda .45",
-    "description": "\"Amanda .45\"\n13-11-9-7-5 reps for time of:\nMuscle-ups\nSquat snatches\nMen use 135-lb. barbell\nWomen use 95-lb. barbell",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 360
-        },
-        "advanced": {
-          "min": 361,
-          "max": 540
-        },
-        "intermediate": {
-          "min": 541,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": 900
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time", "Couplet"],
-    "difficulty": "Very Hard",
-    "movements": ["Muscle-Up", "Squat Snatch"],
-    "countLikes": 1,
-    "difficultyExplanation": "High-skill muscle-ups combined with heavy squat snatches."
+    "difficultyExplanation": "Long endurance event with running and swimming.",
+    "timecap": 2400
   },
   {
     "wodUrl": "https://wodwell.com/wod/180731/",
@@ -28017,44 +28190,6 @@
     "movements": ["Double-Under", "Squat Snatch"],
     "countLikes": 9,
     "difficultyExplanation": "Heavy ascending squat snatches combined with high volume double-unders demand elite strength and skill."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/180806/",
-    "wodName": "Complex Fran",
-    "description": "\"Complex Fran\"\nFor time:\n7 bar muscle-ups\n7 chest-to-bar pull-ups\n7 chin-over-bar pull-ups\n21 thrusters\n5 bar muscle-ups\n5 chest-to-bar pull-ups\n5 chin-over-bar pull-ups\n15 thrusters\n3 bar muscle-ups\n3 chest-to-bar pull-ups\n3 chin-over-bar pull-ups\n9 thrusters\n\nMen: 95 lb.\nWomen: 65 lb.",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 300
-        },
-        "advanced": {
-          "min": 301,
-          "max": 480
-        },
-        "intermediate": {
-          "min": 481,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": 900
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time", "Couplet"],
-    "difficulty": "Very Hard",
-    "movements": [
-      "Bar Muscle-Up",
-      "Chest-to-Bar Pull-Up",
-      "Chin-Over-Bar Pull-Up",
-      "Thruster"
-    ],
-    "countLikes": 9,
-    "difficultyExplanation": "Combines high-skill gymnastics progressions with barbell cycling in a descending sprint."
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-standard/",
@@ -28092,45 +28227,8 @@
       "Thruster"
     ],
     "countLikes": 17,
-    "difficultyExplanation": "Heavy barbell cycling and muscle-ups for time."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/190807/",
-    "wodName": "The Standard",
-    "description": "For Time\n30 clean and jerks\n30 muscle-ups\n30 snatches\n\n♀ 95 lb.\n♂ 135 lb.",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 360
-        },
-        "advanced": {
-          "min": 361,
-          "max": 480
-        },
-        "intermediate": {
-          "min": 481,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time", "Chipper"],
-    "difficulty": "Very Hard",
-    "movements": [
-      "Bar-Facing Burpee",
-      "Hang Power Snatch",
-      "Power Clean",
-      "Thruster"
-    ],
-    "countLikes": 2,
-    "difficultyExplanation": "Heavy barbell cycling and muscle-ups for time."
+    "difficultyExplanation": "Heavy barbell cycling and muscle-ups for time.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/ringer-1-ringer-2/",
@@ -28168,7 +28266,8 @@
       "Toes-to-Rings"
     ],
     "countLikes": 10,
-    "difficultyExplanation": "Two back-to-back sprints combining high power output, gymnastics, and heavy overhead squats."
+    "difficultyExplanation": "Two back-to-back sprints combining high power output, gymnastics, and heavy overhead squats.",
+    "timecap": 420
   },
   {
     "wodUrl": "https://wodwell.com/wod/swim-paddle/",
@@ -28201,7 +28300,8 @@
     "difficulty": "Very Hard",
     "movements": ["Paddle", "Swim"],
     "countLikes": 1,
-    "difficultyExplanation": "Long-distance swim and paddle event testing endurance and pacing."
+    "difficultyExplanation": "Long-distance swim and paddle event testing endurance and pacing.",
+    "timecap": 3000
   },
   {
     "wodUrl": "https://wodwell.com/wod/sprint-couplet/",
@@ -28234,7 +28334,8 @@
     "difficulty": "Very Hard",
     "movements": ["Bar Muscle-Up", "Sled Push"],
     "countLikes": 3,
-    "difficultyExplanation": "Fast sled push and gymnastics sprint."
+    "difficultyExplanation": "Fast sled push and gymnastics sprint.",
+    "timecap": 360
   },
   {
     "wodUrl": "https://wodwell.com/wod/ruck/",
@@ -28267,7 +28368,8 @@
     "difficulty": "Hard",
     "movements": ["Ruck Run"],
     "countLikes": 6,
-    "difficultyExplanation": "Long weighted run with increasing load."
+    "difficultyExplanation": "Long weighted run with increasing load.",
+    "timecap": 2400
   },
   {
     "wodUrl": "https://wodwell.com/wod/second-cut/",
@@ -28300,7 +28402,8 @@
     "difficulty": "Very Hard",
     "movements": ["Handstand Walk", "Kettlebell Shoulder-to-Overhead", "Row"],
     "countLikes": 5,
-    "difficultyExplanation": "Rowing, kettlebell work, and handstand walk under time cap."
+    "difficultyExplanation": "Rowing, kettlebell work, and handstand walk under time cap.",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/first-cut/",
@@ -28333,45 +28436,8 @@
     "difficulty": "Very Hard",
     "movements": ["Legless Rope Climb", "Run", "Squat Snatch"],
     "countLikes": 8,
-    "difficultyExplanation": "Running, rope climbs, and heavy snatches."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/sid-sanctional-20-2/",
-    "wodName": "The Standard",
-    "description": "For Time\n30 Clean-and-Jerks (62.5/42.5 kg)\n30 Ring Muscle-Ups\n30 Snatches (62.5/42.5 kg)\n\nTime Cap: 12/14 minutes",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 360
-        },
-        "advanced": {
-          "min": 361,
-          "max": 480
-        },
-        "intermediate": {
-          "min": 481,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": null
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time", "Chipper"],
-    "difficulty": "Very Hard",
-    "movements": [
-      "Bar-Facing Burpee",
-      "Hang Power Snatch",
-      "Power Clean",
-      "Thruster"
-    ],
-    "countLikes": 3,
-    "difficultyExplanation": "Heavy barbell cycling and muscle-ups for time."
+    "difficultyExplanation": "Running, rope climbs, and heavy snatches.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/handstand-hold/",
@@ -28404,7 +28470,8 @@
     "difficulty": "Very Hard",
     "movements": ["Handstand Hold"],
     "countLikes": 3,
-    "difficultyExplanation": "Max freestanding handstand hold for time."
+    "difficultyExplanation": "Max freestanding handstand hold for time.",
+    "timecap": 240
   },
   {
     "wodUrl": "https://wodwell.com/wod/nasty-nancy/",
@@ -28569,7 +28636,8 @@
     "difficulty": "Very Hard",
     "movements": ["Snatch"],
     "countLikes": 0,
-    "difficultyExplanation": "Progressive heavy snatch ladder under time pressure."
+    "difficultyExplanation": "Progressive heavy snatch ladder under time pressure.",
+    "timecap": 60
   },
   {
     "wodUrl": "https://wodwell.com/wod/toes-to-bar-lunge/",
@@ -28635,7 +28703,8 @@
     "difficulty": "Very Hard",
     "movements": ["Hill Sprint With Corn Sack"],
     "countLikes": 0,
-    "difficultyExplanation": "Uphill sprint with a heavy sandbag demands elite power and endurance."
+    "difficultyExplanation": "Uphill sprint with a heavy sandbag demands elite power and endurance.",
+    "timecap": 480
   },
   {
     "wodUrl": "https://wodwell.com/wod/bike-repeater/",
@@ -28870,7 +28939,7 @@
   },
   {
     "wodUrl": "https://wodwell.com/wod/the-standard-2/",
-    "wodName": "The Standard",
+    "wodName": "The Standard (2)",
     "description": "AMRAP in 5 minutes\n10 Thrusters (95/65 lb)\n10 Bar Facing Burpees\n10 Power Cleans (95/65 lb)\n10 Bar Facing Burpees\n10 Hang Power Snatches (95/65 lb)\n10 Bar Facing Burpees",
     "benchmarks": {
       "type": "time",
@@ -28904,11 +28973,12 @@
       "Thruster"
     ],
     "countLikes": 12,
-    "difficultyExplanation": "Heavy barbell cycling and muscle-ups for time."
+    "difficultyExplanation": "Heavy barbell cycling and muscle-ups for time.",
+    "timecap": 720
   },
   {
     "wodUrl": "https://wodwell.com/wod/run-swim-run-2/",
-    "wodName": "Run Swim Run",
+    "wodName": "Run Swim Run (2)",
     "description": "For Time\n2,000 meter Run\n500 meter Swim\n2,000 meter Run\n\nTime Cap: 40 minutes",
     "benchmarks": {
       "type": "time",
@@ -28937,73 +29007,8 @@
     "difficulty": "Hard",
     "movements": ["Run", "Swim"],
     "countLikes": 0,
-    "difficultyExplanation": "Long endurance event with running and swimming."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/handstand-hold-2/",
-    "wodName": "Handstand Hold",
-    "description": "For Time\nMax Handstand Hold\n\nTime Cap: 4 minutes",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": 60,
-          "max": null
-        },
-        "advanced": {
-          "min": 30,
-          "max": 59
-        },
-        "intermediate": {
-          "min": 10,
-          "max": 29
-        },
-        "beginner": {
-          "min": null,
-          "max": 9
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time"],
-    "difficulty": "Very Hard",
-    "movements": ["Handstand Hold"],
-    "countLikes": 0,
-    "difficultyExplanation": "Max freestanding handstand hold for time."
-  },
-  {
-    "wodUrl": "https://wodwell.com/wod/amanda-45-2/",
-    "wodName": "Amanda .45",
-    "description": "13-11-9-7-5 Reps for Time\nMuscle-Ups\nSquat Snatches (135/95 lb)\n\nTime cap: 12 minutes",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": null,
-          "max": 360
-        },
-        "advanced": {
-          "min": 361,
-          "max": 540
-        },
-        "intermediate": {
-          "min": 541,
-          "max": 720
-        },
-        "beginner": {
-          "min": 721,
-          "max": 900
-        }
-      }
-    },
-    "results": [],
-    "category": "Games",
-    "tags": ["For Time", "Couplet"],
-    "difficulty": "Very Hard",
-    "movements": ["Muscle-Up", "Squat Snatch"],
-    "countLikes": 0,
-    "difficultyExplanation": "High-skill muscle-ups combined with heavy squat snatches."
+    "difficultyExplanation": "Long endurance event with running and swimming.",
+    "timecap": 2400
   },
   {
     "wodName": "Handstand Push-Ups: Max Reps",
@@ -29699,39 +29704,6 @@
     "countLikes": 0
   },
   {
-    "wodName": "Handstand Hold: Max Time",
-    "description": "Maximum time holding a freestanding handstand without support.",
-    "category": "Benchmark",
-    "tags": ["AMRAP"],
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": {
-          "min": 91,
-          "max": null
-        },
-        "advanced": {
-          "min": 45,
-          "max": 90
-        },
-        "intermediate": {
-          "min": 20,
-          "max": 44
-        },
-        "beginner": {
-          "min": null,
-          "max": 19
-        }
-      }
-    },
-    "difficulty": "Medium",
-    "difficultyExplanation": "Tests balance, shoulder stability, and core control while inverted.",
-    "wodUrl": null,
-    "results": [],
-    "movements": ["Handstand Hold"],
-    "countLikes": 0
-  },
-  {
     "wodName": "Handstand Push-Ups: 2 min max reps",
     "description": "Maximum number of handstand push-ups completed in 2 minutes.",
     "category": "Benchmark",
@@ -30396,7 +30368,7 @@
     "wodName": "AGOQ 17.2",
     "description": "AMRAP in 20 minutes\n0:00-4:00:\n25 Toes-to-Bars\n50 Double Unders\n15 Squat Cleans (135/85 lb)\n\nIf completed before 4:00, then until 8:00:\n25 Toes-to-Bars\n50 Double Unders\n13 Squat Cleans (185/115 lb)\n\nIf completed before 8:00, then until 12:00:\n25 Toes-to-Bars\n50 Double Unders\n11 Squat Cleans (225/145 lb)\n\nIf completed before 12:00, then until 16:00:\n25 Toes-to-Bars\n50 Double Unders\n9 Squat Cleans (275/175 lb)\n\nIf completed before 16:00, then until 20:00:\n25 Toes-to-Bars\n50 Double Unders\n7 Squat Cleans (315/205 lb)",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 300,
@@ -30561,7 +30533,7 @@
     "wodName": "AGOQ 18.3",
     "description": "AMRAP in 20 minutes\n50 Wall Ball Shots (20/14 lb)\n100 Double-Unders\n50 ft Handstand Walk\n100 Double-Unders\n50 calorie Row\n100 Double-Unders\n50 ft Handstand Walk\n100 Double-Unders",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 400,
@@ -30594,7 +30566,7 @@
     "wodName": "AGOQ 18.4",
     "description": "AMRAP in 5 minutes\n9 Handstand Push-Ups\n6 Burpees\n3 Snatches (165/115 lb)",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 100,
@@ -30726,7 +30698,7 @@
     "wodName": "AGOQ 19.4",
     "description": "AMRAP in 8 minutes\n45 Thrusters (95/65 lb)\n45 Toes-to-Bars\n45 Cleans (95/65 lb)\n45 Chest-to-Bar Pull-Ups",
     "benchmarks": {
-      "type": "amrap",
+      "type": "rounds",
       "levels": {
         "elite": {
           "min": 180,

@@ -4,7 +4,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import { drizzle } from "drizzle-orm/libsql";
 import { createClient } from "@libsql/client";
-import { eq, and, InferSelectModel } from "drizzle-orm"; // Import InferSelectModel
+import { eq, and, InferSelectModel, is } from "drizzle-orm"; // Import InferSelectModel
 import { distance } from "fastest-levenshtein";
 import inquirer from "inquirer";
 import yargs from "yargs";
@@ -98,14 +98,20 @@ async function main() {
           "\nObject:",
           wod,
         );
+        // In dry run mode, still add the raw object for reporting
+        if (dryRun) {
+          wodsFromJson.push(wod as any);
+        }
       }
     }
     if (invalidCount > 0) {
       console.warn(
-        `⚠️ Skipped ${invalidCount} invalid WOD(s) from wods.json due to schema mismatch.`,
+        `⚠️ Skipped ${invalidCount} invalid WOD(s) from wods.json due to schema mismatch.${dryRun ? " (Included for dry run reporting)" : ""}`,
       );
     }
-    console.log(`✅ Loaded ${wodsFromJson.length} valid WODs from JSON.`);
+    console.log(
+      `✅ Loaded ${wodsFromJson.length} valid${dryRun && invalidCount > 0 ? " (or included for dry run)" : ""} WODs from JSON.`,
+    );
   } catch (error) {
     console.error(`❌ Error reading or parsing ${WODS_JSON_PATH}:`, error);
     process.exit(1);
@@ -155,66 +161,317 @@ async function main() {
 
   for (const wodJson of wodsFromJson) {
     processedWods++;
-    console.log(
-      `\n[${processedWods}/${wodsFromJson.length}] Processing WOD: "${wodJson.wodName}"`,
-    );
+    // console.log(
+    //   `\n[${processedWods}/${wodsFromJson.length}] Processing WOD: "${wodJson.wodName}"`,
+    // );
 
     let newWodId: string | null = null; // Will hold ID if inserted
     const existingWodId = existingWodsMap.get(wodJson.wodName);
-    const currentWodCategoryNormalized = wodJson.category
-      ? normalizeString(wodJson.category)
-      : undefined;
 
-    // --- WOD Update/Skip Logic ---
+    // --- GENERIC WOD UPDATE LOGIC ---
     if (existingWodId) {
-      // WOD exists in DB
-      // Check if we should update this category
-      if (
-        categoryToUpdate &&
-        currentWodCategoryNormalized === categoryToUpdate
-      ) {
-        console.log(
-          `   -> WOD exists (ID: ${existingWodId}). Category matches "${categoryToUpdate}". Processing update...`,
+      // WOD exists in DB: fetch all current fields for comparison
+      let dbWod: any = null;
+      try {
+        const [row] = await db
+          .select()
+          .from(wods)
+          .where(eq(wods.id, existingWodId));
+        dbWod = row;
+      } catch (error) {
+        console.error(
+          `   ❌ Error fetching full WOD row for "${wodJson.wodName}" (ID: ${existingWodId}):`,
+          error,
         );
-        // Explicitly type the update object
-        const valuesToUpdate: WodUpdateValues = {
-          // Read JSON property, set camelCase for DB schema
-          difficultyExplanation: (wodJson as any).difficultyExplanation ?? null, // Updated
-          countLikes: (wodJson as any).countLikes ?? 0, // Updated
-        };
+        errorsEncountered++;
+        skippedWods++;
+        continue;
+      }
 
+      // List of all updatable fields (add/remove as schema evolves)
+      const fieldsToCheck = [
+        "levels",
+        "difficultyExplanation",
+        "countLikes",
+        "description",
+        "benchmarks",
+        "category",
+        "tags",
+        "difficulty",
+        "timecap",
+        "wodUrl",
+      ];
+
+      const updates: Record<string, any> = {};
+      const changedFields: string[] = [];
+
+      // Special handling for "benchmarks" field: compare type and levels separately
+      let benchmarksChanged = false;
+      let benchmarksTypeChanged = false;
+      let benchmarksLevelsChanged = false;
+      let newBenchmarks: any = undefined;
+      let oldBenchmarks: any = undefined;
+
+      for (const field of fieldsToCheck) {
+        if (field === "benchmarks") {
+          let jsonVal = (wodJson as any)[field];
+          let dbVal = dbWod ? dbWod[field] : undefined;
+
+          // Parse both as objects (handle null/undefined)
+          try {
+            newBenchmarks =
+              jsonVal && typeof jsonVal === "string"
+                ? JSON.parse(jsonVal)
+                : jsonVal;
+          } catch {
+            newBenchmarks = jsonVal;
+          }
+          try {
+            oldBenchmarks =
+              dbVal && typeof dbVal === "string" ? JSON.parse(dbVal) : dbVal;
+          } catch {
+            oldBenchmarks = dbVal;
+          }
+
+          // If both are null/undefined, skip
+          if (!newBenchmarks && !oldBenchmarks) continue;
+
+          // Compare "type"
+          const newType = newBenchmarks ? newBenchmarks.type : null;
+          const oldType = oldBenchmarks ? oldBenchmarks.type : null;
+          if (newType !== oldType) {
+            changedFields.push("benchmarks.type");
+            benchmarksTypeChanged = true;
+            benchmarksChanged = true;
+          }
+
+          // Compare "levels"
+          const newLevels = newBenchmarks ? newBenchmarks.levels : null;
+          const oldLevels = oldBenchmarks ? oldBenchmarks.levels : null;
+          if (JSON.stringify(newLevels) !== JSON.stringify(oldLevels)) {
+            changedFields.push("benchmarks.levels");
+            benchmarksLevelsChanged = true;
+            benchmarksChanged = true;
+          }
+        } else {
+          let jsonVal = (wodJson as any)[field];
+          let dbVal = dbWod ? dbWod[field] : undefined;
+
+          // Normalize undefined/null for comparison
+          if (jsonVal === undefined) jsonVal = null;
+          if (dbVal === undefined) dbVal = null;
+
+          // For objects/arrays, use deep equality
+          let isEqual: boolean;
+          if (field === "tags") {
+            // Robust logic for tags comparison
+            let jsonTags = jsonVal as string[] | null | undefined;
+            let dbTagsRaw = dbVal as string[] | string | null | undefined; // DB value might be string or array
+
+            // Normalize undefined to null
+            if (jsonTags === undefined) jsonTags = null;
+            if (dbTagsRaw === undefined) dbTagsRaw = null;
+
+            let dbTagsParsed: string[] | null = null;
+            if (dbTagsRaw !== null) {
+              if (Array.isArray(dbTagsRaw)) {
+                dbTagsParsed = dbTagsRaw; // Already an array
+              } else if (typeof dbTagsRaw === "string") {
+                try {
+                  const parsed = JSON.parse(dbTagsRaw);
+                  if (Array.isArray(parsed)) {
+                    dbTagsParsed = parsed; // Successfully parsed string to array
+                  } else {
+                    // Parsed but not an array - treat as unequal
+                    console.warn(
+                      `   ⚠️ DB 'tags' value for ${wodJson.wodName} parsed from string but was not an array:`,
+                      dbTagsRaw,
+                    );
+                    isEqual = false; // Force inequality if parse result isn't array
+                  }
+                } catch (e) {
+                  // Failed to parse string - treat as unequal
+                  console.warn(
+                    `   ⚠️ Failed to parse DB 'tags' string for ${wodJson.wodName}:`,
+                    dbTagsRaw,
+                    e,
+                  );
+                  isEqual = false; // Force inequality on parse error
+                }
+              } else {
+                // Neither string nor array - treat as unequal
+                console.warn(
+                  `   ⚠️ Unexpected DB 'tags' type for ${wodJson.wodName}:`,
+                  typeof dbTagsRaw,
+                );
+                isEqual = false;
+              }
+            }
+
+            // Only proceed with comparison if parsing was successful (or value was already array/null)
+            if (isEqual !== false) {
+              // Check if inequality was already forced
+              // Handle null cases
+              if (jsonTags === null && dbTagsParsed === null) {
+                isEqual = true;
+              } else if (jsonTags === null || dbTagsParsed === null) {
+                isEqual = false; // One is null, the other isn't
+              } else {
+                // Both are arrays, sort and compare stringified versions
+                const sortedJsonTags = [...jsonTags].sort();
+                const sortedDbTags = [...dbTagsParsed].sort();
+                isEqual =
+                  JSON.stringify(sortedJsonTags) ===
+                  JSON.stringify(sortedDbTags);
+              }
+            }
+          } else {
+            // Existing logic for other fields (handles null/undefined normalization above)
+            isEqual = jsonVal === dbVal;
+          }
+
+          if (!isEqual) {
+            // Explicitly stringify tags before adding to updates, as Drizzle's $type might not handle it in .set()
+            if (field === "tags") {
+              updates[field as keyof WodUpdateValues] = jsonVal
+                ? JSON.stringify(jsonVal)
+                : null;
+            } else {
+              // Keep other fields as they are (Drizzle handles primitives, benchmarks is already stringified)
+              updates[field as keyof WodUpdateValues] = jsonVal;
+            }
+            changedFields.push(field);
+          }
+        }
+      }
+
+      // If any part of benchmarks changed, update the full benchmarks field
+      if (benchmarksChanged) {
+        // Build the updated benchmarks object
+        let updatedBenchmarks = { ...(oldBenchmarks || {}) };
+        if (benchmarksTypeChanged) {
+          updatedBenchmarks.type = newBenchmarks ? newBenchmarks.type : null;
+        }
+        if (benchmarksLevelsChanged) {
+          updatedBenchmarks.levels = newBenchmarks
+            ? newBenchmarks.levels
+            : null;
+        }
+        // Remove undefined keys if newBenchmarks is null
+        if (!newBenchmarks) {
+          updatedBenchmarks = null;
+        }
+        updates["benchmarks"] = updatedBenchmarks
+          ? JSON.stringify(updatedBenchmarks)
+          : null;
+      }
+
+      if (changedFields.length > 0) {
         if (!dryRun) {
           try {
             await db
               .update(wods)
-              .set(valuesToUpdate)
+              .set(updates)
               .where(eq(wods.id, existingWodId));
-            updatedWods++; // Increment update counter
+            updatedWods++;
             console.log(
-              `      ✅ Successfully updated WOD ID: ${existingWodId}`,
+              `   ✅ Updated WOD "${wodJson.wodName}" (ID: ${existingWodId}) [fields: ${changedFields.join(", ")}]`,
             );
           } catch (error) {
             console.error(
-              `      ❌ Error updating WOD ID ${existingWodId}:`,
+              `   ❌ Error updating WOD "${wodJson.wodName}" (ID: ${existingWodId}):`,
               error,
             );
             errorsEncountered++;
           }
         } else {
-          updatedWods++; // Count as 'would be updated'
-          wodsToUpdateNames.push(wodJson.wodName); // Add to list for summary
+          updatedWods++;
+          wodsToUpdateNames.push(wodJson.wodName);
           console.log(
-            `      [DRY RUN] Would update WOD: "${wodJson.wodName}" (ID: ${existingWodId}) with new explanation/likes.`,
+            `   [DRY RUN] Would update WOD: "${wodJson.wodName}" (ID: ${existingWodId}) [fields: ${changedFields.join(", ")}]`,
           );
+          // Output the changed fields in a table
+          const tableRows = changedFields.map((field) => {
+            let dbVal, jsonVal;
+            if (field === "benchmarks.type") {
+              dbVal = oldBenchmarks ? oldBenchmarks.type : null;
+              jsonVal = newBenchmarks ? newBenchmarks.type : null;
+            } else if (field === "benchmarks.levels") {
+              dbVal = oldBenchmarks ? oldBenchmarks.levels : null;
+              jsonVal = newBenchmarks ? newBenchmarks.levels : null;
+            } else {
+              dbVal = dbWod ? dbWod[field] : undefined;
+              jsonVal = (wodJson as any)[field];
+            }
+            // Normalize undefined/null for display
+            if (dbVal === undefined) dbVal = null;
+            if (jsonVal === undefined) jsonVal = null;
+
+            // For objects/arrays, pretty print (with special handling for tags display)
+            let dbValStr: string;
+            let jsonValStr: string;
+
+            if (field === "tags") {
+              // Display sorted tags for consistency with comparison logic
+              let dbTagsForDisplay: string[] | null = null;
+              if (dbVal !== null) {
+                if (Array.isArray(dbVal)) {
+                  dbTagsForDisplay = [...dbVal].sort();
+                } else if (typeof dbVal === "string") {
+                  try {
+                    const parsed = JSON.parse(dbVal);
+                    if (Array.isArray(parsed)) {
+                      dbTagsForDisplay = [...parsed].sort();
+                    } else {
+                      dbTagsForDisplay = ["<Invalid DB Tag Data>"]; // Indicate parsing issue
+                    }
+                  } catch {
+                    dbTagsForDisplay = ["<Unparseable DB Tag String>"]; // Indicate parsing issue
+                  }
+                } else {
+                  dbTagsForDisplay = ["<Unexpected DB Tag Type>"]; // Indicate type issue
+                }
+              }
+              const jsonTagsForDisplay = Array.isArray(jsonVal)
+                ? [...jsonVal].sort()
+                : jsonVal;
+
+              dbValStr = JSON.stringify(dbTagsForDisplay);
+              jsonValStr = JSON.stringify(jsonTagsForDisplay);
+            } else {
+              // Default stringification for other fields
+              dbValStr =
+                typeof dbVal === "object" && dbVal !== null
+                  ? JSON.stringify(dbVal)
+                  : String(dbVal);
+              jsonValStr =
+                typeof jsonVal === "object" && jsonVal !== null
+                  ? JSON.stringify(jsonVal)
+                  : String(jsonVal);
+            }
+
+            // Truncate long strings for readability
+            if (dbValStr.length > 200)
+              dbValStr = dbValStr.slice(0, 200) + "...";
+            if (jsonValStr.length > 200)
+              jsonValStr = jsonValStr.slice(0, 200) + "...";
+            return {
+              Field: field,
+              "DB Value": dbValStr,
+              "JSON Value": jsonValStr,
+            };
+          });
+          if (tableRows.length > 0) {
+            console.table(tableRows);
+          }
         }
-        continue; // Skip insertion logic after update attempt
+        continue; // Skip insertion logic after update
       } else {
-        // WOD exists, but category doesn't match or no update category specified
         console.log(
-          `   -> WOD already exists (ID: ${existingWodId}). Skipping.`,
+          `   -> WOD "${wodJson.wodName}" (ID: ${existingWodId}) is up-to-date. No changes needed.`,
         );
         skippedWods++;
-        continue; // Skip insertion logic
+        continue;
       }
     } else {
       // --- WOD Insertion Logic (WOD does not exist in DB) ---
@@ -232,7 +489,7 @@ async function main() {
         description: wodJson.description ?? null,
         benchmarks: benchmarksString,
         category: wodJson.category ?? null,
-        tags: wodJson.tags ?? null, // Pass array or null directly
+        tags: wodJson.tags ? JSON.stringify(wodJson.tags) : null, // Explicitly stringify for insert
         difficulty: wodJson.difficulty ?? null,
         // Map JSON property to DB camelCase column
         difficultyExplanation: (wodJson as any).difficultyExplanation ?? null, // Updated
@@ -575,8 +832,8 @@ async function main() {
   );
   if (dryRun && wodsToUpdateNames.length > 0) {
     // Print WOD names if dry run
-    console.log("    WODs to Update:");
-    wodsToUpdateNames.forEach((name) => console.log(`      - ${name}`));
+    // console.log("    WODs to Update:");
+    // wodsToUpdateNames.forEach((name) => console.log(`      - ${name}`));
   }
   console.log(`WODs Skipped:       ${skippedWods}`); // Skipped = Existed but not updated
   console.log(

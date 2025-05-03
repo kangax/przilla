@@ -2,6 +2,9 @@ import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type SortByType, type WodCategory } from "~/types/wodTypes";
 
+// Default category to use when no category is specified in the URL
+const DEFAULT_CATEGORY = "Girl";
+
 /**
  * Custom hook to manage WOD viewer filter, sort, and search state with URL synchronization.
  */
@@ -48,9 +51,14 @@ export function useWodViewerFilters(
   const isUpdatingFromState = useRef(false);
 
   // Filter state
+  // If no category is specified in the URL, default to "Girl" (DEFAULT_CATEGORY) if available.
   const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
     const urlCategory = searchParams.get("category");
-    return urlCategory ? [urlCategory] : [];
+    if (urlCategory === "All" || !urlCategory) {
+      // If DEFAULT_CATEGORY is present, use it as default; else show all
+      return categoryOrder.includes(DEFAULT_CATEGORY) ? [DEFAULT_CATEGORY] : [];
+    }
+    return [urlCategory];
   });
 
   const [selectedTags, setSelectedTags] = useState<string[]>(() => {
@@ -104,7 +112,12 @@ export function useWodViewerFilters(
     try {
       // Update category from URL
       const urlCategory = searchParams.get("category");
-      setSelectedCategories(urlCategory ? [urlCategory] : []);
+      if (urlCategory === "All") {
+        setSelectedCategories([]);
+      } else if (urlCategory) {
+        setSelectedCategories([urlCategory]);
+      }
+      // If urlCategory is null (param missing), do not update selectedCategories—preserve default
 
       // Update tags from URL
       const urlTags = searchParams.get("tags");
@@ -155,15 +168,19 @@ export function useWodViewerFilters(
     const timeoutId = setTimeout(() => {
       try {
         const params = new URLSearchParams();
-        const validCategoryForUrl =
+        let validCategoryForUrl: string | null = null;
+        if (
           selectedCategories.length > 0 &&
           categoryOrder.includes(selectedCategories[0] as WodCategory)
-            ? selectedCategories[0]
-            : null;
+        ) {
+          validCategoryForUrl = selectedCategories[0];
+        } else if (selectedCategories.length === 0) {
+          validCategoryForUrl = "All";
+        }
 
         if (validCategoryForUrl) {
           params.set("category", validCategoryForUrl);
-        } // else: don't add it, effectively deleting it if it was there before
+        }
 
         const validTagsForUrl = selectedTags.filter((tag) =>
           tagOrder.includes(tag),

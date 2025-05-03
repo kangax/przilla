@@ -23,6 +23,7 @@ import { ChevronDown, ListFilter, ArrowUp, ArrowDown } from "lucide-react";
 import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
 import TagSelector from "./TagSelector"; // Import the new component
+import CompletionFilterControl from "./CompletionFilterControl"; // Import the new completion filter component
 import { useMediaQuery } from "~/utils/useMediaQuery";
 import { useWodViewerFilters } from "./hooks/useWodViewerFilters";
 import { useWodViewerData } from "./hooks/useWodViewerData";
@@ -360,45 +361,16 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
         {/* SegmentedControl and Sort Button: On mobile, show in a row; on desktop, just SegmentedControl */}
         {isMobile ? (
           <div className="mt-2 flex w-full flex-row items-center gap-2">
-            {/* SegmentedControl for completionFilter: only show if logged in */}
-            {isLoggedIn && (
-              <SegmentedControl.Root
-                size="2"
-                value={completionFilter}
-                onValueChange={(value) =>
-                  setCompletionFilter(value as "all" | "done" | "notDone")
-                }
-                className="flex-1"
-              >
-                <SegmentedControl.Item value="all" data-testid="segmented-all">
-                  <Tooltip content="Show All Workouts">
-                    <span className="text-base">
-                      All ({dynamicTotalWodCount})
-                    </span>
-                  </Tooltip>
-                </SegmentedControl.Item>
-                <SegmentedControl.Item
-                  value="done"
-                  data-testid="segmented-done"
-                >
-                  <Tooltip content="Show Done Workouts">
-                    <span className="text-base">
-                      Done ({dynamicDoneWodsCount})
-                    </span>
-                  </Tooltip>
-                </SegmentedControl.Item>
-                <SegmentedControl.Item
-                  value="notDone"
-                  data-testid="segmented-todo"
-                >
-                  <Tooltip content="Show Not Done Workouts">
-                    <span className="text-base">
-                      Todo ({dynamicNotDoneWodsCount})
-                    </span>
-                  </Tooltip>
-                </SegmentedControl.Item>
-              </SegmentedControl.Root>
-            )}
+            {/* Use the new CompletionFilterControl component */}
+            <CompletionFilterControl
+              completionFilter={completionFilter}
+              setCompletionFilter={setCompletionFilter}
+              dynamicTotalWodCount={dynamicTotalWodCount}
+              dynamicDoneWodsCount={dynamicDoneWodsCount}
+              dynamicNotDoneWodsCount={dynamicNotDoneWodsCount}
+              isLoggedIn={isLoggedIn}
+              isMobile={isMobile}
+            />
             {/* Sort DropdownMenu: always visible */}
             <DropdownMenu.Root>
               <DropdownMenu.Trigger>
@@ -452,30 +424,16 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
             </DropdownMenu.Root>
           </div>
         ) : (
-          <SegmentedControl.Root
-            size="1"
-            value={completionFilter}
-            onValueChange={(value) =>
-              setCompletionFilter(value as "all" | "done" | "notDone")
-            }
-            className="ml-auto"
-          >
-            <SegmentedControl.Item value="all" data-testid="segmented-all">
-              <Tooltip content="Show All Workouts">
-                <span>All ({dynamicTotalWodCount})</span>
-              </Tooltip>
-            </SegmentedControl.Item>
-            <SegmentedControl.Item value="done" data-testid="segmented-done">
-              <Tooltip content="Show Done Workouts">
-                <span>Done ({dynamicDoneWodsCount})</span>
-              </Tooltip>
-            </SegmentedControl.Item>
-            <SegmentedControl.Item value="notDone" data-testid="segmented-todo">
-              <Tooltip content="Show Not Done Workouts">
-                <span>Todo ({dynamicNotDoneWodsCount})</span>
-              </Tooltip>
-            </SegmentedControl.Item>
-          </SegmentedControl.Root>
+          /* Use the new CompletionFilterControl component */
+          <CompletionFilterControl
+            completionFilter={completionFilter}
+            setCompletionFilter={setCompletionFilter}
+            dynamicTotalWodCount={dynamicTotalWodCount}
+            dynamicDoneWodsCount={dynamicDoneWodsCount}
+            dynamicNotDoneWodsCount={dynamicNotDoneWodsCount}
+            isLoggedIn={isLoggedIn}
+            isMobile={isMobile}
+          />
         )}
       </div>
 

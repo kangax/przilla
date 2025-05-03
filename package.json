@@ -108,7 +108,11 @@
     "initVersion": "7.38.1"
   },
   "lint-staged": {
-    "src/**/*.{js,jsx,ts,tsx}": "eslint --fix"
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "**/*.{md,mdx}": "prettier --write"
   },
   "packageManager": "npm@11.2.0"
 }

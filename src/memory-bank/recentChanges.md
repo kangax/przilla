@@ -2,6 +2,15 @@
 
 ## May 3, 2025
 
+- **Pre-commit Formatting Setup**
+
+  - **Goal:** Disable VSCode's format-on-save feature to prevent conflicts with AI agent workflows and ensure consistent code formatting using a pre-commit hook instead.
+  - **Implementation:**
+    - Created/updated `.vscode/settings.json` to set `"editor.formatOnSave": false`.
+    - Updated the `lint-staged` configuration in `package.json` to run both `eslint --fix` and `prettier --write` on staged `src/**/*.{js,jsx,ts,tsx}` files.
+    - Added a `lint-staged` rule to run `prettier --write` on staged `**/*.{md,mdx}` files.
+  - **Outcome:** Format-on-save is disabled for this workspace. Code formatting (ESLint fixes and Prettier) will now be automatically applied only to staged files before they are committed, ensuring consistency without interfering with the development process.
+
 - **WodViewer Completion Filter Refactor**
 
   - **Goal:** Extract the completion status `SegmentedControl` (All/Done/Todo) from `WodViewer.tsx` into its own reusable component.

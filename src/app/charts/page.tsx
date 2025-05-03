@@ -7,7 +7,14 @@ import WodTimelineChart from "./components/WodTimelineChart";
 import MovementFrequencyChart from "./components/MovementFrequencyChart";
 import Header from "~/app/_components/Header";
 import ChartLoginOverlay from "./components/ChartLoginOverlay"; // Import the overlay
-import { type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
+import {
+  type WodFromQuery,
+  type WodChartDataResponse,
+  type ChartDataPoint,
+  type FrequencyDataPoint,
+  type PerformanceDataPoint,
+  type MonthlyScoreDetail,
+} from "~/types/wodTypes";
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
 import {
   generatePlaceholderDistributionData,
@@ -20,37 +27,7 @@ export const metadata: Metadata = {
     "Analyze your WOD performance over time with PRzilla's charts. Track progress, see workout distributions, and identify trends. Login required.",
 };
 
-// Define types for chart data points locally or import if shared
-type ChartDataPoint = {
-  name: string;
-  value: number;
-};
-type FrequencyDataPoint = {
-  month: string;
-  count: number;
-};
-// Define the structure for individual scores in the chart data (matching backend)
-// Updated to include difficulty and adjusted level details
-type MonthlyScoreDetail = {
-  wodName: string;
-  level: number; // The original calculated level (0-4) for this score
-  difficulty: string | null; // WOD difficulty string
-  difficultyMultiplier: number; // Corresponding multiplier
-  adjustedLevel: number; // level * difficultyMultiplier
-  // Raw score fields for formatting in tooltip
-  time_seconds: number | null;
-  reps: number | null;
-  load: number | null;
-  rounds_completed: number | null;
-  partial_reps: number | null;
-  is_rx: boolean | null;
-};
-// Update PerformanceDataPoint to include the updated scores array
-type PerformanceDataPoint = {
-  month: string;
-  averageLevel: number; // This will now represent the average *adjusted* level
-  scores: MonthlyScoreDetail[]; // Use the updated MonthlyScoreDetail type
-};
+// (removed local type definitions for chart data points, now imported from ~/types/wodTypes)
 
 export default async function ChartsPage() {
   const session = await getSession(); // Use getSession()
@@ -86,7 +63,7 @@ export default async function ChartsPage() {
   if (isLoggedIn) {
     // --- Logged In: Fetch real data ---
     try {
-      const chartData = await api.wod.getChartData();
+      const chartData: WodChartDataResponse = await api.wod.getChartData();
       const categoryCounts = chartData.categoryCounts;
       const chartTagCounts = chartData.tagCounts;
       const monthlyScores = chartData.monthlyData; // Now includes adjusted scores array per month

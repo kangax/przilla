@@ -42,3 +42,24 @@ export const PERFORMANCE_LEVEL_COLORS: Record<string, string> = {
   beginner: "text-red-600 dark:text-red-400",
   default: "text-foreground/70 dark:text-foreground/60", // For scaled or N/A
 };
+
+export const WOD_CATEGORIES = [
+  "Girl",
+  "Hero",
+  "Games",
+  "Open",
+  "Quarterfinals",
+  "AGOQ",
+  "Benchmark",
+  "Other",
+] as const;
+
+// Difficulty multipliers for WODs
+export const difficultyMultipliers: Record<string, number> = {
+  Easy: 0.8,
+  Medium: 1.0,
+  Hard: 1.2,
+  "Very Hard": 1.5,
+  "Extremely Hard": 2.0,
+};
+export const DEFAULT_MULTIPLIER = 1.0; // Fallback multiplier

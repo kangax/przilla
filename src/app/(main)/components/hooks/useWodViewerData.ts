@@ -25,8 +25,15 @@ export function useWodViewerData(
   // Map and memoize WODs
   const wods = useMemo(() => {
     // Data is already parsed as Wod[]
-    return wodsData ?? initialWods ?? [];
-  }, [wodsData, initialWods]);
+    const result = wodsData ?? initialWods ?? [];
+    console.log("[DEBUG] Initial wods data:", { 
+      wodsData: wodsData?.length, 
+      initialWods: initialWods?.length, 
+      result: result.length,
+      searchTerm
+    });
+    return result;
+  }, [wodsData, initialWods, searchTerm]);
 
   // Map and memoize scores
   const scoresByWodId = useMemo(() => {
@@ -102,33 +109,10 @@ export function useWodViewerData(
     return Array.from(tags).sort();
   }, [wods]);
 
-  // Category counts
-  const categoryCounts = useMemo(() => {
-    return wods.reduce(
-      (acc, wod) => {
-        if (wod.category) {
-          acc[wod.category] = (acc[wod.category] || 0) + 1;
-        }
-        return acc;
-      },
-      {} as Record<string, number>,
-    );
-  }, [wods]);
-
+  // Original total count (before any filtering)
   const originalTotalWodCount = useMemo(() => wods.length, [wods]);
 
-  // Search/filter logic
-  const searchedWods = useMemo(() => {
-    if (!searchTerm) return wods;
-    const lowerCaseSearchTerm = searchTerm.toLowerCase();
-    return wods.filter(
-      (wod) =>
-        wod.wodName?.toLowerCase().includes(lowerCaseSearchTerm) ||
-        wod.description?.toLowerCase().includes(lowerCaseSearchTerm) ||
-        wod.category?.toLowerCase().includes(lowerCaseSearchTerm) ||
-        wod.tags.some((tag) => tag.toLowerCase().includes(lowerCaseSearchTerm)),
-    );
-  }, [wods, searchTerm]);
+  // Client-side search logic removed - handled by backend now.
 
   const validSelectedCategories = useMemo(() => {
     return selectedCategories.length > 0 &&
@@ -141,8 +125,9 @@ export function useWodViewerData(
     return selectedTags.filter((tag) => tagOrder.includes(tag));
   }, [selectedTags, tagOrder]);
 
+  // Update this filter to use 'wods' directly instead of 'searchedWods'
   const categoryTagFilteredWods = useMemo(() => {
-    return searchedWods.filter((wod) => {
+    const filtered = wods.filter((wod) => { // Use 'wods' here
       const categoryMatch =
         validSelectedCategories.length === 0 ||
         (wod.category && validSelectedCategories.includes(wod.category));
@@ -151,21 +136,55 @@ export function useWodViewerData(
         wod.tags.some((tag) => validSelectedTags.includes(tag));
       return categoryMatch && tagMatch;
     });
-  }, [searchedWods, validSelectedCategories, validSelectedTags]);
+    
+    console.log("[DEBUG] Category/Tag filtering:", {
+      inputLength: wods.length,
+      outputLength: filtered.length,
+      validSelectedCategories,
+      validSelectedTags,
+      searchTerm
+    });
+    
+    return filtered;
+  }, [wods, validSelectedCategories, validSelectedTags, searchTerm]); // Update dependency array
 
   // Completion filter
   const finalFilteredWods = useMemo(() => {
+    let result;
     if (completionFilter === "done") {
-      return categoryTagFilteredWods.filter((wod) =>
+      result = categoryTagFilteredWods.filter((wod) =>
         isWodDone(wod, scoresByWodId[wod.id]),
       );
     } else if (completionFilter === "notDone") {
-      return categoryTagFilteredWods.filter(
+      result = categoryTagFilteredWods.filter(
         (wod) => !isWodDone(wod, scoresByWodId[wod.id]),
       );
+    } else {
+      result = categoryTagFilteredWods;
     }
-    return categoryTagFilteredWods;
-  }, [categoryTagFilteredWods, completionFilter, scoresByWodId]);
+    
+    console.log("[DEBUG] Completion filtering:", {
+      inputLength: categoryTagFilteredWods.length,
+      outputLength: result.length,
+      completionFilter,
+      searchTerm
+    });
+    
+    return result;
+  }, [categoryTagFilteredWods, completionFilter, scoresByWodId, searchTerm]);
+
+  // Category counts based on filtered wods
+  const categoryCounts = useMemo(() => {
+    return categoryTagFilteredWods.reduce(
+      (acc, wod) => {
+        if (wod.category) {
+          acc[wod.category] = (acc[wod.category] || 0) + 1;
+        }
+        return acc;
+      },
+      {} as Record<string, number>,
+    );
+  }, [categoryTagFilteredWods]);
 
   // Counts
   const {
@@ -186,8 +205,40 @@ export function useWodViewerData(
 
   // Sorting
   const sortedWods = useMemo(() => {
-    return sortWods(finalFilteredWods, sortBy, sortDirection, scoresByWodId);
-  }, [finalFilteredWods, sortBy, sortDirection, scoresByWodId]);
+    const sorted = sortWods(finalFilteredWods, sortBy, sortDirection, scoresByWodId);
+    
+    console.log("[DEBUG] Final sorting:", {
+      inputLength: finalFilteredWods.length,
+      outputLength: sorted.length,
+      sortBy,
+      sortDirection,
+      searchTerm
+    });
+    
+    // Log the first few WODs to see what's in the final result
+    if (sorted.length > 0) {
+      console.log("[DEBUG] First few sorted WODs:", sorted.slice(0, Math.min(3, sorted.length)).map(wod => ({
+        id: wod.id,
+        name: wod.wodName,
+        category: wod.category,
+        tags: wod.tags
+      })));
+    } else {
+      console.log("[DEBUG] No WODs in final sorted result");
+    }
+    
+    return sorted;
+  }, [finalFilteredWods, sortBy, sortDirection, scoresByWodId, searchTerm]);
+
+  // Final debug log before returning
+  console.log("[DEBUG] useWodViewerData final state:", {
+    wodsLength: wods.length,
+    categoryTagFilteredWodsLength: categoryTagFilteredWods.length,
+    finalFilteredWodsLength: finalFilteredWods.length,
+    sortedWodsLength: sortedWods.length,
+    searchTerm,
+    timestamp: new Date().toISOString()
+  });
 
   return {
     wods,
@@ -202,7 +253,7 @@ export function useWodViewerData(
     dynamicDoneWodsCount,
     dynamicNotDoneWodsCount,
     sortedWods,
-    searchedWods,
+    // searchedWods, // Removed
     finalFilteredWods,
   };
 }

@@ -29,6 +29,7 @@ export type Benchmarks = {
 
 // Zod schema for Benchmarks
 import { z } from "zod";
+import type { FuseResultMatch } from "fuse.js"; // Import FuseResultMatch
 
 export const BenchmarkLevelSchema = z.object({
   min: z.number().nullable(),
@@ -129,6 +130,99 @@ export const WodSchema = z.object({
     .nullable(),
 });
 
+// Zod schema to parse/transform raw DB row into Wod
+export const WodFromDbRowSchema = z.object({
+  id: z.string().min(1).catch("unknown_id"),
+  wodUrl: z.string().default(""),
+  wodName: z.string().min(1).catch("Unknown WOD"),
+  description: z.string().nullable().optional(),
+  benchmarks: z
+    .any()
+    .transform(val => {
+      if (typeof val === "string") {
+        try { return JSON.parse(val); } catch { return null; }
+      }
+      return val ?? null;
+    })
+    .nullable()
+    .optional(),
+  category: z
+    .string()
+    .refine(
+      val =>
+        [
+          "Girl",
+          "Hero",
+          "Games",
+          "Open",
+          "Quarterfinals",
+          "AGOQ",
+          "Benchmark",
+          "Other",
+        ].includes(val),
+      { message: "Invalid category" }
+    )
+    .nullable()
+    .optional(),
+  tags: z
+    .any()
+    .transform(val => {
+      if (typeof val === "string") {
+        try { return JSON.parse(val); } catch { return []; }
+      }
+      return Array.isArray(val) ? val : [];
+    })
+    .default([]),
+  difficulty: z.string().nullable().optional(),
+  difficultyExplanation: z.string().nullable().optional(),
+  countLikes: z.number().nullable().optional(),
+  timecap: z.number().nullable().optional(),
+  createdAt: z.preprocess((arg: unknown) => {
+    if (typeof arg === "string") return new Date(arg);
+    if (arg instanceof Date) return new Date(arg);
+    return new Date();
+  }, z.date()),
+  updatedAt: z
+    .preprocess((arg: unknown) => {
+      if (typeof arg === "string") return new Date(arg);
+      if (arg instanceof Date) return new Date(arg);
+      if (arg === null || typeof arg === "undefined") return null;
+      if (typeof arg === "object") {
+        if (
+          arg &&
+          "toISOString" in arg &&
+          typeof arg.toISOString === "function"
+        ) {
+          try {
+            const dateObj = arg as { toISOString(): string };
+            const isoString = dateObj.toISOString();
+            return new Date(isoString);
+          } catch {
+            return null;
+          }
+        }
+        if (arg && "valueOf" in arg && typeof arg.valueOf === "function") {
+          try {
+            const valueObj = arg as { valueOf(): number };
+            const value = valueObj.valueOf();
+            const date = new Date(value);
+            return isNaN(date.getTime()) ? null : date;
+          } catch {
+            return null;
+          }
+        }
+        return null;
+      }
+      if (typeof arg === "number") {
+        const date = new Date(arg);
+        return isNaN(date.getTime()) ? null : date;
+      }
+      return null;
+    }, z.date())
+    .nullable(),
+  movements: z.array(z.string()).default([]),
+});
+
 export type WodTag =
   | "Chipper"
   | "Couplet"
@@ -226,6 +320,7 @@ export type FrequencyDataPoint = {
 export type PerformanceDataPoint = {
   month: string;
   averageLevel: number;
+  scores: MonthlyScoreDetail[];
 };
 
 // Type for sorting columns in WodTable/WodViewer
@@ -235,3 +330,33 @@ export type SortByType =
   | "difficulty"
   | "countLikes"
   | "results"; // Added 'results' for sorting by latest score level
+
+// Type for WOD data returned by search, including match indices
+export type WodWithMatches = Wod & {
+  matches?: readonly FuseResultMatch[] | undefined;
+};
+
+// Structure for individual scores in the chart data (used in getChartData)
+export type MonthlyScoreDetail = {
+  wodName: string;
+  level: number; // The original calculated level (0-4) for this score
+  difficulty: string | null; // WOD difficulty string
+  difficultyMultiplier: number; // Corresponding multiplier
+  adjustedLevel: number; // level * difficultyMultiplier
+  // Raw score fields for formatting in tooltip
+  time_seconds: number | null;
+  reps: number | null;
+  load: number | null;
+  rounds_completed: number | null;
+  partial_reps: number | null;
+  is_rx: boolean | null;
+};
+
+export type WodChartDataResponse = {
+  tagCounts: Record<string, number>;
+  categoryCounts: Record<string, number>;
+  monthlyData: Record<string, { count: number; totalAdjustedLevelScore: number; scores: MonthlyScoreDetail[] }>;
+  yourMovementCounts: Record<string, { count: number; wodNames: string[] }>;
+  allMovementCounts: Record<string, { count: number; wodNames: string[] }>;
+  movementCountsByCategory: Record<string, Record<string, { count: number; wodNames: string[] }>>;
+};

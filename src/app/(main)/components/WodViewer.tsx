@@ -90,23 +90,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   // tRPC utils for query invalidation
   const utils = api.useUtils();
 
-  const {
-    data: wodsDataFromHook, // Rename to avoid conflict
-    isLoading: isLoadingWods,
-    error: errorWods,
-  } = api.wod.getAll.useQuery(undefined, {
-    staleTime: 5 * 60 * 1000,
-    // Remove initialData to avoid type conflicts
-  });
-
-  const {
-    data: scoresData,
-    isLoading: isLoadingScores,
-    error: errorScores,
-  } = api.score.getAllByUser.useQuery(undefined, {
-    enabled: isLoggedIn,
-  });
-
   // Get category and tag orders from the data
   const initialCategoryOrder = useMemo(() => {
     if (!validatedInitialWods) return [];
@@ -125,6 +108,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   }, [validatedInitialWods]);
 
   // Use custom filter/sort/search hook with actual category and tag orders
+  // **Moved this hook call BEFORE the api.wod.getAll.useQuery call**
   const {
     selectedCategories,
     setSelectedCategories,
@@ -145,6 +129,45 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     DEFAULT_SORT_DIRECTIONS,
     DEFAULT_COMPLETION_FILTER,
   );
+
+  // **Now call the query hook, using searchTerm defined above**
+  const {
+    data: wodsDataFromHook, // Rename to avoid conflict
+    isLoading: isLoadingWods,
+    error: errorWods,
+  } = api.wod.getAll.useQuery(
+    searchTerm ? { searchQuery: searchTerm } : {}, // Pass input object conditionally
+    {
+      staleTime: 5 * 60 * 1000,
+      // Remove initialData to avoid type conflicts
+    },
+  );
+
+  // Add debugging for API results
+  useEffect(() => {
+    if (wodsDataFromHook) {
+      console.log("[DEBUG] API query data available:", {
+        dataLength: wodsDataFromHook?.length,
+        searchTerm,
+        timestamp: new Date().toISOString()
+      });
+    }
+    if (errorWods) {
+      console.error("[DEBUG] API query error:", {
+        error: errorWods,
+        searchTerm,
+        timestamp: new Date().toISOString()
+      });
+    }
+  }, [wodsDataFromHook, errorWods, searchTerm]);
+
+  const {
+    data: scoresData,
+    isLoading: isLoadingScores,
+    error: errorScores,
+  } = api.score.getAllByUser.useQuery(undefined, {
+    enabled: isLoggedIn,
+  });
 
   // Validate wodsData from the hook using Zod schema
   const wodsDataParseResult = WodSchema.array().safeParse(wodsDataFromHook);
@@ -255,8 +278,21 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   // Let's check the hook's logic again: `return wodsData ?? initialWods ?? [];` - yes, it handles it.
   // So we can rely on the `wods` returned from useWodViewerData for the final check.
 
+  // Add debugging for the final rendering decision
+  useEffect(() => {
+    console.log("[DEBUG] Final rendering decision:", {
+      wodsLength: wods?.length,
+      sortedWodsLength: sortedWods?.length,
+      showWodLoadingSpinner,
+      hasValidatedInitialWods: validatedInitialWods.length > 0,
+      searchTerm,
+      timestamp: new Date().toISOString()
+    });
+  }, [wods, sortedWods, showWodLoadingSpinner, validatedInitialWods, searchTerm]);
+
   if (!wods || wods.length === 0) {
     // Final check based on data processed by useWodViewerData
+    console.log("[DEBUG] Rendering 'No WODs match the current filters'");
     return <Box>No WODs match the current filters.</Box>; // More specific message
   }
 

@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 };
 
 export default async function Home(): Promise<JSX.Element> {
-  // Fetch WODs server-side
-  const initialWodsRaw = await api.wod.getAll();
+  // Fetch WODs server-side, passing an empty object as input
+  const initialWodsRaw = await api.wod.getAll({});
 
   // Validate and transform raw data using the full WodSchema
   const parseResult = WodSchema.array().safeParse(initialWodsRaw);
@@ -37,7 +37,9 @@ export default async function Home(): Promise<JSX.Element> {
   const queryClient = new QueryClient();
   // The query key must match the one used in the client
   // Use the RAW data for hydration to match what the client query will fetch
-  await queryClient.setQueryData(["wod.getAll"], initialWodsRaw);
+  // **Important:** The query key for hydration needs to include the input object
+  // used in the server-side fetch, even if it's empty.
+  await queryClient.setQueryData(["wod.getAll", { input: {}, type: "query" }], initialWodsRaw);
   const dehydratedState = dehydrate(queryClient);
 
   return (

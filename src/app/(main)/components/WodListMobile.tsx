@@ -14,6 +14,7 @@ import {
   getPerformanceBadgeDetails,
 } from "~/utils/wodUtils";
 import { HighlightMatch } from "~/utils/uiUtils";
+import { wodMatchesAllTerms } from "~/utils/wodFuzzySearch";
 import LogScoreForm from "./LogScoreForm";
 import {
   Drawer,
@@ -73,9 +74,37 @@ const badgeColorMap: Record<string, string> = {
 };
 
 const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
-  if (!searchTerm.trim()) return false;
-  const lowerSearchTerm = searchTerm.toLowerCase();
-
+  const trimmedTerm = searchTerm.trim();
+  if (!trimmedTerm) return false;
+  
+  // Handle quoted exact search
+  if (trimmedTerm.startsWith('"') && trimmedTerm.endsWith('"')) {
+    const exactTerm = trimmedTerm.substring(1, trimmedTerm.length - 1).toLowerCase();
+    if (!exactTerm.trim()) return false;
+    
+    const wodNameLower = wod.wodName?.toLowerCase() || "";
+    const descriptionLower = wod.description?.toLowerCase() || "";
+    const tags = parseTags(wod.tags);
+    const tagsLower = tags.map(tag => tag.toLowerCase());
+    
+    return (
+      wodNameLower.includes(exactTerm) ||
+      descriptionLower.includes(exactTerm) ||
+      tagsLower.some(tag => tag.includes(exactTerm)) ||
+      (wod.movements || []).some(m => m.toLowerCase().includes(exactTerm))
+    );
+  }
+  
+  // Handle multi-word search (AND logic) using shared utility function
+  const searchTerms = trimmedTerm.split(/\s+/).filter(Boolean).map(term => term.toLowerCase());
+  
+  if (searchTerms.length > 1) {
+    return wodMatchesAllTerms(wod, searchTerms);
+  }
+  
+  // Single word search
+  const lowerSearchTerm = searchTerms[0];
+  
   if (wod.wodName?.toLowerCase().includes(lowerSearchTerm)) {
     return true;
   }
@@ -84,6 +113,9 @@ const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
   }
   const tags = parseTags(wod.tags);
   if (tags.some((tag) => tag.toLowerCase().includes(lowerSearchTerm))) {
+    return true;
+  }
+  if ((wod.movements || []).some(m => m.toLowerCase().includes(lowerSearchTerm))) {
     return true;
   }
   return false;

@@ -1,10 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type SortByType, type WodCategory } from "~/types/wodTypes";
 
 /**
- * Custom hook to manage WOD viewer filter, sort, and search state,
- * including URL synchronization.
+ * Custom hook to manage WOD viewer filter, sort, and search state with URL synchronization.
  */
 export function useWodViewerFilters(
   categoryOrder: string[],
@@ -13,12 +12,11 @@ export function useWodViewerFilters(
   DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc">,
   DEFAULT_COMPLETION_FILTER: "all" | "done" | "notDone",
 ) {
-  // --- URL State Management ---
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 
-  // Validation helpers
+  // Validation helpers for URL parameters
   const ALLOWED_COMPLETION_STATUSES: ReadonlyArray<"all" | "done" | "notDone"> =
     ["all", "done", "notDone"];
 
@@ -45,7 +43,11 @@ export function useWodViewerFilters(
     return dir === "asc" || dir === "desc";
   };
 
-  // State
+  // Refs to prevent update cycles between URL and state
+  const isUpdatingFromUrl = useRef(false);
+  const isUpdatingFromState = useRef(false);
+
+  // Filter state
   const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
     const urlCategory = searchParams.get("category");
     return urlCategory ? [urlCategory] : [];
@@ -88,62 +90,119 @@ export function useWodViewerFilters(
     return searchParams.get("search") ?? "";
   });
 
-  // URL sync effect
+  // Effect to update state from URL parameters
+  const searchParamsString = searchParams.toString();
   useEffect(() => {
-    const params = new URLSearchParams(searchParams.toString());
-
-    const validCategoryForUrl =
-      selectedCategories.length > 0 &&
-      categoryOrder.includes(selectedCategories[0] as WodCategory)
-        ? selectedCategories[0]
-        : null;
-
-    if (validCategoryForUrl) {
-      params.set("category", validCategoryForUrl);
-    } else {
-      params.delete("category");
+    // Skip if we're currently updating the URL from state to avoid race conditions
+    if (isUpdatingFromState.current) {
+      return;
     }
 
-    const validTagsForUrl = selectedTags.filter((tag) =>
-      tagOrder.includes(tag),
-    );
-    if (validTagsForUrl.length > 0) {
-      params.set("tags", selectedTags.join(","));
-    } else {
-      params.delete("tags");
+    // Set flag to indicate we're updating from URL
+    isUpdatingFromUrl.current = true;
+
+    try {
+      // Update category from URL
+      const urlCategory = searchParams.get("category");
+      setSelectedCategories(urlCategory ? [urlCategory] : []);
+
+      // Update tags from URL
+      const urlTags = searchParams.get("tags");
+      setSelectedTags(urlTags ? urlTags.split(",") : []);
+
+      // Update completion filter from URL
+      const urlCompletion = searchParams.get("completion");
+      setCompletionFilter(
+        isValidCompletionStatus(urlCompletion)
+          ? urlCompletion
+          : DEFAULT_COMPLETION_FILTER,
+      );
+
+      // Update sort by from URL
+      const urlSortBy = searchParams.get("sortBy");
+      setSortBy(isValidSortBy(urlSortBy) ? urlSortBy : "date");
+
+      // Update sort direction from URL
+      const urlSortDir = searchParams.get("sortDir");
+      setSortDirection(
+        isValidSortDirection(urlSortDir)
+          ? urlSortDir
+          : DEFAULT_SORT_DIRECTIONS[
+              isValidSortBy(urlSortBy) ? urlSortBy : "date"
+            ],
+      );
+
+      // Update search term from URL
+      const urlSearch = searchParams.get("search") ?? "";
+      setSearchTerm(urlSearch);
+    } finally {
+      // Reset flag after updates are complete
+      isUpdatingFromUrl.current = false;
+    }
+  }, [searchParamsString, DEFAULT_COMPLETION_FILTER, DEFAULT_SORT_DIRECTIONS]);
+
+  // Effect to update URL from state
+  useEffect(() => {
+    // Skip if we're currently updating from URL to avoid race conditions
+    if (isUpdatingFromUrl.current) {
+      return;
     }
 
-    if (completionFilter !== DEFAULT_COMPLETION_FILTER) {
-      params.set("completion", completionFilter);
-    } else {
-      params.delete("completion");
-    }
+    // Set flag to indicate we're updating from state
+    isUpdatingFromState.current = true;
 
-    if (sortBy !== "date") {
-      params.set("sortBy", sortBy);
-    } else {
-      params.delete("sortBy");
-    }
+    // Use a timeout to debounce URL updates (100ms is reasonable)
+    const timeoutId = setTimeout(() => {
+      try {
+        const params = new URLSearchParams();
+        const validCategoryForUrl =
+          selectedCategories.length > 0 &&
+          categoryOrder.includes(selectedCategories[0] as WodCategory)
+            ? selectedCategories[0]
+            : null;
 
-    const defaultSortDir = DEFAULT_SORT_DIRECTIONS[sortBy];
-    if (sortDirection !== defaultSortDir) {
-      params.set("sortDir", sortDirection);
-    } else {
-      params.delete("sortDir");
-    }
+        if (validCategoryForUrl) {
+          params.set("category", validCategoryForUrl);
+        } // else: don't add it, effectively deleting it if it was there before
 
-    if (searchTerm) {
-      params.set("search", searchTerm);
-    } else {
-      params.delete("search");
-    }
+        const validTagsForUrl = selectedTags.filter((tag) =>
+          tagOrder.includes(tag),
+        );
+        if (validTagsForUrl.length > 0) {
+          params.set("tags", validTagsForUrl.join(","));
+        } // else: don't add it
 
-    const currentSearch = searchParams.toString();
-    const newSearch = params.toString();
+        if (completionFilter !== DEFAULT_COMPLETION_FILTER) {
+          params.set("completion", completionFilter);
+        } // else: don't add it
 
-    if (newSearch !== currentSearch) {
-      router.replace(`${pathname}?${newSearch}`, { scroll: false });
-    }
+        if (sortBy !== "date") {
+          params.set("sortBy", sortBy);
+        } // else: don't add it
+
+        const defaultSortDir = DEFAULT_SORT_DIRECTIONS[sortBy];
+        if (sortDirection !== defaultSortDir) {
+          params.set("sortDir", sortDirection);
+        } // else: don't add it
+
+        if (searchTerm) {
+          params.set("search", searchTerm);
+        } // else: don't add it
+
+        // Get the final constructed search string
+        const newSearch = params.toString();
+        const newUrl = `${pathname}?${newSearch}`;
+
+        // Update URL without triggering a re-render
+        window.history.replaceState({}, "", newUrl);
+      } finally {
+        // Reset flag after updates are complete
+        isUpdatingFromState.current = false;
+      }
+    }, 100); // 100ms debounce
+
+    // Cleanup timeout on unmount or when dependencies change
+    return () => clearTimeout(timeoutId);
   }, [
     selectedCategories,
     categoryOrder,
@@ -154,14 +213,12 @@ export function useWodViewerFilters(
     sortDirection,
     searchTerm,
     pathname,
-    router,
-    searchParams,
     isLoggedIn,
     DEFAULT_COMPLETION_FILTER,
     DEFAULT_SORT_DIRECTIONS,
   ]);
 
-  // Derived values
+  // Derived values for external use
   const validSelectedCategories =
     selectedCategories.length > 0 &&
     categoryOrder.includes(selectedCategories[0] as WodCategory)

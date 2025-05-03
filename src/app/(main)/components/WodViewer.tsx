@@ -6,6 +6,7 @@ import {
   useLayoutEffect,
   useRef,
   useCallback,
+  useMemo,
 } from "react";
 import { api } from "~/trpc/react";
 import { useSession } from "~/lib/auth-client";
@@ -45,13 +46,6 @@ function WodListMobileWrapper(
   useEffect(() => {
     if (typeof window !== "undefined") {
       const params = new URLSearchParams(window.location.search);
-      // eslint-disable-next-line no-console
-      console.log(
-        "WodListMobileWrapper window.location.search",
-        window.location.search,
-        "expandedWodId:",
-        params.get("expandedWodId"),
-      );
       setExpandedWodIdFromUrl(params.get("expandedWodId"));
     }
   }, [locationSearch]);
@@ -111,8 +105,24 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     enabled: isLoggedIn,
   });
 
-  // Use custom filter/sort/search hook
-  // Start with empty arrays, will update after data loads
+  // Get category and tag orders from the data
+  const initialCategoryOrder = useMemo(() => {
+    if (!validatedInitialWods) return [];
+    const categories = new Set(
+      validatedInitialWods.map((wod) => wod.category).filter(Boolean),
+    );
+    return Array.from(categories).sort();
+  }, [validatedInitialWods]);
+
+  const initialTagOrder = useMemo(() => {
+    if (!validatedInitialWods) return [];
+    const tags = new Set(
+      validatedInitialWods.flatMap((wod) => wod.tags || []).filter(Boolean),
+    );
+    return Array.from(tags).sort();
+  }, [validatedInitialWods]);
+
+  // Use custom filter/sort/search hook with actual category and tag orders
   const {
     selectedCategories,
     setSelectedCategories,
@@ -127,8 +137,8 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     searchTerm,
     setSearchTerm,
   } = useWodViewerFilters(
-    [], // will update after data loads
-    [],
+    initialCategoryOrder,
+    initialTagOrder,
     isLoggedIn,
     DEFAULT_SORT_DIRECTIONS,
     DEFAULT_COMPLETION_FILTER,
@@ -140,18 +150,8 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   if (wodsDataParseResult.success) {
     validatedWodsData = wodsDataParseResult.data as Wod[]; // Assert type after successful parse
   } else if (wodsDataFromHook !== undefined) {
-    // Only log error if data was actually present but failed parsing
-    // eslint-disable-next-line no-console
-    console.error(
-      "[WodViewer] Failed to parse wodsData from hook:",
-      wodsDataParseResult.error,
-    );
-    // Keep validatedWodsData as undefined or default to []? Let's use undefined for now.
+    // Keep validatedWodsData as undefined
   }
-
-  // Determine the primary source of truth for WODs to pass down - NO LONGER NEEDED
-  // Prioritize validated data from hook, fall back to validated initial data
-  // const currentWods: Wod[] = validatedWodsData ?? validatedInitialWods;
 
   // Use custom data transformation hook
   const {
@@ -176,27 +176,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     sortDirection,
     searchTerm,
   );
-
-  // Sync filter state with available categories/tags from data
-  // If selectedCategories/tags are no longer valid, reset them
-  useEffect(() => {
-    if (
-      selectedCategories.length > 0 &&
-      !categoryOrder.includes(selectedCategories[0] as WodCategory)
-    ) {
-      setSelectedCategories([]);
-    }
-    if (
-      selectedTags.length > 0 &&
-      selectedTags.some((tag) => !tagOrder.includes(tag))
-    ) {
-      setSelectedTags((prev) => prev.filter((tag) => tagOrder.includes(tag)));
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [categoryOrder, tagOrder]);
-
-  // Now, re-initialize the filter hook with the real categoryOrder/tagOrder
-  // (This is a workaround; ideally, the filter hook would support dynamic updates)
 
   const filterBarRef = useRef<HTMLDivElement>(null);
   const [tableHeight, setTableHeight] = useState<number>(600);
@@ -248,10 +227,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   // We might still show initial data while loading fresh data.
   const showWodLoadingSpinner = isLoadingWods && !validatedWodsData;
 
-  // Determine the data to display (prioritize hook data, fallback to initial)
-  const displayWods = validatedWodsData ?? validatedInitialWods;
-
-  if (showWodLoadingSpinner && displayWods.length === 0) {
+  if (showWodLoadingSpinner && validatedInitialWods.length === 0) {
     // Only show full loading state if hook is loading AND we have no initial data to show
     return (
       <Flex align="center" justify="center" className="h-[300px] w-full">
@@ -267,8 +243,8 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     return <Box>Error loading scores: {errorScores.message}</Box>;
   }
 
-  if (displayWods.length === 0 && !isLoadingWods) {
-    // If not loading and we have no valid data (neither initial nor from hook)
+  if (validatedInitialWods.length === 0 && !isLoadingWods) {
+    // If not loading and we have no valid data
     return <Box>No valid WOD data available.</Box>;
   }
 
@@ -318,13 +294,11 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
                   "Quarterfinals",
                   "AGOQ",
                   "Benchmark",
-                  "Skill",
                   "Other",
                 ].includes(value)
               ) {
                 setSelectedCategories([value as WodCategory]);
               } else {
-                // fallback: ignore invalid value
                 setSelectedCategories([]);
               }
             }}

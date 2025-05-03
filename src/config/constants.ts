@@ -19,7 +19,6 @@ export const DESIRED_CATEGORY_ORDER: WodCategory[] = [
   "Girl",
   "Benchmark",
   "Hero",
-  "Skill",
   "Open",
   "Quarterfinals",
   "Games",

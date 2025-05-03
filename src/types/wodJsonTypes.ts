@@ -42,7 +42,7 @@ export const BenchmarksSchema = z.object({
  */
 
 export const WodJsonSchema = z.object({
-  wodUrl: z.string().nullable().optional(),
+  wodUrl: z.union([z.string().url(), z.literal("")]), // Must be valid URL or empty string
   wodName: z.string(),
   description: z.string(),
   benchmarks: BenchmarksSchema.optional().nullable(),

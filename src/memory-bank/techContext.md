@@ -99,6 +99,38 @@ Never truncate files for brevity, you must always output full file contents.
   - E2E tests for critical user flows.
   - Ensure tests exist for additions/changes.
 
+## Testing Best Practices
+
+- **Keep Test Files Small:** Extract mocks, test data, and test utilities into separate files to keep test files focused on test cases.
+  - Place mocks in `__tests__/utils/` or `__mocks__/` directories.
+  - Create utility functions for common test setup and assertions.
+  - Use factory functions to generate test data.
+- **Mock Organization:**
+
+  - Define mock types in a separate `mockTypes.ts` file.
+  - Create mock context builders in a separate `makeCtx.ts` file.
+  - Store test data in a separate `testData.ts` file.
+  - This improves maintainability and allows reuse across multiple test files.
+
+- **Test Structure:**
+
+  - Each test file should focus on testing a single component or module.
+  - Use `describe` blocks to group related tests.
+  - Use `beforeEach` to set up common test state.
+  - Keep individual test cases (`it` blocks) small and focused on a single assertion or related assertions.
+
+- **Mock Database Operations:**
+
+  - Create mock implementations of database operations that return predictable test data.
+  - Avoid connecting to real databases in unit tests.
+  - Use in-memory databases or mock the database client for integration tests.
+
+- **Testing tRPC Routers:**
+  - Create a mock context that simulates the tRPC context.
+  - Mock database queries to return predefined test data.
+  - Test the router by calling it directly with the mock context.
+  - Verify that the router returns the expected data and handles errors correctly.
+
 ## Example of a wod/workout from wodwell_workouts.json
 
 ```

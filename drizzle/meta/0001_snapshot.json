@@ -1,45 +1,38 @@
 {
   "version": "6",
   "dialect": "sqlite",
-  "id": "493761e1-1e32-4a99-b9c3-02eabaf8a6d6",
-  "prevId": "b63b84ec-51ee-4a92-9d82-5a5915eabfa9",
+  "id": "0d8e054c-0e9c-458f-9b12-d9d63db3f40a",
+  "prevId": "4ec86afc-4375-4caa-a56d-f5cbf12452d1",
   "tables": {
     "przilla_account": {
       "name": "przilla_account",
       "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "account_id": {
+          "name": "account_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "provider_id": {
+          "name": "provider_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
         "user_id": {
           "name": "user_id",
           "type": "text",
           "primaryKey": false,
           "notNull": true,
-          "autoincrement": false
-        },
-        "type": {
-          "name": "type",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "provider": {
-          "name": "provider",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "provider_account_id": {
-          "name": "provider_account_id",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "refresh_token": {
-          "name": "refresh_token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
           "autoincrement": false
         },
         "access_token": {
@@ -49,22 +42,8 @@
           "notNull": false,
           "autoincrement": false
         },
-        "expires_at": {
-          "name": "expires_at",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "token_type": {
-          "name": "token_type",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false
-        },
-        "scope": {
-          "name": "scope",
+        "refresh_token": {
+          "name": "refresh_token",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
@@ -77,11 +56,46 @@
           "notNull": false,
           "autoincrement": false
         },
-        "session_state": {
-          "name": "session_state",
+        "access_token_expires_at": {
+          "name": "access_token_expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "refresh_token_expires_at": {
+          "name": "refresh_token_expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "scope": {
+          "name": "scope",
           "type": "text",
           "primaryKey": false,
           "notNull": false,
+          "autoincrement": false
+        },
+        "password": {
+          "name": "password",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
           "autoincrement": false
         }
       },
@@ -109,15 +123,45 @@
           "onUpdate": "no action"
         }
       },
-      "compositePrimaryKeys": {
-        "przilla_account_provider_provider_account_id_pk": {
-          "columns": [
-            "provider",
-            "provider_account_id"
-          ],
-          "name": "przilla_account_provider_provider_account_id_pk"
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "przilla_movement": {
+      "name": "przilla_movement",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "name": {
+          "name": "name",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
         }
       },
+      "indexes": {
+        "przilla_movement_name_unique": {
+          "name": "przilla_movement_name_unique",
+          "columns": [
+            "name"
+          ],
+          "isUnique": true
+        },
+        "movement_name_idx": {
+          "name": "movement_name_idx",
+          "columns": [
+            "name"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "przilla_score": {
@@ -178,6 +222,14 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
+        },
+        "is_rx": {
+          "name": "is_rx",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false,
+          "default": false
         },
         "score_date": {
           "name": "score_date",
@@ -266,11 +318,53 @@
     "przilla_session": {
       "name": "przilla_session",
       "columns": {
-        "session_token": {
-          "name": "session_token",
+        "id": {
+          "name": "id",
           "type": "text",
           "primaryKey": true,
           "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "token": {
+          "name": "token",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "ip_address": {
+          "name": "ip_address",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "user_agent": {
+          "name": "user_agent",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": false,
           "autoincrement": false
         },
         "user_id": {
@@ -279,22 +373,15 @@
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
-        },
-        "expires": {
-          "name": "expires",
-          "type": "integer",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
         }
       },
       "indexes": {
-        "session_user_id_idx": {
-          "name": "session_user_id_idx",
+        "przilla_session_token_unique": {
+          "name": "przilla_session_token_unique",
           "columns": [
-            "user_id"
+            "token"
           ],
-          "isUnique": false
+          "isUnique": true
         }
       },
       "foreignKeys": {
@@ -329,7 +416,7 @@
           "name": "name",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "email": {
@@ -343,9 +430,8 @@
           "name": "email_verified",
           "type": "integer",
           "primaryKey": false,
-          "notNull": false,
-          "autoincrement": false,
-          "default": "(unixepoch())"
+          "notNull": true,
+          "autoincrement": false
         },
         "image": {
           "name": "image",
@@ -353,32 +439,16 @@
           "primaryKey": false,
           "notNull": false,
           "autoincrement": false
-        }
-      },
-      "indexes": {},
-      "foreignKeys": {},
-      "compositePrimaryKeys": {},
-      "uniqueConstraints": {}
-    },
-    "przilla_verification_token": {
-      "name": "przilla_verification_token",
-      "columns": {
-        "identifier": {
-          "name": "identifier",
-          "type": "text",
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
           "primaryKey": false,
           "notNull": true,
           "autoincrement": false
         },
-        "token": {
-          "name": "token",
-          "type": "text",
-          "primaryKey": false,
-          "notNull": true,
-          "autoincrement": false
-        },
-        "expires": {
-          "name": "expires",
+        "updated_at": {
+          "name": "updated_at",
           "type": "integer",
           "primaryKey": false,
           "notNull": true,
@@ -386,31 +456,148 @@
         }
       },
       "indexes": {
-        "przilla_verification_token_token_unique": {
-          "name": "przilla_verification_token_token_unique",
+        "przilla_user_email_unique": {
+          "name": "przilla_user_email_unique",
           "columns": [
-            "token"
-          ],
-          "isUnique": true
-        },
-        "vt_token_idx": {
-          "name": "vt_token_idx",
-          "columns": [
-            "token"
+            "email"
           ],
           "isUnique": true
         }
       },
       "foreignKeys": {},
-      "compositePrimaryKeys": {
-        "przilla_verification_token_identifier_token_pk": {
-          "columns": [
-            "identifier",
-            "token"
-          ],
-          "name": "przilla_verification_token_identifier_token_pk"
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "przilla_verification": {
+      "name": "przilla_verification",
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "text",
+          "primaryKey": true,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "identifier": {
+          "name": "identifier",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "value": {
+          "name": "value",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "expires_at": {
+          "name": "expires_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "created_at": {
+          "name": "created_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
+        "updated_at": {
+          "name": "updated_at",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
         }
       },
+      "indexes": {
+        "verification_identifier_idx": {
+          "name": "verification_identifier_idx",
+          "columns": [
+            "identifier"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {},
+      "compositePrimaryKeys": {},
+      "uniqueConstraints": {}
+    },
+    "przilla_wod_movement": {
+      "name": "przilla_wod_movement",
+      "columns": {
+        "wod_id": {
+          "name": "wod_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        },
+        "movement_id": {
+          "name": "movement_id",
+          "type": "text",
+          "primaryKey": false,
+          "notNull": true,
+          "autoincrement": false
+        }
+      },
+      "indexes": {
+        "wod_movement_pk": {
+          "name": "wod_movement_pk",
+          "columns": [
+            "wod_id",
+            "movement_id"
+          ],
+          "isUnique": false
+        },
+        "wod_movement_wod_id_idx": {
+          "name": "wod_movement_wod_id_idx",
+          "columns": [
+            "wod_id"
+          ],
+          "isUnique": false
+        },
+        "wod_movement_movement_id_idx": {
+          "name": "wod_movement_movement_id_idx",
+          "columns": [
+            "movement_id"
+          ],
+          "isUnique": false
+        }
+      },
+      "foreignKeys": {
+        "przilla_wod_movement_wod_id_przilla_wod_id_fk": {
+          "name": "przilla_wod_movement_wod_id_przilla_wod_id_fk",
+          "tableFrom": "przilla_wod_movement",
+          "tableTo": "przilla_wod",
+          "columnsFrom": [
+            "wod_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        },
+        "przilla_wod_movement_movement_id_przilla_movement_id_fk": {
+          "name": "przilla_wod_movement_movement_id_przilla_movement_id_fk",
+          "tableFrom": "przilla_wod_movement",
+          "tableTo": "przilla_movement",
+          "columnsFrom": [
+            "movement_id"
+          ],
+          "columnsTo": [
+            "id"
+          ],
+          "onDelete": "cascade",
+          "onUpdate": "no action"
+        }
+      },
+      "compositePrimaryKeys": {},
       "uniqueConstraints": {}
     },
     "przilla_wod": {
@@ -427,7 +614,7 @@
           "name": "wod_url",
           "type": "text",
           "primaryKey": false,
-          "notNull": false,
+          "notNull": true,
           "autoincrement": false
         },
         "wod_name": {
@@ -479,6 +666,13 @@
           "notNull": false,
           "autoincrement": false
         },
+        "timecap": {
+          "name": "timecap",
+          "type": "integer",
+          "primaryKey": false,
+          "notNull": false,
+          "autoincrement": false
+        },
         "count_likes": {
           "name": "count_likes",
           "type": "integer",
@@ -504,13 +698,6 @@
         }
       },
       "indexes": {
-        "przilla_wod_wod_url_unique": {
-          "name": "przilla_wod_wod_url_unique",
-          "columns": [
-            "wod_url"
-          ],
-          "isUnique": true
-        },
         "przilla_wod_wod_name_unique": {
           "name": "przilla_wod_wod_name_unique",
           "columns": [

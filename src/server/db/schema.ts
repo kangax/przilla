@@ -17,7 +17,7 @@ export const wods = createTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
-    wodUrl: text("wod_url"),
+    wodUrl: text("wod_url").notNull(), // Made non-nullable to match JSON SoT
     wodName: text("wod_name").notNull().unique(),
     description: text("description"),
     benchmarks: text("benchmarks").$type<Benchmarks | null>(), // Use imported Benchmarks type

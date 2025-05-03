@@ -9931,9 +9931,9 @@
         "score_partial_reps": null
       }
     ],
-    "category": "Skill",
+    "category": "Benchmark",
     "tags": ["For Time"],
-    "difficulty": "Easy",
+    "difficulty": "Hard",
     "movements": ["Handstand Hold"],
     "countLikes": 3,
     "difficultyExplanation": "Skill. Tests static handstand hold capacity."
@@ -29038,7 +29038,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "Tests upper body pressing strength and endurance, requiring significant shoulder stability and control.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Handstand Push-Up"],
     "countLikes": 0
@@ -29071,7 +29071,7 @@
     },
     "difficulty": "Very Hard",
     "difficultyExplanation": "Requires exceptional balance, control, and strength, significantly harder than wall-assisted HSPU.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Freestanding Handstand Push-Up"],
     "countLikes": 0
@@ -29104,7 +29104,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "Pure test of vertical pressing strength and shoulder stability without momentum.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Strict Handstand Push-Up"],
     "countLikes": 0
@@ -29137,7 +29137,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "Tests balance, shoulder stability, and coordination while inverted.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Handstand Walk"],
     "countLikes": 0
@@ -29170,7 +29170,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests core strength, hip flexor endurance, and triceps strength.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["L-Sit Hold"],
     "countLikes": 0
@@ -29203,7 +29203,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "High-skill gymnastics movement combining a pull-up and a dip, requiring significant strength and coordination.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Muscle-Up"],
     "countLikes": 0
@@ -29236,7 +29236,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "Direct test of maximal pulling strength relative to bodyweight.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Weighted Pull-Up"],
     "countLikes": 0
@@ -29269,7 +29269,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Requires greater range of motion and pulling strength than standard pull-ups.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Chest-to-Bar Pull-Up"],
     "countLikes": 0
@@ -29302,7 +29302,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests pulling endurance and efficiency using a kip.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Kipping Pull-Up"],
     "countLikes": 0
@@ -29335,7 +29335,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Fundamental test of upper body pulling strength.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Strict Pull-Up"],
     "countLikes": 0
@@ -29368,7 +29368,7 @@
     },
     "difficulty": "Easy",
     "difficultyExplanation": "Basic test of upper body pressing endurance.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Push-Up"],
     "countLikes": 0
@@ -29401,7 +29401,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests pressing strength and stability on an unstable surface.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Ring Dip"],
     "countLikes": 0
@@ -29434,7 +29434,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests shoulder mobility, flexibility, and core control.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Skin the Cat"],
     "countLikes": 0
@@ -29467,7 +29467,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests core strength, grip endurance, and hip flexor mobility.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Toes-to-Bar"],
     "countLikes": 0
@@ -29500,7 +29500,7 @@
     },
     "difficulty": "Very Hard",
     "difficultyExplanation": "High-skill jump rope variation requiring exceptional timing, coordination, and wrist speed.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Triple-Under"],
     "countLikes": 0
@@ -29533,7 +29533,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests squatting endurance, coordination, and accuracy under fatigue in a sprint format.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Wall Ball Shot"],
     "countLikes": 0
@@ -29566,7 +29566,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "High-skill gymnastics movement on a bar, requiring power, coordination, and timing.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Bar Muscle-Up"],
     "countLikes": 0
@@ -29599,7 +29599,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests explosive power and jumping ability.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Box Jump"],
     "countLikes": 0
@@ -29632,7 +29632,7 @@
     },
     "difficulty": "Easy",
     "difficultyExplanation": "Basic test of horizontal explosive power.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Broad Jump"],
     "countLikes": 0
@@ -29665,7 +29665,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests jump rope skill, coordination, and cardiovascular endurance over a fixed time.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Double-Under"],
     "countLikes": 0
@@ -29698,7 +29698,7 @@
     },
     "difficulty": "Medium",
     "difficultyExplanation": "Tests jump rope skill, coordination, and consistency.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Double-Under"],
     "countLikes": 0
@@ -29731,7 +29731,7 @@
     },
     "difficulty": "Hard",
     "difficultyExplanation": "Tests upper body pressing endurance and capacity within a fixed time domain.",
-    "wodUrl": null,
+    "wodUrl": "",
     "results": [],
     "movements": ["Handstand Push-Up"],
     "countLikes": 0

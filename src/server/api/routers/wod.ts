@@ -6,7 +6,13 @@ import {
   protectedProcedure,
 } from "~/server/api/trpc";
 import { wods, scores } from "~/server/db/schema";
-import { type Wod, type Score, type Benchmarks } from "~/types/wodTypes";
+import {
+  type Wod,
+  type Score,
+  type Benchmarks,
+  WodSchema, // Import WodSchema for validation
+  type WodFromQuery, // Import intermediate type
+} from "~/types/wodTypes";
 // import { normalizeMovementName } from "~/utils/movementMapping";
 import { isWodDone } from "~/utils/wodUtils";
 
@@ -76,23 +82,75 @@ export const wodRouter = createTRPCRouter({
       );
     }
 
-    // 3. Map WODs and attach movements
-    return allWodsData.map((wod) => ({
-      id: wod.id,
-      wodUrl: wod.wodUrl,
-      wodName: wod.wodName,
-      description: wod.description,
-      benchmarks: wod.benchmarks,
-      category: wod.category,
-      tags: wod.tags,
-      difficulty: wod.difficulty,
-      difficultyExplanation: wod.difficultyExplanation,
-      countLikes: wod.countLikes,
-      timecap: wod.timecap, // Add timecap field
-      createdAt: wod.createdAt,
-      updatedAt: wod.updatedAt,
-      movements: movementsByWod[wod.id] ?? [],
-    }));
+    // 3. Reduce WODs: Parse JSON, Validate with Zod, Filter invalid, and Attach movements
+    return allWodsData.reduce<Wod[]>((acc, wod) => {
+      let parsedBenchmarks: Benchmarks | null = null;
+      if (typeof wod.benchmarks === "string") {
+        try {
+          // Use safe parsing with fallback
+          parsedBenchmarks = JSON.parse(wod.benchmarks || "null") as Benchmarks;
+        } catch (error) {
+          console.error(
+            `Failed to parse benchmarks JSON for WOD ${wod.id} (${wod.wodName}):`,
+            error,
+          );
+          // Keep parsedBenchmarks as null if parsing fails
+        }
+      } else if (wod.benchmarks && typeof wod.benchmarks === "object") {
+        // If it's already a non-null object (e.g., if DB driver parsed it), use it
+        parsedBenchmarks = wod.benchmarks;
+      }
+
+      // Similar parsing for tags (assuming they might also be stored as JSON string)
+      let parsedTags: string[] | null = null;
+      if (typeof wod.tags === "string") {
+        try {
+          parsedTags = JSON.parse(wod.tags) as string[];
+        } catch (error) {
+          console.error(
+            `Failed to parse tags JSON for WOD ${wod.id} (${wod.wodName}):`,
+            error,
+          );
+        }
+      } else if (Array.isArray(wod.tags)) {
+        parsedTags = wod.tags;
+      }
+
+      // Construct the potential Wod object for validation, typed as WodFromQuery
+      const potentialWod: WodFromQuery = {
+        id: wod.id, // id is required in WodFromQuery (implicitly via Omit<Wod>)
+        wodUrl: wod.wodUrl,
+        wodName: wod.wodName,
+        description: wod.description,
+        benchmarks: parsedBenchmarks, // Use parsed object or null
+        category: wod.category,
+        tags: parsedTags ?? [], // Use parsed array or default to empty array
+        difficulty: wod.difficulty,
+        difficultyExplanation: wod.difficultyExplanation,
+        countLikes: wod.countLikes,
+        timecap: wod.timecap,
+        createdAt: wod.createdAt, // Will be validated by Zod preprocessor
+        updatedAt: wod.updatedAt, // Will be validated by Zod preprocessor
+        movements: movementsByWod[wod.id] ?? [],
+      };
+
+      // Validate the constructed object against the WodSchema
+      // No need for 'as any' now that potentialWod is typed correctly
+      const validationResult = WodSchema.safeParse(potentialWod);
+
+      if (validationResult.success) {
+        // If valid, add the validated data to the accumulator
+        acc.push(validationResult.data);
+      } else {
+        // If invalid, log the error and skip this WOD
+        console.error(
+          `Zod validation failed for WOD ${wod.wodName} (ID: ${wod.id}). Skipping. Issues:`,
+          JSON.stringify(validationResult.error.issues, null, 2), // Log detailed issues
+        );
+      }
+
+      return acc; // Return accumulator for the next iteration
+    }, []); // Initial value for reduce is an empty array
   }),
 
   /**
@@ -223,17 +281,37 @@ export const wodRouter = createTRPCRouter({
       monthlyData[monthKey].count++;
 
       // Calculate performance level score based on benchmarks
-      const benchmarks: Benchmarks =
-        typeof benchmarksInput === "string"
-          ? (JSON.parse(benchmarksInput || "{}") as Benchmarks) // Add fallback for empty string
-          : benchmarksInput;
+      let benchmarks: Benchmarks | null = null;
+      if (typeof benchmarksInput === "string") {
+        try {
+          benchmarks = JSON.parse(benchmarksInput || "{}") as Benchmarks; // Use fallback for empty/null string
+        } catch (error) {
+          console.error(
+            `Failed to parse benchmarks JSON in getChartData for score ${data.scoreId}:`,
+            error,
+          );
+          // Keep benchmarks null if parsing fails
+        }
+      } else if (benchmarksInput && typeof benchmarksInput === "object") {
+        benchmarks = benchmarksInput;
+      }
+
+      // If benchmarks are null after parsing/checking, log a warning and skip level calculation for this score
+      if (!benchmarks) {
+        console.warn(
+          `Skipping level calculation for score ${data.scoreId} due to missing or invalid benchmarks data.`,
+        );
+        // Potentially continue to next iteration or handle differently if needed
+        // For now, we'll proceed, but levelScore will remain 0
+      }
 
       // Get numeric score value (time in seconds, reps, etc.)
       const scoreValue = data.time_seconds ?? data.reps ?? 0; // Use nullish coalescing
 
       // Calculate original performance level (0-4 scale)
       let levelScore = 0;
-      if (benchmarks.levels) {
+      // Only calculate level if benchmarks and benchmarks.levels exist
+      if (benchmarks?.levels) {
         // Handle time-based benchmarks (lower is better)
         if (benchmarks.type === "time") {
           if (scoreValue <= (benchmarks.levels.elite?.max ?? Infinity))

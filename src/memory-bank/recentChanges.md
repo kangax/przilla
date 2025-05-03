@@ -1,5 +1,20 @@
 # Recent Changes
 
+## May 2, 2025
+
+- **Test File Refactoring: Improved Organization and Maintainability**
+
+  - **Goal:** Improve test organization by extracting mocks and test data into separate files, following best practices.
+  - **Implementation:**
+    - Created a new directory structure for test utilities: `src/server/api/__tests__/utils/`.
+    - Extracted mock types to `mockTypes.ts`.
+    - Moved context creation logic to `makeCtx.ts`.
+    - Separated test data generation into `testData.ts`.
+    - Updated `wod.test.ts` to use these new utility files.
+    - Fixed TypeScript errors related to `any` types in the test files.
+    - Updated the tech memory bank with testing best practices.
+  - **Outcome:** Test files are now more maintainable, reusable, and follow best practices for organization. The tech memory bank now includes guidelines for keeping test files small and organized.
+
 ## April 30, 2025
 
 - **WodViewer Refactor: Extracted Filter/Sort/Search State to Custom Hook**

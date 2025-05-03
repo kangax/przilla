@@ -54,14 +54,13 @@ export const WodCategorySchema = z.enum([
   "Quarterfinals",
   "AGOQ",
   "Benchmark",
-  "Skill",
   "Other",
 ]);
 
 // Zod schema for the final client-side Wod type
 export const WodSchema = z.object({
   id: z.string(),
-  wodUrl: z.string().url().nullable(),
+  wodUrl: z.union([z.string().url(), z.literal("")]), // Allow valid URL or empty string
   wodName: z.string(),
   description: z.string().nullable().optional(), // Optional because it might be missing entirely
   benchmarks: BenchmarksSchema.nullable().optional(), // Optional because it might be missing entirely
@@ -72,18 +71,60 @@ export const WodSchema = z.object({
   countLikes: z.number().nullable().optional(), // Optional because it might be missing entirely
   movements: z.array(z.string()).default([]), // Default to empty array if undefined
   timecap: z.number().nullable().optional(), // Optional because it might be missing entirely
-  createdAt: z.preprocess((arg) => {
-    if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
-    return new Date(); // Default or throw error? Let's default for now.
+  createdAt: z.preprocess((arg: unknown) => {
+    if (typeof arg === "string") return new Date(arg);
+    if (arg instanceof Date) return new Date(arg);
+    // For any other type, return current date as default
+    return new Date();
   }, z.date()),
   updatedAt: z
-    .preprocess((arg) => {
-      if (typeof arg == "string" || arg instanceof Date) return new Date(arg);
+    .preprocess((arg: unknown) => {
+      if (typeof arg === "string") return new Date(arg);
+      if (arg instanceof Date) return new Date(arg);
       // If null or undefined, return null
       if (arg === null || typeof arg === "undefined") return null;
-      // Handle potential invalid date strings gracefully
-      const date = new Date(arg as any); // Use 'as any' carefully or add more checks
-      return isNaN(date.getTime()) ? null : date;
+
+      // Handle objects specifically to avoid "[object Object]" string conversion
+      if (typeof arg === "object") {
+        // If it has a toISOString method, it might be Date-like
+        if (
+          arg &&
+          "toISOString" in arg &&
+          typeof arg.toISOString === "function"
+        ) {
+          try {
+            // Use type assertion to tell TypeScript this is safe
+            const dateObj = arg as { toISOString(): string };
+            const isoString = dateObj.toISOString();
+            return new Date(isoString);
+          } catch {
+            return null;
+          }
+        }
+        // If it has numeric timestamp properties, try to use those
+        if (arg && "valueOf" in arg && typeof arg.valueOf === "function") {
+          try {
+            // Use type assertion to tell TypeScript this is safe
+            const valueObj = arg as { valueOf(): number };
+            const value = valueObj.valueOf();
+            const date = new Date(value);
+            return isNaN(date.getTime()) ? null : date;
+          } catch {
+            return null;
+          }
+        }
+        // For other objects, we can't safely convert to a date
+        return null;
+      }
+
+      // For numbers, use direct conversion
+      if (typeof arg === "number") {
+        const date = new Date(arg);
+        return isNaN(date.getTime()) ? null : date;
+      }
+
+      // For any other type, we can't safely convert to a date
+      return null;
     }, z.date())
     .nullable(),
 });
@@ -102,16 +143,15 @@ export type WodCategory =
   | "Hero"
   | "Games"
   | "Open"
-  | "Quarterfinals" // Added Quarterfinals based on page.tsx
-  | "AGOQ" // Added AGOQ category
+  | "Quarterfinals"
+  | "AGOQ"
   | "Benchmark"
-  | "Skill" // Added Skill based on page.tsx
   | "Other";
 
 // Final client-side Wod type (after parsing/transformation)
 export type Wod = {
   id: string; // Added from DB schema
-  wodUrl: string | null; // Updated to match DB schema (can be null)
+  wodUrl: string; // Must be a string (valid URL or empty)
   wodName: string;
   description?: string | null; // Updated to match DB schema (can be null)
   benchmarks?: Benchmarks | null; // Updated to match DB schema (can be null)

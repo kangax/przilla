@@ -22,6 +22,7 @@ import * as Select from "@radix-ui/react-select";
 import { ChevronDown, ListFilter, ArrowUp, ArrowDown } from "lucide-react";
 import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
+import TagSelector from "./TagSelector"; // Import the new component
 import { useMediaQuery } from "~/utils/useMediaQuery";
 import { useWodViewerFilters } from "./hooks/useWodViewerFilters";
 import { useWodViewerData } from "./hooks/useWodViewerData";
@@ -305,7 +306,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
           >
             <Select.Trigger
               className={`flex min-w-[120px] items-center justify-between rounded-md border border-border bg-card px-3 text-card-foreground hover:bg-accent ${
-                isMobile ? "py-2 text-base" : "mr-2 py-2 text-xs"
+                isMobile ? "py-2 text-base" : "py-2 text-xs"
               }`}
             >
               <Select.Value placeholder="Select category">
@@ -346,29 +347,14 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
               </Select.Content>
             </Select.Portal>
           </Select.Root>
-        </div>
 
-        {/* Tag chips */}
-        <div
-          className={`${
-            isMobile
-              ? "scrollbar-thin scrollbar-thumb-slate-200 flex w-full gap-2 overflow-x-auto pb-1 pt-1"
-              : "flex flex-grow flex-wrap gap-1"
-          }`}
-        >
-          {tagOrder.map((tag) => (
-            <Box
-              key={tag}
-              className={`cursor-pointer whitespace-nowrap rounded-full border transition-colors duration-150 ${
-                selectedTags.includes(tag)
-                  ? "border-blue-300 bg-blue-100 text-blue-700"
-                  : "border-slate-300 bg-white text-slate-700 hover:bg-slate-100 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-200 dark:hover:bg-slate-700"
-              } ${isMobile ? "px-4 py-1 text-sm font-medium" : "px-3 py-1 text-xs font-medium"}`}
-              onClick={() => toggleTag(tag)}
-            >
-              {tag}
-            </Box>
-          ))}
+          {/* Use the new TagSelector component */}
+          <TagSelector
+            tagOrder={tagOrder}
+            selectedTags={selectedTags}
+            toggleTag={toggleTag}
+            isMobile={isMobile}
+          />
         </div>
 
         {/* SegmentedControl and Sort Button: On mobile, show in a row; on desktop, just SegmentedControl */}

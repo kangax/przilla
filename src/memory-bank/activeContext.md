@@ -2,6 +2,27 @@
 
 ## Current Focus
 
+### WodViewer UI Enhancement: Tags Display as Dropdown (May 2, 2025)
+
+- **Goal:** Change the tags display in `WodViewer.tsx` from an always visible horizontal list to a dropdown containing the same styled tag chips, improving space efficiency while maintaining visual identity.
+- **Implementation Plan:**
+  1. Replace the current horizontal list of tag chips with a Radix UI DropdownMenu component.
+  2. Create a trigger button showing "Tags (X)" where X is the number of selected tags.
+  3. Display the same styled tag chips inside the dropdown content, maintaining their current visual appearance and toggle behavior.
+  4. Ensure the dropdown remains open when selecting/deselecting tags to allow for multiple selections.
+  5. Style the dropdown consistently with the existing category dropdown for visual coherence.
+  6. Ensure responsive behavior on both mobile and desktop.
+- **Technical Approach:**
+  - Use `DropdownMenu` from Radix UI Themes (already used for the sort dropdown).
+  - Maintain the existing tag selection state management from `useWodViewerFilters`.
+  - Preserve the current tag chip styling and toggle behavior.
+  - Ensure the dropdown has sufficient width to display the chips in a comfortable layout.
+- **Expected Outcome:**
+  - More efficient use of screen space in the filter bar.
+  - Consistent UI pattern with the existing category dropdown.
+  - Maintained visual identity of tag chips and their selection state.
+  - Improved mobile experience by eliminating the need for horizontal scrolling of tags.
+
 ### WodViewer Refactor: Filter/Sort/Search State Extraction (Apr 30, 2025)
 
 - **Goal:** Reduce the size and complexity of `WodViewer.tsx` by extracting all filter, sort, search, and URL sync logic into a dedicated custom hook, improving maintainability and separation of concerns.

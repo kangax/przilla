@@ -1,6 +1,36 @@
 # Recent Changes
 
+## May 3, 2025
+
+- **WodViewer Tag Selector Enhancement & Refactor**
+  - **Goal:** Improve the tag filtering UI in `WodViewer.tsx` for better visibility and usability, and refactor it into a dedicated component.
+  - **Implementation:**
+    - Iteratively updated the tag dropdown based on feedback:
+      - Changed trigger from "Tags (X)" to display selected tags as chips.
+      - Added dark mode compatibility for the chips.
+      - Filtered selected tags out of the dropdown list.
+      - Added remove ("×") buttons to selected tag chips for direct removal.
+      - Resolved event propagation issues preventing the remove buttons from working correctly.
+      - Adjusted layout to display "Tags:" label, selected chips, and dropdown trigger horizontally.
+    - Created a new component `TagSelector.tsx` in `src/app/(main)/components/`.
+    - Moved all tag selection logic and JSX (label, selected chips, dropdown) from `WodViewer.tsx` to `TagSelector.tsx`.
+    - Defined props (`tagOrder`, `selectedTags`, `toggleTag`, `isMobile`) for `TagSelector`.
+    - Replaced the original tag selection JSX in `WodViewer.tsx` with the new `<TagSelector />` component, passing the required props.
+  - **Outcome:** The tag selection UI is more intuitive, allowing users to see selected tags easily and remove them directly. The dropdown only shows available tags. The logic is now encapsulated in a reusable `TagSelector` component, making `WodViewer.tsx` cleaner.
+
 ## May 2, 2025
+
+- **WodViewer UI Enhancement: Tags Display as Dropdown**
+
+  - **Goal:** Change the tags display in `WodViewer.tsx` from an always visible horizontal list to a dropdown containing the same styled tag chips, improving space efficiency while maintaining visual identity.
+  - **Implementation Plan:**
+    - Replace the current horizontal list of tag chips with a Radix UI DropdownMenu component.
+    - Create a trigger button showing "Tags (X)" where X is the number of selected tags.
+    - Display the same styled tag chips inside the dropdown content, maintaining their current visual appearance and toggle behavior.
+    - Ensure the dropdown remains open when selecting/deselecting tags to allow for multiple selections.
+    - Style the dropdown consistently with the existing category dropdown for visual coherence.
+    - Ensure responsive behavior on both mobile and desktop.
+  - **Expected Outcome:** More efficient use of screen space in the filter bar, consistent UI pattern with the existing category dropdown, maintained visual identity of tag chips, and improved mobile experience by eliminating the need for horizontal scrolling of tags.
 
 - **Test File Refactoring: Improved Organization and Maintainability**
 

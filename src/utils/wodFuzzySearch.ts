@@ -218,6 +218,6 @@ export function fuzzySearchWods(wods: Wod[], query: string): WodWithMatches[] {
   // Fuzzy search
   return fuse.search(trimmedQuery).map((result) => ({
     ...result.item,
-    matches: result.matches as readonly FuseResultMatch[] | undefined,
+    matches: result.matches,
   }));
 }

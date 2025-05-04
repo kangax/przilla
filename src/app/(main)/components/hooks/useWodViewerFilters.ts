@@ -15,7 +15,6 @@ export function useWodViewerFilters(
   DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc">,
   DEFAULT_COMPLETION_FILTER: "all" | "done" | "notDone",
 ) {
-  const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
 

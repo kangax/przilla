@@ -239,7 +239,6 @@ async function updateWods() {
       await db
         .update(schema.wods)
         .set({
-          // @ts-expect-error
           tags: JSON.stringify(newTags),
           benchmarks: benchmarksData ? JSON.stringify(benchmarksData) : null,
         })

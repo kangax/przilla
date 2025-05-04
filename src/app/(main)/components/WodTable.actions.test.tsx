@@ -114,6 +114,8 @@ const mockWodWithScore = {
   description: "Desc Bravo",
   category: "Girl" as const, // Explicitly use a valid WodCategory literal
   tags: ["For Time"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "time" as const,
     levels: {

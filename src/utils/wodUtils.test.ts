@@ -53,6 +53,14 @@ describe("wodUtils", () => {
         wodName: "Test WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "time",
           levels: {
@@ -62,6 +70,7 @@ describe("wodUtils", () => {
             beginner: { min: 300, max: null },
           },
         },
+        updatedAt: new Date(),
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
       expect(Array.isArray(tooltip)).toBe(true);
@@ -93,6 +102,14 @@ describe("wodUtils", () => {
         wodName: "Test Rounds WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "rounds",
           levels: {
@@ -102,6 +119,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 10 },
           },
         },
+        updatedAt: new Date(),
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
       expect(Array.isArray(tooltip)).toBe(true);
@@ -133,6 +151,14 @@ describe("wodUtils", () => {
         wodName: "Test Load WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "load",
           levels: {
@@ -142,6 +168,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 200 },
           },
         },
+        updatedAt: new Date(),
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
       expect(Array.isArray(tooltip)).toBe(true);
@@ -173,6 +200,14 @@ describe("wodUtils", () => {
         wodName: "Test Reps WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "reps",
           levels: {
@@ -182,6 +217,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 50 },
           },
         },
+        updatedAt: new Date(),
       };
       const tooltip = getPerformanceLevelTooltip(mockWod);
       expect(Array.isArray(tooltip)).toBe(true);
@@ -351,6 +387,14 @@ describe("wodUtils", () => {
         wodName: "Test Time WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "time",
           levels: {
@@ -360,6 +404,7 @@ describe("wodUtils", () => {
             beginner: { min: 300, max: null },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getNumericScore(mockWod, score)).toBe(65);
     });
@@ -385,6 +430,14 @@ describe("wodUtils", () => {
         wodName: "Test Reps WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "reps",
           levels: {
@@ -394,6 +447,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 50 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getNumericScore(mockWod, score)).toBe(42);
     });
@@ -419,6 +473,14 @@ describe("wodUtils", () => {
         wodName: "Test Load WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "load",
           levels: {
@@ -428,6 +490,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 200 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getNumericScore(mockWod, score)).toBe(225);
     });
@@ -453,6 +516,14 @@ describe("wodUtils", () => {
         wodName: "Test Rounds WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "rounds",
           levels: {
@@ -462,6 +533,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 10 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getNumericScore(mockWod, score)).toBe(5);
     });
@@ -484,18 +556,27 @@ describe("wodUtils", () => {
       };
       const mockWod: Wod = {
         id: "wod1",
-        wodName: "Test Rounds WOD",
+        wodName: "Test Load WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
-          type: "rounds",
+          type: "load",
           levels: {
-            elite: { min: 20, max: null },
-            advanced: { min: 15, max: 20 },
-            intermediate: { min: 10, max: 15 },
-            beginner: { min: null, max: 10 },
+            elite: { min: 300, max: null },
+            advanced: { min: 250, max: 300 },
+            intermediate: { min: 200, max: 250 },
+            beginner: { min: null, max: 200 },
           },
         },
+        updatedAt: new Date(),
       };
       // The implementation treats partial reps as a decimal (e.g., 12 becomes 0.12)
       expect(getNumericScore(mockWod, score)).toBeCloseTo(5.12, 2);
@@ -519,18 +600,27 @@ describe("wodUtils", () => {
       };
       const mockWod: Wod = {
         id: "wod1",
-        wodName: "Test Mismatch WOD",
+        wodName: "Test Rounds WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
-          type: "reps",
+          type: "rounds",
           levels: {
-            elite: { min: 100, max: null },
-            advanced: { min: 75, max: 100 },
-            intermediate: { min: 50, max: 75 },
-            beginner: { min: null, max: 50 },
+            elite: { min: 20, max: null },
+            advanced: { min: 15, max: 20 },
+            intermediate: { min: 10, max: 15 },
+            beginner: { min: null, max: 10 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getNumericScore(mockWod, score)).toBeNull();
     });
@@ -575,6 +665,14 @@ describe("wodUtils", () => {
         wodName: "Test No Score WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "time",
           levels: {
@@ -584,6 +682,7 @@ describe("wodUtils", () => {
             beginner: { min: 300, max: null },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getNumericScore(mockWod, score)).toBeNull();
     });
@@ -608,18 +707,27 @@ describe("wodUtils", () => {
       };
       const mockWod: Wod = {
         id: "wod1",
-        wodName: "Test Time WOD",
+        wodName: "Test Reps WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
-          type: "time",
+          type: "reps",
           levels: {
-            elite: { min: null, max: 180 },
-            advanced: { min: 180, max: 240 },
-            intermediate: { min: 240, max: 300 },
-            beginner: { min: 300, max: null },
+            elite: { min: 100, max: null },
+            advanced: { min: 75, max: 100 },
+            intermediate: { min: 50, max: 75 },
+            beginner: { min: null, max: 50 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getPerformanceLevel(mockWod, score)).toBe("advanced");
     });
@@ -645,6 +753,14 @@ describe("wodUtils", () => {
         wodName: "Test Rounds WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "rounds",
           levels: {
@@ -654,6 +770,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 10 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getPerformanceLevel(mockWod, score)).toBe("advanced");
     });
@@ -679,6 +796,14 @@ describe("wodUtils", () => {
         wodName: "Test Load WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "load",
           levels: {
@@ -688,6 +813,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 200 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getPerformanceLevel(mockWod, score)).toBe("advanced");
     });
@@ -713,6 +839,14 @@ describe("wodUtils", () => {
         wodName: "Test Reps WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "reps",
           levels: {
@@ -722,6 +856,7 @@ describe("wodUtils", () => {
             beginner: { min: null, max: 50 },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getPerformanceLevel(mockWod, score)).toBe("intermediate");
     });
@@ -766,6 +901,14 @@ describe("wodUtils", () => {
         wodName: "Test No Score WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
+        description: "Test description",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
         benchmarks: {
           type: "time",
           levels: {
@@ -775,6 +918,7 @@ describe("wodUtils", () => {
             beginner: { min: 300, max: null },
           },
         },
+        updatedAt: new Date(),
       };
       expect(getPerformanceLevel(mockWod, score)).toBeNull();
     });
@@ -824,42 +968,51 @@ describe("wodUtils", () => {
     const wods: Wod[] = [
       {
         id: "1",
-        wodName: "Cindy",
+        wodName: "Test",
         category: "Girl",
         difficulty: "Medium",
         countLikes: 100,
         createdAt: new Date(),
-        wodUrl: "test.com/cindy",
+        wodUrl: "test.com/test",
         updatedAt: new Date(),
-        description: "AMRAP in 20 minutes",
-        difficultyExplanation: "Classic benchmark AMRAP.",
+        description: "Test WOD",
+        difficultyExplanation: "Test explanation",
         tags: ["AMRAP"],
+        benchmarks: null,
+        movements: [],
+        timecap: null,
       },
       {
         id: "2",
-        wodName: "Fran",
+        wodName: "Test2",
         category: "Girl",
         difficulty: "Hard",
         countLikes: 200,
         createdAt: new Date(),
-        wodUrl: "test.com/fran",
+        wodUrl: "test.com/test2",
         updatedAt: new Date(),
-        description: "21-15-9 reps",
-        difficultyExplanation: "Classic benchmark couplet.",
+        description: "Test WOD 2",
+        difficultyExplanation: "Test explanation 2",
         tags: ["For Time"],
+        benchmarks: null,
+        movements: [],
+        timecap: null,
       },
       {
         id: "3",
-        wodName: "Annie",
+        wodName: "Test3",
         category: "Girl",
         difficulty: "Easy",
         countLikes: 50,
         createdAt: new Date(),
-        wodUrl: "test.com/annie",
+        wodUrl: "test.com/test3",
         updatedAt: new Date(),
-        description: "50-40-30-20-10 reps",
-        difficultyExplanation: "Classic benchmark couplet.",
+        description: "Test WOD 3",
+        difficultyExplanation: "Test explanation 3",
         tags: ["For Time"],
+        benchmarks: null,
+        movements: [],
+        timecap: null,
       },
     ];
 

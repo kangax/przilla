@@ -59,6 +59,7 @@ const mockWodTime: Wod = {
   wodName: "Time WOD",
   description: "For time",
   tags: [],
+  movements: [],
   timecap: 600, // 10 minutes
   benchmarks: {
     type: "time",
@@ -83,6 +84,7 @@ const mockWodReps: Wod = {
   wodName: "Reps WOD",
   description: "Max reps",
   tags: [],
+  movements: [],
   timecap: null,
   benchmarks: {
     type: "reps",
@@ -107,6 +109,7 @@ const mockWodLoad: Wod = {
   wodName: "Load WOD",
   description: "Max load",
   tags: [],
+  movements: [],
   timecap: null,
   benchmarks: {
     type: "load",
@@ -131,6 +134,7 @@ const mockWodRounds: Wod = {
   wodName: "Rounds WOD",
   description: "Max rounds",
   tags: [],
+  movements: [],
   timecap: null,
   benchmarks: {
     type: "rounds",

@@ -81,7 +81,7 @@ export function useWodViewerData(
       }),
     );
 
-    return (processedScores ?? []).reduce(
+    return (processedScores ?? []).reduce<Record<string, Score[]>>(
       (acc, score) => {
         if (!acc[score.wodId]) {
           acc[score.wodId] = [];
@@ -92,21 +92,31 @@ export function useWodViewerData(
         );
         return acc;
       },
-      {} as Record<string, Score[]>,
+      {},
     );
   }, [scoresData]);
 
   // Category and tag order
-  const categoryOrder = useMemo(() => {
+  const categoryOrder = useMemo<string[]>(() => {
     if (!wods) return [];
-    const categories = new Set(wods.map((wod) => wod.category).filter(Boolean));
-    return Array.from(categories).sort();
+    const categories = new Set<WodCategory>(
+      wods
+        .map((wod) => wod.category)
+        .filter((cat): cat is WodCategory => typeof cat === "string" && cat.length > 0)
+    );
+    return Array.from(categories).sort() as WodCategory[];
   }, [wods]);
 
-  const tagOrder = useMemo(() => {
+  const tagOrder = useMemo<string[]>(() => {
     if (!wods) return [];
-    const tags = new Set(wods.flatMap((wod) => wod.tags).filter(Boolean));
-    return Array.from(tags).sort();
+    const tags = new Set<string>(
+      wods.flatMap((wod) =>
+        Array.isArray(wod.tags)
+          ? wod.tags.filter((t): t is string => typeof t === "string" && t.length > 0)
+          : []
+      )
+    );
+    return Array.from(tags).sort() as string[];
   }, [wods]);
 
   // Original total count (before any filtering)
@@ -127,16 +137,20 @@ export function useWodViewerData(
 
   // Update this filter to use 'wods' directly instead of 'searchedWods'
   const categoryTagFilteredWods = useMemo(() => {
-    const filtered = wods.filter((wod) => { // Use 'wods' here
+    const filtered = wods.filter((wod) => {
       const categoryMatch =
         validSelectedCategories.length === 0 ||
         (wod.category && validSelectedCategories.includes(wod.category));
+      // Ensure tags is always a string array
+      const tags: string[] = Array.isArray(wod.tags)
+        ? wod.tags.filter((t): t is string => typeof t === "string")
+        : [];
       const tagMatch =
         validSelectedTags.length === 0 ||
-        wod.tags.some((tag) => validSelectedTags.includes(tag));
+        tags.some((tag) => validSelectedTags.includes(tag));
       return categoryMatch && tagMatch;
     });
-    
+
     console.log("[DEBUG] Category/Tag filtering:", {
       inputLength: wods.length,
       outputLength: filtered.length,
@@ -144,9 +158,9 @@ export function useWodViewerData(
       validSelectedTags,
       searchTerm
     });
-    
+
     return filtered;
-  }, [wods, validSelectedCategories, validSelectedTags, searchTerm]); // Update dependency array
+  }, [wods, validSelectedCategories, validSelectedTags, searchTerm]);
 
   // Completion filter
   const finalFilteredWods = useMemo(() => {
@@ -175,14 +189,14 @@ export function useWodViewerData(
 
   // Category counts based on filtered wods
   const categoryCounts = useMemo(() => {
-    return categoryTagFilteredWods.reduce(
+    return categoryTagFilteredWods.reduce<Record<string, number>>(
       (acc, wod) => {
         if (wod.category) {
           acc[wod.category] = (acc[wod.category] || 0) + 1;
         }
         return acc;
       },
-      {} as Record<string, number>,
+      {},
     );
   }, [categoryTagFilteredWods]);
 

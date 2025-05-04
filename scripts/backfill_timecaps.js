@@ -69,7 +69,6 @@ async function main() {
     // Update the wods table where wodName matches
     const res = await db
       .update(wods)
-      // @ts-expect-error
       .set({ timecap: timecapSeconds })
       .where(eq(wods.wodName, wodName));
 

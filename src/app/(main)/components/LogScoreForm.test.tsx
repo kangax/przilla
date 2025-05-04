@@ -85,6 +85,8 @@ const mockWod: Wod = {
   wodName: "Test WOD",
   description: "Test description",
   tags: ["For Time"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "time",
     levels: {

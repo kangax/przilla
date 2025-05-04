@@ -17,22 +17,23 @@ export const wods = createTable(
     id: text("id")
       .primaryKey()
       .$defaultFn(() => crypto.randomUUID()),
-    wodUrl: text("wod_url").notNull(), // Made non-nullable to match JSON SoT
-    wodName: text("wod_name").notNull().unique(),
-    description: text("description"),
-    benchmarks: text("benchmarks").$type<Benchmarks | null>(), // Use imported Benchmarks type
-    category: text("category"), // e.g., "Hero", "Girl", "Benchmark", "Open", "Games", "Quarterfinals"
-    tags: text("tags").$type<string[] | null>(), // Storing JSON array as text
-    difficulty: text("difficulty"), // e.g., "Easy", "Medium", "Hard", "Very Hard", "Extremely Hard"
-    difficultyExplanation: text("difficulty_explanation"),
-    timecap: int("timecap"), // Nullable, seconds
-    countLikes: int("count_likes").default(0),
+    wodUrl: text("wod_url").notNull().default(""),
+    wodName: text("wod_name").notNull().unique().default(""),
+    description: text("description").notNull().default(""),
+    benchmarks: text("benchmarks").notNull().default(""), // Store as JSON string, never null
+    category: text("category").notNull().default("Other"),
+    tags: text("tags").notNull().default("[]"), // Store as JSON string, never null
+    difficulty: text("difficulty").notNull().default(""),
+    difficultyExplanation: text("difficulty_explanation").notNull().default(""),
+    timecap: int("timecap").notNull().default(0),
+    countLikes: int("count_likes").notNull().default(0),
     createdAt: int("created_at", { mode: "timestamp" })
+      .notNull()
+      .default(sql`(unixepoch())`),
+    updatedAt: int("updated_at", { mode: "timestamp" })
+      .notNull()
       .default(sql`(unixepoch())`)
-      .notNull(),
-    updatedAt: int("updated_at", { mode: "timestamp" }).$onUpdate(
-      () => new Date(),
-    ),
+      .$onUpdate(() => new Date()),
   },
   (wod) => ({
     wodNameIndex: index("wod_name_idx").on(wod.wodName),

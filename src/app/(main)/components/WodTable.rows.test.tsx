@@ -78,9 +78,20 @@ const mockWod1_NoResults = {
   description: "Desc Alpha",
   category: "Benchmark" as const, // Use const assertion
   tags: ["AMRAP"],
+  movements: [],
+  timecap: null,
   difficulty: "Medium",
   difficultyExplanation: "Standard benchmark AMRAP.",
   countLikes: 15,
+  benchmarks: {
+    type: "reps" as const,
+    levels: {
+      elite: { min: 200, max: null },
+      advanced: { min: 150, max: 199 },
+      intermediate: { min: 100, max: 149 },
+      beginner: { min: 0, max: 99 },
+    },
+  },
 };
 
 const mockWod2_OneResultRx = {
@@ -92,6 +103,8 @@ const mockWod2_OneResultRx = {
   description: "Desc Bravo",
   category: "Girl" as const, // Use const assertion
   tags: ["For Time"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "time" as const,
     levels: {
@@ -115,6 +128,8 @@ const mockWod3_OneResultScaled = {
   description: "Desc Charlie",
   category: "Hero" as const, // Use const assertion
   tags: ["Chipper"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "rounds" as const,
     levels: {
@@ -138,6 +153,8 @@ const mockWod4_MultiResult = {
   description: "Desc Delta",
   category: "Open" as const, // Use const assertion
   tags: ["Couplet"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "time" as const,
     levels: {
@@ -160,6 +177,8 @@ const mockWod5_NoBenchmark = {
   wodName: "WOD Echo",
   description: "Desc Echo",
   tags: [],
+  movements: [],
+  timecap: null,
   category: null,
   benchmarks: null,
   difficulty: null,

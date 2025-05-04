@@ -44,15 +44,15 @@ export const BenchmarksSchema = z.object({
 export const WodJsonSchema = z.object({
   wodUrl: z.union([z.string().url(), z.literal("")]), // Must be valid URL or empty string
   wodName: z.string(),
-  description: z.string(),
-  benchmarks: BenchmarksSchema.optional().nullable(),
-  category: z.string(),
-  tags: z.array(z.string()).optional().nullable(),
-  difficulty: z.string(),
-  difficultyExplanation: z.string().optional().nullable(),
-  timecap: z.number().optional().nullable(),
-  countLikes: z.number().optional(), // default to 0 if missing
-  movements: z.array(z.string()).optional(),
+  description: z.string().default(""),
+  benchmarks: BenchmarksSchema.nullable().default(null),
+  category: z.string().default("Other"),
+  tags: z.array(z.string()).default([]),
+  difficulty: z.string().default(""),
+  difficultyExplanation: z.string().default(""),
+  timecap: z.number().default(0),
+  countLikes: z.number().default(0),
+  movements: z.array(z.string()).default([]),
 });
 
 export type WodJson = z.infer<typeof WodJsonSchema>;

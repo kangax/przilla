@@ -13,8 +13,6 @@ import { useSession } from "~/lib/auth-client";
 import {
   Box,
   Flex,
-  Tooltip,
-  SegmentedControl,
   IconButton,
   DropdownMenu,
 } from "@radix-ui/themes";
@@ -252,6 +250,18 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   // We might still show initial data while loading fresh data.
   const showWodLoadingSpinner = isLoadingWods && !validatedWodsData;
 
+  // Add debugging for the final rendering decision
+  useEffect(() => {
+    console.log("[DEBUG] Final rendering decision:", {
+      wodsLength: wods?.length,
+      sortedWodsLength: sortedWods?.length,
+      showWodLoadingSpinner,
+      hasValidatedInitialWods: validatedInitialWods.length > 0,
+      searchTerm,
+      timestamp: new Date().toISOString()
+    });
+  }, [wods, sortedWods, showWodLoadingSpinner, validatedInitialWods, searchTerm]);
+
   if (showWodLoadingSpinner && validatedInitialWods.length === 0) {
     // Only show full loading state if hook is loading AND we have no initial data to show
     return (
@@ -277,18 +287,6 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
   // We might not need the separate `displayWods` variable here if the hook handles the fallback correctly.
   // Let's check the hook's logic again: `return wodsData ?? initialWods ?? [];` - yes, it handles it.
   // So we can rely on the `wods` returned from useWodViewerData for the final check.
-
-  // Add debugging for the final rendering decision
-  useEffect(() => {
-    console.log("[DEBUG] Final rendering decision:", {
-      wodsLength: wods?.length,
-      sortedWodsLength: sortedWods?.length,
-      showWodLoadingSpinner,
-      hasValidatedInitialWods: validatedInitialWods.length > 0,
-      searchTerm,
-      timestamp: new Date().toISOString()
-    });
-  }, [wods, sortedWods, showWodLoadingSpinner, validatedInitialWods, searchTerm]);
 
   if (!wods || wods.length === 0) {
     // Final check based on data processed by useWodViewerData

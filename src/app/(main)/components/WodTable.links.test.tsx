@@ -77,6 +77,8 @@ const mockWodWithUrl = {
   description: "Desc Bravo",
   category: "Girl" as const, // Use const assertion
   tags: ["For Time"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "time" as const,
     levels: {
@@ -100,6 +102,8 @@ const mockWodWithoutUrl = {
   description: "Desc Charlie",
   category: "Hero" as const, // Use const assertion
   tags: ["Chipper"],
+  movements: [],
+  timecap: null,
   benchmarks: {
     type: "rounds" as const,
     levels: {

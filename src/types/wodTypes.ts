@@ -63,79 +63,44 @@ export const WodSchema = z.object({
   id: z.string(),
   wodUrl: z.union([z.string().url(), z.literal("")]), // Allow valid URL or empty string
   wodName: z.string(),
-  description: z.string().nullable().optional(), // Optional because it might be missing entirely
-  benchmarks: BenchmarksSchema.nullable().optional(), // Optional because it might be missing entirely
-  category: WodCategorySchema.nullable().optional(), // Optional because it might be missing entirely
-  tags: z.array(z.string()).nullable().default([]), // Default to empty array if null/undefined
-  difficulty: z.string().nullable().optional(), // Optional because it might be missing entirely
-  difficultyExplanation: z.string().nullable().optional(), // Optional because it might be missing entirely
-  countLikes: z.number().nullable().optional(), // Optional because it might be missing entirely
+  description: z.string().default(""),
+  benchmarks: BenchmarksSchema.nullable().default(null),
+  category: WodCategorySchema.default("Other"),
+  tags: z.array(z.string()).default([]),
+  difficulty: z.string().default(""),
+  difficultyExplanation: z.string().default(""),
+  countLikes: z.number().default(0),
   movements: z.array(z.string()).default([]), // Default to empty array if undefined
-  timecap: z.number().nullable().optional(), // Optional because it might be missing entirely
+  timecap: z.number().default(0),
   createdAt: z.preprocess((arg: unknown) => {
     if (typeof arg === "string") return new Date(arg);
     if (arg instanceof Date) return new Date(arg);
     // For any other type, return current date as default
     return new Date();
   }, z.date()),
-  updatedAt: z
-    .preprocess((arg: unknown) => {
-      if (typeof arg === "string") return new Date(arg);
-      if (arg instanceof Date) return new Date(arg);
-      // If null or undefined, return null
-      if (arg === null || typeof arg === "undefined") return null;
-
-      // Handle objects specifically to avoid "[object Object]" string conversion
-      if (typeof arg === "object") {
-        // If it has a toISOString method, it might be Date-like
-        if (
-          arg &&
-          "toISOString" in arg &&
-          typeof arg.toISOString === "function"
-        ) {
-          try {
-            // Use type assertion to tell TypeScript this is safe
-            const dateObj = arg as { toISOString(): string };
-            const isoString = dateObj.toISOString();
-            return new Date(isoString);
-          } catch {
-            return null;
-          }
-        }
-        // If it has numeric timestamp properties, try to use those
-        if (arg && "valueOf" in arg && typeof arg.valueOf === "function") {
-          try {
-            // Use type assertion to tell TypeScript this is safe
-            const valueObj = arg as { valueOf(): number };
-            const value = valueObj.valueOf();
-            const date = new Date(value);
-            return isNaN(date.getTime()) ? null : date;
-          } catch {
-            return null;
-          }
-        }
-        // For other objects, we can't safely convert to a date
-        return null;
-      }
-
-      // For numbers, use direct conversion
-      if (typeof arg === "number") {
-        const date = new Date(arg);
-        return isNaN(date.getTime()) ? null : date;
-      }
-
-      // For any other type, we can't safely convert to a date
-      return null;
-    }, z.date())
-    .nullable(),
+  updatedAt: z.preprocess((arg: unknown) => {
+    if (typeof arg === "string") return new Date(arg);
+    if (arg instanceof Date) return new Date(arg);
+    if (typeof arg === "number") {
+      const date = new Date(arg);
+      return isNaN(date.getTime()) ? new Date() : date;
+    }
+    return new Date();
+  }, z.date()),
 });
 
 // Zod schema to parse/transform raw DB row into Wod
+/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access */
+/**
+ * CANONICAL: This is the single source of truth for parsing and transforming
+ * raw WOD DB rows into normalized Wod objects. All code (API routers, utilities, etc.)
+ * should import and use this schema. Do not duplicate this schema elsewhere.
+ */
 export const WodFromDbRowSchema = z.object({
   id: z.string().min(1).catch("unknown_id"),
   wodUrl: z.string().default(""),
   wodName: z.string().min(1).catch("Unknown WOD"),
-  description: z.string().nullable().optional(),
+  description: z.string().default(""),
   benchmarks: z
     .any()
     .transform(val => {
@@ -145,7 +110,7 @@ export const WodFromDbRowSchema = z.object({
       return val ?? null;
     })
     .nullable()
-    .optional(),
+    .default(null),
   category: z
     .string()
     .refine(
@@ -162,8 +127,7 @@ export const WodFromDbRowSchema = z.object({
         ].includes(val),
       { message: "Invalid category" }
     )
-    .nullable()
-    .optional(),
+    .default("Other"),
   tags: z
     .any()
     .transform(val => {
@@ -173,55 +137,27 @@ export const WodFromDbRowSchema = z.object({
       return Array.isArray(val) ? val : [];
     })
     .default([]),
-  difficulty: z.string().nullable().optional(),
-  difficultyExplanation: z.string().nullable().optional(),
-  countLikes: z.number().nullable().optional(),
-  timecap: z.number().nullable().optional(),
+  difficulty: z.string().default(""),
+  difficultyExplanation: z.string().default(""),
+  countLikes: z.number().default(0),
+  timecap: z.number().default(0),
   createdAt: z.preprocess((arg: unknown) => {
     if (typeof arg === "string") return new Date(arg);
     if (arg instanceof Date) return new Date(arg);
     return new Date();
   }, z.date()),
-  updatedAt: z
-    .preprocess((arg: unknown) => {
-      if (typeof arg === "string") return new Date(arg);
-      if (arg instanceof Date) return new Date(arg);
-      if (arg === null || typeof arg === "undefined") return null;
-      if (typeof arg === "object") {
-        if (
-          arg &&
-          "toISOString" in arg &&
-          typeof arg.toISOString === "function"
-        ) {
-          try {
-            const dateObj = arg as { toISOString(): string };
-            const isoString = dateObj.toISOString();
-            return new Date(isoString);
-          } catch {
-            return null;
-          }
-        }
-        if (arg && "valueOf" in arg && typeof arg.valueOf === "function") {
-          try {
-            const valueObj = arg as { valueOf(): number };
-            const value = valueObj.valueOf();
-            const date = new Date(value);
-            return isNaN(date.getTime()) ? null : date;
-          } catch {
-            return null;
-          }
-        }
-        return null;
-      }
-      if (typeof arg === "number") {
-        const date = new Date(arg);
-        return isNaN(date.getTime()) ? null : date;
-      }
-      return null;
-    }, z.date())
-    .nullable(),
+  updatedAt: z.preprocess((arg: unknown) => {
+    if (typeof arg === "string") return new Date(arg);
+    if (arg instanceof Date) return new Date(arg);
+    if (typeof arg === "number") {
+      const date = new Date(arg);
+      return isNaN(date.getTime()) ? new Date() : date;
+    }
+    return new Date();
+  }, z.date()),
   movements: z.array(z.string()).default([]),
 });
+/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access */
 
 export type WodTag =
   | "Chipper"
@@ -244,27 +180,20 @@ export type WodCategory =
 
 // Final client-side Wod type (after parsing/transformation)
 export type Wod = {
-  id: string; // Added from DB schema
-  wodUrl: string; // Must be a string (valid URL or empty)
+  id: string;
+  wodUrl: string;
   wodName: string;
-  description?: string | null; // Updated to match DB schema (can be null)
-  benchmarks?: Benchmarks | null; // Updated to match DB schema (can be null)
-  // results: WodResult[]; // Removed - results are fetched separately
-  category?: WodCategory | null; // Use specific category type
-  tags?: string[] | null; // Simplified type to match DB 'text' column (JSON array), resolving lint error
-  difficulty?: string | null; // Updated to match DB schema (can be null)
-  difficultyExplanation?: string | null; // Renamed from difficulty_explanation, match DB (can be null)
-  countLikes?: number | null; // Renamed from count_likes, match DB (can be null)
-  /**
-   * List of normalized movement names for this WOD (from DB, can be empty)
-   */
-  movements?: string[];
-  /**
-   * Time cap for the workout, in seconds (nullable, from DB)
-   */
-  timecap?: number | null;
-  createdAt: Date; // Added from DB schema (Drizzle returns Date)
-  updatedAt?: Date | null; // Added from DB schema (Drizzle returns Date or null)
+  description: string;
+  benchmarks: Benchmarks | null;
+  category: WodCategory;
+  tags: string[];
+  difficulty: string;
+  difficultyExplanation: string;
+  countLikes: number;
+  movements: string[];
+  timecap: number;
+  createdAt: Date;
+  updatedAt: Date;
 };
 
 // Intermediate type representing Wod data as potentially received from tRPC query (before client parsing)

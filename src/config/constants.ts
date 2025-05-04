@@ -1,4 +1,5 @@
 import type { WodTag, WodCategory } from "~/types/wodTypes";
+import { WOD_CATEGORIES } from "~/types/wodTypes";
 
 // Define allowed tags and their desired display order
 export const DESIRED_TAG_ORDER: WodTag[] = [
@@ -43,16 +44,7 @@ export const PERFORMANCE_LEVEL_COLORS: Record<string, string> = {
   default: "text-foreground/70 dark:text-foreground/60", // For scaled or N/A
 };
 
-export const WOD_CATEGORIES = [
-  "Girl",
-  "Hero",
-  "Games",
-  "Open",
-  "Quarterfinals",
-  "AGOQ",
-  "Benchmark",
-  "Other",
-] as const;
+
 
 // Difficulty multipliers for WODs
 export const difficultyMultipliers: Record<string, number> = {

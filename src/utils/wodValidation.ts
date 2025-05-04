@@ -1,22 +1,23 @@
-import { type Wod } from "~/types/wodTypes";
+import { type Wod, WodBaseShape } from "~/types/wodTypes";
 import { z } from "zod";
 import { WodFromDbRowSchema } from "~/types/wodTypes";
 
 /**
  * Zod schema representing raw WOD data from the database (non-nullable, with defaults)
+ * DRY: Inherits all shared fields from WodBaseShape, overrides DB-specific fields.
  */
 export const WodFromDbSchema = z.object({
   id: z.string(),
-  wodUrl: z.string().default(""),
-  wodName: z.string().default(""),
-  description: z.string().default(""),
-  benchmarks: z.string().default(""),
-  category: z.string().default("Other"),
-  tags: z.string().default("[]"),
-  difficulty: z.string().default(""),
-  difficultyExplanation: z.string().default(""),
-  timecap: z.number().default(0),
-  countLikes: z.number().default(0),
+  ...{
+    ...WodBaseShape,
+    wodUrl: z.string().default(""),
+    wodName: z.string().default(""),
+    description: z.string().default(""),
+    benchmarks: z.string().default(""),
+    category: z.string().default("Other"),
+    tags: z.string().default("[]"),
+    // difficulty, difficultyExplanation, countLikes, timecap, movements are inherited from WodBaseShape
+  },
   createdAt: z.union([z.number(), z.date()]),
   updatedAt: z.union([z.number(), z.date()]),
 });

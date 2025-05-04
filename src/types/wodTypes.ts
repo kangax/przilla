@@ -46,8 +46,11 @@ export const BenchmarksSchema = z.object({
   }),
 });
 
-// Define allowed tags and categories as types for better safety
-export const WodCategorySchema = z.enum([
+/**
+ * Allowed WOD categories (single source of truth).
+ * Update this array to change allowed categories everywhere.
+ */
+export const WOD_CATEGORIES = [
   "Girl",
   "Hero",
   "Games",
@@ -56,11 +59,16 @@ export const WodCategorySchema = z.enum([
   "AGOQ",
   "Benchmark",
   "Other",
-]);
+] as const;
 
-// Zod schema for the final client-side Wod type
-export const WodSchema = z.object({
-  id: z.string(),
+// Define allowed tags and categories as types for better safety
+export const WodCategorySchema = z.enum(WOD_CATEGORIES);
+
+/**
+ * DRY base shape for all WOD schemas.
+ * Extend or override in each consumer schema as needed.
+ */
+export const WodBaseShape = {
   wodUrl: z.union([z.string().url(), z.literal("")]), // Allow valid URL or empty string
   wodName: z.string(),
   description: z.string().default(""),
@@ -72,6 +80,11 @@ export const WodSchema = z.object({
   countLikes: z.number().default(0),
   movements: z.array(z.string()).default([]), // Default to empty array if undefined
   timecap: z.number().default(0),
+};
+
+export const WodSchema = z.object({
+  id: z.string(),
+  ...WodBaseShape,
   createdAt: z.preprocess((arg: unknown) => {
     if (typeof arg === "string") return new Date(arg);
     if (arg instanceof Date) return new Date(arg);
@@ -98,49 +111,40 @@ export const WodSchema = z.object({
  */
 export const WodFromDbRowSchema = z.object({
   id: z.string().min(1).catch("unknown_id"),
-  wodUrl: z.string().default(""),
-  wodName: z.string().min(1).catch("Unknown WOD"),
-  description: z.string().default(""),
-  benchmarks: z
-    .any()
-    .transform(val => {
-      if (typeof val === "string") {
-        try { return JSON.parse(val); } catch { return null; }
-      }
-      return val ?? null;
-    })
-    .nullable()
-    .default(null),
-  category: z
-    .string()
-    .refine(
-      val =>
-        [
-          "Girl",
-          "Hero",
-          "Games",
-          "Open",
-          "Quarterfinals",
-          "AGOQ",
-          "Benchmark",
-          "Other",
-        ].includes(val),
-      { message: "Invalid category" }
-    )
-    .default("Other"),
-  tags: z
-    .any()
-    .transform(val => {
-      if (typeof val === "string") {
-        try { return JSON.parse(val); } catch { return []; }
-      }
-      return Array.isArray(val) ? val : [];
-    })
-    .default([]),
-  difficulty: z.string().default(""),
-  difficultyExplanation: z.string().default(""),
-  countLikes: z.number().default(0),
-  timecap: z.number().default(0),
+  ...{
+    ...WodBaseShape,
+    wodUrl: z.string().default(""),
+    wodName: z.string().min(1).catch("Unknown WOD"),
+    // description, benchmarks, category, tags, etc. are handled below
+    description: z.string().default(""),
+    benchmarks: z
+      .any()
+      .transform(val => {
+        if (typeof val === "string") {
+          try { return JSON.parse(val); } catch { return null; }
+        }
+        return val ?? null;
+      })
+      .nullable()
+      .default(null),
+    category: z
+      .string()
+      .refine(
+        val => WOD_CATEGORIES.includes(val as any),
+        { message: "Invalid category" }
+      )
+      .default("Other"),
+    tags: z
+      .any()
+      .transform(val => {
+        if (typeof val === "string") {
+          try { return JSON.parse(val); } catch { return []; }
+        }
+        return Array.isArray(val) ? val : [];
+      })
+      .default([]),
+    // difficulty, difficultyExplanation, countLikes, timecap, movements are inherited from WodBaseShape
+  },
   createdAt: z.preprocess((arg: unknown) => {
     if (typeof arg === "string") return new Date(arg);
     if (arg instanceof Date) return new Date(arg);
@@ -168,15 +172,7 @@ export type WodTag =
   | "For Time"
   | "Ladder";
 
-export type WodCategory =
-  | "Girl"
-  | "Hero"
-  | "Games"
-  | "Open"
-  | "Quarterfinals"
-  | "AGOQ"
-  | "Benchmark"
-  | "Other";
+export type WodCategory = typeof WOD_CATEGORIES[number];
 
 // Final client-side Wod type (after parsing/transformation)
 export type Wod = {

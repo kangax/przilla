@@ -21,24 +21,38 @@ export function useWodViewerData(
   sortBy: SortByType,
   sortDirection: "asc" | "desc",
   searchTerm: string,
-) {
+): {
+  wods: Wod[];
+  scoresByWodId: Record<string, Score[]>;
+  categoryOrder: string[];
+  tagOrder: string[];
+  categoryCounts: Record<string, number>;
+  originalTotalWodCount: number;
+  validSelectedCategories: string[];
+  validSelectedTags: string[];
+  dynamicTotalWodCount: number;
+  dynamicDoneWodsCount: number;
+  dynamicNotDoneWodsCount: number;
+  sortedWods: Wod[];
+  finalFilteredWods: Wod[];
+} {
   // Map and memoize WODs
-  const wods = useMemo(() => {
+  const wods = useMemo<Wod[]>(() => {
     // Data is already parsed as Wod[]
     const result = wodsData ?? initialWods ?? [];
-    console.log("[DEBUG] Initial wods data:", { 
-      wodsData: wodsData?.length, 
-      initialWods: initialWods?.length, 
+    console.log("[DEBUG] Initial wods data:", {
+      wodsData: wodsData?.length,
+      initialWods: initialWods?.length,
       result: result.length,
-      searchTerm
+      searchTerm,
     });
     return result;
   }, [wodsData, initialWods, searchTerm]);
 
   // Map and memoize scores
   const scoresByWodId = useMemo(() => {
-    if (!scoresData) return {};
-    const processedScores = scoresData.map(
+    if (!scoresData) return {} as Record<string, Score[]>;
+    const processedScores: Score[] = scoresData.map(
       (score): Score => ({
         id: score.id ?? "",
         userId: score.userId ?? "",
@@ -81,19 +95,19 @@ export function useWodViewerData(
       }),
     );
 
-    return (processedScores ?? []).reduce<Record<string, Score[]>>(
-      (acc, score) => {
-        if (!acc[score.wodId]) {
-          acc[score.wodId] = [];
-        }
-        acc[score.wodId].push(score);
-        acc[score.wodId].sort(
-          (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
-        );
-        return acc;
-      },
-      {},
-    );
+    const reduced: Record<string, Score[]> = (processedScores ?? []).reduce<
+      Record<string, Score[]>
+    >((acc: Record<string, Score[]>, score: Score) => {
+      if (!acc[score.wodId]) {
+        acc[score.wodId] = [];
+      }
+      acc[score.wodId].push(score);
+      acc[score.wodId].sort(
+        (a, b) => b.scoreDate.getTime() - a.scoreDate.getTime(),
+      );
+      return acc;
+    }, {});
+    return reduced;
   }, [scoresData]);
 
   // Category and tag order
@@ -102,9 +116,12 @@ export function useWodViewerData(
     const categories = new Set<WodCategory>(
       wods
         .map((wod) => wod.category)
-        .filter((cat): cat is WodCategory => typeof cat === "string" && cat.length > 0)
+        .filter(
+          (cat): cat is WodCategory =>
+            typeof cat === "string" && cat.length > 0,
+        ),
     );
-    return Array.from(categories).sort() as WodCategory[];
+    return Array.from(categories).sort();
   }, [wods]);
 
   const tagOrder = useMemo<string[]>(() => {
@@ -112,11 +129,13 @@ export function useWodViewerData(
     const tags = new Set<string>(
       wods.flatMap((wod) =>
         Array.isArray(wod.tags)
-          ? wod.tags.filter((t): t is string => typeof t === "string" && t.length > 0)
-          : []
-      )
+          ? wod.tags.filter(
+              (t): t is string => typeof t === "string" && t.length > 0,
+            )
+          : [],
+      ),
     );
-    return Array.from(tags).sort() as string[];
+    return Array.from(tags).sort();
   }, [wods]);
 
   // Original total count (before any filtering)
@@ -126,7 +145,7 @@ export function useWodViewerData(
 
   const validSelectedCategories = useMemo(() => {
     return selectedCategories.length > 0 &&
-      categoryOrder.includes(selectedCategories[0] as WodCategory)
+      categoryOrder.includes(selectedCategories[0])
       ? selectedCategories
       : [];
   }, [selectedCategories, categoryOrder]);
@@ -156,15 +175,15 @@ export function useWodViewerData(
       outputLength: filtered.length,
       validSelectedCategories,
       validSelectedTags,
-      searchTerm
+      searchTerm,
     });
 
     return filtered;
   }, [wods, validSelectedCategories, validSelectedTags, searchTerm]);
 
   // Completion filter
-  const finalFilteredWods = useMemo(() => {
-    let result;
+  const finalFilteredWods = useMemo<Wod[]>(() => {
+    let result: Wod[];
     if (completionFilter === "done") {
       result = categoryTagFilteredWods.filter((wod) =>
         isWodDone(wod, scoresByWodId[wod.id]),
@@ -176,21 +195,21 @@ export function useWodViewerData(
     } else {
       result = categoryTagFilteredWods;
     }
-    
+
     console.log("[DEBUG] Completion filtering:", {
       inputLength: categoryTagFilteredWods.length,
       outputLength: result.length,
       completionFilter,
-      searchTerm
+      searchTerm,
     });
-    
+
     return result;
   }, [categoryTagFilteredWods, completionFilter, scoresByWodId, searchTerm]);
 
   // Category counts based on filtered wods
-  const categoryCounts = useMemo(() => {
+  const categoryCounts = useMemo<Record<string, number>>(() => {
     return categoryTagFilteredWods.reduce<Record<string, number>>(
-      (acc, wod) => {
+      (acc: Record<string, number>, wod: Wod) => {
         if (wod.category) {
           acc[wod.category] = (acc[wod.category] || 0) + 1;
         }
@@ -218,29 +237,37 @@ export function useWodViewerData(
   }, [categoryTagFilteredWods, scoresByWodId]);
 
   // Sorting
-  const sortedWods = useMemo(() => {
-    const sorted = sortWods(finalFilteredWods, sortBy, sortDirection, scoresByWodId);
-    
+  const sortedWods = useMemo<Wod[]>(() => {
+    const sorted = sortWods(
+      finalFilteredWods,
+      sortBy,
+      sortDirection,
+      scoresByWodId,
+    );
+
     console.log("[DEBUG] Final sorting:", {
       inputLength: finalFilteredWods.length,
       outputLength: sorted.length,
       sortBy,
       sortDirection,
-      searchTerm
+      searchTerm,
     });
-    
+
     // Log the first few WODs to see what's in the final result
     if (sorted.length > 0) {
-      console.log("[DEBUG] First few sorted WODs:", sorted.slice(0, Math.min(3, sorted.length)).map(wod => ({
-        id: wod.id,
-        name: wod.wodName,
-        category: wod.category,
-        tags: wod.tags
-      })));
+      console.log(
+        "[DEBUG] First few sorted WODs:",
+        sorted.slice(0, Math.min(3, sorted.length)).map((wod) => ({
+          id: wod.id,
+          name: wod.wodName,
+          category: wod.category,
+          tags: wod.tags,
+        })),
+      );
     } else {
       console.log("[DEBUG] No WODs in final sorted result");
     }
-    
+
     return sorted;
   }, [finalFilteredWods, sortBy, sortDirection, scoresByWodId, searchTerm]);
 
@@ -251,7 +278,7 @@ export function useWodViewerData(
     finalFilteredWodsLength: finalFilteredWods.length,
     sortedWodsLength: sortedWods.length,
     searchTerm,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   });
 
   return {

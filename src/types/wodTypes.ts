@@ -1,5 +1,8 @@
 // Type definitions for WOD data
 
+import { z } from "zod";
+import type { FuseResultMatch } from "fuse.js"; // Import FuseResultMatch
+
 export type WodResult = {
   date?: string;
   rxStatus?: string | null;
@@ -26,10 +29,6 @@ export type Benchmarks = {
     beginner: BenchmarkLevel;
   };
 };
-
-// Zod schema for Benchmarks
-import { z } from "zod";
-import type { FuseResultMatch } from "fuse.js"; // Import FuseResultMatch
 
 export const BenchmarkLevelSchema = z.object({
   min: z.number().nullable(),
@@ -103,7 +102,6 @@ export const WodSchema = z.object({
 });
 
 // Zod schema to parse/transform raw DB row into Wod
-/* eslint-disable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access */
 /**
  * CANONICAL: This is the single source of truth for parsing and transforming
  * raw WOD DB rows into normalized Wod objects. All code (API routers, utilities, etc.)
@@ -115,32 +113,66 @@ export const WodFromDbRowSchema = z.object({
     ...WodBaseShape,
     wodUrl: z.string().default(""),
     wodName: z.string().min(1).catch("Unknown WOD"),
-    // description, benchmarks, category, tags, etc. are handled below
     description: z.string().default(""),
     benchmarks: z
-      .any()
-      .transform(val => {
+      .union([z.string(), BenchmarksSchema, z.null()])
+      .transform((val): Benchmarks | null => {
         if (typeof val === "string") {
-          try { return JSON.parse(val); } catch { return null; }
+          try {
+            const parsed: unknown = JSON.parse(val);
+            if (
+              typeof parsed === "object" &&
+              parsed !== null &&
+              "type" in parsed &&
+              "levels" in parsed
+            ) {
+              const result = BenchmarksSchema.safeParse(parsed);
+              return result.success ? (result.data as Benchmarks) : null;
+            }
+            return null;
+          } catch {
+            return null;
+          }
         }
-        return val ?? null;
+        if (
+          val &&
+          typeof val === "object" &&
+          "type" in val &&
+          "levels" in val
+        ) {
+          const result = BenchmarksSchema.safeParse(val);
+          return result.success ? (result.data as Benchmarks) : null;
+        }
+        return null;
       })
       .nullable()
       .default(null),
     category: z
       .string()
       .refine(
-        val => WOD_CATEGORIES.includes(val as any),
-        { message: "Invalid category" }
+        (val): val is (typeof WOD_CATEGORIES)[number] =>
+          WOD_CATEGORIES.includes(val as (typeof WOD_CATEGORIES)[number]),
+        { message: "Invalid category" },
       )
       .default("Other"),
     tags: z
-      .any()
-      .transform(val => {
+      .union([z.string(), z.array(z.string()), z.null()])
+      .transform((val): string[] => {
         if (typeof val === "string") {
-          try { return JSON.parse(val); } catch { return []; }
+          try {
+            const parsed: unknown = JSON.parse(val);
+            if (Array.isArray(parsed)) {
+              return parsed.filter((t): t is string => typeof t === "string");
+            }
+            return [];
+          } catch {
+            return [];
+          }
         }
-        return Array.isArray(val) ? val : [];
+        if (Array.isArray(val)) {
+          return val.filter((t): t is string => typeof t === "string");
+        }
+        return [];
       })
       .default([]),
     // difficulty, difficultyExplanation, countLikes, timecap, movements are inherited from WodBaseShape
@@ -161,7 +193,6 @@ export const WodFromDbRowSchema = z.object({
   }, z.date()),
   movements: z.array(z.string()).default([]),
 });
-/* eslint-enable @typescript-eslint/no-unsafe-assignment, @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access */
 
 export type WodTag =
   | "Chipper"
@@ -172,7 +203,7 @@ export type WodTag =
   | "For Time"
   | "Ladder";
 
-export type WodCategory = typeof WOD_CATEGORIES[number];
+export type WodCategory = (typeof WOD_CATEGORIES)[number];
 
 // Final client-side Wod type (after parsing/transformation)
 export type Wod = {
@@ -280,8 +311,18 @@ export type MonthlyScoreDetail = {
 export type WodChartDataResponse = {
   tagCounts: Record<string, number>;
   categoryCounts: Record<string, number>;
-  monthlyData: Record<string, { count: number; totalAdjustedLevelScore: number; scores: MonthlyScoreDetail[] }>;
+  monthlyData: Record<
+    string,
+    {
+      count: number;
+      totalAdjustedLevelScore: number;
+      scores: MonthlyScoreDetail[];
+    }
+  >;
   yourMovementCounts: Record<string, { count: number; wodNames: string[] }>;
   allMovementCounts: Record<string, { count: number; wodNames: string[] }>;
-  movementCountsByCategory: Record<string, Record<string, { count: number; wodNames: string[] }>>;
+  movementCountsByCategory: Record<
+    string,
+    Record<string, { count: number; wodNames: string[] }>
+  >;
 };

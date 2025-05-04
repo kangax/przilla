@@ -2,15 +2,10 @@
 
 ### Must have
 
-- move WodFromDbRowSchema out of wod.ts
 - Fix color highlighting in "log score" form
 - Importing scores from SugarWOD should show which ones already exist (and if we they differ)
 - Add remaining Games/Regionals/etc. workouts from SugarWOD
 - export should be named przilla_scores_EMAIL_YYYY_MM_DD
-- Search doesn't show "x" on mobile
-- Fuzzy search
-- Inspect deps for dev vs. not dev
-- should use WOD_CATEGORIES, etc. everywhere
 
 ### Maybe
 

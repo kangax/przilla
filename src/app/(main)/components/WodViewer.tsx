@@ -10,12 +10,7 @@ import {
 } from "react";
 import { api } from "~/trpc/react";
 import { useSession } from "~/lib/auth-client";
-import {
-  Box,
-  Flex,
-  IconButton,
-  DropdownMenu,
-} from "@radix-ui/themes";
+import { Box, Flex, IconButton, DropdownMenu } from "@radix-ui/themes";
 import * as Select from "@radix-ui/react-select";
 import { ChevronDown, ListFilter, ArrowUp, ArrowDown } from "lucide-react";
 import WodTable from "./WodTable";
@@ -58,8 +53,9 @@ import {
   type Wod,
   type SortByType,
   type ScoreFromQuery,
-  type WodCategory, // Import WodCategory
-  WodSchema, // Import the new WodSchema
+  type WodCategory,
+  WodSchema,
+  WOD_CATEGORIES,
 } from "~/types/wodTypes";
 
 // --- URL State Management ---
@@ -147,14 +143,14 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
       console.log("[DEBUG] API query data available:", {
         dataLength: wodsDataFromHook?.length,
         searchTerm,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
     if (errorWods) {
       console.error("[DEBUG] API query error:", {
         error: errorWods,
         searchTerm,
-        timestamp: new Date().toISOString()
+        timestamp: new Date().toISOString(),
       });
     }
   }, [wodsDataFromHook, errorWods, searchTerm]);
@@ -258,9 +254,15 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
       showWodLoadingSpinner,
       hasValidatedInitialWods: validatedInitialWods.length > 0,
       searchTerm,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     });
-  }, [wods, sortedWods, showWodLoadingSpinner, validatedInitialWods, searchTerm]);
+  }, [
+    wods,
+    sortedWods,
+    showWodLoadingSpinner,
+    validatedInitialWods,
+    searchTerm,
+  ]);
 
   if (showWodLoadingSpinner && validatedInitialWods.length === 0) {
     // Only show full loading state if hook is loading AND we have no initial data to show
@@ -322,16 +324,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
               if (value === "all") {
                 setSelectedCategories([]);
               } else if (
-                [
-                  "Girl",
-                  "Hero",
-                  "Games",
-                  "Open",
-                  "Quarterfinals",
-                  "AGOQ",
-                  "Benchmark",
-                  "Other",
-                ].includes(value)
+                (WOD_CATEGORIES as readonly string[]).includes(value)
               ) {
                 setSelectedCategories([value as WodCategory]);
               } else {
@@ -367,7 +360,7 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
                       All ({originalTotalWodCount})
                     </Select.ItemText>
                   </Select.Item>
-                  {categoryOrder.map((category) => (
+                  {WOD_CATEGORIES.map((category) => (
                     <Select.Item
                       key={category}
                       value={category}

@@ -9,7 +9,11 @@ import type {
 } from "~/types/wodTypes";
 import { difficultyMultipliers, DEFAULT_MULTIPLIER } from "~/config/constants";
 import { isWodDone } from "~/utils/wodUtils";
-import { type WodWithMatches } from "~/types/wodTypes";
+import {
+  type WodWithMatches,
+  WOD_CATEGORIES,
+  WodCategorySchema,
+} from "~/types/wodTypes";
 import { protectedProcedure } from "~/server/api/trpc";
 import { validateWodsFromDb } from "~/utils/wodValidation";
 
@@ -64,18 +68,7 @@ export async function getMovementCountsByCategory(
   const wodsByCategory: Record<string, string[]> = {};
   allWods.forEach((wod) => {
     if (!wod.category) return;
-    const categoryCheck = z
-      .enum([
-        "Girl",
-        "Hero",
-        "Games",
-        "Open",
-        "Quarterfinals",
-        "AGOQ",
-        "Benchmark",
-        "Other",
-      ])
-      .safeParse(wod.category);
+    const categoryCheck = WodCategorySchema.safeParse(wod.category);
     if (categoryCheck.success) {
       const validCategory = categoryCheck.data;
       if (!wodsByCategory[validCategory]) wodsByCategory[validCategory] = [];
@@ -122,18 +115,7 @@ export function processTagAndCategoryCounts(
 
     if (isDone) {
       if (wod.category) {
-        const categoryCheck = z
-          .enum([
-            "Girl",
-            "Hero",
-            "Games",
-            "Open",
-            "Quarterfinals",
-            "AGOQ",
-            "Benchmark",
-            "Other",
-          ])
-          .safeParse(wod.category);
+        const categoryCheck = WodCategorySchema.safeParse(wod.category);
         if (categoryCheck.success) {
           categoryCounts[categoryCheck.data] =
             (categoryCounts[categoryCheck.data] || 0) + 1;

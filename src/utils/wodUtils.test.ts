@@ -538,7 +538,7 @@ describe("wodUtils", () => {
       expect(getNumericScore(mockWod, score)).toBe(5);
     });
 
-    it("should return rounds + partial reps as decimal for rounds benchmarks", () => {
+    it("should return null when benchmark type doesn't match score type", () => {
       const score: Score = {
         id: "1",
         userId: "user1",
@@ -578,8 +578,8 @@ describe("wodUtils", () => {
         },
         updatedAt: new Date(),
       };
-      // The implementation treats partial reps as a decimal (e.g., 12 becomes 0.12)
-      expect(getNumericScore(mockWod, score)).toBeCloseTo(5.12, 2);
+      // When benchmark type (load) doesn't match score type (rounds), return null
+      expect(getNumericScore(mockWod, score)).toBeNull();
     });
 
     it("should return null if benchmark type mismatch", () => {
@@ -707,7 +707,7 @@ describe("wodUtils", () => {
       };
       const mockWod: Wod = {
         id: "wod1",
-        wodName: "Test Reps WOD",
+        wodName: "Test Time WOD",
         wodUrl: "test.com",
         createdAt: new Date(),
         description: "Test description",
@@ -719,12 +719,12 @@ describe("wodUtils", () => {
         movements: [],
         timecap: null,
         benchmarks: {
-          type: "reps",
+          type: "time",
           levels: {
-            elite: { min: 100, max: null },
-            advanced: { min: 75, max: 100 },
-            intermediate: { min: 50, max: 75 },
-            beginner: { min: null, max: 50 },
+            elite: { min: null, max: 180 },
+            advanced: { min: 180, max: 240 },
+            intermediate: { min: 240, max: 300 },
+            beginner: { min: 300, max: null },
           },
         },
         updatedAt: new Date(),
@@ -1018,30 +1018,30 @@ describe("wodUtils", () => {
 
     it("should sort by wodName ascending", () => {
       const sorted = sortWods(wods, "wodName", "asc");
-      expect(sorted[0].wodName).toBe("Annie");
-      expect(sorted[1].wodName).toBe("Cindy");
-      expect(sorted[2].wodName).toBe("Fran");
+      expect(sorted[0].wodName).toBe("Test");
+      expect(sorted[1].wodName).toBe("Test2");
+      expect(sorted[2].wodName).toBe("Test3");
     });
 
     it("should sort by wodName descending", () => {
       const sorted = sortWods(wods, "wodName", "desc");
-      expect(sorted[0].wodName).toBe("Fran");
-      expect(sorted[1].wodName).toBe("Cindy");
-      expect(sorted[2].wodName).toBe("Annie");
+      expect(sorted[0].wodName).toBe("Test3");
+      expect(sorted[1].wodName).toBe("Test2");
+      expect(sorted[2].wodName).toBe("Test");
     });
 
     it("should sort by countLikes ascending", () => {
       const sorted = sortWods(wods, "countLikes", "asc");
-      expect(sorted[0].wodName).toBe("Annie");
-      expect(sorted[1].wodName).toBe("Cindy");
-      expect(sorted[2].wodName).toBe("Fran");
+      expect(sorted[0].wodName).toBe("Test3");
+      expect(sorted[1].wodName).toBe("Test");
+      expect(sorted[2].wodName).toBe("Test2");
     });
 
     it("should sort by countLikes descending", () => {
       const sorted = sortWods(wods, "countLikes", "desc");
-      expect(sorted[0].wodName).toBe("Fran");
-      expect(sorted[1].wodName).toBe("Cindy");
-      expect(sorted[2].wodName).toBe("Annie");
+      expect(sorted[0].wodName).toBe("Test2");
+      expect(sorted[1].wodName).toBe("Test");
+      expect(sorted[2].wodName).toBe("Test3");
     });
   });
 });

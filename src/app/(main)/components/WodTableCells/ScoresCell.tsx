@@ -33,7 +33,8 @@ export const ScoresCell: React.FC<ScoresCellProps> = ({
       {scores && scores.length > 0 && (
         <Flex direction="column" gap="2" align="start" className="my-2">
           {scores.map((score) => {
-            const { displayLevel, color } = getPerformanceBadgeDetails(
+            // Destructure colorClass instead of color
+            const { displayLevel, colorClass } = getPerformanceBadgeDetails(
               wod,
               score,
             );
@@ -59,21 +60,12 @@ ${getPerformanceLevelTooltip(wod)
 
             const scoreBadge = (
               <ThemeTooltip content={tooltipContent}>
+                {/* Remove color prop, add colorClass to className */}
                 <Badge
-                  color={
-                    color as
-                      | "red"
-                      | "blue"
-                      | "green"
-                      | "yellow"
-                      | "purple"
-                      | "gray"
-                      | "indigo"
-                  }
                   variant="soft"
                   radius="full"
                   size="2"
-                  className="cursor-help"
+                  className={`cursor-help ${colorClass}`}
                 >
                   {formattedScore}
                 </Badge>

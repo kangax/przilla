@@ -164,46 +164,37 @@ export const formatShortDate = (date: Date): string => {
 };
 
 /**
- * Determines the display text and Radix color for a performance badge based on level and Rx status.
+ * Determines the display text and Tailwind CSS class for a performance badge based on level and Rx status.
  */
 export const getPerformanceBadgeDetails = (
   wod: Wod,
   score: Score,
-): { displayLevel: string; color: string } => {
-  // If the score is not Rx, always show "Scaled" and gray
-  if (!score.isRx) {
-    return { displayLevel: "Scaled", color: "gray" };
-  }
-
-  const level = getPerformanceLevel(wod, score);
+): { displayLevel: string; colorClass: string } => {
+  // <-- Changed return type
   let displayLevel = "Score"; // Default if no level
-  let color = "gray"; // Default Radix color
+  let colorClass = PERFORMANCE_LEVEL_COLORS.default; // Default class
 
-  if (level) {
-    const capitalizedLevel = level.charAt(0).toUpperCase() + level.slice(1);
-    displayLevel = capitalizedLevel;
+  // If the score is not Rx, always show "Scaled" and default color
+  if (!score.isRx) {
+    displayLevel = "Scaled";
+    // colorClass is already PERFORMANCE_LEVEL_COLORS.default
+  } else {
+    const level = getPerformanceLevel(wod, score);
 
-    switch (level) {
-      case "elite":
-        color = "purple";
-        break;
-      case "advanced":
-        color = "green";
-        break;
-      case "intermediate":
-        color = "yellow";
-        break;
-      case "beginner":
-        color = "gray"; // Keep gray for beginner
-        break;
+    if (level) {
+      const capitalizedLevel = level.charAt(0).toUpperCase() + level.slice(1);
+      displayLevel = capitalizedLevel;
+      colorClass = getPerformanceLevelColor(level); // Get the full class string
+    } else if (score.isRx) {
+      // Handle case where there's no benchmark level but it was Rx
+      displayLevel = "Rx";
+      colorClass = getPerformanceLevelColor("advanced"); // Use 'advanced' (green) class for Rx
     }
-  } else if (score.isRx) {
-    // Handle case where there's no benchmark level but it was Rx
-    displayLevel = "Rx";
-    color = "green"; // Use green for Rx when no level is available
+    // If score is Rx but has no level and no benchmarks, it defaults to "Score" and default colorClass
   }
 
-  return { displayLevel, color };
+  // Return the class string instead of the color name
+  return { displayLevel, colorClass }; // <-- Changed return object
 };
 
 /**

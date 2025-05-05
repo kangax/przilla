@@ -2,7 +2,6 @@
 
 ### Must have
 
-- Fix color highlighting in "log score" form
 - Importing scores from SugarWOD should show which ones already exist (and if we they differ)
 - Add remaining Games/Regionals/etc. workouts from SugarWOD
 - export should be named przilla_scores_EMAIL_YYYY_MM_DD

@@ -66,45 +66,45 @@ const difficultyStyles: Record<
   },
 };
 
-const badgeColorMap: Record<string, string> = {
-  purple: "bg-purple-200 text-purple-800 dark:bg-purple-700 dark:text-white",
-  green: "bg-green-200 text-green-800 dark:bg-green-700 dark:text-green-100",
-  yellow: "bg-yellow-200 text-yellow-800 dark:bg-yellow-600 dark:text-white",
-  gray: "bg-slate-200 text-slate-700 dark:bg-slate-600 dark:text-slate-100",
-};
+// Removed badgeColorMap
 
 const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
   const trimmedTerm = searchTerm.trim();
   if (!trimmedTerm) return false;
-  
+
   // Handle quoted exact search
   if (trimmedTerm.startsWith('"') && trimmedTerm.endsWith('"')) {
-    const exactTerm = trimmedTerm.substring(1, trimmedTerm.length - 1).toLowerCase();
+    const exactTerm = trimmedTerm
+      .substring(1, trimmedTerm.length - 1)
+      .toLowerCase();
     if (!exactTerm.trim()) return false;
-    
+
     const wodNameLower = wod.wodName?.toLowerCase() || "";
     const descriptionLower = wod.description?.toLowerCase() || "";
     const tags = parseTags(wod.tags);
-    const tagsLower = tags.map(tag => tag.toLowerCase());
-    
+    const tagsLower = tags.map((tag) => tag.toLowerCase());
+
     return (
       wodNameLower.includes(exactTerm) ||
       descriptionLower.includes(exactTerm) ||
-      tagsLower.some(tag => tag.includes(exactTerm)) ||
-      (wod.movements || []).some(m => m.toLowerCase().includes(exactTerm))
+      tagsLower.some((tag) => tag.includes(exactTerm)) ||
+      (wod.movements || []).some((m) => m.toLowerCase().includes(exactTerm))
     );
   }
-  
+
   // Handle multi-word search (AND logic) using shared utility function
-  const searchTerms = trimmedTerm.split(/\s+/).filter(Boolean).map(term => term.toLowerCase());
-  
+  const searchTerms = trimmedTerm
+    .split(/\s+/)
+    .filter(Boolean)
+    .map((term) => term.toLowerCase());
+
   if (searchTerms.length > 1) {
     return wodMatchesAllTerms(wod, searchTerms);
   }
-  
+
   // Single word search
   const lowerSearchTerm = searchTerms[0];
-  
+
   if (wod.wodName?.toLowerCase().includes(lowerSearchTerm)) {
     return true;
   }
@@ -115,7 +115,9 @@ const checkWodMatch = (wod: Wod, searchTerm: string): boolean => {
   if (tags.some((tag) => tag.toLowerCase().includes(lowerSearchTerm))) {
     return true;
   }
-  if ((wod.movements || []).some(m => m.toLowerCase().includes(lowerSearchTerm))) {
+  if (
+    (wod.movements || []).some((m) => m.toLowerCase().includes(lowerSearchTerm))
+  ) {
     return true;
   }
   return false;
@@ -377,10 +379,10 @@ export function WodListMobile({
                       </h4>
                       <ul className="space-y-2">
                         {wodScores.map((score) => {
-                          const { displayLevel, color } =
+                          // Destructure colorClass instead of color
+                          const { displayLevel, colorClass } =
                             getPerformanceBadgeDetails(wod, score);
-                          const badgeColor =
-                            badgeColorMap[color] || badgeColorMap.gray;
+                          // Removed badgeColor derivation
                           const suffix = score.isRx ? "Rx" : "Scaled";
                           return (
                             <li
@@ -392,8 +394,9 @@ export function WodListMobile({
                                   <span className="font-semibold text-blue-600 dark:text-blue-400">
                                     {formatScore(score, suffix)}
                                   </span>
+                                  {/* Apply colorClass directly */}
                                   <span
-                                    className={`rounded px-1.5 py-0.5 text-xs font-medium ${badgeColor}`}
+                                    className={`rounded px-1.5 py-0.5 text-xs font-medium ${colorClass}`}
                                   >
                                     {displayLevel}
                                   </span>

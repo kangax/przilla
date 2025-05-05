@@ -23,7 +23,7 @@ import {
   type NameType,
   type ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
-import { formatScore } from "~/utils/wodUtils"; // Import formatScore
+import { formatScore, getPerformanceLevelColor } from "~/utils/wodUtils"; // Import formatScore and getPerformanceLevelColor
 import { type Score } from "~/types/wodTypes"; // Import Score type
 
 // Define the structure for individual scores (matching page.tsx and backend)
@@ -120,17 +120,9 @@ const getDescriptiveLevel = (level: number): string => {
   if (level < 4.5) return "Elite"; // Adjusted levels can go higher
   if (level >= 4.5) return "Elite+"; // Handle levels >= 4.5
   return "Unknown";
-};
+}; // <-- Added missing closing brace
 
-// Update color logic to handle potentially higher levels
-const getLevelColor = (level: number): string => {
-  if (level < 1.5) return "text-gray-500"; // Beginner
-  if (level < 2.5) return "text-yellow-500"; // Intermediate range (incl. Beginner+)
-  if (level < 3.5) return "text-green-500"; // Advanced range (incl. Intermediate+)
-  if (level < 4.5) return "text-purple-500"; // Elite range (incl. Advanced+)
-  if (level >= 4.5) return "text-pink-500"; // Elite+ or higher
-  return "text-gray-500"; // Fallback
-};
+// Removed local getLevelColor function
 
 // Custom Tooltip for better display
 const CustomTimelineTooltip = ({
@@ -201,7 +193,12 @@ const CustomTimelineTooltip = ({
             {/* Level Info (Now Adjusted Level) */}
             <Flex align="center" gap="1">
               <Text>Adj. Level:</Text>
-              <Text className={getLevelColor(Number(value))}>
+              {/* Use imported getPerformanceLevelColor */}
+              <Text
+                className={getPerformanceLevelColor(
+                  getDescriptiveLevel(Number(value)).toLowerCase(),
+                )}
+              >
                 {displayValue}
               </Text>
             </Flex>
@@ -209,7 +206,12 @@ const CustomTimelineTooltip = ({
             {rollingAvgDisplay && (
               <Flex align="center" gap="1">
                 <Text>Adj. Trend:</Text>
-                <Text className={getLevelColor(Number(rollingAverage))}>
+                {/* Use imported getPerformanceLevelColor */}
+                <Text
+                  className={getPerformanceLevelColor(
+                    getDescriptiveLevel(Number(rollingAverage)).toLowerCase(),
+                  )}
+                >
                   {rollingAvgDisplay.replace("(Avg: ", "").replace(")", "")}
                 </Text>
               </Flex>
@@ -254,7 +256,14 @@ const CustomTimelineTooltip = ({
                           {formattedScoreValue}
                         </span>{" "}
                         on <span className="italic">{score.wodName}</span> is{" "}
-                        <span className={getLevelColor(score.level)}>
+                        {/* Use imported getPerformanceLevelColor */}
+                        <span
+                          className={getPerformanceLevelColor(
+                            originalDescriptiveLevel
+                              .toLowerCase()
+                              .replace("+", ""),
+                          )}
+                        >
                           {originalDescriptiveLevel} ({score.level.toFixed(1)})
                         </span>
                         {/* Conditionally render adjustment text */}
@@ -262,8 +271,13 @@ const CustomTimelineTooltip = ({
                           <>
                             . Adjusted for difficulty (
                             {score.difficulty || "N/A"}) it&apos;s{" "}
+                            {/* Use imported getPerformanceLevelColor */}
                             <span
-                              className={getLevelColor(score.adjustedLevel)}
+                              className={getPerformanceLevelColor(
+                                adjustedDescriptiveLevel
+                                  .toLowerCase()
+                                  .replace("+", ""),
+                              )}
                             >
                               {adjustedDescriptiveLevel} (
                               {score.adjustedLevel.toFixed(1)})

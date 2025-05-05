@@ -29,9 +29,15 @@ export type WodFromDb = z.infer<typeof WodFromDbSchema>;
  */
 export function validateWodsFromDb(
   wodsData: WodFromDb[],
-  movementsByWod: Record<string, string[]>
+  movementsByWod: Record<string, string[]>,
 ): Wod[] {
   return wodsData.reduce<Wod[]>((acc, wod) => {
+    // Add this check to handle potential null/undefined entries in the input array
+    if (!wod) {
+      console.warn("Skipping validation for nullish WOD data entry.");
+      return acc; // Safely skip this iteration
+    }
+
     // Parse JSON fields before validation
     let parsedBenchmarks: unknown = "";
     try {
@@ -51,16 +57,20 @@ export function validateWodsFromDb(
       ...wod,
       benchmarks: parsedBenchmarks,
       tags: parsedTags,
-      movements: Array.isArray(movementsByWod[wod.id]) ? movementsByWod[wod.id] : [],
+      movements: Array.isArray(movementsByWod[wod.id])
+        ? movementsByWod[wod.id]
+        : [],
     };
     const validationResult = WodFromDbRowSchema.safeParse(input);
 
     if (validationResult.success) {
       acc.push(validationResult.data as Wod);
     } else {
+      // Log error, including wod.wodName and wod.id
+      // Accessing wod.wodName/wod.id is safe now due to the nullish check above
       console.error(
         `Zod validation failed for WOD ${wod.wodName} (ID: ${wod.id}). Skipping. Issues:`,
-        JSON.stringify(validationResult.error.issues, null, 2)
+        JSON.stringify(validationResult.error.issues, null, 2),
       );
     }
 

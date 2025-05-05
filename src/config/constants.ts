@@ -44,8 +44,6 @@ export const PERFORMANCE_LEVEL_COLORS: Record<string, string> = {
   default: "text-foreground/70 dark:text-foreground/60", // For scaled or N/A
 };
 
-
-
 // Difficulty multipliers for WODs
 export const difficultyMultipliers: Record<string, number> = {
   Easy: 0.8,

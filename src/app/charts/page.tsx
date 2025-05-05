@@ -41,7 +41,7 @@ export default async function ChartsPage() {
 
   // Public data - always fetched
   try {
-    wodsData = (await api.wod.getAll()) as WodFromQuery[]; // Add type assertion
+    wodsData = (await api.wod.getAll({})) as WodFromQuery[]; // Add type assertion
     console.log("Loaded WODs data for charts:", wodsData.length);
   } catch (error) {
     console.error("Error loading WODs data:", error);

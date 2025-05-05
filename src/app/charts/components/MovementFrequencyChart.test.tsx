@@ -1,5 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react"; // Added waitFor
+import { render, screen, waitFor } from "@testing-library/react"; // Removed fireEvent
+import userEvent from "@testing-library/user-event"; // Import userEvent
 import MovementFrequencyChart from "./MovementFrequencyChart";
 
 const makeMovementData = (name: string, value: number, wodNames: string[]) => ({
@@ -152,8 +153,8 @@ describe("MovementFrequencyChart", () => {
     expect(initialTabTrigger.getAttribute("data-state")).toBe("active");
     expect(heroTabTrigger.getAttribute("data-state")).toBe("inactive");
 
-    // Click "Hero" tab
-    fireEvent.click(heroTabTrigger);
+    // Click "Hero" tab using userEvent
+    await userEvent.click(heroTabTrigger); // Use await userEvent.click
 
     // Wait for the *clicked trigger* (identified by data-testid) to become active
     await waitFor(() => {

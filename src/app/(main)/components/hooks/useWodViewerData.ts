@@ -206,9 +206,9 @@ export function useWodViewerData(
     return result;
   }, [categoryTagFilteredWods, completionFilter, scoresByWodId, searchTerm]);
 
-  // Category counts based on filtered wods
+  // Category counts based on wods
   const categoryCounts = useMemo<Record<string, number>>(() => {
-    return categoryTagFilteredWods.reduce<Record<string, number>>(
+    return wods.reduce<Record<string, number>>(
       (acc: Record<string, number>, wod: Wod) => {
         if (wod.category) {
           acc[wod.category] = (acc[wod.category] || 0) + 1;
@@ -217,7 +217,7 @@ export function useWodViewerData(
       },
       {},
     );
-  }, [categoryTagFilteredWods]);
+  }, [wods]);
 
   // Counts
   const {

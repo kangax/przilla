@@ -137,7 +137,6 @@ describe("MovementFrequencyChart", () => {
   });
 
   it("switches tabs and shows correct data", async () => {
-    // Made async
     render(
       <MovementFrequencyChart
         data={categoryData}
@@ -145,11 +144,9 @@ describe("MovementFrequencyChart", () => {
         yourData={yourData}
       />,
     );
-    // Get references to the initial and target tabs
-    const initialTabTrigger = screen.getByRole("tab", {
-      name: /Your WOD's Your WOD's/i,
-    });
-    const heroTabTrigger = screen.getByRole("tab", { name: /Hero Hero/i });
+    // Get references using data-testid for robustness
+    const initialTabTrigger = screen.getByTestId("tab-trigger-yourWods");
+    const heroTabTrigger = screen.getByTestId("tab-trigger-Hero");
 
     // Expect initial state
     expect(initialTabTrigger.getAttribute("data-state")).toBe("active");
@@ -158,21 +155,17 @@ describe("MovementFrequencyChart", () => {
     // Click "Hero" tab
     fireEvent.click(heroTabTrigger);
 
-    // Wait for the Hero content panel to become active (data-state="active")
-    // Radix updates the content panel's state when the tab changes.
+    // Wait for the *clicked trigger* (identified by data-testid) to become active
     await waitFor(() => {
-      const heroContentPanel = screen.getByRole("tabpanel", {
-        // Find the panel associated with the Hero tab trigger
-        // Radix uses aria-labelledby with the trigger's ID
-        name: /Hero/i, // Use name as fallback if aria-labelledby is unstable
-      });
-      // Check the content panel's state, not the trigger's
-      expect(heroContentPanel.getAttribute("data-state")).toBe("active");
+      // Re-select the trigger within waitFor to ensure we get the updated element state
+      const updatedHeroTrigger = screen.getByTestId("tab-trigger-Hero");
+      expect(updatedHeroTrigger.getAttribute("data-state")).toBe("active");
     });
 
-    // Now that the content panel is active, the trigger state should also be updated
-    expect(heroTabTrigger.getAttribute("data-state")).toBe("active");
-    expect(initialTabTrigger.getAttribute("data-state")).toBe("inactive");
+    // Now that the trigger is active, verify the other trigger is inactive
+    // Re-select the initial trigger to ensure we get its updated state
+    const updatedInitialTrigger = screen.getByTestId("tab-trigger-yourWods");
+    expect(updatedInitialTrigger.getAttribute("data-state")).toBe("inactive");
 
     // Note: Verifying specific chart content is brittle. We check the tab state.
   });

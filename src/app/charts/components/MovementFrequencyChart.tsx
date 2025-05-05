@@ -148,7 +148,11 @@ export default function MovementFrequencyChart({
       >
         <Tabs.List size="1">
           {tabsToShow.map((tab) => (
-            <Tabs.Trigger key={tab.value} value={tab.value}>
+            <Tabs.Trigger
+              key={tab.value}
+              value={tab.value}
+              data-testid={`tab-trigger-${tab.value}`} // Add data-testid
+            >
               {tab.label}
             </Tabs.Trigger>
           ))}

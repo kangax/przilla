@@ -6,9 +6,10 @@ import type {
   Score,
   Wod,
   MonthlyScoreDetail,
+  Score as ScoreType, // Rename imported Score to avoid conflict
 } from "~/types/wodTypes";
 import { difficultyMultipliers, DEFAULT_MULTIPLIER } from "~/config/constants";
-import { isWodDone } from "~/utils/wodUtils";
+import { isWodDone, getPerformanceLevel } from "~/utils/wodUtils"; // Import getPerformanceLevel
 import {
   type WodWithMatches,
   WOD_CATEGORIES,
@@ -213,50 +214,55 @@ export function calculateMonthlyData(
       );
     }
 
-    const scoreValue = data.time_seconds ?? data.reps ?? 0;
-    let levelScore = 0;
-    if (benchmarks?.levels) {
-      if (benchmarks.type === "time") {
-        if (scoreValue <= (benchmarks.levels.elite?.max ?? Infinity))
-          levelScore = 4;
-        else if (scoreValue <= (benchmarks.levels.advanced?.max ?? Infinity))
-          levelScore = 3;
-        else if (
-          scoreValue <= (benchmarks.levels.intermediate?.max ?? Infinity)
-        )
-          levelScore = 2;
-        else if (
-          benchmarks.levels.beginner?.min !== null &&
-          scoreValue >= (benchmarks.levels.beginner?.min ?? 0)
-        )
-          levelScore = 1;
-        else if (
-          benchmarks.levels.beginner?.min !== null &&
-          scoreValue < benchmarks.levels.beginner.min
-        )
-          levelScore = 1;
-      } else {
-        if (scoreValue >= (benchmarks.levels.elite?.min ?? 0)) levelScore = 4;
-        else if (scoreValue >= (benchmarks.levels.advanced?.min ?? 0))
-          levelScore = 3;
-        else if (scoreValue >= (benchmarks.levels.intermediate?.min ?? 0))
-          levelScore = 2;
-        else if (
-          benchmarks.levels.beginner?.max !== null &&
-          scoreValue <= (benchmarks.levels.beginner?.max ?? Infinity)
-        )
-          levelScore = 1;
-        else if (
-          benchmarks.levels.beginner?.max !== null &&
-          scoreValue > benchmarks.levels.beginner.max
-        )
-          levelScore = 1;
-      }
-    }
+    // --- Start: Replace levelScore calculation with getPerformanceLevel ---
+    // Create temporary Wod and Score objects compatible with getPerformanceLevel
+    const tempWod: Wod = {
+      id: data.wodId,
+      wodName: data.wodName,
+      description: "", // Not needed for level calculation
+      benchmarks: benchmarks, // Use the parsed benchmarks
+      category: null, // Not needed
+      tags: null, // Not needed
+      difficulty: data.difficulty,
+      difficultyExplanation: null, // Not needed
+      countLikes: null, // Not needed
+      wodUrl: null, // Not needed
+      timecap: null, // Not needed
+      movements: [], // Not needed
+      // Add dummy values to satisfy the Wod type
+      createdAt: new Date(),
+      updatedAt: null,
+    };
+    const tempScore: ScoreType = {
+      id: data.scoreId,
+      userId: data.userId,
+      wodId: data.wodId,
+      time_seconds: data.time_seconds,
+      reps: data.reps,
+      load: data.load,
+      rounds_completed: data.rounds_completed,
+      partial_reps: data.partial_reps,
+      isRx: data.is_rx ?? false,
+      scoreDate: data.scoreDate,
+      notes: data.notes,
+      createdAt: data.createdAt,
+      updatedAt: data.updatedAt,
+    };
 
-    if (data.is_rx && levelScore < 4) {
-      levelScore = Math.min(levelScore + 0.5, 4);
-    }
+    const performanceLevelString = getPerformanceLevel(tempWod, tempScore);
+
+    // Map string level to numeric score (1-4)
+    const performanceLevelMap: Record<string, number> = {
+      elite: 4,
+      advanced: 3,
+      intermediate: 2,
+      beginner: 1,
+    };
+    // Default to 1 (Beginner) if level is null or unrecognized
+    const levelScore = performanceLevelString
+      ? (performanceLevelMap[performanceLevelString] ?? 1)
+      : 1;
+    // --- End: Replace levelScore calculation ---
 
     const difficultyMultiplier = difficulty
       ? (difficultyMultipliers[difficulty] ?? DEFAULT_MULTIPLIER)

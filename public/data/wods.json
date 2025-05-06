@@ -31982,5 +31982,42 @@
     "countLikes": 0,
     "movements": ["Strict Muscle-Up", "Strict Handstand Push-Up", "Kettlebell Snatch"],
     "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/chad-wilkinson/",
+    "wodName": "Chad",
+    "description": "For Time:\n1,000 Box Step-Ups (20 in)\n\nWear a Ruck Pack (45/35 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": {
+          "min": null,
+          "max": 3600
+        },
+        "advanced": {
+          "min": 3601,
+          "max": 4500
+        },
+        "intermediate": {
+          "min": 4501,
+          "max": 5400
+        },
+        "beginner": {
+          "min": 5401,
+          "max": null
+        }
+      }
+    },
+    "results": [],
+    "category": "Hero",
+    "tags": [
+      "For Time"
+    ],
+    "difficulty": "Very Hard",
+    "movements": [
+      "Box Step-Up"
+    ],
+    "countLikes": 657,
+    "difficultyExplanation": "A Hero WOD dedicated to Navy SEAL Chad Wilkinson. It consists of 1,000 box step-ups to a 20-inch box while wearing a 45 lb (men) / 35 lb (women) ruck pack. This workout is a significant test of muscular endurance, stamina, and mental fortitude, often taking athletes an hour or more to complete."
   }
 ]

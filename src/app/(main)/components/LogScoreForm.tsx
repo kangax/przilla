@@ -45,7 +45,7 @@ const initialFormState = {
   load: "",
   rounds_completed: "",
   partial_reps: "",
-  isRx: false,
+  isRx: true,
   notes: "",
   scoreDate: new Date().toISOString().slice(0, 10),
   finishedWithinTimecap: "yes" as "yes" | "no",

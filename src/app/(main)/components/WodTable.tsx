@@ -318,7 +318,7 @@ const createColumns = (
             }
           >
             <Text
-              className={`whitespace-nowrap font-medium ${getDifficultyColor(row.difficulty)}`}
+              className={`font-medium ${getDifficultyColor(row.difficulty)}`}
             >
               {row.difficulty}
             </Text>

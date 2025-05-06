@@ -20,15 +20,19 @@ import {
   type Row, // Added Row
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import type { Wod, Score, SortByType } from "~/types/wodTypes";
+import { useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
+import type { Wod, Score, SortByType, WodWithMatches } from "~/types/wodTypes";
 import { getPerformanceLevel } from "~/utils/wodUtils";
 import { HighlightMatch } from "~/utils/uiUtils";
 import { LogScoreDialog } from "./LogScoreDialog";
 import { ScoresCell } from "./WodTableCells/ScoresCell";
 import { DeleteScoreDialog } from "./DeleteScoreDialog";
+import { Star } from "lucide-react";
+import { useSession } from "~/lib/auth-client";
 import { safeString, getDifficultyColor, isValidSortBy } from "./wodTableUtils";
 import { api } from "~/trpc/react";
 import { useToast } from "~/components/ToastProvider";
+import { useFavoriteWod } from "./hooks/useFavoriteWod"; // Import the new hook
 
 interface WodTableProps {
   wods: Wod[];
@@ -62,10 +66,12 @@ const createColumns = (
   sortDirection: "asc" | "desc",
   searchTerm: string,
   scoresByWodId: Record<string, Score[]>,
+  isUserLoggedIn: boolean,
+  handleToggleFavorite: (wodId: string, currentIsFavorited: boolean) => void,
   onScoreLogged?: () => void,
-  openLogDialog?: (wod: Wod) => void, // New handler prop
-  openEditDialog?: (score: Score, wod: Wod) => void, // New handler prop
-  handleDeleteScore?: (score: Score, wod: Wod) => void, // Renamed prop
+  openLogDialog?: (wod: Wod) => void,
+  openEditDialog?: (score: Score, wod: Wod) => void,
+  handleDeleteScore?: (score: Score, wod: Wod) => void,
 ): ColumnDef<Wod, unknown>[] => {
   // --- Define sorting function INSIDE createColumns to access scoresByWodId ---
   const sortByLatestScoreLevel: SortingFn<Wod> = (
@@ -113,23 +119,49 @@ const createColumns = (
         </span>
       ),
       cell: (info) => {
-        const row = info.row.original;
-        return row.wodUrl ? (
-          <Link
-            href={row.wodUrl}
-            target="_blank"
-            className="flex max-w-[200px] items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
-          >
-            <HighlightMatch text={row.wodName} highlight={searchTerm} />
-            <span className="ml-1 flex-shrink-0 text-xs opacity-70">↗</span>
-          </Link>
-        ) : (
-          <span className="max-w-[200px] truncate whitespace-nowrap font-medium">
-            <HighlightMatch text={row.wodName} highlight={searchTerm} />
-          </span>
+        const wod = info.row.original;
+        const starIcon = (
+          <Star
+            size={16}
+            className={`mr-2 flex-shrink-0 ${
+              isUserLoggedIn
+                ? "cursor-pointer hover:text-yellow-400"
+                : "cursor-not-allowed opacity-50"
+            } ${wod.isFavorited ? "fill-yellow-400 text-yellow-500" : "text-gray-400"}`}
+            onClick={(e) => {
+              if (isUserLoggedIn && handleToggleFavorite) {
+                e.preventDefault(); // Prevent link navigation if star is inside Link
+                e.stopPropagation();
+                handleToggleFavorite(wod.id, !!wod.isFavorited); // Pass current state
+              }
+            }}
+            aria-label={wod.isFavorited ? "Unfavorite WOD" : "Favorite WOD"}
+          />
+        );
+
+        return (
+          <Flex align="center" className="max-w-[200px]">
+            {starIcon}
+            {wod.wodUrl ? (
+              <Link
+                href={wod.wodUrl}
+                target="_blank"
+                className="flex items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
+              >
+                <HighlightMatch text={wod.wodName} highlight={searchTerm} />
+                <span className="ml-1 flex-shrink-0 text-xs opacity-70">
+                  ↗
+                </span>
+              </Link>
+            ) : (
+              <span className="truncate whitespace-nowrap font-medium">
+                <HighlightMatch text={wod.wodName} highlight={searchTerm} />
+              </span>
+            )}
+          </Flex>
         );
       },
-      size: 200,
+      size: 220, // Increased size to accommodate star
     }),
     columnHelper.accessor(
       (row) => ({ category: row.category, tags: row.tags }),
@@ -428,6 +460,8 @@ const WodTable: React.FC<WodTableProps> = ({
   onScoreLogged,
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
+  const { data: session } = useSession();
+  const isUserLoggedIn = !!session?.user;
 
   // State for Log/Edit Dialog
   const [dialogState, setDialogState] = useState<{
@@ -442,8 +476,19 @@ const WodTable: React.FC<WodTableProps> = ({
     wod: Wod;
   } | null>(null);
 
+  const { showToast } = useToast(); // Still needed for deleteScoreMutation and potentially by useFavoriteWod if not passed
+
+  // Use the new hook for favorite logic
+  const {
+    handleToggleFavorite,
+    // isAddingFavorite, // if needed for UI feedback
+    // isRemovingFavorite, // if needed for UI feedback
+  } = useFavoriteWod({ searchTerm });
+
+  // utils and queryClient might still be needed for deleteScoreMutation
   const utils = api.useUtils();
-  const { showToast } = useToast();
+  // const queryClient = useQueryClient(); // Not directly used here if deleteScoreMutation uses utils
+
   const deleteScoreMutation = api.score.deleteScore.useMutation({
     onSuccess: async () => {
       await utils.score.getAllByUser.invalidate();
@@ -491,10 +536,12 @@ const WodTable: React.FC<WodTableProps> = ({
         sortDirection,
         searchTerm,
         scoresByWodId,
-        onScoreLogged, // Pass this down for refresh after log/edit
-        openLogDialog, // Pass dialog opener
-        openEditDialog, // Pass dialog opener
-        handleDeleteScore, // Pass delete handler
+        isUserLoggedIn,
+        handleToggleFavorite,
+        onScoreLogged,
+        openLogDialog,
+        openEditDialog,
+        handleDeleteScore,
       ),
     [
       handleSort,
@@ -502,8 +549,10 @@ const WodTable: React.FC<WodTableProps> = ({
       sortDirection,
       searchTerm,
       scoresByWodId,
+      isUserLoggedIn,
+      handleToggleFavorite,
       onScoreLogged,
-      // Dependencies for handlers are implicitly covered by WodTable scope
+      // openLogDialog, openEditDialog, handleDeleteScore are stable if defined outside or wrapped in useCallback
     ],
   );
 

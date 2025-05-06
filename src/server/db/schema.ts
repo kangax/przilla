@@ -1,5 +1,11 @@
 import { relations, sql } from "drizzle-orm";
-import { index, int, sqliteTableCreator, text } from "drizzle-orm/sqlite-core";
+import {
+  index,
+  int,
+  sqliteTableCreator,
+  text,
+  primaryKey as drizzlePrimaryKey,
+} from "drizzle-orm/sqlite-core"; // Added primaryKey
 import type { Benchmarks } from "~/types/wodTypes"; // Import the actual Benchmarks type
 
 /**
@@ -156,19 +162,42 @@ export const verification = createTable(
   }),
 );
 
+// --- User Favorite WODs Table ---
+export const userFavoriteWods = createTable(
+  "user_favorite_wod",
+  {
+    userId: text("user_id")
+      .notNull()
+      .references(() => user.id, { onDelete: "cascade" }),
+    wodId: text("wod_id")
+      .notNull()
+      .references(() => wods.id, { onDelete: "cascade" }),
+    createdAt: int("created_at", { mode: "timestamp" })
+      .notNull()
+      .default(sql`(unixepoch())`),
+  },
+  (t) => ({
+    pk: drizzlePrimaryKey({ columns: [t.userId, t.wodId] }),
+    userIdIdx: index("favorite_user_id_idx").on(t.userId),
+    wodIdIdx: index("favorite_wod_id_idx").on(t.wodId),
+  }),
+);
+
 // --- Relations ---
 
-// App-Specific Relations (WODs <-> Scores)
-
+// App-Specific Relations (WODs <-> Scores, WODs <-> UserFavoriteWODs, WODs <-> WODMovements)
 export const wodsRelations = relations(wods, ({ many }) => ({
   scores: many(scores), // A WOD can have many scores logged against it
+  favoritedByUsers: many(userFavoriteWods), // A WOD can be favorited by many users
+  wodMovements: many(wodMovements), // A WOD can have many movements
 }));
 
-// Updated Auth Relations
+// Updated Auth Relations (User <-> Accounts, User <-> Sessions, User <-> Scores, User <-> UserFavoriteWODs)
 export const userRelations = relations(user, ({ many }) => ({
   accounts: many(account), // User can have multiple accounts (social, email/pass)
   sessions: many(session), // User can have multiple active sessions
   scores: many(scores), // A user can have many scores (App-specific relation)
+  favoriteWods: many(userFavoriteWods), // A user can have many favorite WODs
 }));
 
 export const sessionRelations = relations(session, ({ one }) => ({
@@ -210,12 +239,10 @@ export const wodMovements = createTable(
       .notNull()
       .references(() => movements.id, { onDelete: "cascade" }),
   },
-  (wodMovement) => ({
-    pk: index("wod_movement_pk").on(wodMovement.wodId, wodMovement.movementId),
-    wodIdIdx: index("wod_movement_wod_id_idx").on(wodMovement.wodId),
-    movementIdIdx: index("wod_movement_movement_id_idx").on(
-      wodMovement.movementId,
-    ),
+  (t) => ({
+    pk: drizzlePrimaryKey({ columns: [t.wodId, t.movementId] }), // Corrected to use drizzlePrimaryKey
+    wodIdIdx: index("wod_movement_wod_id_idx").on(t.wodId),
+    movementIdIdx: index("wod_movement_movement_id_idx").on(t.movementId),
   }),
 );
 
@@ -231,3 +258,18 @@ export const wodMovementsRelations = relations(wodMovements, ({ one }) => ({
     references: [movements.id],
   }),
 }));
+
+// --- Relations for UserFavoriteWods ---
+export const userFavoriteWodsRelations = relations(
+  userFavoriteWods,
+  ({ one }) => ({
+    user: one(user, {
+      fields: [userFavoriteWods.userId],
+      references: [user.id],
+    }),
+    wod: one(wods, {
+      fields: [userFavoriteWods.wodId],
+      references: [wods.id],
+    }),
+  }),
+);

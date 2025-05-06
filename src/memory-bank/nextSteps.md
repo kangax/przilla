@@ -5,6 +5,7 @@
 - QF 24.3 doesn't have timecap
 - QF 21.4 timecap UI is incorrect because it's load based
 - Check aliases.ts for missing wods
+- Log score form should be user-friendlier when logged out
 - Importing scores from SugarWOD should show which ones already exist (and if we they differ)
 - See what kind of insights we can get from SugarWOD data
 

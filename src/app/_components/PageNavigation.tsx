@@ -3,7 +3,8 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Flex } from "@radix-ui/themes";
-import { BarChart3, ListChecks, Upload } from "lucide-react";
+import { BarChart3, ListChecks, Upload, Star } from "lucide-react"; // Added Star icon
+import { useSession } from "~/lib/auth-client"; // Added useSession
 
 // Define props type
 type PageNavigationProps = {
@@ -14,9 +15,14 @@ export default function PageNavigation({
   mobile = false,
 }: PageNavigationProps) {
   const pathname = usePathname();
+  const { data: session } = useSession(); // Get session data
+
   const isChartsActive = pathname === "/charts";
   const isImportActive = pathname === "/import";
-  const isWorkoutsActive = !isChartsActive && !isImportActive;
+  const isFavoritesActive = pathname === "/favorites"; // Active state for favorites
+  // Adjust isWorkoutsActive to exclude /favorites
+  const isWorkoutsActive =
+    !isChartsActive && !isImportActive && !isFavoritesActive;
 
   // Base classes for links
   const linkBaseClasses =
@@ -57,6 +63,15 @@ export default function PageNavigation({
         <Upload size={16} />
         Import
       </Link>
+      {session?.user && (
+        <Link
+          href="/favorites"
+          className={`${linkBaseClasses} ${linkLayoutClasses} ${isFavoritesActive ? activeClasses : inactiveClasses}`}
+        >
+          <Star size={16} />
+          Favorites
+        </Link>
+      )}
     </Flex>
   );
 }

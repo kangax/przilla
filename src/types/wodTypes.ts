@@ -99,6 +99,7 @@ export const WodSchema = z.object({
     }
     return new Date();
   }, z.date()),
+  isFavorited: z.boolean().optional(),
 });
 
 // Zod schema to parse/transform raw DB row into Wod
@@ -221,18 +222,20 @@ export type Wod = {
   timecap: number;
   createdAt: Date;
   updatedAt: Date;
+  isFavorited?: boolean; // Added for favorites feature
 };
 
 // Intermediate type representing Wod data as potentially received from tRPC query (before client parsing)
 export type WodFromQuery = Omit<
   Wod,
-  "createdAt" | "updatedAt" | "tags" | "benchmarks"
+  "createdAt" | "updatedAt" | "tags" | "benchmarks" | "isFavorited" // Exclude isFavorited here if it's added to Wod
 > & {
   createdAt: string | Date; // Could be string or Date depending on serialization
   updatedAt?: string | Date | null; // Could be string or Date depending on serialization
   tags?: string | string[] | null; // Could be stringified JSON or array
   benchmarks?: string | Benchmarks | null; // Could be stringified JSON or object
   movements?: string[]; // Always array from DB, can be empty
+  isFavorited?: boolean; // Added for favorites feature, will be dynamically added by API
 };
 
 // Final client-side Score type (after parsing/transformation)

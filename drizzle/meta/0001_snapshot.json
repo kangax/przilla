@@ -2,7 +2,7 @@
   "version": "6",
   "dialect": "sqlite",
   "id": "0d8e054c-0e9c-458f-9b12-d9d63db3f40a",
-  "prevId": "4ec86afc-4375-4caa-a56d-f5cbf12452d1",
+  "prevId": "a8797d06-d919-45d3-ae66-0cbb17a095e6",
   "tables": {
     "przilla_account": {
       "name": "przilla_account",

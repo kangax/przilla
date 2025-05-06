@@ -5,6 +5,7 @@ import {
 } from "~/server/api/trpc";
 import { wodRouter } from "~/server/api/routers/wod";
 import { scoreRouter } from "~/server/api/routers/score"; // Import the score router
+import { favoriteRouter } from "~/server/api/routers/favoriteRouter"; // Import the favorite router
 
 /**
  * This is the primary router for your server.
@@ -14,6 +15,7 @@ import { scoreRouter } from "~/server/api/routers/score"; // Import the score ro
 export const appRouter = createTRPCRouter({
   wod: wodRouter,
   score: scoreRouter, // Add the score router
+  favorite: favoriteRouter, // Add the favorite router
   health: publicProcedure.query(() => {
     return "ok";
   }),

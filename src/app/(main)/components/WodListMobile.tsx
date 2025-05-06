@@ -6,8 +6,11 @@ import {
   Pencil,
   Trash,
   Share2,
+  Star, // Added Star icon
 } from "lucide-react";
-import type { Wod, Score } from "~/types/wodTypes";
+import type { Wod, Score } from "~/types/wodTypes"; // WodWithMatches might not be needed directly here anymore
+import { useSession } from "~/lib/auth-client";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   formatScore,
   parseTags,
@@ -24,6 +27,7 @@ import {
 import { Dialog, Button, Flex } from "@radix-ui/themes";
 import { api } from "../../../trpc/react";
 import { useToast } from "~/components/ToastProvider";
+import { useFavoriteWod } from "./hooks/useFavoriteWod"; // Import the new hook
 
 type ScoresByWodId = Record<string, Score[]>;
 
@@ -182,8 +186,23 @@ export function WodListMobile({
     wod: Wod;
   } | null>(null);
 
+  const { showToast } = useToast(); // Keep for deleteScoreMutation
+  const { data: session } = useSession(); // Keep for isUserLoggedIn check for UI
+  const isUserLoggedIn = !!session?.user;
+
+  // Use the new hook for favorite logic
+  const {
+    handleToggleFavorite,
+    // isAddingFavorite, // if needed for UI feedback
+    // isRemovingFavorite, // if needed for UI feedback
+  } = useFavoriteWod({ searchTerm });
+
+  // These are still needed for deleteScoreMutation
   const utils = api.useUtils();
-  const { showToast } = useToast();
+  // const queryClient = useQueryClient(); // queryClient is initialized in useFavoriteWod, but also needed here if deleteScore uses it.
+  // Let's assume deleteScore might need its own queryClient instance or it's fine.
+  // Actually, useQueryClient() can be called multiple times.
+
   const deleteScoreMutation = api.score.deleteScore.useMutation({
     onSuccess: async () => {
       await utils.score.getAllByUser.invalidate();
@@ -282,10 +301,29 @@ export function WodListMobile({
                 className="flex cursor-pointer items-center justify-between"
                 onClick={() => toggleExpand(wod.id)}
               >
-                <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
-                  <HighlightMatch text={wod.wodName} highlight={searchTerm} />
-                </span>
-                <div className="flex items-center gap-2">
+                <Flex align="center" gap="2" className="flex-grow">
+                  <Star
+                    size={20}
+                    className={`flex-shrink-0 ${
+                      isUserLoggedIn
+                        ? "cursor-pointer hover:text-yellow-400"
+                        : "cursor-not-allowed opacity-50"
+                    } ${wod.isFavorited ? "fill-yellow-400 text-yellow-500" : "text-gray-400"}`}
+                    onClick={(e) => {
+                      if (isUserLoggedIn) {
+                        e.stopPropagation(); // Prevent card toggle
+                        handleToggleFavorite(wod.id, !!wod.isFavorited);
+                      }
+                    }}
+                    aria-label={
+                      wod.isFavorited ? "Unfavorite WOD" : "Favorite WOD"
+                    }
+                  />
+                  <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
+                    <HighlightMatch text={wod.wodName} highlight={searchTerm} />
+                  </span>
+                </Flex>
+                <div className="flex flex-shrink-0 items-center gap-2">
                   {wod.wodUrl && (
                     <a
                       href={wod.wodUrl}

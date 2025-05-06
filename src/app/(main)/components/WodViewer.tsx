@@ -57,11 +57,14 @@ import {
   WodSchema,
   WOD_CATEGORIES,
 } from "~/types/wodTypes";
+import type { Score } from "~/types/wodTypes"; // Ensure Score is available for props
 
 // --- URL State Management ---
 
 interface WodViewerProps {
   initialWods: Wod[];
+  initialScoresByWodId?: Record<string, Score[]>; // For pre-loaded scores on favorites page
+  source?: "main" | "favorites"; // To differentiate behavior
 }
 
 const DEFAULT_COMPLETION_FILTER = "all";
@@ -73,7 +76,11 @@ const DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc"> = {
   results: "desc",
 };
 
-export default function WodViewer({ initialWods }: WodViewerProps) {
+export default function WodViewer({
+  initialWods,
+  initialScoresByWodId,
+  source = "main",
+}: WodViewerProps) {
   // initialWods prop is now guaranteed to be Wod[] by page.tsx server-side validation
   const validatedInitialWods: Wod[] = initialWods;
 
@@ -124,53 +131,59 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     DEFAULT_COMPLETION_FILTER,
   );
 
-  // **Now call the query hook, using searchTerm defined above**
+  const isFavoritesSource = source === "favorites";
+
+  // **Conditionally call the query hook**
   const {
-    data: wodsDataFromHook, // Rename to avoid conflict
-    isLoading: isLoadingWods,
-    error: errorWods,
-  } = api.wod.getAll.useQuery(
-    searchTerm ? { searchQuery: searchTerm } : {}, // Pass input object conditionally
-    {
-      staleTime: 5 * 60 * 1000,
-      // Remove initialData to avoid type conflicts
-    },
-  );
+    data: wodsDataFromApiQuery, // Renamed for clarity
+    isLoading: isLoadingWodsFromApi, // Renamed for clarity
+    error: errorWodsFromApi, // Renamed for clarity
+  } = api.wod.getAll.useQuery(searchTerm ? { searchQuery: searchTerm } : {}, {
+    enabled: !isFavoritesSource, // Only fetch if not on favorites page
+    staleTime: 5 * 60 * 1000,
+  });
 
   // Add debugging for API results
   useEffect(() => {
-    if (wodsDataFromHook) {
+    if (wodsDataFromApiQuery) {
       console.log("[DEBUG] API query data available:", {
-        dataLength: wodsDataFromHook?.length,
+        dataLength: wodsDataFromApiQuery?.length,
         searchTerm,
         timestamp: new Date().toISOString(),
       });
     }
-    if (errorWods) {
+    if (errorWodsFromApi) {
       console.error("[DEBUG] API query error:", {
-        error: errorWods,
+        error: errorWodsFromApi,
         searchTerm,
         timestamp: new Date().toISOString(),
       });
     }
-  }, [wodsDataFromHook, errorWods, searchTerm]);
+  }, [wodsDataFromApiQuery, errorWodsFromApi, searchTerm]);
 
   const {
-    data: scoresData,
-    isLoading: isLoadingScores,
-    error: errorScores,
+    data: scoresDataFromApi, // Renamed
+    isLoading: isLoadingScoresFromApi, // Renamed
+    error: errorScoresFromApi, // Renamed
   } = api.score.getAllByUser.useQuery(undefined, {
-    enabled: isLoggedIn,
+    enabled: isLoggedIn && !isFavoritesSource, // Only fetch if logged in AND not on favorites page (where scores are pre-loaded)
   });
 
-  // Validate wodsData from the hook using Zod schema
-  const wodsDataParseResult = WodSchema.array().safeParse(wodsDataFromHook);
-  let validatedWodsData: Wod[] | undefined = undefined; // Keep undefined if parsing fails or data is initially undefined
-  if (wodsDataParseResult.success) {
-    validatedWodsData = wodsDataParseResult.data as Wod[]; // Assert type after successful parse
-  } else if (wodsDataFromHook !== undefined) {
-    // Keep validatedWodsData as undefined
-  }
+  // Determine WODs data source
+  const wodsSourceForHook = isFavoritesSource
+    ? undefined
+    : wodsDataFromApiQuery;
+  const validatedWodsFromApi = WodSchema.array().safeParse(wodsSourceForHook)
+    .success
+    ? (WodSchema.array().parse(wodsSourceForHook) as Wod[])
+    : undefined;
+
+  // Determine scores data source
+  const scoresSourceForHook = isFavoritesSource
+    ? initialScoresByWodId
+      ? Object.values(initialScoresByWodId).flat() // Convert Record to Score[]
+      : []
+    : (scoresDataFromApi ?? []);
 
   // Use custom data transformation hook
   const {
@@ -185,10 +198,10 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     dynamicNotDoneWodsCount,
     sortedWods,
   } = useWodViewerData(
-    validatedWodsData, // Arg 1: Data from hook (Wod[] | undefined)
-    validatedInitialWods, // Arg 2: Initial data (Wod[])
-    (scoresData ?? []) as ScoreFromQuery[], // Arg 3
-    selectedCategories, // Arg 4
+    validatedWodsFromApi, // Use WODs from API if main source, else undefined
+    validatedInitialWods, // InitialWods (from props, will be favorites on fav page)
+    scoresSourceForHook as ScoreFromQuery[], // Use pre-loaded scores if favorites, else from API
+    selectedCategories,
     selectedTags,
     completionFilter,
     sortBy,
@@ -241,10 +254,12 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     void utils.score.getAllByUser.invalidate();
   }, [utils.score.getAllByUser]);
 
-  const showScoreLoading = isLoggedIn && (isLoadingScores || isSessionLoading);
-  // Adjust loading condition: true if hook is loading AND we don't have validated data from the hook yet.
-  // We might still show initial data while loading fresh data.
-  const showWodLoadingSpinner = isLoadingWods && !validatedWodsData;
+  const showScoreLoading =
+    isLoggedIn &&
+    (isLoadingScoresFromApi || isSessionLoading) &&
+    !isFavoritesSource;
+  const showWodLoadingSpinner =
+    isLoadingWodsFromApi && !validatedWodsFromApi && !isFavoritesSource;
 
   // Add debugging for the final rendering decision
   useEffect(() => {
@@ -264,8 +279,11 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     searchTerm,
   ]);
 
-  if (showWodLoadingSpinner && validatedInitialWods.length === 0) {
-    // Only show full loading state if hook is loading AND we have no initial data to show
+  if (
+    showWodLoadingSpinner &&
+    validatedInitialWods.length === 0 &&
+    !isFavoritesSource
+  ) {
     return (
       <Flex align="center" justify="center" className="h-[300px] w-full">
         Loading WOD data...
@@ -273,15 +291,30 @@ export default function WodViewer({ initialWods }: WodViewerProps) {
     );
   }
 
-  if (errorWods) {
-    return <Box>Error loading WODs: {errorWods.message}</Box>;
+  if (errorWodsFromApi && !isFavoritesSource) {
+    return <Box>Error loading WODs: {errorWodsFromApi.message}</Box>;
   }
-  if (isLoggedIn && errorScores) {
-    return <Box>Error loading scores: {errorScores.message}</Box>;
+  if (isLoggedIn && errorScoresFromApi && !isFavoritesSource) {
+    return <Box>Error loading scores: {errorScoresFromApi.message}</Box>;
   }
 
-  if (validatedInitialWods.length === 0 && !isLoadingWods) {
-    // If not loading and we have no valid data
+  // If it's favorites source and initialWods is empty (after fetching), show specific message
+  if (
+    isFavoritesSource &&
+    validatedInitialWods.length === 0 &&
+    !isLoadingWodsFromApi
+  ) {
+    // isLoadingWodsFromApi will be false here
+    return <Box>You have no favorited WODs yet.</Box>;
+  }
+
+  // If main source, and initialWods (from server) was empty and API fetch also resulted in no valid data
+  if (
+    !isFavoritesSource &&
+    validatedInitialWods.length === 0 &&
+    !validatedWodsFromApi &&
+    !isLoadingWodsFromApi
+  ) {
     return <Box>No valid WOD data available.</Box>;
   }
 

@@ -30890,5 +30890,1097 @@
     "movements": ["Overhead Squat", "Burpee Box Jump Over"],
     "countLikes": 0,
     "difficultyExplanation": "A sprint couplet with heavy overhead squats and high box jumps. Demands speed, strength, and explosive power."
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-23-2/",
+    "wodName": "AGOQ 23.2",
+    "description": "As many repetitions as possible in 10 minutes:\n10 calorie Echo Bike\n50 foot Handstand Walk\n10 calorie Echo Bike\n10 Chest-to-Wall Handstand Push-Ups\n\nRest 5 minutes\n\nRepeat",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 150, "max": null },
+        "advanced": { "min": 120, "max": 149 },
+        "intermediate": { "min": 90, "max": 119 },
+        "beginner": { "min": null, "max": 89 }
+      }
+    },
+    "category": "Quarterfinals",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A short, high-intensity couplet combining a gymnastics skill (Handstand Walk) and a challenging push variation (C2W HSPU) with Echo Bike sprints, repeated after rest. Tests capacity and skill cycling.",
+    "countLikes": 11,
+    "movements": ["Air Bike", "Handstand Walk", "Chest-to-Wall Handstand Push-Ups"],
+    "timecap": 1500
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/230402/",
+    "wodName": "AGOQ 23.3",
+    "description": "AMRAP in 20 minutes:\n4 Strict Handstand Push-Ups\n8 Box Jumps (30/24 in)\n12 Pull-Ups",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 288, "max": null },
+        "advanced": { "min": 240, "max": 287 },
+        "intermediate": { "min": 192, "max": 239 },
+        "beginner": { "min": null, "max": 191 }
+      }
+    },
+    "category": "Quarterfinals",
+    "tags": ["AMRAP", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A 20-minute AMRAP testing strict gymnastics strength (Strict HSPU), power (High Box Jumps), and pulling endurance (Pull-Ups). Pacing and HSPU capacity are key.",
+    "countLikes": 28,
+    "movements": ["Strict Handstand Push-Ups", "Box Jump", "Pull-Up"],
+    "timecap": 1200
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agoq-23-4/",
+    "wodName": "AGOQ 23.4",
+    "description": "For Time:\n3 rounds of:\n 7 Squat Cleans (155/105 lb)\n 7 Bar Facing Burpees\nRest 1 minute\nThen,\n3 rounds of:\n 7 Squat Cleans (185/125 lb)\n 7 Bar Facing Burpees\nRest 1 minute\nThen,\n3 rounds of:\n 7 Squat Cleans (205/135 lb)\n 7 Bar Facing Burpees\n\nTime cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 720 },
+        "advanced": { "min": 721, "max": 900 },
+        "intermediate": { "min": 901, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "category": "Quarterfinals",
+    "tags": ["For Time"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A challenging triplet structure with increasing squat clean weight across three segments, paired with bar-facing burpees. Includes mandatory rest, testing strength endurance and pacing under fatigue against a time cap.",
+    "countLikes": 10,
+    "movements": ["Squat Clean", "Bar Facing Burpee"],
+    "timecap": 1200
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-16-1/",
+    "wodName": "Regionals 16.1",
+    "description": "For Time:\n1,000 meter Assault AirBike Row\n100 foot Handstand Walk\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 240 },
+        "advanced": { "min": 241, "max": 300 },
+        "intermediate": { "min": 301, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A short, intense couplet pairing a max-effort Assault Bike (or Row) with a long handstand walk. Tests anaerobic capacity and gymnastics skill under pressure against a tight time cap.",
+    "countLikes": 55,
+    "movements": ["Assault Bike", "Handstand Walk"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-16-3/",
+    "wodName": "Regionals 16.3",
+    "description": "For Time:\n104 Wall Ball Shots (20/14 lb, 10/9 ft)\n52 Pull-Ups\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 270 },
+        "advanced": { "min": 271, "max": 330 },
+        "intermediate": { "min": 331, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A high-volume couplet sprint of wall balls and pull-ups. Tests muscular endurance and work capacity against a very tight time cap.",
+    "countLikes": 51,
+    "movements": ["Wall Ball Shot", "Pull-Up"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-16-4/",
+    "wodName": "Regionals 16.4",
+    "description": "For Time:\n100 foot Dumbbell Overhead Walking Lunges (80/55 lb)\n100 Double-Unders\n15 Muscle-Ups\n100 Double-Unders\n100 foot Dumbbell Overhead Walking Lunges (80/55 lb)\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 420 },
+        "advanced": { "min": 421, "max": 510 },
+        "intermediate": { "min": 511, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A challenging chipper demanding shoulder stability and strength (Heavy DB OH Lunges), coordination (Double-Unders), and high-skill gymnastics (Muscle-Ups).",
+    "countLikes": 54,
+    "movements": ["Dumbbell Overhead Walking Lunge", "Double-Under", "Muscle-Up"],
+    "timecap": 600
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-16-5/",
+    "wodName": "Regionals 16.5",
+    "description": "For Time:\n25 calorie Row\n16 Burpee Box Jump Overs (24/20 in)\n9 Bar Muscle-Ups\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 240 },
+        "advanced": { "min": 241, "max": 300 },
+        "intermediate": { "min": 301, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A fast triplet combining rowing, burpee box jump overs, and bar muscle-ups. Tests power, conditioning, and gymnastics skill in a sprint format with a tight time cap.",
+    "countLikes": 53,
+    "movements": ["Row", "Burpee Box Jump Over", "Bar Muscle-Up"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-16-6/",
+    "wodName": "Regionals 16.6",
+    "description": "For Time:\n30 Snatches (135/85 lb)\n30 Snatches (185/125 lb)\nMax Rep Snatches (225/145 lb)\n\nTime Cap: 13 minutes",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 70, "max": null },
+        "advanced": { "min": 65, "max": 69 },
+        "intermediate": { "min": 60, "max": 64 },
+        "beginner": { "min": null, "max": 59 }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Ladder"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A heavy snatch ladder testing strength, power, and technique under fatigue, finishing with max reps at a heavy weight (225/145 lb).",
+    "countLikes": 36,
+    "movements": ["Snatch"],
+    "timecap": 780
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-16-7/",
+    "wodName": "Regionals 16.7",
+    "description": "For Time:\n3 Legless Rope Climbs\n27 Thrusters (95/65 lb)\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 210 },
+        "advanced": { "min": 211, "max": 270 },
+        "intermediate": { "min": 271, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A quick couplet testing high-skill/strength upper body pulling (Legless Rope Climbs) combined with a metabolic push (Thrusters) against a tight time cap.",
+    "countLikes": 38,
+    "movements": ["Legless Rope Climb", "Thruster"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-17-1/",
+    "wodName": "Regionals 17.1",
+    "description": "For Time:\nRun 1,200 meters\nThen, 12 Rounds of:\n 4 Strict Handstand Push-Ups\n 4 Bar Facing Burpees\nThen,\nRun 600 meters\n\nTime Cap: 17 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 780 },
+        "advanced": { "min": 781, "max": 900 },
+        "intermediate": { "min": 901, "max": 1020 },
+        "beginner": { "min": 1021, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A long chipper combining running endurance with high-volume strict gymnastics (Strict HSPU) and burpees. Tests pacing and capacity across multiple domains.",
+    "countLikes": 67,
+    "movements": ["Run", "Strict Handstand Push-Ups", "Bar Facing Burpee"],
+    "timecap": 1020
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-17-2/",
+    "wodName": "Regionals 17.2",
+    "description": "For Time:\n50 Dumbbell Snatches (100/70 lb)\n50 foot Right-Arm Dumbbell Overhead Walking Lunges (100/70 lb)\n50 foot Left-Arm Dumbbell Overhead Walking Lunges (100/70 lb)\n50 Dumbbell Snatches (100/70 lb)\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 420 },
+        "advanced": { "min": 421, "max": 510 },
+        "intermediate": { "min": 511, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A demanding workout focused entirely on heavy single-dumbbell movements (Snatches, OH Lunges). Tests unilateral strength, core stability, and grip endurance under heavy load.",
+    "countLikes": 69,
+    "movements": ["Dumbbell Snatch", "Dumbbell Overhead Walking Lunge"],
+    "timecap": 600
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-17-3/",
+    "wodName": "Regionals 17.3",
+    "description": "For Time:\n21-15-9 reps of:\n Parallel Bar Dips\n 15 foot Rope Climbs\n\nTime Cap: 11 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 420 },
+        "advanced": { "min": 421, "max": 540 },
+        "intermediate": { "min": 541, "max": 660 },
+        "beginner": { "min": 661, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A classic descending rep scheme couplet focused on upper body endurance, combining parallel bar dips and rope climbs.",
+    "countLikes": 46,
+    "movements": ["Parallel Bar Dip", "Rope Climb"],
+    "timecap": 660
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-17-4/",
+    "wodName": "Regionals 17.4",
+    "description": "For Time:\n27 Thrusters (95/65 lb)\n12 Ring Muscle-Ups\n21 Thrusters (115/75 lb)\n9 Ring Muscle-Ups\n15 Thrusters (135/85 lb)\n6 Ring Muscle-Ups\n\nTime Cap: 11 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 450 },
+        "advanced": { "min": 451, "max": 570 },
+        "intermediate": { "min": 571, "max": 660 },
+        "beginner": { "min": 661, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A challenging couplet pairing high-skill ring muscle-ups with increasingly heavy thrusters across descending/ascending rounds. Tests gymnastics proficiency and strength under fatigue.",
+    "countLikes": 57,
+    "movements": ["Thruster", "Ring Muscle-Up"],
+    "timecap": 660
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-17-5/",
+    "wodName": "Regionals 17.5",
+    "description": "For Time:\n30/25 calorie Assault Air Bike\n20 Burpee Box Jump Overs (24/20 in)\n10 Sandbag Cleans (150/100 lb)\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 240 },
+        "advanced": { "min": 241, "max": 300 },
+        "intermediate": { "min": 301, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A triplet sprint combining Assault Bike power output, burpee box jump overs, and heavy odd-object lifting (Sandbag Cleans). Tests power, conditioning, and strength against a tight time cap.",
+    "countLikes": 67,
+    "movements": ["Assault Bike", "Burpee Box Jump Over", "Sandbag Clean"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-17-6/",
+    "wodName": "Regionals 17.6",
+    "description": "For Time:\n30 Snatches (175/125 lb)\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 180 },
+        "advanced": { "min": 181, "max": 270 },
+        "intermediate": { "min": 271, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A barbell cycling sprint requiring 30 heavy snatches (175/125 lb) for time. Tests strength, speed, and technique under fatigue against a tight time cap.",
+    "countLikes": 42,
+    "movements": ["Snatch"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-18-3/",
+    "wodName": "Regionals 18.3",
+    "description": "For Time:\n10 Snatches (175/125 lb)\n12 Burpees\nThen, 4 Rounds of:\n 7 Snatches (175/125 lb)\n 7 Burpees\n\nTime Cap: 11 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 420 },
+        "advanced": { "min": 421, "max": 540 },
+        "intermediate": { "min": 541, "max": 660 },
+        "beginner": { "min": 661, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A couplet combining heavy snatches (175/125 lb) and burpees, structured with an initial set followed by multiple rounds. Tests strength, power, and conditioning.",
+    "countLikes": 48,
+    "movements": ["Snatch", "Burpee"],
+    "timecap": 660
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-18-4/",
+    "wodName": "Regionals 18.4",
+    "description": "For Time:\n2 Rounds of:\n 10 Strict Handstand Push-Ups\n 10 Toes-to-Bars\n 50 foot Handstand Walk\nThen, 2 Rounds of:\n 10 Kipping Handstand Push-Ups\n 10 Chest-to-Bar Pull-Ups\n 50 foot Handstand Walk\nThen, 2 Rounds of:\n 10 Push-Ups\n 10 Pull-Ups\n 50 foot Handstand Walk\n\nTime Cap: 11 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 420 },
+        "advanced": { "min": 421, "max": 540 },
+        "intermediate": { "min": 541, "max": 660 },
+        "beginner": { "min": 661, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A gymnastics gauntlet progressing through strict, kipping, and foundational variations of handstand push-ups, pull-ups, and toes-to-bar, combined with handstand walks. Tests broad gymnastics skill and endurance.",
+    "countLikes": 46,
+    "movements": ["Strict Handstand Push-Ups", "Toes-to-Bar", "Handstand Walk", "Kipping Handstand Push-Ups", "Chest-to-Bar Pull-Up", "Push-Up", "Pull-Up"],
+    "timecap": 660
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-18-5/",
+    "wodName": "Regionals 18.5",
+    "description": "30 Ring Muscle-Ups for Time\n\nTime Cap: 6 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 210 },
+        "advanced": { "min": 211, "max": 300 },
+        "intermediate": { "min": 301, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A sprint test of high-volume ring muscle-ups (30 reps) against a 6-minute time cap. Tests gymnastics skill, strength, and capacity.",
+    "countLikes": 65,
+    "movements": ["Ring Muscle-Up"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-18-6/",
+    "wodName": "Regionals 18.6",
+    "description": "For Time:\n30 calorie Assault Air Bike\n30 Dumbbell Box Step Overs (2x50/35 lb, 24/20 in)\n30 Deficit Handstand Push-Ups (4.5/3 in)\n\nTime Cap: 7 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 300 },
+        "advanced": { "min": 301, "max": 360 },
+        "intermediate": { "min": 361, "max": 420 },
+        "beginner": { "min": 421, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "An intense triplet demanding power on the Assault Bike, strength endurance with heavy Dumbbell Box Step Overs, and advanced gymnastics strength with Deficit Handstand Push-Ups, all against a tight time cap.",
+    "countLikes": 51,
+    "movements": ["Assault Bike", "Dumbbell Box Step Over", "Deficit Handstand Push-Up"],
+    "timecap": 420
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-11-1/",
+    "wodName": "Regionals 11.1",
+    "description": "For Time:\n1000 meter Run\n30 Handstand Push-Ups\n1000 meter Row\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 600 },
+        "advanced": { "min": 601, "max": 720 },
+        "intermediate": { "min": 721, "max": 900 },
+        "beginner": { "min": 901, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A triplet combining running and rowing endurance with a moderate volume of a challenging gymnastics skill (Handstand Push-Ups).",
+    "countLikes": 0,
+    "movements": ["Run", "Handstand Push-Up", "Row"],
+    "timecap": 900
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-11-2/",
+    "wodName": "Regionals 11.2",
+    "description": "For Load:\nThruster Ladder\nMen: 155, 165, 175, 185, 195, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295 lb\nWomen: 105, 115, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185 lb\n\n20 seconds per lift, 10 seconds transition.",
+    "benchmarks": {
+      "type": "load",
+      "levels": {
+        "elite": { "min": 245, "max": null },
+        "advanced": { "min": 215, "max": 244 },
+        "intermediate": { "min": 185, "max": 214 },
+        "beginner": { "min": null, "max": 184 }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Load", "Ladder"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A max-effort thruster ladder with increasing weight and short work/rest windows. Tests maximal strength and power endurance.",
+    "countLikes": 0,
+    "movements": ["Thruster"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-11-3/",
+    "wodName": "Regionals 11.3",
+    "description": "For Time:\n3-9-15-21-15-9-3 reps of:\nDeadlifts (205/145 lb)\nBox Jumps (24/20 in)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 300 },
+        "advanced": { "min": 301, "max": 420 },
+        "intermediate": { "min": 421, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Medium",
+    "difficultyExplanation": "A pyramid couplet combining moderate-weight deadlifts with box jumps, testing conditioning and pacing through varying rep ranges.",
+    "countLikes": 0,
+    "movements": ["Deadlift", "Box Jump"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-11-4/",
+    "wodName": "Regionals 11.4",
+    "description": "For Time:\n100 Pull-Ups\n100 Kettlebell Swings (24/16 kg)\n100 Double-Unders\n100 Overhead Squats (95/65 lb)\n\nTime Cap: 25 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 900 },
+        "advanced": { "min": 901, "max": 1140 },
+        "intermediate": { "min": 1141, "max": 1500 },
+        "beginner": { "min": 1501, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A high-volume chipper requiring proficiency and endurance across gymnastics (Pull-Ups), weightlifting (OHS), kettlebells, and coordination (Double-Unders).",
+    "countLikes": 0,
+    "movements": ["Pull-Up", "Kettlebell Swing", "Double-Under", "Overhead Squat"],
+    "timecap": 1500
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-11-5/",
+    "wodName": "Regionals 11.5",
+    "description": "9-7-5 Reps For Time:\nMuscle Ups\nSquat Snatches (135/95 lb)\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 300 },
+        "advanced": { "min": 301, "max": 480 },
+        "intermediate": { "min": 481, "max": 720 },
+        "beginner": { "min": 721, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A classic CrossFit benchmark ('Amanda') pairing high-skill gymnastics (Muscle-Ups) with heavy, technical squat snatches in a sprint format.",
+    "countLikes": 0,
+    "movements": ["Muscle-Up", "Snatch"],
+    "timecap": 900
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-11-6/",
+    "wodName": "Regionals 11.6",
+    "description": "For Time:\n20 calorie Row\n30 Burpees\n40 Two-Arm Dumbbell Ground-to-Overheads (45/35 lb)\n50 Toes-to-Bars\n100 foot Overhead Walking Lunges (45/25 lb plate)\n150 foot Sprint\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 720 },
+        "advanced": { "min": 721, "max": 900 },
+        "intermediate": { "min": 901, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A demanding chipper workout testing endurance across rowing, burpees, dumbbell work, gymnastics (Toes-to-Bar), loaded carries (OH Lunge), and sprinting.",
+    "countLikes": 0,
+    "movements": ["Row", "Burpee", "Dumbbell Ground-to-Overhead", "Toes-to-Bar", "Overhead Walking Lunge", "Run"],
+    "timecap": 1200
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-12-1/",
+    "wodName": "Open 12.1",
+    "description": "AMRAP in 7 minutes:\nBurpees to a target (6\")",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 140, "max": null },
+        "advanced": { "min": 120, "max": 139 },
+        "intermediate": { "min": 90, "max": 119 },
+        "beginner": { "min": null, "max": 89 }
+      }
+    },
+    "category": "Games",
+    "tags": ["AMRAP"],
+    "difficulty": "Medium",
+    "difficultyExplanation": "A 7-minute test of pure work capacity using burpees with a standardized target reach.",
+    "countLikes": 0,
+    "movements": ["Burpee"],
+    "timecap": 420
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-12-2/",
+    "wodName": "Regionals 12.2",
+    "description": "For Time:\n2000 meter Row\n50 Pistols alternating One-Legs\n30 Hang Cleans (225/135 lbs)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 720 },
+        "advanced": { "min": 721, "max": 900 },
+        "intermediate": { "min": 901, "max": 1080 },
+        "beginner": { "min": 1081, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "Combines a significant rowing endurance piece with high-skill gymnastics (Pistols) and heavy barbell cycling (Hang Cleans).",
+    "countLikes": 0,
+    "movements": ["Row", "Pistol", "Hang Clean"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-12-3/",
+    "wodName": "Regionals 12.3",
+    "description": "4 Rounds for Time:\n10 One-Arm Dumbbell Snatches (100/70 lbs)\n100 meter Sprint",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 480 },
+        "intermediate": { "min": 481, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "Four rounds combining very heavy single-arm dumbbell snatches with short sprints, testing power and anaerobic capacity.",
+    "countLikes": 0,
+    "movements": ["Dumbbell Snatch", "Run"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-12-4/",
+    "wodName": "Regionals 12.4",
+    "description": "For Time:\n50 Back Squats (135/95 lbs)\n40 Pull-Ups\n30 Shoulder-to-Overheads (135/95 lbs)\n50 Front Squats (85/65 lbs)\n40 Pull-Ups\n30 Shoulder-to-Overheads (85/65 lbs)\n50 Overhead Squats (65/45 lbs)\n40 Pull-Ups\n30 Shoulder-to-Overhead (65/45 lbs)\nUse a single barbell.",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 900 },
+        "advanced": { "min": 901, "max": 1200 },
+        "intermediate": { "min": 1201, "max": 1500 },
+        "beginner": { "min": 1501, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A high-volume chipper involving three rounds of decreasing weight squats (Back, Front, OHS), pull-ups, and shoulder-to-overhead. Tests strength endurance and stamina.",
+    "countLikes": 0,
+    "movements": ["Back Squat", "Pull-Up", "Shoulder-to-Overhead", "Front Squat", "Overhead Squat"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-12-5/",
+    "wodName": "Regionals 12.5",
+    "description": "Snatch Ladder:\n1 Snatch at each weight:\nMen: 155, 165, 175, 185, 195, 205, 215, 225, 235, 245, 255, 265, 275, 285, 295 lb\nWomen: 105, 115, 125, 130, 135, 140, 145, 150, 155, 160, 165, 170, 175, 180, 185 lb\n\n20 Double Unders before each Snatch attempt.\nAthlete has 50 seconds to complete 20 Double Unders and 1 snatch.",
+    "benchmarks": {
+      "type": "load",
+      "levels": {
+        "elite": { "min": 245, "max": null },
+        "advanced": { "min": 215, "max": 244 },
+        "intermediate": { "min": 185, "max": 214 },
+        "beginner": { "min": null, "max": 184 }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Load", "Ladder"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A challenging snatch ladder requiring athletes to perform double-unders and then a heavy snatch within short time windows. Tests Olympic lifting strength, technique, and coordination under pressure.",
+    "countLikes": 0,
+    "movements": ["Snatch", "Double-Under"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-12-6/",
+    "wodName": "Regionals 12.6",
+    "description": "For Time:\nPart 1: 3 Rounds of:\n 7 Deadlifts (345/225 lb)\n 7 Muscle-Ups\nPart 2: Then, 3 Rounds of:\n 21 Wall Ball Shots (20/14 lb)\n 21 Toes-to-Bars\nPart 3: Then:\n 100 foot Dumbbell Farmer Carry (2x100/70 lb)\n 28 Burpee Box Jumps (24/20 in)\n 100 foot Dumbbell Farmer Carry (2x100/70 lb)\n 3 Muscle-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 1080 },
+        "advanced": { "min": 1081, "max": 1320 },
+        "intermediate": { "min": 1321, "max": 1560 },
+        "beginner": { "min": 1561, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Extremely Hard",
+    "difficultyExplanation": "A brutal three-part chipper combining very heavy deadlifts, high-skill gymnastics (Muscle-Ups, Toes-to-Bar), heavy carries, and high-volume conditioning movements.",
+    "countLikes": 0,
+    "movements": ["Deadlift", "Muscle-Up", "Wall Ball Shot", "Toes-to-Bar", "Farmer's Carry", "Burpee Box Jump"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-1/",
+    "wodName": "Regionals 14.1",
+    "description": "For Load:\n1 Rep-Max Hang Squat Snatch\n\nTime Cap: 6 minutes (3 attempts within time).",
+    "benchmarks": {
+      "type": "load",
+      "levels": {
+        "elite": { "min": 245, "max": null },
+        "advanced": { "min": 205, "max": 244 },
+        "intermediate": { "min": 165, "max": 204 },
+        "beginner": { "min": null, "max": 164 }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Load"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A test of maximal strength in the hang squat snatch, requiring technique and power within a limited number of attempts and time.",
+    "countLikes": 0,
+    "movements": ["Snatch"],
+    "timecap": 360
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-2/",
+    "wodName": "Regionals 14.2",
+    "description": "For Time: \n10-8-6-4-2 reps of:\nOverhead Squats (225/135 lb)\nChest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 180 },
+        "advanced": { "min": 181, "max": 300 },
+        "intermediate": { "min": 301, "max": 420 },
+        "beginner": { "min": 421, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A descending couplet pairing very heavy overhead squats with chest-to-bar pull-ups. Tests strength, stability, and pulling endurance in a sprint format.",
+    "countLikes": 0,
+    "movements": ["Overhead Squat", "Chest-to-Bar Pull-Up"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-3/",
+    "wodName": "Regionals 14.3",
+    "description": "Max distance Handstand Walk in 3 minutes.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 150, "max": null },
+        "advanced": { "min": 100, "max": 149 },
+        "intermediate": { "min": 50, "max": 99 },
+        "beginner": { "min": null, "max": 49 }
+      }
+    },
+    "category": "Games",
+    "tags": ["AMRAP"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A test of maximal distance in the handstand walk within a 3-minute window, requiring significant shoulder stability, balance, and endurance.",
+    "countLikes": 0,
+    "movements": ["Handstand Walk"],
+    "timecap": 180
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-4/",
+    "wodName": "Regionals 14.4",
+    "description": "For Time:\n60 foot Rope Climb ascent (total)\n60 Toes-to-Bar\n120 Wall Ball Shots (20/14 lb)\n120 foot Sled Pull (heavy)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 600 },
+        "intermediate": { "min": 601, "max": 720 },
+        "beginner": { "min": 721, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A chipper combining rope climbs, high-volume toes-to-bar and wall balls, and a heavy sled pull. Tests a broad range of capacities.",
+    "countLikes": 0,
+    "movements": ["Rope Climb", "Toes-to-Bar", "Wall Ball Shot", "Sled Pull"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-5/",
+    "wodName": "Regionals 14.5",
+    "description": "For Time:\n64 Pull-ups\n8 Overhead Squats (205/125 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 480 },
+        "intermediate": { "min": 481, "max": 600 },
+        "beginner": { "min": 601, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A demanding couplet pairing high-volume pull-ups with very heavy overhead squats, testing pulling endurance and overhead strength/stability.",
+    "countLikes": 0,
+    "movements": ["Pull-Up", "Overhead Squat"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-6/",
+    "wodName": "Regionals 14.6",
+    "description": "For Time:\n30 Clean & Jerks (185/115 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 180 },
+        "advanced": { "min": 181, "max": 300 },
+        "intermediate": { "min": 301, "max": 420 },
+        "beginner": { "min": 421, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A heavier variation of the benchmark 'Grace,' testing barbell cycling capacity with 30 clean and jerks at 185/115 lb.",
+    "countLikes": 0,
+    "movements": ["Clean & Jerk"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-14-7/",
+    "wodName": "Regionals 14.7",
+    "description": "For Time:\n50 calorie Row\n50 Burpees\n50 Overhead Squats (95/65 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 600 },
+        "intermediate": { "min": 601, "max": 780 },
+        "beginner": { "min": 781, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A high-volume triplet combining rowing, burpees, and overhead squats at a moderate weight. Tests cardiovascular endurance and stamina across modalities.",
+    "countLikes": 0,
+    "movements": ["Row", "Burpee", "Overhead Squat"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-1/",
+    "wodName": "Regionals 15.1",
+    "description": "For Time:\n75 Snatches (75/55 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 180 },
+        "advanced": { "min": 181, "max": 240 },
+        "intermediate": { "min": 241, "max": 360 },
+        "beginner": { "min": 361, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time"],
+    "difficulty": "Medium",
+    "difficultyExplanation": "The benchmark WOD 'Randy,' consisting of 75 power snatches for time at a light weight. Tests barbell cycling speed, efficiency, and grip endurance.",
+    "countLikes": 0,
+    "movements": ["Snatch"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-2/",
+    "wodName": "Regionals 15.2",
+    "description": "5 Rounds For Time:\n250 meter Row\n10 Chest-to-Bar Pull-Ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 450 },
+        "intermediate": { "min": 451, "max": 540 },
+        "beginner": { "min": 541, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Medium",
+    "difficultyExplanation": "Five rounds of rowing sprints combined with chest-to-bar pull-ups. Tests power output and pulling endurance in short bursts.",
+    "countLikes": 0,
+    "movements": ["Row", "Chest-to-Bar Pull-Up"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-3/",
+    "wodName": "Regionals 15.3",
+    "description": "AMRAP in 14 minutes:\n7 Muscle-Ups\n50 Wall Ball Shots (20/14 lb)\n100 Double-Unders",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 519, "max": null },
+        "advanced": { "min": 432, "max": 518 },
+        "intermediate": { "min": 345, "max": 431 },
+        "beginner": { "min": null, "max": 344 }
+      }
+    },
+    "category": "Games",
+    "tags": ["AMRAP", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A 14-minute AMRAP combining muscle-ups, wall balls, and double-unders. Tests gymnastics skill, endurance, and coordination over a longer duration.",
+    "countLikes": 0,
+    "movements": ["Muscle-Up", "Wall Ball Shot", "Double-Under"],
+    "timecap": 840
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-4/",
+    "wodName": "Regionals 15.4",
+    "description": "For Time:\n1000 meter Row\nClean Ladder (Men: 185-205-225-245-265-285-305-315 lb, Women: 125-135-145-155-165-175-185-195 lb)\n\nTime Cap: 10 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 600 },
+        "intermediate": { "min": 601, "max": 720 },
+        "beginner": { "min": 721, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Ladder"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "Combines a 1k row with an increasingly heavy clean ladder, testing rowing endurance followed by maximal strength under fatigue.",
+    "countLikes": 0,
+    "movements": ["Row", "Clean"],
+    "timecap": 600
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-5/",
+    "wodName": "Regionals 15.5",
+    "description": "2 Rounds For Time:\n25 Strict Handstand Push-Ups\n50 calorie Row\n\nTime Cap: 12 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 600 },
+        "intermediate": { "min": 601, "max": 720 },
+        "beginner": { "min": 721, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "Two rounds combining high-volume strict handstand push-ups with 50-calorie rows. Tests strict pressing strength and rowing endurance.",
+    "countLikes": 0,
+    "movements": ["Strict Handstand Push-Up", "Row"],
+    "timecap": 720
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-6/",
+    "wodName": "Regionals 15.6",
+    "description": "For Time:\n150 ft Handstand Walk\n10 Squat Cleans (205/135 lb)\n150 ft Handstand Walk\n10 Squat Cleans (225/145 lb)\n150 ft Handstand Walk\n10 Squat Cleans (245/155 lb)\n\nTime Cap: 16 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 600 },
+        "advanced": { "min": 601, "max": 780 },
+        "intermediate": { "min": 781, "max": 960 },
+        "beginner": { "min": 961, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A challenging workout pairing long handstand walks with increasingly heavy squat cleans. Tests gymnastics endurance, strength, and stability under fatigue.",
+    "countLikes": 0,
+    "movements": ["Handstand Walk", "Squat Clean"],
+    "timecap": 960
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regionals-15-7/",
+    "wodName": "Regionals 15.7",
+    "description": "For Time:\n27 Thrusters (95/65 lb)\n4 Rope Climbs\n21 Thrusters (95/65 lb)\n3 Rope Climbs\n15 Thrusters (95/65 lb)\n2 Rope Climbs\n9 Thrusters (95/65 lb)\n1 Rope Climb\n\nTime Cap: 11 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 360 },
+        "advanced": { "min": 361, "max": 480 },
+        "intermediate": { "min": 481, "max": 660 },
+        "beginner": { "min": 661, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "A descending rep scheme couplet combining moderate thrusters with rope climbs. Tests grip endurance, pulling strength, and conditioning against the clock.",
+    "countLikes": 0,
+    "movements": ["Thruster", "Rope Climb"],
+    "timecap": 660
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/220423/",
+    "wodName": "Crunch",
+    "description": "5 Rounds For Time:\n12 Dumbbell Bench Press (2x50/35 lb)\n15 GHD Sit-ups",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 480 },
+        "advanced": { "min": 481, "max": 600 },
+        "intermediate": { "min": 601, "max": 780 },
+        "beginner": { "min": 781, "max": null }
+      }
+    },
+    "category": "Other",
+    "tags": ["For Time", "Couplet"],
+    "difficulty": "Medium",
+    "difficultyExplanation": "Five rounds combining moderate dumbbell bench press with GHD sit-ups. Tests pushing strength and high-skill core endurance.",
+    "countLikes": 0,
+    "movements": ["Dumbbell Bench Press", "GHD Sit-Up"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agq-22-2/",
+    "wodName": "AGQ 22.2",
+    "description": "For Time:\n50 Overhead Squats (95/65 lb)\n50 Bar Facing Burpees\n40 Back Rack Walking Lunges (95/65 lb)\n30 Bar Facing Burpees\n30 Cleans (95/65 lb)\n20 Bar Facing Burpees\n20 Alternating Pistols\n10 Bar Muscle-Ups\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 840 },
+        "advanced": { "min": 841, "max": 1020 },
+        "intermediate": { "min": 1021, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "category": "AGOQ",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A long and demanding chipper testing endurance, strength, and skill across overhead squats, burpees, lunges, cleans, pistols, and bar muscle-ups.",
+    "countLikes": 0,
+    "movements": ["Overhead Squat", "Bar Facing Burpee", "Back Rack Lunge", "Clean", "Pistol", "Bar Muscle-Up"],
+    "timecap": 1200
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agq-22-3/",
+    "wodName": "AGQ 22.3",
+    "description": "AMRAP in 10 minutes:\n1 Rope Climb (15 ft)\n2x50 foot Shuttle Runs\nThen 2 Rope Climbs (15 ft)\n4x50 foot Shuttle Runs\nThen 3 Rope Climbs (15 ft)\n6x50 Shuttle Runs\nContinue with this pattern, adding 1 Rope Climb and 2x50 foot Shuttle Runs after every round.",
+    "benchmarks": {
+      "type": "reps",
+      "levels": {
+        "elite": { "min": 56, "max": null },
+        "advanced": { "min": 40, "max": 55 },
+        "intermediate": { "min": 28, "max": 39 },
+        "beginner": { "min": null, "max": 27 }
+      }
+    },
+    "category": "AGOQ",
+    "tags": ["AMRAP", "Ladder"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "An ascending ladder AMRAP combining rope climbs and shuttle runs. Becomes increasingly difficult, testing pulling endurance and anaerobic capacity.",
+    "countLikes": 0,
+    "movements": ["Rope Climb", "Run"],
+    "timecap": 600
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/agq-22-5/",
+    "wodName": "AGQ 22.5",
+    "description": "3 Rounds for Time:\n50 calorie Row\n15 Handstand Push-Ups\n50 Double-Unders\n\nTime Cap: 20 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 720 },
+        "advanced": { "min": 721, "max": 900 },
+        "intermediate": { "min": 901, "max": 1200 },
+        "beginner": { "min": 1201, "max": null }
+      }
+    },
+    "category": "AGOQ",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Hard",
+    "difficultyExplanation": "Three rounds combining rowing, handstand push-ups, and double-unders. Tests endurance, gymnastics capacity, and coordination under fatigue.",
+    "countLikes": 0,
+    "movements": ["Row", "Handstand Push-Up", "Double-Under"],
+    "timecap": 1200
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/aqoq-23-1/",
+    "wodName": "AQOQ 23.1",
+    "description": "For Time:\n3 Rounds:\n 2x25 foot Dumbbell Walking Lunges (hang, 2x50/35 lb)\n 20 Toes-to-Bars\nThen, 2 Rounds:\n 2x25 foot Dumbbell Walking Lunges (front rack, 2x50/35 lb)\n 15 Chest-to-Bar Pull-Ups\nThen, 1 Round:\n 2x25 foot Dumbbell Walking Lunges (overhead, 2x50/35 lb)\n 10 Bar Muscle-Ups\n\nTime Cap: 15 minutes",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 600 },
+        "advanced": { "min": 601, "max": 750 },
+        "intermediate": { "min": 751, "max": 900 },
+        "beginner": { "min": 901, "max": null }
+      }
+    },
+    "category": "Quarterfinals",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A complex chipper involving dumbbell lunges in different positions (hang, rack, overhead) paired with progressively harder gymnastics movements (TTB, C2B, BMU).",
+    "countLikes": 0,
+    "movements": ["Dumbbell Walking Lunge", "Toes-to-Bar", "Chest-to-Bar Pull-Up", "Bar Muscle-Up"],
+    "timecap": 900
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/160720/",
+    "wodName": "Masters Event 1 (160720)",
+    "description": "For Time:\n8 Deadlifts (365/245 lb)\n40 GHD Sit-ups\n80 Double-Unders\n4 Rope Climbs\n80 Wall Ball Shots (20/14 lb)\n4 Rope Climbs\n80 Double-Unders\n40 GHD Sit-ups\n8 Deadlifts",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 900 },
+        "advanced": { "min": 901, "max": 1140 },
+        "intermediate": { "min": 1141, "max": 1380 },
+        "beginner": { "min": 1381, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Chipper"],
+    "difficulty": "Very Hard",
+    "difficultyExplanation": "A symmetrical chipper featuring very heavy deadlifts sandwiching high-volume core work, double-unders, rope climbs, and wall balls. Tests strength, endurance, and skill.",
+    "countLikes": 0,
+    "movements": ["Deadlift", "GHD Sit-Up", "Double-Under", "Rope Climb", "Wall Ball Shot"],
+    "timecap": null
+  },
+  {
+    "wodUrl": "https://wodwell.com/wod/regional-nate/",
+    "wodName": "Regional Nate",
+    "description": "10 Rounds for Time:\n4 Strict Muscle-Ups\n7 Strict Handstand Push-Ups\n12 Kettlebell Snatches (70/53 lb)",
+    "benchmarks": {
+      "type": "time",
+      "levels": {
+        "elite": { "min": null, "max": 1080 },
+        "advanced": { "min": 1081, "max": 1440 },
+        "intermediate": { "min": 1441, "max": 1800 },
+        "beginner": { "min": 1801, "max": null }
+      }
+    },
+    "category": "Games",
+    "tags": ["For Time", "Triplet"],
+    "difficulty": "Extremely Hard",
+    "difficultyExplanation": "A highly demanding workout combining significant volume of strict, high-skill gymnastics (Muscle-Ups, HSPU) with heavy kettlebell snatches over 10 rounds. Elite test of strength and skill endurance.",
+    "countLikes": 0,
+    "movements": ["Strict Muscle-Up", "Strict Handstand Push-Up", "Kettlebell Snatch"],
+    "timecap": null
   }
 ]

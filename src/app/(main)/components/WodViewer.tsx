@@ -8,6 +8,7 @@ import {
   useCallback,
   useMemo,
 } from "react";
+import { useQueryClient } from "@tanstack/react-query";
 import { api } from "~/trpc/react";
 import { useSession } from "~/lib/auth-client";
 import { Box, Flex, IconButton, DropdownMenu } from "@radix-ui/themes";
@@ -133,15 +134,75 @@ export default function WodViewer({
 
   const isFavoritesSource = source === "favorites";
 
+  // Add logging for initialWods when source is 'favorites'
+  useEffect(() => {
+    if (isFavoritesSource) {
+      console.log(
+        "[DEBUG WodViewer] Source is 'favorites'. initialWods changed. Count:",
+        initialWods?.length,
+        "Timestamp:",
+        new Date().toISOString(),
+      );
+      // console.log("[DEBUG WodViewer] Favorites initialWods content:", JSON.stringify(initialWods?.slice(0, 2))); // Log first 2 items
+    }
+  }, [initialWods, isFavoritesSource]);
+
   // **Conditionally call the query hook**
+  console.log(
+    "[DEBUG WodViewer] About to call api.wod.getAll.useQuery. Current searchTerm:",
+    searchTerm,
+    "Effective input for query:",
+    { searchQuery: searchTerm || undefined },
+    "Timestamp:",
+    new Date().toISOString(),
+  );
   const {
     data: wodsDataFromApiQuery, // Renamed for clarity
     isLoading: isLoadingWodsFromApi, // Renamed for clarity
     error: errorWodsFromApi, // Renamed for clarity
-  } = api.wod.getAll.useQuery(searchTerm ? { searchQuery: searchTerm } : {}, {
-    enabled: !isFavoritesSource, // Only fetch if not on favorites page
-    staleTime: 5 * 60 * 1000,
-  });
+  } = api.wod.getAll.useQuery(
+    { searchQuery: searchTerm || undefined },
+    {
+      enabled: !isFavoritesSource, // Only fetch if not on favorites page
+      staleTime: 5 * 60 * 1000,
+    },
+  );
+
+  // ADD THIS useEffect FOR DIAGNOSTICS
+  useEffect(() => {
+    if (!isFavoritesSource && wodsDataFromApiQuery) {
+      // Only log for main page updates
+      console.log(
+        `[DEBUG WodViewer Effect] wodsDataFromApiQuery updated. Timestamp: ${new Date().toISOString()}. Length: ${wodsDataFromApiQuery.length}`,
+      );
+      // Optionally, find a specific WOD that you attempt to favorite/unfavorite
+      // and log its 'isFavorited' status from wodsDataFromApiQuery.
+      // For example, if you know a WOD ID you're testing with:
+      // const testWodId = "your-test-wod-id";
+      // const testWod = wodsDataFromApiQuery.find(w => w.id === testWodId);
+      // if (testWod) {
+      //   console.log(`[DEBUG WodViewer Effect] Test WOD (${testWodId}) isFavorited: ${testWod.isFavorited}`);
+      // } else {
+      //   // If you want to see the first item's status
+      //   if (wodsDataFromApiQuery.length > 0) {
+      //       console.log(`[DEBUG WodViewer Effect] First WOD (${wodsDataFromApiQuery[0].id}) isFavorited: ${wodsDataFromApiQuery[0].isFavorited}`);
+      //   }
+      // }
+    }
+  }, [wodsDataFromApiQuery, isFavoritesSource]); // Dependency array includes wodsDataFromApiQuery
+
+  // DEBUG: Print all query keys in the React Query cache
+  // This will show the actual structure used by TanStack Query
+  const queryClient = useQueryClient();
+  if (typeof window !== "undefined") {
+    const queries = queryClient.getQueryCache().getAll();
+    for (const q of queries) {
+      if (q.queryHash && q.queryHash.includes("wod.getAll")) {
+        // eslint-disable-next-line no-console
+        console.log("[DEBUG] TanStack Query Key for wod.getAll:", q.queryKey);
+      }
+    }
+  }
 
   // Add debugging for API results
   useEffect(() => {

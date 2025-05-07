@@ -36,6 +36,10 @@ async function getScoresForWods(
 }
 
 export default async function FavoritesPage() {
+  console.log(
+    "[DEBUG FavoritesPage] Rendering FavoritesPage component, timestamp:",
+    new Date().toISOString(),
+  );
   const session = await getSession();
 
   if (!session?.user) {
@@ -45,6 +49,10 @@ export default async function FavoritesPage() {
   // Fetch favorited WODs using the new tRPC endpoint
   // The input for getFavoritesByUser is optional filters; pass empty for now.
   const favoritedWodsUntyped = await api.wod.getFavoritesByUser({});
+  console.log(
+    "[DEBUG FavoritesPage] Fetched favoritedWodsUntyped count:",
+    favoritedWodsUntyped?.length,
+  );
 
   // Ensure the fetched WODs conform to the Wod[] type, especially date fields
   const favoritedWods: Wod[] = favoritedWodsUntyped.map((wod) => ({
@@ -59,6 +67,10 @@ export default async function FavoritesPage() {
     createdAt: new Date(wod.createdAt),
     updatedAt: wod.updatedAt ? new Date(wod.updatedAt) : new Date(), // Or handle null appropriately
   }));
+  console.log(
+    "[DEBUG FavoritesPage] Processed favoritedWods count:",
+    favoritedWods?.length,
+  );
 
   const favoritedWodIds = favoritedWods.map((wod) => wod.id);
   const scoresByWodId = await getScoresForWods(favoritedWodIds);

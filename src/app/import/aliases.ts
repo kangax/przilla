@@ -31,17 +31,16 @@ export const sugarwodAliases: Record<string, string> = {
   "Snatch Speed Triple": "Games: Snatch Speed Triple",
   "Sprint Couplet": "Games: Sprint Couplet",
   "Sprint Sled Sprint": "Games: Sprint Sled Sprint",
-  "Sprint Triplet": "Games: Sprint Triplet", // TODO: add
-  "Swim 'N' Stuff": "Games: Swim 'N' Stuff", // TODO: add
+  "Sprint Triplet": "Games: Sprint Triplet",
+  "Swim 'N' Stuff": "Games: Swim 'N' Stuff",
   "Swim Paddle": "Games: Swim Paddle",
   "The Standard": "Games: The Standard",
   "Triple-G Chipper": "Games: Triple-G Chipper",
-  "Heavy DT": "Individual 15.5: Heavy DT", // TODO: add
-  "Double DT": "Individual 16.7: Double DT", // TODO: add
-  "The Separator": "Individual 16.9: The Seperator", // TODO: add
+  "Heavy DT": "Individual 15.5: Heavy DT",
+  "Double DT": "Individual 16.7: Double DT",
+  "The Separator": "Individual 16.9: The Seperator",
   "Triple 3": "Regional: Triple 3",
-  // TODO: "Regional: Linda"
-  // TODO: "Midline March"
+  "Regionals 18.2 (Linda)": "Regional: Linda",
   "Regionals 11.1": "Regional Individual 11.1",
   "Regionals 11.2": "Regional Individual 11.2",
   "Regionals 11.3": "Regional Individual 11.3",
@@ -72,7 +71,7 @@ export const sugarwodAliases: Record<string, string> = {
   "AGQ 22.2": "AGOQ 22.2",
   "AGQ 22.3": "AGOQ 22.3",
   "AGQ 22.5": "AGOQ 22.5",
-  "AGQ 23.1": "AGOQ 23.1", // TODO: add
+  "AGQ 23.1": "AGOQ 23.1",
   "Masters Event 1 (160720)": "Masters Event 16.1",
-  "Regionals 10.2 (Central East)": "Regional 16.2 (Regional Nate)", // TODO: add
+  "Regionals 10.2 (Central East)": "Regional 16.2 (Regional Nate)",
 };

@@ -20,34 +20,6 @@ import { useMediaQuery } from "~/utils/useMediaQuery";
 import { useWodViewerFilters } from "./hooks/useWodViewerFilters";
 import { useWodViewerData } from "./hooks/useWodViewerData";
 
-/**
- * Client-only wrapper for WodListMobile to ensure searchParams is read after hydration.
- * (Avoids duplicate import of useState/useEffect)
- */
-function WodListMobileWrapper(
-  props: Omit<
-    React.ComponentProps<typeof WodListMobile>,
-    "expandedWodIdFromUrl"
-  >,
-) {
-  const [expandedWodIdFromUrl, setExpandedWodIdFromUrl] = useState<
-    string | null
-  >(null);
-
-  const locationSearch =
-    typeof window !== "undefined" ? window.location.search : "";
-
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const params = new URLSearchParams(window.location.search);
-      setExpandedWodIdFromUrl(params.get("expandedWodId"));
-    }
-  }, [locationSearch]);
-
-  return (
-    <WodListMobile {...props} expandedWodIdFromUrl={expandedWodIdFromUrl} />
-  );
-}
 import {
   type Wod,
   type SortByType,
@@ -321,7 +293,7 @@ export default function WodViewer({
 
       {/* Conditionally render card list or table */}
       {isMobile ? (
-        <WodListMobileWrapper
+        <WodListMobile // Use WodListMobile directly
           wods={sortedWods}
           scoresByWodId={scoresByWodId}
           searchTerm={searchTerm}

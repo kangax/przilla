@@ -31,6 +31,51 @@
   - Summary of actions at the end.
   - Use `try/catch` or `.catch()` on main functions to log and exit on error.
 
+### WOD Data Management Scripts
+
+The project uses several scripts to manage WOD data, primarily sourced from `public/data/wods.json`. Understanding their roles is crucial for maintaining data integrity:
+
+- **`scripts/migrate_json_to_db.ts` (The "Full Reset" Script):**
+
+  - **Role:** Performs a complete wipe and reload of WODs from `public/data/wods.json`. It first **deletes all WODs** from the database, then re-inserts them. This process assigns **new unique IDs (UUIDs)** to all WODs.
+  - **Use Case:** Intended for initial database setup or when a total, clean-slate refresh from `wods.json` is necessary.
+  - **WARNING:** Due to changing all WOD IDs, this script breaks all existing foreign key relationships to WODs (e.g., in `scores`, `userFavoriteWods`, `wodMovements`).
+  - **Mandatory Follow-up:** After running this script, `scripts/sync_db_wods_from_json.ts` (see below) **must** be run immediately to correctly populate WOD details and re-establish all movement associations using the new WOD IDs.
+
+- **`scripts/sync_db_wods_from_json.ts` (The "Comprehensive Sync & Populate" Script):**
+
+  - **Role:** This is the primary script for ongoing synchronization of WOD data and their movement associations from `public/data/wods.json`.
+  - **Behavior:**
+    - Updates existing WOD details (matched by `wodName`) or inserts new WODs if they don't exist.
+    - For **every WOD processed (new or existing)**, if `public/data/wods.json` provides a `movements` array for it:
+      1. It first **deletes all existing movement associations** for that WOD from the `przilla_wod_movement` table.
+      2. It then ensures all listed movements exist in the `przilla_movement` table (creating new ones if necessary, potentially with user interaction for fuzzy matches).
+      3. Finally, it creates fresh, correct associations in `przilla_wod_movement` linking the WOD to its current set of movements.
+  - **Use Cases:**
+    - For regular, ongoing updates to keep the database WODs and their movements aligned with `public/data/wods.json`.
+    - As the essential follow-up step immediately after running `scripts/migrate_json_to_db.ts`.
+  - **Idempotency:** Designed to be idempotent for both WOD data and movement associations.
+
+- **`scripts/populate_movements_to_db.ts` (The "Movement Link Refresher"):**
+  - **Role:** Specifically focuses on populating the `przilla_wod_movement` table based on `public/data/wods.json` (which it now correctly points to) and current WOD IDs (looked up by name). It does not alter other WOD attributes.
+  - **Use Case:** Can be used if only movement associations need to be refreshed or repaired without running a full WOD data sync. With the enhanced `sync_db_wods_from_json.ts`, this script may become less frequently needed for the main workflow but remains a useful utility.
+
+**Recommended NPM Script Wrappers:**
+
+To simplify execution and enforce correct sequencing, the following npm scripts are recommended (to be added to `package.json`):
+
+```json
+"scripts": {
+  // ... other scripts ...
+  "db:seed:wods": "tsx scripts/migrate_json_to_db.ts && tsx scripts/sync_db_wods_from_json.ts",
+  "db:sync:wods": "tsx scripts/sync_db_wods_from_json.ts"
+  // ... other scripts ...
+}
+```
+
+- `npm run db:seed:wods`: Use for a full reset and re-seed. Runs the destructive `migrate_json_to_db.ts` then immediately follows with the comprehensive `sync_db_wods_from_json.ts` to ensure all data and associations are correctly established with new WOD IDs.
+- `npm run db:sync:wods`: Use for regular updates. Runs the `sync_db_wods_from_json.ts` script to update WOD details and ensure movement associations are correctly maintained.
+
 ---
 
 If `replace_in_file` fails once, immediately start using `write_to_file` from now on.

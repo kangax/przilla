@@ -12,14 +12,14 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 const WODS_WITH_MOVEMENTS_PATH = path.join(
   __dirname,
-  "../public/data/wods_with_movements.json",
+  "../public/data/wods.json",
 );
 
 // --- MAIN ---
 async function main() {
   // 1. Read WODs with movements
   const wodsWithMovements: {
-    name: string;
+    wodName: string;
     movements: string[];
   }[] = JSON.parse(fs.readFileSync(WODS_WITH_MOVEMENTS_PATH, "utf8"));
 
@@ -88,20 +88,20 @@ async function main() {
       dbWod = await db
         .select()
         .from(wods)
-        .where(eq(wods.wodName, wod.name))
+        .where(eq(wods.wodName, wod.wodName))
         .get();
 
       if (!dbWod) {
-        console.warn(`WOD not found in DB: ${wod.name}`);
+        console.warn(`WOD not found in DB: ${wod.wodName}`);
         missingWods++;
         continue;
       }
 
       // *** ADDED LOGGING ***
-      console.log(`Processing WOD: ${wod.name} (Prod DB ID: ${dbWod.id})`);
+      console.log(`Processing WOD: ${wod.wodName} (Prod DB ID: ${dbWod.id})`);
       // *** END ADDED LOGGING ***
     } catch (error) {
-      console.error(`Error fetching WOD from DB: ${wod.name}. Error: ${error}`);
+      console.error(`Error fetching WOD from DB: ${wod.wodName}. Error: ${error}`);
       continue;
     }
 

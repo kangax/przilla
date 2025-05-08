@@ -167,6 +167,7 @@ async function main() {
 
     let newWodId: string | null = null; // Will hold ID if inserted
     const existingWodId = existingWodsMap.get(wodJson.wodName);
+    let currentWodDbId: string | null = existingWodId || null; // Initialize with existingWodId
 
     // --- GENERIC WOD UPDATE LOGIC ---
     if (existingWodId) {
@@ -511,6 +512,7 @@ async function main() {
             throw new Error("Insertion did not return an ID.");
           }
           newWodId = insertedWod.id; // Assign the real ID
+          currentWodDbId = newWodId; // Update currentWodDbId if new WOD was inserted
           insertedWods++; // Increment actual insertion counter
           console.log(
             `      ✅ Successfully inserted WOD with ID: ${newWodId}`,
@@ -527,6 +529,7 @@ async function main() {
         // Dry Run Simulation
         // Simulate ID for dry run to allow movement processing simulation
         newWodId = `dry-run-wod-${wodJson.wodName.replace(/\s+/g, "-")}`;
+        currentWodDbId = newWodId; // Update currentWodDbId for dry run new WOD
         insertedWods++; // Count as 'would be inserted'
         wodsToInsertNames.push(wodJson.wodName); // Collect name for summary
         console.log(
@@ -536,11 +539,28 @@ async function main() {
       }
     } // End of WOD Insertion block
 
-    // --- Movement Processing & Association (Only if WOD was newly inserted) ---
-    if (newWodId && wodJson.movements && wodJson.movements.length > 0) {
+    // --- Movement Processing & Association (Now for NEW or EXISTING WODs with movements) ---
+    if (currentWodDbId && wodJson.movements && wodJson.movements.length > 0) {
       console.log(
-        `   -> Processing ${wodJson.movements.length} movements for new WOD ID: ${newWodId}`,
+        `   -> Processing ${wodJson.movements.length} movements for WOD ID: ${currentWodDbId}`,
       );
+
+      // Clear existing associations for this WOD before adding new ones
+      if (!dryRun) {
+        try {
+          console.log(`      -> Clearing existing movement associations for WOD ID: ${currentWodDbId}`);
+          await db.delete(wodMovements).where(eq(wodMovements.wodId, currentWodDbId));
+          console.log(`      ✅ Cleared existing associations.`);
+        } catch (error) {
+          console.error(`      ❌ Error clearing existing movement associations for WOD ID ${currentWodDbId}:`, error);
+          errorsEncountered++;
+          // Optionally, decide if you want to continue to attempt to add new movements or skip this WOD's movements
+          // For now, we'll continue and try to add.
+        }
+      } else {
+        console.log(`      [DRY RUN] Would clear existing movement associations for WOD ID: ${currentWodDbId}`);
+      }
+
       const movementIdsToAssociate: string[] = [];
 
       for (const movementName of wodJson.movements) {
@@ -765,39 +785,25 @@ async function main() {
       // --- Association Insertion ---
       if (movementIdsToAssociate.length > 0) {
         console.log(
-          `   -> Associating ${movementIdsToAssociate.length} movements with WOD ID: ${newWodId}`,
+          `   -> Associating ${movementIdsToAssociate.length} movements with WOD ID: ${currentWodDbId}`,
         );
         for (const movementId of movementIdsToAssociate) {
           try {
-            // Check if association already exists (safety check, should be redundant for new WOD)
-            const existingAssoc = await db
-              .select()
-              .from(wodMovements)
-              .where(
-                and(
-                  eq(wodMovements.wodId, newWodId),
-                  eq(wodMovements.movementId, movementId),
-                ),
-              )
-              .get();
-
-            if (!existingAssoc) {
-              if (!dryRun) {
-                await db
-                  .insert(wodMovements)
-                  .values({ wodId: newWodId, movementId });
-                associationsCreated++; // Only count if not dry run
-                // console.log(`      -> Associated movement ID: ${movementId}`);
-              } else {
-                associationsCreated++; // Count as 'would be associated'
-                // console.log(`      [DRY RUN] Would associate movement ID: ${movementId}`);
-              }
+            // Since we cleared associations, we don't need to check for existingAssoc here before inserting.
+            // The previous check was mainly for new WODs where clearing might not have happened.
+            // Now, it's safe to assume we always insert if we have a movementId.
+            if (!dryRun) {
+              await db
+                .insert(wodMovements)
+                .values({ wodId: currentWodDbId, movementId });
+              associationsCreated++;
             } else {
-              // console.log(`      -> Association already exists for movement ID: ${movementId}`);
+              associationsCreated++; // Count as 'would be associated'
+              // console.log(`      [DRY RUN] Would associate WOD ${currentWodDbId} with movement ID: ${movementId}`);
             }
           } catch (error) {
             console.error(
-              `      ❌ Error associating WOD ${newWodId} with Movement ${movementId}:`,
+              `      ❌ Error associating WOD ${currentWodDbId} with Movement ${movementId}:`,
               error,
             );
             errorsEncountered++;
@@ -805,11 +811,11 @@ async function main() {
         }
         console.log(`      -> Finished associating movements.`);
       } else {
-        console.log(`   -> No movements to associate for WOD ID: ${newWodId}`);
+        console.log(`   -> No movements to associate for WOD ID: ${currentWodDbId}`);
       }
-    } else if (newWodId) {
+    } else if (currentWodDbId) { // Check currentWodDbId instead of newWodId
       console.log(
-        `   -> No movements listed in JSON for WOD ID: ${newWodId}. Skipping association.`,
+        `   -> No movements listed in JSON for WOD ID: ${currentWodDbId}. Skipping association.`,
       );
     } // End movement processing block
   } // End loop through wodsFromJson

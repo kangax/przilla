@@ -28,7 +28,7 @@ export function ScoreImportWizard({ importType }: ScoreImportWizardProps) {
     data: allWods,
     isLoading: isLoadingWods,
     error: wodsError,
-  } = api.wod.getAll.useQuery();
+  } = api.wod.getAll.useQuery({});
 
   // Create a map for faster WOD lookup
   const [wodsMap, setWodsMap] = useState<Map<string, Wod>>(new Map());

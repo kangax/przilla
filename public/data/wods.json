@@ -18589,7 +18589,8 @@
       "Wall Walk"
     ],
     "countLikes": 5,
-    "difficultyExplanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression."
+    "difficultyExplanation": "Open WOD (AMRAP For As Long As Possible). Increasing rounds/weight/skill: Wall Walks/DUs/Snatches (up to 225lb), then Strict HSPU/DUs/Snatches. Extremely demanding skill/strength progression.",
+    "timecap": 540
   },
   {
     "wodUrl": "https://wodwell.com/wod/open-24-1/",
@@ -30361,7 +30362,8 @@
     "difficulty": "Very Hard",
     "movements": ["Dumbbell Snatch", "Row", "Burpee", "Muscle-Up"],
     "countLikes": 16,
-    "difficultyExplanation": "A high-volume chipper with advanced gymnastics and a tight time cap. Demands grip endurance, aerobic capacity, and muscle-up proficiency."
+    "difficultyExplanation": "A high-volume chipper with advanced gymnastics and a tight time cap. Demands grip endurance, aerobic capacity, and muscle-up proficiency.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-17-2/",
@@ -30493,7 +30495,8 @@
     "difficulty": "Hard",
     "movements": ["Thruster", "Rope Climb"],
     "countLikes": 13,
-    "difficultyExplanation": "A short, high-intensity chipper with heavy thrusters and rope climbs. Tests grip, pulling strength, and speed under fatigue."
+    "difficultyExplanation": "A short, high-intensity chipper with heavy thrusters and rope climbs. Tests grip, pulling strength, and speed under fatigue.",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-18-2/",
@@ -30526,7 +30529,8 @@
     "difficulty": "Very Hard",
     "movements": ["Chest-to-Bar Pull-Up", "Clean"],
     "countLikes": 7,
-    "difficultyExplanation": "Heavy cleans and high-rep chest-to-bar pull-ups in a short time cap. Demands strength, skill, and stamina."
+    "difficultyExplanation": "Heavy cleans and high-rep chest-to-bar pull-ups in a short time cap. Demands strength, skill, and stamina.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-18-3/",
@@ -30625,7 +30629,8 @@
     "difficulty": "Hard",
     "movements": ["Deadlift", "Overhead Squat", "Double-Under"],
     "countLikes": 9,
-    "difficultyExplanation": "A high-rep chipper with moderate weights and a tight time cap. Tests barbell cycling, overhead mobility, and jump rope stamina."
+    "difficultyExplanation": "A high-rep chipper with moderate weights and a tight time cap. Tests barbell cycling, overhead mobility, and jump rope stamina.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-19-2/",
@@ -30658,7 +30663,8 @@
     "difficulty": "Very Hard",
     "movements": ["Bar-Facing Burpee", "Row"],
     "countLikes": 13,
-    "difficultyExplanation": "A long, grueling test of aerobic capacity and grit. High volume burpees and rowing challenge endurance and pacing."
+    "difficultyExplanation": "A long, grueling test of aerobic capacity and grit. High volume burpees and rowing challenge endurance and pacing.",
+    "timecap": 1800
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-19-3/",
@@ -30691,7 +30697,8 @@
     "difficulty": "Very Hard",
     "movements": ["Muscle-Up", "Shoulder-to-Overhead"],
     "countLikes": 4,
-    "difficultyExplanation": "A two-part chipper with increasing weight and high-skill gymnastics. Demands strength, stamina, and muscle-up proficiency."
+    "difficultyExplanation": "A two-part chipper with increasing weight and high-skill gymnastics. Demands strength, stamina, and muscle-up proficiency.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-19-4/",
@@ -30757,7 +30764,8 @@
     "difficulty": "Very Hard",
     "movements": ["Snatch", "Strict Handstand Push-Up"],
     "countLikes": 5,
-    "difficultyExplanation": "A sprint couplet with heavy snatches and strict HSPU. Demands speed, strength, and advanced gymnastics skill."
+    "difficultyExplanation": "A sprint couplet with heavy snatches and strict HSPU. Demands speed, strength, and advanced gymnastics skill.",
+    "timecap": 360
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-21-1/",
@@ -30790,7 +30798,8 @@
     "difficulty": "Hard",
     "movements": ["Handstand Push-Up", "Dumbbell Shoulder-to-Overhead", "Row"],
     "countLikes": 3,
-    "difficultyExplanation": "A five-round chipper with moderate weights and gymnastics. Tests pressing stamina, rowing, and movement transitions."
+    "difficultyExplanation": "A five-round chipper with moderate weights and gymnastics. Tests pressing stamina, rowing, and movement transitions.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-21-2/",
@@ -30823,7 +30832,8 @@
     "difficulty": "Very Hard",
     "movements": ["GHD Sit-Up", "Rope Climb", "Pistol"],
     "countLikes": 2,
-    "difficultyExplanation": "A descending chipper with high-skill gymnastics and single-leg squats. Tests core, grip, and stamina."
+    "difficultyExplanation": "A descending chipper with high-skill gymnastics and single-leg squats. Tests core, grip, and stamina.",
+    "timecap": 1200
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-21-3/",
@@ -30856,7 +30866,8 @@
     "difficulty": "Hard",
     "movements": ["Clean", "Double-Under"],
     "countLikes": 1,
-    "difficultyExplanation": "A chipper with high-rep cleans and double-unders. Tests barbell cycling, grip, and jump rope stamina."
+    "difficultyExplanation": "A chipper with high-rep cleans and double-unders. Tests barbell cycling, grip, and jump rope stamina.",
+    "timecap": 900
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-21-5/",
@@ -30889,7 +30900,8 @@
     "difficulty": "Hard",
     "movements": ["Overhead Squat", "Burpee Box Jump Over"],
     "countLikes": 0,
-    "difficultyExplanation": "A sprint couplet with heavy overhead squats and high box jumps. Demands speed, strength, and explosive power."
+    "difficultyExplanation": "A sprint couplet with heavy overhead squats and high box jumps. Demands speed, strength, and explosive power.",
+    "timecap": 600
   },
   {
     "wodUrl": "https://wodwell.com/wod/agoq-23-2/",
@@ -30898,10 +30910,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 150, "max": null },
-        "advanced": { "min": 120, "max": 149 },
-        "intermediate": { "min": 90, "max": 119 },
-        "beginner": { "min": null, "max": 89 }
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 120,
+          "max": 149
+        },
+        "intermediate": {
+          "min": 90,
+          "max": 119
+        },
+        "beginner": {
+          "min": null,
+          "max": 89
+        }
       }
     },
     "category": "Quarterfinals",
@@ -30909,7 +30933,11 @@
     "difficulty": "Hard",
     "difficultyExplanation": "A short, high-intensity couplet combining a gymnastics skill (Handstand Walk) and a challenging push variation (C2W HSPU) with Echo Bike sprints, repeated after rest. Tests capacity and skill cycling.",
     "countLikes": 11,
-    "movements": ["Air Bike", "Handstand Walk", "Chest-to-Wall Handstand Push-Ups"],
+    "movements": [
+      "Air Bike",
+      "Handstand Walk",
+      "Chest-to-Wall Handstand Push-Ups"
+    ],
     "timecap": 1500
   },
   {
@@ -30919,10 +30947,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 288, "max": null },
-        "advanced": { "min": 240, "max": 287 },
-        "intermediate": { "min": 192, "max": 239 },
-        "beginner": { "min": null, "max": 191 }
+        "elite": {
+          "min": 288,
+          "max": null
+        },
+        "advanced": {
+          "min": 240,
+          "max": 287
+        },
+        "intermediate": {
+          "min": 192,
+          "max": 239
+        },
+        "beginner": {
+          "min": null,
+          "max": 191
+        }
       }
     },
     "category": "Quarterfinals",
@@ -30940,10 +30980,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 720 },
-        "advanced": { "min": 721, "max": 900 },
-        "intermediate": { "min": 901, "max": 1200 },
-        "beginner": { "min": 1201, "max": null }
+        "elite": {
+          "min": null,
+          "max": 720
+        },
+        "advanced": {
+          "min": 721,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
       }
     },
     "category": "Quarterfinals",
@@ -30961,10 +31013,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 240 },
-        "advanced": { "min": 241, "max": 300 },
-        "intermediate": { "min": 301, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 240
+        },
+        "advanced": {
+          "min": 241,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -30982,10 +31046,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 270 },
-        "advanced": { "min": 271, "max": 330 },
-        "intermediate": { "min": 331, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 270
+        },
+        "advanced": {
+          "min": 271,
+          "max": 330
+        },
+        "intermediate": {
+          "min": 331,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31003,10 +31079,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 420 },
-        "advanced": { "min": 421, "max": 510 },
-        "intermediate": { "min": 511, "max": 600 },
-        "beginner": { "min": 601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 510
+        },
+        "intermediate": {
+          "min": 511,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31014,7 +31102,11 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "A challenging chipper demanding shoulder stability and strength (Heavy DB OH Lunges), coordination (Double-Unders), and high-skill gymnastics (Muscle-Ups).",
     "countLikes": 54,
-    "movements": ["Dumbbell Overhead Walking Lunge", "Double-Under", "Muscle-Up"],
+    "movements": [
+      "Dumbbell Overhead Walking Lunge",
+      "Double-Under",
+      "Muscle-Up"
+    ],
     "timecap": 600
   },
   {
@@ -31024,10 +31116,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 240 },
-        "advanced": { "min": 241, "max": 300 },
-        "intermediate": { "min": 301, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 240
+        },
+        "advanced": {
+          "min": 241,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31045,10 +31149,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 70, "max": null },
-        "advanced": { "min": 65, "max": 69 },
-        "intermediate": { "min": 60, "max": 64 },
-        "beginner": { "min": null, "max": 59 }
+        "elite": {
+          "min": 70,
+          "max": null
+        },
+        "advanced": {
+          "min": 65,
+          "max": 69
+        },
+        "intermediate": {
+          "min": 60,
+          "max": 64
+        },
+        "beginner": {
+          "min": null,
+          "max": 59
+        }
       }
     },
     "category": "Games",
@@ -31066,10 +31182,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 210 },
-        "advanced": { "min": 211, "max": 270 },
-        "intermediate": { "min": 271, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 210
+        },
+        "advanced": {
+          "min": 211,
+          "max": 270
+        },
+        "intermediate": {
+          "min": 271,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31087,10 +31215,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 780 },
-        "advanced": { "min": 781, "max": 900 },
-        "intermediate": { "min": 901, "max": 1020 },
-        "beginner": { "min": 1021, "max": null }
+        "elite": {
+          "min": null,
+          "max": 780
+        },
+        "advanced": {
+          "min": 781,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1020
+        },
+        "beginner": {
+          "min": 1021,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31108,10 +31248,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 420 },
-        "advanced": { "min": 421, "max": 510 },
-        "intermediate": { "min": 511, "max": 600 },
-        "beginner": { "min": 601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 510
+        },
+        "intermediate": {
+          "min": 511,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31129,10 +31281,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 420 },
-        "advanced": { "min": 421, "max": 540 },
-        "intermediate": { "min": 541, "max": 660 },
-        "beginner": { "min": 661, "max": null }
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 660
+        },
+        "beginner": {
+          "min": 661,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31150,10 +31314,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 450 },
-        "advanced": { "min": 451, "max": 570 },
-        "intermediate": { "min": 571, "max": 660 },
-        "beginner": { "min": 661, "max": null }
+        "elite": {
+          "min": null,
+          "max": 450
+        },
+        "advanced": {
+          "min": 451,
+          "max": 570
+        },
+        "intermediate": {
+          "min": 571,
+          "max": 660
+        },
+        "beginner": {
+          "min": 661,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31171,10 +31347,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 240 },
-        "advanced": { "min": 241, "max": 300 },
-        "intermediate": { "min": 301, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 240
+        },
+        "advanced": {
+          "min": 241,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31192,10 +31380,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 180 },
-        "advanced": { "min": 181, "max": 270 },
-        "intermediate": { "min": 271, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 270
+        },
+        "intermediate": {
+          "min": 271,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31213,10 +31413,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 420 },
-        "advanced": { "min": 421, "max": 540 },
-        "intermediate": { "min": 541, "max": 660 },
-        "beginner": { "min": 661, "max": null }
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 660
+        },
+        "beginner": {
+          "min": 661,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31234,10 +31446,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 420 },
-        "advanced": { "min": 421, "max": 540 },
-        "intermediate": { "min": 541, "max": 660 },
-        "beginner": { "min": 661, "max": null }
+        "elite": {
+          "min": null,
+          "max": 420
+        },
+        "advanced": {
+          "min": 421,
+          "max": 540
+        },
+        "intermediate": {
+          "min": 541,
+          "max": 660
+        },
+        "beginner": {
+          "min": 661,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31245,7 +31469,15 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "A gymnastics gauntlet progressing through strict, kipping, and foundational variations of handstand push-ups, pull-ups, and toes-to-bar, combined with handstand walks. Tests broad gymnastics skill and endurance.",
     "countLikes": 46,
-    "movements": ["Strict Handstand Push-Ups", "Toes-to-Bar", "Handstand Walk", "Kipping Handstand Push-Ups", "Chest-to-Bar Pull-Up", "Push-Up", "Pull-Up"],
+    "movements": [
+      "Strict Handstand Push-Ups",
+      "Toes-to-Bar",
+      "Handstand Walk",
+      "Kipping Handstand Push-Ups",
+      "Chest-to-Bar Pull-Up",
+      "Push-Up",
+      "Pull-Up"
+    ],
     "timecap": 660
   },
   {
@@ -31255,10 +31487,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 210 },
-        "advanced": { "min": 211, "max": 300 },
-        "intermediate": { "min": 301, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 210
+        },
+        "advanced": {
+          "min": 211,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31276,10 +31520,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 300 },
-        "advanced": { "min": 301, "max": 360 },
-        "intermediate": { "min": 361, "max": 420 },
-        "beginner": { "min": 421, "max": null }
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 360
+        },
+        "intermediate": {
+          "min": 361,
+          "max": 420
+        },
+        "beginner": {
+          "min": 421,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31287,7 +31543,11 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "An intense triplet demanding power on the Assault Bike, strength endurance with heavy Dumbbell Box Step Overs, and advanced gymnastics strength with Deficit Handstand Push-Ups, all against a tight time cap.",
     "countLikes": 51,
-    "movements": ["Assault Bike", "Dumbbell Box Step Over", "Deficit Handstand Push-Up"],
+    "movements": [
+      "Assault Bike",
+      "Dumbbell Box Step Over",
+      "Deficit Handstand Push-Up"
+    ],
     "timecap": 420
   },
   {
@@ -31297,10 +31557,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 600 },
-        "advanced": { "min": 601, "max": 720 },
-        "intermediate": { "min": 721, "max": 900 },
-        "beginner": { "min": 901, "max": null }
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 720
+        },
+        "intermediate": {
+          "min": 721,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31318,10 +31590,22 @@
     "benchmarks": {
       "type": "load",
       "levels": {
-        "elite": { "min": 245, "max": null },
-        "advanced": { "min": 215, "max": 244 },
-        "intermediate": { "min": 185, "max": 214 },
-        "beginner": { "min": null, "max": 184 }
+        "elite": {
+          "min": 245,
+          "max": null
+        },
+        "advanced": {
+          "min": 215,
+          "max": 244
+        },
+        "intermediate": {
+          "min": 185,
+          "max": 214
+        },
+        "beginner": {
+          "min": null,
+          "max": 184
+        }
       }
     },
     "category": "Games",
@@ -31339,10 +31623,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 300 },
-        "advanced": { "min": 301, "max": 420 },
-        "intermediate": { "min": 421, "max": 600 },
-        "beginner": { "min": 601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 420
+        },
+        "intermediate": {
+          "min": 421,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31360,10 +31656,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 900 },
-        "advanced": { "min": 901, "max": 1140 },
-        "intermediate": { "min": 1141, "max": 1500 },
-        "beginner": { "min": 1501, "max": null }
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1140
+        },
+        "intermediate": {
+          "min": 1141,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31371,7 +31679,12 @@
     "difficulty": "Hard",
     "difficultyExplanation": "A high-volume chipper requiring proficiency and endurance across gymnastics (Pull-Ups), weightlifting (OHS), kettlebells, and coordination (Double-Unders).",
     "countLikes": 0,
-    "movements": ["Pull-Up", "Kettlebell Swing", "Double-Under", "Overhead Squat"],
+    "movements": [
+      "Pull-Up",
+      "Kettlebell Swing",
+      "Double-Under",
+      "Overhead Squat"
+    ],
     "timecap": 1500
   },
   {
@@ -31381,10 +31694,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 300 },
-        "advanced": { "min": 301, "max": 480 },
-        "intermediate": { "min": 481, "max": 720 },
-        "beginner": { "min": 721, "max": null }
+        "elite": {
+          "min": null,
+          "max": 300
+        },
+        "advanced": {
+          "min": 301,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31402,10 +31727,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 720 },
-        "advanced": { "min": 721, "max": 900 },
-        "intermediate": { "min": 901, "max": 1200 },
-        "beginner": { "min": 1201, "max": null }
+        "elite": {
+          "min": null,
+          "max": 720
+        },
+        "advanced": {
+          "min": 721,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31413,7 +31750,14 @@
     "difficulty": "Hard",
     "difficultyExplanation": "A demanding chipper workout testing endurance across rowing, burpees, dumbbell work, gymnastics (Toes-to-Bar), loaded carries (OH Lunge), and sprinting.",
     "countLikes": 0,
-    "movements": ["Row", "Burpee", "Dumbbell Ground-to-Overhead", "Toes-to-Bar", "Overhead Walking Lunge", "Run"],
+    "movements": [
+      "Row",
+      "Burpee",
+      "Dumbbell Ground-to-Overhead",
+      "Toes-to-Bar",
+      "Overhead Walking Lunge",
+      "Run"
+    ],
     "timecap": 1200
   },
   {
@@ -31423,10 +31767,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 140, "max": null },
-        "advanced": { "min": 120, "max": 139 },
-        "intermediate": { "min": 90, "max": 119 },
-        "beginner": { "min": null, "max": 89 }
+        "elite": {
+          "min": 140,
+          "max": null
+        },
+        "advanced": {
+          "min": 120,
+          "max": 139
+        },
+        "intermediate": {
+          "min": 90,
+          "max": 119
+        },
+        "beginner": {
+          "min": null,
+          "max": 89
+        }
       }
     },
     "category": "Games",
@@ -31444,10 +31800,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 720 },
-        "advanced": { "min": 721, "max": 900 },
-        "intermediate": { "min": 901, "max": 1080 },
-        "beginner": { "min": 1081, "max": null }
+        "elite": {
+          "min": null,
+          "max": 720
+        },
+        "advanced": {
+          "min": 721,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1080
+        },
+        "beginner": {
+          "min": 1081,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31465,10 +31833,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 360 },
-        "advanced": { "min": 361, "max": 480 },
-        "intermediate": { "min": 481, "max": 600 },
-        "beginner": { "min": 601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31486,10 +31866,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 900 },
-        "advanced": { "min": 901, "max": 1200 },
-        "intermediate": { "min": 1201, "max": 1500 },
-        "beginner": { "min": 1501, "max": null }
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1200
+        },
+        "intermediate": {
+          "min": 1201,
+          "max": 1500
+        },
+        "beginner": {
+          "min": 1501,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31497,7 +31889,13 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "A high-volume chipper involving three rounds of decreasing weight squats (Back, Front, OHS), pull-ups, and shoulder-to-overhead. Tests strength endurance and stamina.",
     "countLikes": 0,
-    "movements": ["Back Squat", "Pull-Up", "Shoulder-to-Overhead", "Front Squat", "Overhead Squat"],
+    "movements": [
+      "Back Squat",
+      "Pull-Up",
+      "Shoulder-to-Overhead",
+      "Front Squat",
+      "Overhead Squat"
+    ],
     "timecap": 0
   },
   {
@@ -31507,10 +31905,22 @@
     "benchmarks": {
       "type": "load",
       "levels": {
-        "elite": { "min": 245, "max": null },
-        "advanced": { "min": 215, "max": 244 },
-        "intermediate": { "min": 185, "max": 214 },
-        "beginner": { "min": null, "max": 184 }
+        "elite": {
+          "min": 245,
+          "max": null
+        },
+        "advanced": {
+          "min": 215,
+          "max": 244
+        },
+        "intermediate": {
+          "min": 185,
+          "max": 214
+        },
+        "beginner": {
+          "min": null,
+          "max": 184
+        }
       }
     },
     "category": "Games",
@@ -31528,10 +31938,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1080 },
-        "advanced": { "min": 1081, "max": 1320 },
-        "intermediate": { "min": 1321, "max": 1560 },
-        "beginner": { "min": 1561, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1080
+        },
+        "advanced": {
+          "min": 1081,
+          "max": 1320
+        },
+        "intermediate": {
+          "min": 1321,
+          "max": 1560
+        },
+        "beginner": {
+          "min": 1561,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31539,7 +31961,14 @@
     "difficulty": "Extremely Hard",
     "difficultyExplanation": "A brutal three-part chipper combining very heavy deadlifts, high-skill gymnastics (Muscle-Ups, Toes-to-Bar), heavy carries, and high-volume conditioning movements.",
     "countLikes": 0,
-    "movements": ["Deadlift", "Muscle-Up", "Wall Ball Shot", "Toes-to-Bar", "Farmer's Carry", "Burpee Box Jump"],
+    "movements": [
+      "Deadlift",
+      "Muscle-Up",
+      "Wall Ball Shot",
+      "Toes-to-Bar",
+      "Farmer's Carry",
+      "Burpee Box Jump"
+    ],
     "timecap": 0
   },
   {
@@ -31549,10 +31978,22 @@
     "benchmarks": {
       "type": "load",
       "levels": {
-        "elite": { "min": 245, "max": null },
-        "advanced": { "min": 205, "max": 244 },
-        "intermediate": { "min": 165, "max": 204 },
-        "beginner": { "min": null, "max": 164 }
+        "elite": {
+          "min": 245,
+          "max": null
+        },
+        "advanced": {
+          "min": 205,
+          "max": 244
+        },
+        "intermediate": {
+          "min": 165,
+          "max": 204
+        },
+        "beginner": {
+          "min": null,
+          "max": 164
+        }
       }
     },
     "category": "Games",
@@ -31570,10 +32011,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 180 },
-        "advanced": { "min": 181, "max": 300 },
-        "intermediate": { "min": 301, "max": 420 },
-        "beginner": { "min": 421, "max": null }
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 420
+        },
+        "beginner": {
+          "min": 421,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31591,10 +32044,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 150, "max": null },
-        "advanced": { "min": 100, "max": 149 },
-        "intermediate": { "min": 50, "max": 99 },
-        "beginner": { "min": null, "max": 49 }
+        "elite": {
+          "min": 150,
+          "max": null
+        },
+        "advanced": {
+          "min": 100,
+          "max": 149
+        },
+        "intermediate": {
+          "min": 50,
+          "max": 99
+        },
+        "beginner": {
+          "min": null,
+          "max": 49
+        }
       }
     },
     "category": "Games",
@@ -31612,10 +32077,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 480 },
-        "advanced": { "min": 481, "max": 600 },
-        "intermediate": { "min": 601, "max": 720 },
-        "beginner": { "min": 721, "max": null }
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31633,10 +32110,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 360 },
-        "advanced": { "min": 361, "max": 480 },
-        "intermediate": { "min": 481, "max": 600 },
-        "beginner": { "min": 601, "max": null }
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 600
+        },
+        "beginner": {
+          "min": 601,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31654,10 +32143,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 180 },
-        "advanced": { "min": 181, "max": 300 },
-        "intermediate": { "min": 301, "max": 420 },
-        "beginner": { "min": 421, "max": null }
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 300
+        },
+        "intermediate": {
+          "min": 301,
+          "max": 420
+        },
+        "beginner": {
+          "min": 421,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31675,10 +32176,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 480 },
-        "advanced": { "min": 481, "max": 600 },
-        "intermediate": { "min": 601, "max": 780 },
-        "beginner": { "min": 781, "max": null }
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 780
+        },
+        "beginner": {
+          "min": 781,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31696,10 +32209,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 180 },
-        "advanced": { "min": 181, "max": 240 },
-        "intermediate": { "min": 241, "max": 360 },
-        "beginner": { "min": 361, "max": null }
+        "elite": {
+          "min": null,
+          "max": 180
+        },
+        "advanced": {
+          "min": 181,
+          "max": 240
+        },
+        "intermediate": {
+          "min": 241,
+          "max": 360
+        },
+        "beginner": {
+          "min": 361,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31717,10 +32242,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 360 },
-        "advanced": { "min": 361, "max": 450 },
-        "intermediate": { "min": 451, "max": 540 },
-        "beginner": { "min": 541, "max": null }
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 450
+        },
+        "intermediate": {
+          "min": 451,
+          "max": 540
+        },
+        "beginner": {
+          "min": 541,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31738,10 +32275,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 519, "max": null },
-        "advanced": { "min": 432, "max": 518 },
-        "intermediate": { "min": 345, "max": 431 },
-        "beginner": { "min": null, "max": 344 }
+        "elite": {
+          "min": 519,
+          "max": null
+        },
+        "advanced": {
+          "min": 432,
+          "max": 518
+        },
+        "intermediate": {
+          "min": 345,
+          "max": 431
+        },
+        "beginner": {
+          "min": null,
+          "max": 344
+        }
       }
     },
     "category": "Games",
@@ -31759,10 +32308,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 480 },
-        "advanced": { "min": 481, "max": 600 },
-        "intermediate": { "min": 601, "max": 720 },
-        "beginner": { "min": 721, "max": null }
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31780,10 +32341,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 480 },
-        "advanced": { "min": 481, "max": 600 },
-        "intermediate": { "min": 601, "max": 720 },
-        "beginner": { "min": 721, "max": null }
+        "elite": {
+          "min": null,
+          "max": 480
+        },
+        "advanced": {
+          "min": 481,
+          "max": 600
+        },
+        "intermediate": {
+          "min": 601,
+          "max": 720
+        },
+        "beginner": {
+          "min": 721,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31801,10 +32374,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 600 },
-        "advanced": { "min": 601, "max": 780 },
-        "intermediate": { "min": 781, "max": 960 },
-        "beginner": { "min": 961, "max": null }
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 780
+        },
+        "intermediate": {
+          "min": 781,
+          "max": 960
+        },
+        "beginner": {
+          "min": 961,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31822,10 +32407,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 360 },
-        "advanced": { "min": 361, "max": 480 },
-        "intermediate": { "min": 481, "max": 660 },
-        "beginner": { "min": 661, "max": null }
+        "elite": {
+          "min": null,
+          "max": 360
+        },
+        "advanced": {
+          "min": 361,
+          "max": 480
+        },
+        "intermediate": {
+          "min": 481,
+          "max": 660
+        },
+        "beginner": {
+          "min": 661,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31843,10 +32440,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 840 },
-        "advanced": { "min": 841, "max": 1020 },
-        "intermediate": { "min": 1021, "max": 1200 },
-        "beginner": { "min": 1201, "max": null }
+        "elite": {
+          "min": null,
+          "max": 840
+        },
+        "advanced": {
+          "min": 841,
+          "max": 1020
+        },
+        "intermediate": {
+          "min": 1021,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
       }
     },
     "category": "AGOQ",
@@ -31854,7 +32463,14 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "A long and demanding chipper testing endurance, strength, and skill across overhead squats, burpees, lunges, cleans, pistols, and bar muscle-ups.",
     "countLikes": 0,
-    "movements": ["Overhead Squat", "Bar Facing Burpee", "Back Rack Lunge", "Clean", "Pistol", "Bar Muscle-Up"],
+    "movements": [
+      "Overhead Squat",
+      "Bar Facing Burpee",
+      "Back Rack Lunge",
+      "Clean",
+      "Pistol",
+      "Bar Muscle-Up"
+    ],
     "timecap": 1200
   },
   {
@@ -31864,10 +32480,22 @@
     "benchmarks": {
       "type": "reps",
       "levels": {
-        "elite": { "min": 56, "max": null },
-        "advanced": { "min": 40, "max": 55 },
-        "intermediate": { "min": 28, "max": 39 },
-        "beginner": { "min": null, "max": 27 }
+        "elite": {
+          "min": 56,
+          "max": null
+        },
+        "advanced": {
+          "min": 40,
+          "max": 55
+        },
+        "intermediate": {
+          "min": 28,
+          "max": 39
+        },
+        "beginner": {
+          "min": null,
+          "max": 27
+        }
       }
     },
     "category": "AGOQ",
@@ -31885,10 +32513,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 720 },
-        "advanced": { "min": 721, "max": 900 },
-        "intermediate": { "min": 901, "max": 1200 },
-        "beginner": { "min": 1201, "max": null }
+        "elite": {
+          "min": null,
+          "max": 720
+        },
+        "advanced": {
+          "min": 721,
+          "max": 900
+        },
+        "intermediate": {
+          "min": 901,
+          "max": 1200
+        },
+        "beginner": {
+          "min": 1201,
+          "max": null
+        }
       }
     },
     "category": "AGOQ",
@@ -31906,10 +32546,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 600 },
-        "advanced": { "min": 601, "max": 750 },
-        "intermediate": { "min": 751, "max": 900 },
-        "beginner": { "min": 901, "max": null }
+        "elite": {
+          "min": null,
+          "max": 600
+        },
+        "advanced": {
+          "min": 601,
+          "max": 750
+        },
+        "intermediate": {
+          "min": 751,
+          "max": 900
+        },
+        "beginner": {
+          "min": 901,
+          "max": null
+        }
       }
     },
     "category": "Quarterfinals",
@@ -31917,7 +32569,12 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "A complex chipper involving dumbbell lunges in different positions (hang, rack, overhead) paired with progressively harder gymnastics movements (TTB, C2B, BMU).",
     "countLikes": 0,
-    "movements": ["Dumbbell Walking Lunge", "Toes-to-Bar", "Chest-to-Bar Pull-Up", "Bar Muscle-Up"],
+    "movements": [
+      "Dumbbell Walking Lunge",
+      "Toes-to-Bar",
+      "Chest-to-Bar Pull-Up",
+      "Bar Muscle-Up"
+    ],
     "timecap": 900
   },
   {
@@ -31927,10 +32584,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 900 },
-        "advanced": { "min": 901, "max": 1140 },
-        "intermediate": { "min": 1141, "max": 1380 },
-        "beginner": { "min": 1381, "max": null }
+        "elite": {
+          "min": null,
+          "max": 900
+        },
+        "advanced": {
+          "min": 901,
+          "max": 1140
+        },
+        "intermediate": {
+          "min": 1141,
+          "max": 1380
+        },
+        "beginner": {
+          "min": 1381,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31938,7 +32607,13 @@
     "difficulty": "Very Hard",
     "difficultyExplanation": "A symmetrical chipper featuring very heavy deadlifts sandwiching high-volume core work, double-unders, rope climbs, and wall balls. Tests strength, endurance, and skill.",
     "countLikes": 0,
-    "movements": ["Deadlift", "GHD Sit-Up", "Double-Under", "Rope Climb", "Wall Ball Shot"],
+    "movements": [
+      "Deadlift",
+      "GHD Sit-Up",
+      "Double-Under",
+      "Rope Climb",
+      "Wall Ball Shot"
+    ],
     "timecap": 0
   },
   {
@@ -31948,10 +32623,22 @@
     "benchmarks": {
       "type": "time",
       "levels": {
-        "elite": { "min": null, "max": 1080 },
-        "advanced": { "min": 1081, "max": 1440 },
-        "intermediate": { "min": 1441, "max": 1800 },
-        "beginner": { "min": 1801, "max": null }
+        "elite": {
+          "min": null,
+          "max": 1080
+        },
+        "advanced": {
+          "min": 1081,
+          "max": 1440
+        },
+        "intermediate": {
+          "min": 1441,
+          "max": 1800
+        },
+        "beginner": {
+          "min": 1801,
+          "max": null
+        }
       }
     },
     "category": "Games",
@@ -31959,7 +32646,11 @@
     "difficulty": "Extremely Hard",
     "difficultyExplanation": "A highly demanding workout combining significant volume of strict, high-skill gymnastics (Muscle-Ups, HSPU) with heavy kettlebell snatches over 10 rounds. Elite test of strength and skill endurance.",
     "countLikes": 0,
-    "movements": ["Strict Muscle-Up", "Strict Handstand Push-Up", "Kettlebell Snatch"],
+    "movements": [
+      "Strict Muscle-Up",
+      "Strict Handstand Push-Up",
+      "Kettlebell Snatch"
+    ],
     "timecap": 0
   },
   {
@@ -31989,13 +32680,9 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Very Hard",
-    "movements": [
-      "Box Step-Up"
-    ],
+    "movements": ["Box Step-Up"],
     "countLikes": 657,
     "difficultyExplanation": "A Hero WOD dedicated to Navy SEAL Chad Wilkinson. It consists of 1,000 box step-ups to a 20-inch box while wearing a 45 lb (men) / 35 lb (women) ruck pack. This workout is a significant test of muscular endurance, stamina, and mental fortitude, often taking athletes an hour or more to complete."
   },
@@ -32026,16 +32713,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "movements": [
-      "GHD Sit-Up",
-      "Handstand Walk",
-      "Overhead Walking Lunge"
-    ],
+    "movements": ["GHD Sit-Up", "Handstand Walk", "Overhead Walking Lunge"],
     "countLikes": 13,
     "difficultyExplanation": "Originally CrossFit Games Workout #11 from 2014, 'Midline March' is a demanding test of core strength with GHD Sit-Ups, advanced gymnastics skill with the Handstand Walk, and significant strength under load during the heavy Overhead Walking Lunges. It's designed to push athletes to their limits in midline stability and overall capacity.",
     "timecap": 0
@@ -32067,10 +32747,7 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Extremely Hard",
     "movements": [
       "Ring Handstand Push-Up",
@@ -32110,16 +32787,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Extremely Hard",
-    "movements": [
-      "Row",
-      "Double-Under",
-      "Run"
-    ],
+    "movements": ["Row", "Double-Under", "Run"],
     "countLikes": 176,
     "difficultyExplanation": "A brutal endurance test from the 2014 CrossFit Games (and also featured in the 2018 Regionals), 'Triple 3' combines a 3,000-meter row, 300 double-unders, and a 3-mile run, all performed for time. This WOD is designed to push athletes' cardiovascular capacity, stamina, and mental toughness to their absolute limits, often taking well over 30-40 minutes for proficient athletes to complete.",
     "timecap": 0
@@ -32151,16 +32821,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "movements": [
-      "Deadlift",
-      "Hang Power Clean",
-      "Push Jerk"
-    ],
+    "movements": ["Deadlift", "Hang Power Clean", "Push Jerk"],
     "countLikes": 300,
     "difficultyExplanation": "A brutal CrossFit Games WOD from 2016 (Workout #7), 'Double DT' doubles the volume of the classic Hero WOD 'DT'. It consists of 10 grueling rounds for time, each with 12 Deadlifts (155/105 lb), 9 Hang Power Cleans (155/105 lb), and 6 Push Jerks (155/105 lb). This tests barbell cycling endurance, grip, and mental toughness to an extreme degree.",
     "timecap": 0
@@ -32192,16 +32855,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Triplet"],
     "difficulty": "Very Hard",
-    "movements": [
-      "Deadlift",
-      "Hang Power Clean",
-      "Push Jerk"
-    ],
+    "movements": ["Deadlift", "Hang Power Clean", "Push Jerk"],
     "countLikes": 215,
     "difficultyExplanation": "A challenging version of the Hero WOD 'DT', 'Heavy DT' was featured as Workout #5 in the 2015 CrossFit Games. It demands significant strength and barbell cycling endurance over 5 rounds, each consisting of 12 Deadlifts, 9 Hang Power Cleans, and 6 Push Jerks, all performed with a heavier weight of 205 lb for men and 145 lb for women.",
     "timecap": 0
@@ -32233,18 +32889,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Intervals",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Intervals", "Chipper"],
     "difficulty": "Very Hard",
-    "movements": [
-      "Air Bike",
-      "Swim",
-      "GHD Sit-Up",
-      "Ball Slam"
-    ],
+    "movements": ["Air Bike", "Swim", "GHD Sit-Up", "Ball Slam"],
     "countLikes": 0,
     "difficultyExplanation": "Event #10 from the 2020 CrossFit Games (Phase 2), 'Swim 'N' Stuff' is a unique interval-style workout. Athletes perform 4 rounds, each within a 4-minute window. Rounds 1 & 3 consist of Air Bike calories, a 50m swim, GHD Sit-Ups, and heavy Ball Slams (60/40 lb). Rounds 2 & 4 are performed with these movements in reverse order. The score is the cumulative time of the work periods. This WOD tests cardiovascular capacity, swimming skill, core strength, and power, with an added challenge of managing transitions and work/rest under pressure.",
     "timecap": null
@@ -32276,18 +32923,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Chipper",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Chipper", "Triplet"],
     "difficulty": "Extremely Hard",
-    "movements": [
-      "Muscle-Up",
-      "Deadlift",
-      "GHD Sit-Up",
-      "Run"
-    ],
+    "movements": ["Muscle-Up", "Deadlift", "GHD Sit-Up", "Run"],
     "countLikes": 3,
     "difficultyExplanation": "The 'Triplet Sprint' was the 4th event of the 2011 CrossFit Games. It's a high-intensity workout consisting of four rounds. Each round includes 5 Muscle-Ups, 10 Deadlifts (245/165 lb), and 15 GHD Sit-Ups, followed by a progressively longer sprint (50, 100, 150, then 200 yards). This WOD tests high-skill gymnastics, heavy lifting under fatigue, core endurance, and sprinting ability, all against a tight 7-minute time cap.",
     "timecap": 420
@@ -32319,17 +32957,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Ladder",
-      "Triplet"
-    ],
+    "tags": ["For Time", "Ladder", "Triplet"],
     "difficulty": "Extremely Hard",
-    "movements": [
-      "Deadlift",
-      "Bench Press",
-      "Squat Clean"
-    ],
+    "movements": ["Deadlift", "Bench Press", "Squat Clean"],
     "countLikes": 1270,
     "difficultyExplanation": "This is the 2018 CrossFit Games Regionals version of the benchmark WOD 'Linda', officially designated as Regionals 18.2. It's a brutal descending ladder (10-9-8-7-6-5-4-3-2-1 reps) of Deadlifts (295/220 lb), Bench Presses (195/135 lb), and Squat Cleans (145/105 lb). This WOD severely tests maximal strength endurance across three major lifts within a 17-minute time cap.",
     "timecap": 1020
@@ -32361,10 +32991,7 @@
     },
     "results": [],
     "category": "Quarterfinals",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Very Hard",
     "movements": [
       "Dumbbell Walking Lunge",
@@ -32403,13 +33030,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Extremely Hard",
-    "movements": [
-      "Weighted Run"
-    ],
+    "movements": ["Weighted Run"],
     "countLikes": 3,
     "difficultyExplanation": "This grueling event was Workout #2 from the 2010 Central East CrossFit Games Regionals. Athletes faced a 5,000 meter trail run, made significantly more challenging by the explicit inclusion of 'sandbags on a very large hill'. This WOD tests pure endurance, strength under awkward load, and mental toughness over difficult terrain.",
     "timecap": 0
@@ -32441,10 +33064,7 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time",
-      "Chipper"
-    ],
+    "tags": ["For Time", "Chipper"],
     "difficulty": "Extremely Hard",
     "movements": [
       "Parallette Handstand Push-Up",
@@ -32482,13 +33102,9 @@
     },
     "results": [],
     "category": "Benchmark",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Hard",
-    "movements": [
-      "Run"
-    ],
+    "movements": ["Run"],
     "countLikes": 0,
     "difficultyExplanation": "A standard benchmark test of 10 kilometer running endurance."
   },
@@ -32519,13 +33135,9 @@
     },
     "results": [],
     "category": "Games",
-    "tags": [
-      "For Time"
-    ],
+    "tags": ["For Time"],
     "difficulty": "Extremely Hard",
-    "movements": [
-      "Row"
-    ],
+    "movements": ["Row"],
     "countLikes": 18,
     "difficultyExplanation": "A grueling test of endurance, the Marathon Row was Event #4 of the 2018 CrossFit Games. Athletes row 42,195 meters (a full marathon distance) for time, pushing their physical and mental limits over several hours. It has a 4-hour time cap.",
     "timecap": 14400
@@ -32557,15 +33169,9 @@
     },
     "results": [],
     "category": "AGOQ",
-    "tags": [
-      "For Time",
-      "Couplet"
-    ],
+    "tags": ["For Time", "Couplet"],
     "difficulty": "Hard",
-    "movements": [
-      "Toes-to-Bar",
-      "Alternating Dumbbell Snatch"
-    ],
+    "movements": ["Toes-to-Bar", "Alternating Dumbbell Snatch"],
     "countLikes": 1,
     "difficultyExplanation": "Workout #1 from the 2022 CrossFit Games Age Group/Occupational Qualifier. This is a fast couplet of 3 rounds for time: 20 Toes-to-Bars and 20 Alternating Dumbbell Snatches (70/50 lb), with a 10-minute time cap. It tests grip endurance, core strength, and power output with a heavy dumbbell.",
     "timecap": 600

@@ -2,7 +2,7 @@
 
 ### Must have
 
-- QF 24.3 doesn't have timecap
+- QF 24.3 doesn't have timecap (look through ALL wods and fix timecaps)
 - QF 21.4 timecap UI is incorrect because it's load based
 - Importing scores from SugarWOD should show which ones already exist (and if we they differ)
 

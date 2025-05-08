@@ -31837,27 +31837,6 @@
     "timecap": 660
   },
   {
-    "wodUrl": "https://wodwell.com/wod/220423/",
-    "wodName": "Crunch",
-    "description": "5 Rounds For Time:\n12 Dumbbell Bench Press (2x50/35 lb)\n15 GHD Sit-ups",
-    "benchmarks": {
-      "type": "time",
-      "levels": {
-        "elite": { "min": null, "max": 480 },
-        "advanced": { "min": 481, "max": 600 },
-        "intermediate": { "min": 601, "max": 780 },
-        "beginner": { "min": 781, "max": null }
-      }
-    },
-    "category": "Other",
-    "tags": ["For Time", "Couplet"],
-    "difficulty": "Medium",
-    "difficultyExplanation": "Five rounds combining moderate dumbbell bench press with GHD sit-ups. Tests pushing strength and high-skill core endurance.",
-    "countLikes": 0,
-    "movements": ["Dumbbell Bench Press", "GHD Sit-Up"],
-    "timecap": 0
-  },
-  {
     "wodUrl": "https://wodwell.com/wod/agq-22-2/",
     "wodName": "AGQ 22.2",
     "description": "For Time:\n50 Overhead Squats (95/65 lb)\n50 Bar Facing Burpees\n40 Back Rack Walking Lunges (95/65 lb)\n30 Bar Facing Burpees\n30 Cleans (95/65 lb)\n20 Bar Facing Burpees\n20 Alternating Pistols\n10 Bar Muscle-Ups\n\nTime Cap: 20 minutes",

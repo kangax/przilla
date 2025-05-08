@@ -548,17 +548,26 @@ async function main() {
       // Clear existing associations for this WOD before adding new ones
       if (!dryRun) {
         try {
-          console.log(`      -> Clearing existing movement associations for WOD ID: ${currentWodDbId}`);
-          await db.delete(wodMovements).where(eq(wodMovements.wodId, currentWodDbId));
+          console.log(
+            `      -> Clearing existing movement associations for WOD ID: ${currentWodDbId}`,
+          );
+          await db
+            .delete(wodMovements)
+            .where(eq(wodMovements.wodId, currentWodDbId));
           console.log(`      ✅ Cleared existing associations.`);
         } catch (error) {
-          console.error(`      ❌ Error clearing existing movement associations for WOD ID ${currentWodDbId}:`, error);
+          console.error(
+            `      ❌ Error clearing existing movement associations for WOD ID ${currentWodDbId}:`,
+            error,
+          );
           errorsEncountered++;
           // Optionally, decide if you want to continue to attempt to add new movements or skip this WOD's movements
           // For now, we'll continue and try to add.
         }
       } else {
-        console.log(`      [DRY RUN] Would clear existing movement associations for WOD ID: ${currentWodDbId}`);
+        console.log(
+          `      [DRY RUN] Would clear existing movement associations for WOD ID: ${currentWodDbId}`,
+        );
       }
 
       const movementIdsToAssociate: string[] = [];
@@ -811,9 +820,12 @@ async function main() {
         }
         console.log(`      -> Finished associating movements.`);
       } else {
-        console.log(`   -> No movements to associate for WOD ID: ${currentWodDbId}`);
+        console.log(
+          `   -> No movements to associate for WOD ID: ${currentWodDbId}`,
+        );
       }
-    } else if (currentWodDbId) { // Check currentWodDbId instead of newWodId
+    } else if (currentWodDbId) {
+      // Check currentWodDbId instead of newWodId
       console.log(
         `   -> No movements listed in JSON for WOD ID: ${currentWodDbId}. Skipping association.`,
       );

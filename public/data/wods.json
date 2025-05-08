@@ -229,7 +229,7 @@
     },
     "results": [],
     "category": "Hero",
-    "tags": ["EMOM"],
+    "tags": ["EMOM", "For Time"],
     "difficulty": "Medium",
     "movements": [
       "Push-Up",
@@ -4968,7 +4968,7 @@
       }
     ],
     "category": "Girl",
-    "tags": ["AMRAP", "For Time", "Triplet"],
+    "tags": ["AMRAP", "Triplet"],
     "difficulty": "Medium",
     "movements": ["Pull-Up", "Push-Up", "Air Squat"],
     "countLikes": 2600,
@@ -21426,7 +21426,7 @@
     },
     "results": [],
     "category": "Quarterfinals",
-    "tags": ["For Time"],
+    "tags": ["For Load"],
     "difficulty": "Medium",
     "movements": ["Front Squat"],
     "countLikes": 1,

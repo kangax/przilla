@@ -11,13 +11,11 @@ import {
 import { useQueryClient } from "@tanstack/react-query";
 import { api } from "~/trpc/react";
 import { useSession } from "~/lib/auth-client";
-import { Box, Flex, IconButton, DropdownMenu } from "@radix-ui/themes";
-import * as Select from "@radix-ui/react-select";
-import { ChevronDown, ListFilter, ArrowUp, ArrowDown } from "lucide-react";
+import { Box, Flex } from "@radix-ui/themes";
+// Removed Select, IconButton, DropdownMenu, ChevronDown, ListFilter, ArrowUp, ArrowDown, TagSelector, CompletionFilterControl
 import WodTable from "./WodTable";
 import WodListMobile from "./WodListMobile";
-import TagSelector from "./TagSelector"; // Import the new component
-import CompletionFilterControl from "./CompletionFilterControl"; // Import the new completion filter component
+import { FilterBar } from "./FilterBar"; // Import the new FilterBar component
 import { useMediaQuery } from "~/utils/useMediaQuery";
 import { useWodViewerFilters } from "./hooks/useWodViewerFilters";
 import { useWodViewerData } from "./hooks/useWodViewerData";
@@ -134,28 +132,7 @@ export default function WodViewer({
 
   const isFavoritesSource = source === "favorites";
 
-  // Add logging for initialWods when source is 'favorites'
-  useEffect(() => {
-    if (isFavoritesSource) {
-      console.log(
-        "[DEBUG WodViewer] Source is 'favorites'. initialWods changed. Count:",
-        initialWods?.length,
-        "Timestamp:",
-        new Date().toISOString(),
-      );
-      // console.log("[DEBUG WodViewer] Favorites initialWods content:", JSON.stringify(initialWods?.slice(0, 2))); // Log first 2 items
-    }
-  }, [initialWods, isFavoritesSource]);
-
   // **Conditionally call the query hook**
-  console.log(
-    "[DEBUG WodViewer] About to call api.wod.getAll.useQuery. Current searchTerm:",
-    searchTerm,
-    "Effective input for query:",
-    { searchQuery: searchTerm || undefined },
-    "Timestamp:",
-    new Date().toISOString(),
-  );
   const {
     data: wodsDataFromApiQuery, // Renamed for clarity
     isLoading: isLoadingWodsFromApi, // Renamed for clarity
@@ -167,60 +144,6 @@ export default function WodViewer({
       staleTime: 5 * 60 * 1000,
     },
   );
-
-  // ADD THIS useEffect FOR DIAGNOSTICS
-  useEffect(() => {
-    if (!isFavoritesSource && wodsDataFromApiQuery) {
-      // Only log for main page updates
-      console.log(
-        `[DEBUG WodViewer Effect] wodsDataFromApiQuery updated. Timestamp: ${new Date().toISOString()}. Length: ${wodsDataFromApiQuery.length}`,
-      );
-      // Optionally, find a specific WOD that you attempt to favorite/unfavorite
-      // and log its 'isFavorited' status from wodsDataFromApiQuery.
-      // For example, if you know a WOD ID you're testing with:
-      // const testWodId = "your-test-wod-id";
-      // const testWod = wodsDataFromApiQuery.find(w => w.id === testWodId);
-      // if (testWod) {
-      //   console.log(`[DEBUG WodViewer Effect] Test WOD (${testWodId}) isFavorited: ${testWod.isFavorited}`);
-      // } else {
-      //   // If you want to see the first item's status
-      //   if (wodsDataFromApiQuery.length > 0) {
-      //       console.log(`[DEBUG WodViewer Effect] First WOD (${wodsDataFromApiQuery[0].id}) isFavorited: ${wodsDataFromApiQuery[0].isFavorited}`);
-      //   }
-      // }
-    }
-  }, [wodsDataFromApiQuery, isFavoritesSource]); // Dependency array includes wodsDataFromApiQuery
-
-  // DEBUG: Print all query keys in the React Query cache
-  // This will show the actual structure used by TanStack Query
-  const queryClient = useQueryClient();
-  if (typeof window !== "undefined") {
-    const queries = queryClient.getQueryCache().getAll();
-    for (const q of queries) {
-      if (q.queryHash && q.queryHash.includes("wod.getAll")) {
-        // eslint-disable-next-line no-console
-        console.log("[DEBUG] TanStack Query Key for wod.getAll:", q.queryKey);
-      }
-    }
-  }
-
-  // Add debugging for API results
-  useEffect(() => {
-    if (wodsDataFromApiQuery) {
-      console.log("[DEBUG] API query data available:", {
-        dataLength: wodsDataFromApiQuery?.length,
-        searchTerm,
-        timestamp: new Date().toISOString(),
-      });
-    }
-    if (errorWodsFromApi) {
-      console.error("[DEBUG] API query error:", {
-        error: errorWodsFromApi,
-        searchTerm,
-        timestamp: new Date().toISOString(),
-      });
-    }
-  }, [wodsDataFromApiQuery, errorWodsFromApi, searchTerm]);
 
   const {
     data: scoresDataFromApi, // Renamed
@@ -322,24 +245,6 @@ export default function WodViewer({
   const showWodLoadingSpinner =
     isLoadingWodsFromApi && !validatedWodsFromApi && !isFavoritesSource;
 
-  // Add debugging for the final rendering decision
-  useEffect(() => {
-    console.log("[DEBUG] Final rendering decision:", {
-      wodsLength: wods?.length,
-      sortedWodsLength: sortedWods?.length,
-      showWodLoadingSpinner,
-      hasValidatedInitialWods: validatedInitialWods.length > 0,
-      searchTerm,
-      timestamp: new Date().toISOString(),
-    });
-  }, [
-    wods,
-    sortedWods,
-    showWodLoadingSpinner,
-    validatedInitialWods,
-    searchTerm,
-  ]);
-
   if (
     showWodLoadingSpinner &&
     validatedInitialWods.length === 0 &&
@@ -386,177 +291,33 @@ export default function WodViewer({
 
   if (!wods || wods.length === 0) {
     // Final check based on data processed by useWodViewerData
-    console.log("[DEBUG] Rendering 'No WODs match the current filters'");
     return <Box>No WODs match the current filters.</Box>; // More specific message
   }
 
   return (
     <Box>
-      {/* Filter Bar */}
-      <div
-        ref={filterBarRef}
-        className={`mb-4 mt-4 ${
-          isMobile ? "flex flex-col gap-2 px-2" : "flex items-center gap-2"
-        }`}
-      >
-        <div className={isMobile ? "flex gap-2" : "flex flex-grow gap-2"}>
-          <input
-            type="search"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-            className={`placeholder:text-muted-foreground rounded border border-input px-3 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring ${
-              isMobile ? "flex-1 py-2 text-base" : "w-40 py-1.5 text-sm"
-            }`}
-          />
-
-          <Select.Root
-            value={
-              selectedCategories.length > 0 ? selectedCategories[0] : "all"
-            }
-            onValueChange={(value) => {
-              if (value === "all") {
-                setSelectedCategories([]);
-              } else if (
-                (WOD_CATEGORIES as readonly string[]).includes(value)
-              ) {
-                setSelectedCategories([value as WodCategory]);
-              } else {
-                setSelectedCategories([]);
-              }
-            }}
-          >
-            <Select.Trigger
-              className={`flex min-w-[120px] items-center justify-between rounded-md border border-border bg-card px-3 text-card-foreground hover:bg-accent ${
-                isMobile ? "py-2 text-base" : "py-2 text-xs"
-              }`}
-            >
-              <Select.Value placeholder="Select category">
-                {selectedCategories.length > 0
-                  ? `${selectedCategories[0]} (${categoryCounts[selectedCategories[0]] || 0})`
-                  : `All (${originalTotalWodCount})`}
-              </Select.Value>
-              <Select.Icon>
-                <ChevronDown className="ml-2 h-4 w-4 opacity-70" />
-              </Select.Icon>
-            </Select.Trigger>
-            <Select.Portal>
-              <Select.Content
-                className="z-50 rounded-md border border-border bg-popover shadow-md"
-                position="popper"
-              >
-                <Select.Viewport>
-                  <Select.Item
-                    value="all"
-                    className="cursor-pointer px-3 py-2 text-base text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
-                  >
-                    <Select.ItemText>
-                      All ({originalTotalWodCount})
-                    </Select.ItemText>
-                  </Select.Item>
-                  {WOD_CATEGORIES.map((category) => (
-                    <Select.Item
-                      key={category}
-                      value={category}
-                      className="cursor-pointer px-3 py-2 text-base text-popover-foreground outline-none hover:bg-accent data-[state=checked]:bg-accent data-[state=checked]:text-accent-foreground"
-                    >
-                      <Select.ItemText>
-                        {category} ({categoryCounts[category] || 0})
-                      </Select.ItemText>
-                    </Select.Item>
-                  ))}
-                </Select.Viewport>
-              </Select.Content>
-            </Select.Portal>
-          </Select.Root>
-
-          {/* Use the new TagSelector component */}
-          <TagSelector
-            tagOrder={tagOrder}
-            selectedTags={selectedTags}
-            toggleTag={toggleTag}
-            isMobile={isMobile}
-          />
-        </div>
-
-        {/* SegmentedControl and Sort Button: On mobile, show in a row; on desktop, just SegmentedControl */}
-        {isMobile ? (
-          <div className="mt-2 flex w-full flex-row items-center gap-2">
-            {/* Use the new CompletionFilterControl component */}
-            <CompletionFilterControl
-              completionFilter={completionFilter}
-              setCompletionFilter={setCompletionFilter}
-              dynamicTotalWodCount={dynamicTotalWodCount}
-              dynamicDoneWodsCount={dynamicDoneWodsCount}
-              dynamicNotDoneWodsCount={dynamicNotDoneWodsCount}
-              isLoggedIn={isLoggedIn}
-              isMobile={isMobile}
-            />
-            {/* Sort DropdownMenu: always visible */}
-            <DropdownMenu.Root>
-              <DropdownMenu.Trigger>
-                <IconButton variant="ghost" aria-label="Sort WODs">
-                  <ListFilter size={20} />
-                </IconButton>
-              </DropdownMenu.Trigger>
-              <DropdownMenu.Content
-                className="z-50 min-w-[180px] rounded-md border border-border bg-popover p-1 shadow-md"
-                sideOffset={5}
-                align="end"
-              >
-                <DropdownMenu.Label className="px-2 py-1.5 text-sm font-semibold text-popover-foreground">
-                  Sort By
-                </DropdownMenu.Label>
-                <DropdownMenu.Separator className="my-1 h-px bg-border" />
-                {(isLoggedIn
-                  ? [
-                      { key: "wodName", label: "Name" },
-                      { key: "date", label: "Date Added" },
-                      { key: "difficulty", label: "Difficulty" },
-                      { key: "countLikes", label: "Likes" },
-                      { key: "results", label: "Your Score" },
-                    ]
-                  : [
-                      { key: "wodName", label: "Name" },
-                      { key: "date", label: "Date Added" },
-                      { key: "difficulty", label: "Difficulty" },
-                      { key: "countLikes", label: "Likes" },
-                    ]
-                ).map((item) => (
-                  <DropdownMenu.Item
-                    key={item.key}
-                    data-testid={`sort-menuitem-${item.key}`}
-                    className="relative flex cursor-pointer select-none items-center rounded-sm px-2 py-1.5 text-sm text-popover-foreground outline-none transition-colors hover:bg-accent focus:bg-accent data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                    onSelect={() => handleSort(item.key as SortByType)}
-                  >
-                    <span className="flex-grow">{item.label}</span>
-                    {sortBy === item.key && (
-                      <>
-                        {sortDirection === "asc" ? (
-                          <ArrowUp className="ml-auto h-4 w-4" />
-                        ) : (
-                          <ArrowDown className="ml-auto h-4 w-4" />
-                        )}
-                      </>
-                    )}
-                  </DropdownMenu.Item>
-                ))}
-              </DropdownMenu.Content>
-            </DropdownMenu.Root>
-          </div>
-        ) : (
-          /* Use the new CompletionFilterControl component */
-          <CompletionFilterControl
-            completionFilter={completionFilter}
-            setCompletionFilter={setCompletionFilter}
-            dynamicTotalWodCount={dynamicTotalWodCount}
-            dynamicDoneWodsCount={dynamicDoneWodsCount}
-            dynamicNotDoneWodsCount={dynamicNotDoneWodsCount}
-            isLoggedIn={isLoggedIn}
-            isMobile={isMobile}
-          />
-        )}
-      </div>
+      <FilterBar
+        filterBarRef={filterBarRef}
+        isMobile={isMobile}
+        searchTerm={searchTerm}
+        setSearchTerm={setSearchTerm}
+        selectedCategories={selectedCategories}
+        setSelectedCategories={setSelectedCategories}
+        categoryCounts={categoryCounts}
+        originalTotalWodCount={originalTotalWodCount}
+        tagOrder={tagOrder}
+        selectedTags={selectedTags}
+        toggleTag={toggleTag}
+        completionFilter={completionFilter}
+        setCompletionFilter={setCompletionFilter}
+        dynamicTotalWodCount={dynamicTotalWodCount}
+        dynamicDoneWodsCount={dynamicDoneWodsCount}
+        dynamicNotDoneWodsCount={dynamicNotDoneWodsCount}
+        isLoggedIn={isLoggedIn}
+        sortBy={sortBy}
+        sortDirection={sortDirection}
+        handleSort={handleSort}
+      />
 
       {/* Conditionally render card list or table */}
       {isMobile ? (

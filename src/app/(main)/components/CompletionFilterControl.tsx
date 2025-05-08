@@ -3,7 +3,7 @@
 import { SegmentedControl, Tooltip } from "@radix-ui/themes";
 
 // Define the type for completion filter values
-type CompletionFilterType = "all" | "done" | "notDone";
+export type CompletionFilterType = "all" | "done" | "notDone"; // Exported type
 
 interface CompletionFilterControlProps {
   completionFilter: CompletionFilterType;

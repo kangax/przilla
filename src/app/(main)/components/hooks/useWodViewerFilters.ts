@@ -9,7 +9,7 @@ const DEFAULT_CATEGORY = "Girl";
  * Custom hook to manage WOD viewer filter, sort, and search state with URL synchronization.
  */
 export function useWodViewerFilters(
-  categoryOrder: string[],
+  categoryOrder: WodCategory[], // Changed to WodCategory[]
   tagOrder: string[],
   isLoggedIn: boolean,
   DEFAULT_SORT_DIRECTIONS: Record<SortByType, "asc" | "desc">,
@@ -51,14 +51,22 @@ export function useWodViewerFilters(
 
   // Filter state
   // If no category is specified in the URL, default to "Girl" (DEFAULT_CATEGORY) if available.
-  const [selectedCategories, setSelectedCategories] = useState<string[]>(() => {
-    const urlCategory = searchParams.get("category");
-    if (urlCategory === "All" || !urlCategory) {
-      // If DEFAULT_CATEGORY is present, use it as default; else show all
-      return categoryOrder.includes(DEFAULT_CATEGORY) ? [DEFAULT_CATEGORY] : [];
-    }
-    return [urlCategory];
-  });
+  const [selectedCategories, setSelectedCategories] = useState<WodCategory[]>(
+    () => {
+      // Changed to WodCategory[]
+      const urlCategory = searchParams.get("category");
+      if (urlCategory === "All" || !urlCategory) {
+        // If DEFAULT_CATEGORY is present, use it as default; else show all
+        return categoryOrder.includes(DEFAULT_CATEGORY as WodCategory)
+          ? [DEFAULT_CATEGORY as WodCategory]
+          : [];
+      }
+      // Ensure urlCategory is a valid WodCategory before adding
+      return categoryOrder.includes(urlCategory as WodCategory)
+        ? [urlCategory as WodCategory]
+        : [];
+    },
+  );
 
   const [selectedTags, setSelectedTags] = useState<string[]>(() => {
     const urlTags = searchParams.get("tags");
@@ -113,10 +121,14 @@ export function useWodViewerFilters(
       const urlCategory = searchParams.get("category");
       if (urlCategory === "All") {
         setSelectedCategories([]);
-      } else if (urlCategory) {
-        setSelectedCategories([urlCategory]);
+      } else if (
+        urlCategory &&
+        categoryOrder.includes(urlCategory as WodCategory)
+      ) {
+        // Validate category from URL
+        setSelectedCategories([urlCategory as WodCategory]);
       }
-      // If urlCategory is null (param missing), do not update selectedCategories—preserve default
+      // If urlCategory is null (param missing) or invalid, do not update selectedCategories—preserve default
 
       // Update tags from URL
       const urlTags = searchParams.get("tags");
@@ -170,7 +182,7 @@ export function useWodViewerFilters(
         let validCategoryForUrl: string | null = null;
         if (
           selectedCategories.length > 0 &&
-          categoryOrder.includes(selectedCategories[0] as WodCategory)
+          categoryOrder.includes(selectedCategories[0])
         ) {
           validCategoryForUrl = selectedCategories[0];
         } else if (selectedCategories.length === 0) {
@@ -237,7 +249,7 @@ export function useWodViewerFilters(
   // Derived values for external use
   const validSelectedCategories =
     selectedCategories.length > 0 &&
-    categoryOrder.includes(selectedCategories[0] as WodCategory)
+    categoryOrder.includes(selectedCategories[0]) // No need for 'as WodCategory' if selectedCategories is WodCategory[]
       ? selectedCategories
       : [];
 

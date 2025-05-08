@@ -102,9 +102,7 @@
       "indexes": {
         "account_user_id_idx": {
           "name": "account_user_id_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         }
       },
@@ -113,12 +111,8 @@
           "name": "przilla_account_user_id_przilla_user_id_fk",
           "tableFrom": "przilla_account",
           "tableTo": "przilla_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -147,16 +141,12 @@
       "indexes": {
         "przilla_movement_name_unique": {
           "name": "przilla_movement_name_unique",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": true
         },
         "movement_name_idx": {
           "name": "movement_name_idx",
-          "columns": [
-            "name"
-          ],
+          "columns": ["name"],
           "isUnique": false
         }
       },
@@ -264,23 +254,17 @@
       "indexes": {
         "score_user_id_idx": {
           "name": "score_user_id_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         },
         "score_wod_id_idx": {
           "name": "score_wod_id_idx",
-          "columns": [
-            "wod_id"
-          ],
+          "columns": ["wod_id"],
           "isUnique": false
         },
         "score_date_idx": {
           "name": "score_date_idx",
-          "columns": [
-            "score_date"
-          ],
+          "columns": ["score_date"],
           "isUnique": false
         }
       },
@@ -289,12 +273,8 @@
           "name": "przilla_score_user_id_przilla_user_id_fk",
           "tableFrom": "przilla_score",
           "tableTo": "przilla_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -302,12 +282,8 @@
           "name": "przilla_score_wod_id_przilla_wod_id_fk",
           "tableFrom": "przilla_score",
           "tableTo": "przilla_wod",
-          "columnsFrom": [
-            "wod_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["wod_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -378,9 +354,7 @@
       "indexes": {
         "przilla_session_token_unique": {
           "name": "przilla_session_token_unique",
-          "columns": [
-            "token"
-          ],
+          "columns": ["token"],
           "isUnique": true
         }
       },
@@ -389,12 +363,8 @@
           "name": "przilla_session_user_id_przilla_user_id_fk",
           "tableFrom": "przilla_session",
           "tableTo": "przilla_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
@@ -458,9 +428,7 @@
       "indexes": {
         "przilla_user_email_unique": {
           "name": "przilla_user_email_unique",
-          "columns": [
-            "email"
-          ],
+          "columns": ["email"],
           "isUnique": true
         }
       },
@@ -497,16 +465,12 @@
       "indexes": {
         "favorite_user_id_idx": {
           "name": "favorite_user_id_idx",
-          "columns": [
-            "user_id"
-          ],
+          "columns": ["user_id"],
           "isUnique": false
         },
         "favorite_wod_id_idx": {
           "name": "favorite_wod_id_idx",
-          "columns": [
-            "wod_id"
-          ],
+          "columns": ["wod_id"],
           "isUnique": false
         }
       },
@@ -515,12 +479,8 @@
           "name": "przilla_user_favorite_wod_user_id_przilla_user_id_fk",
           "tableFrom": "przilla_user_favorite_wod",
           "tableTo": "przilla_user",
-          "columnsFrom": [
-            "user_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["user_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -528,22 +488,15 @@
           "name": "przilla_user_favorite_wod_wod_id_przilla_wod_id_fk",
           "tableFrom": "przilla_user_favorite_wod",
           "tableTo": "przilla_wod",
-          "columnsFrom": [
-            "wod_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["wod_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "przilla_user_favorite_wod_user_id_wod_id_pk": {
-          "columns": [
-            "user_id",
-            "wod_id"
-          ],
+          "columns": ["user_id", "wod_id"],
           "name": "przilla_user_favorite_wod_user_id_wod_id_pk"
         }
       },
@@ -598,9 +551,7 @@
       "indexes": {
         "verification_identifier_idx": {
           "name": "verification_identifier_idx",
-          "columns": [
-            "identifier"
-          ],
+          "columns": ["identifier"],
           "isUnique": false
         }
       },
@@ -629,16 +580,12 @@
       "indexes": {
         "wod_movement_wod_id_idx": {
           "name": "wod_movement_wod_id_idx",
-          "columns": [
-            "wod_id"
-          ],
+          "columns": ["wod_id"],
           "isUnique": false
         },
         "wod_movement_movement_id_idx": {
           "name": "wod_movement_movement_id_idx",
-          "columns": [
-            "movement_id"
-          ],
+          "columns": ["movement_id"],
           "isUnique": false
         }
       },
@@ -647,12 +594,8 @@
           "name": "przilla_wod_movement_wod_id_przilla_wod_id_fk",
           "tableFrom": "przilla_wod_movement",
           "tableTo": "przilla_wod",
-          "columnsFrom": [
-            "wod_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["wod_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         },
@@ -660,22 +603,15 @@
           "name": "przilla_wod_movement_movement_id_przilla_movement_id_fk",
           "tableFrom": "przilla_wod_movement",
           "tableTo": "przilla_movement",
-          "columnsFrom": [
-            "movement_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["movement_id"],
+          "columnsTo": ["id"],
           "onDelete": "cascade",
           "onUpdate": "no action"
         }
       },
       "compositePrimaryKeys": {
         "przilla_wod_movement_wod_id_movement_id_pk": {
-          "columns": [
-            "wod_id",
-            "movement_id"
-          ],
+          "columns": ["wod_id", "movement_id"],
           "name": "przilla_wod_movement_wod_id_movement_id_pk"
         }
       },
@@ -791,23 +727,17 @@
       "indexes": {
         "przilla_wod_wod_name_unique": {
           "name": "przilla_wod_wod_name_unique",
-          "columns": [
-            "wod_name"
-          ],
+          "columns": ["wod_name"],
           "isUnique": true
         },
         "wod_name_idx": {
           "name": "wod_name_idx",
-          "columns": [
-            "wod_name"
-          ],
+          "columns": ["wod_name"],
           "isUnique": false
         },
         "category_idx": {
           "name": "category_idx",
-          "columns": [
-            "category"
-          ],
+          "columns": ["category"],
           "isUnique": false
         }
       },

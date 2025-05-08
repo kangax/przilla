@@ -11,7 +11,11 @@ export const HighlightMatch: React.FC<{ text: string; highlight: string }> =
     // If highlight is quoted, pass the unquoted phrase to createSearchPattern
     let pattern: string;
     const trimmed = highlight.trim();
-    if (trimmed.length > 1 && trimmed.startsWith('"') && trimmed.endsWith('"')) {
+    if (
+      trimmed.length > 1 &&
+      trimmed.startsWith('"') &&
+      trimmed.endsWith('"')
+    ) {
       // Remove quotes for pattern creation
       pattern = createSearchPattern(trimmed, false);
     } else {

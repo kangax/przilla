@@ -101,7 +101,9 @@ async function main() {
       console.log(`Processing WOD: ${wod.wodName} (Prod DB ID: ${dbWod.id})`);
       // *** END ADDED LOGGING ***
     } catch (error) {
-      console.error(`Error fetching WOD from DB: ${wod.wodName}. Error: ${error}`);
+      console.error(
+        `Error fetching WOD from DB: ${wod.wodName}. Error: ${error}`,
+      );
       continue;
     }
 

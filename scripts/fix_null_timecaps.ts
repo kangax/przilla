@@ -15,7 +15,10 @@ try {
   }
   const client = createClient({ url: DATABASE_URL });
   db = drizzle(client, { schema });
-  console.log("Database connection established. Connecting to DB:", DATABASE_URL);
+  console.log(
+    "Database connection established. Connecting to DB:",
+    DATABASE_URL,
+  );
 } catch (error) {
   console.error("Failed to connect to the database:", error);
   process.exit(1);
@@ -34,7 +37,9 @@ async function fixNullTimecaps() {
   console.log(chalk.blue(`Found ${nullCount} WOD(s) with null timecap.`));
 
   if (nullCount === 0) {
-    console.log(chalk.green("No WODs with null timecap found. No update needed."));
+    console.log(
+      chalk.green("No WODs with null timecap found. No update needed."),
+    );
     return;
   }
 
@@ -51,9 +56,15 @@ async function fixNullTimecaps() {
   });
   const afterCount = afterUpdate.length;
 
-  console.log(chalk.green(`Updated ${nullCount} WOD(s) with null timecap to 0.`));
+  console.log(
+    chalk.green(`Updated ${nullCount} WOD(s) with null timecap to 0.`),
+  );
   if (afterCount > 0) {
-    console.log(chalk.red(`Warning: ${afterCount} WOD(s) still have null timecap after update.`));
+    console.log(
+      chalk.red(
+        `Warning: ${afterCount} WOD(s) still have null timecap after update.`,
+      ),
+    );
   } else {
     console.log(chalk.green("All WODs now have non-null timecap."));
   }

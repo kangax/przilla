@@ -99,7 +99,11 @@ async function main() {
 // --- Export Logic ---
 async function exportScores() {
   console.log("Looking up user by email...");
-  const userRow = await db.select().from(user).where(eq(user.email, USER_EMAIL)).limit(1);
+  const userRow = await db
+    .select()
+    .from(user)
+    .where(eq(user.email, USER_EMAIL))
+    .limit(1);
   if (!userRow || userRow.length === 0) {
     console.error(`❌ Error: User with email '${USER_EMAIL}' not found.`);
     process.exit(1);
@@ -159,7 +163,11 @@ async function importScores() {
     process.exit(1);
   }
   console.log("Looking up user by email...");
-  const userRow = await db.select().from(user).where(eq(user.email, USER_EMAIL)).limit(1);
+  const userRow = await db
+    .select()
+    .from(user)
+    .where(eq(user.email, USER_EMAIL))
+    .limit(1);
   if (!userRow || userRow.length === 0) {
     console.error(`❌ Error: User with email '${USER_EMAIL}' not found.`);
     process.exit(1);
@@ -169,9 +177,14 @@ async function importScores() {
 
   // Delete all existing scores for this user before import
   try {
-    const existingScores = await db.select().from(scores).where(eq(scores.userId, userId));
+    const existingScores = await db
+      .select()
+      .from(scores)
+      .where(eq(scores.userId, userId));
     const deleted = await db.delete(scores).where(eq(scores.userId, userId));
-    console.log(`🗑️  Deleted ${existingScores.length} existing scores for user before import.`);
+    console.log(
+      `🗑️  Deleted ${existingScores.length} existing scores for user before import.`,
+    );
   } catch (err) {
     console.error(`❌ Error deleting existing scores for user:`, err);
     process.exit(1);
@@ -195,8 +208,12 @@ async function importScores() {
   let wodUrlToId: Record<string, string> = {};
   let wodNameToIds: Record<string, string[]> = {};
   try {
-    const allWods = await db.select({ id: wods.id, wodUrl: wods.wodUrl, wodName: wods.wodName }).from(wods);
-    wodUrlToId = Object.fromEntries(allWods.filter(w => w.wodUrl).map((w) => [w.wodUrl, w.id]));
+    const allWods = await db
+      .select({ id: wods.id, wodUrl: wods.wodUrl, wodName: wods.wodName })
+      .from(wods);
+    wodUrlToId = Object.fromEntries(
+      allWods.filter((w) => w.wodUrl).map((w) => [w.wodUrl, w.id]),
+    );
     for (const w of allWods) {
       if (!wodNameToIds[w.wodName]) wodNameToIds[w.wodName] = [];
       wodNameToIds[w.wodName].push(w.id);
@@ -208,7 +225,10 @@ async function importScores() {
   }
 
   // Process and insert
-  let processed = 0, inserted = 0, skipped = 0, errors = 0;
+  let processed = 0,
+    inserted = 0,
+    skipped = 0,
+    errors = 0;
   for (const row of csvRows) {
     processed++;
     const wodUrl = row.wodUrl;
@@ -219,21 +239,29 @@ async function importScores() {
     } else if (wodName && wodNameToIds[wodName]) {
       if (wodNameToIds[wodName].length === 1) {
         wodId = wodNameToIds[wodName][0];
-        console.warn(`⚠️  Row ${processed}: Matched by wodName '${wodName}' (no url).`);
+        console.warn(
+          `⚠️  Row ${processed}: Matched by wodName '${wodName}' (no url).`,
+        );
       } else {
-        console.warn(`⚠️  Skipping row ${processed}: Multiple WODs found with name '${wodName}'.`);
+        console.warn(
+          `⚠️  Skipping row ${processed}: Multiple WODs found with name '${wodName}'.`,
+        );
         skipped++;
         continue;
       }
     } else {
-      console.warn(`⚠️  Skipping row ${processed}: WOD not found by url or name (url: '${wodUrl}', name: '${wodName}').`);
+      console.warn(
+        `⚠️  Skipping row ${processed}: WOD not found by url or name (url: '${wodUrl}', name: '${wodName}').`,
+      );
       skipped++;
       continue;
     }
     // Defensive: parse/validate fields
     let scoreDateNum = Number(row.scoreDate);
     if (isNaN(scoreDateNum)) {
-      console.warn(`⚠️  Skipping row ${processed}: Invalid scoreDate '${row.scoreDate}'.`);
+      console.warn(
+        `⚠️  Skipping row ${processed}: Invalid scoreDate '${row.scoreDate}'.`,
+      );
       skipped++;
       continue;
     }
@@ -247,7 +275,9 @@ async function importScores() {
       time_seconds: row.time_seconds ? Number(row.time_seconds) : null,
       reps: row.reps ? Number(row.reps) : null,
       load: row.load ? Number(row.load) : null,
-      rounds_completed: row.rounds_completed ? Number(row.rounds_completed) : null,
+      rounds_completed: row.rounds_completed
+        ? Number(row.rounds_completed)
+        : null,
       partial_reps: row.partial_reps ? Number(row.partial_reps) : null,
     };
     // Insert unless dry-run
@@ -255,13 +285,17 @@ async function importScores() {
       try {
         await db.insert(scores).values(scoreData);
         inserted++;
-        console.log(`✅ Inserted score for WOD '${wodUrl || wodName}' (row ${processed})`);
+        console.log(
+          `✅ Inserted score for WOD '${wodUrl || wodName}' (row ${processed})`,
+        );
       } catch (err) {
         console.error(`❌ Error inserting row ${processed}:`, err);
         errors++;
       }
     } else {
-      console.log(`[DRY RUN] Would insert score for WOD '${wodUrl || wodName}' (row ${processed})`);
+      console.log(
+        `[DRY RUN] Would insert score for WOD '${wodUrl || wodName}' (row ${processed})`,
+      );
       inserted++;
     }
   }

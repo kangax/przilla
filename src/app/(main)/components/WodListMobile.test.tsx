@@ -1,8 +1,9 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+// Import render (aliased from customRender) from test-utils
+import { screen, fireEvent, waitFor, render } from "~/test-utils";
 import { WodListMobile } from "./WodListMobile";
 import type { Wod, Score } from "~/types/wodTypes";
-import { ToastProvider } from "../../../components/ToastProvider";
+// ToastProvider is included in customRender's AllTheProviders
 
 // Use Vitest mocking API
 import { vi } from "vitest";
@@ -51,30 +52,7 @@ vi.mock("./LogScoreForm", () => ({
   ),
 }));
 
-// Mock tRPC deleteScore mutation
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-vi.mock("../../../trpc/react", () => {
-  return {
-    api: {
-      useUtils: () => ({
-        score: {
-          getAllByUser: { invalidate: vi.fn() },
-        },
-      }),
-      score: {
-        deleteScore: {
-          useMutation: (options: { onSuccess?: () => void } = {}) => ({
-            // The real mutation API expects options.onSuccess in the mutation options, not mutate param
-            mutate: () => {
-              if (typeof options.onSuccess === "function") options.onSuccess();
-            },
-            status: "idle",
-          }),
-        },
-      },
-    },
-  };
-});
+// No local tRPC mock here - using global mock from vitest.setup.ts
 
 const now = new Date();
 
@@ -124,11 +102,7 @@ const specialNote = "Great job! 💪🔥 <b>Bold</b> & *markdown*";
 
 describe("WodListMobile", () => {
   it("renders WOD and allows logging a new score", () => {
-    render(
-      <ToastProvider>
-        <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />
-      </ToastProvider>,
-    );
+    render(<WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />);
     expect(screen.getByText("Fran")).toBeInTheDocument();
 
     // Expand the card
@@ -149,23 +123,21 @@ describe("WodListMobile", () => {
   it("updates UI after logging a new score", async () => {
     // Start with no scores
     const { rerender } = render(
-      <ToastProvider>
-        <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />
-      </ToastProvider>,
+      <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />,
     );
     fireEvent.click(screen.getByText("Fran"));
     fireEvent.click(screen.getByText("Log score"));
     // Simulate logging a new score (onScoreLogged)
     fireEvent.click(screen.getByText("Submit"));
     // Rerender with new score
+    // Note: Rerendering might not be necessary if using customRender which includes QueryClientProvider
+    // Let's keep it for now, but might remove if tests pass without it.
     rerender(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [mockScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
     );
     // Wait for the new score to appear
     expect(await screen.findByText("3:00 Rx")).toBeInTheDocument();
@@ -173,13 +145,11 @@ describe("WodListMobile", () => {
 
   it("renders existing score and allows editing", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [mockScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
     );
     expect(screen.getByText("Fran")).toBeInTheDocument();
 
@@ -204,13 +174,11 @@ describe("WodListMobile", () => {
     // Start with an existing score
     const updatedScore = { ...mockScore, time_seconds: 200, isRx: false };
     const { rerender } = render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [mockScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
     );
     fireEvent.click(screen.getByText("Fran"));
     fireEvent.click(screen.getByLabelText("Edit score"));
@@ -218,13 +186,11 @@ describe("WodListMobile", () => {
     fireEvent.click(screen.getByText("Submit"));
     // Rerender with updated score
     rerender(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [updatedScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [updatedScore] }}
+        searchTerm=""
+      />,
     );
     // Wait for the updated score to appear (should be "3:20" and not Rx)
     expect(
@@ -236,13 +202,11 @@ describe("WodListMobile", () => {
 
   it("shows and cancels delete confirmation dialog", async () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [mockScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
     );
     // Expand the card
     fireEvent.click(screen.getByText("Fran"));
@@ -266,13 +230,11 @@ describe("WodListMobile", () => {
 
   it("confirms delete and closes dialog", async () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [mockScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
     );
     // Expand the card
     fireEvent.click(screen.getByText("Fran"));
@@ -294,13 +256,11 @@ describe("WodListMobile", () => {
 
   it("closes drawer on cancel", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [mockScore] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [mockScore] }}
+        searchTerm=""
+      />,
     );
     // Expand the card
     fireEvent.click(screen.getByText("Fran"));
@@ -319,13 +279,11 @@ describe("WodListMobile", () => {
   it("highlights search term in WOD name, tags, and description, and auto-expands card", () => {
     const wodWithTag = { ...mockWod, tags: ["For Time", "Chipper"] };
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[wodWithTag]}
-          scoresByWodId={{}}
-          searchTerm="fran"
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[wodWithTag]}
+        scoresByWodId={{}}
+        searchTerm="fran"
+      />,
     );
     // Card should be auto-expanded (description visible)
     expect(screen.getByText(/Thrusters and Pull-ups/)).toBeInTheDocument();
@@ -336,26 +294,22 @@ describe("WodListMobile", () => {
 
     // Tag should be highlighted if matches
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[wodWithTag]}
-          scoresByWodId={{}}
-          searchTerm="chipper"
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[wodWithTag]}
+        scoresByWodId={{}}
+        searchTerm="chipper"
+      />,
     );
     const highlightedTag = screen.getByText("Chipper", { selector: "mark" });
     expect(highlightedTag).toBeInTheDocument();
 
     // Description should be highlighted if matches
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{}}
-          searchTerm="thrusters"
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{}}
+        searchTerm="thrusters"
+      />,
     );
     const highlightedDesc = screen.getByText(/Thrusters/i, {
       selector: "mark",
@@ -367,13 +321,11 @@ describe("WodListMobile", () => {
 
   it("renders score notes", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [{ ...mockScore, notes: "Felt great" }] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: "Felt great" }] }}
+        searchTerm=""
+      />,
     );
     fireEvent.click(screen.getByText("Fran"));
     expect(screen.getByText("Felt great")).toBeInTheDocument();
@@ -381,13 +333,11 @@ describe("WodListMobile", () => {
 
   it("renders long score notes", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [{ ...mockScore, notes: longNote }] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: longNote }] }}
+        searchTerm=""
+      />,
     );
     fireEvent.click(screen.getByText("Fran"));
     // Use a partial match to avoid issues with truncation or formatting
@@ -398,13 +348,11 @@ describe("WodListMobile", () => {
 
   it("renders score notes with special characters", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [{ ...mockScore, notes: specialNote }] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: specialNote }] }}
+        searchTerm=""
+      />,
     );
     fireEvent.click(screen.getByText("Fran"));
     expect(screen.getByText(specialNote)).toBeInTheDocument();
@@ -412,13 +360,11 @@ describe("WodListMobile", () => {
 
   it("handles absence of score notes (null)", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [{ ...mockScore, notes: null }] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: null }] }}
+        searchTerm=""
+      />,
     );
     fireEvent.click(screen.getByText("Fran"));
     // Should not render an empty <p> for notes
@@ -431,13 +377,11 @@ describe("WodListMobile", () => {
 
   it("handles absence of score notes (empty string)", () => {
     render(
-      <ToastProvider>
-        <WodListMobile
-          wods={[mockWod]}
-          scoresByWodId={{ wod1: [{ ...mockScore, notes: "" }] }}
-          searchTerm=""
-        />
-      </ToastProvider>,
+      <WodListMobile
+        wods={[mockWod]}
+        scoresByWodId={{ wod1: [{ ...mockScore, notes: "" }] }}
+        searchTerm=""
+      />,
     );
     fireEvent.click(screen.getByText("Fran"));
     expect(
@@ -450,11 +394,7 @@ describe("WodListMobile", () => {
   // --- BASIC RESPONSIVE LAYOUT TEST (MOBILE ELEMENTS) ---
 
   it("renders mobile-specific elements (Drawer, card layout)", () => {
-    render(
-      <ToastProvider>
-        <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />
-      </ToastProvider>,
-    );
+    render(<WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />);
     // Card layout should be present
     expect(screen.getByText("Fran")).toBeInTheDocument();
     // Drawer should not be open initially

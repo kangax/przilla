@@ -4,6 +4,7 @@ import { db } from "~/server/db";
 import { userFavoriteWods } from "~/server/db/schema";
 import { TRPCError } from "@trpc/server";
 import { eq, and } from "drizzle-orm";
+import { getFavoriteWodIdsByUser } from "./favoriteUtils";
 
 export const favoriteRouter = createTRPCRouter({
   add: protectedProcedure
@@ -76,14 +77,8 @@ export const favoriteRouter = createTRPCRouter({
     }),
 
   getWodIdsByUser: protectedProcedure.query(async ({ ctx }) => {
-    const userId = ctx.session.user.id;
     try {
-      const favorites = await db
-        .select({ wodId: userFavoriteWods.wodId })
-        .from(userFavoriteWods)
-        .where(eq(userFavoriteWods.userId, userId));
-
-      return favorites.map((fav) => fav.wodId);
+      return await getFavoriteWodIdsByUser(ctx);
     } catch (error) {
       console.error("Failed to get favorite WOD IDs:", error);
       throw new TRPCError({

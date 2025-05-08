@@ -5,9 +5,8 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
-import { createCaller } from "~/server/api/root"; // For internal calls
-import { appRouter } from "~/server/api/root"; // For internal calls type
 import { wods, scores, userFavoriteWods } from "~/server/db/schema";
+import { getFavoriteWodIdsByUser } from "./favoriteUtils";
 import {
   type Wod,
   type Score,
@@ -47,13 +46,7 @@ export const wodRouter = createTRPCRouter({
       let favoriteWodIds: string[] = [];
       if (ctx.session?.user) {
         try {
-          // Create a caller with the current context
-          // Note: This direct use of appRouter might lead to circular dependencies if not careful.
-          // A more robust way might be to pass ctx to a direct function call if possible,
-          // or ensure routers are structured to avoid this.
-          // For now, proceeding as per "internal call" interpretation.
-          const caller = createCaller(ctx);
-          favoriteWodIds = await caller.favorite.getWodIdsByUser();
+          favoriteWodIds = await getFavoriteWodIdsByUser(ctx);
         } catch (error) {
           console.error(
             "Failed to fetch favorite WOD IDs in wod.getAll:",

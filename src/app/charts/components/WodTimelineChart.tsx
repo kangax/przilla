@@ -26,22 +26,8 @@ import {
 import { formatScore, getPerformanceLevelColor } from "~/utils/wodUtils"; // Import formatScore and getPerformanceLevelColor
 import { type Score } from "~/types/wodTypes"; // Import Score type
 
-// Define the structure for individual scores (matching page.tsx and backend)
-// Updated to include difficulty and adjusted level details
-type MonthlyScoreDetail = {
-  wodName: string;
-  level: number; // The original calculated level (0-4) for this score
-  difficulty: string | null; // WOD difficulty string
-  difficultyMultiplier: number; // Corresponding multiplier
-  adjustedLevel: number; // level * difficultyMultiplier
-  // Raw score fields for formatting in tooltip
-  time_seconds: number | null;
-  reps: number | null;
-  load: number | null;
-  rounds_completed: number | null;
-  partial_reps: number | null;
-  is_rx: boolean | null;
-};
+// Use shared MonthlyScoreDetail type from ~/types/wodTypes
+import type { MonthlyScoreDetail, Benchmarks } from "~/types/wodTypes";
 
 // Define the structure for timeline data points
 type FrequencyDataPoint = {
@@ -241,7 +227,38 @@ const CustomTimelineTooltip = ({
                       createdAt: new Date(), // Not needed for formatting
                       updatedAt: null, // Not needed for formatting
                     };
-                    const formattedScoreValue = formatScore(scoreObject);
+                    // Create a minimal Wod object for formatting, using server-provided benchType
+                    const minimalWod = {
+                      id: "",
+                      wodName: score.wodName || "",
+                      wodUrl: "",
+                      createdAt: new Date(),
+                      updatedAt: new Date(),
+                      description: "",
+                      category:
+                        "Benchmark" as import("~/types/wodTypes").Wod["category"],
+                      tags: [],
+                      difficulty: score.difficulty || "",
+                      difficultyExplanation: "",
+                      countLikes: 0,
+                      movements: [],
+                      timecap: 0,
+                      benchmarks: score.benchType
+                        ? {
+                            type: score.benchType,
+                            levels: {
+                              elite: { min: null, max: null },
+                              advanced: { min: null, max: null },
+                              intermediate: { min: null, max: null },
+                              beginner: { min: null, max: null },
+                            },
+                          }
+                        : null,
+                    };
+                    const formattedScoreValue = formatScore(
+                      scoreObject,
+                      minimalWod,
+                    );
                     const originalDescriptiveLevel = getDescriptiveLevel(
                       score.level,
                     );

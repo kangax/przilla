@@ -1,10 +1,11 @@
 import { eq } from "drizzle-orm";
 import { userFavoriteWods } from "~/server/db/schema";
+import { type db as mainDb } from "~/server/db/index";
 
 export async function getFavoriteWodIdsByUser(ctx: {
-  db: any;
+  db: typeof mainDb;
   session: { user: { id: string } };
-}) {
+}): Promise<string[]> {
   const userId = ctx.session.user.id;
   const favorites = await ctx.db
     .select({ wodId: userFavoriteWods.wodId })

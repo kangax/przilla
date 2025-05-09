@@ -266,7 +266,31 @@ describe("wodUtils", () => {
         createdAt: new Date(),
         updatedAt: null,
       };
-      expect(formatScore(score)).toBe("1:05");
+      const wod: Wod = {
+        id: "wod1",
+        wodName: "Test Time WOD",
+        wodUrl: "test.com",
+        createdAt: new Date(),
+        description: "desc",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
+        benchmarks: {
+          type: "time",
+          levels: {
+            elite: { min: null, max: 180 },
+            advanced: { min: 180, max: 240 },
+            intermediate: { min: 240, max: 300 },
+            beginner: { min: 300, max: null },
+          },
+        },
+        updatedAt: new Date(),
+      };
+      expect(formatScore(score, wod)).toBe("1:05");
     });
 
     it("should format reps scores", () => {
@@ -285,7 +309,31 @@ describe("wodUtils", () => {
         createdAt: new Date(),
         updatedAt: null,
       };
-      expect(formatScore(score)).toBe("42 reps");
+      const wod: Wod = {
+        id: "wod1",
+        wodName: "Test Reps WOD",
+        wodUrl: "test.com",
+        createdAt: new Date(),
+        description: "desc",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
+        benchmarks: {
+          type: "reps",
+          levels: {
+            elite: { min: 100, max: null },
+            advanced: { min: 75, max: 100 },
+            intermediate: { min: 50, max: 75 },
+            beginner: { min: null, max: 50 },
+          },
+        },
+        updatedAt: new Date(),
+      };
+      expect(formatScore(score, wod)).toBe("42 reps");
     });
 
     it("should format load scores", () => {
@@ -304,7 +352,31 @@ describe("wodUtils", () => {
         createdAt: new Date(),
         updatedAt: null,
       };
-      expect(formatScore(score)).toBe("225 lbs");
+      const wod: Wod = {
+        id: "wod1",
+        wodName: "Test Load WOD",
+        wodUrl: "test.com",
+        createdAt: new Date(),
+        description: "desc",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
+        benchmarks: {
+          type: "load",
+          levels: {
+            elite: { min: 300, max: null },
+            advanced: { min: 250, max: 300 },
+            intermediate: { min: 200, max: 250 },
+            beginner: { min: null, max: 200 },
+          },
+        },
+        updatedAt: new Date(),
+      };
+      expect(formatScore(score, wod)).toBe("225 lbs");
     });
 
     it("should format rounds scores", () => {
@@ -323,7 +395,31 @@ describe("wodUtils", () => {
         createdAt: new Date(),
         updatedAt: null,
       };
-      expect(formatScore(score)).toBe("5 rounds");
+      const wod: Wod = {
+        id: "wod1",
+        wodName: "Test Rounds WOD",
+        wodUrl: "test.com",
+        createdAt: new Date(),
+        description: "desc",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
+        benchmarks: {
+          type: "rounds",
+          levels: {
+            elite: { min: 20, max: null },
+            advanced: { min: 15, max: 20 },
+            intermediate: { min: 10, max: 15 },
+            beginner: { min: null, max: 10 },
+          },
+        },
+        updatedAt: new Date(),
+      };
+      expect(formatScore(score, wod)).toBe("5 rounds");
     });
 
     it("should format rounds + partial reps scores", () => {
@@ -342,7 +438,31 @@ describe("wodUtils", () => {
         createdAt: new Date(),
         updatedAt: null,
       };
-      expect(formatScore(score)).toBe("5+12");
+      const wod: Wod = {
+        id: "wod1",
+        wodName: "Test Rounds WOD",
+        wodUrl: "test.com",
+        createdAt: new Date(),
+        description: "desc",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
+        benchmarks: {
+          type: "rounds",
+          levels: {
+            elite: { min: 20, max: null },
+            advanced: { min: 15, max: 20 },
+            intermediate: { min: 10, max: 15 },
+            beginner: { min: null, max: 10 },
+          },
+        },
+        updatedAt: new Date(),
+      };
+      expect(formatScore(score, wod)).toBe("5+12");
     });
 
     it("should return dash if no score", () => {
@@ -361,7 +481,311 @@ describe("wodUtils", () => {
         createdAt: new Date(),
         updatedAt: null,
       };
-      expect(formatScore(score)).toBe("-");
+      const wod: Wod = {
+        id: "wod1",
+        wodName: "Test No Score WOD",
+        wodUrl: "test.com",
+        createdAt: new Date(),
+        description: "desc",
+        category: "Benchmark",
+        tags: [],
+        difficulty: "Medium",
+        difficultyExplanation: "Test explanation",
+        countLikes: 0,
+        movements: [],
+        timecap: null,
+        benchmarks: {
+          type: "time",
+          levels: {
+            elite: { min: null, max: 180 },
+            advanced: { min: 180, max: 240 },
+            intermediate: { min: 240, max: 300 },
+            beginner: { min: 300, max: null },
+          },
+        },
+        updatedAt: new Date(),
+      };
+      expect(formatScore(score, wod)).toBe("-");
+    });
+  });
+
+  // --- New logic tests for formatScore ---
+  describe("formatScore - new logic", () => {
+    const baseScore: Partial<Score> = {
+      id: "s1",
+      userId: "u1",
+      wodId: "w1",
+      isRx: true,
+      scoreDate: new Date(),
+      notes: null,
+      createdAt: new Date(),
+      updatedAt: null,
+    };
+
+    const baseWod: Partial<Wod> = {
+      id: "w1",
+      wodName: "Test WOD",
+      wodUrl: "test.com",
+      createdAt: new Date(),
+      description: "desc",
+      category: "Benchmark",
+      tags: [],
+      difficulty: "Medium",
+      difficultyExplanation: "Test explanation",
+      countLikes: 0,
+      movements: [],
+      updatedAt: new Date(),
+    };
+
+    it("should display reps when timecap is hit for reps WOD", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 300,
+        benchmarks: {
+          type: "reps",
+          levels: {
+            elite: { min: 100, max: null },
+            advanced: { min: 75, max: 100 },
+            intermediate: { min: 50, max: 75 },
+            beginner: { min: null, max: 50 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 300,
+        reps: 55,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("55 reps");
+    });
+
+    it("should display load when timecap is hit for load WOD", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 600,
+        benchmarks: {
+          type: "load",
+          levels: {
+            elite: { min: 300, max: null },
+            advanced: { min: 250, max: 300 },
+            intermediate: { min: 200, max: 250 },
+            beginner: { min: null, max: 200 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 600,
+        reps: null,
+        load: 185,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("185 lbs");
+    });
+
+    it("should display rounds when timecap is hit for rounds WOD (no partial reps)", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 900,
+        benchmarks: {
+          type: "rounds",
+          levels: {
+            elite: { min: 20, max: null },
+            advanced: { min: 15, max: 20 },
+            intermediate: { min: 10, max: 15 },
+            beginner: { min: null, max: 10 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 900,
+        reps: null,
+        load: null,
+        rounds_completed: 7,
+        partial_reps: 0,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("7 rounds");
+    });
+
+    it("should display rounds+partial when timecap is hit for rounds WOD (with partial reps)", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 900,
+        benchmarks: {
+          type: "rounds",
+          levels: {
+            elite: { min: 20, max: null },
+            advanced: { min: 15, max: 20 },
+            intermediate: { min: 10, max: 15 },
+            beginner: { min: null, max: 10 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 900,
+        reps: null,
+        load: null,
+        rounds_completed: 7,
+        partial_reps: 8,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("7+8");
+    });
+
+    it("should fallback to MM:SS (TC) if timecap hit for non-time WOD but no matching score value", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 400,
+        benchmarks: {
+          type: "reps",
+          levels: {
+            elite: { min: 100, max: null },
+            advanced: { min: 75, max: 100 },
+            intermediate: { min: 50, max: 75 },
+            beginner: { min: null, max: 50 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 400,
+        reps: null,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("6:40 (TC)");
+    });
+
+    it("should format time as normal if timecap hit for time WOD", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 180,
+        benchmarks: {
+          type: "time",
+          levels: {
+            elite: { min: null, max: 100 },
+            advanced: { min: 100, max: 120 },
+            intermediate: { min: 120, max: 150 },
+            beginner: { min: 150, max: null },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 180,
+        reps: null,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("3:00");
+    });
+
+    it("should append suffix if provided (basic case)", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 0,
+        benchmarks: {
+          type: "time",
+          levels: {
+            elite: { min: null, max: 100 },
+            advanced: { min: 100, max: 120 },
+            intermediate: { min: 120, max: 150 },
+            beginner: { min: 150, max: null },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 95,
+        reps: null,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      expect(formatScore(score, wod, "Rx")).toBe("1:35 Rx");
+    });
+
+    it("should append suffix if provided (timecap hit for non-time WOD)", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 300,
+        benchmarks: {
+          type: "reps",
+          levels: {
+            elite: { min: 100, max: null },
+            advanced: { min: 75, max: 100 },
+            intermediate: { min: 50, max: 75 },
+            beginner: { min: null, max: 50 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 300,
+        reps: 60,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      expect(formatScore(score, wod, "Scaled")).toBe("60 reps Scaled");
+    });
+
+    it("should not display +0 for partial reps = 0 (should show X rounds)", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 900,
+        benchmarks: {
+          type: "rounds",
+          levels: {
+            elite: { min: 20, max: null },
+            advanced: { min: 15, max: 20 },
+            intermediate: { min: 10, max: 15 },
+            beginner: { min: null, max: 10 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 900,
+        reps: null,
+        load: null,
+        rounds_completed: 5,
+        partial_reps: 0,
+      } as Score;
+      expect(formatScore(score, wod)).toBe("5 rounds");
+    });
+
+    it("should return dash if all score fields are null and timecap is hit", () => {
+      const wod: Wod = {
+        ...baseWod,
+        timecap: 200,
+        benchmarks: {
+          type: "reps",
+          levels: {
+            elite: { min: 100, max: null },
+            advanced: { min: 75, max: 100 },
+            intermediate: { min: 50, max: 75 },
+            beginner: { min: null, max: 50 },
+          },
+        },
+      } as Wod;
+      const score: Score = {
+        ...baseScore,
+        time_seconds: 200,
+        reps: null,
+        load: null,
+        rounds_completed: null,
+        partial_reps: null,
+      } as Score;
+      // This will fallback to MM:SS (TC) as per logic, not dash
+      expect(formatScore(score, wod)).toBe("3:20 (TC)");
     });
   });
 

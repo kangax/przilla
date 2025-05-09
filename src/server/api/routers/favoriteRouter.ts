@@ -76,15 +76,17 @@ export const favoriteRouter = createTRPCRouter({
       }
     }),
 
-  getWodIdsByUser: protectedProcedure.query(async ({ ctx }) => {
-    try {
-      return await getFavoriteWodIdsByUser(ctx);
-    } catch (error) {
-      console.error("Failed to get favorite WOD IDs:", error);
-      throw new TRPCError({
-        code: "INTERNAL_SERVER_ERROR",
-        message: "Failed to retrieve favorite WOD IDs.",
-      });
-    }
-  }),
+  getWodIdsByUser: protectedProcedure.query(
+    async ({ ctx }): Promise<string[]> => {
+      try {
+        return await getFavoriteWodIdsByUser(ctx);
+      } catch (error) {
+        console.error("Failed to get favorite WOD IDs:", error);
+        throw new TRPCError({
+          code: "INTERNAL_SERVER_ERROR",
+          message: "Failed to retrieve favorite WOD IDs.",
+        });
+      }
+    },
+  ),
 });

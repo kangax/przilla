@@ -198,25 +198,60 @@ export const getPerformanceBadgeDetails = (
 };
 
 /**
- * Formats a Score object into a displayable score string based on available fields.
+ * Formats a Score object into a displayable score string based on available fields and WOD context.
+ * Handles timecap edge cases: if the timecap was hit for a non-time WOD, displays reps/load/rounds instead of time.
  * Optionally appends a suffix (e.g., "Rx" or "Scaled").
+ * @param score The Score object to format.
+ * @param wod The Wod object for context (type, timecap).
+ * @param suffix Optional string to append (e.g., "Rx", "Scaled").
+ * @returns Formatted score string.
  */
-export const formatScore = (score: Score, suffix?: string): string => {
+export const formatScore = (
+  score: Score,
+  wod: Wod,
+  suffix?: string,
+): string => {
   let value = "-";
-  if (score.time_seconds !== null) {
-    value = formatSecondsToMMSS(score.time_seconds);
-  } else if (score.reps !== null) {
-    value = `${score.reps} reps`;
-  } else if (score.load !== null) {
-    // TODO: Add unit (lbs/kg) based on user preference or WOD context if available
-    value = `${score.load} lbs`;
-  } else if (score.rounds_completed !== null) {
-    if (score.partial_reps !== null && score.partial_reps > 0) {
-      value = `${score.rounds_completed}+${score.partial_reps}`;
+  const isTimeCapHit =
+    wod.timecap && wod.timecap > 0 && score.time_seconds === wod.timecap;
+  const primaryScoreType = wod.benchmarks?.type;
+
+  // If the timecap was hit, prioritize displaying reps/rounds/load based on WOD type
+  if (isTimeCapHit && primaryScoreType !== "time") {
+    if (primaryScoreType === "reps" && score.reps !== null) {
+      value = `${score.reps} reps`;
+    } else if (primaryScoreType === "load" && score.load !== null) {
+      value = `${score.load} lbs`; // Add unit preference later if needed
+    } else if (
+      primaryScoreType === "rounds" &&
+      score.rounds_completed !== null
+    ) {
+      if (score.partial_reps !== null && score.partial_reps > 0) {
+        value = `${score.rounds_completed}+${score.partial_reps}`;
+      } else {
+        value = `${score.rounds_completed} rounds`;
+      }
     } else {
-      value = `${score.rounds_completed} rounds`; // Be explicit for full rounds
+      // Fallback if timecap hit but score type/value mismatch (should ideally not happen with form validation)
+      value = formatSecondsToMMSS(score.time_seconds ?? 0) + " (TC)"; // Indicate timecap was hit
+    }
+  } else {
+    // Original logic: Prioritize based on available score fields
+    if (score.time_seconds !== null) {
+      value = formatSecondsToMMSS(score.time_seconds);
+    } else if (score.reps !== null) {
+      value = `${score.reps} reps`;
+    } else if (score.load !== null) {
+      value = `${score.load} lbs`; // Add unit preference later if needed
+    } else if (score.rounds_completed !== null) {
+      if (score.partial_reps !== null && score.partial_reps > 0) {
+        value = `${score.rounds_completed}+${score.partial_reps}`;
+      } else {
+        value = `${score.rounds_completed} rounds`;
+      }
     }
   }
+
   if (suffix) {
     return `${value} ${suffix}`;
   }

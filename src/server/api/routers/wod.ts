@@ -56,7 +56,7 @@ export const wodRouter = createTRPCRouter({
         }
       }
 
-      const allWodsData = await ctx.db
+      const allWodsData: (typeof wods.$inferSelect)[] = await ctx.db
         .select()
         .from(wods)
         .orderBy(asc(wods.wodName));

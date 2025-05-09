@@ -39,7 +39,7 @@ export const ScoresCell: React.FC<ScoresCellProps> = ({
               score,
             );
             const suffix = score.isRx ? "Rx" : "Scaled";
-            const formattedScore = formatScore(score, suffix);
+            const formattedScore = formatScore(score, wod, suffix);
             const formattedDate = formatShortDate(score.scoreDate);
 
             const tooltipContent = (

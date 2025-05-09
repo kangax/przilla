@@ -282,6 +282,7 @@ export function calculateMonthlyData(
       rounds_completed: data.rounds_completed,
       partial_reps: data.partial_reps,
       is_rx: data.is_rx,
+      benchType: benchmarks?.type,
     });
   });
 

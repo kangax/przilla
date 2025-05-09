@@ -236,7 +236,7 @@ export function WodMobileCard({
                       <div className="flex w-full items-center justify-between">
                         <div className="flex items-center gap-2">
                           <span className="font-semibold text-blue-600 dark:text-blue-400">
-                            {formatScore(score, suffix)}
+                            {formatScore(score, wod, suffix)}
                           </span>
                           <span
                             className={`rounded px-1.5 py-0.5 text-xs font-medium ${colorClass}`}

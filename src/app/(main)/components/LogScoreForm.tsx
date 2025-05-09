@@ -21,6 +21,25 @@ import {
 } from "../../../utils/wodUtils"; // Import helpers
 import { useToast } from "../../../components/ToastProvider";
 
+/**
+ * Returns the correct label for the "No, hit the timecap" radio option based on WOD score type.
+ * @param scoreType The WOD's benchmarks.type ("reps" | "load" | "rounds" | "time" | undefined)
+ */
+function getTimecapNoLabel(scoreType: string | undefined): string {
+  switch (scoreType) {
+    case "reps":
+      return "No, hit the timecap (enter reps)";
+    case "load":
+      return "No, hit the timecap (enter load)";
+    case "rounds":
+      return "No, hit the timecap (enter rounds or rounds+reps)";
+    case "time":
+      return "No, hit the timecap (enter your time)";
+    default:
+      return "No, hit the timecap (enter your score)";
+  }
+}
+
 type ScorePayload = {
   wodId: string;
   scoreDate: Date;
@@ -169,7 +188,7 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
 
   const hasTimecap = typeof wod.timecap === "number" && wod.timecap > 0;
   const timecapFormatted = hasTimecap ? formatTimecap(wod.timecap) : "";
-  const showTimecapRadio = hasTimecap && showTime;
+  const showTimecapRadio = hasTimecap;
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
@@ -219,11 +238,53 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
           return `Time must be less than the time cap (${timecapFormatted}). If you reached the cap, log your score as reps/rounds+reps instead.`;
         }
       } else if (form.finishedWithinTimecap === "no") {
-        if (
-          (!form.reps || parseInt(form.reps, 10) <= 0) &&
-          (!form.rounds_completed || parseInt(form.rounds_completed, 10) < 0)
-        ) {
-          return "Please enter reps or rounds completed.";
+        // Validation for "hit the timecap" should depend on scoreType
+        switch (scoreType) {
+          case "reps":
+            if (!form.reps || parseInt(form.reps, 10) <= 0) {
+              return "Please enter reps completed.";
+            }
+            break;
+          case "rounds":
+            if (
+              !form.rounds_completed ||
+              parseInt(form.rounds_completed, 10) < 0
+            ) {
+              return "Please enter rounds completed (0 or more).";
+            }
+            break;
+          case "load":
+            if (!form.load || parseInt(form.load, 10) <= 0) {
+              return "Please enter a positive load.";
+            }
+            break;
+          case "time":
+            {
+              const min = form.time_minutes
+                ? parseInt(form.time_minutes, 10)
+                : 0;
+              const sec = form.time_seconds
+                ? parseInt(form.time_seconds, 10)
+                : 0;
+              if (
+                min === 0 &&
+                sec === 0 &&
+                !form.time_minutes &&
+                !form.time_seconds
+              ) {
+                return "Please enter a time (minutes or seconds).";
+              }
+            }
+            break;
+          default:
+            if (
+              (!form.reps || parseInt(form.reps, 10) <= 0) &&
+              (!form.rounds_completed ||
+                parseInt(form.rounds_completed, 10) < 0) &&
+              (!form.load || parseInt(form.load, 10) <= 0)
+            ) {
+              return "Please enter a score (reps, rounds, or load).";
+            }
         }
       }
     } else {
@@ -277,13 +338,54 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
             : totalSeconds;
       } else if (form.finishedWithinTimecap === "no") {
         payload.time_seconds = wod.timecap ?? null;
-        payload.reps = form.reps ? parseInt(form.reps, 10) : null;
-        payload.rounds_completed = form.rounds_completed
-          ? parseInt(form.rounds_completed, 10)
-          : null;
-        payload.partial_reps = form.partial_reps
-          ? parseInt(form.partial_reps, 10)
-          : null;
+        switch (scoreType) {
+          case "reps":
+            payload.reps = form.reps ? parseInt(form.reps, 10) : null;
+            break;
+          case "rounds":
+            payload.rounds_completed = form.rounds_completed
+              ? parseInt(form.rounds_completed, 10)
+              : null;
+            payload.partial_reps = form.partial_reps
+              ? parseInt(form.partial_reps, 10)
+              : null;
+            break;
+          case "load":
+            payload.load = form.load ? parseInt(form.load, 10) : null;
+            break;
+          case "time":
+            {
+              const min = form.time_minutes
+                ? parseInt(form.time_minutes, 10)
+                : 0;
+              const sec = form.time_seconds
+                ? parseInt(form.time_seconds, 10)
+                : 0;
+              const totalSeconds =
+                (!isNaN(min) ? min : 0) * 60 + (!isNaN(sec) ? sec : 0);
+              payload.time_seconds =
+                min === 0 &&
+                sec === 0 &&
+                !form.time_minutes &&
+                !form.time_seconds
+                  ? null
+                  : totalSeconds;
+            }
+            break;
+          default:
+            // Fallback: set any present fields
+            if (form.reps) payload.reps = parseInt(form.reps, 10);
+            if (form.rounds_completed)
+              payload.rounds_completed = parseInt(form.rounds_completed, 10);
+            if (form.partial_reps)
+              payload.partial_reps = parseInt(form.partial_reps, 10);
+            if (form.load) payload.load = parseInt(form.load, 10);
+            const min = form.time_minutes ? parseInt(form.time_minutes, 10) : 0;
+            const sec = form.time_seconds ? parseInt(form.time_seconds, 10) : 0;
+            if (min > 0 || sec > 0) {
+              payload.time_seconds = min * 60 + sec;
+            }
+        }
       }
     } else {
       if (showAll || showTime) {
@@ -443,7 +545,7 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
                       htmlFor="finishedWithinTimecap-no"
                       size="2"
                     >
-                      No, hit the timecap (enter reps or rounds+reps)
+                      {getTimecapNoLabel(scoreType)}
                     </Text>
                   </Flex>
                 </Flex>
@@ -493,77 +595,249 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = ({
               </Box>
             </Flex>
           )}
-          {/* Show reps/rounds if hit the timecap, or for AMRAPs/ShowAll */}
-          {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
-            (!showTimecapRadio && (showAll || showReps))) && (
-            <Flex direction="row" gap="2" align="end">
-              {/* Reps Input */}
-              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
-                (!showTimecapRadio && (showAll || showReps))) && (
-                <Box style={{ flexGrow: 1 }}>
-                  <Text as="label" htmlFor="reps" size="1" mb="1">
-                    Reps
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="reps"
-                    name="reps"
-                    type="number"
-                    min={0}
-                    placeholder="Reps"
-                    value={form.reps}
-                    onChange={handleChange}
-                    disabled={!isLoggedIn || submitting}
-                    size="3"
-                    autoComplete="off"
-                  />
-                </Box>
+          {/* Show type-specific input(s) if hit the timecap */}
+          {showTimecapRadio && form.finishedWithinTimecap === "no" && (
+            <>
+              {scoreType === "reps" && (
+                <Flex direction="row" gap="2" align="end">
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="reps" size="1" mb="1">
+                      Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="reps"
+                      name="reps"
+                      type="number"
+                      min={0}
+                      placeholder="Reps"
+                      value={form.reps}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                </Flex>
               )}
-              {/* Rounds Input */}
-              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
-                (!showTimecapRadio && (showAll || showRounds))) && (
-                <Box style={{ flexGrow: 1 }}>
-                  <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
-                    Rounds
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="rounds_completed"
-                    name="rounds_completed"
-                    type="number"
-                    min={0}
-                    placeholder="Rounds"
-                    value={form.rounds_completed}
-                    onChange={handleChange}
-                    disabled={!isLoggedIn || submitting}
-                    size="3"
-                    autoComplete="off"
-                  />
-                </Box>
+              {scoreType === "load" && (
+                <Flex direction="row" gap="2" align="end">
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="load" size="1" mb="1">
+                      Load
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="load"
+                      name="load"
+                      type="number"
+                      min={0}
+                      placeholder="Load"
+                      value={form.load}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                </Flex>
               )}
-              {/* Partial Reps Input */}
-              {((showTimecapRadio && form.finishedWithinTimecap === "no") ||
-                (!showTimecapRadio && (showAll || showPartialReps))) && (
-                <Box style={{ flexGrow: 1 }}>
-                  <Text as="label" htmlFor="partial_reps" size="1" mb="1">
-                    Partial Reps
-                  </Text>
-                  <TextField.Root
-                    variant="classic"
-                    id="partial_reps"
-                    name="partial_reps"
-                    type="number"
-                    min={0}
-                    placeholder="Partial Reps"
-                    value={form.partial_reps}
-                    onChange={handleChange}
-                    disabled={!isLoggedIn || submitting}
-                    size="3"
-                    autoComplete="off"
-                  />
-                </Box>
+              {scoreType === "rounds" && (
+                <Flex direction="row" gap="2" align="end">
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
+                      Rounds
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="rounds_completed"
+                      name="rounds_completed"
+                      type="number"
+                      min={0}
+                      placeholder="Rounds"
+                      value={form.rounds_completed}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="partial_reps" size="1" mb="1">
+                      Partial Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="partial_reps"
+                      name="partial_reps"
+                      type="number"
+                      min={0}
+                      placeholder="Partial Reps"
+                      value={form.partial_reps}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                </Flex>
               )}
-            </Flex>
+              {scoreType === "time" && (
+                <Flex gap="2" align="end">
+                  <Box style={{ width: "165px" }}>
+                    <Text as="label" htmlFor="time_minutes" size="1" mb="1">
+                      Minutes
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="time_minutes"
+                      name="time_minutes"
+                      type="number"
+                      min={0}
+                      placeholder="min"
+                      value={form.time_minutes}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ width: "165px" }}>
+                    <Text as="label" htmlFor="time_seconds" size="1" mb="1">
+                      Seconds
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="time_seconds"
+                      name="time_seconds"
+                      type="number"
+                      min={0}
+                      max={59}
+                      placeholder="sec"
+                      value={form.time_seconds}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                </Flex>
+              )}
+              {/* Fallback: show all if type is unknown */}
+              {!["reps", "load", "rounds", "time"].includes(scoreType) && (
+                <Flex direction="row" gap="2" align="end">
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="reps" size="1" mb="1">
+                      Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="reps"
+                      name="reps"
+                      type="number"
+                      min={0}
+                      placeholder="Reps"
+                      value={form.reps}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="rounds_completed" size="1" mb="1">
+                      Rounds
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="rounds_completed"
+                      name="rounds_completed"
+                      type="number"
+                      min={0}
+                      placeholder="Rounds"
+                      value={form.rounds_completed}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="partial_reps" size="1" mb="1">
+                      Partial Reps
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="partial_reps"
+                      name="partial_reps"
+                      type="number"
+                      min={0}
+                      placeholder="Partial Reps"
+                      value={form.partial_reps}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ flexGrow: 1 }}>
+                    <Text as="label" htmlFor="load" size="1" mb="1">
+                      Load
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="load"
+                      name="load"
+                      type="number"
+                      min={0}
+                      placeholder="Load"
+                      value={form.load}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ width: "165px" }}>
+                    <Text as="label" htmlFor="time_minutes" size="1" mb="1">
+                      Minutes
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="time_minutes"
+                      name="time_minutes"
+                      type="number"
+                      min={0}
+                      placeholder="min"
+                      value={form.time_minutes}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                  <Box style={{ width: "165px" }}>
+                    <Text as="label" htmlFor="time_seconds" size="1" mb="1">
+                      Seconds
+                    </Text>
+                    <TextField.Root
+                      variant="classic"
+                      id="time_seconds"
+                      name="time_seconds"
+                      type="number"
+                      min={0}
+                      max={59}
+                      placeholder="sec"
+                      value={form.time_seconds}
+                      onChange={handleChange}
+                      disabled={!isLoggedIn || submitting}
+                      size="3"
+                      autoComplete="off"
+                    />
+                  </Box>
+                </Flex>
+              )}
+            </>
           )}
           {/* Load Input (only shown if not timecapped and WOD type is Load/ShowAll) */}
           {!showTimecapRadio && (showAll || showLoad) && (

@@ -21400,7 +21400,7 @@
     "wodName": "Quarterfinals 21.4",
     "description": "For Load\n4 rep max Front Squats\n\nTime Cap: 20 minutes",
     "benchmarks": {
-      "type": "time",
+      "type": "load",
       "levels": {
         "elite": {
           "min": 90,

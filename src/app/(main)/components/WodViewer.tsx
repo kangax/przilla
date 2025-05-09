@@ -261,11 +261,7 @@ export default function WodViewer({
   // Let's check the hook's logic again: `return wodsData ?? initialWods ?? [];` - yes, it handles it.
   // So we can rely on the `wods` returned from useWodViewerData for the final check.
 
-  if (!wods || wods.length === 0) {
-    // Final check based on data processed by useWodViewerData
-    return <Box>No WODs match the current filters.</Box>; // More specific message
-  }
-
+  // Always render the FilterBar at the top
   return (
     <Box>
       <FilterBar
@@ -291,9 +287,12 @@ export default function WodViewer({
         handleSort={handleSort}
       />
 
-      {/* Conditionally render card list or table */}
-      {isMobile ? (
-        <WodListMobile // Use WodListMobile directly
+      {/* If no WODs, show empty state message below the filter bar */}
+      {!wods || wods.length === 0 ? (
+        <Box mt="4">No WODs match the current filters.</Box>
+      ) : // Conditionally render card list or table
+      isMobile ? (
+        <WodListMobile
           wods={sortedWods}
           scoresByWodId={scoresByWodId}
           searchTerm={searchTerm}
@@ -308,7 +307,7 @@ export default function WodViewer({
           handleSort={handleSort}
           searchTerm={searchTerm}
           scoresByWodId={scoresByWodId}
-          _isLoadingScores={showScoreLoading} // Renamed prop
+          _isLoadingScores={showScoreLoading}
           onScoreLogged={handleScoreLogged}
         />
       )}

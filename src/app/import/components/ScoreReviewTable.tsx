@@ -212,7 +212,10 @@ export function ScoreReviewTable({ rows, onComplete }: ScoreReviewTableProps) {
           header: "Score",
           cell: (info: ProposedScoreCellContext): React.ReactNode => {
             const scoreData = info.getValue();
-            return scoreData ? formatScore(scoreData as Score) : "-";
+            const matchedWod = info.row.original.matchedWod;
+            return scoreData && matchedWod
+              ? formatScore(scoreData as Score, matchedWod)
+              : "-";
           },
           enableSorting: false,
         }),

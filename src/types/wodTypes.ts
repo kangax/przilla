@@ -309,6 +309,7 @@ export type MonthlyScoreDetail = {
   rounds_completed: number | null;
   partial_reps: number | null;
   is_rx: boolean | null;
+  benchType: Benchmarks["type"];
 };
 
 export type WodChartDataResponse = {

@@ -1,38 +1,31 @@
 "use client";
 
 import React, { useRef, useMemo, useState } from "react";
-import Link from "next/link";
-import * as TooltipPrimitive from "@radix-ui/react-tooltip"; // Import primitive
-import {
-  Tooltip as ThemeTooltip, // Alias the theme Tooltip
-  Text,
-  Flex,
-  Badge,
-  Separator,
-} from "@radix-ui/themes";
 import {
   useReactTable,
   getCoreRowModel,
-  createColumnHelper,
   flexRender,
   type ColumnDef,
-  type SortingFn, // Added SortingFn
-  type Row, // Added Row
 } from "@tanstack/react-table";
 import { useVirtualizer } from "@tanstack/react-virtual";
-import { useQueryClient } from "@tanstack/react-query"; // Import useQueryClient
-import type { Wod, Score, SortByType, WodWithMatches } from "~/types/wodTypes";
-import { getPerformanceLevel } from "~/utils/wodUtils";
-import { HighlightMatch } from "~/utils/uiUtils";
+import type { Wod, Score, SortByType } from "~/types/wodTypes";
 import { LogScoreDialog } from "./LogScoreDialog";
-import { ScoresCell } from "./WodTableCells/ScoresCell";
 import { DeleteScoreDialog } from "./DeleteScoreDialog";
-import { Star } from "lucide-react";
 import { useSession } from "~/lib/auth-client";
-import { safeString, getDifficultyColor, isValidSortBy } from "./wodTableUtils";
-import { api } from "~/trpc/react";
-import { useToast } from "~/components/ToastProvider";
-import { useFavoriteWod } from "./hooks/useFavoriteWod"; // Import the new hook
+import { isValidSortBy } from "./wodTableUtils";
+// api, useToast are now used within useWodTableDialogs or useFavoriteWod
+import { useFavoriteWod } from "./hooks/useFavoriteWod"; 
+import { useWodTableDialogs } from "./hooks/useWodTableDialogs"; // Import the new dialogs hook
+import { Flex } from "@radix-ui/themes"; 
+
+// Import new column definitions
+import { createWodNameColumn } from "./WodTableColumns/wodNameColumn";
+import { createCategoryAndTagsColumn } from "./WodTableColumns/categoryAndTagsColumn";
+import { createDifficultyColumn } from "./WodTableColumns/difficultyColumn";
+import { createCountLikesColumn } from "./WodTableColumns/countLikesColumn";
+import { createDescriptionColumn } from "./WodTableColumns/descriptionColumn";
+import { createResultsColumn } from "./WodTableColumns/resultsColumn";
+
 
 interface WodTableProps {
   wods: Wod[];
@@ -46,20 +39,7 @@ interface WodTableProps {
   onScoreLogged?: () => void;
 }
 
-const columnHelper = createColumnHelper<Wod>();
-
-// Numeric mapping for performance levels for sorting (can stay outside)
-const performanceLevelValues: Record<string, number> = {
-  elite: 4,
-  advanced: 3,
-  intermediate: 2,
-  beginner: 1,
-  rx: 0, // Rx but no specific level (e.g., no benchmarks)
-  scaled: -1,
-  noScore: -2, // WOD has no score logged
-};
-
-// Updated createColumns signature
+// Simplified createColumns - now an assembler
 const createColumns = (
   handleSort: (column: SortByType) => void,
   sortBy: SortByType,
@@ -68,383 +48,33 @@ const createColumns = (
   scoresByWodId: Record<string, Score[]>,
   isUserLoggedIn: boolean,
   handleToggleFavorite: (wodId: string, currentIsFavorited: boolean) => void,
-  onScoreLogged?: () => void,
+  // onScoreLogged is passed to createResultsColumn
   openLogDialog?: (wod: Wod) => void,
   openEditDialog?: (score: Score, wod: Wod) => void,
   handleDeleteScore?: (score: Score, wod: Wod) => void,
-): ColumnDef<Wod, unknown>[] => {
-  // --- Define sorting function INSIDE createColumns to access scoresByWodId ---
-  const sortByLatestScoreLevel: SortingFn<Wod> = (
-    rowA: Row<Wod>,
-    rowB: Row<Wod>,
-    _columnId: string,
-  ) => {
-    const getLevelValue = (row: Row<Wod>): number => {
-      const wod = row.original;
-      // Directly use scoresByWodId from the outer scope (createColumns parameters)
-      const scores = scoresByWodId?.[wod.id] ?? [];
-      if (scores.length === 0) {
-        return performanceLevelValues.noScore;
-      }
-      // Assuming scores are sorted descending by date, latest is scores[0]
-      const latestScore = scores[0];
-      if (!latestScore.isRx) {
-        return performanceLevelValues.scaled;
-      }
-      const level = getPerformanceLevel(wod, latestScore);
-      return level
-        ? (performanceLevelValues[level] ?? performanceLevelValues.rx) // Use 'rx' if level exists but not in map
-        : performanceLevelValues.rx; // No specific level calculated, but was Rx
-    };
-
-    const levelA = getLevelValue(rowA);
-    const levelB = getLevelValue(rowB);
-
-    return levelA - levelB;
-  };
-  // --- End sorting function definition ---
-
-  const getSortIndicator = (columnName: SortByType) => {
-    if (sortBy === columnName) {
-      return sortDirection === "asc" ? " ▲" : " ▼";
-    }
-    return "";
-  };
-
+): ColumnDef<Wod, any>[] => { // Return type changed to any for simplicity during assembly
   return [
-    columnHelper.accessor("wodName", {
-      header: () => (
-        <span onClick={() => handleSort("wodName")} className="cursor-pointer">
-          Workout{getSortIndicator("wodName")}
-        </span>
-      ),
-      cell: (info) => {
-        const wod = info.row.original;
-        const starIcon = (
-          <Star
-            size={16}
-            className={`mr-2 flex-shrink-0 ${
-              isUserLoggedIn
-                ? "cursor-pointer hover:text-yellow-400"
-                : "cursor-not-allowed opacity-50"
-            } ${wod.isFavorited ? "fill-yellow-400 text-yellow-500" : "text-gray-400"}`}
-            onClick={(e) => {
-              if (isUserLoggedIn && handleToggleFavorite) {
-                e.preventDefault(); // Prevent link navigation if star is inside Link
-                e.stopPropagation();
-                handleToggleFavorite(wod.id, !!wod.isFavorited); // Pass current state
-              }
-            }}
-            aria-label={wod.isFavorited ? "Unfavorite WOD" : "Favorite WOD"}
-          />
-        );
-
-        return (
-          <Flex align="center" className="max-w-[200px]">
-            {starIcon}
-            {wod.wodUrl ? (
-              <Link
-                href={wod.wodUrl}
-                target="_blank"
-                className="flex items-center truncate whitespace-nowrap font-medium text-primary hover:underline"
-              >
-                <HighlightMatch text={wod.wodName} highlight={searchTerm} />
-                <span className="ml-1 flex-shrink-0 text-xs opacity-70">
-                  ↗
-                </span>
-              </Link>
-            ) : (
-              <span className="truncate whitespace-nowrap font-medium">
-                <HighlightMatch text={wod.wodName} highlight={searchTerm} />
-              </span>
-            )}
-          </Flex>
-        );
-      },
-      size: 220, // Increased size to accommodate star
+    createWodNameColumn({
+      handleSort,
+      sortBy,
+      sortDirection,
+      searchTerm,
+      isUserLoggedIn,
+      handleToggleFavorite,
     }),
-    columnHelper.accessor(
-      (row) => ({ category: row.category, tags: row.tags }),
-      {
-        id: "categoryAndTags",
-        header: "Category / Tags",
-        cell: (info) => {
-          const { category, tags } = info.getValue();
-          const safeTags = tags ?? [];
-          if (!category && safeTags.length === 0) return null;
-
-          return (
-            <Flex direction="column" gap="1" align="start">
-              {category && (
-                <Badge
-                  color="indigo"
-                  variant="soft"
-                  radius="full"
-                  className="w-fit"
-                >
-                  <HighlightMatch text={category} highlight={searchTerm} />
-                </Badge>
-              )}
-              {safeTags.length > 0 && (
-                <Flex gap="1" wrap="wrap" className="mt-1">
-                  {safeTags.map((tag) => (
-                    <Badge
-                      key={tag}
-                      color="gray"
-                      variant="soft"
-                      radius="full"
-                      className="flex-shrink-0 text-xs"
-                    >
-                      <HighlightMatch text={tag} highlight={searchTerm} />
-                    </Badge>
-                  ))}
-                </Flex>
-              )}
-            </Flex>
-          );
-        },
-        size: 200,
-      },
-    ),
-    columnHelper.accessor("difficulty", {
-      header: () => (
-        <TooltipPrimitive.Root>
-          <TooltipPrimitive.Trigger asChild>
-            <span
-              onClick={() => handleSort("difficulty")}
-              className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
-              tabIndex={0}
-            >
-              Difficulty{getSortIndicator("difficulty")}
-            </span>
-          </TooltipPrimitive.Trigger>
-          <TooltipPrimitive.Content
-            className="min-w-[510px] max-w-[510px] rounded-sm border bg-white p-4 text-black shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
-            sideOffset={5} // Maintain offset if needed, default is 5
-          >
-            <div>
-              <Flex direction="column" gap="2">
-                <Text
-                  size="2"
-                  weight="bold"
-                  className="text-black dark:text-gray-100"
-                >
-                  Difficulty Levels
-                </Text>
-                <Separator my="1" size="4" />
-                <Flex align="start" gap="2">
-                  <Text
-                    size="1"
-                    color="green"
-                    weight="bold"
-                    style={{ minWidth: 100 }}
-                  >
-                    Easy
-                  </Text>
-                  <Text size="1" className="text-black dark:text-gray-100">
-                    Bodyweight only, low volume, no complex skills
-                    <br />
-                    <Text
-                      size="1"
-                      className="italic text-black dark:text-gray-100"
-                    >
-                      (e.g. &quot;500m row&quot;)
-                    </Text>
-                  </Text>
-                </Flex>
-                <Flex align="start" gap="2">
-                  <Text
-                    size="1"
-                    color="yellow"
-                    weight="bold"
-                    style={{ minWidth: 100 }}
-                  >
-                    Medium
-                  </Text>
-                  <Text size="1" className="text-black dark:text-gray-100">
-                    Moderate volume, light-moderate loads, basic skills
-                    <br />
-                    <Text
-                      size="1"
-                      className="italic text-black dark:text-gray-100"
-                    >
-                      (e.g. &quot;Angie&quot;)
-                    </Text>
-                  </Text>
-                </Flex>
-                <Flex align="start" gap="2">
-                  <Text
-                    size="1"
-                    color="orange"
-                    weight="bold"
-                    style={{ minWidth: 100 }}
-                  >
-                    Hard
-                  </Text>
-                  <Text size="1" className="text-black dark:text-gray-100">
-                    High volume OR moderate skill/heavy load
-                    <br />
-                    <Text
-                      size="1"
-                      className="italic text-black dark:text-gray-100"
-                    >
-                      (e.g. &quot;Isabel&quot;)
-                    </Text>
-                  </Text>
-                </Flex>
-                <Flex align="start" gap="2">
-                  <Text
-                    size="1"
-                    color="red"
-                    weight="bold"
-                    style={{ minWidth: 100 }}
-                  >
-                    Very Hard
-                  </Text>
-                  <Text size="1" className="text-black dark:text-gray-100">
-                    Heavy loads + high skill + high volume
-                    <br />
-                    <Text
-                      size="1"
-                      className="italic text-black dark:text-gray-100"
-                    >
-                      (e.g. &quot;Eva&quot;)
-                    </Text>
-                  </Text>
-                </Flex>
-                <Flex align="start" gap="2">
-                  <Text
-                    size="1"
-                    color="purple"
-                    weight="bold"
-                    style={{ minWidth: 100 }}
-                  >
-                    Extremely Hard
-                  </Text>
-                  <Text size="1" className="text-black dark:text-gray-100">
-                    Maximal loads, multiple high-skill elements, or extreme
-                    volume
-                    <br />
-                    <Text
-                      size="1"
-                      className="italic text-black dark:text-gray-100"
-                    >
-                      (e.g. &quot;Awful Annie&quot;)
-                    </Text>
-                  </Text>
-                </Flex>
-              </Flex>
-            </div>
-          </TooltipPrimitive.Content>
-        </TooltipPrimitive.Root>
-      ),
-      cell: (info) => {
-        const row = info.row.original;
-        if (!row.difficulty) return <Text>-</Text>;
-        return (
-          <ThemeTooltip
-            content={
-              <span style={{ whiteSpace: "pre-wrap" }}>
-                {safeString(row.difficultyExplanation)}
-              </span>
-            }
-          >
-            <Text
-              className={`font-medium ${getDifficultyColor(row.difficulty)}`}
-            >
-              {row.difficulty}
-            </Text>
-          </ThemeTooltip>
-        );
-      },
-      size: 100,
+    createCategoryAndTagsColumn({ searchTerm }),
+    createDifficultyColumn({ handleSort, sortBy, sortDirection }),
+    createCountLikesColumn({ handleSort, sortBy, sortDirection }),
+    createDescriptionColumn({ searchTerm }),
+    createResultsColumn({
+      scoresByWodId,
+      handleSort,
+      sortBy,
+      sortDirection,
+      openLogDialog,
+      openEditDialog,
+      handleDeleteScore,
     }),
-    columnHelper.accessor("countLikes", {
-      header: () => (
-        <ThemeTooltip content="Number of likes on wodwell.com">
-          <span
-            onClick={() => handleSort("countLikes")}
-            className="cursor-pointer whitespace-nowrap underline decoration-dotted underline-offset-4"
-            tabIndex={0} // Add tabIndex for accessibility
-          >
-            Likes{getSortIndicator("countLikes")}
-          </span>
-        </ThemeTooltip>
-      ),
-      cell: (info) => {
-        const row = info.row.original;
-        return (
-          <span className="whitespace-nowrap">{row.countLikes ?? "-"} </span>
-        );
-      },
-      size: 70,
-    }),
-    columnHelper.accessor("description", {
-      header: "Description",
-      cell: (info) => {
-        const row = info.row.original;
-        if (!row.description) return null;
-        const movements = row.movements ?? [];
-        const hasMovements = movements.length > 0;
-        const tooltipContent = hasMovements ? (
-          <div style={{ maxWidth: 320 }}>
-            <span className="mb-1 block text-sm font-semibold">Movements:</span>
-            <ul className="list-disc pl-5 text-xs">
-              {movements.map((m) => (
-                <li key={m}>{m}</li>
-              ))}
-            </ul>
-          </div>
-        ) : (
-          <span className="text-xs text-gray-400">No movements listed</span>
-        );
-        return (
-          <TooltipPrimitive.Root>
-            <TooltipPrimitive.Trigger asChild>
-              <span className="cursor-help whitespace-pre-wrap break-words">
-                <HighlightMatch text={row.description} highlight={searchTerm} />
-              </span>
-            </TooltipPrimitive.Trigger>
-            <TooltipPrimitive.Content
-              className="max-w-[340px] rounded-sm border bg-white p-3 text-black shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-100"
-              sideOffset={6}
-            >
-              {tooltipContent}
-            </TooltipPrimitive.Content>
-          </TooltipPrimitive.Root>
-        );
-      },
-      size: 364,
-    }),
-    columnHelper.accessor(
-      (row) => ({ wod: row, scores: scoresByWodId[row.id] }),
-      {
-        id: "results",
-        header: () => (
-          <span
-            onClick={() => handleSort("results")}
-            className="cursor-pointer whitespace-nowrap"
-          >
-            Your scores{getSortIndicator("results")}
-          </span>
-        ),
-        cell: (info) => {
-          const { wod, scores } = info.getValue();
-          return (
-            <ScoresCell
-              wod={wod}
-              scores={scores}
-              openLogDialog={openLogDialog}
-              openEditDialog={openEditDialog}
-              handleDeleteScore={handleDeleteScore}
-            />
-          );
-        },
-        size: 250,
-        enableSorting: true,
-        sortingFn: sortByLatestScoreLevel,
-      },
-    ),
   ];
 };
 
@@ -457,76 +87,31 @@ const WodTable: React.FC<WodTableProps> = ({
   searchTerm,
   scoresByWodId,
   _isLoadingScores, // Prefixed as unused for now
-  onScoreLogged,
+  onScoreLogged, // This will be passed to useWodTableDialogs
 }) => {
   const parentRef = useRef<HTMLDivElement>(null);
   const { data: session } = useSession();
   const isUserLoggedIn = !!session?.user;
 
-  // State for Log/Edit Dialog
-  const [dialogState, setDialogState] = useState<{
-    isOpen: boolean;
-    wod: Wod | null;
-    score: Score | null;
-  }>({ isOpen: false, wod: null, score: null });
-
-  // State for Delete Confirmation Dialog
-  const [deletingScore, setDeletingScore] = useState<{
-    score: Score;
-    wod: Wod;
-  } | null>(null);
-
-  const { showToast } = useToast(); // Still needed for deleteScoreMutation and potentially by useFavoriteWod if not passed
-
   // Use the new hook for favorite logic
   const {
     handleToggleFavorite,
-    // isAddingFavorite, // if needed for UI feedback
-    // isRemovingFavorite, // if needed for UI feedback
   } = useFavoriteWod({ searchTerm });
+  
+  // Use the new hook for dialog management
+  const {
+    logScoreDialogState,
+    openLogNewScoreDialog,
+    openEditScoreDialog,
+    handleLogScoreDialogChange,
+    handleLogScoreDialogSubmit,
+    deleteScoreDialogState,
+    requestDeleteScore,
+    confirmDeleteScore,
+    cancelDeleteScore,
+    isDeletingScore,
+  } = useWodTableDialogs({ onDialogActionCompletion: onScoreLogged });
 
-  // utils and queryClient might still be needed for deleteScoreMutation
-  const utils = api.useUtils();
-  // const queryClient = useQueryClient(); // Not directly used here if deleteScoreMutation uses utils
-
-  const deleteScoreMutation = api.score.deleteScore.useMutation({
-    onSuccess: async () => {
-      await utils.score.getAllByUser.invalidate();
-      if (onScoreLogged) onScoreLogged();
-      showToast("success", "Score deleted");
-    },
-    onError: () => {
-      showToast("error", "Failed to delete score");
-    },
-  });
-
-  // Handlers for Dialogs
-  const openLogDialog = (wod: Wod) => {
-    setDialogState({ isOpen: true, wod: wod, score: null });
-  };
-
-  const openEditDialog = (score: Score, wod: Wod) => {
-    setDialogState({ isOpen: true, wod: wod, score: score });
-  };
-
-  const handleDialogChange = (open: boolean) => {
-    setDialogState((prev) => ({ ...prev, isOpen: open }));
-  };
-
-  const handleDeleteScore = (score: Score, wod: Wod) => {
-    setDeletingScore({ score, wod });
-  };
-
-  const confirmDeleteScore = async () => {
-    if (deletingScore) {
-      deleteScoreMutation.mutate({ id: deletingScore.score.id });
-      setDeletingScore(null);
-    }
-  };
-
-  const cancelDeleteScore = () => {
-    setDeletingScore(null);
-  };
 
   const columns = useMemo(
     () =>
@@ -538,10 +123,9 @@ const WodTable: React.FC<WodTableProps> = ({
         scoresByWodId,
         isUserLoggedIn,
         handleToggleFavorite,
-        onScoreLogged,
-        openLogDialog,
-        openEditDialog,
-        handleDeleteScore,
+        openLogNewScoreDialog, // Pass new handler from hook
+        openEditScoreDialog,   // Pass new handler from hook
+        requestDeleteScore,  // Pass new handler from hook
       ),
     [
       handleSort,
@@ -551,8 +135,10 @@ const WodTable: React.FC<WodTableProps> = ({
       scoresByWodId,
       isUserLoggedIn,
       handleToggleFavorite,
-      onScoreLogged,
-      // openLogDialog, openEditDialog, handleDeleteScore are stable if defined outside or wrapped in useCallback
+      // Dependencies from useWodTableDialogs hook if their functions are not stable (e.g., not wrapped in useCallback within the hook)
+      // For now, assuming they are stable or their change implies a re-render anyway.
+      // Add openLogNewScoreDialog, openEditScoreDialog, requestDeleteScore if they are not stable.
+      // onScoreLogged is part of the hook's setup, so it's implicitly a dependency if it changes.
     ],
   );
 
@@ -701,29 +287,26 @@ const WodTable: React.FC<WodTableProps> = ({
       </div>
 
       {/* Log/Edit Score Dialog */}
-      {dialogState.isOpen && dialogState.wod && (
+      {logScoreDialogState.isOpen && logScoreDialogState.wod && (
         <LogScoreDialog
-          isOpen={dialogState.isOpen}
-          onOpenChange={handleDialogChange}
-          wod={dialogState.wod}
-          initialScore={dialogState.score}
-          onScoreLogged={() => {
-            // Ensure scores are refreshed after dialog action
-            if (onScoreLogged) onScoreLogged();
-          }}
+          isOpen={logScoreDialogState.isOpen}
+          onOpenChange={handleLogScoreDialogChange}
+          wod={logScoreDialogState.wod}
+          initialScore={logScoreDialogState.scoreToEdit}
+          onScoreLogged={handleLogScoreDialogSubmit} // Use submit handler from hook
         />
       )}
 
       {/* Delete confirmation dialog */}
-      {deletingScore && (
+      {deleteScoreDialogState.isOpen && deleteScoreDialogState.scoreToDelete && deleteScoreDialogState.wodAssociated && (
         <DeleteScoreDialog
-          open={!!deletingScore}
-          onOpenChange={cancelDeleteScore}
+          open={deleteScoreDialogState.isOpen}
+          onOpenChange={(open) => { if (!open) cancelDeleteScore(); }} // Close via cancel if dismissed
           onConfirm={confirmDeleteScore}
           onCancel={cancelDeleteScore}
-          isDeleting={deleteScoreMutation.status === "pending"}
-          score={deletingScore.score}
-          wod={deletingScore.wod}
+          isDeleting={isDeletingScore}
+          score={deleteScoreDialogState.scoreToDelete}
+          wod={deleteScoreDialogState.wodAssociated}
         />
       )}
     </div>

@@ -46,11 +46,49 @@ For each identified large component (`LogScoreForm`, `WodTable`, `WodViewer`, `W
 
 ### 2. `WodTable.tsx` (609 LOC):
 
-- **Modularize `createColumns`:**
-  - Define complex column definitions in separate files or a dedicated `columnDefinitions.ts`.
-  - Extract complex cell rendering logic into dedicated cell components (e.g., `DifficultyTooltipCell.tsx`).
-- **Dialog Management:** Improve encapsulation of `LogScoreDialog` and `DeleteScoreDialog` state and handlers.
-- **Hook for Table State/Interactions:** Consider a `useWodTableInteractions` hook for complex table interaction logic.
+**Overall Strategy:** The primary goal is to significantly reduce the size of `WodTable.tsx` by modularizing its largest part, the `createColumns` function, and by extracting dialog management logic into a custom hook.
+
+**A. Modularize `createColumns` (Primary Focus):**
+
+*   **New Directory for Column Logic:** Create `src/app/(main)/components/WodTableColumns/`.
+*   **Individual Column Definition Files:** Each current column definition within `createColumns` will be moved to its own file within the new directory. These files will export functions that return the `ColumnDef` for that specific column. These functions will accept necessary parameters (e.g., sort handlers, `searchTerm`, `scoresByWodId`, dialog openers).
+    *   `src/app/(main)/components/WodTableColumns/wodNameColumn.ts`: Defines the "Workout" column, including the star icon for favorites and the WOD name link/text with highlighting.
+    *   `src/app/(main)/components/WodTableColumns/categoryAndTagsColumn.ts`: Defines the "Category / Tags" column, rendering badges for category and tags with highlighting.
+    *   `src/app/(main)/components/WodTableColumns/difficultyColumn.ts`: Defines the "Difficulty" column, including its complex header tooltip and cell rendering.
+    *   `src/app/(main)/components/WodTableColumns/countLikesColumn.ts`: Defines the "Likes" column.
+    *   `src/app/(main)/components/WodTableColumns/descriptionColumn.ts`: Defines the "Description" column, including its movement tooltip and description highlighting.
+    *   `src/app/(main)/components/WodTableColumns/resultsColumn.ts`: Defines the "Your scores" column. It will continue to use the existing `ScoresCell` component and will encapsulate the `sortByLatestScoreLevel` custom sorting logic.
+*   **Column Utilities:**
+    *   `src/app/(main)/components/WodTableColumns/columnUtils.ts`: This file will contain shared helper functions like `getSortIndicator` and the `performanceLevelValues` constant. The `sortByLatestScoreLevel` sorting function could also reside here (if it can be generalized) or be co-located with `resultsColumn.ts`.
+*   **Refined `createColumns` in `WodTable.tsx`:** The main `createColumns` function in `WodTable.tsx` will become a concise assembler. It will import and call the functions from the individual column definition files, passing the necessary props to each.
+
+**B. Extract Complex Cell/Header Rendering into Dedicated Components:**
+
+While the individual column definition files will encapsulate much of the rendering logic, some particularly complex UI parts within cells or headers can be further extracted into their own React components. These would likely reside in a subdirectory like `src/app/(main)/components/WodTableColumns/Cells/` or directly in `src/app/(main)/components/WodTableColumns/` if they are primarily for headers.
+*   **`DifficultyHeaderTooltip.tsx`**: A new component specifically for rendering the detailed tooltip content found in the "Difficulty" column's header.
+    *   Proposed Location: `src/app/(main)/components/WodTableColumns/DifficultyHeaderTooltip.tsx`
+*   **Potentially other cell components (to be created if their complexity warrants it during implementation):**
+    *   `WodNameCell.tsx` (for the WOD name, star icon, and link)
+    *   `CategoryAndTagsCell.tsx` (for category and tag badges)
+    *   `DescriptionCell.tsx` (for the description text and movement tooltip)
+    *   (Note: `ScoresCell.tsx` is already well-encapsulated at `src/app/(main)/components/WodTableCells/ScoresCell.tsx`. We can evaluate moving it or standardizing locations if many new cell components are created under `WodTableColumns/Cells/`.)
+
+**C. Dialog Management via Custom Hook:**
+
+*   **`useWodTableDialogs` Hook:** Extract the state management and handler functions for both the `LogScoreDialog` and `DeleteScoreDialog` into a new custom hook.
+    *   Proposed Location: `src/app/(main)/components/hooks/useWodTableDialogs.ts`
+    *   Responsibilities:
+        *   Manage `logScoreDialogState` (tracking `isOpen`, the target `wod`, and any `score` being edited).
+        *   Manage `deleteScoreDialogState` (tracking the `score` and `wod` for deletion confirmation).
+        *   Encapsulate the `deleteScoreMutation` logic, including API calls, query invalidation, and toast notifications.
+        *   Provide clear handler functions: `openLogDialog`, `openEditDialog`, `handleLogScoreDialogChange` (for opening/closing the log/edit dialog), `handleDeleteScoreRequest` (to initiate deletion), `confirmDeleteScore`, and `cancelDeleteScore`.
+*   **`WodTable.tsx` Update:** The main `WodTable` component will utilize this hook, significantly simplifying its internal logic related to dialog interactions.
+
+**Expected Outcome:**
+*   The Line of Code (LOC) count for `WodTable.tsx` will be substantially reduced.
+*   Column definitions will be more modular, readable, and maintainable in their respective files.
+*   Dialog management logic will be better separated and encapsulated within the custom hook.
+*   Overall, the `WodTable` component will have improved separation of concerns, making it easier to understand, test, and modify in the future.
 
 ### 3. `WodViewer.tsx` (506 LOC):
 

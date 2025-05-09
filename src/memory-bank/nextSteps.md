@@ -2,9 +2,11 @@
 
 ### Must have
 
-- QF 24.3 doesn't have timecap (look through ALL wods and fix timecaps)
-- QF 21.4 timecap UI is incorrect because it's load based
+- Sort scores by date/perf
+- Refactor long files
+- Import from PRzilla doesn't work? Combine into one import
 - Importing scores from SugarWOD should show which ones already exist (and if we they differ)
+- Remove /favorites and just show them in the main table
 
 ### Maybe
 

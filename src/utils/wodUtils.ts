@@ -2,6 +2,37 @@ import type { Wod, Score, SortByType } from "~/types/wodTypes"; // Added Score, 
 import { PERFORMANCE_LEVEL_COLORS } from "~/config/constants";
 
 /**
+ * Returns the correct label for the "No, hit the timecap" radio option based on WOD score type.
+ * @param scoreType The WOD's benchmarks.type ("reps" | "load" | "rounds" | "time" | undefined)
+ */
+export function getTimecapNoLabel(scoreType: string | undefined): string {
+  switch (scoreType) {
+    case "reps":
+      return "No, hit the timecap (enter reps)";
+    case "load":
+      return "No, hit the timecap (enter load)";
+    case "rounds":
+      return "No, hit the timecap (enter rounds or rounds+reps)";
+    case "time":
+      return "No, hit the timecap (enter your time)";
+    default:
+      return "No, hit the timecap (enter your score)";
+  }
+}
+
+/**
+ * Formats a timecap in seconds as "M:SS" (e.g., 90 -> "1:30").
+ * Returns an empty string if input is null, undefined, or NaN.
+ * @param seconds Number of seconds (timecap)
+ */
+export function formatTimecap(seconds: number | null | undefined): string {
+  if (!seconds || isNaN(seconds)) return "";
+  const min = Math.floor(seconds / 60);
+  const sec = seconds % 60;
+  return `${min}:${sec.toString().padStart(2, "0")}`;
+}
+
+/**
  * Checks if a Score has any score value recorded.
  */
 export const hasScore = (score: Score): boolean => {

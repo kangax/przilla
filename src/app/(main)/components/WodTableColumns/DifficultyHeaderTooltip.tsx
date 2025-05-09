@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import React from "react";
 import { Text, Flex, Separator } from "@radix-ui/themes";
 import * as TooltipPrimitive from "@radix-ui/react-tooltip";
@@ -30,10 +31,7 @@ export const DifficultyHeaderTooltipContent = () => {
             <Text size="1" className="text-black dark:text-gray-100">
               Bodyweight only, low volume, no complex skills
               <br />
-              <Text
-                size="1"
-                className="italic text-black dark:text-gray-100"
-              >
+              <Text size="1" className="italic text-black dark:text-gray-100">
                 (e.g. "500m row")
               </Text>
             </Text>
@@ -50,10 +48,7 @@ export const DifficultyHeaderTooltipContent = () => {
             <Text size="1" className="text-black dark:text-gray-100">
               Moderate volume, light-moderate loads, basic skills
               <br />
-              <Text
-                size="1"
-                className="italic text-black dark:text-gray-100"
-              >
+              <Text size="1" className="italic text-black dark:text-gray-100">
                 (e.g. "Angie")
               </Text>
             </Text>
@@ -70,30 +65,19 @@ export const DifficultyHeaderTooltipContent = () => {
             <Text size="1" className="text-black dark:text-gray-100">
               High volume OR moderate skill/heavy load
               <br />
-              <Text
-                size="1"
-                className="italic text-black dark:text-gray-100"
-              >
+              <Text size="1" className="italic text-black dark:text-gray-100">
                 (e.g. "Isabel")
               </Text>
             </Text>
           </Flex>
           <Flex align="start" gap="2">
-            <Text
-              size="1"
-              color="red"
-              weight="bold"
-              style={{ minWidth: 100 }}
-            >
+            <Text size="1" color="red" weight="bold" style={{ minWidth: 100 }}>
               Very Hard
             </Text>
             <Text size="1" className="text-black dark:text-gray-100">
               Heavy loads + high skill + high volume
               <br />
-              <Text
-                size="1"
-                className="italic text-black dark:text-gray-100"
-              >
+              <Text size="1" className="italic text-black dark:text-gray-100">
                 (e.g. "Eva")
               </Text>
             </Text>
@@ -108,13 +92,9 @@ export const DifficultyHeaderTooltipContent = () => {
               Extremely Hard
             </Text>
             <Text size="1" className="text-black dark:text-gray-100">
-              Maximal loads, multiple high-skill elements, or extreme
-              volume
+              Maximal loads, multiple high-skill elements, or extreme volume
               <br />
-              <Text
-                size="1"
-                className="italic text-black dark:text-gray-100"
-              >
+              <Text size="1" className="italic text-black dark:text-gray-100">
                 (e.g. "Awful Annie")
               </Text>
             </Text>

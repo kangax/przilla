@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useRef, useMemo, useState } from "react";
+import React, { useRef, useMemo } from "react";
 import {
   useReactTable,
   getCoreRowModel,
@@ -14,9 +14,9 @@ import { DeleteScoreDialog } from "./DeleteScoreDialog";
 import { useSession } from "~/lib/auth-client";
 import { isValidSortBy } from "./wodTableUtils";
 // api, useToast are now used within useWodTableDialogs or useFavoriteWod
-import { useFavoriteWod } from "./hooks/useFavoriteWod"; 
+import { useFavoriteWod } from "./hooks/useFavoriteWod";
 import { useWodTableDialogs } from "./hooks/useWodTableDialogs"; // Import the new dialogs hook
-import { Flex } from "@radix-ui/themes"; 
+import { Flex } from "@radix-ui/themes";
 
 // Import new column definitions
 import { createWodNameColumn } from "./WodTableColumns/wodNameColumn";
@@ -25,7 +25,6 @@ import { createDifficultyColumn } from "./WodTableColumns/difficultyColumn";
 import { createCountLikesColumn } from "./WodTableColumns/countLikesColumn";
 import { createDescriptionColumn } from "./WodTableColumns/descriptionColumn";
 import { createResultsColumn } from "./WodTableColumns/resultsColumn";
-
 
 interface WodTableProps {
   wods: Wod[];
@@ -48,11 +47,10 @@ const createColumns = (
   scoresByWodId: Record<string, Score[]>,
   isUserLoggedIn: boolean,
   handleToggleFavorite: (wodId: string, currentIsFavorited: boolean) => void,
-  // onScoreLogged is passed to createResultsColumn
   openLogDialog?: (wod: Wod) => void,
   openEditDialog?: (score: Score, wod: Wod) => void,
   handleDeleteScore?: (score: Score, wod: Wod) => void,
-): ColumnDef<Wod, any>[] => { // Return type changed to any for simplicity during assembly
+): ColumnDef<Wod>[] => {
   return [
     createWodNameColumn({
       handleSort,
@@ -94,10 +92,8 @@ const WodTable: React.FC<WodTableProps> = ({
   const isUserLoggedIn = !!session?.user;
 
   // Use the new hook for favorite logic
-  const {
-    handleToggleFavorite,
-  } = useFavoriteWod({ searchTerm });
-  
+  const { handleToggleFavorite } = useFavoriteWod({ searchTerm });
+
   // Use the new hook for dialog management
   const {
     logScoreDialogState,
@@ -112,7 +108,6 @@ const WodTable: React.FC<WodTableProps> = ({
     isDeletingScore,
   } = useWodTableDialogs({ onDialogActionCompletion: onScoreLogged });
 
-
   const columns = useMemo(
     () =>
       createColumns(
@@ -124,8 +119,8 @@ const WodTable: React.FC<WodTableProps> = ({
         isUserLoggedIn,
         handleToggleFavorite,
         openLogNewScoreDialog, // Pass new handler from hook
-        openEditScoreDialog,   // Pass new handler from hook
-        requestDeleteScore,  // Pass new handler from hook
+        openEditScoreDialog, // Pass new handler from hook
+        requestDeleteScore, // Pass new handler from hook
       ),
     [
       handleSort,
@@ -135,10 +130,9 @@ const WodTable: React.FC<WodTableProps> = ({
       scoresByWodId,
       isUserLoggedIn,
       handleToggleFavorite,
-      // Dependencies from useWodTableDialogs hook if their functions are not stable (e.g., not wrapped in useCallback within the hook)
-      // For now, assuming they are stable or their change implies a re-render anyway.
-      // Add openLogNewScoreDialog, openEditScoreDialog, requestDeleteScore if they are not stable.
-      // onScoreLogged is part of the hook's setup, so it's implicitly a dependency if it changes.
+      openLogNewScoreDialog,
+      openEditScoreDialog,
+      requestDeleteScore,
     ],
   );
 
@@ -298,17 +292,21 @@ const WodTable: React.FC<WodTableProps> = ({
       )}
 
       {/* Delete confirmation dialog */}
-      {deleteScoreDialogState.isOpen && deleteScoreDialogState.scoreToDelete && deleteScoreDialogState.wodAssociated && (
-        <DeleteScoreDialog
-          open={deleteScoreDialogState.isOpen}
-          onOpenChange={(open) => { if (!open) cancelDeleteScore(); }} // Close via cancel if dismissed
-          onConfirm={confirmDeleteScore}
-          onCancel={cancelDeleteScore}
-          isDeleting={isDeletingScore}
-          score={deleteScoreDialogState.scoreToDelete}
-          wod={deleteScoreDialogState.wodAssociated}
-        />
-      )}
+      {deleteScoreDialogState.isOpen &&
+        deleteScoreDialogState.scoreToDelete &&
+        deleteScoreDialogState.wodAssociated && (
+          <DeleteScoreDialog
+            open={deleteScoreDialogState.isOpen}
+            onOpenChange={(open) => {
+              if (!open) cancelDeleteScore();
+            }} // Close via cancel if dismissed
+            onConfirm={confirmDeleteScore}
+            onCancel={cancelDeleteScore}
+            isDeleting={isDeletingScore}
+            score={deleteScoreDialogState.scoreToDelete}
+            wod={deleteScoreDialogState.wodAssociated}
+          />
+        )}
     </div>
   );
 };

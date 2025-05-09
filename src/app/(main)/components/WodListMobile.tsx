@@ -1,19 +1,11 @@
 import React, { useState, useMemo, useEffect } from "react";
-import {
-  ChevronDown,
-  ChevronUp,
-  Plus,
-  Pencil,
-  Trash,
-  Share2,
-  Star, // Added Star icon
-} from "lucide-react";
+
 import { useSearchParams } from "next/navigation"; // Added useSearchParams
 import type { Wod, Score } from "~/types/wodTypes";
 import { useSession } from "~/lib/auth-client";
 // useQueryClient is not directly used, can be removed if not needed by other parts.
 // It's used by useFavoriteWod hook, so it's fine if it's imported but not directly here.
-import { parseTags } from "~/utils/wodUtils"; // formatScore, getPerformanceBadgeDetails, HighlightMatch moved to WodMobileCard
+// formatScore, getPerformanceBadgeDetails, HighlightMatch moved to WodMobileCard
 import { checkWodMatch } from "~/utils/wodFuzzySearch"; // Import checkWodMatch
 import LogScoreForm from "./LogScoreForm";
 import { WodMobileCard } from "./WodMobileCard"; // Import the new component

@@ -2,8 +2,6 @@
 
 ## Current Focus
 
-Adding favorites
-
 ## Learnings & Insights
 
 - **CSV Import Validation Pattern:**
@@ -42,7 +40,5 @@ Adding favorites
 - Trigger elements for actions like "Log Score" should maintain consistent appearance and behavior, independent of other states (like editing) managed within the same component instance. Separate trigger logic (e.g., dedicated onClick handlers) can achieve this.
 
 ## Recent Changes
-
-- **Apr 30, 2025:** Extracted all filter, sort, search, and URL sync logic from `WodViewer.tsx` into a new custom hook `useWodViewerFilters` (`src/app/(main)/components/hooks/useWodViewerFilters.ts`). Updated `WodViewer.tsx` to use the hook, significantly reducing its size and improving maintainability. Next: continue modularizing data transformation and UI.
 
 See [recentChanges.md](./recentChanges.md) for the full, detailed changelog.

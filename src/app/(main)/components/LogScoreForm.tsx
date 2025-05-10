@@ -1,9 +1,7 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import * as RadioGroup from "@radix-ui/react-radio-group";
-import { useSession } from "../../../lib/auth-client";
-import { useRouter } from "next/navigation";
 import {
   Button,
   TextField,
@@ -13,9 +11,7 @@ import {
   Flex,
   Box,
 } from "@radix-ui/themes";
-import { api } from "../../../trpc/react";
-import { useQueryClient } from "@tanstack/react-query";
-import type { Wod, Score } from "../../../types/wodTypes"; // Added BenchmarkLevel
+import type { Wod, Score } from "../../../types/wodTypes";
 import {
   getPerformanceLevelTooltip,
   getTimecapNoLabel,
@@ -27,18 +23,6 @@ import RepsInputFields from "./LogScoreForm/RepsInputFields";
 import LoadInputFields from "./LogScoreForm/LoadInputFields";
 import RoundsInputFields from "./LogScoreForm/RoundsInputFields";
 
-type ScorePayload = {
-  wodId: string;
-  scoreDate: Date;
-  isRx: boolean;
-  notes?: string | null;
-  time_seconds?: number | null;
-  reps?: number | null;
-  load?: number | null;
-  rounds_completed?: number | null;
-  partial_reps?: number | null;
-};
-
 interface LogScoreFormProps {
   wod: Wod;
   onScoreLogged?: () => void;
@@ -46,45 +30,23 @@ interface LogScoreFormProps {
   onCancel: () => void;
 }
 
-const initialFormState = {
-  time_minutes: "",
-  time_seconds: "",
-  reps: "",
-  load: "",
-  rounds_completed: "",
-  partial_reps: "",
-  isRx: true,
-  notes: "",
-  scoreDate: new Date().toISOString().slice(0, 10),
-  finishedWithinTimecap: "yes" as "yes" | "no",
-};
-
 export const LogScoreForm: React.FC<LogScoreFormProps> = (props) => {
   const {
     form,
-    setForm,
     submitting,
-    setSubmitting,
     error,
-    setError,
     handleChange,
     handleIsRxChange,
     handleTimecapRadioChange,
-    resetForm,
-    validate,
-    buildPayload,
     handleSubmit,
     isEditMode,
     isLoggedIn,
     isSessionLoading,
     scoreType,
     showTime,
-    showReps,
     showLoad,
     showRounds,
     showAll,
-    showPartialReps,
-    hasTimecap,
     timecapFormatted,
     showTimecapRadio,
     router,

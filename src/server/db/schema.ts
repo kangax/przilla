@@ -6,7 +6,6 @@ import {
   text,
   primaryKey as drizzlePrimaryKey,
 } from "drizzle-orm/sqlite-core"; // Added primaryKey
-import type { Benchmarks } from "~/types/wodTypes"; // Import the actual Benchmarks type
 
 /**
  * This is an example of how to use the multi-project schema feature of Drizzle ORM. Use the same

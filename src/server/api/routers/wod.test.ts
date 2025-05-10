@@ -26,7 +26,7 @@ vi.mock("~/server/auth", () => ({ auth: {} }));
 // Now import the router and other dependencies
 import { wodRouter } from "./wod";
 import type { createTRPCContext } from "../trpc";
-import { makeCtx, assertMockContext } from "../__tests__/utils/makeCtx";
+import { makeCtx } from "../__tests__/utils/makeCtx";
 import {
   createTestWodsData,
   createTestScoresData,

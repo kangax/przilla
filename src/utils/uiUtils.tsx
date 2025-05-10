@@ -33,7 +33,7 @@ export const HighlightMatch: React.FC<{ text: string; highlight: string }> =
     try {
       regex = new RegExp(`(${pattern})`, "gi");
       parts = text.split(regex);
-    } catch (_e) {
+    } catch {
       // If regex fails, return the original text
       return <>{text}</>;
     }

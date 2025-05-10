@@ -1,3 +1,6 @@
+if (typeof globalThis.Set === "undefined") globalThis.Set = class { add() {} };
+if (typeof globalThis.Map === "undefined") globalThis.Map = class { set() {} get() {} };
+
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 // Import the mockApi object

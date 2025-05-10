@@ -5,7 +5,7 @@ import { api } from "../../../../trpc/react";
 import { useSession } from "../../../../lib/auth-client";
 import { useToast } from "../../../../components/ToastProvider";
 import type { Wod, Score } from "../../../../types/wodTypes";
-import { formatTimecap, getTimecapNoLabel } from "../../../../utils/wodUtils";
+import { formatTimecap } from "../../../../utils/wodUtils";
 
 export interface UseLogScoreFormProps {
   wod: Wod;

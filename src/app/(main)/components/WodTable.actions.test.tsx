@@ -29,80 +29,10 @@ vi.mock("~/components/ToastProvider", () => ({
 let mockDeleteScoreSuccess = vi.fn();
 let mockDeleteScoreError = vi.fn();
 
-/* eslint-disable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
-vi.mock("~/trpc/react", () => ({
-  api: {
-    useUtils: () => ({
-      score: {
-        getAllByUser: { invalidate: vi.fn() },
-      },
-    }),
-    score: {
-      deleteScore: {
-        useMutation: (
-          options: {
-            onSuccess?: () => void;
-            onError?: (error: Error) => void;
-          } = {},
-        ) => ({
-          mutate: (params: unknown) => {
-            if (mockDeleteScoreSuccess) {
-              mockDeleteScoreSuccess(params);
-              options.onSuccess?.();
-            } else if (mockDeleteScoreError) {
-              mockDeleteScoreError(params);
-              options.onError?.(new Error("API Error"));
-            }
-          },
-          isLoading: false,
-          status: "idle",
-          reset: vi.fn(),
-        }),
-      },
-      /* eslint-enable @typescript-eslint/no-explicit-any, @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
-      logScore: {
-        useMutation: () => ({
-          mutate: vi.fn(),
-          isLoading: false,
-          isSuccess: true,
-          reset: vi.fn(),
-        }),
-      },
-      updateScore: {
-        useMutation: () => ({
-          mutate: vi.fn(),
-          isLoading: false,
-          isSuccess: true,
-          reset: vi.fn(),
-        }),
-      },
-      importScores: {
-        useMutation: () => ({
-          mutate: vi.fn(),
-          isLoading: false,
-          isSuccess: true,
-          reset: vi.fn(),
-        }),
-      },
-      getAllByUser: {
-        useQuery: () => ({
-          data: [],
-          isLoading: false,
-          isSuccess: true,
-        }),
-      },
-    },
-    wod: {
-      getAll: {
-        useQuery: () => ({
-          data: [],
-          isLoading: false,
-          isSuccess: true,
-        }),
-      },
-    },
-  },
-}));
+// Use shared mock for ~/trpc/react
+import * as trpcMock from "~/trpc/__mocks__/react";
+import type { Mock } from "vitest";
+vi.mock("~/trpc/react", () => trpcMock);
 
 // Minimal mock data for actions
 const mockWodWithScore = {
@@ -165,12 +95,37 @@ const findRenderedRowByContent = (content: string) => {
 describe("WodTable Actions", () => {
   const queryClient = new QueryClient();
 
+  // Patch the shared mock's deleteScore.useMutation to support custom success/error logic
   beforeEach(() => {
     // Reset mocks
     vi.clearAllMocks();
     mockShowToast.mockClear();
     mockDeleteScoreSuccess = vi.fn();
     mockDeleteScoreError = vi.fn();
+
+    // Patch the shared mock's deleteScore.useMutation
+    const trpc = trpcMock;
+    (trpc.api.score.deleteScore.useMutation as Mock).mockImplementation(
+      (
+        options: {
+          onSuccess?: () => void;
+          onError?: (error: Error) => void;
+        } = {},
+      ) => ({
+        mutate: (params: unknown) => {
+          if (mockDeleteScoreSuccess) {
+            mockDeleteScoreSuccess(params);
+            options.onSuccess?.();
+          } else if (mockDeleteScoreError) {
+            mockDeleteScoreError(params);
+            options.onError?.(new Error("API Error"));
+          }
+        },
+        isLoading: false,
+        status: "idle",
+        reset: vi.fn(),
+      }),
+    );
   });
 
   it("should display the 'Scaled' badge for non-Rx scores", () => {

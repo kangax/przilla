@@ -5,27 +5,12 @@ import {
   publicProcedure,
   protectedProcedure,
 } from "~/server/api/trpc";
-import { wods, scores, userFavoriteWods } from "~/server/db/schema";
+import { wods, userFavoriteWods } from "~/server/db/schema";
 import { getFavoriteWodIdsByUser } from "./favoriteUtils";
-import {
-  type Wod,
-  type Score,
-  type Benchmarks,
-  WodSchema,
-  type WodFromQuery,
-  type WodWithMatches,
-} from "~/types/wodTypes";
-import { isWodDone } from "~/utils/wodUtils";
+import { type Wod, type WodWithMatches } from "~/types/wodTypes";
 import { fuzzySearchWods } from "~/utils/wodFuzzySearch";
-import {
-  getMovementsForWods,
-  getMovementCountsByCategory,
-  processTagAndCategoryCounts,
-  calculateMonthlyData,
-} from "./wodChartHelpers";
 import { getChartData } from "./wodChartHelpers";
 import type { WodChartDataResponse } from "~/types/wodTypes";
-import { difficultyMultipliers, DEFAULT_MULTIPLIER } from "~/config/constants";
 import { validateWodsFromDb } from "~/utils/wodValidation";
 
 export const wodRouter = createTRPCRouter({

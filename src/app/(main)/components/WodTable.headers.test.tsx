@@ -3,70 +3,9 @@ import { render, screen } from "../../../test-utils";
 import "@testing-library/jest-dom";
 import WodTable from "./WodTable";
 
-// Mock tRPC api at the module level (correct import path)
-vi.mock("~/trpc/react", () => ({
-  api: {
-    useUtils: () => ({}),
-    score: {
-      deleteScore: {
-        useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
-          isLoading: false,
-          isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
-        }),
-      },
-      logScore: {
-        useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
-          isLoading: false,
-          isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
-        }),
-      },
-      updateScore: {
-        useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
-          isLoading: false,
-          isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
-        }),
-      },
-      importScores: {
-        useMutation: () => ({
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          mutate: () => {},
-          isLoading: false,
-          isSuccess: true,
-          // eslint-disable-next-line @typescript-eslint/no-empty-function
-          reset: () => {},
-        }),
-      },
-      getAllByUser: {
-        useQuery: () => ({
-          data: [],
-          isLoading: false,
-          isSuccess: true,
-        }),
-      },
-    },
-    wod: {
-      getAll: {
-        useQuery: () => ({
-          data: [],
-          isLoading: false,
-          isSuccess: true,
-        }),
-      },
-    },
-  },
-}));
+// Use shared mock for ~/trpc/react
+import * as trpcMock from "~/trpc/__mocks__/react";
+vi.mock("~/trpc/react", () => trpcMock);
 
 // Minimal mock for handleSort
 let handleSortMock: ReturnType<typeof vi.fn>;

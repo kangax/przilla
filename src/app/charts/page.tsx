@@ -13,7 +13,6 @@ import {
   type ChartDataPoint,
   type FrequencyDataPoint,
   type PerformanceDataPoint,
-  type MonthlyScoreDetail,
 } from "~/types/wodTypes";
 import { DESIRED_TAG_ORDER, DESIRED_CATEGORY_ORDER } from "~/config/constants";
 import {

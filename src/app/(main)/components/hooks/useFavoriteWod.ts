@@ -64,13 +64,13 @@ export function useFavoriteWod({ searchTerm }: UseFavoriteWodProps = {}) {
       showToast("info", "Adding to favorites...");
       return { previousWods, queryKey: getAllWodsQueryKey };
     },
-    onError: (err, variables, context) => {
+    onError: (_err, _variables, context) => {
       if (context?.previousWods && context?.queryKey) {
         queryClient.setQueryData(context.queryKey, context.previousWods);
       }
       showToast("error", "Failed to add favorite");
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, _variables) => {
       showToast("success", "WOD added to favorites!");
 
       // Optimistic update for wod.getAll is handled in onMutate.
@@ -123,13 +123,13 @@ export function useFavoriteWod({ searchTerm }: UseFavoriteWodProps = {}) {
       showToast("info", "Removing from favorites...");
       return { previousWods, queryKey: getAllWodsQueryKey };
     },
-    onError: (err, variables, context) => {
+    onError: (_err, _variables, context) => {
       if (context?.previousWods && context?.queryKey) {
         queryClient.setQueryData(context.queryKey, context.previousWods);
       }
       showToast("error", "Failed to remove favorite");
     },
-    onSuccess: (data, variables) => {
+    onSuccess: (_data, _variables) => {
       showToast("success", "WOD removed from favorites!");
 
       // Optimistic update for wod.getAll is handled in onMutate.

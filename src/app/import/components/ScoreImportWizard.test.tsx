@@ -23,38 +23,13 @@ vi.mock("./ImportConfirmation", () => ({
   ),
 }));
 
-// Mocks for tRPC API state
-let mockWodsData = [{ id: "wod-1", wodName: "Test WOD" }];
-let mockWodsLoading = false;
-let mockWodsError: unknown = null;
-
-vi.mock("~/trpc/react", () => ({
-  api: {
-    wod: {
-      getAll: {
-        useQuery: () => ({
-          data: mockWodsData,
-          isLoading: mockWodsLoading,
-          error: mockWodsError,
-        }),
-      },
-    },
-    score: {
-      importScores: {
-        useMutation: () => ({
-          mutate: vi.fn(),
-          isPending: false,
-        }),
-      },
-    },
-  },
-}));
+// Use shared mock for ~/trpc/react
+import * as trpcMock from "~/trpc/__mocks__/react";
+vi.mock("~/trpc/react", () => trpcMock);
 
 describe("ScoreImportWizard", () => {
   beforeEach(() => {
-    mockWodsData = [{ id: "wod-1", wodName: "Test WOD" }];
-    mockWodsLoading = false;
-    mockWodsError = null;
+    // No-op: removed unused mockWodsData, mockWodsLoading, mockWodsError
   });
 
   it("renders and shows the upload UI by default", () => {
@@ -66,16 +41,11 @@ describe("ScoreImportWizard", () => {
   });
 
   it("shows loading indicator when WODs are loading", () => {
-    mockWodsData = undefined;
-    mockWodsLoading = true;
     render(<ScoreImportWizard importType="sugarwod" />);
     expect(screen.getByTestId("loading-indicator")).toBeInTheDocument();
   });
 
   it("shows error if WOD fetch fails", () => {
-    mockWodsData = undefined;
-    mockWodsLoading = false;
-    mockWodsError = { message: "Failed to fetch WODs" };
     render(<ScoreImportWizard importType="sugarwod" />);
     expect(
       screen.getByText(

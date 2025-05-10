@@ -7,7 +7,7 @@ import PageLayout from "~/app/_components/PageLayout";
 import { api } from "~/trpc/server"; // Import server tRPC client
 import ReactQueryProvider from "~/app/_components/ReactQueryProvider";
 import { QueryClient, dehydrate } from "@tanstack/react-query";
-import { type Wod, type WodFromQuery } from "~/types/wodTypes"; // Import WodFromQuery
+import { type Wod } from "~/types/wodTypes";
 import { WodSchema } from "~/types/wodTypes"; // Import the full WodSchema
 
 export const metadata: Metadata = {

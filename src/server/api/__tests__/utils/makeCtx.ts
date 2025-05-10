@@ -107,7 +107,7 @@ export function makeCtx({
         let joinedData = [...currentData];
 
         const queryBuilder: MockQueryBuilder = {
-          leftJoin: (joinTable: MockTableSymbol, condition: MockCondition) => {
+          leftJoin: (joinTable: MockTableSymbol, _condition: MockCondition) => {
             let rightTableData: Record<string, unknown>[] = [];
             // Use structuredClone to preserve Date objects
             if (joinTable === mockWodsTable)
@@ -160,30 +160,30 @@ export function makeCtx({
             }
             return queryBuilder;
           },
-          where: (condition: MockCondition) => {
+          where: (_condition: MockCondition) => {
             // Refined 'where' simulation based on logged structure
             // Example: eq(scores.userId, userId) -> condition might look like { operator: 'eq', left: { table: mockScoresTable, name: 'userId' }, right: userIdValue }
             // Example: inArray(wodMovements.wodId, wodIds) -> { operator: 'inArray', left: { table: mockWodMovementsTable, name: 'wodId' }, right: [id1, id2] }
 
             // Check for eq(scores.userId, value)
             if (
-              condition?.operator === "eq" &&
-              condition?.left?.table === mockScoresTable &&
-              condition?.left?.name === "userId" &&
-              typeof condition?.right === "string"
+              _condition?.operator === "eq" &&
+              _condition?.left?.table === mockScoresTable &&
+              _condition?.left?.name === "userId" &&
+              typeof _condition?.right === "string"
             ) {
               joinedData = joinedData.filter(
-                (row) => (row.userId as string) === condition.right,
+                (row) => (row.userId as string) === _condition.right,
               );
             }
             // Check for inArray(wodMovements.wodId, value)
             else if (
-              condition?.operator === "inArray" &&
-              condition?.left?.table === mockWodMovementsTable &&
-              condition?.left?.name === "wodId" &&
-              Array.isArray(condition?.right)
+              _condition?.operator === "inArray" &&
+              _condition?.left?.table === mockWodMovementsTable &&
+              _condition?.left?.name === "wodId" &&
+              Array.isArray(_condition?.right)
             ) {
-              const filterWodIds = new Set(condition.right);
+              const filterWodIds = new Set(_condition.right);
               joinedData = joinedData.filter((row) => {
                 const wodId = row.wodId as string;
                 return filterWodIds.has(wodId);
@@ -191,17 +191,17 @@ export function makeCtx({
             }
             // Ignore join conditions passed to where (handled in leftJoin mock)
             else if (
-              condition?.operator === "eq" &&
-              condition?.left?.table &&
-              typeof condition?.right === "object" &&
-              condition?.right !== null &&
-              "table" in condition.right
+              _condition?.operator === "eq" &&
+              _condition?.left?.table &&
+              typeof _condition?.right === "object" &&
+              _condition?.right !== null &&
+              "table" in _condition.right
             ) {
               // Likely a join condition, ignore in 'where' simulation
             } else {
               console.warn(
                 "Mock where: Unhandled condition structure:",
-                JSON.stringify(condition, null, 2),
+                JSON.stringify(_condition, null, 2),
               );
             }
             return queryBuilder;

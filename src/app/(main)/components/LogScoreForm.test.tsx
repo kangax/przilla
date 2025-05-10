@@ -25,59 +25,10 @@ const ToastProvider = ({ children }: { children: React.ReactNode }) => (
   <>{children}</>
 );
 
+import * as trpcMock from "~/trpc/__mocks__/react";
 // Mock the tRPC API client
-let mockLogScoreSuccess = vi.fn();
-let mockLogScoreError = vi.fn();
-let mockUpdateScoreSuccess = vi.fn();
-let mockUpdateScoreError = vi.fn();
 
-/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
-vi.mock("~/trpc/react", () => ({
-  api: {
-    score: {
-      logScore: {
-        useMutation: ({ onSuccess, onError }) => ({
-          mutateAsync: async (params) => {
-            if (mockLogScoreSuccess) {
-              await mockLogScoreSuccess(params);
-              onSuccess?.({});
-              return {};
-            } else if (mockLogScoreError) {
-              await mockLogScoreError(params);
-              onError?.(new Error("API Error"));
-              throw new Error("API Error");
-            }
-          },
-          status: "idle",
-        }),
-      },
-      updateScore: {
-        useMutation: ({ onSuccess, onError }) => ({
-          mutateAsync: async (params) => {
-            if (mockUpdateScoreSuccess) {
-              await mockUpdateScoreSuccess(params);
-              onSuccess?.({});
-              return {};
-            } else if (mockUpdateScoreError) {
-              await mockUpdateScoreError(params);
-              onError?.(new Error("API Error"));
-              throw new Error("API Error");
-            }
-          },
-          status: "idle",
-        }),
-      },
-    },
-    /* eslint-enable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access */
-    useUtils: () => ({
-      score: {
-        getAllByUser: {
-          invalidate: vi.fn(),
-        },
-      },
-    }),
-  },
-}));
+vi.mock("~/trpc/react", () => trpcMock);
 
 // Create a mock wod for testing
 const mockWod: Wod = {
@@ -131,17 +82,9 @@ describe("LogScoreForm Toast Notifications", () => {
     // Reset mocks
     vi.clearAllMocks();
     mockShowToast.mockClear();
-    mockLogScoreSuccess = vi.fn();
-    mockLogScoreError = vi.fn();
-    mockUpdateScoreSuccess = vi.fn();
-    mockUpdateScoreError = vi.fn();
   });
 
   it("shows success toast when adding a score", async () => {
-    // Set up the mock to succeed
-    mockLogScoreSuccess = vi.fn();
-    mockLogScoreError = null;
-
     render(
       <QueryClientProvider client={queryClient}>
         <ToastProvider>
@@ -174,10 +117,6 @@ describe("LogScoreForm Toast Notifications", () => {
   });
 
   it("shows error toast when adding a score fails", async () => {
-    // Set up the mock to fail
-    mockLogScoreSuccess = null;
-    mockLogScoreError = vi.fn();
-
     render(
       <QueryClientProvider client={queryClient}>
         <ToastProvider>
@@ -210,10 +149,6 @@ describe("LogScoreForm Toast Notifications", () => {
   });
 
   it("shows success toast when updating a score", async () => {
-    // Set up the mock to succeed
-    mockUpdateScoreSuccess = vi.fn();
-    mockUpdateScoreError = null;
-
     render(
       <QueryClientProvider client={queryClient}>
         <ToastProvider>
@@ -240,10 +175,6 @@ describe("LogScoreForm Toast Notifications", () => {
   });
 
   it("shows error toast when updating a score fails", async () => {
-    // Set up the mock to fail
-    mockUpdateScoreSuccess = null;
-    mockUpdateScoreError = vi.fn();
-
     render(
       <QueryClientProvider client={queryClient}>
         <ToastProvider>

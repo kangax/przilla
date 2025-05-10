@@ -3,7 +3,20 @@ import React from "react";
 import { screen, fireEvent, waitFor, render } from "~/test-utils";
 import { WodListMobile } from "./WodListMobile";
 import type { Wod, Score } from "~/types/wodTypes";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 // ToastProvider is included in customRender's AllTheProviders
+
+function renderWithQueryClient(ui: React.ReactElement) {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+  return render(
+    <QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+  );
+}
 
 // Use Vitest mocking API
 import { vi } from "vitest";
@@ -102,7 +115,9 @@ const specialNote = "Great job! 💪🔥 <b>Bold</b> & *markdown*";
 
 describe("WodListMobile", () => {
   it("renders WOD and allows logging a new score", () => {
-    render(<WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />);
+    renderWithQueryClient(
+      <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />,
+    );
     expect(screen.getByText("Fran")).toBeInTheDocument();
 
     // Expand the card
@@ -122,7 +137,7 @@ describe("WodListMobile", () => {
 
   it("updates UI after logging a new score", async () => {
     // Start with no scores
-    const { rerender } = render(
+    const { rerender } = renderWithQueryClient(
       <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />,
     );
     fireEvent.click(screen.getByText("Fran"));
@@ -144,7 +159,7 @@ describe("WodListMobile", () => {
   });
 
   it("renders existing score and allows editing", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [mockScore] }}
@@ -173,7 +188,7 @@ describe("WodListMobile", () => {
   it("updates UI after editing a score", async () => {
     // Start with an existing score
     const updatedScore = { ...mockScore, time_seconds: 200, isRx: false };
-    const { rerender } = render(
+    const { rerender } = renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [mockScore] }}
@@ -201,7 +216,7 @@ describe("WodListMobile", () => {
   });
 
   it("shows and cancels delete confirmation dialog", async () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [mockScore] }}
@@ -229,7 +244,7 @@ describe("WodListMobile", () => {
   });
 
   it("confirms delete and closes dialog", async () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [mockScore] }}
@@ -255,7 +270,7 @@ describe("WodListMobile", () => {
   });
 
   it("closes drawer on cancel", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [mockScore] }}
@@ -278,7 +293,7 @@ describe("WodListMobile", () => {
 
   it("highlights search term in WOD name, tags, and description, and auto-expands card", () => {
     const wodWithTag = { ...mockWod, tags: ["For Time", "Chipper"] };
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[wodWithTag]}
         scoresByWodId={{}}
@@ -293,7 +308,7 @@ describe("WodListMobile", () => {
     expect(highlightedName).toBeInTheDocument();
 
     // Tag should be highlighted if matches
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[wodWithTag]}
         scoresByWodId={{}}
@@ -304,7 +319,7 @@ describe("WodListMobile", () => {
     expect(highlightedTag).toBeInTheDocument();
 
     // Description should be highlighted if matches
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{}}
@@ -320,7 +335,7 @@ describe("WodListMobile", () => {
   // --- NEW TESTS FOR SCORE NOTES DISPLAY ---
 
   it("renders score notes", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [{ ...mockScore, notes: "Felt great" }] }}
@@ -332,7 +347,7 @@ describe("WodListMobile", () => {
   });
 
   it("renders long score notes", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [{ ...mockScore, notes: longNote }] }}
@@ -347,7 +362,7 @@ describe("WodListMobile", () => {
   });
 
   it("renders score notes with special characters", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [{ ...mockScore, notes: specialNote }] }}
@@ -359,7 +374,7 @@ describe("WodListMobile", () => {
   });
 
   it("handles absence of score notes (null)", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [{ ...mockScore, notes: null }] }}
@@ -376,7 +391,7 @@ describe("WodListMobile", () => {
   });
 
   it("handles absence of score notes (empty string)", () => {
-    render(
+    renderWithQueryClient(
       <WodListMobile
         wods={[mockWod]}
         scoresByWodId={{ wod1: [{ ...mockScore, notes: "" }] }}
@@ -394,7 +409,9 @@ describe("WodListMobile", () => {
   // --- BASIC RESPONSIVE LAYOUT TEST (MOBILE ELEMENTS) ---
 
   it("renders mobile-specific elements (Drawer, card layout)", () => {
-    render(<WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />);
+    renderWithQueryClient(
+      <WodListMobile wods={[mockWod]} scoresByWodId={{}} searchTerm="" />,
+    );
     // Card layout should be present
     expect(screen.getByText("Fran")).toBeInTheDocument();
     // Drawer should not be open initially

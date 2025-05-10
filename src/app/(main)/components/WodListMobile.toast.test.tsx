@@ -1,8 +1,9 @@
 import React from "react";
-import { render, screen, fireEvent, waitFor } from "@testing-library/react";
+import { render, screen, fireEvent, waitFor } from "~/test-utils";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { WodListMobile } from "./WodListMobile";
 import type { Wod, Score } from "~/types/wodTypes";
+import type { Mock } from "vitest";
 
 // Create a mock for showToast function
 const mockShowToast = vi.fn();
@@ -42,33 +43,9 @@ vi.mock("./LogScoreForm", () => ({
 let mockMutateSuccess = vi.fn();
 let mockMutateError = vi.fn();
 
-/* eslint-disable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
-vi.mock("~/trpc/react", () => ({
-  api: {
-    useUtils: () => ({
-      score: {
-        getAllByUser: { invalidate: vi.fn() },
-      },
-    }),
-    score: {
-      deleteScore: {
-        useMutation: ({ onSuccess, onError }) => ({
-          mutate: (params) => {
-            if (mockMutateSuccess) {
-              mockMutateSuccess(params);
-              onSuccess?.();
-            } else if (mockMutateError) {
-              mockMutateError(params);
-              onError?.(new Error("API Error"));
-            }
-          },
-          status: "idle",
-        }),
-      },
-    },
-  },
-}));
-/* eslint-enable @typescript-eslint/no-unsafe-call, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
+// Use shared mock for ~/trpc/react
+import * as trpcMock from "~/trpc/__mocks__/react";
+vi.mock("~/trpc/react", () => trpcMock);
 
 // Mock scrollIntoView globally for all tests in this file
 beforeAll(() => {
@@ -125,6 +102,28 @@ describe("WodListMobile Toast Notifications", () => {
     mockShowToast.mockClear();
     mockMutateSuccess = vi.fn();
     mockMutateError = vi.fn();
+
+    // Patch the shared mock's deleteScore.useMutation
+    const trpc = trpcMock;
+    (trpc.api.score.deleteScore.useMutation as Mock).mockImplementation(
+      (
+        options: {
+          onSuccess?: () => void;
+          onError?: (error: Error) => void;
+        } = {},
+      ) => ({
+        mutate: (params: unknown) => {
+          if (mockMutateSuccess) {
+            mockMutateSuccess(params);
+            options.onSuccess?.();
+          } else if (mockMutateError) {
+            mockMutateError(params);
+            options.onError?.(new Error("API Error"));
+          }
+        },
+        status: "idle",
+      }),
+    );
   });
 
   it("shows success toast when deleting a score", async () => {

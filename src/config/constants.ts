@@ -1,5 +1,4 @@
 import type { WodTag, WodCategory } from "~/types/wodTypes";
-import { WOD_CATEGORIES } from "~/types/wodTypes";
 
 // Define allowed tags and their desired display order
 export const DESIRED_TAG_ORDER: WodTag[] = [

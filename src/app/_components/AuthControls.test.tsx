@@ -6,7 +6,8 @@ import * as exportUtil from "~/utils/exportUserData";
 import AuthControls from "./AuthControls";
 
 // Mock trpc/react module
-vi.mock("~/trpc/react");
+import * as trpcMock from "~/trpc/__mocks__/react";
+vi.mock("~/trpc/react", () => trpcMock);
 
 // Mock auth-client module
 vi.mock("~/lib/auth-client", () => ({

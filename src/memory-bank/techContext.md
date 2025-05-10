@@ -107,6 +107,7 @@ Never truncate files for brevity, you must always output full file contents.
 - **Environment Variables:** Managed via `.env` files and validated using `@t3-oss/env-nextjs`. Requires `BETTER_AUTH_SECRET`, `BETTER_AUTH_URL`. Optionally uses `GITHUB_CLIENT_ID`, `GITHUB_CLIENT_SECRET`, `GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET` for social login. See `.env.example`.
 - Use `;` to string commands in the terminal (e.g., `cd some/dir ; npm install`) as `&&` can have escaping issues.
 - Do not create backup files; rely on the version control system (Git).
+- when fixing tests, ALWAYS ensure your fix works on 1 file before fixing multiple failures
 
 ## Technical Constraints
 

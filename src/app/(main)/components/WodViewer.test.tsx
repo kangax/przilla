@@ -12,65 +12,8 @@ vi.mock("~/lib/auth-client", () => ({
 }));
 
 // --- Mock tRPC ---
-import type { ScoreFromQuery } from "~/types/wodTypes";
-vi.mock("~/trpc/react", () => ({
-  api: {
-    wod: {
-      getAll: {
-        useQuery: vi.fn(() => ({
-          data: undefined, // Return undefined so initialWods is used
-          isLoading: false,
-          error: null,
-        })),
-      },
-      logScore: {
-        useMutation: vi.fn(() => ({
-          mutate: vi.fn(),
-          mutateAsync: vi.fn(),
-          isLoading: false,
-          isSuccess: false,
-          isError: false,
-          error: null,
-          reset: vi.fn(),
-        })),
-      },
-    },
-    score: {
-      getAllByUser: {
-        useQuery: vi.fn(
-          () =>
-            ({
-              data: [] as ScoreFromQuery[],
-              isLoading: false,
-              error: null,
-            }) as {
-              data: ScoreFromQuery[];
-              isLoading: boolean;
-              error: null;
-            },
-        ),
-      },
-      deleteScore: {
-        useMutation: vi.fn(() => ({
-          mutate: vi.fn(),
-          mutateAsync: vi.fn(),
-          isLoading: false,
-          isSuccess: false,
-          isError: false,
-          error: null,
-          reset: vi.fn(),
-        })),
-      },
-    },
-    useUtils: () => ({
-      score: {
-        getAllByUser: {
-          invalidate: vi.fn(),
-        },
-      },
-    }),
-  },
-}));
+import * as trpcMock from "~/trpc/__mocks__/react";
+vi.mock("~/trpc/react", () => trpcMock);
 
 // --- Mock next/navigation ---
 vi.mock("next/navigation", () => ({

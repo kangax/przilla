@@ -1,6 +1,16 @@
 import { useState, useEffect, useRef } from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { type SortByType, type WodCategory } from "~/types/wodTypes";
+
+const ALLOWED_COMPLETION_STATUSES: ReadonlyArray<"all" | "done" | "notDone"> = [
+  "all",
+  "done",
+  "notDone",
+];
+const isValidCompletionStatus = (
+  status: string | null,
+): status is "all" | "done" | "notDone" =>
+  ALLOWED_COMPLETION_STATUSES.includes(status as "all" | "done" | "notDone");
 
 // Default category to use when no category is specified in the URL
 const DEFAULT_CATEGORY = "Girl";
@@ -17,18 +27,6 @@ export function useWodViewerFilters(
 ) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-
-  // Validation helpers for URL parameters
-  const ALLOWED_COMPLETION_STATUSES: ReadonlyArray<"all" | "done" | "notDone"> =
-    ["all", "done", "notDone"];
-
-  const isValidCompletionStatus = (
-    status: string | null,
-  ): status is "all" | "done" | "notDone" => {
-    return ALLOWED_COMPLETION_STATUSES.includes(
-      status as "all" | "done" | "notDone",
-    );
-  };
 
   const isValidSortBy = (sortBy: string | null): sortBy is SortByType => {
     const validSortKeys: SortByType[] = [
@@ -107,6 +105,7 @@ export function useWodViewerFilters(
 
   // Effect to update state from URL parameters
   const searchParamsString = searchParams.toString();
+
   useEffect(() => {
     // Skip if we're currently updating the URL from state to avoid race conditions
     if (isUpdatingFromState.current) {
@@ -163,7 +162,13 @@ export function useWodViewerFilters(
       // Reset flag after updates are complete
       isUpdatingFromUrl.current = false;
     }
-  }, [searchParamsString, DEFAULT_COMPLETION_FILTER, DEFAULT_SORT_DIRECTIONS]);
+  }, [
+    searchParamsString,
+    DEFAULT_COMPLETION_FILTER,
+    DEFAULT_SORT_DIRECTIONS,
+    categoryOrder,
+    searchParams,
+  ]);
 
   // Effect to update URL from state
   useEffect(() => {

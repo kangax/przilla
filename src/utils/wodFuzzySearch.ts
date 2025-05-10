@@ -1,4 +1,4 @@
-import Fuse, { type FuseResultMatch } from "fuse.js";
+import Fuse from "fuse.js";
 import { normalizeMovementName } from "~/utils/movementMapping";
 import type { Wod, WodWithMatches } from "~/types/wodTypes";
 

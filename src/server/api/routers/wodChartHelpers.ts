@@ -1,5 +1,4 @@
 import { asc, eq, inArray } from "drizzle-orm";
-import { z } from "zod";
 import { wods, wodMovements, movements, scores } from "~/server/db/schema";
 import type {
   Benchmarks,
@@ -10,12 +9,7 @@ import type {
 } from "~/types/wodTypes";
 import { difficultyMultipliers, DEFAULT_MULTIPLIER } from "~/config/constants";
 import { isWodDone, getPerformanceLevel } from "~/utils/wodUtils"; // Import getPerformanceLevel
-import {
-  type WodWithMatches,
-  WOD_CATEGORIES,
-  WodCategorySchema,
-} from "~/types/wodTypes";
-import { protectedProcedure } from "~/server/api/trpc";
+import { WodCategorySchema } from "~/types/wodTypes";
 import { validateWodsFromDb } from "~/utils/wodValidation";
 
 /**

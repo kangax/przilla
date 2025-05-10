@@ -24,10 +24,8 @@ import {
   type ValueType,
 } from "recharts/types/component/DefaultTooltipContent";
 import { formatScore, getPerformanceLevelColor } from "~/utils/wodUtils"; // Import formatScore and getPerformanceLevelColor
-import { type Score } from "~/types/wodTypes"; // Import Score type
-
-// Use shared MonthlyScoreDetail type from ~/types/wodTypes
-import type { MonthlyScoreDetail, Benchmarks } from "~/types/wodTypes";
+import { type Score, type Wod } from "~/types/wodTypes";
+import type { MonthlyScoreDetail } from "~/types/wodTypes";
 
 // Define the structure for timeline data points
 type FrequencyDataPoint = {
@@ -235,8 +233,7 @@ const CustomTimelineTooltip = ({
                       createdAt: new Date(),
                       updatedAt: new Date(),
                       description: "",
-                      category:
-                        "Benchmark" as import("~/types/wodTypes").Wod["category"],
+                      category: "Benchmark" as Wod["category"],
                       tags: [],
                       difficulty: score.difficulty || "",
                       difficultyExplanation: "",

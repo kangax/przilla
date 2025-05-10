@@ -1,24 +1,40 @@
-// Mock for ~/trpc/react
+// Comprehensive mock for ~/trpc/react used in WodTable tests
 import { vi } from "vitest";
+import React from "react";
+
+// Helper for mutation mocks
+const mutationMock = () => ({
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  mutate: () => {},
+  isLoading: false,
+  isSuccess: true,
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
+  reset: () => {},
+});
+
+// Helper for query mocks
+const queryMock = (data = []) => ({
+  data,
+  isLoading: false,
+  isSuccess: true,
+});
 
 export const api = {
-  wod: {
-    getAll: {
-      useQuery: vi.fn(() => ({
-        data: [],
-        isLoading: false,
-        error: null,
-      })),
-    },
-  },
+  useUtils: () => ({}),
   score: {
-    getAllByUser: {
-      useQuery: vi.fn(() => ({
-        data: [],
-        isLoading: false,
-        error: null,
-      })),
-    },
+    deleteScore: { useMutation: vi.fn(mutationMock) },
+    logScore: { useMutation: vi.fn(mutationMock) },
+    updateScore: { useMutation: vi.fn(mutationMock) },
+    importScores: { useMutation: vi.fn(mutationMock) },
+    getAllByUser: { useQuery: vi.fn(() => queryMock([])) },
+  },
+  wod: {
+    getAll: { useQuery: vi.fn(() => queryMock([])) },
+  },
+  favorite: {
+    add: { useMutation: vi.fn(mutationMock) },
+    remove: { useMutation: vi.fn(mutationMock) },
+    getWodIdsByUser: { useQuery: vi.fn(() => queryMock([])) },
   },
 };
 

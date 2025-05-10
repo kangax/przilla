@@ -1,14 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useLayoutEffect,
-  useRef,
-  useCallback,
-  useMemo,
-} from "react";
-import { useQueryClient } from "@tanstack/react-query";
+import { useState, useLayoutEffect, useRef, useCallback, useMemo } from "react";
 import { api } from "~/trpc/react";
 import { useSession } from "~/lib/auth-client";
 import { Box, Flex } from "@radix-ui/themes";
@@ -24,9 +16,7 @@ import {
   type Wod,
   type SortByType,
   type ScoreFromQuery,
-  type WodCategory,
   WodSchema,
-  WOD_CATEGORIES,
 } from "~/types/wodTypes";
 import type { Score } from "~/types/wodTypes"; // Ensure Score is available for props
 
@@ -145,7 +135,6 @@ export default function WodViewer({
   const {
     wods,
     scoresByWodId,
-    categoryOrder,
     tagOrder,
     categoryCounts,
     originalTotalWodCount,

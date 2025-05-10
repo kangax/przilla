@@ -255,23 +255,34 @@ export const LogScoreForm: React.FC<LogScoreFormProps> = (props) => {
               )}
             </>
           )}
-          {/* Load Input (only shown if not timecapped and WOD type is Load/ShowAll) */}
-          {!showTimecapRadio && (showAll || showLoad) && (
-            <LoadInputFields
-              load={form.load}
-              onChange={handleChange}
-              disabled={!isLoggedIn || submitting}
-            />
-          )}
-          {/* Rounds + Partial Reps Input (for benchmarks.type='rounds') */}
-          {!showTimecapRadio && showRounds && (
-            <RoundsInputFields
-              rounds_completed={form.rounds_completed}
-              partial_reps={form.partial_reps}
-              onChange={handleChange}
-              disabled={!isLoggedIn || submitting}
-            />
-          )}
+          {/* Reps Input (only shown if not timecapped OR finished within timecap, AND WOD type is Reps/ShowAll) */}
+          {(!showTimecapRadio || form.finishedWithinTimecap === "yes") &&
+            (showAll || scoreType === "reps") && (
+              <RepsInputFields
+                reps={form.reps}
+                onChange={handleChange}
+                disabled={!isLoggedIn || submitting}
+              />
+            )}
+          {/* Load Input (only shown if not timecapped OR finished within timecap, AND WOD type is Load/ShowAll) */}
+          {(!showTimecapRadio || form.finishedWithinTimecap === "yes") &&
+            (showAll || showLoad) && (
+              <LoadInputFields
+                load={form.load}
+                onChange={handleChange}
+                disabled={!isLoggedIn || submitting}
+              />
+            )}
+          {/* Rounds + Partial Reps Input (for benchmarks.type='rounds', if not timecapped OR finished within timecap) */}
+          {(!showTimecapRadio || form.finishedWithinTimecap === "yes") &&
+            showRounds && (
+              <RoundsInputFields
+                rounds_completed={form.rounds_completed}
+                partial_reps={form.partial_reps}
+                onChange={handleChange}
+                disabled={!isLoggedIn || submitting}
+              />
+            )}
           {/* Date and Rx Switch */}
           <Flex align="center" gap="3">
             <Box style={{ flexBasis: "140px" }}>

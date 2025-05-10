@@ -43,7 +43,8 @@ export const HighlightMatch: React.FC<{ text: string; highlight: string }> =
         {parts.map((part, i) => {
           // Reset lastIndex to avoid issues with repeated tests
           regex.lastIndex = 0;
-          return regex.test(part) ? (
+          const isMatch = regex.test(part);
+          return isMatch ? (
             <mark key={i}>{part}</mark>
           ) : (
             <React.Fragment key={i}>{part}</React.Fragment>

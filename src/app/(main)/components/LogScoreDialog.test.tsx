@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen } from "@testing-library/react";
 import { describe, it, expect, vi, beforeEach } from "vitest";
 import { Theme } from "@radix-ui/themes";
+import { useSession } from "~/lib/auth-client"; // Import useSession
 import { LogScoreDialog } from "./LogScoreDialog";
 import type { Wod, Score } from "../../../types/wodTypes";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -45,9 +46,41 @@ vi.mock("../../../trpc/react", () => ({
 
 // Mock portal container
 beforeEach(() => {
+  // Reset mocks before each test
+  vi.clearAllMocks();
+  mockShowToast.mockClear(); // Clear toast mock as well
+
   const portalContainer = document.createElement("div");
   portalContainer.id = "page-layout-container";
-  document.body.appendChild(portalContainer);
+  // Ensure it's cleaned up if added multiple times, or add only if not present
+  if (!document.getElementById("page-layout-container")) {
+    document.body.appendChild(portalContainer);
+  }
+
+  // Default to authenticated user for all tests in this suite
+  vi.mocked(useSession).mockReturnValue({
+    data: {
+      user: {
+        id: "test-user-id",
+        email: "test@example.com",
+        name: "Test User",
+        emailVerified: true,
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+      session: {
+        id: "test-session-id",
+        userId: "test-user-id",
+        createdAt: new Date(),
+        updatedAt: new Date(),
+        expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+        token: "test-session-token",
+      },
+    },
+    isPending: false,
+    error: null,
+    refetch: vi.fn(),
+  });
 });
 
 const queryClient = new QueryClient();

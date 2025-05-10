@@ -5,7 +5,7 @@ import WodTable from "./WodTable";
 
 // Use shared mock for ~/trpc/react
 import * as trpcMock from "~/trpc/__mocks__/react";
-vi.mock("~/trpc/react", () => trpcMock);
+vi.doMock("~/trpc/react", () => trpcMock);
 
 // Mock data and helpers (copied from original test)
 const mockWod1_NoResults = {

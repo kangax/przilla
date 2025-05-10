@@ -1,9 +1,16 @@
 import React from "react";
 import { render, screen, fireEvent, waitFor } from "~/test-utils";
-import { describe, it, expect, vi, beforeEach } from "vitest";
+import { describe, it, expect, vi, beforeEach, beforeAll } from "vitest"; // Removed Mock
+import { useSession } from "~/lib/auth-client";
 import { WodListMobile } from "./WodListMobile";
 import type { Wod, Score } from "~/types/wodTypes";
-import type { Mock } from "vitest";
+import type { UseMutationOptions } from "@tanstack/react-query";
+import type { RouterInputs } from "~/trpc/react";
+import {
+  mutationMock as actualMutationMockFactory,
+  // Removed SimplifiedMockMutationResult import as it's not used for casting anymore
+} from "~/trpc/__mocks__/react";
+import type * as TRPCMockModuleType from "~/trpc/__mocks__/react";
 
 // Create a mock for showToast function
 const mockShowToast = vi.fn();
@@ -18,17 +25,25 @@ vi.mock("~/components/ToastProvider", () => ({
   }),
 }));
 
-// Mock LogScoreForm to avoid full form logic in this test
-/* eslint-disable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
+// Mock LogScoreForm
+interface MockLogScoreFormProps {
+  wod: Wod;
+  initialScore?: Score | null;
+  onScoreLogged?: () => void;
+  onCancel: () => void;
+}
 vi.mock("./LogScoreForm", () => ({
   __esModule: true,
-  default: ({ wod, initialScore, onScoreLogged, onCancel }) => (
+  default: ({
+    wod,
+    initialScore,
+    onScoreLogged,
+    onCancel,
+  }: MockLogScoreFormProps) => (
     <div data-testid="log-score-form">
       <div>WOD: {wod.wodName}</div>
       {initialScore ? (
-        <div>
-          <div>Editing score: {initialScore.id}</div>
-        </div>
+        <div>Editing score: {initialScore.id}</div>
       ) : (
         <div>Logging new score</div>
       )}
@@ -37,23 +52,40 @@ vi.mock("./LogScoreForm", () => ({
     </div>
   ),
 }));
-/* eslint-enable @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-assignment */
 
-// Mock tRPC API
-let mockMutateSuccess = vi.fn();
-let mockMutateError = vi.fn();
+// Mock ~/trpc/react with a factory
+vi.mock("~/trpc/react", async () => {
+  const originalMockModule = await vi.importActual<typeof TRPCMockModuleType>(
+    "~/trpc/__mocks__/react",
+  );
+  return {
+    ...originalMockModule,
+    api: {
+      ...originalMockModule.api,
+      score: {
+        ...originalMockModule.api.score,
+        deleteScore: {
+          // The only mutation used directly by WodListMobile for toasts
+          useMutation: vi.fn(),
+        },
+        // Keep other score methods as they are from the original mock module
+        logScore: originalMockModule.api.score.logScore,
+        updateScore: originalMockModule.api.score.updateScore,
+        importScores: originalMockModule.api.score.importScores,
+        getAllByUser: originalMockModule.api.score.getAllByUser,
+      },
+      wod: originalMockModule.api.wod,
+      favorite: originalMockModule.api.favorite,
+      useUtils: originalMockModule.api.useUtils,
+    },
+  };
+});
 
-// Use shared mock for ~/trpc/react
-import * as trpcMock from "~/trpc/__mocks__/react";
-vi.mock("~/trpc/react", () => trpcMock);
-
-// Mock scrollIntoView globally for all tests in this file
 beforeAll(() => {
   window.HTMLElement.prototype.scrollIntoView = vi.fn();
 });
 
 const now = new Date();
-
 const mockWod: Wod = {
   id: "wod1",
   wodName: "Fran",
@@ -78,7 +110,6 @@ const mockWod: Wod = {
   createdAt: now,
   updatedAt: now,
 };
-
 const mockScore: Score = {
   id: "score1",
   wodId: "wod1",
@@ -96,41 +127,58 @@ const mockScore: Score = {
 };
 
 describe("WodListMobile Toast Notifications", () => {
-  beforeEach(() => {
-    // Reset mocks
-    vi.clearAllMocks();
-    mockShowToast.mockClear();
-    mockMutateSuccess = vi.fn();
-    mockMutateError = vi.fn();
+  let mockedTrpcApi: typeof TRPCMockModuleType.api;
 
-    // Patch the shared mock's deleteScore.useMutation
-    const trpc = trpcMock;
-    (trpc.api.score.deleteScore.useMutation as Mock).mockImplementation(
-      (
-        options: {
-          onSuccess?: () => void;
-          onError?: (error: Error) => void;
-        } = {},
-      ) => ({
-        mutate: (params: unknown) => {
-          if (mockMutateSuccess) {
-            mockMutateSuccess(params);
-            options.onSuccess?.();
-          } else if (mockMutateError) {
-            mockMutateError(params);
-            options.onError?.(new Error("API Error"));
-          }
+  beforeEach(async () => {
+    mockShowToast.mockClear();
+
+    const mockedTrpcModule =
+      await vi.importMock<typeof TRPCMockModuleType>("~/trpc/react");
+    mockedTrpcApi = mockedTrpcModule.api;
+
+    vi.mocked(useSession).mockReturnValue({
+      data: {
+        user: {
+          id: "test-user-id",
+          email: "test@example.com",
+          name: "Test User",
+          emailVerified: true,
+          createdAt: new Date(),
+          updatedAt: new Date(),
         },
-        status: "idle",
-      }),
+        session: {
+          id: "test-session-id",
+          userId: "test-user-id",
+          createdAt: new Date(),
+          updatedAt: new Date(),
+          expiresAt: new Date(Date.now() + 24 * 60 * 60 * 1000),
+          token: "test-session-token",
+        },
+      },
+      isPending: false,
+      error: null,
+      refetch: vi.fn(),
+    });
+
+    // Set default SUCCESS implementation for deleteScore.useMutation
+    vi.mocked(mockedTrpcApi.score.deleteScore.useMutation).mockImplementation(
+      (
+        hookOptions?: UseMutationOptions<
+          void,
+          Error,
+          RouterInputs["score"]["deleteScore"]
+        >,
+      ) => actualMutationMockFactory(true, undefined, hookOptions), // Removed cast
     );
   });
 
-  it("shows success toast when deleting a score", async () => {
-    // Set up the mock to succeed
-    mockMutateSuccess = vi.fn();
-    mockMutateError = null;
+  // afterEach(() => {
+  // If vi.restoreAllMocks() is used globally, this might not be needed.
+  // Otherwise, restore individual spies if they were created with vi.spyOn and assigned to module-level vars.
+  // Since we are using vi.mock factory, spies are generally reset/recreated per test file run.
+  // });
 
+  it("shows success toast when deleting a score", async () => {
     render(
       <WodListMobile
         wods={[mockWod]}
@@ -138,30 +186,28 @@ describe("WodListMobile Toast Notifications", () => {
         searchTerm=""
       />,
     );
-
-    // Expand the card
     fireEvent.click(screen.getByText("Fran"));
-
-    // Find and click the delete button
-    const deleteButton = screen.getByLabelText("Delete score");
-    fireEvent.click(deleteButton);
-
-    // Confirm deletion in the dialog
-    const confirmButton = screen.getByRole("button", { name: /delete/i });
-    fireEvent.click(confirmButton);
-
-    // Wait for the mutation to complete
+    fireEvent.click(
+      screen.getByLabelText(
+        `Delete score ${mockScore.id} for ${mockWod.wodName}`,
+      ),
+    );
+    fireEvent.click(screen.getByLabelText("Confirm delete score"));
     await waitFor(() => {
-      // Verify showToast was called with success message
       expect(mockShowToast).toHaveBeenCalledWith("success", "Score deleted");
     });
   });
 
   it("shows error toast when deleting a score fails", async () => {
-    // Set up the mock to fail
-    mockMutateSuccess = null;
-    mockMutateError = vi.fn();
-
+    vi.mocked(mockedTrpcApi.score.deleteScore.useMutation).mockImplementation(
+      (
+        hookOptions?: UseMutationOptions<
+          void,
+          Error,
+          RouterInputs["score"]["deleteScore"]
+        >,
+      ) => actualMutationMockFactory(false, undefined, hookOptions), // Removed cast
+    );
     render(
       <WodListMobile
         wods={[mockWod]}
@@ -169,24 +215,17 @@ describe("WodListMobile Toast Notifications", () => {
         searchTerm=""
       />,
     );
-
-    // Expand the card
     fireEvent.click(screen.getByText("Fran"));
-
-    // Find and click the delete button
-    const deleteButton = screen.getByLabelText("Delete score");
-    fireEvent.click(deleteButton);
-
-    // Confirm deletion in the dialog
-    const confirmButton = screen.getByRole("button", { name: /delete/i });
-    fireEvent.click(confirmButton);
-
-    // Wait for the mutation to complete
+    fireEvent.click(
+      screen.getByLabelText(
+        `Delete score ${mockScore.id} for ${mockWod.wodName}`,
+      ),
+    );
+    fireEvent.click(screen.getByLabelText("Confirm delete score"));
     await waitFor(() => {
-      // Verify showToast was called with error message
       expect(mockShowToast).toHaveBeenCalledWith(
         "error",
-        "Failed to delete score",
+        "Failed to delete score: Mock API Error",
       );
     });
   });

@@ -12,6 +12,7 @@ import { WodMobileCard } from "./WodMobileCard"; // Import the new component
 import {
   Drawer,
   DrawerContent,
+  DrawerDescription, // Added DrawerDescription
   DrawerTitle,
 } from "../../../components/ui/drawer";
 import { Dialog, Button, Flex } from "@radix-ui/themes";
@@ -144,6 +145,11 @@ export function WodListMobile({
                 : `Log Score for ${currentSheetWod.wodName}`
               : "Log Score"}
           </DrawerTitle>
+          <DrawerDescription className="px-4 text-sm text-slate-500 dark:text-slate-400">
+            {editingScore
+              ? "Update the details of your score."
+              : "Enter your score details for this WOD."}
+          </DrawerDescription>
           <div className="px-4 pb-6 pt-2">
             {currentSheetWod && (
               <LogScoreForm
@@ -158,14 +164,22 @@ export function WodListMobile({
       </Drawer>
       {/* Delete Confirmation Dialog */}
       <Dialog.Root open={!!deletingScore} onOpenChange={cancelDeleteScore}>
-        <Dialog.Content>
-          <Dialog.Title>Delete Score</Dialog.Title>
-          <Dialog.Description>
+        <Dialog.Content
+          aria-labelledby="delete-dialog-title"
+          aria-describedby="delete-dialog-description"
+        >
+          <Dialog.Title id="delete-dialog-title">Delete Score</Dialog.Title>
+          <Dialog.Description id="delete-dialog-description">
             Are you sure you want to delete this score? This action cannot be
             undone.
           </Dialog.Description>
           <Flex gap="3" mt="4" justify="end">
-            <Button variant="soft" color="gray" onClick={cancelDeleteScore}>
+            <Button
+              variant="soft"
+              color="gray"
+              onClick={cancelDeleteScore}
+              aria-label="Cancel delete score"
+            >
               Cancel
             </Button>
             <Button
@@ -173,6 +187,7 @@ export function WodListMobile({
               color="red"
               onClick={confirmDeleteScore}
               disabled={deleteScoreMutationStatus === "pending"} // Use status from hook
+              aria-label="Confirm delete score"
             >
               {deleteScoreMutationStatus === "pending" // Use status from hook
                 ? "Deleting..."

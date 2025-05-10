@@ -111,6 +111,12 @@ export function WodMobileCard({
       <div
         className="flex cursor-pointer items-center justify-between"
         onClick={() => onToggleExpand(wod.id)}
+        aria-label={`WOD card for ${wod.wodName}`}
+        role="button" // Make it clear it's interactive for expansion
+        tabIndex={0} // Make it focusable
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") onToggleExpand(wod.id);
+        }}
       >
         <Flex align="center" gap="2" className="flex-grow">
           <Star
@@ -126,9 +132,18 @@ export function WodMobileCard({
                 onToggleFavorite(wod.id, !!wod.isFavorited);
               }
             }}
-            aria-label={wod.isFavorited ? "Unfavorite WOD" : "Favorite WOD"}
+            aria-label={
+              wod.isFavorited
+                ? `Unfavorite WOD ${wod.wodName}`
+                : `Favorite WOD ${wod.wodName}`
+            }
+            role="button"
+            tabIndex={0}
           />
-          <span className="text-lg font-semibold text-blue-700 dark:text-blue-300">
+          <span
+            className="text-lg font-semibold text-blue-700 dark:text-blue-300"
+            aria-label={`WOD name: ${wod.wodName}`}
+          >
             <HighlightMatch text={wod.wodName} highlight={searchTerm} />
           </span>
         </Flex>
@@ -206,7 +221,10 @@ export function WodMobileCard({
         <div className="relative mt-4 border-t border-slate-200 pt-3 dark:border-slate-700">
           {/* Description - Apply HighlightMatch */}
           <div className="relative mb-3">
-            <p className="text-md whitespace-pre-wrap text-slate-600 dark:text-slate-400">
+            <p
+              className="text-md whitespace-pre-wrap text-slate-600 dark:text-slate-400"
+              aria-label={`WOD description for ${wod.wodName}`}
+            >
               <HighlightMatch
                 text={wod.description ?? ""}
                 highlight={searchTerm}
@@ -228,36 +246,45 @@ export function WodMobileCard({
                   const { displayLevel, colorClass } =
                     getPerformanceBadgeDetails(wod, score);
                   const suffix = score.isRx ? "Rx" : "Scaled";
+                  const formattedScore = formatScore(score, wod, suffix);
+                  const scoreDateFormatted = new Date(
+                    score.scoreDate,
+                  ).toLocaleDateString("en-US", {
+                    year: "2-digit",
+                    month: "short",
+                    day: "numeric",
+                  });
                   return (
                     <li
                       key={score.id}
                       className="flex flex-col rounded-md bg-slate-100 p-2 dark:bg-slate-700"
+                      aria-label={`Score item: ${formattedScore} on ${scoreDateFormatted}`}
                     >
                       <div className="flex w-full items-center justify-between">
                         <div className="flex items-center gap-2">
-                          <span className="font-semibold text-blue-600 dark:text-blue-400">
-                            {formatScore(score, wod, suffix)}
+                          <span
+                            className="font-semibold text-blue-600 dark:text-blue-400"
+                            aria-label={`Score value: ${formattedScore}`}
+                          >
+                            {formattedScore}
                           </span>
                           <span
                             className={`rounded px-1.5 py-0.5 text-xs font-medium ${colorClass}`}
+                            aria-label={`Performance level: ${displayLevel}`}
                           >
                             {displayLevel}
                           </span>
                         </div>
-                        <span className="text-xs text-slate-500 dark:text-slate-400">
-                          {new Date(score.scoreDate).toLocaleDateString(
-                            "en-US",
-                            {
-                              year: "2-digit",
-                              month: "short",
-                              day: "numeric",
-                            },
-                          )}
+                        <span
+                          className="text-xs text-slate-500 dark:text-slate-400"
+                          aria-label={`Score date: ${scoreDateFormatted}`}
+                        >
+                          {scoreDateFormatted}
                         </span>
                         <div className="ml-2 flex items-center gap-1">
                           <button
                             type="button"
-                            aria-label="Edit score"
+                            aria-label={`Edit score ${score.id} for ${wod.wodName}`}
                             className="rounded-full p-1 hover:bg-blue-100 dark:hover:bg-blue-900"
                             onClick={(e) => {
                               e.stopPropagation();
@@ -268,7 +295,7 @@ export function WodMobileCard({
                           </button>
                           <button
                             type="button"
-                            aria-label="Delete score"
+                            aria-label={`Delete score ${score.id} for ${wod.wodName}`}
                             className="rounded-full p-1 hover:bg-red-100 dark:hover:bg-red-900"
                             onClick={(e) => {
                               e.stopPropagation();
@@ -280,7 +307,10 @@ export function WodMobileCard({
                         </div>
                       </div>
                       {score.notes && (
-                        <p className="mt-1 w-3/4 text-xs text-slate-500 dark:text-slate-400">
+                        <p
+                          className="mt-1 w-3/4 text-xs text-slate-500 dark:text-slate-400"
+                          aria-label={`Notes for score ${score.id}`}
+                        >
                           {score.notes}
                         </p>
                       )}
@@ -293,7 +323,7 @@ export function WodMobileCard({
           <div className="flex">
             <button
               type="button"
-              aria-label="Log Score"
+              aria-label={`Log new score for ${wod.wodName}`}
               className="text-md my-4 flex items-center gap-1 rounded-full bg-green-500 px-3 py-1 font-semibold text-white shadow-md transition hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-400 active:bg-green-700"
               onClick={(e) => {
                 e.stopPropagation();
@@ -305,7 +335,7 @@ export function WodMobileCard({
             </button>
             <button
               type="button"
-              aria-label="Share WOD"
+              aria-label={`Share WOD ${wod.wodName}`}
               className="text-md my-4 ml-4 flex items-center gap-1 rounded-full bg-blue-500 px-3 py-1 font-semibold text-white shadow-md transition hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-400 active:bg-blue-700"
               onClick={(e) => {
                 e.stopPropagation();

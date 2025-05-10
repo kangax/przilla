@@ -41,6 +41,17 @@ export const LogScoreDialog: React.FC<LogScoreDialogProps> = ({
               {initialScore ? "Edit Score" : "Log Score"} for {wod.wodName}
             </Text>
           </Dialog.Title>
+          <Dialog.Description asChild>
+            <Text
+              size="2"
+              mb="4"
+              className="block text-slate-600 dark:text-slate-400"
+            >
+              {initialScore
+                ? "Update the details of your recorded score."
+                : "Enter the details of your score for this WOD."}
+            </Text>
+          </Dialog.Description>
           <LogScoreForm
             wod={wod}
             onScoreLogged={onScoreLogged}

@@ -1,6 +1,3 @@
-if (typeof globalThis.Set === "undefined") globalThis.Set = class { add() {} };
-if (typeof globalThis.Map === "undefined") globalThis.Map = class { set() {} get() {} };
-
 import "@testing-library/jest-dom";
 import { vi } from "vitest";
 // Import the mockApi object
@@ -71,6 +68,21 @@ vi.mock("next/navigation", () => {
     useParams: vi.fn(() => ({})), // Default params
   };
 });
+
+// Mock ~/lib/auth-client
+vi.mock("~/lib/auth-client", () => ({
+  useSession: vi.fn(() => ({
+    data: null, // Unauthenticated by default
+    isPending: false,
+    error: null,
+    refetch: vi.fn(),
+  })),
+  signIn: vi.fn(),
+  signOut: vi.fn(),
+  signUp: vi.fn(),
+  forgetPassword: vi.fn(),
+  resetPassword: vi.fn(),
+}));
 
 // Mock the entire trpc/react module
 vi.mock("~/trpc/react", () => ({

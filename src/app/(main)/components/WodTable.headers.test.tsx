@@ -5,7 +5,7 @@ import WodTable from "./WodTable";
 
 // Use shared mock for ~/trpc/react
 import * as trpcMock from "~/trpc/__mocks__/react";
-vi.mock("~/trpc/react", () => trpcMock);
+vi.doMock("~/trpc/react", () => trpcMock);
 
 // Minimal mock for handleSort
 let handleSortMock: ReturnType<typeof vi.fn>;
